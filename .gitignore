@@ -16,6 +16,7 @@ documentacion/*
 
 # === Documentos internos del proyecto ===
 INFORME_EJECUCION_v2_9_4.md
+NOTAS_PARA_RETOMAR.md
 .claude/
 
 # === Scripts de desarrollo (no útiles para el alumno) ===
