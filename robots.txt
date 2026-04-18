@@ -1,0 +1,8 @@
+# robots.txt — TECI II · IES Jiménez de Quesada
+# Permite a los buscadores indexar todo el contenido público.
+
+User-agent: *
+Allow: /
+
+# Mapa del sitio para facilitar la indexación
+Sitemap: https://teci2-iesjdq.netlify.app/sitemap.xml
