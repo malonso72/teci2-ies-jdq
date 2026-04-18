@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ponencia 2025-26 resuelta — Bloque D2 · TECI II</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--az:#1B4F8A;--az2:#2E7BC4;--bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5;--green:#2E7D32;--green2:#43A047;--green-soft:#EDF6EE;--green-line:#A8D5AE;--red:#C0321E;--orange:#D4700A;--orange-soft:#FFF4E5;--orange-line:#F5C98A;--yellow:#FFA000;--yellow-soft:#FFF8E1;--yellow-line:#FFE082}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:var(--bg);color:var(--tx);line-height:1.55}
+.hd{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(27,79,138,.12);position:sticky;top:0;z-index:500}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer}
+.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.72rem;opacity:.78;margin-left:10px}
+.home-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:8px;cursor:pointer;margin-left:auto;transition:background .15s;text-decoration:none}
+.home-btn:hover{background:rgba(255,255,255,.16)}
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:var(--az);color:var(--az)}
+.navcross span.nc-current{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;border-color:var(--az);font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8;align-self:center}
+.main{max-width:1000px;margin:0 auto;padding:26px 18px 70px}
+.title-block{text-align:center;margin-bottom:26px}
+.title-block h1{font-family:'Barlow Condensed',sans-serif;font-size:2rem;color:var(--az);font-weight:700}
+.title-block .sub{color:var(--t2);font-size:.95rem;margin-top:4px}
+.intro{background:#fff;border:1px solid var(--bd);border-left:4px solid var(--az2);padding:14px 18px;border-radius:0 10px 10px 0;margin:0 0 20px;font-size:.92rem;color:var(--t2)}
+.intro strong{color:var(--az)}
+.back-portal{display:inline-block;margin-bottom:14px;padding:7px 14px;background:#fff;color:var(--az);border:1px solid var(--bd);border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:600;transition:background .15s}
+.back-portal:hover{background:#EBF0F7;border-color:var(--az)}
+.problema{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:20px 22px;margin:0 0 22px;box-shadow:0 3px 12px rgba(27,79,138,.06)}
+.problema.variante{margin:14px 0 22px;background:#FAFBFD;border-left:4px solid var(--az2)}
+.prob-header{display:flex;align-items:center;gap:14px;padding-bottom:10px;border-bottom:2px solid var(--az2);margin-bottom:12px}
+.prob-header h2{font-family:'Barlow Condensed',sans-serif;color:var(--az);font-size:1.4rem;font-weight:700;flex:1}
+.dif{font-size:.95rem;color:var(--orange);letter-spacing:1px}
+.dif[data-level="1"]{color:#43A047}
+.dif[data-level="2"]{color:var(--orange)}
+.dif[data-level="3"]{color:var(--red)}
+.enunciado{font-size:.95rem;line-height:1.65;margin:4px 0 10px}
+.enunciado p{margin:6px 0}
+.enunciado ol,.enunciado ul{margin:6px 0 6px 24px}
+.enunciado li{margin:3px 0}
+details.resolucion{margin-top:12px;border:1px solid var(--bd);border-radius:10px;background:#FAFBFD;overflow:hidden}
+details.resolucion summary{padding:10px 16px;cursor:pointer;font-weight:700;color:var(--az);font-size:.9rem;background:#F7FAFD;list-style:none;user-select:none;transition:background .15s}
+details.resolucion summary:hover{background:#EEF4FA}
+details.resolucion summary::-webkit-details-marker{display:none}
+details.resolucion summary::after{content:'▾';float:right;color:var(--green);transition:transform .2s}
+details.resolucion[open] summary::after{content:'▴'}
+.resol-body{padding:14px 18px;background:#fff;border-top:1px solid var(--bd)}
+.apartado{margin:10px 0 14px;padding-bottom:10px;border-bottom:1px dashed #E0E4EC}
+.apartado:last-child{border-bottom:none;padding-bottom:0}
+.apartado h3{font-family:'Barlow',sans-serif;color:var(--az);font-size:1rem;font-weight:700;margin-bottom:6px}
+.apartado p{margin:4px 0;font-size:.92rem}
+.apartado strong{color:var(--az)}
+.dato{display:inline-block;margin:2px 6px 2px 0}
+.resultado{background:var(--green-soft);border:1px solid var(--green-line);border-left:5px solid var(--green2);border-radius:0 8px 8px 0;padding:10px 14px;margin:8px 0;color:#1B4D1F;font-weight:600}
+.resultado strong{color:var(--green)}
+.aviso{background:var(--yellow-soft);border:1px solid var(--yellow-line);border-left:5px solid var(--yellow);border-radius:0 8px 8px 0;padding:10px 14px;margin:12px 0 6px;font-size:.88rem;color:#7A5500}
+.aviso strong{color:#5C3D00}
+.svg-wrap{display:block;margin:12px auto;text-align:center}
+.svg-wrap svg{display:inline-block;max-width:100%;height:auto;background:#fff;border:1px solid var(--bd);border-radius:8px;padding:6px;font-family:'Barlow Condensed',sans-serif}
+.kmap{border-collapse:collapse;margin:10px auto;font-family:'JetBrains Mono',monospace;font-size:.88rem}
+.kmap th,.kmap td{border:1px solid var(--bd);padding:5px 10px;text-align:center;min-width:38px}
+.kmap th{background:#EBF0F7;color:var(--az);font-weight:700}
+.kmap td.one{background:#FFF4E5;color:#7A4400;font-weight:700}
+.kmap td.zero{color:#8C97A8}
+.kmap td.dc{background:#F4F6F9;color:#8C97A8;font-style:italic}
+.kmap td.g1{background:#FFE0B2;color:#5C3D00;font-weight:700;outline:2px solid #EF6C00;outline-offset:-3px}
+.kmap td.g2{background:#BBDEFB;color:#0D47A1;font-weight:700;outline:2px solid #1976D2;outline-offset:-3px}
+.kmap td.g3{background:#C8E6C9;color:#1B5E20;font-weight:700;outline:2px solid #388E3C;outline-offset:-3px}
+.kmap td.g12{background:linear-gradient(135deg,#FFE0B2 50%,#BBDEFB 50%);color:#263238;font-weight:700;outline:2px solid #1976D2;outline-offset:-3px}
+.kmap td.g13{background:linear-gradient(135deg,#FFE0B2 50%,#C8E6C9 50%);color:#263238;font-weight:700;outline:2px solid #388E3C;outline-offset:-3px}
+.kmap td.g23{background:linear-gradient(135deg,#BBDEFB 50%,#C8E6C9 50%);color:#263238;font-weight:700;outline:2px solid #388E3C;outline-offset:-3px}
+.kmap caption{caption-side:top;font-family:'Barlow',sans-serif;font-weight:700;color:var(--az);padding:4px 0;font-size:.88rem}
+.kmap-legend{font-family:'Barlow',sans-serif;font-size:.82rem;color:var(--t2);margin:2px auto 10px;text-align:center}
+.kmap-legend .lg-i{display:inline-block;width:14px;height:10px;border:1px solid #999;margin:0 4px -1px 0;vertical-align:middle}
+.tv{border-collapse:collapse;margin:10px 0;font-family:'JetBrains Mono',monospace;font-size:.85rem;width:auto}
+.tv th,.tv td{border:1px solid var(--bd);padding:4px 10px;text-align:center}
+.tv th{background:#EBF0F7;color:var(--az)}
+.tv tr.hl td{background:#FFF4E5}
+[id]{scroll-margin-top:120px}
+@media(max-width:768px){.main{padding:16px 10px 40px}.problema{padding:14px 14px}.title-block h1{font-size:1.45rem}}
+@media print{
+  .hd,.navcross,.back-portal{display:none!important}
+  body{background:#fff}
+  .problema{break-inside:avoid;page-break-inside:avoid;box-shadow:none;border:1px solid #999}
+  details.resolucion,details.resolucion[open]{border:1px solid #999}
+  details.resolucion>*{display:block!important}
+  details.resolucion summary{background:#F0F0F0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  details.resolucion summary::after{display:none}
+  .resol-body{display:block!important}
+  .resultado{background:#F0F0F0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .aviso{background:#FAFAFA!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+<script>
+/* Force-open all <details> on print */
+window.addEventListener('beforeprint',function(){
+  document.querySelectorAll('details.resolucion').forEach(function(d){d.dataset.wasOpen=d.open?'1':'0';d.open=true;});
+});
+window.addEventListener('afterprint',function(){
+  document.querySelectorAll('details.resolucion').forEach(function(d){if(d.dataset.wasOpen==='0')d.open=false;delete d.dataset.wasOpen;});
+});
+</script>
+</head>
+<body>
+<div class="hd">
+<span class="lg" onclick="location.href='../index.html'">TECI II</span>
+<span class="sb">📚 Ponencia resuelta · D2 Electrónica digital</span>
+<a href="../index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal">
+<a href="../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+<a href="../index.html#teoria"><span>📖</span><span class="nc-lbl">Teoría</span></a><span class="nc-sep">·</span>
+<a href="../index.html#ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a><span class="nc-sep">·</span>
+<a href="../index.html#examenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a><span class="nc-sep">·</span>
+<span class="nc-current" aria-current="page"><span>📚</span><span class="nc-lbl">Ponencia resuelta</span></span><span class="nc-sep">·</span>
+<a href="../apoyo/formulario.html"><span>📚</span><span class="nc-lbl">Apoyo</span></a>
+</nav>
+
+<div class="main">
+<a href="index_ponencia.html" class="back-portal">← Volver al portal de Ponencia resuelta</a>
+
+<div class="title-block">
+<h1>Ponencia 2025-26 resuelta — Bloque D2 Electrónica digital</h1>
+<div class="sub">4 problemas competenciales (+ variante v2 del Problema 1) · Tabla de verdad · Karnaugh · Circuitos con puertas ANSI</div>
+</div>
+
+<p class="intro"><strong>Bloque D2 · Electrónica digital.</strong> Análisis y diseño de sistemas lógicos combinacionales: obtención de la tabla de verdad, forma canónica en minterms, simplificación por el método de Karnaugh y trazado del circuito con puertas lógicas AND, OR, NOT, NAND y NOR. Los enunciados se transcriben íntegros desde la Ponencia oficial; en cada apartado se razona el paso y se cierra con el resultado del PDF. Haz clic en <em>"📝 Ver resolución completa"</em> para desplegar cada desarrollo.</p>
+
+<!-- ============================================================= -->
+<!-- PROBLEMA 1 versión 1                                            -->
+<!-- ============================================================= -->
+<section class="problema" id="prob-1">
+  <header class="prob-header">
+    <h2>Problema 1 (versión 1) — Concentrador de riego <span class="dif" data-level="1">★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p>Se dispone de un concentrador de agua de riego (<strong>F</strong>) al que llegan cuatro tuberías: tubería <strong>A</strong>, con un caudal de \(5\ \text{l/min}\); tubería <strong>B</strong>, con un caudal de \(10\ \text{l/min}\); tubería <strong>C</strong>, con un caudal de \(20\ \text{l/min}\); y tubería <strong>D</strong>, con un caudal de \(30\ \text{l/min}\). Cada tubería tiene un sensor que se activa cuando está pasando agua por la misma. Se desea diseñar un circuito que detecte que al concentrador le llega un caudal superior o igual a \(30\ \text{l/min}\). Se pide:</p>
+    <ol type="a">
+      <li>Obtener la tabla de verdad del circuito.</li>
+      <li>Obtener la expresión simplificada del circuito.</li>
+      <li>Dibujar el circuito lógico de la expresión simplificada.</li>
+      <li>Razonar (basándose en la fórmula simplificada) si existe alguna entrada que no influya en el comportamiento del circuito.</li>
+    </ol>
+  </div>
+
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+
+      <section class="apartado">
+        <h3>a) Tabla de verdad</h3>
+        <p>Para cada combinación de \((A,B,C,D)\) se calcula el caudal total \(Q = 5A + 10B + 20C + 30D\ (\text{l/min})\) y se asigna \(F=1\) si \(Q \ge 30\ \text{l/min}\).</p>
+        <table class="tv">
+          <thead>
+            <tr><th>n</th><th>A (5)</th><th>B (10)</th><th>C (20)</th><th>D (30)</th><th>Q (l/min)</th><th>F</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr class="hl"><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>30</td><td>1</td></tr>
+            <tr><td>2</td><td>0</td><td>0</td><td>1</td><td>0</td><td>20</td><td>0</td></tr>
+            <tr class="hl"><td>3</td><td>0</td><td>0</td><td>1</td><td>1</td><td>50</td><td>1</td></tr>
+            <tr><td>4</td><td>0</td><td>1</td><td>0</td><td>0</td><td>10</td><td>0</td></tr>
+            <tr class="hl"><td>5</td><td>0</td><td>1</td><td>0</td><td>1</td><td>40</td><td>1</td></tr>
+            <tr class="hl"><td>6</td><td>0</td><td>1</td><td>1</td><td>0</td><td>30</td><td>1</td></tr>
+            <tr class="hl"><td>7</td><td>0</td><td>1</td><td>1</td><td>1</td><td>60</td><td>1</td></tr>
+            <tr><td>8</td><td>1</td><td>0</td><td>0</td><td>0</td><td>5</td><td>0</td></tr>
+            <tr class="hl"><td>9</td><td>1</td><td>0</td><td>0</td><td>1</td><td>35</td><td>1</td></tr>
+            <tr><td>10</td><td>1</td><td>0</td><td>1</td><td>0</td><td>25</td><td>0</td></tr>
+            <tr class="hl"><td>11</td><td>1</td><td>0</td><td>1</td><td>1</td><td>55</td><td>1</td></tr>
+            <tr><td>12</td><td>1</td><td>1</td><td>0</td><td>0</td><td>15</td><td>0</td></tr>
+            <tr class="hl"><td>13</td><td>1</td><td>1</td><td>0</td><td>1</td><td>45</td><td>1</td></tr>
+            <tr class="hl"><td>14</td><td>1</td><td>1</td><td>1</td><td>0</td><td>50</td><td>1</td></tr>
+            <tr class="hl"><td>15</td><td>1</td><td>1</td><td>1</td><td>1</td><td>65</td><td>1</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Función canónica (minterms).</strong></p>
+        \[ F(A,B,C,D) = \sum m(1,3,5,6,7,9,11,13,14,15) \]
+      </section>
+
+      <section class="apartado">
+        <h3>b) Simplificación por Karnaugh</h3>
+        <p>Mapa de 4 variables con \(AB\) en columnas (orden Gray \(00,01,11,10\)) y \(CD\) en filas. Se marcan dos grupos de 8 y 4 celdas.</p>
+        <table class="kmap">
+          <caption>Mapa K de \(F(A,B,C,D)\)</caption>
+          <thead>
+            <tr><th rowspan="2" colspan="2">F</th><th colspan="4">AB</th></tr>
+            <tr><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+          </thead>
+          <tbody>
+            <tr><th rowspan="4">CD</th><th>00</th><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td></tr>
+            <tr><th>01</th><td class="g1">1</td><td class="g1">1</td><td class="g1">1</td><td class="g1">1</td></tr>
+            <tr><th>11</th><td class="g12">1</td><td class="g12">1</td><td class="g12">1</td><td class="g12">1</td></tr>
+            <tr><th>10</th><td class="zero">0</td><td class="g2">1</td><td class="g2">1</td><td class="zero">0</td></tr>
+          </tbody>
+        </table>
+        <p class="kmap-legend"><span class="lg-i" style="background:#FFE0B2;border-color:#EF6C00"></span> Grupo 1 (8 unos, fila \(D=1\)) &rarr; \(D\) &nbsp;·&nbsp; <span class="lg-i" style="background:#BBDEFB;border-color:#1976D2"></span> Grupo 2 (4 unos, \(B=1,\ C=1\)) &rarr; \(B\cdot C\)</p>
+        <p><strong>Expresión simplificada.</strong></p>
+        \[ \boxed{\,F = D + B\cdot C\,} \]
+        <div class="resultado">\( F = D + B\cdot C \)</div>
+      </section>
+
+      <section class="apartado">
+        <h3>c) Circuito lógico (puertas ANSI)</h3>
+        <p>Una puerta <strong>AND</strong> para \(B\cdot C\) y una puerta <strong>OR</strong> final para sumar \(D\).</p>
+        <!-- CIRCUITO DE RESOLUCIÓN ELIMINADO v2.9.5: F = D + B·C (AND+OR) — calidad insuficiente, archivado en imagenes_huerfanas_v2_8.md §17, pendiente rehacer manualmente en v3.0 con herramienta externa. -->
+      </section>
+
+      <section class="apartado">
+        <h3>d) Entrada que no influye</h3>
+        <p>Como en la expresión simplificada \(F = D + B\cdot C\) <strong>no aparece la variable \(A\)</strong>, su valor no afecta al resultado: el circuito responde únicamente a \(B\), \(C\) y \(D\).</p>
+        <div class="resultado">La entrada \(A\) no influye en el comportamiento del circuito porque no aparece en la fórmula simplificada.</div>
+      </section>
+
+      <div class="aviso">⚠ <strong>Justificación física.</strong> Como \(D=30\ \text{l/min}\) ya alcanza por sí solo el umbral, \(D=1\) es condición suficiente para \(F=1\). Además, \(B+C = 10+20 = 30\ \text{l/min}\) también alcanza el umbral, lo que añade el término \(B\cdot C\). El caudal de \(A = 5\ \text{l/min}\) nunca es decisivo: sólo suma \(5\) l/min que no cambian la comparación con \(30\) cuando \(D=0\) y \((B\cdot C) = 0\).</div>
+    </div>
+  </details>
+
+  <!-- ============================================================= -->
+  <!-- PROBLEMA 1 versión 2 (variante anidada)                         -->
+  <!-- ============================================================= -->
+  <section class="problema variante" id="prob-1v2">
+    <header class="prob-header">
+      <h2>Problema 1 (versión 2) — Variante con tabla de verdad dada <span class="dif" data-level="1">★</span></h2>
+    </header>
+    <div class="enunciado">
+      <p>Se dispone del mismo concentrador de agua de riego (<strong>F</strong>) con las cuatro tuberías anteriores (\(A=5\), \(B=10\), \(C=20\), \(D=30\ \text{l/min}\)). Ahora se facilita directamente la tabla de verdad del circuito lógico:</p>
+      <table class="tv">
+        <thead>
+          <tr><th>A (5)</th><th>B (10)</th><th>C (20)</th><th>D (30)</th><th>F (\(\ge 30\))</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr class="hl"><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+          <tr><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+          <tr class="hl"><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+          <tr><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr class="hl"><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+          <tr class="hl"><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+          <tr class="hl"><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr class="hl"><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+          <tr class="hl"><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr class="hl"><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+          <tr class="hl"><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+          <tr class="hl"><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+        </tbody>
+      </table>
+      <p>Se pide:</p>
+      <ol type="a">
+        <li>Obtener la fórmula simplificada del circuito.</li>
+        <li>Dibujar el circuito lógico de la fórmula simplificada.</li>
+        <li>Razonar (basándose en la fórmula simplificada) si existe alguna entrada que no influya en el comportamiento del circuito.</li>
+        <li>¿Cuál es el caudal mínimo que detecta el sistema? Justificar su respuesta.</li>
+      </ol>
+    </div>
+
+    <details class="resolucion">
+      <summary>📝 Ver resolución completa</summary>
+      <div class="resol-body">
+
+        <section class="apartado">
+          <h3>a) Fórmula simplificada — Karnaugh</h3>
+          <p>La tabla de verdad es idéntica a la del Problema 1 v1, luego el mapa K coincide:</p>
+          <table class="kmap">
+            <caption>Mapa K de \(F(A,B,C,D)\)</caption>
+            <thead>
+              <tr><th rowspan="2" colspan="2">F</th><th colspan="4">AB</th></tr>
+              <tr><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+            </thead>
+            <tbody>
+              <tr><th rowspan="4">CD</th><th>00</th><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td></tr>
+              <tr><th>01</th><td class="g1">1</td><td class="g1">1</td><td class="g1">1</td><td class="g1">1</td></tr>
+              <tr><th>11</th><td class="g12">1</td><td class="g12">1</td><td class="g12">1</td><td class="g12">1</td></tr>
+              <tr><th>10</th><td class="zero">0</td><td class="g2">1</td><td class="g2">1</td><td class="zero">0</td></tr>
+            </tbody>
+          </table>
+          <p class="kmap-legend"><span class="lg-i" style="background:#FFE0B2;border-color:#EF6C00"></span> Grupo 1 (8 unos, \(D=1\)) &rarr; \(D\) &nbsp;·&nbsp; <span class="lg-i" style="background:#BBDEFB;border-color:#1976D2"></span> Grupo 2 (4 unos, \(B=1,\ C=1\)) &rarr; \(B\cdot C\)</p>
+          \[ \boxed{\,F = D + B\cdot C\,} \]
+          <div class="resultado">\( F = D + B\cdot C \)</div>
+        </section>
+
+        <section class="apartado">
+          <h3>b) Circuito lógico</h3>
+          <p>Se implementa con una puerta AND (\(B,C\)) y una puerta OR final con \(D\):</p>
+          <!-- CIRCUITO DE RESOLUCIÓN ELIMINADO v2.9.5: F = D + B·C (AND+OR v2) — calidad insuficiente, archivado en imagenes_huerfanas_v2_8.md §18, pendiente rehacer manualmente en v3.0 con herramienta externa. -->
+        </section>
+
+        <section class="apartado">
+          <h3>c) Entrada irrelevante</h3>
+          <p>Como \(F = D + B\cdot C\), la variable \(A\) no aparece en la expresión.</p>
+          <div class="resultado">La entrada \(A\) no influye en el comportamiento del circuito porque no aparece en la fórmula simplificada.</div>
+        </section>
+
+        <section class="apartado">
+          <h3>d) Caudal mínimo detectado</h3>
+          <p>Se listan los caudales totales de las combinaciones con \(F=1\):</p>
+          <ul>
+            <li>\(D=1\) sólo (minterm 1): \(30\ \text{l/min}\)</li>
+            <li>\(D+C\) (3): \(50\ \text{l/min}\)</li>
+            <li>\(D+B\) (5): \(40\ \text{l/min}\)</li>
+            <li>\(D+B+C\) (7): \(60\ \text{l/min}\)</li>
+            <li>\(D+A\) (9): \(35\ \text{l/min}\)</li>
+            <li>\(D+A+C\) (11): \(55\ \text{l/min}\)</li>
+            <li>\(D+A+B\) (13): \(45\ \text{l/min}\)</li>
+            <li>\(D+A+B+C\) (15): \(65\ \text{l/min}\)</li>
+            <li>\(B+C\) (6): \(30\ \text{l/min}\)</li>
+            <li>\(A+B+C\) (14): \(35\ \text{l/min}\)</li>
+          </ul>
+          <p>El caudal más pequeño que hace \(F=1\) es \(30\ \text{l/min}\) (se alcanza con \(D=1\) o con \(B=C=1\)).</p>
+          <div class="resultado">Caudal mínimo detectado: \( Q_{\min} = 30\ \text{l/min} \).</div>
+        </section>
+
+        <div class="aviso">⚠ La versión 2 comparte tabla con la versión 1; cambia sólo el punto de partida didáctico: se entrega la tabla y se pide directamente la simplificación, sin deducirla del enunciado físico.</div>
+      </div>
+    </details>
+  </section>
+</section>
+
+<!-- ============================================================= -->
+<!-- PROBLEMA 2                                                      -->
+<!-- ============================================================= -->
+<section class="problema" id="prob-2">
+  <header class="prob-header">
+    <h2>Problema 2 — Control automático de luces <span class="dif" data-level="1">★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p>En una habitación se utiliza un sistema automatizado para controlar las luces, \(F\), en función de tres entradas:</p>
+    <ul>
+      <li>Sensor de movimiento \(M\) (hay personas en la habitación \(=1\), no hay personas \(=0\)).</li>
+      <li>Sensor de luz ambiente \(L\) (luz insuficiente \(=1\), luz adecuada \(=0\)).</li>
+      <li>Interruptor manual \(S\) (encendido manual \(=1\), encendido automático \(=0\)).</li>
+    </ul>
+    <p>Las luces, \(F\), se encenderán si: i) se detecta movimiento y la luz ambiente es insuficiente; ii) el interruptor manual está activado independientemente del resto de condiciones. Se pide:</p>
+    <ol type="a">
+      <li>Obtener la tabla de verdad y su función en forma canónica.</li>
+      <li>Simplificar por el método de Karnaugh e implementar la función con puertas NAND.</li>
+    </ol>
+  </div>
+
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+
+      <section class="apartado">
+        <h3>a) Tabla de verdad y forma canónica</h3>
+        <p>\(F = 1\) si \((M=1\ \text{y}\ L=1)\) o \(S = 1\).</p>
+        <table class="tv">
+          <thead>
+            <tr><th>n</th><th>M</th><th>L</th><th>S</th><th>F</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr class="hl"><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+            <tr><td>2</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+            <tr class="hl"><td>3</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+            <tr><td>4</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr class="hl"><td>5</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+            <tr class="hl"><td>6</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+            <tr class="hl"><td>7</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Forma canónica (suma de minterms):</strong></p>
+        \[ F = \overline{M}\,\overline{L}\,S + \overline{M}\,L\,S + M\,\overline{L}\,S + M\,L\,\overline{S} + M\,L\,S \]
+        \[ F(M,L,S) = \sum m(1,3,5,6,7) \]
+      </section>
+
+      <section class="apartado">
+        <h3>b) Simplificación por Karnaugh e implementación con NAND</h3>
+        <p>Mapa de 3 variables con \(LS\) en columnas y \(M\) en filas.</p>
+        <table class="kmap">
+          <caption>Mapa K de \(F(M,L,S)\)</caption>
+          <thead>
+            <tr><th rowspan="2">F</th><th colspan="4">LS</th></tr>
+            <tr><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>M=0</th><td class="zero">0</td><td class="g1">1</td><td class="g1">1</td><td class="zero">0</td></tr>
+            <tr><th>M=1</th><td class="zero">0</td><td class="g1">1</td><td class="g12">1</td><td class="g2">1</td></tr>
+          </tbody>
+        </table>
+        <p class="kmap-legend"><span class="lg-i" style="background:#FFE0B2;border-color:#EF6C00"></span> Grupo 1 (4 unos, columna \(S=1\)) &rarr; \(S\) &nbsp;·&nbsp; <span class="lg-i" style="background:#BBDEFB;border-color:#1976D2"></span> Grupo 2 (2 unos, \(M=1,\ L=1\)) &rarr; \(M\cdot L\)</p>
+        <p><strong>Expresión simplificada:</strong></p>
+        \[ F = S + M\cdot L \]
+        <p><strong>Conversión a NAND</strong> aplicando De Morgan y doble negación:</p>
+        \[ F = S + M\cdot L = \overline{\overline{S + M\cdot L}} = \overline{\overline{S}\cdot \overline{M\cdot L}} \]
+        \[ F = \overline{\;\overline{S}\cdot \overline{M\cdot L}\;} \]
+        <p>es decir, \(F = \text{NAND}\bigl(\overline{S},\ \overline{M\cdot L}\bigr)\). Se usan: una NAND para \(\overline{M\cdot L}\), un inversor (NAND con dos entradas unidas) para \(\overline{S}\) y una NAND final.</p>
+        <div class="resultado">\( F = S + M\cdot L \) &nbsp;&rarr;&nbsp; implementación NAND: \( F = \overline{\,\overline{S}\cdot \overline{M\cdot L}\,} \)</div>
+
+        <!-- CIRCUITO DE RESOLUCIÓN ELIMINADO v2.9.5: F = S+M·L (3 NAND) — calidad insuficiente, archivado en imagenes_huerfanas_v2_8.md §19, pendiente rehacer manualmente en v3.0 con herramienta externa. -->
+      </section>
+
+      <div class="aviso">⚠ La puerta NAND es <em>funcionalmente completa</em>: con sólo NAND se puede implementar cualquier función lógica. Por eso el enunciado pide usarla: un inversor se obtiene cortocircuitando las dos entradas de una NAND.</div>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================= -->
+<!-- PROBLEMA 3                                                      -->
+<!-- ============================================================= -->
+<section class="problema" id="prob-3">
+  <header class="prob-header">
+    <h2>Problema 3 — Guillotina de seguridad <span class="dif" data-level="1">★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p>El sistema de seguridad de una guillotina para cortar papel tiene una salida (\(G\)) para el corte y una salida luminosa (\(A\)) de aviso. Consta, además, de dos pulsadores (\(I\)) y (\(D\)) y dos interruptores (\(M\)) y (\(E\)). Su funcionamiento es el siguiente:</p>
+    <ul>
+      <li>Si \(E\) está inactivo (\(E=0\)), la salida \(G\) no se activa en ningún caso (\(G=0\)).</li>
+      <li>Si \(E=1\) y \(M=1\), la máquina funciona en modo seguro y es preciso que se pulsen simultáneamente ambos pulsadores (\(I=1,\ D=1\)) para que se active la salida (\(G=1\)) y se corte el papel.</li>
+      <li>Si \(E=1\) y \(M=0\), la guillotina se activa pulsando cualquiera de los dos pulsadores (\(I\) ó \(D\)) o ambos a la vez y, además, se activará la señal de aviso (\(A=1\)) para que el operario tenga cuidado durante esa operación.</li>
+    </ul>
+    <p>Se pide:</p>
+    <ol type="a">
+      <li>Obtener la tabla de verdad y las funciones canónicas de \(G\) y \(A\).</li>
+      <li>Simplificar las funciones \(G\) y \(A\) por Karnaugh y obtener los correspondientes circuitos lógicos utilizando puertas NAND.</li>
+    </ol>
+  </div>
+
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+
+      <section class="apartado">
+        <h3>a) Tabla de verdad y funciones canónicas</h3>
+        <table class="tv">
+          <thead>
+            <tr><th>n</th><th>E</th><th>M</th><th>I</th><th>D</th><th>G</th><th>A</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+            <tr><td>2</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>3</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+            <tr><td>4</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>5</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+            <tr><td>6</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>7</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+            <tr><td>8</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr class="hl"><td>9</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+            <tr class="hl"><td>10</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+            <tr class="hl"><td>11</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+            <tr><td>12</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>13</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+            <tr><td>14</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr class="hl"><td>15</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Funciones canónicas (minterms):</strong></p>
+        \[ G(E,M,I,D) = \sum m(9,10,11,15) = E\,\overline{M}\,\overline{I}\,D + E\,\overline{M}\,I\,\overline{D} + E\,\overline{M}\,I\,D + E\,M\,I\,D \]
+        \[ A(E,M,I,D) = \sum m(9,10,11) = E\,\overline{M}\,\overline{I}\,D + E\,\overline{M}\,I\,\overline{D} + E\,\overline{M}\,I\,D \]
+      </section>
+
+      <section class="apartado">
+        <h3>b) Simplificación por Karnaugh</h3>
+
+        <p><strong>Función \(G\).</strong> Mapa con \(EM\) en filas y \(ID\) en columnas.</p>
+        <table class="kmap">
+          <caption>Mapa K de \(G\)</caption>
+          <thead>
+            <tr><th rowspan="2" colspan="2">G</th><th colspan="4">ID</th></tr>
+            <tr><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+          </thead>
+          <tbody>
+            <tr><th rowspan="4">EM</th><th>00</th><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td></tr>
+            <tr><th>01</th><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td></tr>
+            <tr><th>11</th><td class="zero">0</td><td class="zero">0</td><td class="g1">1</td><td class="zero">0</td></tr>
+            <tr><th>10</th><td class="zero">0</td><td class="g2">1</td><td class="g12">1</td><td class="g3">1</td></tr>
+          </tbody>
+        </table>
+        <p class="kmap-legend">
+          <span class="lg-i" style="background:#FFE0B2;border-color:#EF6C00"></span> Grupo 1 (\(E\cdot I\cdot D\), 2 unos entre filas EM=11 y EM=10, columna ID=11) &nbsp;·&nbsp;
+          <span class="lg-i" style="background:#BBDEFB;border-color:#1976D2"></span> Grupo 2 (\(E\cdot\overline{M}\cdot D\), celdas EM=10 con ID=01, ID=11) &nbsp;·&nbsp;
+          <span class="lg-i" style="background:#C8E6C9;border-color:#388E3C"></span> Grupo 3 (\(E\cdot\overline{M}\cdot I\), celdas EM=10 con ID=11, ID=10)
+        </p>
+        \[ G = E\,I\,D + E\,\overline{M}\,D + E\,\overline{M}\,I \]
+
+        <p><strong>Función \(A\).</strong></p>
+        <table class="kmap">
+          <caption>Mapa K de \(A\)</caption>
+          <thead>
+            <tr><th rowspan="2" colspan="2">A</th><th colspan="4">ID</th></tr>
+            <tr><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+          </thead>
+          <tbody>
+            <tr><th rowspan="4">EM</th><th>00</th><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td></tr>
+            <tr><th>01</th><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td></tr>
+            <tr><th>11</th><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td></tr>
+            <tr><th>10</th><td class="zero">0</td><td class="g2">1</td><td class="g23">1</td><td class="g3">1</td></tr>
+          </tbody>
+        </table>
+        <p class="kmap-legend">
+          <span class="lg-i" style="background:#BBDEFB;border-color:#1976D2"></span> Grupo \(E\overline{M}D\) (ID=01, ID=11) &nbsp;·&nbsp;
+          <span class="lg-i" style="background:#C8E6C9;border-color:#388E3C"></span> Grupo \(E\overline{M}I\) (ID=11, ID=10)
+        </p>
+        \[ A = E\,\overline{M}\,D + E\,\overline{M}\,I \]
+
+        <p><strong>Forma NAND</strong> aplicando doble negación y De Morgan:</p>
+        \[ G = \overline{\overline{E\,I\,D}\cdot\overline{E\,\overline{M}\,D}\cdot\overline{E\,\overline{M}\,I}} \]
+        \[ A = \overline{\overline{E\,\overline{M}\,D}\cdot\overline{E\,\overline{M}\,I}} \]
+
+        <div class="resultado">
+          \( G = E\,I\,D + E\,\overline{M}\,D + E\,\overline{M}\,I \) &nbsp;·&nbsp;
+          \( A = E\,\overline{M}\,D + E\,\overline{M}\,I \)
+        </div>
+
+        <p><strong>Circuito lógico (NAND).</strong> Tres NAND de entrada generan \(\overline{E\,I\,D}\), \(\overline{E\,\overline{M}\,D}\) y \(\overline{E\,\overline{M}\,I}\). Una NAND de 3 entradas agrupa las tres para \(G\); una NAND de 2 entradas agrupa las dos últimas para \(A\). \(\overline{M}\) se obtiene con un inversor (NAND con entradas unidas).</p>
+        <!-- CIRCUITO DE RESOLUCIÓN ELIMINADO v2.9.5: G, A (NAND guillotina) — calidad insuficiente, archivado en imagenes_huerfanas_v2_8.md §20, pendiente rehacer manualmente en v3.0 con herramienta externa. -->
+      </section>
+
+      <div class="aviso">⚠ Observa que \(A\) no incluye el minterm 15 (\(E,M,I,D\) todos a 1): en modo seguro no hay aviso, el aviso es específico del modo \(M=0\).</div>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================= -->
+<!-- PROBLEMA 4                                                      -->
+<!-- ============================================================= -->
+<section class="problema" id="prob-4">
+  <header class="prob-header">
+    <h2>Problema 4 — Indicador de nivel con 3 leds <span class="dif" data-level="1">★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p>En la figura adjunta, <strong>CD</strong> es un circuito digital que indica el nivel de agua de un depósito con tres leds. Si el líquido no llega a \(S_1\), no se enciende ningún led. Cuando el líquido llega a \(S_1\) (\(S_1=1\)), solo se enciende \(L_1\) (\(L_1=1\)); cuando el líquido llega a \(S_2\) (\(S_2=1\)), solo se enciende \(L_2\) (\(L_2=1,\ L_1=0\)); cuando el líquido llega a \(S_3\) (\(S_3=1\)), solo se enciende \(L_3\) (\(L_3=1,\ L_2=0,\ L_1=0\)). Finalmente, si se da alguna combinación de la que se deduzca un fallo de detección de nivel, se encenderán los tres leds simultáneamente. Se pide:</p>
+    <ol type="a">
+      <li>Obtener la tabla de verdad y las funciones canónicas de los tres leds.</li>
+      <li>Simplificar las funciones por Karnaugh y obtener los correspondientes circuitos lógicos con puertas básicas.</li>
+    </ol>
+  </div>
+
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+
+      <section class="apartado">
+        <h3>a) Tabla de verdad y funciones canónicas</h3>
+        <p>Las combinaciones físicamente coherentes son \(S_3S_2S_1 \in\{000,001,011,111\}\). El resto corresponden a <em>fallo de detección</em> y los tres leds se encienden.</p>
+        <table class="tv">
+          <thead>
+            <tr><th>n</th><th>\(S_3\)</th><th>\(S_2\)</th><th>\(S_1\)</th><th>\(L_3\)</th><th>\(L_2\)</th><th>\(L_1\)</th><th>Interpretación</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>Vacío</td></tr>
+            <tr class="hl"><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>Nivel \(S_1\)</td></tr>
+            <tr class="hl"><td>2</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>Fallo</td></tr>
+            <tr class="hl"><td>3</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>Nivel \(S_2\)</td></tr>
+            <tr class="hl"><td>4</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>Fallo</td></tr>
+            <tr class="hl"><td>5</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>Fallo</td></tr>
+            <tr class="hl"><td>6</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>Fallo</td></tr>
+            <tr class="hl"><td>7</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>Nivel \(S_3\)</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Funciones canónicas (minterms, orden \(S_3S_2S_1\)):</strong></p>
+        \[ L_1(S_3,S_2,S_1) = \sum m(1,2,4,5,6) \]
+        \[ L_2(S_3,S_2,S_1) = \sum m(2,3,4,5,6) \]
+        \[ L_3(S_3,S_2,S_1) = \sum m(2,4,5,6,7) \]
+      </section>
+
+      <section class="apartado">
+        <h3>b) Simplificación por Karnaugh</h3>
+
+        <p><strong>Función \(L_1\).</strong></p>
+        <table class="kmap">
+          <caption>Mapa K de \(L_1\)</caption>
+          <thead>
+            <tr><th rowspan="2">L1</th><th colspan="4">\(S_2 S_1\)</th></tr>
+            <tr><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>\(S_3\)=0</th><td class="zero">0</td><td class="g1">1</td><td class="zero">0</td><td class="g2">1</td></tr>
+            <tr><th>\(S_3\)=1</th><td class="g3">1</td><td class="g13">1</td><td class="zero">0</td><td class="g23">1</td></tr>
+          </tbody>
+        </table>
+        <p class="kmap-legend">
+          <span class="lg-i" style="background:#FFE0B2;border-color:#EF6C00"></span> \(\overline{S_2}\cdot S_1\) (columna \(S_2S_1=01\)) &nbsp;·&nbsp;
+          <span class="lg-i" style="background:#BBDEFB;border-color:#1976D2"></span> \(S_2\cdot\overline{S_1}\) (columna \(S_2S_1=10\)) &nbsp;·&nbsp;
+          <span class="lg-i" style="background:#C8E6C9;border-color:#388E3C"></span> \(S_3\cdot\overline{S_2}\) (fila \(S_3=1\), columnas 00 y 01)
+        </p>
+        \[ L_1 = \overline{S_2}\,S_1 + S_2\,\overline{S_1} + S_3\,\overline{S_2} \]
+
+        <p><strong>Función \(L_2\).</strong></p>
+        <table class="kmap">
+          <caption>Mapa K de \(L_2\)</caption>
+          <thead>
+            <tr><th rowspan="2">L2</th><th colspan="4">\(S_2 S_1\)</th></tr>
+            <tr><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>\(S_3\)=0</th><td class="zero">0</td><td class="zero">0</td><td class="g1">1</td><td class="g2">1</td></tr>
+            <tr><th>\(S_3\)=1</th><td class="g3">1</td><td class="g3">1</td><td class="zero">0</td><td class="g23">1</td></tr>
+          </tbody>
+        </table>
+        <p class="kmap-legend">
+          <span class="lg-i" style="background:#FFE0B2;border-color:#EF6C00"></span> \(\overline{S_3}\cdot S_2\) (fila \(S_3=0\), columnas 11 y 10) &nbsp;·&nbsp;
+          <span class="lg-i" style="background:#BBDEFB;border-color:#1976D2"></span> \(S_2\cdot\overline{S_1}\) (columna \(S_2S_1=10\)) &nbsp;·&nbsp;
+          <span class="lg-i" style="background:#C8E6C9;border-color:#388E3C"></span> \(S_3\cdot\overline{S_2}\) (fila \(S_3=1\), columnas 00 y 01)
+        </p>
+        \[ L_2 = \overline{S_3}\,S_2 + S_2\,\overline{S_1} + S_3\,\overline{S_2} \]
+
+        <p><strong>Función \(L_3\).</strong></p>
+        <table class="kmap">
+          <caption>Mapa K de \(L_3\)</caption>
+          <thead>
+            <tr><th rowspan="2">L3</th><th colspan="4">\(S_2 S_1\)</th></tr>
+            <tr><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>\(S_3\)=0</th><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="g1">1</td></tr>
+            <tr><th>\(S_3\)=1</th><td class="g2">1</td><td class="g2">1</td><td class="g2">1</td><td class="g12">1</td></tr>
+          </tbody>
+        </table>
+        <p class="kmap-legend">
+          <span class="lg-i" style="background:#FFE0B2;border-color:#EF6C00"></span> \(S_2\cdot\overline{S_1}\) (columna \(S_2S_1=10\)) &nbsp;·&nbsp;
+          <span class="lg-i" style="background:#BBDEFB;border-color:#1976D2"></span> \(S_3\) (fila \(S_3=1\) completa)
+        </p>
+        \[ L_3 = S_2\,\overline{S_1} + S_3 \]
+
+        <div class="resultado">
+          \( L_1 = \overline{S_2}\,S_1 + S_2\,\overline{S_1} + S_3\,\overline{S_2} \) &nbsp;·&nbsp;
+          \( L_2 = \overline{S_3}\,S_2 + S_2\,\overline{S_1} + S_3\,\overline{S_2} \) &nbsp;·&nbsp;
+          \( L_3 = S_2\,\overline{S_1} + S_3 \)
+        </div>
+
+        <p><strong>Circuito lógico con puertas básicas (AND, OR, NOT).</strong> Se comparten las puertas AND intermedias \(S_2\cdot\overline{S_1}\) y \(S_3\cdot\overline{S_2}\) entre \(L_1\) y \(L_2\).</p>
+        <!-- CIRCUITO DE RESOLUCIÓN ELIMINADO v2.9.5: L1,L2,L3 (AND+OR+NOT) — calidad insuficiente, archivado en imagenes_huerfanas_v2_8.md §21, pendiente rehacer manualmente en v3.0 con herramienta externa. -->
+      </section>
+
+      <div class="aviso">⚠ El minterm \(m_7\) (los tres sensores activos: \(S_3=S_2=S_1=1\)) corresponde a <em>nivel máximo normal</em>, no a fallo: enciende sólo \(L_3\). En cambio, \(m_2, m_4, m_5, m_6\) son combinaciones físicamente imposibles (sensores en niveles superiores activados sin los inferiores) y se interpretan como fallo, con los tres leds a \(1\).</div>
+    </div>
+  </details>
+</section>
+
+</div>
+</body>
+</html>

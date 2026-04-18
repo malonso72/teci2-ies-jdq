@@ -1,0 +1,44 @@
+# ──────────────────────────────────────────────────────────────
+# .gitignore para TECI II — qué NO se publica en la web
+# ──────────────────────────────────────────────────────────────
+# Todo lo que aparezca aquí se queda SOLO en tu ordenador.
+# GitHub no lo sube, Netlify no lo publica.
+# Tú lo sigues viendo y editando con total normalidad.
+# Para volver a publicar algo, basta con borrar su línea de aquí.
+# ──────────────────────────────────────────────────────────────
+
+# === Material privado del profesor ===
+_soluciones/
+documentacion/
+
+# === Documentos internos del proyecto ===
+INFORME_EJECUCION_v2_9_4.md
+.claude/
+
+# === Scripts de desarrollo (no útiles para el alumno) ===
+scripts/
+
+# === Material imprimible (PDF) — aún no preparado, no publicar ===
+apoyo/Libro_TECI_2_Manuel_Alonso_ultimate.pdf
+apoyo/Resumen_Teoria_TECI_2_ultimate.pdf
+apoyo/TI2_PEvAU_Ejercicios_ultimate.pdf
+apoyo/Suplemento_v2_9_11.pdf
+# Versiones editables (.docx) del material imprimible
+apoyo/Libro_TECI_2_Manuel_Alonso_ultimate_v6.docx
+apoyo/Resumen_Teoria_TECI_2_ultimate_v9.docx
+apoyo/TI2_PEvAU_Ejercicios_ultimate.docx
+
+# === Archivos del sistema y temporales ===
+Thumbs.db
+.DS_Store
+desktop.ini
+*.tmp
+*.bak
+~$*
+
+# ──────────────────────────────────────────────────────────────
+# Si quieres EXCLUIR algo más, añade su nombre al final.
+# Ejemplos:
+#   apoyo/Libro_TECI_2_Manuel_Alonso_ultimate_v6.docx
+#   ponencia_resuelta/
+# ──────────────────────────────────────────────────────────────

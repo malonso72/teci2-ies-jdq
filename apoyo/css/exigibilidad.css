@@ -1,0 +1,88 @@
+/* ==========================================================================
+   Sistema visual unificado de exigibilidad PEvAU 2025-26
+   v2.7 · TECI II ultimate_v1
+   4 niveles de exigibilidad · paleta coherente con el ecosistema
+   Contraste WCAG AA en todas las etiquetas (texto sobre fondo)
+   ========================================================================== */
+
+/* Wrapper de etiquetas (inline badge) --------------------------------------- */
+.exig{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.72rem;font-weight:700;letter-spacing:.03em;
+  padding:3px 10px;border-radius:999px;
+  border:1.5px solid transparent;
+  text-transform:uppercase;
+  line-height:1.2;white-space:nowrap;
+  vertical-align:middle;
+  margin:0 6px 0 0;
+}
+
+.exig::before{font-size:.88em;line-height:1}
+
+/* Nivel 1 · NÚCLEO PEvAU · entra seguro ------------------------------------- */
+.exig.nucleo{
+  background:#E7F4EA;color:#175028;border-color:#7DBB90;
+}
+.exig.nucleo::before{content:'✅';}
+
+/* Nivel 2 · PUEDE APARECER CONTEXTUALIZADO ---------------------------------- */
+.exig.contextual{
+  background:#E4EEF8;color:#174775;border-color:#7FB3E6;
+}
+.exig.contextual::before{content:'🔄';}
+
+/* Nivel 3 · AMPLIACIÓN · no exigible, formación complementaria -------------- */
+.exig.ampliacion{
+  background:#FDEEDA;color:#6B3800;border-color:#E8B37A;
+}
+.exig.ampliacion::before{content:'➕';}
+
+/* Nivel 4 · FUERA DE PEvAU -------------------------------------------------- */
+.exig.fuera{
+  background:#EFEAEA;color:#4A4145;border-color:#9A8F94;
+}
+.exig.fuera::before{content:'🚫';}
+
+/* Bloque destacado completo (envuelve un contenido — epígrafe, apartado) ---- */
+/* Se aplica con .exig-box class + modificador con el mismo nombre de nivel */
+.exig-box{
+  position:relative;
+  border:1px solid var(--bd,#D8DDE5);
+  border-radius:10px;
+  padding:10px 14px 12px 14px;
+  margin:14px 0;
+  background:#FBFCFE;
+}
+.exig-box > .exig{position:absolute;top:-10px;left:12px;background-origin:border-box}
+
+.exig-box.nucleo{ border-left:5px solid #2E7D32;background:#F4FBF5}
+.exig-box.contextual{ border-left:5px solid #2E7BC4;background:#F2F7FC}
+.exig-box.ampliacion{ border-left:5px solid #D4700A;background:#FDF7EF}
+.exig-box.fuera{ border-left:5px solid #6B6168;background:#F7F5F6;opacity:.92}
+
+/* Leyenda opcional al principio de un bloque -------------------------------- */
+.exig-leyenda{
+  display:flex;flex-wrap:wrap;gap:8px;row-gap:6px;
+  padding:10px 14px;margin:0 0 16px;
+  border:1px dashed var(--bd,#D8DDE5);border-radius:10px;
+  background:#FAFBFD;
+  font-size:.8rem;color:var(--t2,#555D6B);
+  align-items:center;
+}
+.exig-leyenda strong{color:var(--az,#1B4F8A);font-weight:700;font-family:'Barlow Condensed',sans-serif;font-size:.85rem;margin-right:4px}
+.exig-leyenda .exig{margin:0}
+
+/* Impresión: mantener colores para preservar el código visual --------------- */
+@media print{
+  .exig,.exig-box,.exig-leyenda{
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+  .exig-box{break-inside:avoid;page-break-inside:avoid}
+}
+
+/* Móvil: reducir tamaño del badge sin perder legibilidad -------------------- */
+@media (max-width:480px){
+  .exig{font-size:.68rem;padding:2px 8px}
+  .exig-box{padding:10px 12px}
+}

@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II · Autoevaluación · IES Jiménez de Quesada</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script>
+MathJax = { tex: { inlineMath: [['\\(','\\)'],['$','$']], displayMath: [['$$','$$'],['\\[','\\]']] } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+<style>
+:root{--az:#1B4F8A;--az2:#2E7BC4;--nj:#D4700A;--vd:#1A6B3A;--rj:#C0321E;--hub-bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:radial-gradient(circle at top,#F9FBFE 0,#F4F6F9 40%,#EEF2F7 100%);color:var(--tx);overflow-x:hidden}
+.hd{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:34px 24px 30px;text-align:center;box-shadow:0 10px 30px rgba(27,79,138,.14);position:relative}
+.hd h1{font-family:'Barlow Condensed',sans-serif;font-size:2.08rem;font-weight:700;margin-bottom:5px}
+.hd p{font-size:.92rem;opacity:.85;max-width:580px;margin:0 auto;line-height:1.55}
+.hd .btn-home{position:absolute;top:16px;left:16px;background:rgba(255,255,255,.15);color:#fff;padding:6px 12px;border-radius:18px;text-decoration:none;font-size:.82rem;font-weight:600;border:1px solid rgba(255,255,255,.35);transition:all .18s}
+.hd .btn-home:hover{background:rgba(255,255,255,.28)}
+
+/* Navcross */
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:0;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+.navcross span.nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8;align-self:center;user-select:none}
+@media(max-width:640px){.navcross{gap:4px;padding:8px 10px}.navcross a span.nc-lbl,.navcross span.nc-current span.nc-lbl{display:none}.navcross .nc-sep{display:none}}
+
+.main{max-width:1100px;margin:0 auto;padding:26px 18px 62px}
+
+/* Filter bar */
+.filters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:8px 0 24px;padding:14px;background:#fff;border:1px solid var(--bd);border-radius:18px;box-shadow:0 6px 20px rgba(20,42,74,.05)}
+.fbtn{font-family:'Barlow',sans-serif;font-weight:600;font-size:.82rem;padding:7px 14px;border-radius:20px;border:1px solid var(--bd);background:#fff;color:var(--az);cursor:pointer;transition:all .18s;letter-spacing:.02em}
+.fbtn:hover{background:#EBF0F7;border-color:var(--az);transform:translateY(-1px)}
+.fbtn.btn-active{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;border-color:var(--az);box-shadow:0 4px 12px rgba(27,79,138,.25)}
+.fbtn.orange{color:var(--nj);border-color:#F5D5B0}
+.fbtn.orange:hover{background:#FFF4E8;border-color:var(--nj);color:var(--nj)}
+.fbtn.orange.btn-active{background:linear-gradient(135deg,var(--nj),#F09D3F);color:#fff;border-color:var(--nj);box-shadow:0 4px 12px rgba(212,112,10,.25)}
+
+/* Block heading */
+.block-head{font-family:'Barlow Condensed',sans-serif;font-size:1.28rem;font-weight:700;color:var(--az);margin:26px 0 14px;padding:8px 14px;border-left:5px solid var(--az);background:linear-gradient(90deg,#EBF0F7,transparent);border-radius:4px;letter-spacing:.02em}
+section[data-block]{margin-bottom:18px}
+section[data-block].hidden{display:none}
+
+/* Flashcard grid */
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));gap:16px}
+
+.flashcard{position:relative;width:100%;height:190px;perspective:1200px;cursor:pointer}
+.flashcard.hidden{display:none}
+.fc-inner{position:relative;width:100%;height:100%;transition:transform .5s ease;transform-style:preserve-3d}
+.flashcard.flipped .fc-inner{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;padding:18px 16px;border-radius:16px;display:flex;flex-direction:column;justify-content:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 6px 20px rgba(20,42,74,.08);border:1px solid var(--bd);overflow:auto}
+.fc-front{background:linear-gradient(140deg,#EBF3FB,#D5E6F5);color:var(--az)}
+.fc-back{background:linear-gradient(140deg,#E3F3E9,#CDE7D5);color:#13532C;transform:rotateY(180deg)}
+.fc-tag{font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:600;opacity:.7;margin-bottom:6px;letter-spacing:.06em}
+.fc-q{font-family:'Barlow',sans-serif;font-weight:600;font-size:1rem;line-height:1.35}
+.fc-a{font-family:'Barlow',sans-serif;font-weight:500;font-size:.92rem;line-height:1.42}
+.fc-hint{position:absolute;bottom:6px;right:10px;font-size:.62rem;opacity:.55;font-family:'JetBrains Mono',monospace}
+
+.meta{text-align:center;font-size:.8rem;color:var(--t2);margin-bottom:8px}
+.meta strong{color:var(--az)}
+
+.foot{text-align:center;margin-top:40px;font-size:.74rem;color:var(--t2);line-height:1.5}
+
+@media(max-width:640px){
+  .fgrid{grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));gap:12px}
+  .flashcard{height:200px}
+  .hd h1{font-size:1.7rem}
+}
+
+@media print{
+  html,body{background:#fff!important;color:#000!important}
+  .hd,.navcross,.nv,.mb,.home-btn,.sol-btn,.btn-video,.video-group{display:none!important}
+  .ly{position:static!important}
+  .ct{overflow:visible!important;padding:0}
+  .pagina{box-shadow:none!important;max-width:100%}
+  .cabecera{background:#fff!important;color:#000!important}
+  .cab-titulo,.cab-label,.cab-sub{color:#000!important}
+  h2,h3,h4{page-break-after:avoid}
+  .seccion{page-break-inside:avoid}
+  .sol-content{display:block!important}
+  img{max-width:100%;page-break-inside:avoid}
+  a{text-decoration:none;color:#000}
+  .objetivos-box,.decalogo-box{background:#fff!important;border:1px solid #aaa!important}
+}
+/* @media print v2 — ecosistema TECI2 */
+
+</style>
+</head>
+<body>
+
+<div class="hd">
+<a href="index.html" class="btn-home">🏠 Índice</a>
+<h1>🎓 Autoevaluación TECI II</h1>
+<p>~200 flashcards interactivas por bloque · Haz clic en la tarjeta para voltearla y ver la respuesta · PEvAU Andalucía 2025–26</p>
+</div>
+
+<nav class="navcross" role="navigation" aria-label="Navegación transversal">
+<a href="index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html#teoria"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html#ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html#examenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a>
+<span class="nc-sep">·</span>
+<a href="ponencia_resuelta/index_ponencia.html" aria-label="Ver Ponencia 2025-26 resuelta"><span>📚</span><span class="nc-lbl">Ponencia</span></a>
+<span class="nc-sep">·</span>
+<a href="apoyo/formulario.html" aria-label="Ir al material de apoyo"><span>📚</span><span class="nc-lbl">Apoyo</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current" aria-current="page"><span>🎓</span><span class="nc-lbl">Autoeval</span></span>
+</nav>
+
+<div class="main">
+
+<p class="meta">Filtra por bloque y repasa. <strong id="visibleCount">0</strong> tarjetas visibles de <strong id="totalCount">0</strong>.</p>
+
+<div class="filters" role="toolbar" aria-label="Filtros por bloque">
+<button class="fbtn btn-active" data-filter="all">Todos</button>
+<button class="fbtn" data-filter="A">A · Proyectos</button>
+<button class="fbtn orange" data-filter="B">B · Materiales</button>
+<button class="fbtn" data-filter="C1">C1 · Estructuras</button>
+<button class="fbtn orange" data-filter="C2">C2 · Térmicas</button>
+<button class="fbtn" data-filter="C31">C31 · Neumática</button>
+<button class="fbtn orange" data-filter="C32">C32 · Hidráulica</button>
+<button class="fbtn" data-filter="D1">D1 · CA</button>
+<button class="fbtn orange" data-filter="D2">D2 · Digital</button>
+<button class="fbtn" data-filter="E">E · Informáticos</button>
+<button class="fbtn orange" data-filter="F">F · Automáticos</button>
+<button class="fbtn" data-filter="G">G · Sostenibilidad</button>
+<button class="fbtn orange" data-filter="CC">CC · Repaso</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- BLOQUE A · Proyectos (18 tarjetas)                           -->
+<!-- ============================================================ -->
+<section data-block="A">
+<h2 class="block-head">📋 Bloque A · Proyectos I+D+i</h2>
+<div class="fgrid">
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 01</div><div class="fc-q">¿Cuáles son las fases de un proyecto técnico?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 01</div><div class="fc-a">Estudio previo, anteproyecto, proyecto, ejecución, uso/mantenimiento y, finalmente, retirada o reciclaje.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 02</div><div class="fc-q">¿Qué documentos integran un proyecto según UNE 157001?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 02</div><div class="fc-a">Índice general, memoria, anexos, planos, pliego de condiciones, mediciones, presupuesto y estudios con entidad propia.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 03</div><div class="fc-q">¿Qué es Scrum?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 03</div><div class="fc-a">Metodología ágil iterativa basada en sprints cortos (2–4 semanas), con roles Product Owner, Scrum Master y equipo.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 04</div><div class="fc-q">¿En qué consiste Kanban?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 04</div><div class="fc-a">Gestión visual del flujo con tablero de columnas (por hacer, en curso, hecho) y límite del trabajo en progreso.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 05</div><div class="fc-q">¿Qué caracteriza a eXtreme Programming (XP)?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 05</div><div class="fc-a">Ciclos muy cortos, programación en pareja, integración continua, refactorización y pruebas automáticas constantes.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 06</div><div class="fc-q">¿Qué contiene la memoria de un proyecto?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 06</div><div class="fc-a">Objeto, alcance, antecedentes, normativa, requisitos, análisis de soluciones, solución adoptada y justificación técnica.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 07</div><div class="fc-q">¿Qué es el pliego de condiciones?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 07</div><div class="fc-a">Documento contractual con condiciones técnicas, facultativas, económicas y legales para la ejecución del proyecto.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 08</div><div class="fc-q">¿Qué incluye un presupuesto?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 08</div><div class="fc-a">Mediciones, precios unitarios, precios descompuestos, presupuestos parciales, presupuesto de ejecución material y total.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 09</div><div class="fc-q">¿Qué es el análisis de viabilidad?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 09</div><div class="fc-a">Estudio de viabilidad técnica, económica, legal, ambiental y temporal que decide si el proyecto se ejecuta.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 10</div><div class="fc-q">¿Qué es un diagrama de Gantt?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 10</div><div class="fc-a">Gráfico de barras horizontales que representa tareas frente al tiempo mostrando duración, inicio y dependencias.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 11</div><div class="fc-q">¿Qué es el camino crítico (CPM)?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 11</div><div class="fc-a">Secuencia de tareas encadenadas sin holgura cuya duración determina el tiempo mínimo total del proyecto.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 12</div><div class="fc-q">¿Qué norma regula la estructura del proyecto técnico?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 12</div><div class="fc-a">La norma UNE 157001, que fija criterios generales para la elaboración formal de proyectos técnicos.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 13</div><div class="fc-q">¿Qué diferencia I+D de innovación?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 13</div><div class="fc-a">I+D genera conocimiento nuevo; innovación introduce ese conocimiento en productos, procesos o servicios con éxito comercial.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 14</div><div class="fc-q">¿Qué evalúa la fase final de un proyecto?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 14</div><div class="fc-a">Cumplimiento de requisitos, desviaciones de coste y plazo, impacto, satisfacción del cliente y lecciones aprendidas.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 15</div><div class="fc-q">¿Qué es un DAFO?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 15</div><div class="fc-a">Análisis estratégico que identifica Debilidades y Fortalezas internas, y Amenazas y Oportunidades externas del proyecto.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 16</div><div class="fc-q">¿Qué tres actitudes recoge el saber básico A.3 (TECI.2.A.3)?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 16</div><div class="fc-a">Autoconfianza e iniciativa, identificación y gestión de emociones, y el error y la reevaluación como parte del proceso de aprendizaje.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 17</div><div class="fc-q">¿Qué cuatro competencias agrupa el saber básico A.4?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 17</div><div class="fc-a">Emprendimiento, resiliencia, perseverancia y creatividad interdisciplinar para abordar problemas técnicos.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">A · 18</div><div class="fc-q">¿Cómo trata la metodología ágil al error en un proyecto?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">A · 18</div><div class="fc-a">Como información valiosa: las retrospectivas de cada sprint analizan qué falló y qué se aprende para la siguiente iteración. El error no es un fracaso, es una variable que aún no se había considerado.</div></div>
+</div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- BLOQUE B · Materiales (20 tarjetas)                          -->
+<!-- ============================================================ -->
+<section data-block="B">
+<h2 class="block-head">🔩 Bloque B · Materiales y Fabricación</h2>
+<div class="fgrid">
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 01</div><div class="fc-q">¿Qué mide el ensayo de tracción?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 01</div><div class="fc-a">Relación tensión–deformación aplicando una fuerza axial creciente hasta la rotura de la probeta normalizada.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 02</div><div class="fc-q">Enuncia la ley de Hooke.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 02</div><div class="fc-a">En la zona elástica, la tensión es proporcional a la deformación: $\sigma = E\cdot\varepsilon$, siendo $E$ el módulo de Young.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 03</div><div class="fc-q">¿Qué es el módulo de Young?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 03</div><div class="fc-a">Pendiente del tramo elástico del diagrama $\sigma$–$\varepsilon$. Mide la rigidez del material (Pa o N/m²).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 04</div><div class="fc-q">¿Qué es el límite elástico?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 04</div><div class="fc-a">Tensión máxima que el material soporta sin sufrir deformaciones permanentes al retirar la carga.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 05</div><div class="fc-q">¿Qué ocurre en la zona plástica?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 05</div><div class="fc-a">La deformación es permanente. Al descargar, la probeta no recupera su longitud inicial.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 06</div><div class="fc-q">¿Qué es la estricción?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 06</div><div class="fc-a">Reducción localizada de sección de la probeta previa a la rotura tras superarse la carga máxima.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 07</div><div class="fc-q">¿Qué es la tenacidad?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 07</div><div class="fc-a">Energía absorbida por unidad de volumen hasta la rotura. Área bajo la curva $\sigma$–$\varepsilon$ completa.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 08</div><div class="fc-q">Fórmula de la dureza Brinell.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 08</div><div class="fc-a">$HB = \dfrac{2F}{\pi D\,(D-\sqrt{D^2-d^2})}$, con $F$ en kgf, $D$ diámetro bola, $d$ huella.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 09</div><div class="fc-q">¿Qué es la constante K en Brinell?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 09</div><div class="fc-a">Factor de carga $K = F/D^2$. Depende del material (30 acero, 10 cobre, 5 aluminio, 2,5 plomo).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 10</div><div class="fc-q">Validez del ensayo Brinell.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 10</div><div class="fc-a">La huella debe cumplir $D/4 \le d \le D/2$; fuera de ese rango el resultado no es válido.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 11</div><div class="fc-q">¿Cómo se designa una dureza Brinell?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 11</div><div class="fc-a">Ejemplo: 180 HB 10/3000/15 → 180 dureza, bola 10 mm, carga 3000 kgf, 15 s.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 12</div><div class="fc-q">Fórmula de dureza Vickers.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 12</div><div class="fc-a">$HV = 1{,}854\,\dfrac{F}{d^2}$, siendo $d$ la media aritmética de las diagonales de la huella piramidal.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 13</div><div class="fc-q">¿Qué penetrador usa Vickers?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 13</div><div class="fc-a">Pirámide de diamante de base cuadrada con ángulo de 136° entre caras opuestas.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 14</div><div class="fc-q">¿Qué mide el ensayo Charpy?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 14</div><div class="fc-a">Resiliencia: energía absorbida por unidad de sección al romperse por impacto una probeta entallada.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 15</div><div class="fc-q">Fórmula de la resiliencia Charpy.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 15</div><div class="fc-a">$\rho = \dfrac{m\,g\,(h_0 - h_f)}{S}$, con $S$ sección efectiva (restando la entalla) en la zona de rotura.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 16</div><div class="fc-q">Diferencia entre red BCC y FCC.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 16</div><div class="fc-a">BCC (cúbica centrada en cuerpo): 2 átomos/celda, menos densa. FCC (centrada en caras): 4 átomos, más dúctil.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 17</div><div class="fc-q">¿Qué es el temple?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 17</div><div class="fc-a">Tratamiento térmico: calentar sobre crítica y enfriar bruscamente para obtener martensita, aumentando dureza y fragilidad.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 18</div><div class="fc-q">¿Qué es el recocido?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 18</div><div class="fc-a">Calentamiento seguido de enfriamiento lento en horno. Elimina tensiones, ablanda y mejora la mecanización.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 19</div><div class="fc-q">¿En qué consiste el normalizado?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 19</div><div class="fc-a">Calentamiento ligeramente por encima de la crítica y enfriamiento al aire. Afina el grano y homogeneiza la estructura.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">B · 20</div><div class="fc-q">Cita dos tratamientos superficiales.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">B · 20</div><div class="fc-a">Cementación (enriquece en C la capa) y nitruración (incorpora N). También cianuración y temple superficial por inducción.</div></div>
+</div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- BLOQUE C1 · Estructuras (18 tarjetas)                        -->
+<!-- ============================================================ -->
+<section data-block="C1">
+<h2 class="block-head">🏗️ Bloque C1 · Estructuras</h2>
+<div class="fgrid">
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 01</div><div class="fc-q">¿Qué es un esfuerzo de tracción?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 01</div><div class="fc-a">Esfuerzo axial que tiende a alargar la barra; las fuerzas actúan según el eje longitudinal, separándose del centro.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 02</div><div class="fc-q">¿Qué es un esfuerzo de compresión?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 02</div><div class="fc-a">Esfuerzo axial que acorta la pieza; las fuerzas convergen hacia el centro a lo largo del eje.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 03</div><div class="fc-q">¿Qué es el esfuerzo cortante?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 03</div><div class="fc-a">Fuerza transversal a la sección que tiende a hacer deslizar una parte respecto a la otra.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 04</div><div class="fc-q">¿Qué es la flexión?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 04</div><div class="fc-a">Solicitación que curva la pieza: una fibra se tracciona y la opuesta se comprime, con fibra neutra intermedia.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 05</div><div class="fc-q">¿Qué es la torsión?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 05</div><div class="fc-a">Solicitación producida por un par que hace girar una sección respecto de otra alrededor del eje longitudinal.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 06</div><div class="fc-q">¿Qué reacciones da un apoyo articulado fijo?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 06</div><div class="fc-a">Dos reacciones (horizontal y vertical); impide traslación pero permite giro.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 07</div><div class="fc-q">¿Qué reacciones da un apoyo articulado móvil?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 07</div><div class="fc-a">Una única reacción normal al plano de rodadura; permite giro y desplazamiento en una dirección.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 08</div><div class="fc-q">¿Qué reacciones da un empotramiento?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 08</div><div class="fc-a">Tres: dos fuerzas (H y V) y un momento. Impide traslación y giro.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 09</div><div class="fc-q">Ecuaciones de equilibrio 2D.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 09</div><div class="fc-a">$\sum F_x = 0$, $\sum F_y = 0$, $\sum M = 0$ respecto a cualquier punto del plano.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 10</div><div class="fc-q">Relación entre V(x) y M(x).</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 10</div><div class="fc-a">$V = \dfrac{dM}{dx}$. El cortante es la derivada del momento; el momento es máximo donde $V = 0$.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 11</div><div class="fc-q">¿Qué es una carga puntual?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 11</div><div class="fc-a">Fuerza concentrada aplicada en un único punto de la estructura (N o kN).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 12</div><div class="fc-q">¿Qué es una carga uniformemente repartida?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 12</div><div class="fc-a">Fuerza distribuida por unidad de longitud (N/m). Su resultante vale $q\cdot L$ y actúa en el centro.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 13</div><div class="fc-q">¿Qué es una viga biapoyada?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 13</div><div class="fc-a">Viga con apoyo fijo en un extremo y móvil en el otro. Estructura isostática con tres incógnitas.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 14</div><div class="fc-q">¿Qué es una ménsula (viga en voladizo)?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 14</div><div class="fc-a">Viga empotrada en un extremo y libre en el otro. Momento máximo en el empotramiento.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 15</div><div class="fc-q">Condición de isostaticidad en una cercha.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 15</div><div class="fc-a">(Ampliación) $b = 2n - 3$, donde $b$ = barras y $n$ = nudos. Si $b > 2n-3$ es hiperestática.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 16</div><div class="fc-q">¿Qué es el método de los nudos?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 16</div><div class="fc-a">Procedimiento para cerchas: plantear $\sum F_x = 0$ y $\sum F_y = 0$ en cada nudo para hallar las fuerzas en barras.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 17</div><div class="fc-q">Tensión normal en tracción/compresión.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 17</div><div class="fc-a">$\sigma = \dfrac{F}{S}$, siendo $F$ la fuerza axial y $S$ la sección transversal de la pieza.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C1 · 18</div><div class="fc-q">Coeficiente de seguridad.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C1 · 18</div><div class="fc-a">$n = \sigma_{\text{rotura}} / \sigma_{\text{trabajo}}$. Debe ser $>1$ para garantizar seguridad estructural.</div></div>
+</div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- BLOQUE C2 · Máquinas térmicas (18 tarjetas)                  -->
+<!-- ============================================================ -->
+<section data-block="C2">
+<h2 class="block-head">🔥 Bloque C2 · Máquinas Térmicas</h2>
+<div class="fgrid">
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 01</div><div class="fc-q">¿Qué es el ciclo de Carnot?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 01</div><div class="fc-a">Ciclo reversible ideal de 4 etapas (2 isotermas + 2 adiabáticas) entre dos focos térmicos. Rendimiento máximo posible.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 02</div><div class="fc-q">Rendimiento de Carnot.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 02</div><div class="fc-a">$\eta = 1 - \dfrac{T_f}{T_c}$, con $T$ en kelvin ($T[\mathrm{K}] = T[\mathrm{°C}] + 273$).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 03</div><div class="fc-q">Eficiencia de máquina frigorífica (COP).</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 03</div><div class="fc-a">$\varepsilon = \dfrac{Q_f}{W} = \dfrac{T_f}{T_c - T_f}$. Calor extraído del foco frío dividido por trabajo aportado.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 04</div><div class="fc-q">Eficiencia de bomba de calor.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 04</div><div class="fc-a">$\varepsilon_{BC} = \dfrac{Q_c}{W} = \dfrac{T_c}{T_c - T_f}$. Calor cedido al foco caliente por unidad de trabajo.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 05</div><div class="fc-q">Relación $\varepsilon_{BC}$ y $\varepsilon_{frig}$.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 05</div><div class="fc-a">$\varepsilon_{BC} = \varepsilon_{frig} + 1$. La bomba también entrega el trabajo aportado como calor.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 06</div><div class="fc-q">Fases del ciclo Otto de 4T.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 06</div><div class="fc-a">Admisión, compresión, combustión-expansión y escape. Dos vueltas de cigüeñal por ciclo.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 07</div><div class="fc-q">Diferencia Otto – Diésel.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 07</div><div class="fc-a">Otto: mezcla aire-combustible con chispa, combustión isócora. Diésel: autoignición por compresión, combustión isobárica.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 08</div><div class="fc-q">¿Qué es el par motor?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 08</div><div class="fc-a">Momento de giro del eje motor (N·m). Refleja la capacidad del motor para vencer resistencias.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 09</div><div class="fc-q">Potencia mecánica en función del par.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 09</div><div class="fc-a">$P = M\cdot\omega$, con $\omega = 2\pi n$ rad/s y $n$ en revoluciones por segundo.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 10</div><div class="fc-q">Cilindrada total.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 10</div><div class="fc-a">$V_T = Z\cdot V_u$, con $Z$ número de cilindros y $V_u = \pi\,D^2 S / 4$ (cilindrada unitaria).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 11</div><div class="fc-q">¿Qué es la relación de compresión?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 11</div><div class="fc-a">$r = \dfrac{V_u + V_c}{V_c}$, cociente entre volumen máximo (PMI) y mínimo (PMS) en la cámara de combustión.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 12</div><div class="fc-q">¿Qué es el consumo específico?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 12</div><div class="fc-a">Masa de combustible consumida por unidad de energía producida (g/kWh). Menor valor → motor más eficiente.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 13</div><div class="fc-q">Rendimiento real de una máquina térmica.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 13</div><div class="fc-a">$\eta_{real} = \eta_{rel}\cdot\eta_{Carnot}$. El rendimiento relativo (<1) expresa la proximidad al ciclo ideal.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 14</div><div class="fc-q">Potencia indicada vs efectiva.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 14</div><div class="fc-a">Indicada: desarrollada en el cilindro. Efectiva: medida en el eje. Su cociente es el rendimiento mecánico.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 15</div><div class="fc-q">Rendimiento térmico general.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 15</div><div class="fc-a">$\eta = \dfrac{W}{Q_c} = 1 - \dfrac{Q_f}{Q_c}$. Trabajo útil dividido por calor aportado al foco caliente.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 16</div><div class="fc-q">¿Qué es el PMS y el PMI?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 16</div><div class="fc-a">PMS (punto muerto superior): posición más alta del pistón. PMI: la más baja. Su diferencia es la carrera $S$.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 17</div><div class="fc-q">Ciclo frigorífico por compresión.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 17</div><div class="fc-a">Compresor → condensador → válvula de expansión → evaporador. Refrigerante cambia de fase cíclicamente.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C2 · 18</div><div class="fc-q">Balance energético $Q_c$, $Q_f$, $W$.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C2 · 18</div><div class="fc-a">En motor: $W = Q_c - Q_f$. En frigorífica/BC: $Q_c = Q_f + W$. Primera ley aplicada al ciclo.</div></div>
+</div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- BLOQUE C31 · Neumática (18 tarjetas)                         -->
+<!-- ============================================================ -->
+<section data-block="C31">
+<h2 class="block-head">💨 Bloque C31 · Neumática</h2>
+<div class="fgrid">
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 01</div><div class="fc-q">Fuerza de avance de un cilindro neumático.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 01</div><div class="fc-a">$F_{avance} = p\cdot S_{émbolo}$, siendo $p$ la presión relativa y $S_{émbolo} = \pi D^2/4$.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 02</div><div class="fc-q">Fuerza de retroceso de un cilindro.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 02</div><div class="fc-a">$F_{retroceso} = p\cdot(S_{émbolo} - S_{vástago})$. Menor que la de avance por el área que ocupa el vástago.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 03</div><div class="fc-q">Ley de Boyle-Mariotte.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 03</div><div class="fc-a">A temperatura constante, $p\cdot V = \mathrm{cte}$. Útil para relacionar condiciones normales y de trabajo.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 04</div><div class="fc-q">Presión absoluta vs manométrica.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 04</div><div class="fc-a">$p_{abs} = p_{man} + p_{atm}$. La manométrica (relativa) es la que marcan los manómetros.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 05</div><div class="fc-q">Caudal en condiciones normales.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 05</div><div class="fc-a">$Q_N = Q\cdot\dfrac{p_{abs}}{p_{atm}}$. Se refiere el caudal a 1 atm y 0 °C (o 20 °C según norma).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 06</div><div class="fc-q">Cilindro de simple efecto.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 06</div><div class="fc-a">El aire empuja el émbolo solo en un sentido; el retorno lo realiza un muelle interno.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 07</div><div class="fc-q">Cilindro de doble efecto.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 07</div><div class="fc-a">El aire actúa en ambas cámaras: avance y retroceso con fuerza. No lleva muelle.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 08</div><div class="fc-q">¿Qué es una válvula 3/2?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 08</div><div class="fc-a">Válvula de 3 vías y 2 posiciones. Típica para gobernar cilindros de simple efecto.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 09</div><div class="fc-q">¿Qué es una válvula 5/2?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 09</div><div class="fc-a">5 vías y 2 posiciones. Empleada para pilotar cilindros de doble efecto.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 10</div><div class="fc-q">¿Qué es la unidad de mantenimiento FRL?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 10</div><div class="fc-a">Conjunto filtro + regulador + lubricador que acondiciona el aire comprimido antes de los actuadores.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 11</div><div class="fc-q">Función del compresor.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 11</div><div class="fc-a">Aspirar aire atmosférico y elevarlo a la presión de trabajo almacenándolo en un calderín.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 12</div><div class="fc-q">¿Para qué sirve una válvula estranguladora?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 12</div><div class="fc-a">Regular el caudal, controlando la velocidad de avance o retroceso del cilindro.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 13</div><div class="fc-q">Ventajas del aire comprimido.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 13</div><div class="fc-a">Limpio, seguro frente a incendios, fácilmente almacenable, rápido, económico y sin retorno (escapa a la atmósfera).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 14</div><div class="fc-q">Inconvenientes del aire comprimido.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 14</div><div class="fc-a">Fuerzas limitadas, compresibilidad (poca precisión), ruido, pérdidas por fugas y necesidad de acondicionamiento.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 15</div><div class="fc-q">Relación volumen–presión en transformación isoterma.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 15</div><div class="fc-a">$p_1 V_1 = p_2 V_2$. Imprescindible para calcular caudales entregados por un compresor.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 16</div><div class="fc-q">Ley de Charles · proceso isobárico (p = cte).</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 16</div><div class="fc-a">$V_1/T_1 = V_2/T_2$. A presión constante, el volumen es directamente proporcional a la temperatura absoluta (en kelvin).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 17</div><div class="fc-q">Ley de Gay-Lussac · proceso isocórico (V = cte).</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 17</div><div class="fc-a">$p_1/T_1 = p_2/T_2$. A volumen constante, la presión es directamente proporcional a la temperatura absoluta.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C31 · 18</div><div class="fc-q">¿Por qué es crítica la distinción presión absoluta vs manométrica?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C31 · 18</div><div class="fc-a">Las leyes de los gases (Boyle, Charles, gas ideal) exigen $p_{abs} = p_{man} + p_{atm}$. Usar $p_{man}$ en Boyle-Mariotte es un error típico de PEvAU que se penaliza.</div></div>
+</div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- BLOQUE C32 · Hidráulica (17 tarjetas)                        -->
+<!-- ============================================================ -->
+<section data-block="C32">
+<h2 class="block-head">💧 Bloque C32 · Hidráulica</h2>
+<div class="fgrid">
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C32 · 01</div><div class="fc-q">Enuncia el principio de Pascal.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C32 · 01</div><div class="fc-a">La presión aplicada a un fluido incompresible se transmite íntegra a todos sus puntos y a las paredes del recipiente.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C32 · 02</div><div class="fc-q">Ecuación de la prensa hidráulica.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C32 · 02</div><div class="fc-a">$\dfrac{F_1}{S_1} = \dfrac{F_2}{S_2}$. Se amplifica la fuerza a costa de recorrer más el émbolo pequeño.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C32 · 03</div><div class="fc-q">Ecuación de continuidad.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C32 · 03</div><div class="fc-a">$Q = A\cdot v = \mathrm{cte}$. Donde la sección disminuye, la velocidad del fluido aumenta.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C32 · 04</div><div class="fc-q">Ecuación de Bernoulli.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C32 · 04</div><div class="fc-a">$p + \tfrac{1}{2}\rho v^2 + \rho g h = \mathrm{cte}$. Conservación de la energía en fluido ideal, estacionario e incompresible.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C32 · 05</div><div class="fc-q">¿Qué es el efecto Venturi?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C32 · 05</div><div class="fc-a">En un estrechamiento aumenta la velocidad y disminuye la presión estática (consecuencia de Bernoulli).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C32 · 06</div><div class="fc-q">Presión hidrostática.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C32 · 06</div><div class="fc-a">$p = p_0 + \rho g h$. La presión crece linealmente con la profundidad en un fluido en reposo.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C32 · 07</div><div class="fc-q">Régimen laminar vs turbulento.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C32 · 07</div><div class="fc-a">Laminar: capas paralelas sin mezcla (Re < 2300). Turbulento: movimiento caótico (Re > 4000).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C32 · 08</div><div class="fc-q">Número de Reynolds.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C32 · 08</div><div class="fc-a">$Re = \dfrac{\rho\,v\,D}{\mu}$. Parámetro adimensional que discrimina régimen laminar/turbulento.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C32 · 09</div><div class="fc-q">¿Qué es la viscosidad?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C32 · 09</div><div class="fc-a">Resistencia interna que opone un fluido al deslizamiento relativo entre sus capas (Pa·s).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C32 · 10</div><div class="fc-q">Ventajas de la hidráulica frente a la neumática.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C32 · 10</div><div class="fc-a">Mayores fuerzas, movimientos más precisos (fluido incompresible) y posicionamiento intermedio estable.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C32 · 11</div><div class="fc-q">Inconvenientes de la hidráulica.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C32 · 11</div><div class="fc-a">Fluido contaminante, circuitos caros, mayor mantenimiento y necesidad de línea de retorno del aceite.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C32 · 12</div><div class="fc-q">Potencia hidráulica en una bomba.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C32 · 12</div><div class="fc-a">$P = p\cdot Q$. Producto de presión y caudal volumétrico entregado por la bomba.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C32 · 13</div><div class="fc-q">Ventaja mecánica en la prensa hidráulica.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C32 · 13</div><div class="fc-a">$VM = S_2/S_1 = F_2/F_1$. Relación de áreas determina la multiplicación de fuerza.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C32 · 14</div><div class="fc-q">¿Qué relación hay entre los desplazamientos de los émbolos?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C32 · 14</div><div class="fc-a">$S_1\cdot d_1 = S_2\cdot d_2$. Volumen constante: lo que baja un émbolo lo sube el otro proporcionalmente.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C32 · 15</div><div class="fc-q">Velocidad del cilindro hidráulico.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C32 · 15</div><div class="fc-a">$v = Q/S$. A mayor caudal, mayor velocidad; a mayor sección, menor velocidad.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C32 · 16</div><div class="fc-q">Las tres formas equivalentes de Bernoulli.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C32 · 16</div><div class="fc-a">En energía (J): $pV + mgh + \frac{1}{2}mv^2$. En presión (Pa): $p + \rho gh + \frac{1}{2}\rho v^2$. En altura (m): $\frac{p}{\rho g} + h + \frac{v^2}{2g}$. Son equivalentes; se elige según el problema.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">C32 · 17</div><div class="fc-q">¿Qué es la altura manométrica H y dónde aparece?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">C32 · 17</div><div class="fc-a">$H = p/(\rho g) + h + v^2/(2g)$ (en metros). Aparece en la potencia de la bomba $P_B = \rho g H Q/\eta$ y de la turbina $P_T = \eta \rho g H Q$. Es la suma de las tres cargas de Bernoulli en la forma en altura.</div></div>
+</div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- BLOQUE D1 · Corriente alterna (21 tarjetas)                  -->
+<!-- ============================================================ -->
+<section data-block="D1">
+<h2 class="block-head">⚡ Bloque D1 · Corriente Alterna</h2>
+<div class="fgrid">
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 01</div><div class="fc-q">Valor eficaz de una señal senoidal.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 01</div><div class="fc-a">$V_{ef} = V_0/\sqrt{2}$. Valor DC que disipa la misma potencia en una resistencia.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 02</div><div class="fc-q">Pulsación angular.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 02</div><div class="fc-a">$\omega = 2\pi f$ (rad/s). En España $f = 50$ Hz, luego $\omega \approx 314$ rad/s.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 03</div><div class="fc-q">Reactancia inductiva.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 03</div><div class="fc-a">$X_L = \omega L$. La tensión adelanta a la corriente 90° en una bobina ideal.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 04</div><div class="fc-q">Reactancia capacitiva.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 04</div><div class="fc-a">$X_C = \dfrac{1}{\omega C}$. La tensión se retrasa 90° respecto a la corriente en un condensador.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 05</div><div class="fc-q">Impedancia en RLC serie.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 05</div><div class="fc-a">$Z = \sqrt{R^2 + (X_L - X_C)^2}$, con argumento $\varphi = \arctan\dfrac{X_L - X_C}{R}$.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 06</div><div class="fc-q">Ley de Ohm en alterna.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 06</div><div class="fc-a">$V = I\cdot Z$. Relaciona valores eficaces tratando la impedancia como magnitud compleja.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 07</div><div class="fc-q">Potencia activa.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 07</div><div class="fc-a">$P = V\,I\,\cos\varphi$ (W). Es la potencia media realmente consumida por la parte resistiva.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 08</div><div class="fc-q">Potencia reactiva.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 08</div><div class="fc-a">$Q = V\,I\,\sin\varphi$ (var). Se intercambia con bobinas y condensadores, no produce trabajo útil.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 09</div><div class="fc-q">Potencia aparente.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 09</div><div class="fc-a">$S = V\,I = \sqrt{P^2 + Q^2}$ (VA). Módulo del triángulo de potencias.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 10</div><div class="fc-q">Factor de potencia.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 10</div><div class="fc-a">$\cos\varphi = P/S$. Indica qué fracción de la potencia aparente se convierte en activa.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 11</div><div class="fc-q">Corrección del fdp con condensador.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 11</div><div class="fc-a">Se conecta un condensador en paralelo con la carga inductiva: aporta $Q_C$ y reduce la reactiva total.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 12</div><div class="fc-q">Capacidad necesaria para corregir el fdp.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 12</div><div class="fc-a">$C = \dfrac{P(\tan\varphi_1 - \tan\varphi_2)}{\omega\,V^2}$. Expresada en faradios.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 13</div><div class="fc-q">Resonancia en RLC serie.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 13</div><div class="fc-a">Se da cuando $X_L = X_C$. La impedancia es mínima ($Z = R$) y el fdp vale 1.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 14</div><div class="fc-q">Frecuencia de resonancia.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 14</div><div class="fc-a">$f_0 = \dfrac{1}{2\pi\sqrt{L C}}$. A esa frecuencia el circuito se comporta como puramente resistivo.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 15</div><div class="fc-q">¿Qué representa un diagrama fasorial?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 15</div><div class="fc-a">Representación vectorial de tensiones y corrientes senoidales; longitud = amplitud, ángulo = fase.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 16</div><div class="fc-q">Tipo de carga según el signo de $\varphi$.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 16</div><div class="fc-a">$\varphi>0$: carga inductiva (I retrasa a V). $\varphi<0$: capacitiva (I adelanta a V). $\varphi=0$: resistiva pura.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 17</div><div class="fc-q">Triángulo de potencias.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 17</div><div class="fc-a">Representación rectangular: cateto horizontal $P$, cateto vertical $Q$, hipotenusa $S$. El ángulo es $\varphi$.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 18</div><div class="fc-q">¿Aparecen circuitos mixtos serie-paralelo en PEvAU?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 18</div><div class="fc-a">No. La Ponencia de Andalucía 2025-26 limita CA a RLC serie o RLC paralelo, no mixtos.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 19</div><div class="fc-q">¿Cómo se genera la corriente alterna?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 19</div><div class="fc-a">En un alternador: una bobina gira con velocidad angular $\omega$ dentro de un campo magnético uniforme. Por la Ley de Faraday-Lenz se induce una fem senoidal $\varepsilon(t) = \varepsilon_0 \operatorname{sen}(\omega t)$ con $\varepsilon_0 = N B S \omega$.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 20</div><div class="fc-q">¿Por qué la onda inducida es senoidal?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 20</div><div class="fc-a">Porque el flujo magnético varía como $\Phi(t) = B S \cos(\omega t)$ y la fem es $\varepsilon = -d\Phi/dt = B S \omega \operatorname{sen}(\omega t)$. La derivada del coseno da seno.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D1 · 21</div><div class="fc-q">Datos clave de la red eléctrica española.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D1 · 21</div><div class="fc-a">$V_{ef} = 230$ V, $f = 50$ Hz, $\omega = 2\pi \cdot 50 \approx 314$ rad/s, $V_0 = 230\sqrt{2} \approx 325$ V. Solo monofásica entra en PEvAU 2025-26.</div></div>
+</div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- BLOQUE D2 · Electrónica digital (15 tarjetas)                -->
+<!-- ============================================================ -->
+<section data-block="D2">
+<h2 class="block-head">🔢 Bloque D2 · Electrónica Digital</h2>
+<div class="fgrid">
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D2 · 01</div><div class="fc-q">Puerta AND: salida.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D2 · 01</div><div class="fc-a">$S = A\cdot B$. Vale 1 solo cuando todas sus entradas valen 1.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D2 · 02</div><div class="fc-q">Puerta OR: salida.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D2 · 02</div><div class="fc-a">$S = A + B$. Vale 1 cuando al menos una de las entradas vale 1.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D2 · 03</div><div class="fc-q">Puerta NOT.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D2 · 03</div><div class="fc-a">$S = \overline{A}$. Invierte el estado de la entrada.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D2 · 04</div><div class="fc-q">Puerta NAND.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D2 · 04</div><div class="fc-a">$S = \overline{A\cdot B}$. Negación del AND. Puerta universal.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D2 · 05</div><div class="fc-q">Puerta NOR.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D2 · 05</div><div class="fc-a">$S = \overline{A + B}$. Negación del OR. Puerta universal.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D2 · 06</div><div class="fc-q">Puerta XOR.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D2 · 06</div><div class="fc-a">$S = A\oplus B$. Vale 1 si las entradas son distintas. Sirve como sumador parcial.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D2 · 07</div><div class="fc-q">Primera ley de De Morgan.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D2 · 07</div><div class="fc-a">$\overline{A\cdot B} = \overline{A} + \overline{B}$. Permite convertir AND con NOT en OR con NOT.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D2 · 08</div><div class="fc-q">Segunda ley de De Morgan.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D2 · 08</div><div class="fc-a">$\overline{A + B} = \overline{A}\cdot\overline{B}$. Permite convertir OR con NOT en AND con NOT.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D2 · 09</div><div class="fc-q">¿Qué es una tabla de verdad?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D2 · 09</div><div class="fc-a">Tabla que muestra todas las combinaciones posibles de las entradas y el valor de la salida para cada una.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D2 · 10</div><div class="fc-q">¿Qué es una expresión SOP?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D2 · 10</div><div class="fc-a">Suma de productos (minterms): suma OR de los AND correspondientes a las filas con salida 1.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D2 · 11</div><div class="fc-q">¿Qué es una expresión POS?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D2 · 11</div><div class="fc-a">Producto de sumas (maxterms): AND de las OR correspondientes a las filas con salida 0 (variables negadas).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D2 · 12</div><div class="fc-q">¿Qué es un mapa de Karnaugh?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D2 · 12</div><div class="fc-a">Cuadrícula que ordena los minterms en código Gray para simplificar funciones lógicas visualmente.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D2 · 13</div><div class="fc-q">Regla de agrupación en Karnaugh.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D2 · 13</div><div class="fc-a">Agrupar unos en bloques de $2^n$ (1, 2, 4, 8…) adyacentes, lo más grandes posible, incluyendo solapes.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D2 · 14</div><div class="fc-q">¿Por qué NAND y NOR son universales?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D2 · 14</div><div class="fc-a">Porque con solo puertas NAND (o solo NOR) puede construirse cualquier función lógica (AND, OR, NOT).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">D2 · 15</div><div class="fc-q">¿Qué es el código Gray?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">D2 · 15</div><div class="fc-a">Código binario reflejado en el que términos adyacentes difieren en un único bit. Se usa en Karnaugh.</div></div>
+</div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- BLOQUE E · Sistemas informáticos emergentes (12 tarjetas)    -->
+<!-- ============================================================ -->
+<section data-block="E">
+<h2 class="block-head">🤖 Bloque E · Sistemas Informáticos Emergentes</h2>
+<div class="fgrid">
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">E · 01</div><div class="fc-q">Los 4 tipos de inteligencia artificial.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">E · 01</div><div class="fc-a">Reactiva, memoria limitada, teoría de la mente y autoconsciente.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">E · 02</div><div class="fc-q">IA reactiva.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">E · 02</div><div class="fc-a">Responde a estímulos presentes sin usar experiencias pasadas. Ejemplo: Deep Blue de IBM.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">E · 03</div><div class="fc-q">IA de memoria limitada.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">E · 03</div><div class="fc-a">Aprovecha datos recientes para tomar decisiones. Ejemplo: vehículos autónomos, chatbots actuales.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">E · 04</div><div class="fc-q">Las 7 V del Big Data.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">E · 04</div><div class="fc-a">Volumen, velocidad, variedad, veracidad, viabilidad, visualización y valor.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">E · 05</div><div class="fc-q">Triada CIA de ciberseguridad.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">E · 05</div><div class="fc-a">Confidencialidad (sólo accede quien debe), Integridad (no alterada), Disponibilidad (accesible cuando se necesita).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">E · 06</div><div class="fc-q">¿Qué es el malware?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">E · 06</div><div class="fc-a">Software malicioso: virus, troyanos, gusanos, spyware. Se introduce sin permiso para dañar o espiar.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">E · 07</div><div class="fc-q">¿Qué es el phishing?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">E · 07</div><div class="fc-a">Ingeniería social que suplanta entidades legítimas (correos, webs) para robar credenciales o datos bancarios.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">E · 08</div><div class="fc-q">¿Qué es el ransomware?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">E · 08</div><div class="fc-a">Malware que cifra los datos de la víctima y exige un rescate para restaurar el acceso.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">E · 09</div><div class="fc-q">¿Qué son los deepfakes?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">E · 09</div><div class="fc-a">Contenidos audiovisuales generados por IA que suplantan rostro o voz real con finalidad engañosa.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">E · 10</div><div class="fc-q">Machine Learning vs Deep Learning.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">E · 10</div><div class="fc-a">ML: algoritmos que aprenden de datos. DL: subconjunto de ML basado en redes neuronales profundas.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">E · 11</div><div class="fc-q">¿Qué es IoT?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">E · 11</div><div class="fc-a">Internet de las Cosas: red de objetos físicos con sensores y conectividad que intercambian datos en la nube.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">E · 12</div><div class="fc-q">¿Qué es la computación en la nube?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">E · 12</div><div class="fc-a">Servicios de cómputo, almacenamiento y aplicaciones prestados a demanda a través de internet (IaaS, PaaS, SaaS).</div></div>
+</div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- BLOQUE F · Sistemas automáticos (15 tarjetas)                -->
+<!-- ============================================================ -->
+<section data-block="F">
+<h2 class="block-head">🔄 Bloque F · Sistemas Automáticos</h2>
+<div class="fgrid">
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">F · 01</div><div class="fc-q">Sistema en lazo abierto.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">F · 01</div><div class="fc-a">No hay realimentación: la salida no influye en la entrada. Sencillo pero poco preciso ante perturbaciones.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">F · 02</div><div class="fc-q">Sistema en lazo cerrado.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">F · 02</div><div class="fc-a">Incluye realimentación: la salida se compara con la referencia y el error corrige la actuación.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">F · 03</div><div class="fc-q">¿Qué es la función de transferencia?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">F · 03</div><div class="fc-a">$G(s) = Y(s)/X(s)$. Relación salida/entrada en Laplace con condiciones iniciales nulas.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">F · 04</div><div class="fc-q">Bloques en serie.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">F · 04</div><div class="fc-a">$G_{eq} = G_1\cdot G_2$. La salida de uno alimenta al siguiente; se multiplican funciones de transferencia.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">F · 05</div><div class="fc-q">Bloques en paralelo.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">F · 05</div><div class="fc-a">$G_{eq} = G_1 + G_2$. Reciben la misma entrada y sus salidas se suman.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">F · 06</div><div class="fc-q">Bloques con realimentación.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">F · 06</div><div class="fc-a">$G_{eq} = \dfrac{G}{1 + G\cdot H}$ (negativa); con realimentación positiva aparece $1 - G\cdot H$.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">F · 07</div><div class="fc-q">Elementos de un sistema de control.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">F · 07</div><div class="fc-a">Referencia, comparador, regulador, actuador, planta (proceso) y sensor/transductor de realimentación.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">F · 08</div><div class="fc-q">Controlador P.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">F · 08</div><div class="fc-a">Acción proporcional al error: $u = K_p\cdot e$. Rápido, pero deja error en régimen permanente.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">F · 09</div><div class="fc-q">Controlador PI.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">F · 09</div><div class="fc-a">Añade acción integral a la proporcional: elimina el error estacionario, aunque ralentiza la respuesta.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">F · 10</div><div class="fc-q">Controlador PD.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">F · 10</div><div class="fc-a">Añade acción derivativa: anticipa la tendencia del error, mejora la estabilidad y reduce sobreoscilaciones.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">F · 11</div><div class="fc-q">Controlador PID.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">F · 11</div><div class="fc-a">Combina acciones P, I y D. $u = K_p e + K_i\int e\,dt + K_d\,de/dt$. Control estándar industrial.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">F · 12</div><div class="fc-q">¿Qué es la estabilidad cualitativa?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">F · 12</div><div class="fc-a">Un sistema es estable si, ante una entrada acotada, la salida permanece acotada (BIBO).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">F · 13</div><div class="fc-q">¿Se usa el criterio de Routh en PEvAU?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">F · 13</div><div class="fc-a">No. La Ponencia de Andalucía 2025-26 excluye explícitamente el criterio de Routh-Hurwitz.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">F · 14</div><div class="fc-q">Ventajas del lazo cerrado.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">F · 14</div><div class="fc-a">Reduce el error, compensa perturbaciones, disminuye sensibilidad a variaciones paramétricas y mejora precisión.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">F · 15</div><div class="fc-q">¿Qué es un transductor?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">F · 15</div><div class="fc-a">Dispositivo que convierte una magnitud física (temperatura, posición, velocidad) en señal eléctrica medible.</div></div>
+</div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- BLOQUE G · Sostenibilidad (15 tarjetas)                      -->
+<!-- ============================================================ -->
+<section data-block="G">
+<h2 class="block-head">🌱 Bloque G · Tecnología Sostenible</h2>
+<div class="fgrid">
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">G · 01</div><div class="fc-q">¿Qué es el ACV?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">G · 01</div><div class="fc-a">Análisis del ciclo de vida: evaluación de los impactos ambientales de un producto desde la cuna a la tumba.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">G · 02</div><div class="fc-q">Fases del ACV.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">G · 02</div><div class="fc-a">Extracción de materias primas, producción, distribución, uso y fin de vida (reciclaje o retirada).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">G · 03</div><div class="fc-q">Las 5R de la sostenibilidad.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">G · 03</div><div class="fc-a">Rechazar, Reducir, Reutilizar, Reciclar y Recuperar (energía). Jerarquía de gestión de residuos.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">G · 04</div><div class="fc-q">¿Qué es la huella de carbono?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">G · 04</div><div class="fc-a">Cantidad total de gases de efecto invernadero emitidos (directa o indirectamente) medida en kg de CO₂ equivalente.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">G · 05</div><div class="fc-q">¿Qué es la economía circular?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">G · 05</div><div class="fc-a">Modelo productivo que mantiene materiales y productos en uso el mayor tiempo posible, minimizando residuos.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">G · 06</div><div class="fc-q">¿Qué es la EIA?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">G · 06</div><div class="fc-a">Evaluación de Impacto Ambiental: procedimiento legal (Ley 21/2013) que analiza efectos de un proyecto sobre el medio.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">G · 07</div><div class="fc-q">Eficiencia energética.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">G · 07</div><div class="fc-a">Relación entre energía útil obtenida y la consumida. Reduce impacto y coste manteniendo el servicio.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">G · 08</div><div class="fc-q">Cita 3 fuentes de energía renovables.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">G · 08</div><div class="fc-a">Solar, eólica, hidráulica, biomasa, geotérmica y mareomotriz. No se agotan a escala humana.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">G · 09</div><div class="fc-q">Materiales reciclables habituales.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">G · 09</div><div class="fc-a">Aluminio, acero, vidrio, papel, cartón y termoplásticos (PET, HDPE, PP). Los termoestables no se reciclan fácilmente.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">G · 10</div><div class="fc-q">Objetivos de Desarrollo Sostenible.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">G · 10</div><div class="fc-a">Agenda 2030 de la ONU: 17 ODS que integran dimensiones económica, social y ambiental del desarrollo.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">G · 11</div><div class="fc-q">Ecodiseño.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">G · 11</div><div class="fc-a">Diseño que incorpora criterios ambientales desde la concepción: menor consumo, reparabilidad y reciclabilidad.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">G · 12</div><div class="fc-q">¿Qué indica la etiqueta energética A–G?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">G · 12</div><div class="fc-a">Clasifica electrodomésticos por eficiencia: A (muy eficiente) a G (poco eficiente). Obligatoria en la UE.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">G · 13</div><div class="fc-q">¿Qué son los ODS y cuáles son los más relevantes para Tecnología?</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">G · 13</div><div class="fc-a">Los 17 Objetivos de Desarrollo Sostenible (Agenda 2030 de la ONU). Los más relevantes en Tecnología e Ingeniería: ODS 7 (energía limpia), 9 (industria/innovación), 11 (ciudades sostenibles), 12 (consumo responsable) y 13 (acción por el clima).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">G · 14</div><div class="fc-q">Cita 4 tecnologías de generación renovable.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">G · 14</div><div class="fc-a">Solar fotovoltaica (efecto fotoeléctrico), solar térmica (calor → vapor → turbina), eólica (aerogeneradores), hidráulica (saltos de agua). También: biomasa, geotérmica, mareomotriz/undimotriz.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">G · 15</div><div class="fc-q">Tres ventajas de las energías renovables frente a las fósiles.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">G · 15</div><div class="fc-a">(1) Inagotables a escala humana. (2) Cero o muy poco CO₂ en operación (las emisiones se concentran en fabricación). (3) Generación distribuida: producción cerca del consumo, menos pérdidas en transporte.</div></div>
+</div></div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- BLOQUE CC · Repaso Corriente Continua (12 tarjetas)          -->
+<!-- ============================================================ -->
+<section data-block="CC">
+<h2 class="block-head">⚡ Repaso · Corriente Continua</h2>
+<div class="fgrid">
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">CC · 01</div><div class="fc-q">Ley de Ohm.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">CC · 01</div><div class="fc-a">$I = V/R$. La intensidad es directamente proporcional a la tensión e inversamente a la resistencia.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">CC · 02</div><div class="fc-q">Resistencia equivalente en serie.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">CC · 02</div><div class="fc-a">$R_{eq} = R_1 + R_2 + \dots + R_n$. La intensidad es la misma en todas las resistencias.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">CC · 03</div><div class="fc-q">Resistencia equivalente en paralelo.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">CC · 03</div><div class="fc-a">$\dfrac{1}{R_{eq}} = \sum\dfrac{1}{R_i}$. La tensión es igual en todas las ramas.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">CC · 04</div><div class="fc-q">Divisor de tensión.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">CC · 04</div><div class="fc-a">$V_i = V_T\cdot\dfrac{R_i}{R_{eq}}$. Reparto de tensión en una asociación serie proporcional a cada resistencia.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">CC · 05</div><div class="fc-q">Divisor de corriente.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">CC · 05</div><div class="fc-a">En paralelo (2 ramas): $I_1 = I_T\cdot\dfrac{R_2}{R_1 + R_2}$. Más corriente por la menor resistencia.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">CC · 06</div><div class="fc-q">Potencia eléctrica.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">CC · 06</div><div class="fc-a">$P = V\cdot I = I^2 R = V^2/R$ (W). Velocidad a la que se transfiere energía.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">CC · 07</div><div class="fc-q">Energía consumida.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">CC · 07</div><div class="fc-a">$E = P\cdot t$. Se mide en julios o kWh (1 kWh = 3,6·10⁶ J).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">CC · 08</div><div class="fc-q">Primera ley de Kirchhoff (nudos).</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">CC · 08</div><div class="fc-a">$\sum I_{entran} = \sum I_{salen}$. Conservación de la carga eléctrica en cada nudo.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">CC · 09</div><div class="fc-q">Segunda ley de Kirchhoff (mallas).</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">CC · 09</div><div class="fc-a">$\sum\varepsilon = \sum I\cdot R$ en una malla cerrada. Conservación de la energía.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">CC · 10</div><div class="fc-q">Efecto Joule.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">CC · 10</div><div class="fc-a">$Q = I^2 R\,t$. Calor disipado por una resistencia al paso de corriente (pérdida energética).</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">CC · 11</div><div class="fc-q">Resistividad y resistencia de un conductor.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">CC · 11</div><div class="fc-a">$R = \rho\cdot L/S$. Depende del material ($\rho$), la longitud y la sección del conductor.</div></div>
+</div></div>
+
+<div class="flashcard"><div class="fc-inner">
+<div class="fc-face fc-front"><div class="fc-tag">CC · 12</div><div class="fc-q">Transición CC → CA.</div><div class="fc-hint">clic ▸</div></div>
+<div class="fc-face fc-back"><div class="fc-tag">CC · 12</div><div class="fc-a">En CA la resistencia se generaliza a impedancia $Z$, que incluye R, $X_L$ y $X_C$, y depende de la frecuencia.</div></div>
+</div></div>
+
+</div>
+</section>
+
+<p class="foot">IES Jiménez de Quesada · Santa Fe, Granada · Autoevaluación TECI II<br>Basado en las Orientaciones PEvAU Andalucía 2025–26. Haz clic en las tarjetas para voltearlas.</p>
+
+</div>
+
+<script>
+(function(){
+  // Flip de tarjetas al hacer clic
+  document.addEventListener('click', function(e){
+    var card = e.target.closest('.flashcard');
+    if(card){ card.classList.toggle('flipped'); }
+  });
+
+  // Botones de filtro
+  var buttons = document.querySelectorAll('.fbtn');
+  var sections = document.querySelectorAll('section[data-block]');
+  var totalEl = document.getElementById('totalCount');
+  var visEl = document.getElementById('visibleCount');
+  var total = document.querySelectorAll('.flashcard').length;
+  totalEl.textContent = total;
+  visEl.textContent = total;
+
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      buttons.forEach(function(b){ b.classList.remove('btn-active'); });
+      btn.classList.add('btn-active');
+      var f = btn.getAttribute('data-filter');
+      var count = 0;
+      sections.forEach(function(sec){
+        var block = sec.getAttribute('data-block');
+        var show = (f === 'all' || f === block);
+        sec.classList.toggle('hidden', !show);
+        if(show){ count += sec.querySelectorAll('.flashcard').length; }
+        // Reset flipped state al filtrar
+        sec.querySelectorAll('.flashcard.flipped').forEach(function(c){ c.classList.remove('flipped'); });
+      });
+      visEl.textContent = count;
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

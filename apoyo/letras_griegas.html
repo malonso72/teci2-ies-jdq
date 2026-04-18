@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II — 🔤 Letras Griegas en Ingeniería</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+:root{--az:#1B4F8A;--az2:#2E7BC4;--hub-bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5;--nw:260px;--hh:52px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;font-family:'Barlow',system-ui,sans-serif;background:var(--hub-bg);color:var(--tx)}
+.hd{position:fixed;top:0;left:0;right:0;height:var(--hh);background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;display:flex;align-items:center;padding:0 14px;z-index:1000;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer}.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.7rem;opacity:.6;margin-left:10px}
+.mb{display:none;background:none;border:none;color:#fff;font-size:1.3rem;cursor:pointer;margin-right:8px}
+.home-btn{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;font-size:.72rem;padding:4px 10px;border-radius:4px;cursor:pointer;margin-left:auto;transition:all .15s}
+.home-btn:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.5)}
+.ly{display:flex;position:fixed;top:var(--hh);left:0;right:0;bottom:0}
+.nv{width:var(--nw);flex-shrink:0;background:var(--w);border-right:1px solid var(--bd);overflow-y:auto;padding:44px 0 6px;z-index:500}  /* v2.9: padding-top 44 evita solape con navcross */
+.nb{border-bottom:1px solid #eee}.nb-h{padding:7px 10px;font-size:.76rem;font-weight:500;cursor:pointer;transition:background .15s;display:flex;align-items:center;gap:4px}
+.nb-h:hover{background:#EBF0F7}.nb.act .nb-h{background:var(--az);color:#fff}
+.nc{display:none;padding:0 0 4px}.nb.act .nc{display:block}
+.na{display:block;padding:2px 10px 2px 22px;font-size:.68rem;color:var(--t2);cursor:pointer;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.6}
+.na:hover{background:#EBF0F7;color:var(--az)}
+.ct{flex:1;overflow-y:scroll;-webkit-overflow-scrolling:touch;scroll-padding-top:44px}
+@media(max-width:768px){.mb{display:block}.nv{position:fixed;top:var(--hh);left:0;bottom:0;z-index:900;transform:translateX(-100%)}.nv.open{transform:translateX(0);box-shadow:4px 0 16px rgba(0,0,0,.2)}}
+
+:root {
+  --azul:     #1B4F8A;
+  --azul2:    #2E7BC4;
+  --azul-cl:  #DDE9F7;
+  --azul-bg:  #EEF4FB;
+  --naranja:  #D4700A;
+  --naranja-cl:#FEF0DF;
+  --verde:    #1A6B3A;
+  --verde-cl: #E4F4EB;
+  --rojo:     #C0321E;
+  --rojo-cl:  #FCEAE7;
+  --gris:     #F5F6F8;
+  --borde:    #CDD7E3;
+  --texto:    #1A2430;
+  --texto2:   #455565;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Barlow', sans-serif;
+  --cond: 'Barlow Condensed', sans-serif;
+}
+
+.formulario-content { padding: 24px 44px 52px; max-width: 100%; }
+.formulario-content h1 { 
+    font-family: var(--cond);
+    font-size: 15pt; font-weight: 700; color: var(--azul);
+    margin: 32px 0 12px; padding: 6px 0;
+    border-bottom: 2px solid var(--azul);
+}
+.formulario-content h1:first-child { margin-top: 0; }
+.formulario-content h2 {
+    font-family: var(--cond);
+    font-size: 12pt; font-weight: 700; color: var(--azul2);
+    margin: 20px 0 8px; padding-left: 9px;
+    border-left: 3px solid #D4700A;
+}
+.formulario-content table {
+    width: 100%; border-collapse: collapse; margin: 8px 0 16px;
+    font-size: 9.5pt;
+}
+.formulario-content th {
+    background: var(--azul); color: #fff;
+    padding: 6px 10px; text-align: left; font-size: 9pt;
+    font-family: var(--cond); font-weight: 700; letter-spacing: .7px;
+}
+.formulario-content td {
+    padding: 8px 10px; border: 1px solid #CDD7E3;
+    vertical-align: middle;
+}
+.formulario-content tr:nth-child(even) td { background: #F5F6F8; }
+.formulario-content p { margin: 6px 0; line-height: 1.6; font-size: 10pt; }
+strong { color: var(--azul); font-weight: 600; }
+
+.aviso-formula {
+  border-radius: 0 6px 6px 0;
+  padding: 12px 16px;
+  margin: 12px 0;
+  font-size: 9.5pt;
+  line-height: 1.65;
+}
+.math.display { text-align:center; margin:10px 0; }
+.MathJax { font-size:100% !important; }
+
+[id]{scroll-margin-top:20px;}
+
+@media print{
+  html,body{ background:white; overflow:visible; height:auto; }
+  .hd,.nv,.mb,.home-btn{ display:none; }
+  .ly{ display:block; position:static; }
+  .ct{ overflow:visible; }
+}
+
+
+/* ── NAVCROSS: barra de navegación transversal (Fase D) ── */
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+.navcross span.nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8;align-self:center;user-select:none}
+@media(max-width:640px){.navcross{gap:4px;padding:8px 10px;top:52px}.navcross a span.nc-lbl,.navcross span.nc-current span.nc-lbl{display:none}.navcross .nc-sep{display:none}}
+
+@media print{
+  html,body{background:#fff!important;color:#000!important}
+  .hd,.navcross,.nv,.mb,.home-btn,.sol-btn,.btn-video,.video-group{display:none!important}
+  .ly{position:static!important}
+  .ct{overflow:visible!important;padding:0}
+  .pagina{box-shadow:none!important;max-width:100%}
+  .cabecera{background:#fff!important;color:#000!important}
+  .cab-titulo,.cab-label,.cab-sub{color:#000!important}
+  h2,h3,h4{page-break-after:avoid}
+  .seccion{page-break-inside:avoid}
+  .sol-content{display:block!important}
+  img{max-width:100%;page-break-inside:avoid}
+  a{text-decoration:none;color:#000}
+  .objetivos-box,.decalogo-box{background:#fff!important;border:1px solid #aaa!important}
+}
+/* @media print v2 — ecosistema TECI2 */
+
+</style>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)'],['$','$']],
+    displayMath: [['$$','$$'],['\\[','\\]']],
+    processEscapes: true
+  },
+  options: {
+    skipHtmlTags: ['script','noscript','style','textarea','pre']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+<div class="hd">
+<button class="mb" onclick="document.getElementById('nv').classList.toggle('open')">☰</button>
+<span class="lg" onclick="location.href='../index.html'">TECI II</span>
+<span class="sb">🔤 Letras Griegas en Ingeniería</span>
+<a href="../index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal"><a href="../index.html" aria-label="Ir al índice principal"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span><a href="../index.html#teoria" aria-label="Ver índice de teoría"><span>📖</span><span class="nc-lbl">Teoría</span></a><span class="nc-sep">·</span><a href="../index.html#ejercicios" aria-label="Ver índice de ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a><span class="nc-sep">·</span><a href="../index.html#examenes" aria-label="Ver índice de exámenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a><span class="nc-sep">·</span><a href="../ponencia_resuelta/index_ponencia.html" aria-label="Ver Ponencia 2025-26 resuelta"><span>📚</span><span class="nc-lbl">Ponencia</span></a><span class="nc-sep">·</span><span class="nc-current" aria-current="page"><span>📚</span><span class="nc-lbl">Apoyo</span></span></nav>
+
+<div class="ly">
+<nav class="nv" id="nv">
+<div class="nb act">
+<div class="nb-h" style="background:var(--az);color:#fff;">🔤 Letras Griegas</div>
+<div class="nc" style="display:block;">
+<a class="na" href="#por-que-letras-griegas" style="font-weight:600;padding-top:6px;">¿Por qué letras griegas?</a>
+<a class="na" href="#minusculas">Minúsculas más frecuentes</a>
+<a class="na" href="#mayusculas">Mayúsculas más frecuentes</a>
+<a class="na" href="#confusiones">Confusiones típicas</a>
+<a class="na" href="#prefijos-si">Prefijos SI con letras griegas</a>
+</div>
+</div>
+</nav>
+<div class="ct" id="ct">
+<div class="formulario-content">
+
+<h1 id="por-que-letras-griegas"><strong>LETRAS GRIEGAS EN INGENIERÍA</strong></h1>
+
+<div class="aviso-formula" style="background:#EEF4FB;border-left:4px solid var(--azul);">
+<strong>¿Por qué letras griegas?</strong> En ingeniería se usan letras griegas para representar magnitudes físicas y evitar confusión con las letras latinas ya asignadas a otras variables. Conocerlas es imprescindible para leer cualquier fórmula de la PEvAU. Esta guía recoge <strong>todas las que aparecen en los bloques A–G</strong> de Tecnología e Ingeniería II.
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="minusculas"><strong>Minúsculas más frecuentes</strong></h2>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 11%" />
+<col style="width: 14%" />
+<col style="width: 36%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr><th>Símbolo</th><th>Nombre</th><th>Se lee…</th><th>Magnitud(es)</th><th>Dónde aparece en TECI II</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\sigma\]</span></td><td>sigma</td><td><em>sigma</em></td><td>Tensión / esfuerzo normal (MPa, N/mm²)</td><td>B1 Ensayo de tracción, C1 Estructuras</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\varepsilon\]</span></td><td>épsilon</td><td><em>epsilon</em></td><td>Deformación unitaria (adimensional, mm/mm)</td><td>B1 Diagrama σ-ε</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\rho\]</span></td><td>rho</td><td><em>ro</em></td><td>Densidad (kg/m³)</td><td>C2 Termodinámica, C3 Hidráulica</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\gamma\]</span></td><td>gamma</td><td><em>gamma</em></td><td>Peso específico (N/m³); γ = ρ · g</td><td>C3 Hidráulica</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\eta\]</span></td><td>eta</td><td><em>eta</em></td><td>Rendimiento (adimensional, 0 a 1 o en %)</td><td>C2 Motores térmicos, D1 Circ. CA</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\omega\]</span></td><td>omega</td><td><em>omega</em></td><td>Velocidad angular (rad/s) · Pulsación (rad/s)</td><td>C2 Motores, D1 CA (ω = 2πf)</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\varphi\]</span></td><td>fi</td><td><em>fi</em></td><td>Ángulo de desfase (rad o °)</td><td>D1 Triángulo de potencias (cos φ)</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\tau\]</span></td><td>tau</td><td><em>tau</em></td><td>Tensión cortante (MPa) · Constante de tiempo (s)</td><td>C1 Estructuras, F Sist. Automáticos</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\pi\]</span></td><td>pi</td><td><em>pi</em></td><td>Constante π ≈ 3,1416</td><td>Todos los bloques (áreas, ω, etc.)</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\alpha\]</span></td><td>alfa</td><td><em>alfa</em></td><td>Ángulo genérico · Coef. de dilatación</td><td>C1 Estructuras (ángulos barras)</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\beta\]</span></td><td>beta</td><td><em>beta</em></td><td>Ángulo · Coeficiente</td><td>C1 Estructuras (ángulos nudo)</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\mu\]</span></td><td>mu</td><td><em>mu</em></td><td>Coef. de rozamiento · Prefijo «micro» (10⁻⁶)</td><td>C1 Estructuras, unidades (μF, μm…)</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\delta\]</span></td><td>delta</td><td><em>delta</em></td><td>Flecha / deflexión (mm)</td><td>C1 Estructuras (deformación)</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\nu\]</span></td><td>nu</td><td><em>niu</em></td><td>Coef. de Poisson (adimensional)</td><td>B1 Materiales</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\lambda\]</span></td><td>lambda</td><td><em>lambda</em></td><td>Longitud de onda · Esbeltez</td><td>C1 Pandeo, E Comunicaciones</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\theta\]</span></td><td>theta</td><td><em>zeta</em></td><td>Ángulo genérico (rad o °)</td><td>C1 Estructuras, trigonometría</td></tr>
+</tbody>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="mayusculas"><strong>Mayúsculas más frecuentes</strong></h2>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 11%" />
+<col style="width: 14%" />
+<col style="width: 36%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr><th>Símbolo</th><th>Nombre</th><th>Se lee…</th><th>Magnitud(es)</th><th>Dónde aparece en TECI II</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\Delta\]</span></td><td>Delta</td><td><em>delta</em></td><td>Incremento / variación (Δx, ΔT, ΔP…)</td><td>Todos los bloques</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\Sigma\]</span></td><td>Sigma</td><td><em>sigma</em></td><td>Sumatorio (Σ)</td><td>C1 Estructuras (ΣF = 0, ΣM = 0)</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\Omega\]</span></td><td>Omega</td><td><em>omega</em></td><td>Ohmio (unidad de resistencia eléctrica)</td><td>D1 CA (impedancia Z en Ω)</td></tr>
+<tr><td style="text-align:center;font-size:14pt;"><span class="math display">\[\Phi\]</span></td><td>Fi</td><td><em>fi</em></td><td>Flujo magnético (Wb)</td><td>D1 CA (conceptos generadores)</td></tr>
+</tbody>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="confusiones"><strong>Confusiones típicas en examen</strong></h2>
+
+<div class="aviso-formula" style="background:#FCEAE7;border-left:4px solid var(--rojo);">
+<strong>⚠️ No las confundas — le puede costar puntos en la PEvAU:</strong>
+</div>
+
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 64%" />
+</colgroup>
+<thead>
+<tr><th>Griega</th><th>Latina</th><th>Cómo distinguirlas</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:center;"><span class="math display">\[\nu\]</span> (nu)</td><td style="text-align:center;"><em>v</em> (uve)</td><td><strong>ν</strong> es más estrecha y curvada abajo. En TECI II, <em>ν</em> = Poisson y <em>v</em> = velocidad.</td></tr>
+<tr><td style="text-align:center;"><span class="math display">\[\rho\]</span> (rho)</td><td style="text-align:center;"><em>p</em> (pe)</td><td><strong>ρ</strong> tiene la «patita» curvada bajo la línea base. <em>ρ</em> = densidad, <em>p</em> = presión.</td></tr>
+<tr><td style="text-align:center;"><span class="math display">\[\eta\]</span> (eta)</td><td style="text-align:center;"><em>n</em> (ene)</td><td><strong>η</strong> tiene el trazo derecho bajando bajo la línea. <em>η</em> = rendimiento, <em>n</em> = rpm.</td></tr>
+<tr><td style="text-align:center;"><span class="math display">\[\omega\]</span> (omega min.)</td><td style="text-align:center;"><span class="math display">\[\Omega\]</span> (Omega may.)</td><td>Minúscula <strong>ω</strong> = velocidad angular (rad/s). Mayúscula <strong>Ω</strong> = ohmio (unidad).</td></tr>
+<tr><td style="text-align:center;"><span class="math display">\[\varphi\]</span> (fi min.)</td><td style="text-align:center;"><span class="math display">\[\Phi\]</span> (Fi may.)</td><td>Minúscula <strong>φ</strong> = ángulo de desfase. Mayúscula <strong>Φ</strong> = flujo magnético.</td></tr>
+<tr><td style="text-align:center;"><span class="math display">\[\sigma\]</span> (sigma min.)</td><td style="text-align:center;"><span class="math display">\[\Sigma\]</span> (Sigma may.)</td><td>Minúscula <strong>σ</strong> = tensión (MPa). Mayúscula <strong>Σ</strong> = sumatorio.</td></tr>
+</tbody>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2 id="prefijos-si"><strong>Prefijos SI que usan letras griegas</strong></h2>
+
+<div class="aviso-formula" style="background:#EEF4FB;border-left:4px solid var(--azul);">
+<strong>💡 Nota:</strong> Algunos prefijos del Sistema Internacional provienen del griego. Los más usados en TECI II:
+</div>
+
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 14%" />
+<col style="width: 16%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr><th>Prefijo</th><th>Símbolo</th><th>Factor</th><th>Ejemplo en TECI II</th></tr>
+</thead>
+<tbody>
+<tr><td>mega</td><td>M</td><td>10⁶</td><td>MPa (megapascal), MW (megavatio)</td></tr>
+<tr><td>kilo</td><td>k</td><td>10³</td><td>kJ (kilojulio), kW (kilovatio), kPa</td></tr>
+<tr><td>mili</td><td>m</td><td>10⁻³</td><td>mm (milímetro), mA (miliamperio)</td></tr>
+<tr><td>micro</td><td>μ</td><td>10⁻⁶</td><td>μF (microfaradio), μm (micrómetro)</td></tr>
+<tr><td>nano</td><td>n</td><td>10⁻⁹</td><td>nm (nanómetro) — E Informática</td></tr>
+<tr><td>giga</td><td>G</td><td>10⁹</td><td>GHz (gigahercio), GB — E Informática</td></tr>
+</tbody>
+</table>
+
+</div><!-- /formulario-content -->
+</div><!-- /ct -->
+</div><!-- /ly -->
+
+<script>
+(function(){
+  const container = document.getElementById('ct');
+  if(!container) return;
+  function jumpToHash(hash, smooth){
+    const raw = (hash || window.location.hash || '').trim();
+    if(!raw || raw === '#') return;
+    const id = decodeURIComponent(raw.slice(1));
+    const target = document.getElementById(id);
+    if(!target) return;
+    const cRect = container.getBoundingClientRect();
+    const tRect = target.getBoundingClientRect();
+    const top = container.scrollTop + (tRect.top - cRect.top) - 10;
+    container.scrollTo({ top: Math.max(0, top), behavior: smooth ? 'smooth' : 'auto' });
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(ev){
+      const href = this.getAttribute('href');
+      if(!href || href === '#') return;
+      const target = document.getElementById(href.slice(1));
+      if(!target) return;
+      ev.preventDefault();
+      jumpToHash(href, false);
+      if(history.replaceState) history.replaceState(null, '', href);
+      else window.location.hash = href;
+    });
+  });
+  window.addEventListener('hashchange', function(){ jumpToHash(window.location.hash, false); });
+  window.addEventListener('load', function(){ if(window.location.hash) setTimeout(function(){ jumpToHash(window.location.hash, false); }, 50); });
+})();
+</script>
+</body>
+</html>

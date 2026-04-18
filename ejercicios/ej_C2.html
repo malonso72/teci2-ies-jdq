@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II — ✏️ Ejercicios 🔥 C2: Máquinas Térmicas</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+:root{--az:#1B4F8A;--az2:#2E7BC4;--hub-bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5;--nw:260px;--hh:52px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;font-family:'Barlow',system-ui,sans-serif;background:var(--hub-bg);color:var(--tx)}
+.hd{position:fixed;top:0;left:0;right:0;height:var(--hh);background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;display:flex;align-items:center;padding:0 14px;z-index:1001;box-shadow:0 2px 8px rgba(0,0,0,.15)}  /* v2.9.4: z-index 1001 explicit */
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer}.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.7rem;opacity:.6;margin-left:10px}
+.mb{display:none;background:none;border:none;color:#fff;font-size:1.3rem;cursor:pointer;margin-right:8px}
+.home-btn{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;font-size:.72rem;padding:4px 10px;border-radius:4px;cursor:pointer;margin-left:auto;transition:all .15s}
+.home-btn:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.5)}
+.ly{display:flex;position:fixed;top:var(--hh);left:0;right:0;bottom:0;overflow:hidden}  /* v2.9.4: overflow:hidden evita escape */
+.nv{width:var(--nw);flex-shrink:0;background:var(--w);border-right:1px solid var(--bd);overflow-y:auto;padding:44px 0 6px;z-index:500}  /* v2.9: padding-top 44 evita solape con navcross */
+.nb{border-bottom:1px solid #eee}.nb-h{padding:7px 10px;font-size:.76rem;font-weight:500;cursor:pointer;transition:background .15s;display:flex;align-items:center;gap:4px}
+.nb-h:hover{background:#EBF0F7}.nb.act .nb-h{background:var(--az);color:#fff}
+.nc{display:none;padding:0 0 4px}.nb.act .nc{display:block}
+.na{display:block;padding:2px 10px 2px 22px;font-size:.68rem;color:var(--t2);cursor:pointer;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.6}
+.na:hover{background:#EBF0F7;color:var(--az)}
+.ct{flex:1;overflow-y:scroll;-webkit-overflow-scrolling:touch;scroll-padding-top:44px}
+.wl{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;text-align:center;padding:40px 24px}
+.wl h2{font-family:'Barlow Condensed',sans-serif;font-size:2rem;color:var(--az);margin-bottom:6px}
+.wl p{color:var(--t2);max-width:500px;line-height:1.5;font-size:.88rem;margin-bottom:24px}
+.bg{display:grid;grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));gap:10px;max-width:700px;width:100%}
+.bc{background:var(--w);border:1px solid var(--bd);border-radius:8px;padding:14px 16px;cursor:pointer;transition:all .2s;text-align:left;display:flex;flex-direction:column;gap:4px}
+.bc:hover{border-color:var(--az);box-shadow:0 3px 12px rgba(27,79,138,.12);transform:translateY(-2px)}
+.bi{font-size:1.6rem;margin-bottom:2px}.bk{font-weight:700;font-size:.85rem;color:var(--az)}.bn{font-size:.72rem;color:var(--t2);line-height:1.3}
+.block-content{padding:0}
+@media(max-width:768px){.mb{display:block}.nv{position:fixed;top:var(--hh);left:0;bottom:0;z-index:900;transform:translateX(-100%)}.nv.open{transform:translateX(0);box-shadow:4px 0 16px rgba(0,0,0,.2)}}
+
+:root {
+  --azul:     #1B4F8A;
+  --azul2:    #2E7BC4;
+  --azul-cl:  #DDE9F7;
+  --azul-bg:  #EEF4FB;
+  --naranja:  #D4700A;
+  --naranja-cl:#FEF0DF;
+  --verde:    #1A6B3A;
+  --verde-cl: #E4F4EB;
+  --rojo:     #C0321E;
+  --rojo-cl:  #FCEAE7;
+  --gris:     #F5F6F8;
+  --borde:    #CDD7E3;
+  --texto:    #1A2430;
+  --texto2:   #455565;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Barlow', sans-serif;
+  --cond: 'Barlow Condensed', sans-serif;
+}
+body{
+  font-family:var(--sans);
+  font-size:10.5pt;
+  line-height:1.72;
+  color:var(--texto);
+}
+.pagina{
+  max-width:870px;
+  margin:0 auto;
+  background:#fff;
+  box-shadow:0 6px 48px rgba(0,0,0,.18);
+}
+.cabecera{
+  background:var(--azul);
+  padding:0;
+  display:grid;
+  grid-template-columns:6px 1fr;
+}
+.cab-banda{ background:var(--naranja); }
+.cab-inner{ padding:32px 44px 28px; }
+.cab-label{
+  font-family:var(--cond);
+  font-size:8.5pt;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.6);
+  margin-bottom:8px;
+}
+.cab-titulo{
+  font-family:var(--cond);
+  font-size:26pt;
+  font-weight:700;
+  color:#fff;
+  line-height:1.05;
+  margin-bottom:6px;
+}
+.cab-titulo span{ color:#F8C060; }
+.cab-sub{
+  font-family:var(--sans);
+  font-weight:300;
+  font-size:11.5pt;
+  color:rgba(255,255,255,.78);
+  margin-bottom:22px;
+}
+.cab-chips{ display:flex; gap:10px; flex-wrap:wrap; }
+.chip{
+  font-family:var(--sans);
+  font-size:8pt;
+  font-weight:600;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.22);
+  color:rgba(255,255,255,.85);
+  padding:3px 10px;
+  border-radius:20px;
+  letter-spacing:.5px;
+}
+
+.cuerpo{ padding:8px 44px 52px; }
+.seccion{ margin-top:38px; }
+.sec-hdr{
+  display:flex; align-items:stretch; gap:0;
+  margin-bottom:16px;
+  border-bottom:2px solid var(--azul);
+}
+.sec-num{
+  background:var(--azul);
+  color:#fff;
+  font-family:var(--cond);
+  font-weight:700;
+  font-size:15pt;
+  padding:4px 14px;
+  display:flex; align-items:center; justify-content:center;
+  min-width:46px;
+}
+.sec-tit{
+  font-family:var(--cond);
+  font-size:15pt;
+  font-weight:700;
+  color:var(--azul);
+  padding:4px 12px;
+  display:flex; align-items:center;
+  letter-spacing:.3px;
+}
+h3{
+  font-family:var(--cond);
+  font-size:11.5pt;
+  font-weight:700;
+  color:var(--azul2);
+  margin:20px 0 8px;
+  padding-left:9px;
+  border-left:3px solid var(--naranja);
+  letter-spacing:.3px;
+}
+h4{
+  font-family:var(--sans);
+  font-size:10pt;
+  font-weight:700;
+  color:var(--azul);
+  margin:14px 0 5px;
+}
+p{ margin-bottom:9px; }
+ul,ol{ margin:7px 0 11px 20px; }
+li{ margin-bottom:4px; }
+strong{ color:var(--azul); font-weight:600; }
+
+/* ── CAJAS ── */
+.caja{
+  border-radius:5px;
+  padding:12px 16px;
+  margin:12px 0;
+  font-size:10pt;
+}
+.def { background:var(--azul-bg); border-left:4px solid var(--azul2); }
+.clave { background:var(--naranja-cl); border-left:4px solid var(--naranja); }
+.aviso { background:var(--rojo-cl); border-left:4px solid var(--rojo); }
+.ok    { background:var(--verde-cl); border-left:4px solid var(--verde); }
+
+.callout{
+  display:flex; gap:10px; align-items:flex-start;
+  padding:12px 16px; border-radius:5px; margin:14px 0; font-size:10pt;
+}
+.callout-key{ background:var(--naranja-cl); border-left:4px solid var(--naranja); }
+.callout-info{ background:var(--azul-bg); border-left:4px solid var(--azul2); }
+.callout-warn{ background:var(--rojo-cl); border-left:4px solid var(--rojo); }
+.callout-ok{ background:var(--verde-cl); border-left:4px solid var(--verde); }
+.callout-icon{ font-size:14pt; flex-shrink:0; margin-top:1px; }
+
+/* ── SOLUCIÓN ── */
+.solucion{
+  border-left:3px solid var(--azul2);
+  padding:8px 16px;
+  margin:8px 0;
+  background:var(--azul-bg);
+  border-radius:0 5px 5px 0;
+  font-size:10pt;
+}
+
+/* ── RESULTADO ── */
+.resultado{
+  background:var(--verde-cl);
+  border-left:4px solid var(--verde);
+  border-radius:0 5px 5px 0;
+  padding:10px 16px;
+  margin:12px 0;
+  font-size:10pt;
+  font-weight:600;
+}
+
+.ejemplo{
+  border-left:4px solid var(--verde);
+  border-radius:0 5px 5px 0;
+  padding:12px 16px;
+  margin:12px 0;
+  background:var(--verde-cl);
+}
+.ej-tit{
+  font-family:var(--cond);
+  font-weight:700;
+  color:var(--verde);
+  font-size:8.5pt;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:9.5pt;
+  margin:12px 0;
+}
+th{
+  background:var(--azul);
+  color:#fff;
+  font-family:var(--cond);
+  font-weight:700;
+  font-size:9pt;
+  letter-spacing:.7px;
+  padding:8px 12px;
+  text-align:left;
+}
+td{
+  padding:8px 12px;
+  border-bottom:1px solid var(--borde);
+  vertical-align:top;
+}
+tr:nth-child(even) td{ background:var(--gris); }
+
+.img-container{
+  text-align:center;
+  margin:18px 0;
+}
+.img-container img{
+  max-width:100%;
+  border-radius:5px;
+  box-shadow:0 2px 12px rgba(0,0,0,.12);
+}
+
+.pie{
+  background:var(--azul);
+  color:rgba(255,255,255,.65);
+  font-family:var(--sans);
+  font-size:8pt;
+  padding:12px 44px;
+  display:flex;
+  justify-content:space-between;
+}
+
+/* ── MathJax overrides ── */
+.math.display { text-align:center; margin:10px 0; }
+.MathJax { font-size:100% !important; }
+span.math { font-family: var(--mono); }
+
+/* ── Enunciado highlighting ── */
+.enunciado {
+  background: var(--naranja-cl);
+  border-left: 4px solid var(--naranja);
+  padding: 12px 16px;
+  border-radius: 0 5px 5px 0;
+  margin: 0 0 16px;
+  font-size: 10pt;
+}
+
+hr.div{ border:none; border-top:1.5px solid var(--borde); margin:28px 0; }
+
+@media print{
+  html,body{ background:white; }
+  .pagina{ box-shadow:none; max-width:100%; }
+  .seccion{ page-break-inside:avoid; }
+}
+
+/* Override exercise standalone styles for layout integration */
+.ct .pagina { max-width:100%; box-shadow:none; margin:0; background:#fff; }
+.ct .pie { margin:0; border-radius:0; }
+
+html { background:var(--hub-bg, #F4F6F9) !important; }
+body { background:var(--hub-bg, #F4F6F9) !important; }
+
+a
+
+/* Scroll fix anchors */
+[id]{scroll-margin-top:20px;}
+
+
+/* ── NAVCROSS: barra de navegación transversal (Fase D) ── */
+
+/* v2.9: Selector de bloques */
+.nav-bloque-selector{display:inline-flex;align-items:center;gap:6px;margin-left:8px}
+.nav-bloque-selector select{font-family:'Barlow',sans-serif;font-size:.75rem;padding:4px 8px;border:1px solid #D8DDE5;border-radius:6px;background:#fff;color:#23272F;cursor:pointer;max-width:220px}
+.nav-bloque-selector select:hover{border-color:#1B4F8A}
+.nav-bloque-selector select:focus{outline:2px solid #2E7BC4;outline-offset:1px}
+.nav-bloque-flechas{display:inline-flex;gap:4px;margin-left:4px}
+.nav-bloque-flechas a{display:inline-flex;align-items:center;gap:3px;padding:4px 8px;border-radius:6px;text-decoration:none;font-size:.72rem;color:#23272F;background:#fff;border:1px solid #D8DDE5;transition:all .18s}
+.nav-bloque-flechas a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+@media(max-width:640px){.nav-bloque-selector select{max-width:140px;font-size:.7rem}.nav-bloque-flechas a span.flecha-label{display:none}}
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+.navcross span.nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8;align-self:center;user-select:none}
+@media(max-width:640px){
+/* v2.9: Selector de bloques */
+.nav-bloque-selector{display:inline-flex;align-items:center;gap:6px;margin-left:8px}
+.nav-bloque-selector select{font-family:'Barlow',sans-serif;font-size:.75rem;padding:4px 8px;border:1px solid #D8DDE5;border-radius:6px;background:#fff;color:#23272F;cursor:pointer;max-width:220px}
+.nav-bloque-selector select:hover{border-color:#1B4F8A}
+.nav-bloque-selector select:focus{outline:2px solid #2E7BC4;outline-offset:1px}
+.nav-bloque-flechas{display:inline-flex;gap:4px;margin-left:4px}
+.nav-bloque-flechas a{display:inline-flex;align-items:center;gap:3px;padding:4px 8px;border-radius:6px;text-decoration:none;font-size:.72rem;color:#23272F;background:#fff;border:1px solid #D8DDE5;transition:all .18s}
+.nav-bloque-flechas a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+@media(max-width:640px){.nav-bloque-selector select{max-width:140px;font-size:.7rem}.nav-bloque-flechas a span.flecha-label{display:none}}
+.navcross{gap:4px;padding:8px 10px;top:52px}.navcross a span.nc-lbl,.navcross span.nc-current span.nc-lbl{display:none}.navcross .nc-sep{display:none}}
+
+.difficulty{display:inline-block;margin-left:8px;color:#D4700A;font-size:11pt;letter-spacing:1px;vertical-align:middle}
+
+@media print{
+  html,body{background:#fff!important;color:#000!important}
+  .hd,.navcross,.nv,.mb,.home-btn,.sol-btn,.btn-video,.video-group{display:none!important}
+  .ly{position:static!important}
+  .ct{overflow:visible!important;padding:0}
+  .pagina{box-shadow:none!important;max-width:100%}
+  .cabecera{background:#fff!important;color:#000!important}
+  .cab-titulo,.cab-label,.cab-sub{color:#000!important}
+  h2,h3,h4{page-break-after:avoid}
+  .seccion{page-break-inside:avoid}
+  .sol-content{display:block!important}
+  img{max-width:100%;page-break-inside:avoid}
+  a{text-decoration:none;color:#000}
+  .objetivos-box,.decalogo-box{background:#fff!important;border:1px solid #aaa!important}
+}
+/* @media print v2 — ecosistema TECI2 */
+
+
+
+/* v2.9.8: soluciones colapsables */
+details.solucion-collapsible{margin-top:1rem;border-left:3px solid var(--az,#1B4F8A);padding-left:1rem}
+details.solucion-collapsible summary{cursor:pointer;font-weight:600;color:var(--az,#1B4F8A);padding:.5rem 0;user-select:none;font-size:.95rem}
+details.solucion-collapsible summary:hover{color:var(--az2,#2E7BC4)}
+details.solucion-collapsible[open] summary{color:var(--az2,#2E7BC4)}
+@media print{details.solucion-collapsible{display:block}details.solucion-collapsible>*{display:block !important}}
+</style>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)'],['$','$']],
+    displayMath: [['$$','$$'],['\\[','\\]']],
+    processEscapes: true
+  },
+  options: {
+    skipHtmlTags: ['script','noscript','style','textarea','pre']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+<div class="hd">
+<button class="mb" onclick="document.getElementById('nv').classList.toggle('open')">☰</button>
+<span class="lg" onclick="location.href='../index.html'">TECI II</span>
+<span class="sb">✏️ Ejercicios C2 — Máquinas Térmicas</span>
+<a href="../index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal"><a href="../index.html" aria-label="Ir al índice principal"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span><a href="../teoria/bloque_C2.html" aria-label="Ver teoría del bloque C2"><span>📖</span><span class="nc-lbl">Teoría C2</span></a><span class="nc-sep">·</span><span class="nc-current" aria-current="page"><span>✏️</span><span class="nc-lbl">Ejercicios C2</span></span><span class="nc-sep">·</span><a href="../index.html#examenes" aria-label="Ver índice de exámenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a><span class="nc-sep">·</span><div class="nav-bloque-selector">
+  <select onchange="if(this.value)window.location.href=this.value" aria-label="Cambiar de bloque">
+    <option value="../teoria/bloque_A.html">A — Proyectos I+D+i</option>
+    <option value="../ejercicios/ej_B.html">B — Materiales y Fabricación</option>
+    <option value="../ejercicios/ej_C1.html">C1 — Estructuras</option>
+    <option value="../ejercicios/ej_C2.html" selected>C2 — Máquinas Térmicas</option>
+    <option value="../ejercicios/ej_C3.html">C3.1 — Neumática</option>
+    <option value="../teoria/bloque_C32.html">C3.2 — Hidráulica</option>
+    <option value="../ejercicios/ej_D1.html">D1 — Corriente Alterna</option>
+    <option value="../ejercicios/ej_D2.html">D2 — Electrónica Digital</option>
+    <option value="../teoria/bloque_E.html">E — Sist. Informáticos</option>
+    <option value="../ejercicios/ej_F.html">F — Sist. Automáticos</option>
+    <option value="../teoria/bloque_G.html">G — Tecnología Sostenible</option>
+  </select>
+</div></nav>
+
+<div class="ly">
+<nav class="nv" id="nv">
+<div class="nb act" data-block="C2">
+<div class="nb-h" style="background:var(--az);color:#fff;">✏️ Ej. C2 — Máquinas Térmicas</div>
+<div class="nc" style="display:block;">
+<a class="na" href="#ex_1">1. Central de biomasa — Carnot, frigorífica y …</a>
+<a class="na" href="#ex_2">2. Hotel Sierra Nevada — Bomba de calor</a>
+<a class="na" href="#ex_3">3. Sistema reversible verano/invierno</a>
+<a class="na" href="#ex_4">4. Motor Otto — Geometría y trabajo en viaje […</a>
+<a class="na" href="#ex_5">5. Verificación del 2º principio [PAU Extra]</a>
+<a class="na" href="#ex_6">6. Rendimiento teórico Otto [PAU 2024/4B]</a>
+<a class="na" href="#ex_7">7. Motor Otto con S = 1,5·D [PAU 2024/2B]</a>
+<a class="na" href="#ex_8">8. Motor Diésel [PAU 2024/6B]</a>
+<a class="na" href="#ex_9">9. Consumo específico [PAU 2025/2B]</a>
+<a class="na" href="#ex_10">10. Temperatura exterior desconocida [PAU 2025/2A…</a>
+<a class="na" href="#ex_11">11. Motor 4T banco de pruebas — Ponencia P1 [Pon…</a>
+
+</div>
+</div>
+</nav>
+<div class="ct" id="ct">
+<div class="block-content" id="block-C2" style="display:block"><div class="pagina">
+
+<div class="cabecera">
+  <div class="cab-banda"></div>
+  <div class="cab-inner">
+    <div class="cab-label">Tecnología e Ingeniería II · 2º Bachillerato · IES Jiménez de Quesada</div>
+    <div class="cab-titulo">Bloque C2 — <span>Máquinas Térmicas y Motores</span></div>
+    <div class="cab-sub">Ejercicios resueltos PEvAU · Junta de Andalucía · Curso 2025–2026 · ≈ 1,5 pts</div>
+    <div class="cab-chips">
+      <span class="chip">🌡️ Carnot</span>
+<span class="chip">❄️ Frigorífica</span>
+<span class="chip">🏠 Bomba de calor</span>
+<span class="chip">🔧 Otto/Diésel</span>
+    </div>
+  </div>
+</div>
+
+<div class="cuerpo">
+<div class="seccion" id="ex_1">
+  <div class="sec-hdr">
+    <div class="sec-num">1</div>
+    <div class="sec-tit">Central de biomasa — Carnot, frigorífica y bomba de calor<span class="difficulty" aria-label="Dificultad ★★★">★★★</span></div>
+  </div>
+  <p>Una central de biomasa opera un ciclo de Carnot entre una fuente
+caliente a T<sub>c</sub> = 327 °C y un foco frío a T<sub>f</sub> = 57
+°C. El trabajo obtenido por ciclo es W = 0,9 kJ. El poder calorífico de
+la biomasa utilizada es de 15 000 kJ/kg.</p>
+<p>a) Calcula el rendimiento del ciclo de Carnot.</p>
+<p>b) Determina Q<sub>c</sub> y Q<sub>f</sub> por ciclo.</p>
+<p>c) Calcula el consumo de biomasa por ciclo en gramos.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>CRÍTICO: Temperaturas siempre en Kelvin</h4>
+<div class="solucion">
+<p><span class="math display">\[T_{c}\  = \ 327 + 273\  = \ 600\ K\ \ \
+\ T_{f}\  = \ 57 + 273\  = \ 330\ K\]</span></p>
+</div>
+<h4>Apartado a — Rendimiento</h4>
+<div class="solucion">
+<p><span class="math display">\[\eta\  = \ 1 - \frac{T_{f}}{T_{c}} = \ 1
+- \frac{330}{600} = \ 0,45\  = \ 45\%\]</span></p>
+</div>
+<div class="resultado"><strong>→ ηCarnot = 45% Techo teórico: ninguna máquina real puede
+superarlo</strong></div>
+<h4>Apartado b — Calores</h4>
+<div class="solucion">
+<p><span class="math display">\[Qc\  = \ \frac{W}{\eta} = \
+\frac{900}{0,45} = \ 2000\ J\ \ \ \ Q_{f}\  = \ Q_{c} - W\  = \ 2000 -
+900\  = \ 1100\ J\]</span></p>
+</div>
+<div class="resultado"><strong>→ Q<sub>c</sub></strong> = 2000 J ; Q<sub>f</sub> = 1100 J
+<strong>Verificar: Q<sub>c</sub></strong> = W+Q<sub>f</sub> → 2000 =
+900+1100 ✓</div>
+<h4>Apartado c — Consumo de biomasa</h4>
+<div class="solucion">
+<p><span class="math display">\[m\  = \ \frac{Q_{c}}{Pc} = \
+\frac{2000}{15\ 000\ 000} = \ 1,33 \times 10^{-4}\ kg\  = \ 0,133\
+g/ciclo\]</span></p>
+</div>
+<div class="resultado"><strong>→ m ≈ 0,133 g/ciclo</strong></div>
+<div class="solucion">
+<p><strong>⚠ <em>CRÍTICO: SIEMPRE convertir °C a K antes de calcular
+ηCarnot. T[K] = T[°C]+273.</em></strong></p>
+<p><strong>⚠ <em>Q<sub>c</sub></em></strong> = W/η (no η·W). Es el calor
+que hay que pagar para obtener el trabajo W.</p>
+</div>
+<h4>Apartado c — Modo frigorífico (Cámara de
+congelados)</h4>
+<p>Supermercado de Granada. Cámara a −18 °C, sala a 27 °C. Extrae
+Q<sub>f</sub> = 1200 kJ/h. Eficiencia real = 60% de la ideal.</p>
+<p>a) Calcula la eficiencia ideal y real del sistema.</p>
+<p>b) Determina el trabajo absorbido por el compresor en una hora y la
+potencia del motor.</p>
+<p>c) Calcula el calor cedido al exterior en una hora.</p>
+<div class="solucion">
+<p><span class="math display">\[T_{f}\  = \  - 18 + 273\  = \ 255\ K\ \
+\ \ T_{c}\  = \ 27 + 273\  = \ 300\ K\]</span></p>
+</div>
+<h4>Apartado a — Eficiencias</h4>
+<div class="solucion">
+<p><span class="math display">\[\varepsilon_{ideal}\  = \
+\frac{T_{f}}{T_{c} - T_{f}} = \ \frac{255}{45} = \ 5,67\ \ \ \
+\varepsilon_{real}\  = \ 0,60 \times 5,67\  = \ 3,40\]</span></p>
+</div>
+<div class="resultado"><strong>→ εideal = 5,67 · εreal = 3,40 La eficiencia puede ser &gt;
+1</strong></div>
+<h4>Apartados b y c</h4>
+<div class="solucion">
+<p><span class="math display">\[W\  = \ \frac{Q_{f}}{\varepsilon_{real}}
+= \ \frac{1200}{3,40} \approx \ 352,9\ kJ/h\ \ \ \ P\  = \
+\frac{352900}{3600} \approx \ 98\ W\]</span></p>
+<p><span class="math display">\[Q_{c}\  = \ Q_{f} + W\  = \ 1200 +
+352,9\  = \ 1552,9\ kJ/h\]</span></p>
+</div>
+<div class="resultado"><strong>→ W=352,9 kJ/h · P≈98 W · Q<sub>c</sub></strong>≈1553
+kJ/h</div>
+<div class="solucion">
+<p><strong>⚠ <em>ε frigorífica = Q<sub>f</sub></em></strong>/W =
+T<sub>f</sub>/(T<sub>c</sub>−T<sub>f</sub>). <em><strong>Energía útil =
+Q<sub>f</sub></strong></em> (lo que extrae del frío).</p>
+<p><strong>⚠ <em>Q<sub>c</sub></em></strong> = Q<sub>f</sub>+W: el calor
+cedido al exterior es SIEMPRE mayor que el extraído.</p>
+</div>
+</details>
+</div>
+<div class="seccion" id="ex_2">
+  <div class="sec-hdr">
+    <div class="sec-num">2</div>
+    <div class="sec-tit">Hotel Sierra Nevada — Bomba de calor<span class="difficulty" aria-label="Dificultad ★★">★★</span></div>
+  </div>
+  <p>Hotel rural en Sierra Nevada. Interior a 22 °C, exterior a −3 °C.
+Aporta Q<sub>c</sub> = 90 000 J/min al interior. Eficiencia real = un
+tercio de la ideal.</p>
+<p>a) Calcula la eficiencia ideal y real de la bomba de calor.</p>
+<p>b) Determina el trabajo absorbido por el compresor en un minuto y la
+potencia.</p>
+<p>c) Calcula el calor extraído del exterior en una hora.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<div class="solucion">
+<p><span class="math display">\[T_{c}\  = \ 295\ K\ \ \ \ T_{f}\  = \
+270\ K\]</span></p>
+</div>
+
+
+<h4>Apartado a — Eficiencias</h4>
+<div class="solucion">
+<p><span class="math display">\[\varepsilon_{ideal}\  = \
+\frac{T_{c}}{T_{c} - T_{f}} = \ \frac{295}{25} = \ 11,8\ ;\ \ \
+{\varepsilon&#39;}_{real}\  = \ \frac{11,8}{3} \approx \
+3,93\]</span></p>
+</div>
+<div class="resultado"><strong>→ ε'</strong><sub>ideal</sub> = 11,8 · ε'<sub>real</sub> =
+3,93</div>
+<h4>Apartados b y c</h4>
+<div class="solucion">
+<p><span class="math display">\[W\  = \
+\frac{Q_{c}}{{\varepsilon&#39;}_{real}} = \ \frac{90\ 000}{3,93} \approx
+\ 22\ 901\ J/min\ \ \ \ P\  = \ \frac{22\ 901}{60} \approx \ 382\
+W\]</span></p>
+<p><span class="math display">\[Q_{f}(1h)\  = \ (Q_{c} - W) \times
+60\  = \ 67099 \times 60\  \approx \ 4\ 026\ kJ\]</span></p>
+</div>
+<h4>Apartado b — Trabajo del compresor y potencia</h4>
+<div class="resultado"><strong>→ W≈22,9 kJ/min · P≈382 W · Q<sub>f</sub></strong>(1h)≈4026
+kJ/h</div>
+<div class="solucion">
+<p><strong>⚠ <em>ε' bomba calor = Q<sub>c</sub></em></strong>/W =
+T<sub>c</sub>/(T<sub>c</sub>−T<sub>f</sub>). Energía útil =
+Q<sub>c</sub> (lo que calienta el interior).</p>
+<p><strong>⚠ <em>Relación: ε' = ε+1. La bomba siempre entrega más calor
+del que consume en trabajo.</em></strong></p>
+</div>
+</details>
+</div>
+<div class="seccion" id="ex_3">
+  <div class="sec-hdr">
+    <div class="sec-num">3</div>
+    <div class="sec-tit">Sistema reversible verano/invierno<span class="difficulty" aria-label="Dificultad ★★★">★★★</span></div>
+  </div>
+  <p>La climatización de la Biblioteca Pública de Sevilla se realiza mediante una máquina térmica reversible que funciona como frigorífico en verano y como bomba de calor en invierno. La temperatura interior de consigna es de 23 °C, y se adoptan como temperaturas exteriores representativas 38 °C en verano y 5 °C en invierno. La eficiencia real del equipo se estima en el 35 % de la que proporcionaría un ciclo de Carnot ideal entre esos mismos focos. El compresor consume una potencia eléctrica de 4 kW y la instalación trabaja 8 horas al día.</p>
+<p>a) Calcule la eficiencia real de la máquina funcionando como frigorífico en verano y como bomba de calor en invierno.</p>
+<p>b) Determine el calor extraído del local a lo largo de un día de verano.</p>
+<p>c) Determine el calor aportado al local a lo largo de un día de invierno.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Conversión de temperaturas</h4>
+<div class="solucion">
+<p><span class="math display">\[Tint\  = \ 23 + 273\  = \ 296\ K\ \ \ \
+Tver\  = \ 38 + 273\  = \ 311\ K\ \ \ \ Tinv\  = \ 5 + 273\  = \ 278\
+K\]</span></p>
+</div>
+<h4>Apartado a — Eficiencias real en verano (frigorífico) y en
+invierno (bomba)</h4>
+<div class="solucion">
+<p>Verano: la máquina extrae calor del interior (foco frío = interior =
+296 K):</p>
+<p><span class="math display">\[\varepsilon_{ideal}(ver)\  = \
+\frac{Tint}{Tver - Tint} = \ \frac{296}{311 - 296} = \ \frac{296}{15} =
+\ 19,73\]</span></p>
+<p><span class="math display">\[\varepsilon_{real}(ver)\  = \ 0,35
+\times 19,73\  = \ 6,91\]</span></p>
+<p>Invierno: la máquina calienta el interior (foco caliente = interior =
+296 K):</p>
+<p><span class="math display">\[{\varepsilon&#39;}_{ideal}\ (inv)\  = \
+\frac{Tint}{Tint - Tinv} = \ \frac{296}{296 - 278} = \ \frac{296}{18} =
+\ 16,44\]</span></p>
+<p><span class="math display">\[{\varepsilon&#39;}_{real}(inv)\  = \
+0,35 \times 16,44\  = \ 5,75\]</span></p>
+</div>
+<div class="resultado"><strong>→ εreal verano = 6,91 · ε'</strong><sub>real</sub> invierno
+= 5,75</div>
+<h4>Apartado b — Calor extraído del local un día de
+verano</h4>
+<div class="solucion">
+<p><span class="math display">\[W_{día}\  = \ P \times t\  = \ 4\ kW
+\times 8\ h \times 3600\ s/h\  = \ 115\ 200\ kJ\]</span></p>
+<p><span class="math display">\[Q_{f}(ver)\  = \ \varepsilon_{real}
+\times W\  = \ 6,91 \times 115\ 200\  \approx \ 796\ 032\
+kJ\]</span></p>
+</div>
+<div class="resultado"><strong>→ Q<sub>f</sub></strong>(verano) ≈ 796 032 kJ/día
+<strong>Calor extraído del interior en verano</strong></div>
+<h4>Apartado c — Calor aportado al local un día de
+invierno</h4>
+<div class="solucion">
+<p><span class="math display">\[Q_{c}(inv)\  = \
+{\varepsilon&#39;}_{real} \times W\  = \ 5,75 \times 115\ 200\  \approx
+\ 662\ 400\ kJ\]</span></p>
+</div>
+<div class="resultado"><strong>→ Q<sub>c</sub></strong>(invierno) ≈ 662 400 kJ/día
+<strong>Calor cedido al interior en invierno</strong></div>
+<div class="solucion">
+<p><strong>⚠ <em>En verano la máquina es frigorífica: foco frío =
+interior. T<sub>f</sub></em></strong> = Tinterior.</p>
+<p><strong>⚠ <em>En invierno la máquina es bomba de calor: foco caliente
+= interior. T<sub>c</sub></em></strong> = Tinterior.</p>
+<p><strong>⚠ <em>El comprersor es el mismo: la diferencia es solo la
+dirección del flujo (válvulas inversoras).</em></strong></p>
+<p><strong>⚠ <em>Tipo frecuente en PAU 2024-2025. Es el modelo del
+examen de la Ponencia 2025.</em></strong></p>
+</div>
+</details>
+</div>
+<div class="seccion" id="ex_4">
+  <div class="sec-hdr">
+    <div class="sec-num">4</div>
+    <div class="sec-tit">Motor Otto — Geometría y trabajo en viaje [Ponencia P2A]<span class="difficulty" aria-label="Dificultad ★★">★★</span></div>
+  </div>
+  <p>Se realiza un viaje de dos horas en un quad que tiene un motor Otto
+bicilíndrico de cuatro tiempos. Los parámetros del motor son: cilindrada
+500 cm³, diámetro del cilindro 60 mm, relación de compresión 10:1. La
+potencia máxima se obtiene con un par de 30 N·m a 5000 rpm.</p>
+<p>a) Calcular la carrera del cilindro y el volumen de la cámara de
+combustión.</p>
+<p>b) Calcular el trabajo desarrollado en el viaje, suponiendo que el
+motor trabaja a potencia máxima todo el trayecto.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Carrera y Vcc</h4>
+<div class="solucion">
+<p>Cilindrada unitaria:</p>
+<p><span class="math display">\[Vu\  = \ \frac{VT}{Z} = \ \frac{500\
+cm^3}{2} = \ 250\ cm^3\]</span></p>
+<p>Carrera L:</p>
+<p><span class="math display">\[L\  = \ \frac{4 \cdot Vu}{\pi \cdot D^2}
+= \ \frac{4 \times 250}{\pi \times (6,0)^2} = \ \frac{1000}{113,1}
+\approx \ 8,84\ cm\]</span></p>
+<p>Volumen de la cámara de combustión:</p>
+<p><span class="math display">\[Vcc\  = \ \frac{Vu}{Rc - 1} = \
+\frac{250}{10 - 1} = \ \frac{250}{9} \approx \ 27,8\ cm^3\]</span></p>
+</div>
+<div class="resultado"><strong>→ L ≈ 8,84 cm · Vcc ≈ 27,8 cm³</strong></div>
+<h4>Apartado b — Trabajo en el viaje</h4>
+<div class="solucion">
+<p>Velocidad angular a potencia máxima:</p>
+<p><span class="math display">\[\omega\  = \ \frac{2\pi \times n}{60} =
+\ \frac{2\pi \times 5000}{60} \approx \ 523,6\ rad/s\]</span></p>
+<p>Potencia máxima:</p>
+<p><span class="math display">\[P\  = \ M \cdot \omega\  = \ 30\ N \cdot
+m\  \times \ 523,6\ rad/s\  = \ 15\ 708\ W\  \approx \ 15,7\
+kW\]</span></p>
+<p>Trabajo en el viaje (t = 2 h = 7200 s):</p>
+<p><span class="math display">\[W\  = \ P \cdot t\  = \ 15\ 708\
+W\  \times \ 7200\ s\  = \ 1,131 \times 10^8\ J\  \approx \ 113,1\
+MJ\]</span></p>
+</div>
+</details>
+</div>
+<div class="seccion" id="ex_5">
+  <div class="sec-hdr">
+    <div class="sec-num">5</div>
+    <div class="sec-tit">Verificación del 2º principio [PAU Extra]<span class="difficulty" aria-label="Dificultad ★★★">★★★</span></div>
+  </div>
+  <p>Un fabricante afirma haber diseñado una máquina térmica que opera
+entre un foco caliente a 527 ºC y un foco frío a 27 ºC. La máquina
+absorbe 800 kJ del foco caliente y produce un trabajo de 400 kJ.</p>
+<p>a) Calcular el rendimiento teórico de Carnot entre esas
+temperaturas.</p>
+<p>b) Calcular el rendimiento real declarado y razonar si la máquina
+viola o no el 2º principio de la termodinámica.</p>
+<p>c) El fabricante afirma que con la misma fuente puede obtener 600 kJ
+de trabajo. Razonar si esto es posible.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Rendimiento de Carnot</h4>
+<p>Convertir temperaturas a Kelvin:</p>
+<div class="solucion">
+<p><span class="math display">\[T_{c}\  = \ 527\  + \ 273\  = \ 800\ K\
+\ \ \ \ T_{f}\  = \ 27\  + \ 273\  = \ 300\ K\]</span></p>
+<p><span class="math display">\[\eta_{Carnot}\  = \ 1\  - \
+T_{f}/T_{c}\  = \ 1\  - \ 300/800\  = \ 1\  - \ 0,375\  = \ 0,625\
+\  \rightarrow \ \ 62,5\ \%\]</span></p>
+</div>
+<div class="resultado"><strong>→ η</strong><sub>Carnot</sub> = 62,5 % (máximo teórico
+posible entre 800 K y 300 K)</div>
+<h4>Apartado b — Rendimiento real y verificación</h4>
+<div class="solucion">
+<p><span class="math display">\[\eta_{real}\  = \ W\ /\ Q_{c}\  = \ 400\
+/\ 800\  = \ 0,50\ \  \rightarrow \ \ 50\ \%\]</span></p>
+</div>
+<p>η<sub>real</sub> = 50 % &lt; η<sub>Carnot</sub> = 62,5 % → NO viola
+el 2º principio.</p>
+<p>El 2º principio establece que ningún motor térmico puede tener
+rendimiento superior al de Carnot. Como η<sub>real</sub> &lt;
+η<sub>Carnot</sub>, la afirmación es compatible con las leyes de la
+termodinámica.</p>
+<div class="resultado"><strong>→ η</strong><sub>real</sub> = 50 % &lt; η<sub>Carnot</sub> =
+62,5 % → máquina VIABLE (no viola el 2º principio)</div>
+<h4>Apartado c — Verificación con W = 600 kJ</h4>
+<div class="solucion">
+<p><span class="math display">\[\eta&#39;\  = \ W\ /\ Q_{c}\  = \ 600\
+/\ 800\  = \ 0,75\ \  \rightarrow \ \ 75\ \%\]</span></p>
+</div>
+<p>η' = 75 % &gt; η<sub>Carnot</sub> = 62,5 % → VIOLA el 2º principio →
+IMPOSIBLE.</p>
+<p>Un motor con η &gt; η<sub>Carnot</sub> sería más eficiente que una
+máquina de Carnot ideal, lo cual es termodinámicamente imposible.</p>
+<div class="resultado"><strong>→ η' = 75 % &gt; η</strong><sub>Carnot</sub> = 62,5 % →
+IMPOSIBLE — viola el 2º principio</div>
+<p><em>⚠ Regla: si η</em><sub>real</sub> ≤ η<sub>Carnot</sub> → posible;
+si η<sub>real</sub> &gt; η<sub>Carnot</sub> → imposible. Siempre
+convertir ºC a K antes de calcular η<sub>Carnot</sub> = 1 −
+T<sub>f</sub> / T<sub>c</sub>.</p>
+</details>
+</div>
+<div class="seccion" id="ex_6">
+  <div class="sec-hdr">
+    <div class="sec-num">6</div>
+    <div class="sec-tit">Rendimiento teórico Otto [PAU 2024/4B]<span class="difficulty" aria-label="Dificultad ★★★">★★★</span></div>
+  </div>
+  <p>Un motor Otto de cuatro cilindros y 1800 cm³ tiene un diámetro de
+cilindro de 75 mm y un volumen de cámara de combustión de 41 cm³. El
+coeficiente adiabático del combustible es γ = 1,4.</p>
+<p>a) Calcular la cilindrada unitaria y la relación de compresión del
+motor.</p>
+<p>b) Calcular el rendimiento teórico del ciclo Otto.</p>
+<p>c) Calcular la carrera de los cilindros.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Cilindrada unitaria y relación de
+compresión</h4>
+<div class="solucion">
+<p><span class="math display">\[V_{u}\  = \ V_{T}\ /\ z\  = \ 1800\ /\
+4\  = \ 450\ cm^3\]</span></p>
+<p><span class="math display">\[r_{c}\  = \ (V_{cc}\  + \ V_{u})\ /\
+V_{cc}\  = \ (41\  + \ 450)\ /\ 41\  = \ 491\ /\ 41\  = \
+11,98\  \approx \ 12:1\]</span></p>
+</div>
+<div class="resultado"><strong>→ V</strong><sub>u</sub> = 450 cm³ · r<sub>c</sub> = 11,98 ≈
+12:1</div>
+<h4>Apartado b — Rendimiento teórico del ciclo Otto</h4>
+<p>Fórmula del ciclo Otto ideal (proceso adiabático):</p>
+<div class="solucion">
+<p><span class="math display">\[\eta_{Otto}\  = \ 1\  - \ (1\ /\
+r_{c}\hat{}(\gamma - 1))\  = \ 1\  - \ r_{c}\hat{}(1 -
+\gamma)\]</span></p>
+<p><span class="math display">\[Exponente:\ \gamma\  - \ 1\  = \ 1,4\  -
+\ 1\  = \ 0,4\]</span></p>
+<p><span class="math display">\[r_{c}\hat{}0,4\  = \ 11,98\hat{}0,4\  =
+\ e\hat{}(0,4\  \cdot \ ln\ 11,98)\  = \ e\hat{}(0,4\  \cdot \
+2,483)\  = \ e\hat{}0,993\  = \ 2,699\]</span></p>
+<p><span class="math display">\[\eta_{Otto}\  = \ 1\  - \ (1\ /\
+2,699)\  = \ 1\  - \ 0,370\  = \ 0,630\ \  \rightarrow \ \ 63,0\
+\%\]</span></p>
+</div>
+<div class="resultado"><strong>→ η</strong><sub>Otto</sub> = 63,0 % (rendimiento teórico
+del ciclo ideal)</div>
+<h4>Apartado c — Carrera del cilindro</h4>
+<div class="solucion">
+<p><span class="math display">\[V_{u}\  = \ (\pi\  \cdot \ D^2\  \cdot \
+S)\ /\ 4\ \  \rightarrow \ \ S\  = \ (4\  \cdot \ V_{u})\ /\
+(\pi\  \cdot \ D^2)\]</span></p>
+<p><span class="math display">\[S\  = \ (4\  \times \ 450)\ /\
+(\pi\  \times \ 7,5^2)\  = \ 1800\ /\ 176,71\  = \ 10,19\ cm\  = \ 101,9\
+mm\]</span></p>
+</div>
+<div class="resultado"><strong>→ S = 101,9 mm</strong></div>
+<p><em>⚠ Fórmula clave: η</em><sub>Otto</sub> = 1 − r<sub>c</sub>^(1−γ).
+Calcular el exponente (1−γ) = −0,4 y aplicar r<sub>c</sub>^(−0,4) =
+1/r<sub>c</sub>^0,4. El rendimiento teórico del ciclo Otto solo depende
+de r<sub>c</sub> y γ, no del combustible ni del consumo.</p>
+</details>
+</div>
+<div class="seccion" id="ex_7">
+  <div class="sec-hdr">
+    <div class="sec-num">7</div>
+    <div class="sec-tit">Motor Otto con S = 1,5·D [PAU 2024/2B]<span class="difficulty" aria-label="Dificultad ★★">★★</span></div>
+  </div>
+  <p>Un motor Otto de cuatro cilindros tiene una relación de compresión
+r<sub>c</sub> = 10:1 y un volumen de cámara de combustión V<sub>cc</sub>
+= 25 cm³. Alcanza un par máximo de 350 Nm a 2500 rpm consumiendo 20 l/h
+de un combustible de densidad ρ = 0,85 kg/l y poder calorífico Q = 41
+400 kJ/kg. La carrera es S = 1,5·D.</p>
+<p>a) Calcular la cilindrada unitaria y total. Determinar el diámetro y
+la carrera del cilindro.</p>
+<p>b) Calcular la potencia desarrollada y el rendimiento del motor.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Cilindrada y geometría (S = 1,5·D)</h4>
+<p>De la relación de compresión:</p>
+<div class="solucion">
+<p><span class="math display">\[r_{c}\  = \ (V_{cc}\  + \ V_{u})\ /\
+V_{cc}\ \  \rightarrow \ \ 10\  = \ (25\  + \ V_{u})\ /\ 25\
+\  \rightarrow \ \ V_{u}\  = \ 250\  - \ 25\  = \ 225\ cm^3\]</span></p>
+<p><span class="math display">\[V_{T}\  = \ z\  \cdot \ V_{u}\  = \
+4\  \times \ 225\  = \ 900\ cm^3\]</span></p>
+</div>
+<p>Despejar D con S = 1,5·D:</p>
+<div class="solucion">
+<p><span class="math display">\[V_{u}\  = \ (\pi\  \cdot \ D^2\  \cdot \
+S)\ /\ 4\  = \ (\pi\  \cdot \ D^2\  \cdot \ 1,5D)\ /\ 4\  = \
+(1,5\pi\  \cdot \ D^3)\ /\ 4\]</span></p>
+<p><span class="math display">\[D^3\  = \ (4\  \cdot \ V_{u})\ /\
+(1,5\pi)\  = \ (4\  \times \ 225)\ /\ (1,5\  \times \ 3,1416)\  = \ 900\
+/\ 4,712\  = \ 191,06\ cm^3\]</span></p>
+<p><span class="math display">\[D\  = \ ^3\sqrt{191,06}\  = \ 5,76\
+cm\  = \ 57,6\ mm\]</span></p>
+<p><span class="math display">\[S\  = \ 1,5\  \times \ 57,6\  = \ 86,4\
+mm\]</span></p>
+</div>
+<div class="resultado"><strong>→ V</strong><sub>u</sub> = 225 cm³ · V<sub>T</sub> = 900 cm³
+· D = 57,6 mm · S = 86,4 mm</div>
+<h4>Apartado b — Potencia y rendimiento</h4>
+<p>Potencia (par y régimen):</p>
+<div class="solucion">
+<p><span class="math display">\[P\  = \ (M\  \cdot \ n\  \cdot \ 2\pi)\
+/\ 60\  = \ (350\  \times \ 2500\  \times \ 2\pi)\ /\ 60\  = \ 91\ 629\
+W\  \approx \ 91,63\ kW\]</span></p>
+</div>
+<p>Energía térmica suministrada:</p>
+<div class="solucion">
+<p><span class="math display">\[m_{c}\  = \ 20\ l/h\  \times \ 0,85\
+kg/l\  = \ 17,0\ kg/h\]</span></p>
+<p><span class="math display">\[E_{t}\  = \ 17,0\  \times \ 41\ 400\  =
+\ 703\ 800\ kJ/h\  = \ 195,5\ kW\]</span></p>
+<p><span class="math display">\[\eta\  = \ P\ /\ E_{t}\  = \ 91,63\ /\
+195,5\  = \ 0,469\ \  \rightarrow \ \ 46,9\ \%\]</span></p>
+</div>
+<div class="resultado"><strong>→ P = 91,63 kW · η = 46,9 %</strong></div>
+<div class="solucion">
+<p><strong>⚠ <em>Con S = k·D: sustituir S en V</em></strong><sub>u</sub> → expresión en
+\(D^3\) → despejar \(D\) → obtener \(S\). La raíz cúbica es el paso crítico.
+Verificar que V<sub>u</sub> recalculada coincide con la obtenida de
+r<sub>c</sub>.</p>
+<p><strong>⚠ <em>W = P × t. Convertir t a segundos: 2 h = 7200 s. No
+olvidar la conversión.</em></strong></p>
+<p><strong>⚠ <em>P = M·ω. ω = 2π·n/60. Con n en rpm: ω ≈ 523,6 rad/s
+para 5000 rpm.</em></strong></p>
+<p><strong>⚠ <em>Este tipo combina geometría (apartado a) con
+potencia+trabajo (apartado b). Ponencia P2A.</em></strong></p>
+</div>
+</details>
+</div>
+<div class="seccion" id="ex_8">
+  <div class="sec-hdr">
+    <div class="sec-num">8</div>
+    <div class="sec-tit">Motor Diésel [PAU 2024/6B]<span class="difficulty" aria-label="Dificultad ★">★</span></div>
+  </div>
+  
+<p>Un taller de vehículos industriales de Cádiz ensaya en banco un motor
+Diésel de cuatro cilindros y cuatro tiempos: D = 60 mm, carrera a = 90
+mm, RC = 20:1. El motor desarrolla un par M = 53 N·m con una potencia P
+= 20 kW.</p>
+<p>a) Calcular el volumen de la cámara de combustión y la cilindrada
+total del motor.</p>
+<p>b) Calcular el régimen de giro en rpm.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Volumen cámara y cilindrada</h4>
+<div class="solucion">
+<p>\(V_c = \pi \cdot D^2/4 \cdot a = \pi \cdot 60^2/4 \cdot 90 = 254\,469\) mm³ \(\approx 254{,}5\) cm³</p>
+<p>Vcc = Vc / (RC−1) = 254,5 / (20−1) = 254,5 / 19 ≈ 13,4 cm³</p>
+<p>Cilindrada total = Vc × 4 = 254,5 × 4 = 1018 cm³ ≈ 1,02 L</p>
+</div>
+<div class="resultado"><strong>→ Vcc ≈ 13,4 cm³ · Cilindrada total ≈ 1018 cm³ = 1,02
+L</strong></div>
+<h4>Apartado b — Régimen de giro</h4>
+<div class="solucion">
+<p>P = 2π·n·M → n = P/(2π·M) = 20 000/(2π×53) = 20 000/333,0 ≈ 60,07
+rev/s = 3 604 rpm</p>
+</div>
+<div class="resultado"><strong>→ n ≈ 3 604 rpm</strong></div>
+<div class="solucion">
+<p><strong>⚠ <em>Diferencia clave Diésel vs Otto: autoencendido por
+compresión (RC ≈ 14-22), sin bujías. La geometría y fórmulas son
+idénticas.</em></strong></p>
+<p><strong>⚠ <em>Vcc = Vc/(RC−1), NO Vc/RC. Usar RC−1 en el
+denominador.</em></strong></p>
+<p><strong>⚠ <em>Unidades: P en W, M en N·m → n en rev/s. Multiplicar
+por 60 para obtener rpm.</em></strong></p>
+</div>
+</details>
+</div>
+<div class="seccion" id="ex_9">
+  <div class="sec-hdr">
+    <div class="sec-num">9</div>
+    <div class="sec-tit">Consumo específico [PAU 2025/2B]<span class="difficulty" aria-label="Dificultad ★">★</span></div>
+  </div>
+  
+<p>Un fabricante de Córdoba prueba un motor de combustión en banco:
+consumo 9,5 l/h, par 110 N·m, régimen 2750 rpm, densidad combustible 0,8
+kg/dm³, poder calorífico 41 700 kJ/kg.</p>
+<p>a) Calcular la potencia suministrada y el consumo específico en
+g/(kW·h).</p>
+<p>b) Calcular el rendimiento del motor.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Potencia y consumo específico</h4>
+<div class="solucion">
+<p>P = 2π·n·M = 2π×(2750/60)×110 = 2π×45,83×110 ≈ 31 680 W ≈ 31,68
+kW</p>
+<p>ṁ = 9,5 l/h × 0,8 kg/l = 7,6 kg/h = 7600 g/h</p>
+<p>ce = ṁ [g/h] / P [kW] = 7600 / 31,68 ≈ 240 g/(kW·h)</p>
+</div>
+<div class="resultado"><strong>→ P ≈ 31,68 kW · ce ≈ 240 g/(kW·h)</strong></div>
+<h4>Apartado b — Rendimiento</h4>
+<div class="solucion">
+<p>P<sub>ap</sub> = ṁ·P<sub>c</sub> = (7,6/3600) × 41 700 000 ≈ 88 083 W
+≈ 88,08 kW</p>
+<p>η = P/P<sub>ap</sub> = 31 680/88 083 ≈ 0,360 → η ≈ 36,0 %</p>
+</div>
+<div class="resultado"><strong>→ η ≈ 36,0 %</strong></div>
+<div class="solucion">
+<p><strong>⚠ <em>ce = ṁ[g/h] / P[kW]. Cuanto menor es ce, más eficiente
+es el motor. Motores actuales: 220-280 g/(kW·h).</em></strong></p>
+<p><strong>⚠ <em>Conversión clave: ṁ en kg/h → dividir por 3600 para
+tener kg/s antes de multiplicar por Pc [J/kg].</em></strong></p>
+</div>
+</details>
+</div>
+<div class="seccion" id="ex_10">
+  <div class="sec-hdr">
+    <div class="sec-num">10</div>
+    <div class="sec-tit">Temperatura exterior desconocida [PAU 2025/2A Titular]<span class="difficulty" aria-label="Dificultad ★">★</span></div>
+  </div>
+  <p>Una bomba de calor reversible climatiza una nave industrial de Málaga
+a 23 ºC en invierno. Tiene COPreal = 5 y esa eficiencia es el 30 % de la
+ideal de Carnot. Calcular la temperatura media exterior.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Temperatura exterior mínima</h4>
+<h4>Desarrollo</h4>
+<div class="solucion">
+<p>COP<sub>ideal</sub> = COP<sub>real</sub> / 0,30 = 5/0,30 ≈ 16,67</p>
+<p>T₁ = 23+273 = 296 K. De COP<sub>ideal</sub> = T₁/(T₁−T₂) → T₁−T₂ =
+T₁/COP<sub>ideal</sub> = 296/16,67 = 17,76 K</p>
+<p>T₂ = 296 − 17,76 = 278,24 K → T₂ ≈ 278 K = 5 ºC</p>
+</div>
+<div class="resultado"><strong>→ Text ≈ 5 ºC</strong></div>
+<div class="solucion">
+<p><strong>⚠ <em>Siempre usar Kelvin en los cálculos. El resultado se
+puede expresar en ºC restando 273.</em></strong></p>
+<p><strong>⚠ <em>Bomba de calor: COP<sub>BC</sub> = T₁/(T₁−T₂).
+Frigorífica: COP<sub>F</sub> = T₂/(T₁−T₂). No confundir T₁ y
+T₂.</em></strong></p>
+</div>
+<h4>Apartado b — Verificación del COP real</h4>
+<p>Verificar que el COP real (5) es inferior al COP ideal (16,67)
+obtenido.</p>
+<p>COPreal = 5 &lt; COP<sub>ideal</sub> = 16,67 → Condición
+termodinámica necesaria: COP<sub>real</sub> ≤ COP<sub>ideal</sub> ✓</p>
+<p>Calor cedido al interior por unidad de tiempo: Q₁ = COP<sub>BC</sub>
+· W = 5·W</p>
+<p>El trabajo W que consume la bomba es 1/5 del calor suministrado, lo
+que la hace 5 veces más eficiente que una resistencia eléctrica.</p>
+<div class="resultado"><strong>→ COP<sub>real</sub> (5) &lt; COP<sub>ideal</sub> (16,67) ✓
+· La bomba suministra 5 J de calor por cada 1 J de trabajo
+eléctrico</strong></div>
+</div>
+</details>
+</div>
+
+<div class="seccion" id="ex_11">
+  <div class="sec-hdr">
+    <div class="sec-num">11</div>
+    <div class="sec-tit">Motor 4T en banco de pruebas — Potencia, consumo específico y rendimiento [Ponencia 2025-26, P1]<span class="difficulty" aria-label="Dificultad ★★">★★</span></div>
+  </div>
+  <p>Un fabricante de coches está pensando en cambiar el motor de uno de sus vehículos. Para ello, está comprobando el prototipo de un nuevo motor de combustión de 4T en un banco de pruebas, obteniéndose los siguientes resultados:</p>
+<ul style="margin:6px 0 6px 24px; list-style:disc;">
+<li>Consumo de combustible: 9,5 l/h.</li>
+<li>Par obtenido: 110 N·m.</li>
+<li>Régimen de giro: 2 750 rpm.</li>
+<li>Densidad del combustible: 0,8 kg/dm³.</li>
+<li>Poder calorífico del combustible: 41 700 kJ/kg.</li>
+</ul>
+<p>Partiendo de los datos anteriores, calcular:</p>
+<p>a) La potencia que está suministrando el motor y el consumo específico expresado en g/(kW·h).</p>
+<p>b) El rendimiento.</p>
+
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Potencia y consumo específico</h4>
+<div class="solucion">
+<p><strong>Potencia efectiva:</strong></p>
+<p><span class="math display">\[\omega = \frac{2\pi \cdot n}{60} = \frac{2\pi \times 2\,750}{60} = 287{,}98 \text{ rad/s}\]</span></p>
+<p><span class="math display">\[P = M \cdot \omega = 110 \times 287{,}98 = 31\,677{,}7 \text{ W}\]</span></p>
+<p><span class="math display">\[\boxed{P \approx 31{,}68 \text{ kW}}\]</span></p>
+
+<p><strong>Consumo específico:</strong></p>
+<p>Primero convertimos el consumo volumétrico a másico:</p>
+<p><span class="math display">\[\dot{m} = 9{,}5 \text{ l/h} \times 0{,}8 \text{ kg/l} = 7{,}6 \text{ kg/h} = 7\,600 \text{ g/h}\]</span></p>
+<p>El consumo específico es el consumo másico dividido por la potencia:</p>
+<p><span class="math display">\[C_e = \frac{\dot{m}}{P} = \frac{7\,600 \text{ g/h}}{31{,}68 \text{ kW}}\]</span></p>
+<p><span class="math display">\[\boxed{C_e \approx 239{,}9 \text{ g/(kW\cdot h)}}\]</span></p>
+</div>
+
+<h4>Apartado b — Rendimiento</h4>
+<div class="solucion">
+<p>El rendimiento del motor es la relación entre la potencia útil y la potencia calorífica del combustible consumido:</p>
+<p><span class="math display">\[\dot{Q}_a = \dot{m} \cdot P_c = \frac{7{,}6}{3\,600} \text{ kg/s} \times 41\,700 \text{ kJ/kg} = 0{,}002111 \times 41\,700 = 88{,}03 \text{ kW}\]</span></p>
+<p><span class="math display">\[\eta = \frac{P}{\dot{Q}_a} = \frac{31{,}68}{88{,}03}\]</span></p>
+<p><span class="math display">\[\boxed{\eta = 0{,}360 = 36{,}0\,\%}\]</span></p>
+
+<p>Es un rendimiento razonable para un motor de combustión interna de 4 tiempos (típicamente 25–40 %).</p>
+</div>
+
+<div class="resultado"><strong>→ P = 31,68 kW · C<sub>e</sub> = 239,9 g/(kW·h) · η = 36,0 %</strong></div>
+
+<p><strong>⚠ <em>Tipo Ponencia P1-C2: ejercicio de motor en banco de pruebas. Clave: P = M·ω con ω en rad/s. El consumo específico C<sub>e</sub> = ṁ/P tiene unidades de g/(kW·h). El rendimiento η = P/(ṁ·P<sub>c</sub>) requiere unidades coherentes (todo en kW o todo en W). Cuidado con la conversión l/h → kg/h → kg/s.</em></strong></p>
+</details>
+</div>
+
+<div class="pie">
+  <span>IES Jiménez de Quesada · Santa Fe (Granada)</span>
+  <span>Bloque C2 — Máquinas Térmicas y Motores</span>
+  <span>Curso 2025–2026</span>
+</div>
+
+</div></div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if(typeof MathJax !== 'undefined' && MathJax.typeset) MathJax.typeset();
+});
+</script>
+<script>
+(function(){
+  const container = document.getElementById('ct');
+  if(!container) return;
+
+  function jumpToHash(hash, smooth){
+    const raw = (hash || window.location.hash || '').trim();
+    if(!raw || raw === '#') return;
+    const id = decodeURIComponent(raw.slice(1));
+    const target = document.getElementById(id);
+    if(!target) return;
+
+    const cRect = container.getBoundingClientRect();
+    const tRect = target.getBoundingClientRect();
+    const top = container.scrollTop + (tRect.top - cRect.top) - 10;
+    container.scrollTo({ top: Math.max(0, top), behavior: smooth ? 'smooth' : 'auto' });
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(ev){
+      const href = this.getAttribute('href');
+      if(!href || href === '#') return;
+      const id = href.slice(1);
+      const target = document.getElementById(id);
+      if(!target) return;
+      ev.preventDefault();
+      jumpToHash(href, false);
+      if(history.replaceState){
+        history.replaceState(null, '', href);
+      } else {
+        window.location.hash = href;
+      }
+    });
+  });
+
+  window.addEventListener('hashchange', function(){
+    jumpToHash(window.location.hash, false);
+  });
+
+  window.addEventListener('load', function(){
+    if(window.location.hash){
+      setTimeout(function(){ jumpToHash(window.location.hash, false); }, 50);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

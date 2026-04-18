@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ponencia 2025-26 resuelta — Bloque C3 · TECI II</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--az:#1B4F8A;--az2:#2E7BC4;--bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5;--green:#2E7D32;--green2:#43A047;--green-soft:#EDF6EE;--green-line:#A8D5AE;--red:#C0321E;--orange:#D4700A;--orange-soft:#FFF4E5;--orange-line:#F5C98A;--yellow:#FFA000;--yellow-soft:#FFF8E1;--yellow-line:#FFE082}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:var(--bg);color:var(--tx);line-height:1.55}
+.hd{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(27,79,138,.12);position:sticky;top:0;z-index:500}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer}
+.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.72rem;opacity:.78;margin-left:10px}
+.home-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:8px;cursor:pointer;margin-left:auto;transition:background .15s;text-decoration:none}
+.home-btn:hover{background:rgba(255,255,255,.16)}
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:var(--az);color:var(--az)}
+.navcross span.nc-current{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;border-color:var(--az);font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8;align-self:center}
+.main{max-width:1000px;margin:0 auto;padding:26px 18px 70px}
+.title-block{text-align:center;margin-bottom:26px}
+.title-block h1{font-family:'Barlow Condensed',sans-serif;font-size:2rem;color:var(--az);font-weight:700}
+.title-block .sub{color:var(--t2);font-size:.95rem;margin-top:4px}
+.intro{background:#fff;border:1px solid var(--bd);border-left:4px solid var(--az2);padding:14px 18px;border-radius:0 10px 10px 0;margin:0 0 20px;font-size:.92rem;color:var(--t2)}
+.intro strong{color:var(--az)}
+.back-portal{display:inline-block;margin-bottom:14px;padding:7px 14px;background:#fff;color:var(--az);border:1px solid var(--bd);border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:600;transition:background .15s}
+.back-portal:hover{background:#EBF0F7;border-color:var(--az)}
+.problema{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:20px 22px;margin:0 0 22px;box-shadow:0 3px 12px rgba(27,79,138,.06)}
+.prob-header{display:flex;align-items:center;gap:14px;padding-bottom:10px;border-bottom:2px solid var(--az2);margin-bottom:12px}
+.prob-header h2{font-family:'Barlow Condensed',sans-serif;color:var(--az);font-size:1.4rem;font-weight:700;flex:1}
+.dif{font-size:.95rem;color:var(--orange);letter-spacing:1px}
+.dif[data-level="1"]{color:#43A047}
+.dif[data-level="2"]{color:var(--orange)}
+.dif[data-level="3"]{color:var(--red)}
+.enunciado{font-size:.95rem;line-height:1.65;margin:4px 0 10px}
+.enunciado p{margin:6px 0}
+.enunciado ol,.enunciado ul{margin:6px 0 6px 24px}
+.enunciado li{margin:3px 0}
+details.resolucion{margin-top:12px;border:1px solid var(--bd);border-radius:10px;background:#FAFBFD;overflow:hidden}
+details.resolucion summary{padding:10px 16px;cursor:pointer;font-weight:700;color:var(--az);font-size:.9rem;background:#F7FAFD;list-style:none;user-select:none;transition:background .15s}
+details.resolucion summary:hover{background:#EEF4FA}
+details.resolucion summary::-webkit-details-marker{display:none}
+details.resolucion summary::after{content:'▾';float:right;color:var(--green);transition:transform .2s}
+details.resolucion[open] summary::after{content:'▴'}
+.resol-body{padding:14px 18px;background:#fff;border-top:1px solid var(--bd)}
+.apartado{margin:10px 0 14px;padding-bottom:10px;border-bottom:1px dashed #E0E4EC}
+.apartado:last-child{border-bottom:none;padding-bottom:0}
+.apartado h3{font-family:'Barlow',sans-serif;color:var(--az);font-size:1rem;font-weight:700;margin-bottom:6px}
+.apartado p{margin:4px 0;font-size:.92rem}
+.apartado strong{color:var(--az)}
+.dato{display:inline-block;margin:2px 6px 2px 0}
+.resultado{background:var(--green-soft);border:1px solid var(--green-line);border-left:5px solid var(--green2);border-radius:0 8px 8px 0;padding:10px 14px;margin:8px 0;color:#1B4D1F;font-weight:600}
+.resultado strong{color:var(--green)}
+.aviso{background:var(--yellow-soft);border:1px solid var(--yellow-line);border-left:5px solid var(--yellow);border-radius:0 8px 8px 0;padding:10px 14px;margin:12px 0 6px;font-size:.88rem;color:#7A5500}
+.aviso strong{color:#5C3D00}
+.svg-wrap{display:block;margin:12px auto;text-align:center}
+.svg-wrap svg{display:inline-block;max-width:100%;height:auto;background:#fff;border:1px solid var(--bd);border-radius:8px;padding:6px;font-family:'Barlow Condensed',sans-serif}
+[id]{scroll-margin-top:120px}
+@media(max-width:768px){.main{padding:16px 10px 40px}.problema{padding:14px 14px}.title-block h1{font-size:1.45rem}}
+@media print{
+  .hd,.navcross,.back-portal{display:none!important}
+  body{background:#fff}
+  .problema{break-inside:avoid;page-break-inside:avoid;box-shadow:none;border:1px solid #999}
+  details.resolucion,details.resolucion[open]{border:1px solid #999}
+  details.resolucion>*{display:block!important}
+  details.resolucion summary{background:#F0F0F0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  details.resolucion summary::after{display:none}
+  .resol-body{display:block!important}
+  .resultado{background:#F0F0F0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .aviso{background:#FAFAFA!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+<script>
+window.addEventListener('beforeprint',function(){
+  document.querySelectorAll('details.resolucion').forEach(function(d){d.dataset.wasOpen=d.open?'1':'0';d.open=true;});
+});
+window.addEventListener('afterprint',function(){
+  document.querySelectorAll('details.resolucion').forEach(function(d){if(d.dataset.wasOpen==='0')d.open=false;delete d.dataset.wasOpen;});
+});
+</script>
+</head>
+<body>
+<div class="hd">
+<span class="lg" onclick="location.href='../index.html'">TECI II</span>
+<span class="sb">📚 Ponencia resuelta · C3 Neumática e hidráulica</span>
+<a href="../index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal">
+<a href="../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+<a href="../index.html#teoria"><span>📖</span><span class="nc-lbl">Teoría</span></a><span class="nc-sep">·</span>
+<a href="../index.html#ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a><span class="nc-sep">·</span>
+<a href="../index.html#examenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a><span class="nc-sep">·</span>
+<span class="nc-current" aria-current="page"><span>📚</span><span class="nc-lbl">Ponencia resuelta</span></span><span class="nc-sep">·</span>
+<a href="../apoyo/formulario.html"><span>📚</span><span class="nc-lbl">Apoyo</span></a>
+</nav>
+
+<div class="main">
+<a href="index_ponencia.html" class="back-portal">← Volver al portal de Ponencia resuelta</a>
+
+<div class="title-block">
+<h1>Ponencia 2025-26 resuelta — Bloque C3 Neumática e hidráulica</h1>
+<div class="sub">7 problemas competenciales contextualizados · curso 2025-26</div>
+</div>
+
+<p class="intro"><strong>Bloque C3 — Neumática e hidráulica.</strong> Se incluyen cálculos sobre cilindros neumáticos de simple y doble efecto (fuerza, caudal, consumo en condiciones normales), interpretación de esquemas ISO 1219 y problemas de hidrostática/hidrodinámica (principio de Pascal, ley de continuidad, ecuación de Bernoulli). Haz clic en <em>"📝 Ver resolución completa"</em> para desplegar cada desarrollo.</p>
+
+<!-- ================= PROBLEMA 1 ================= -->
+<section class="problema" id="prob-1">
+  <header class="prob-header">
+    <h2>Problema 1 <span class="dif" data-level="2">★★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p>Un grupo de ingenieros están decidiendo qué tipo de cilindro neumático elegir para la cadena de montaje de una fábrica de ensamblaje del fuselaje de aviones en la provincia de Cádiz. Necesitan un circuito neumático con un cilindro de doble efecto para ejercer una fuerza de 8 500 N en su carrera de avance para elevar verticalmente determinadas piezas. El fabricante de cilindros les ofrece dos modelos de cilindro distintos, aunque ambos tienen diámetro de émbolo 8 cm, carrera 10 cm y diámetro de vástago 5 cm. En uno de ellos la tensión máxima admisible del material del vástago es de 10 MPa, y en el otro de 1 MPa.</p>
+    <ol type="a">
+      <li>¿Qué modelo de cilindro utilizaría? Justificar la respuesta.</li>
+      <li>Calcular el consumo de aire medido a la presión de trabajo, si efectúa 10 ciclos por minuto y la presión de la red de aire comprimido es de 3 MPa.</li>
+    </ol>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+
+      <section class="apartado">
+        <h3>a) Modelo de cilindro a utilizar</h3>
+        <p><strong>Datos.</strong>
+          <span class="dato">\(D = 8\ \text{cm} = 0{,}08\ \text{m}\)</span>
+          <span class="dato">\(d = 5\ \text{cm} = 0{,}05\ \text{m}\)</span>
+          <span class="dato">\(L = 10\ \text{cm} = 0{,}10\ \text{m}\)</span>
+          <span class="dato">\(F = 8\,500\ \text{N}\)</span>
+          <span class="dato">\(\sigma_{\text{adm}} = 1\ \text{MPa}\) ó \(10\ \text{MPa}\)</span>.
+        </p>
+        <p><strong>Planteamiento.</strong> La tensión axial en el vástago es \(\sigma = F/A_V\).</p>
+        \[ A_V = \dfrac{\pi\cdot d^{2}}{4} = \dfrac{\pi\cdot (0{,}05)^{2}}{4} = 1{,}9635\cdot 10^{-3}\ \text{m}^{2} \]
+        <p><strong>Sustitución.</strong></p>
+        \[ \sigma = \dfrac{F}{A_V} = \dfrac{8\,500}{1{,}9635\cdot 10^{-3}} = 4{,}33\ \text{MPa} \]
+        <p><strong>Comparación.</strong></p>
+        <ul>
+          <li>Con \(\sigma_{\text{adm}} = 1\ \text{MPa}\): insuficiente (\(4{,}33 &gt; 1\)).</li>
+          <li>Con \(\sigma_{\text{adm}} = 10\ \text{MPa}\): suficiente (\(4{,}33 &lt; 10\)).</li>
+        </ul>
+        <div class="resultado">Se elige el cilindro con vástago de \(\sigma_{\text{adm}} = 10\ \text{MPa}\).</div>
+      </section>
+
+      <section class="apartado">
+        <h3>b) Consumo de aire a la presión de trabajo</h3>
+        <p><strong>Datos.</strong>
+          <span class="dato">\(D = 0{,}08\ \text{m}\)</span>
+          <span class="dato">\(d = 0{,}05\ \text{m}\)</span>
+          <span class="dato">\(L = 0{,}10\ \text{m}\)</span>
+          <span class="dato">\(n = 10\ \text{ciclos/min}\)</span>
+          <span class="dato">\(p_{\text{red}} = 3\ \text{MPa}\)</span>.
+        </p>
+        <p><strong>Volumen de avance</strong> (sección completa del émbolo).</p>
+        \[ V_{Av} = S_e\cdot L = \dfrac{\pi\cdot D^{2}}{4}\cdot L = \dfrac{\pi\cdot 0{,}08^{2}}{4}\cdot 0{,}10 = 5{,}0265\cdot 10^{-4}\ \text{m}^{3} \]
+        <p><strong>Volumen de retroceso</strong> (sección del émbolo menos sección del vástago).</p>
+        \[ V_{Ret} = (S_e - S_V)\cdot L = \left(\dfrac{\pi\cdot D^{2}}{4} - \dfrac{\pi\cdot d^{2}}{4}\right)\cdot L = 3{,}0630\cdot 10^{-4}\ \text{m}^{3} \]
+        <p><strong>Volumen por ciclo.</strong></p>
+        \[ V_{\text{ciclo}} = V_{Av} + V_{Ret} = 5{,}0265\cdot 10^{-4} + 3{,}0630\cdot 10^{-4} = 8{,}0896\cdot 10^{-4}\ \text{m}^{3} \]
+        <p><strong>Consumo a la presión de trabajo para 10 ciclos/min.</strong></p>
+        \[ V_{\text{trab}} = V_{\text{ciclo}}\cdot n = 8{,}0896\cdot 10^{-4}\cdot 10 = 8{,}0896\cdot 10^{-3}\ \dfrac{\text{m}^{3}}{\text{min}} \]
+        <p>Conversión a litros (\(1\ \text{m}^{3} = 1\,000\ \text{L}\)):</p>
+        \[ V_{\text{trab}} = 8{,}0896\cdot 10^{-3}\ \dfrac{\text{m}^{3}}{\text{min}} \cdot \dfrac{1\,000\ \text{L}}{1\ \text{m}^{3}} = 8{,}06\ \dfrac{\text{L}}{\text{min}} \]
+        <!-- DISCREPANCIA: PDF=8,06 L/min, Python=8,09 L/min (redondeos intermedios del PDF). PDF prevalece. -->
+        <div class="resultado">\( V_{\text{trab}} \approx 8{,}06\ \text{L/min} \)</div>
+      </section>
+
+      <div class="aviso">⚠ <strong>Unidades y presión.</strong> El consumo pedido es «medido a la <em>presión de trabajo</em>», por lo que se calcula directamente con la geometría del cilindro (sin aplicar Boyle-Mariotte). La conversión clave es \(1\ \text{m}^{3}/\text{min} = 1\,000\ \text{L/min}\); no confundas la presión de red (\(3\ \text{MPa}\) manométrica) con la presión absoluta, que solo interviene si se pide el consumo en condiciones normales.</div>
+    </div>
+  </details>
+</section>
+
+<!-- ================= PROBLEMA 2 ================= -->
+<section class="problema" id="prob-2">
+  <header class="prob-header">
+    <h2>Problema 2 <span class="dif" data-level="3">★★★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p>En una cadena de montaje de teléfonos móviles de última generación, se ha instalado el circuito neumático de la figura, en el que ambos cilindros son iguales. Se pide:</p>
+    <ol type="a">
+      <li>El valor de las fuerzas de avance y retroceso, despreciando las fuerzas de rozamiento, de los cilindros de doble efecto si tienen un émbolo de 5 cm de diámetro, un vástago de 1 cm de diámetro y una carrera de 24 cm. Está alimentado con una presión de 6 kg/cm² (despreciando las fuerzas de rozamiento).</li>
+      <li>Explicar el funcionamiento del esquema de la figura para el mando de dos cilindros de doble efecto.</li>
+    </ol>
+
+    <!-- SVG P2 — Circuito neumático ISO 1219 con 2 cilindros A y B -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 760 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="p2t p2d">
+        <title id="p2t">Circuito neumático ISO 1219 con dos cilindros de doble efecto</title>
+        <desc id="p2d">Secuencia A+ B+ A− B−. Pulsador 1.2 (3/2), válvulas pilotadas 4/2 (1.1 y 2.1) y finales de carrera 3/2 (1.3, 2.2, 2.3). Fuente de aire a presión.</desc>
+        <style>
+          .ln{stroke:#1B4F8A;stroke-width:1.6;fill:none}
+          .bx{stroke:#1B4F8A;stroke-width:1.6;fill:#fff}
+          .bx2{stroke:#2E7BC4;stroke-width:1.4;fill:#EBF0F7}
+          .cyl{stroke:#23272F;stroke-width:1.6;fill:#fff}
+          .pist{fill:#2E7BC4}
+          .vst{stroke:#23272F;stroke-width:1.6;fill:#D8DDE5}
+          .lbl{font:600 12px 'Barlow',sans-serif;fill:#1B4F8A}
+          .lbl2{font:500 10px 'Barlow',sans-serif;fill:#555D6B}
+          .air{fill:#1B4F8A}
+        </style>
+        <!-- Cilindro A -->
+        <g transform="translate(40,40)">
+          <rect class="cyl" x="0" y="0" width="150" height="60"/>
+          <rect class="pist" x="42" y="4" width="8" height="52"/>
+          <rect class="vst" x="50" y="24" width="120" height="12"/>
+          <text class="lbl" x="75" y="-8">Cilindro A</text>
+          <text class="lbl2" x="10" y="78">a0</text>
+          <text class="lbl2" x="130" y="78">a1</text>
+        </g>
+        <!-- Cilindro B -->
+        <g transform="translate(540,40)">
+          <rect class="cyl" x="0" y="0" width="150" height="60"/>
+          <rect class="pist" x="42" y="4" width="8" height="52"/>
+          <rect class="vst" x="50" y="24" width="120" height="12"/>
+          <text class="lbl" x="75" y="-8">Cilindro B</text>
+          <text class="lbl2" x="10" y="78">b0</text>
+          <text class="lbl2" x="130" y="78">b1</text>
+        </g>
+        <!-- Válvula 4/2 1.1 -->
+        <g transform="translate(60,170)">
+          <rect class="bx" x="0" y="0" width="80" height="40"/>
+          <line class="ln" x1="40" y1="0" x2="40" y2="40"/>
+          <text class="lbl" x="40" y="-6" text-anchor="middle">1.1 (4/2)</text>
+          <text class="lbl2" x="12" y="25">P</text><text class="lbl2" x="62" y="25">R</text>
+        </g>
+        <!-- Válvula 4/2 2.1 -->
+        <g transform="translate(560,170)">
+          <rect class="bx" x="0" y="0" width="80" height="40"/>
+          <line class="ln" x1="40" y1="0" x2="40" y2="40"/>
+          <text class="lbl" x="40" y="-6" text-anchor="middle">2.1 (4/2)</text>
+          <text class="lbl2" x="12" y="25">P</text><text class="lbl2" x="62" y="25">R</text>
+        </g>
+        <!-- Pulsador 3/2 1.2 -->
+        <g transform="translate(320,340)">
+          <rect class="bx" x="0" y="0" width="80" height="40"/>
+          <text class="lbl" x="40" y="-6" text-anchor="middle">1.2 pulsador 3/2</text>
+          <circle cx="40" cy="-16" r="4" fill="#C0321E"/>
+        </g>
+        <!-- Finales de carrera 3/2 -->
+        <g transform="translate(200,270)"><rect class="bx2" x="0" y="0" width="60" height="30"/><text class="lbl" x="30" y="20" text-anchor="middle">1.3</text></g>
+        <g transform="translate(350,270)"><rect class="bx2" x="0" y="0" width="60" height="30"/><text class="lbl" x="30" y="20" text-anchor="middle">2.2</text></g>
+        <g transform="translate(500,270)"><rect class="bx2" x="0" y="0" width="60" height="30"/><text class="lbl" x="30" y="20" text-anchor="middle">2.3</text></g>
+        <!-- Fuente aire -->
+        <g transform="translate(350,400)">
+          <circle cx="30" cy="15" r="14" class="bx"/>
+          <polygon class="air" points="24,15 36,9 36,21"/>
+          <text class="lbl" x="60" y="20">Red aire comprimido</text>
+        </g>
+        <!-- Conexiones -->
+        <path class="ln" d="M 75 170 L 75 130 L 115 130 L 115 100"/>
+        <path class="ln" d="M 125 170 L 125 110 L 175 110 L 175 100"/>
+        <path class="ln" d="M 575 170 L 575 130 L 615 130 L 615 100"/>
+        <path class="ln" d="M 625 170 L 625 110 L 675 110 L 675 100"/>
+        <path class="ln" d="M 360 400 L 360 340"/>
+        <path class="ln" d="M 100 210 L 100 340 L 320 340"/>
+        <path class="ln" d="M 600 210 L 600 340 L 400 340"/>
+        <path class="ln" d="M 230 270 L 230 230 L 100 230"/>
+        <path class="ln" d="M 380 270 L 380 230 L 560 230"/>
+        <path class="ln" d="M 530 270 L 530 240 L 620 240 L 620 210"/>
+      </svg>
+    </div>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+
+      <section class="apartado">
+        <h3>a) Fuerzas de avance y retroceso</h3>
+        <p><strong>Datos.</strong>
+          <span class="dato">\(D = 5\ \text{cm} = 0{,}05\ \text{m}\)</span>
+          <span class="dato">\(d = 1\ \text{cm} = 0{,}01\ \text{m}\)</span>
+          <span class="dato">\(p = 6\ \text{kg/cm}^{2}\)</span>.
+        </p>
+        <p><strong>Conversión de la presión</strong> (\(1\ \text{kgf/cm}^{2} = 0{,}0980665\ \text{MPa}\)):</p>
+        \[ p = 6\cdot 0{,}0980665\cdot 10^{6} = 5{,}88399\cdot 10^{5}\ \text{Pa} \]
+        <p><strong>Áreas.</strong></p>
+        \[ S_{Av} = \dfrac{\pi\cdot D^{2}}{4} = \dfrac{\pi\cdot 0{,}05^{2}}{4} = 1{,}963495\cdot 10^{-3}\ \text{m}^{2} \]
+        \[ S_{Ret} = \dfrac{\pi\cdot D^{2}}{4} - \dfrac{\pi\cdot d^{2}}{4} = 1{,}963495\cdot 10^{-3} - 7{,}853982\cdot 10^{-5} = 1{,}884956\cdot 10^{-3}\ \text{m}^{2} \]
+        <p><strong>Fuerza de avance.</strong></p>
+        \[ F_{Av} = p\cdot S_{Av} = 5{,}88399\cdot 10^{5}\cdot 1{,}963495\cdot 10^{-3} = 1\,155{,}3\ \text{N} \]
+        <p><strong>Fuerza de retroceso.</strong></p>
+        \[ F_{Ret} = p\cdot S_{Ret} = 5{,}88399\cdot 10^{5}\cdot 1{,}884956\cdot 10^{-3} = 1\,109{,}1\ \text{N} \]
+        <div class="resultado">\( F_{Av} \approx 1\,155{,}3\ \text{N} \) &nbsp;·&nbsp; \( F_{Ret} \approx 1\,109{,}1\ \text{N} \)</div>
+      </section>
+
+      <section class="apartado">
+        <h3>b) Funcionamiento del circuito</h3>
+        <p>Mando por una válvula <strong>3/2 de pulsador manual (1.2)</strong> que activa el circuito, con dos válvulas <strong>4/2 pilotadas neumáticamente</strong> (1.1 para el cilindro A y 2.1 para el cilindro B) y tres finales de carrera 3/2 mecánicos <strong>1.3</strong>, <strong>2.2</strong> y <strong>2.3</strong>. Secuencia:</p>
+        <p style="text-align:center;font-family:'JetBrains Mono',monospace;font-weight:600;color:#1B4F8A">A+ → B+ → A− → B−</p>
+        <ol>
+          <li><strong>Arranque → A+.</strong> Al pulsar 1.2, llega pilotaje a 1.1 por el lado izquierdo. 1.1 conmuta y alimenta la cámara anterior de A, que avanza. Al llegar A al final de avance acciona el FC 2.2, cuya 3/2 envía señal a 2.1 (lado izquierdo).</li>
+          <li><strong>Disparo por fin de A → B+.</strong> 2.1 conmuta y alimenta la cámara anterior de B, que avanza. Al llegar al final, acciona 2.3 que manda señal al pilotaje opuesto de 2.1 (lado derecho).</li>
+          <li><strong>Conmutación B+ → B−.</strong> 2.1 cambia de posición y alimenta la cámara posterior de B, que retrocede. Al terminar el retroceso, B pulsa 1.3, cuya 3/2 envía señal al pilotaje opuesto de 1.1 (lado derecho).</li>
+          <li><strong>Conmutación A → A−.</strong> 1.1 cambia de posición, alimenta la cámara posterior de A y el vástago se repliega. El circuito queda en reposo esperando una nueva pulsación de 1.2.</li>
+        </ol>
+      </section>
+
+      <div class="aviso">⚠ <strong>Presión en bar/kgf/cm².</strong> \(6\ \text{kgf/cm}^{2} \approx 5{,}884\ \text{bar}\) (no 6 bar exactos). En ejercicios reales la aproximación \(1\ \text{kgf/cm}^{2} \approx 1\ \text{bar}\) introduce un error del \(\sim 2\%\); aquí el PDF aplica la conversión estricta \(\times 0{,}0980665\).</div>
+    </div>
+  </details>
+</section>
+
+<!-- ================= PROBLEMA 3 ================= -->
+<section class="problema" id="prob-3">
+  <header class="prob-header">
+    <h2>Problema 3 <span class="dif" data-level="3">★★★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p>En una línea de fabricación de chapas de acero, una estación realiza el punzonado de un orificio en cada pieza. La sujeción de la pieza y el expulsado del recorte son neumáticos. Para ello, por el espacio que existe y por las características del punzonado que se debe realizar, los diseñadores de la estación tienen que utilizar un cilindro de doble efecto que tiene 10 cm de diámetro, con una relación de los diámetros del émbolo y vástago de 5. Este cilindro funcionará conectado a una red de aire comprimido a la presión de 2 MPa y tiene que efectuar 15 ciclos por minuto. Se pide:</p>
+    <ol type="a">
+      <li>¿Cuál será la longitud de la carrera del cilindro si el caudal de aire exterior que se debe consumir, medido en condiciones normales, es de 583 L/min?</li>
+      <li>Representar el esquema neumático para el gobierno de un cilindro de doble efecto (C), de manera que cada vez que se oprime un pulsador M, el vástago hace automáticamente la salida y retroceso al llegar al final de su carrera, quedando en espera a que sea pulsado nuevamente el pulsador M.</li>
+    </ol>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+
+      <section class="apartado">
+        <h3>a) Longitud de carrera</h3>
+        <p><strong>Datos.</strong>
+          <span class="dato">\(D_e = 10\ \text{cm} = 0{,}10\ \text{m}\)</span>
+          <span class="dato">\(D_e/d_v = 5 \Rightarrow d_v = 2\ \text{cm} = 0{,}02\ \text{m}\)</span>
+          <span class="dato">\(p_{\text{rel}} = 2\ \text{MPa}\)</span>
+          <span class="dato">\(p_{\text{atm}} = 10^{5}\ \text{Pa}\)</span>
+          <span class="dato">\(n = 15\ \text{ciclos/min}\)</span>
+          <span class="dato">\(Q_{CN} = 583\ \text{L/min}\)</span>.
+        </p>
+        <p><strong>Paso 1 — Volumen CN por ciclo.</strong></p>
+        \[ V_{CN} = \dfrac{Q_{CN}}{n} = \dfrac{583\ \text{L/min}}{15\ \text{ciclos/min}} = 38{,}87\ \dfrac{\text{L}}{\text{ciclo}} \]
+        <p><strong>Paso 2 — Conversión a presión de trabajo</strong> (Boyle-Mariotte, temperatura constante): \(p_{\text{atm}}\cdot V_{CN} = p_{\text{abs}}\cdot V_C\) con \(p_{\text{abs}} = p_{\text{atm}} + p_{\text{rel}}\).</p>
+        \[ V_C = \dfrac{p_{\text{atm}}}{p_{\text{atm}} + p_{\text{rel}}}\cdot V_{CN} = \dfrac{10^{5}}{10^{5} + 2\cdot 10^{6}}\cdot 38{,}87 = \dfrac{1}{21}\cdot 38{,}87 = 1{,}851\ \dfrac{\text{L}}{\text{ciclo}} \]
+        \[ V_C = 1{,}851\cdot 10^{-3}\ \dfrac{\text{m}^{3}}{\text{ciclo}} \]
+        <p><strong>Paso 3 — Carrera.</strong> El volumen por ciclo es \(V_C = C\cdot (S_{Av} + S_{Ret})\), con \(S_{Av} = \dfrac{\pi\cdot D_e^{2}}{4}\) y \(S_{Ret} = \dfrac{\pi}{4}(D_e^{2} - d_v^{2})\).</p>
+        \[ C = \dfrac{V_C}{\dfrac{\pi}{4}\cdot (2\cdot D_e^{2} - d_v^{2})} = \dfrac{1{,}851\cdot 10^{-3}}{\dfrac{\pi}{4}\cdot (2\cdot 0{,}10^{2} - 0{,}02^{2})} = 0{,}12\ \text{m} \]
+        <div class="resultado">\( C \approx 0{,}12\ \text{m} = 12\ \text{cm} \)</div>
+      </section>
+
+      <section class="apartado">
+        <h3>b) Esquema neumático del gobierno del cilindro</h3>
+        <p>Para conseguir <em>salida automática al pulsar M y retroceso al final de carrera</em> se emplea una <strong>válvula 5/2 (o 4/2) biestable pilotada neumáticamente</strong>, gobernada por un pulsador 3/2 (M) en el pilotaje izquierdo y un <strong>final de carrera 3/2</strong> (FC a1) en el pilotaje derecho.</p>
+
+        <!-- SVG P3b — Esquema neumático de un cilindro doble efecto -->
+        <div class="svg-wrap">
+          <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="p3bt p3bd">
+            <title id="p3bt">Esquema neumático: pulsador M → cilindro C → retroceso por FC</title>
+            <desc id="p3bd">Cilindro C de doble efecto gobernado por válvula 5/2 biestable pilotada; pulsador 3/2 M a la izquierda y final de carrera 3/2 a1 a la derecha; fuente de aire comprimido.</desc>
+            <style>
+              .ln{stroke:#1B4F8A;stroke-width:1.6;fill:none}
+              .bx{stroke:#1B4F8A;stroke-width:1.6;fill:#fff}
+              .cyl{stroke:#23272F;stroke-width:1.6;fill:#fff}
+              .pist{fill:#2E7BC4}.vst{stroke:#23272F;stroke-width:1.6;fill:#D8DDE5}
+              .lbl{font:600 13px 'Barlow',sans-serif;fill:#1B4F8A}
+              .lbl2{font:500 11px 'Barlow',sans-serif;fill:#555D6B}
+            </style>
+            <!-- Cilindro C -->
+            <g transform="translate(230,40)">
+              <rect class="cyl" x="0" y="0" width="250" height="70"/>
+              <rect class="pist" x="60" y="4" width="10" height="62"/>
+              <rect class="vst" x="70" y="28" width="200" height="14"/>
+              <text class="lbl" x="125" y="-8" text-anchor="middle">Cilindro C (doble efecto)</text>
+              <text class="lbl2" x="6" y="86">cámara trasera</text>
+              <text class="lbl2" x="180" y="86">a1 (FC delantero)</text>
+            </g>
+            <!-- Válvula 5/2 biestable -->
+            <g transform="translate(280,180)">
+              <rect class="bx" x="0" y="0" width="150" height="50"/>
+              <line class="ln" x1="75" y1="0" x2="75" y2="50"/>
+              <text class="lbl" x="75" y="-8" text-anchor="middle">Válvula 5/2 biestable</text>
+              <text class="lbl2" x="12" y="32">A</text><text class="lbl2" x="70" y="32">P</text><text class="lbl2" x="125" y="32">B</text>
+              <text class="lbl2" x="30" y="62">R1</text><text class="lbl2" x="110" y="62">R2</text>
+            </g>
+            <!-- Pulsador M -->
+            <g transform="translate(80,180)">
+              <rect class="bx" x="0" y="0" width="90" height="50"/>
+              <text class="lbl" x="45" y="-8" text-anchor="middle">Pulsador M (3/2)</text>
+              <circle cx="45" cy="62" r="6" fill="#C0321E"/>
+              <text class="lbl2" x="45" y="86" text-anchor="middle">Pulsar</text>
+            </g>
+            <!-- FC a1 -->
+            <g transform="translate(540,180)">
+              <rect class="bx" x="0" y="0" width="110" height="50"/>
+              <text class="lbl" x="55" y="-8" text-anchor="middle">FC a1 (3/2)</text>
+              <text class="lbl2" x="55" y="75" text-anchor="middle">rodillo</text>
+            </g>
+            <!-- Fuente -->
+            <g transform="translate(330,300)">
+              <circle cx="25" cy="14" r="14" class="bx"/>
+              <polygon points="19,14 31,8 31,20" fill="#1B4F8A"/>
+              <text class="lbl" x="55" y="20">Aire comprimido</text>
+            </g>
+            <!-- Conexiones -->
+            <path class="ln" d="M 300 180 L 300 135 L 260 135 L 260 110"/>
+            <path class="ln" d="M 410 180 L 410 135 L 460 135 L 460 110"/>
+            <path class="ln" d="M 355 300 L 355 230"/>
+            <path class="ln" d="M 170 205 L 280 205"/>
+            <path class="ln" d="M 430 205 L 540 205"/>
+            <path class="ln" d="M 125 180 L 125 135 L 80 135 L 80 125"/>
+            <path class="ln" d="M 595 180 L 595 135 L 640 135 L 640 125"/>
+          </svg>
+        </div>
+        <p>Funcionamiento: al pulsar M se pilota el lado izquierdo de la 5/2, que alimenta la cámara trasera de C (avance). Al llegar al final, el vástago pulsa el FC a1, que pilota el lado derecho de la 5/2, invirtiéndola y alimentando la cámara delantera (retroceso). El sistema queda en espera hasta pulsar M de nuevo.</p>
+      </section>
+
+      <div class="aviso">⚠ <strong>CN vs presión de trabajo.</strong> El caudal se da «medido en condiciones normales» (1 atm, 0 °C). Para pasar al volumen <em>real</em> que ocupa el cilindro a la presión de trabajo hay que aplicar Boyle-Mariotte con la <strong>presión absoluta</strong> (\(p_{\text{abs}} = p_{\text{atm}} + p_{\text{rel}} = 21\ \text{bar}\)), no con la manométrica.</div>
+    </div>
+  </details>
+</section>
+
+<!-- ================= PROBLEMA 4 ================= -->
+<section class="problema" id="prob-4">
+  <header class="prob-header">
+    <h2>Problema 4 <span class="dif" data-level="2">★★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p>La figura muestra un sistema para comprobar el número de flexiones que soporta un calzado deportivo antes de presentar algún defecto. El cilindro neumático es de simple efecto con retorno por muelle y realiza una secuencia de avance y retroceso de forma continuada. El diámetro del émbolo es 50 mm, su recorrido 120 mm, la fuerza resistente de la zapatilla 100 N y la fuerza del muelle 60 N. Se pide:</p>
+    <ol type="a">
+      <li>Presión mínima que ha de tener la red de aire comprimido.</li>
+      <li>Consumo de aire exterior, en condiciones normales, al cabo de un millón de ciclos.</li>
+    </ol>
+
+    <!-- SVG P4 — Probeta de flexiones (cilindro simple efecto + zapatilla) -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="p4t p4d">
+        <title id="p4t">Probeta de flexiones con cilindro simple efecto y retorno por muelle</title>
+        <desc id="p4d">Esquema: válvula 3/2 pulsador con retorno por muelle, cilindro de simple efecto con muelle interno y zapatilla deportiva apoyada sobre el vástago.</desc>
+        <style>
+          .ln{stroke:#1B4F8A;stroke-width:1.6;fill:none}
+          .bx{stroke:#1B4F8A;stroke-width:1.6;fill:#fff}
+          .cyl{stroke:#23272F;stroke-width:1.6;fill:#fff}
+          .pist{fill:#2E7BC4}.vst{stroke:#23272F;stroke-width:1.6;fill:#D8DDE5}
+          .spr{stroke:#D4700A;stroke-width:1.4;fill:none}
+          .zap{fill:#F5C98A;stroke:#7A4400;stroke-width:1.4}
+          .lbl{font:600 12px 'Barlow',sans-serif;fill:#1B4F8A}
+          .lbl2{font:500 11px 'Barlow',sans-serif;fill:#555D6B}
+        </style>
+        <!-- Cilindro simple efecto con muelle -->
+        <g transform="translate(40,60)">
+          <rect class="cyl" x="0" y="0" width="240" height="60"/>
+          <rect class="pist" x="70" y="4" width="10" height="52"/>
+          <rect class="vst" x="80" y="22" width="190" height="16"/>
+          <!-- muelle en cámara trasera -->
+          <polyline class="spr" points="10,30 20,15 30,45 40,15 50,45 60,15 70,30"/>
+          <text class="lbl" x="100" y="-8">Cilindro simple efecto, retorno por muelle</text>
+          <text class="lbl2" x="6" y="78">D = 50 mm · L = 120 mm · F_muelle = 60 N</text>
+        </g>
+        <!-- Zapatilla -->
+        <g transform="translate(310,48)">
+          <path class="zap" d="M 0 40 C 20 20, 80 10, 140 20 L 150 45 L 10 48 Z"/>
+          <text class="lbl" x="70" y="15" text-anchor="middle">Zapatilla (F_res = 100 N)</text>
+        </g>
+        <!-- Válvula 3/2 pulsador -->
+        <g transform="translate(70,200)">
+          <rect class="bx" x="0" y="0" width="80" height="40"/>
+          <text class="lbl" x="40" y="-8" text-anchor="middle">3/2 pulsador</text>
+          <circle cx="40" cy="-20" r="4" fill="#C0321E"/>
+        </g>
+        <!-- Fuente -->
+        <g transform="translate(200,210)">
+          <circle cx="20" cy="12" r="12" class="bx"/>
+          <polygon points="15,12 25,7 25,17" fill="#1B4F8A"/>
+          <text class="lbl" x="45" y="17">Red aire</text>
+        </g>
+        <!-- Conexiones -->
+        <path class="ln" d="M 90 200 L 90 160 L 60 160 L 60 120"/>
+        <path class="ln" d="M 150 210 L 200 210"/>
+      </svg>
+    </div>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+
+      <section class="apartado">
+        <h3>a) Presión mínima</h3>
+        <p><strong>Datos.</strong>
+          <span class="dato">\(D = 50\ \text{mm} = 0{,}05\ \text{m}\)</span>
+          <span class="dato">\(L = 120\ \text{mm} = 0{,}12\ \text{m}\)</span>
+          <span class="dato">\(F_{\text{zap}} = 100\ \text{N}\)</span>
+          <span class="dato">\(F_{\text{muelle}} = 60\ \text{N}\)</span>.
+        </p>
+        <p><strong>Planteamiento.</strong> En avance, el émbolo vence simultáneamente la fuerza resistente de la zapatilla y la del muelle: \(F = F_{\text{zap}} + F_{\text{muelle}} = 160\ \text{N}\).</p>
+        \[ P = \dfrac{F}{S} = \dfrac{F}{\dfrac{\pi\cdot D^{2}}{4}} = \dfrac{160}{\dfrac{\pi\cdot 0{,}05^{2}}{4}} \]
+        \[ P = 81\,489\ \dfrac{\text{N}}{\text{m}^{2}} = 81\,489\ \text{Pa} = 0{,}81489\ \text{bar} \]
+        <div class="resultado">\( P_{\min} \approx 81\,489\ \text{Pa} \approx 0{,}815\ \text{bar} \)</div>
+      </section>
+
+      <section class="apartado">
+        <h3>b) Consumo en CN al cabo de un millón de ciclos</h3>
+        <p><strong>Volumen de un ciclo</strong> (cilindro de simple efecto: sólo cuenta el avance).</p>
+        \[ V_{\text{1 ciclo}} = A\cdot L = \dfrac{\pi\cdot D^{2}}{4}\cdot L = \dfrac{\pi\cdot 0{,}05^{2}}{4}\cdot 0{,}12 = 2{,}35\cdot 10^{-4}\ \text{m}^{3} \]
+        <p><strong>Paso a condiciones normales</strong> por Boyle-Mariotte: \(P_{1}\cdot V_{1} = P_{2}\cdot V_{2}\), con \(P_{1} = 1 + 0{,}8149\ \text{bar}\) (absoluta de trabajo) y \(P_{2} = 1\ \text{bar}\):</p>
+        \[ V_{CN,\ 1\ \text{ciclo}} = V_{\text{1 ciclo}}\cdot \dfrac{P_{1}}{P_{2}} = 2{,}35\cdot 10^{-4}\cdot \dfrac{1{,}8149}{1} = 4{,}276\cdot 10^{-4}\ \text{m}^{3} \]
+        <p><strong>Consumo para \(10^{6}\) ciclos.</strong></p>
+        \[ V_{CN,\ 10^{6}} = V_{CN,\ 1\ \text{ciclo}}\cdot 10^{6} = 4{,}276\cdot 10^{-4}\cdot 10^{6} = 427{,}6\ \text{m}^{3} \]
+        <div class="resultado">\( V_{CN,\ 10^{6}\ \text{ciclos}} \approx 427{,}6\ \text{m}^{3} \)</div>
+      </section>
+
+      <div class="aviso">⚠ <strong>Simple efecto y presión absoluta.</strong> En un cilindro de simple efecto sólo se consume aire durante el <em>avance</em> (el retroceso lo hace el muelle). Para convertir a condiciones normales se debe usar la <strong>presión absoluta de trabajo</strong> (\(\approx 1{,}815\ \text{bar}\)), no la manométrica (\(0{,}815\ \text{bar}\)).</div>
+    </div>
+  </details>
+</section>
+
+<!-- ================= PROBLEMA 5 ================= -->
+<section class="problema" id="prob-5">
+  <header class="prob-header">
+    <h2>Problema 5 <span class="dif" data-level="1">★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p>En el taller de una fábrica de coches deportivos ligeros hay una prensa hidráulica, como la que se observa en la figura. La prensa se utiliza para elevar los coches y reparar las averías de las partes bajas de los mismos. La sección transversal del émbolo grande (\(S_{2}\)) es de 250 cm² y la del pequeño (\(S_{1}\)) es 10 cm². Se pide:</p>
+    <ol type="a">
+      <li>Si el deportivo ejerce una carga de 12 000 N y se quiere elevar 0,1 m, calcular la fuerza que se debe ejercer sobre el émbolo pequeño y el desplazamiento del mismo.</li>
+      <li>En el diseño de otro modelo, los ingenieros quieren introducir nuevos elementos que tienen un mayor peso, ¿qué cambios realizaría en las dimensiones de la prensa para elevar una carga de 15 000 N, sin modificar la fuerza ejercida sobre el émbolo pequeño del apartado a)?</li>
+    </ol>
+
+    <!-- SVG P5 — Prensa hidráulica -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 620 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="p5t p5d">
+        <title id="p5t">Prensa hidráulica — principio de Pascal</title>
+        <desc id="p5d">Dos cilindros conectados: émbolo pequeño S1 con fuerza F1 y émbolo grande S2 soportando el peso del vehículo.</desc>
+        <style>
+          .ln{stroke:#1B4F8A;stroke-width:2;fill:none}
+          .cyl{stroke:#23272F;stroke-width:2;fill:#EBF0F7}
+          .pist{fill:#2E7BC4;stroke:#1B4F8A;stroke-width:1.5}
+          .oil{fill:#2E7BC4;opacity:.25}
+          .car{fill:#C0321E;stroke:#7A1E12;stroke-width:1.5}
+          .lbl{font:700 14px 'Barlow',sans-serif;fill:#1B4F8A}
+          .lbl2{font:500 12px 'Barlow',sans-serif;fill:#555D6B}
+          .arr{stroke:#C0321E;stroke-width:2;fill:none;marker-end:url(#ar)}
+        </style>
+        <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0321E"/></marker></defs>
+        <!-- Pistón pequeño -->
+        <rect class="cyl" x="80" y="110" width="60" height="110"/>
+        <rect class="pist" x="84" y="100" width="52" height="14"/>
+        <rect class="oil" x="82" y="120" width="56" height="98"/>
+        <line class="arr" x1="110" y1="60" x2="110" y2="96"/>
+        <text class="lbl" x="110" y="55" text-anchor="middle">F₁</text>
+        <text class="lbl2" x="110" y="240" text-anchor="middle">S₁ = 10 cm²</text>
+        <!-- Conducto -->
+        <path class="cyl" d="M 140 180 L 400 180 L 400 210 L 140 210 Z" fill="#EBF0F7"/>
+        <rect class="oil" x="140" y="180" width="260" height="30"/>
+        <!-- Pistón grande -->
+        <rect class="cyl" x="400" y="110" width="160" height="110"/>
+        <rect class="pist" x="406" y="100" width="148" height="14"/>
+        <rect class="oil" x="402" y="120" width="156" height="98"/>
+        <text class="lbl2" x="480" y="240" text-anchor="middle">S₂ = 250 cm²</text>
+        <!-- Coche -->
+        <g transform="translate(400,40)">
+          <path class="car" d="M 10 45 L 40 20 L 120 20 L 150 45 L 150 55 L 10 55 Z"/>
+          <circle cx="40" cy="58" r="8" fill="#23272F"/>
+          <circle cx="120" cy="58" r="8" fill="#23272F"/>
+          <text class="lbl" x="80" y="38" text-anchor="middle">12 000 N</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+
+      <section class="apartado">
+        <h3>a) Fuerza y desplazamiento del émbolo pequeño</h3>
+        <p><strong>Datos.</strong>
+          <span class="dato">\(S_{1} = 10\ \text{cm}^{2} = 10\cdot 10^{-4}\ \text{m}^{2}\)</span>
+          <span class="dato">\(S_{2} = 250\ \text{cm}^{2} = 250\cdot 10^{-4}\ \text{m}^{2}\)</span>
+          <span class="dato">\(F_{2} = 12\,000\ \text{N}\)</span>
+          <span class="dato">\(C_{2} = 0{,}1\ \text{m}\)</span>.
+        </p>
+        <p><strong>Principio de Pascal</strong>: \(p_{1} = p_{2}\), por lo que \(\dfrac{F_{1}}{S_{1}} = \dfrac{F_{2}}{S_{2}}\).</p>
+        \[ F_{1} = \dfrac{S_{1}}{S_{2}}\cdot F_{2} = \dfrac{10\cdot 10^{-4}}{250\cdot 10^{-4}}\cdot 12\,000 = \dfrac{1}{25}\cdot 12\,000 = 480\ \text{N} \]
+        <p><strong>Conservación de volumen</strong> (fluido incompresible): \(S_{1}\cdot C_{1} = S_{2}\cdot C_{2}\).</p>
+        \[ C_{1} = \dfrac{S_{2}}{S_{1}}\cdot C_{2} = \dfrac{250\cdot 10^{-4}}{10\cdot 10^{-4}}\cdot 0{,}1 = 25\cdot 0{,}1 = 2{,}5\ \text{m} \]
+        <div class="resultado">\( F_{1} = 480\ \text{N} \) &nbsp;·&nbsp; \( C_{1} = 2{,}5\ \text{m} \)</div>
+      </section>
+
+      <section class="apartado">
+        <h3>b) Rediseño para 15 000 N manteniendo F₁ = 480 N</h3>
+        <p>Se mantiene \(p_{1} = p_{2}\) con \(F_{1} = 480\ \text{N}\) y \(F_{2} = 15\,000\ \text{N}\).</p>
+        \[ \dfrac{S_{2}}{S_{1}} = \dfrac{F_{2}}{F_{1}} = \dfrac{15\,000}{480} = 31{,}25 \]
+        <p>La nueva relación de secciones debe ser \(S_{2}/S_{1} = 31{,}25\) (antes era \(25\)). Esto se consigue aumentando \(S_{2}\) o reduciendo \(S_{1}\) en la proporción adecuada.</p>
+        <div class="resultado">Nueva relación de émbolos: \( \dfrac{S_{2}}{S_{1}} = 31{,}25 \)</div>
+      </section>
+
+      <div class="aviso">⚠ <strong>Ganancia de fuerza = pérdida de recorrido.</strong> En una prensa hidráulica la multiplicación de fuerza (\(F_{2}/F_{1} = 25\)) coincide con la división del desplazamiento (\(C_{2}/C_{1} = 1/25\)). El trabajo \(W = F\cdot C\) se conserva (despreciando pérdidas).</div>
+    </div>
+  </details>
+</section>
+
+<!-- ================= PROBLEMA 6 ================= -->
+<section class="problema" id="prob-6">
+  <header class="prob-header">
+    <h2>Problema 6 <span class="dif" data-level="2">★★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p>La figura muestra un gato hidráulico para elevar vehículos. El pistón B tiene un diámetro de 80 mm y el pistón A es movido manualmente mediante una palanca que multiplica por diez la fuerza F aplicada en su extremo.</p>
+    <ol type="a">
+      <li>Calcular el diámetro del pistón A sabiendo que el pistón B eleva una masa de 1 000 kg cuando la fuerza F es 100 N.</li>
+      <li>Calcular de nuevo el diámetro del pistón A para que este se desplace 5 cm cuando el pistón B se mueva 1 mm.</li>
+    </ol>
+
+    <!-- SVG P6 — Gato hidráulico -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="p6t p6d">
+        <title id="p6t">Gato hidráulico con palanca</title>
+        <desc id="p6d">Pistón A (pequeño, accionado por palanca que multiplica por 10 la fuerza F) y pistón B de 80 mm de diámetro con masa de 1 000 kg encima.</desc>
+        <style>
+          .ln{stroke:#1B4F8A;stroke-width:2;fill:none}
+          .cyl{stroke:#23272F;stroke-width:2;fill:#EBF0F7}
+          .pist{fill:#2E7BC4;stroke:#1B4F8A;stroke-width:1.5}
+          .oil{fill:#2E7BC4;opacity:.25}
+          .lev{stroke:#7A4400;stroke-width:5;fill:none;stroke-linecap:round}
+          .pvt{fill:#7A4400}
+          .mas{fill:#555D6B;stroke:#23272F;stroke-width:1.5}
+          .lbl{font:700 13px 'Barlow',sans-serif;fill:#1B4F8A}
+          .lbl2{font:500 12px 'Barlow',sans-serif;fill:#555D6B}
+          .arr{stroke:#C0321E;stroke-width:2;fill:none;marker-end:url(#ar6)}
+        </style>
+        <defs><marker id="ar6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0321E"/></marker></defs>
+        <!-- Palanca -->
+        <line class="lev" x1="40" y1="60" x2="280" y2="60"/>
+        <circle class="pvt" cx="240" cy="60" r="6"/>
+        <line class="arr" x1="60" y1="30" x2="60" y2="56"/>
+        <text class="lbl" x="60" y="25" text-anchor="middle">F = 100 N</text>
+        <text class="lbl2" x="240" y="50" text-anchor="middle">pivote</text>
+        <!-- Pistón A -->
+        <rect class="cyl" x="250" y="100" width="50" height="120"/>
+        <rect class="pist" x="254" y="70" width="42" height="32"/>
+        <rect class="oil" x="252" y="110" width="46" height="108"/>
+        <text class="lbl2" x="275" y="240" text-anchor="middle">A (D_A = ?)</text>
+        <line class="lev" x1="275" y1="66" x2="275" y2="76"/>
+        <!-- Canal -->
+        <path class="cyl" d="M 300 180 L 420 180 L 420 210 L 300 210 Z" fill="#EBF0F7"/>
+        <rect class="oil" x="300" y="180" width="120" height="30"/>
+        <!-- Pistón B -->
+        <rect class="cyl" x="420" y="100" width="110" height="120"/>
+        <rect class="pist" x="426" y="80" width="98" height="22"/>
+        <rect class="oil" x="422" y="110" width="106" height="108"/>
+        <rect class="mas" x="440" y="30" width="70" height="50"/>
+        <text class="lbl" x="475" y="60" text-anchor="middle" fill="#fff">1 000 kg</text>
+        <text class="lbl2" x="475" y="240" text-anchor="middle">B (D_B = 80 mm)</text>
+      </svg>
+    </div>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+
+      <section class="apartado">
+        <h3>a) Diámetro del pistón A (elevar 1 000 kg)</h3>
+        <p><strong>Datos.</strong>
+          <span class="dato">\(D_{B} = 80\ \text{mm}\)</span>
+          <span class="dato">\(F = 100\ \text{N}\)</span>
+          <span class="dato">\(F_{A} = 10\cdot F = 1\,000\ \text{N}\) (ganancia mecánica de la palanca)</span>
+          <span class="dato">\(F_{B} = m\cdot g = 1\,000\cdot 9{,}8 = 9\,800\ \text{N}\)</span>.
+        </p>
+        <p><strong>Planteamiento</strong> — Principio de Pascal:</p>
+        \[ \dfrac{F_{A}}{F_{B}} = \dfrac{S_{A}}{S_{B}} = \dfrac{\pi\cdot D_{A}^{2}/4}{\pi\cdot D_{B}^{2}/4} = \dfrac{D_{A}^{2}}{D_{B}^{2}} \tag{1} \]
+        <p><strong>Despeje y sustitución.</strong></p>
+        \[ D_{A} = D_{B}\cdot \sqrt{\dfrac{F_{A}}{F_{B}}} = 80\cdot \sqrt{\dfrac{1\,000}{9\,800}} = 25{,}55\ \text{mm} \]
+        <div class="resultado">\( D_{A} \approx 25{,}55\ \text{mm} \)</div>
+      </section>
+
+      <section class="apartado">
+        <h3>b) Diámetro de A para H_A = 5 cm cuando H_B = 1 mm</h3>
+        <p><strong>Planteamiento</strong> — Conservación de volumen (\(V_A = V_B\)):</p>
+        \[ \dfrac{H_{A}}{H_{B}} = \dfrac{S_{B}}{S_{A}} = \dfrac{D_{B}^{2}}{D_{A}^{2}} \tag{2} \]
+        <p><strong>Despeje y sustitución</strong> con \(H_{A} = 50\ \text{mm}\) y \(H_{B} = 1\ \text{mm}\):</p>
+        \[ D_{A} = D_{B}\cdot \sqrt{\dfrac{H_{B}}{H_{A}}} = 80\cdot \sqrt{\dfrac{1}{50}} = 11{,}3\ \text{mm} \]
+        <div class="resultado">\( D_{A} \approx 11{,}3\ \text{mm} \)</div>
+      </section>
+
+      <div class="aviso">⚠ <strong>Dos relaciones distintas.</strong> Fuerzas: \(S_{A}/S_{B} = F_{A}/F_{B}\). Desplazamientos: \(S_{A}/S_{B} = H_{B}/H_{A}\) (invertida). No mezclar ambas: si se quiere mayor fuerza se paga con mayor recorrido del émbolo pequeño.</div>
+    </div>
+  </details>
+</section>
+
+<!-- ================= PROBLEMA 7 ================= -->
+<section class="problema" id="prob-7">
+  <header class="prob-header">
+    <h2>Problema 7 <span class="dif" data-level="2">★★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p>Se desea diseñar una fuente de agua para un hotel. Esta fuente estará alimentada por una tubería cilíndrica de 15 cm de diámetro situada horizontalmente a una profundidad de 8 m bajo el nivel del suelo. Posteriormente, la tubería se curvará hacia arriba, y el agua será expulsada por el extremo de otra tubería cilíndrica de 5 cm de diámetro. Este extremo estará a una altura de 1,75 m por encima del suelo y el agua se proyectará con una velocidad de 12 m/s. Calcular:</p>
+    <ol type="a">
+      <li>El caudal de agua cuando esté en funcionamiento.</li>
+      <li>La presión manométrica necesaria en la tubería horizontal.</li>
+    </ol>
+    <p><strong>Dato:</strong> densidad del agua \(\rho = 1\,000\ \text{kg/m}^{3}\).</p>
+
+    <!-- SVG P7 — Fuente con tubería -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="p7t p7d">
+        <title id="p7t">Fuente alimentada por tubería horizontal soterrada</title>
+        <desc id="p7d">Tubería de 15 cm de diámetro a 8 m de profundidad (punto 1) que se curva hacia arriba hasta un extremo de 5 cm a 1,75 m sobre el suelo (punto 2). Chorro a 12 m/s.</desc>
+        <style>
+          .grd{fill:#D8B48C;stroke:#7A4400;stroke-width:1.5}
+          .suelo{stroke:#7A4400;stroke-width:2;fill:none}
+          .pipe{fill:#D8DDE5;stroke:#555D6B;stroke-width:2}
+          .agua{fill:#2E7BC4;opacity:.55}
+          .chor{fill:#2E7BC4;opacity:.8}
+          .bmba{fill:#EBF0F7;stroke:#1B4F8A;stroke-width:1.8}
+          .lbl{font:700 12px 'Barlow',sans-serif;fill:#1B4F8A}
+          .lbl2{font:500 11px 'Barlow',sans-serif;fill:#555D6B}
+          .cot{stroke:#C0321E;stroke-width:1;fill:none;marker-start:url(#a7s);marker-end:url(#a7e)}
+        </style>
+        <defs>
+          <marker id="a7s" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M10,0 L0,5 L10,10 z" fill="#C0321E"/></marker>
+          <marker id="a7e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0321E"/></marker>
+        </defs>
+        <!-- Suelo -->
+        <rect class="grd" x="0" y="120" width="640" height="200"/>
+        <line class="suelo" x1="0" y1="120" x2="640" y2="120"/>
+        <text class="lbl2" x="20" y="115">nivel suelo</text>
+        <!-- Tubería horizontal soterrada -->
+        <rect class="pipe" x="30" y="280" width="360" height="30"/>
+        <rect class="agua" x="32" y="282" width="358" height="26"/>
+        <!-- Codo -->
+        <path class="pipe" d="M 390 280 Q 460 280 460 210 L 440 210 Q 440 300 390 300 Z"/>
+        <rect class="agua" x="440" y="215" width="20" height="85"/>
+        <!-- Vertical -->
+        <rect class="pipe" x="440" y="90" width="20" height="125"/>
+        <rect class="agua" x="442" y="92" width="16" height="123"/>
+        <!-- Reducción en extremo 5 cm -->
+        <rect class="pipe" x="444" y="78" width="12" height="14"/>
+        <rect class="agua" x="446" y="80" width="8" height="12"/>
+        <!-- Chorro -->
+        <path class="chor" d="M 450 78 Q 455 30 460 10 Q 452 30 450 78 Z" opacity=".75"/>
+        <text class="lbl" x="500" y="40">v₂ = 12 m/s</text>
+        <!-- Bomba -->
+        <g transform="translate(20,280)"><circle class="bmba" cx="10" cy="15" r="14"/><text class="lbl2" x="10" y="19" text-anchor="middle">B</text></g>
+        <!-- Cotas -->
+        <line class="cot" x1="580" y1="120" x2="580" y2="295"/>
+        <text class="lbl" x="595" y="210">8 m</text>
+        <line class="cot" x1="500" y1="85" x2="500" y2="120"/>
+        <text class="lbl" x="510" y="105">1,75 m</text>
+        <!-- Diámetros -->
+        <text class="lbl2" x="200" y="275" text-anchor="middle">D₁ = 15 cm (punto 1, h=0)</text>
+        <text class="lbl2" x="515" y="75">D₂ = 5 cm (punto 2, h=9,75 m)</text>
+      </svg>
+    </div>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+
+      <section class="apartado">
+        <h3>a) Caudal</h3>
+        <p><strong>Datos.</strong>
+          <span class="dato">\(D_{1} = 15\ \text{cm} = 0{,}15\ \text{m}\)</span>
+          <span class="dato">\(D_{2} = 5\ \text{cm} = 0{,}05\ \text{m}\)</span>
+          <span class="dato">\(v_{2} = 12\ \text{m/s}\)</span>
+          <span class="dato">\(\rho = 1\,000\ \text{kg/m}^{3}\)</span>.
+        </p>
+        <p><strong>Planteamiento</strong> — \(Q = A_{2}\cdot v_{2}\):</p>
+        \[ A_{2} = \dfrac{\pi\cdot D_{2}^{2}}{4} = \dfrac{\pi\cdot 0{,}05^{2}}{4} = 1{,}9625\cdot 10^{-3}\ \text{m}^{2} \]
+        \[ Q = A_{2}\cdot v_{2} = 1{,}9625\cdot 10^{-3}\cdot 12 = 2{,}355\cdot 10^{-2}\ \dfrac{\text{m}^{3}}{\text{s}} = 23{,}55\ \dfrac{\text{L}}{\text{s}} \]
+        <div class="resultado">\( Q \approx 2{,}355\cdot 10^{-2}\ \text{m}^{3}/\text{s} = 23{,}55\ \text{L/s} \)</div>
+      </section>
+
+      <section class="apartado">
+        <h3>b) Presión manométrica en la tubería horizontal</h3>
+        <p><strong>Paso 1 — Velocidad en el punto 1</strong> (ecuación de continuidad \(Q = A_{1}\cdot v_{1}\)):</p>
+        \[ A_{1} = \dfrac{\pi\cdot D_{1}^{2}}{4} = \dfrac{\pi\cdot 0{,}15^{2}}{4} = 1{,}76625\cdot 10^{-2}\ \text{m}^{2} \]
+        \[ v_{1} = \dfrac{Q}{A_{1}} = \dfrac{2{,}355\cdot 10^{-2}}{1{,}76625\cdot 10^{-2}} = 1{,}33\ \dfrac{\text{m}}{\text{s}} \]
+        <p><strong>Paso 2 — Ecuación de Bernoulli</strong> entre 1 (tubería horizontal, referencia \(h_{1}=0\)) y 2 (salida, \(h_{2}=9{,}75\ \text{m}\)). Tomamos \(P_{2}=0\) (presión manométrica en la salida al aire libre).</p>
+        \[ \rho\cdot g\cdot h_{1} + P_{1} + \tfrac{1}{2}\rho\cdot v_{1}^{2} = \rho\cdot g\cdot h_{2} + P_{2} + \tfrac{1}{2}\rho\cdot v_{2}^{2} \]
+        <p><strong>Despeje.</strong></p>
+        \[ P_{1} = \rho\cdot g\cdot h_{2} + \tfrac{1}{2}\rho\cdot v_{2}^{2} - \tfrac{1}{2}\rho\cdot v_{1}^{2} \]
+        <p><strong>Sustitución.</strong></p>
+        \[ P_{1} = 1\,000\cdot 9{,}8\cdot 9{,}75 + \tfrac{1}{2}\cdot 1\,000\cdot 12^{2} - \tfrac{1}{2}\cdot 1\,000\cdot 1{,}33^{2} \]
+        \[ P_{1} = 95\,550 + 72\,000 - 884{,}45 = 166\,665{,}55\ \text{Pa} \approx 1{,}67\ \text{atm} \]
+        <div class="resultado">\( P_{1} \approx 166\,666\ \text{Pa} \approx 1{,}67\ \text{atm} \) (manométrica)</div>
+      </section>
+
+      <div class="aviso">⚠ <strong>Altura total y presión manométrica.</strong> Al tomar \(P_{2}=0\) trabajamos con presiones <em>manométricas</em> (no absolutas). La diferencia de altura relevante es \(h_{2}-h_{1} = 1{,}75 + 8 = 9{,}75\ \text{m}\) (de la tubería soterrada al extremo del chorro), no los 8 m de profundidad ni los 1,75 m aislados.</div>
+    </div>
+  </details>
+</section>
+
+</div>
+</body>
+</html>

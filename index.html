@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II — Teoría + Ejercicios PAU 2025–26 · IES Jiménez de Quesada</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--az:#1B4F8A;--az2:#2E7BC4;--hub-bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:radial-gradient(circle at top,#F9FBFE 0,#F4F6F9 40%,#EEF2F7 100%);color:var(--tx);overflow-x:hidden}
+.hd{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:22px 24px 20px;text-align:center;box-shadow:0 6px 20px rgba(27,79,138,.12)}
+.hd h1{font-family:'Barlow Condensed',sans-serif;font-size:1.78rem;font-weight:700;margin-bottom:4px}
+.hd p{font-size:.86rem;opacity:.82;max-width:620px;margin:0 auto;line-height:1.5}
+.main{max-width:1080px;margin:0 auto;padding:22px 20px 50px}
+.section-title{font-family:'Barlow Condensed',sans-serif;font-size:1.14rem;font-weight:700;color:var(--az);margin:22px 0 10px;padding-left:4px;display:flex;align-items:center;gap:8px;letter-spacing:.02em;border-bottom:1px solid #E2E8F0;padding-bottom:6px}
+.section-title:first-of-type{margin-top:0}
+.year-label{font-family:'Barlow Condensed',sans-serif;font-size:.86rem;font-weight:600;color:var(--t2);margin:12px 0 8px;padding-left:4px;letter-spacing:.03em}
+.bg{display:grid;grid-template-columns:repeat(auto-fill, minmax(155px, 1fr));gap:10px}
+.bc{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0,#FBFCFE 100%);border:1px solid var(--bd);border-radius:14px;padding:12px 12px 11px;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;text-align:left;display:flex;flex-direction:column;gap:4px;text-decoration:none;color:inherit;box-shadow:0 3px 12px rgba(20,42,74,.04)}
+.bc::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#7FB3E6,#2E7BC4)}
+.bc:hover{border-color:rgba(27,79,138,.35);box-shadow:0 12px 28px rgba(27,79,138,.12);transform:translateY(-4px)}
+.bc.ej::before{background:linear-gradient(90deg,#F6B26B,#D4700A)}
+.bc.form::before{background:linear-gradient(90deg,#7BCB92,#1A6B3A)}
+.bc.exam::before{background:linear-gradient(90deg,#F08A7C,#C0321E)}
+.bi{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:10px;font-size:1.25rem;line-height:1;margin-bottom:2px;background:linear-gradient(135deg,#F2F7FD,#E5EEF9);box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 3px 8px rgba(27,79,138,.06)}
+.bc.ej .bi{background:linear-gradient(135deg,#FFF4E8,#FDE8CF);box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 6px 14px rgba(212,112,10,.10)}
+.bc.form .bi{background:linear-gradient(135deg,#EEF9F1,#DCF2E3);box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 6px 14px rgba(26,107,58,.10)}
+.bc.exam .bi{background:linear-gradient(135deg,#FFF0EE,#FFE0DB);box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 6px 14px rgba(192,50,30,.10)}
+.bk{font-weight:700;font-size:.92rem;color:var(--az);line-height:1.15}
+.bc.ej .bk{color:#C96B0E}
+.bc.form .bk{color:#1A6B3A}
+.bc.exam .bk{color:#C0321E}
+.bn{font-size:.72rem;color:var(--t2);line-height:1.38}
+.foot{text-align:center;margin-top:40px;font-size:.74rem;color:var(--t2);line-height:1.5}
+.bc.pending{opacity:.55;pointer-events:none;cursor:default;background:linear-gradient(180deg,#FAFAFC 0,#F4F5F8 100%)}
+.bc.pending .bk{color:var(--t2)}
+.bc.pending::before{background:linear-gradient(90deg,#C9CFD8,#8C97A8)!important}
+.pending-badge{position:absolute;top:8px;right:8px;font-family:'Barlow Condensed',sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.04em;padding:3px 9px;border-radius:999px;background:linear-gradient(135deg,#E2E6EC,#C9CFD8);color:#3A4250;border:1.5px solid #B5BCC6;text-transform:uppercase;line-height:1.2;box-shadow:0 2px 6px rgba(60,70,90,.15)}
+.bc.destacada::before{background:linear-gradient(90deg,#F6B26B,#2E7BC4,#7BCB92)}
+.bc.destacada{border-color:rgba(27,79,138,.25);background:linear-gradient(180deg,#FDFBFF 0,#F4F9FD 100%)}
+.bc.destacada .bi{background:linear-gradient(135deg,#E9F3FC,#F7ECFD);box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 6px 16px rgba(46,123,196,.12)}
+.bc.destacada .bk{color:var(--az)}
+.bc.recomendado{border-color:#F3A83D;box-shadow:0 6px 22px rgba(243,168,61,.18)}
+.bc.recomendado:hover{border-color:#D4700A}
+.bc.recomendado::before{background:linear-gradient(90deg,#FFD27A,#F3A83D,#D4700A)}
+.bc.recomendado .reco-badge{position:absolute;top:8px;right:8px;font-family:'Barlow Condensed',sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.04em;padding:3px 9px;border-radius:999px;background:linear-gradient(135deg,#FFC56E,#F3A83D);color:#4A2600;border:1.5px solid #F3A83D;text-transform:uppercase;line-height:1.2;box-shadow:0 2px 6px rgba(212,112,10,.22)}
+
+/* Scroll fix anchors */
+[id]{scroll-margin-top:110px;}
+
+@media (max-width:640px){
+  .bg{grid-template-columns:repeat(auto-fill, minmax(145px, 1fr));gap:12px}
+  .bc{border-radius:16px;padding:16px 14px 14px}
+  .bi{width:44px;height:44px;font-size:1.55rem}
+}
+
+
+/* ── NAVCROSS: barra de navegación transversal (Fase D) ── */
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+.navcross span.nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8;align-self:center;user-select:none}
+@media(max-width:640px){.navcross{gap:4px;padding:8px 10px;top:52px}.navcross a span.nc-lbl,.navcross span.nc-current span.nc-lbl{display:none}.navcross .nc-sep{display:none}}
+
+
+/* ── BUSCADOR GLOBAL (Fase G/P4.2) ── */
+.searchbar{max-width:640px;margin:18px auto 8px;padding:10px 18px;background:#fff;border:1px solid var(--bd);border-radius:24px;box-shadow:0 6px 18px rgba(27,79,138,.08);display:flex;align-items:center}
+.searchbar input{flex:1;border:0;outline:0;background:transparent;font-family:'Barlow',sans-serif;font-size:.95rem;color:var(--tx);padding:4px 6px}
+.searchbar input::placeholder{color:#8C97A8}
+.searchbar:focus-within{border-color:var(--az2);box-shadow:0 6px 18px rgba(46,123,196,.18)}
+
+@media print{
+  html,body{background:#fff!important;color:#000!important}
+  .hd,.navcross,.nv,.mb,.home-btn,.sol-btn,.btn-video,.video-group{display:none!important}
+  .ly{position:static!important}
+  .ct{overflow:visible!important;padding:0}
+  .pagina{box-shadow:none!important;max-width:100%}
+  .cabecera{background:#fff!important;color:#000!important}
+  .cab-titulo,.cab-label,.cab-sub{color:#000!important}
+  h2,h3,h4{page-break-after:avoid}
+  .seccion{page-break-inside:avoid}
+  .sol-content{display:block!important}
+  img{max-width:100%;page-break-inside:avoid}
+  a{text-decoration:none;color:#000}
+  .objetivos-box,.decalogo-box{background:#fff!important;border:1px solid #aaa!important}
+}
+/* ── v3.0.2 · destacar las 3 secciones prioritarias ── */
+.section-title.priority{
+  border-left:5px solid #D4700A;
+  padding-left:12px;
+  background:linear-gradient(90deg,rgba(212,112,10,.06) 0%,transparent 60%);
+  border-radius:0 4px 4px 0;
+}
+.section-title.priority::after{
+  content:'PRIORITARIO';
+  margin-left:auto;font-family:'Barlow Condensed',sans-serif;
+  font-size:.62rem;font-weight:700;letter-spacing:.08em;
+  color:#D4700A;background:rgba(212,112,10,.1);
+  padding:2px 8px;border-radius:8px;
+}
+
+/* ── v3.0.2 · tabla compacta de exámenes ── */
+.exam-table{
+  width:100%;border-collapse:separate;border-spacing:0;
+  font-family:'Barlow',sans-serif;font-size:.82rem;
+  margin:8px 0 4px;background:#fff;
+  border:1px solid #F1D7D2;border-radius:10px;overflow:hidden;
+  box-shadow:0 3px 10px rgba(192,50,30,.05);
+}
+.exam-table thead th{
+  background:linear-gradient(135deg,#FFF0EE,#FFE0DB);
+  color:#962919;font-family:'Barlow Condensed',sans-serif;
+  font-size:.75rem;font-weight:700;letter-spacing:.04em;
+  text-transform:uppercase;text-align:left;
+  padding:8px 12px;border-bottom:1px solid #F1D7D2;
+}
+.exam-table tbody td{
+  padding:6px 12px;border-bottom:1px solid #F8E9E5;
+  color:#3A2A26;vertical-align:middle;
+}
+.exam-table tbody tr:last-child td{border-bottom:none}
+.exam-table tbody tr:hover{background:#FFF8F6}
+.exam-table .ex-link{
+  color:#C0321E;text-decoration:none;font-weight:600;
+  display:inline-flex;align-items:center;gap:4px;
+  padding:2px 8px;border-radius:6px;transition:background .15s;
+}
+.exam-table .ex-link:hover{background:rgba(192,50,30,.08)}
+.exam-table .ex-link.reco{background:rgba(243,168,61,.18);color:#8C4400}
+.exam-table .ex-link.reco::before{content:'⭐ '}
+.exam-table .ex-conv{font-weight:600;color:#1B4F8A;font-family:'Barlow Condensed',sans-serif}
+.exam-table .ex-meta{font-size:.75rem;color:#666;font-style:italic}
+@media(max-width:560px){
+  .exam-table{font-size:.78rem}
+  .exam-table thead th, .exam-table tbody td{padding:5px 8px}
+}
+
+/* @media print v2 — ecosistema TECI2 */
+
+</style>
+</head>
+<body>
+<div class="hd">
+<h1>Tecnología e Ingeniería II</h1>
+<p>Profesor: Manuel Alonso Herrera<br>Apuntes completos PAU Andalucía 2025–2026<br>11 bloques de teoría · 121 ejercicios resueltos · 12 exámenes oficiales · 57 problemas de la Ponencia resueltos (56 oficiales + 1 variante)</p>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal"><span class="nc-current" aria-current="page"><span>🏠</span><span class="nc-lbl">Índice</span></span><span class="nc-sep">·</span><a href="index.html#teoria" aria-label="Ver índice de teoría"><span>📖</span><span class="nc-lbl">Teoría</span></a><span class="nc-sep">·</span><a href="index.html#ejercicios" aria-label="Ver índice de ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a><span class="nc-sep">·</span><a href="index.html#examenes" aria-label="Ver índice de exámenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a><span class="nc-sep">·</span><a href="ponencia_resuelta/index_ponencia.html" aria-label="Ver Ponencia 2025-26 resuelta"><span>📚</span><span class="nc-lbl">Ponencia</span></a><span class="nc-sep">·</span><a href="apoyo/formulario.html" aria-label="Ir al material de apoyo"><span>📚</span><span class="nc-lbl">Apoyo</span></a></nav>
+
+<div class="searchbar" role="search"><input type="search" id="gl-search" placeholder="🔍 Buscar en todo el ecosistema..." aria-label="Buscar en el ecosistema"></div>
+
+<div class="main">
+
+<div class="section-title priority" id="teoria">📘 Teoría</div>
+<div class="bg">
+<a href="teoria/bloque_A.html" class="bc" data-keywords="proyectos i+d+i investigación desarrollo innovación gestión metodología normas patentes" aria-label="Ir a Teoría del Bloque A — Proyectos I+D+i"><span class="bi">📋</span><span class="bk">A</span><span class="bn">Proyectos I+D+i</span></a>
+<a href="teoria/bloque_B.html" class="bc" data-keywords="materiales fabricación tracción brinell vickers charpy hooke módulo young designación normalizada resiliencia fluencia dureza rotura aceros aleaciones ensayos" aria-label="Ir a Teoría del Bloque B — Materiales y Fabricación"><span class="bi">🔩</span><span class="bk">B</span><span class="bn">Materiales y Fabricación</span></a>
+<a href="teoria/bloque_C1.html" class="bc" data-keywords="estructuras vigas apoyos momento flector cortante ménsula biapoyada cerchas cremona nudos tracción compresión esfuerzos" aria-label="Ir a Teoría del Bloque C1 — Estructuras"><span class="bi">🏗️</span><span class="bk">C1</span><span class="bn">Estructuras</span></a>
+<a href="teoria/bloque_C2.html" class="bc" data-keywords="máquinas térmicas motor otto diésel carnot rendimiento ciclo termodinámica calor trabajo 2 tiempos 4 tiempos PMI PMS cilindrada" aria-label="Ir a Teoría del Bloque C2 — Máquinas Térmicas"><span class="bi">🔥</span><span class="bk">C2</span><span class="bn">Máquinas Térmicas</span></a>
+<a href="teoria/bloque_C31.html" class="bc" data-keywords="neumática cilindros válvulas compresor aire comprimido actuadores simple efecto doble efecto esquemas" aria-label="Ir a Teoría del Bloque C31 — Neumática"><span class="bi">💨</span><span class="bk">C31</span><span class="bn">Neumática</span></a>
+<a href="teoria/bloque_C32.html" class="bc" data-keywords="hidráulica oleohidráulica bombas válvulas presión caudal pascal bernoulli circuitos esquemas" aria-label="Ir a Teoría del Bloque C32 — Hidráulica"><span class="bi">💧</span><span class="bk">C32</span><span class="bn">Hidráulica</span></a>
+<a href="teoria/bloque_D1.html" class="bc" data-keywords="corriente alterna ca fasores impedancia reactancia resonancia rlc factor potencia cos fi monofásica trifásica transformador" aria-label="Ir a Teoría del Bloque D1 — Corriente Alterna"><span class="bi">⚡</span><span class="bk">D1</span><span class="bn">Corriente Alterna</span></a>
+<a href="teoria/bloque_D2.html" class="bc" data-keywords="electrónica digital álgebra boole karnaugh puertas lógicas simplificación combinacional secuencial biestables" aria-label="Ir a Teoría del Bloque D2 — Electrónica Digital"><span class="bi">🔢</span><span class="bk">D2</span><span class="bn">Electrónica Digital</span></a>
+<a href="teoria/bloque_E.html" class="bc" data-keywords="sistemas informáticos microcontroladores arduino programación hardware software arquitectura" aria-label="Ir a Teoría del Bloque E — Sistemas Informáticos"><span class="bi">🤖</span><span class="bk">E</span><span class="bn">Sist. Informáticos</span></a>
+<a href="teoria/bloque_F.html" class="bc" data-keywords="sistemas automáticos control lazo abierto cerrado bucle realimentación función transferencia diagrama bloques estabilidad pid" aria-label="Ir a Teoría del Bloque F — Sistemas Automáticos"><span class="bi">🔄</span><span class="bk">F</span><span class="bn">Sist. Automáticos</span></a>
+<a href="teoria/bloque_G.html" class="bc" data-keywords="tecnología sostenible sostenibilidad huella carbono co2 reciclaje economía circular ecodiseño impacto ambiental renovables" aria-label="Ir a Teoría del Bloque G — Tecnología Sostenible"><span class="bi">🌱</span><span class="bk">G</span><span class="bn">Tecnología Sostenible</span></a>
+</div>
+
+<div class="section-title priority" id="ejercicios">✏️ Ejercicios resueltos</div>
+<div class="bg">
+<a href="ejercicios/ej_B.html" class="bc ej" data-keywords="ejercicios materiales fabricación tracción brinell vickers charpy resueltos problemas" aria-label="Ir a Ejercicios del Bloque B — Materiales y Fabricación, 15 ejercicios"><span class="bi">🧪</span><span class="bk">Ej. B</span><span class="bn">Materiales y Fabricación (15 ej.)</span></a>
+<a href="ejercicios/ej_C1.html" class="bc ej" data-keywords="ejercicios estructuras vigas cerchas momento flector resueltos problemas cremona" aria-label="Ir a Ejercicios del Bloque C1 — Estructuras, 23 ejercicios"><span class="bi">🏗️</span><span class="bk">Ej. C1</span><span class="bn">Estructuras (23 ej.)</span></a>
+<a href="ejercicios/ej_C2.html" class="bc ej" data-keywords="ejercicios máquinas térmicas motor otto diésel carnot ciclo rendimiento resueltos" aria-label="Ir a Ejercicios del Bloque C2 — Máquinas Térmicas, 11 ejercicios"><span class="bi">♨️</span><span class="bk">Ej. C2</span><span class="bn">Máquinas Térmicas (11 ej.)</span></a>
+<a href="ejercicios/ej_C3.html" class="bc ej" data-keywords="ejercicios neumática hidráulica cilindros válvulas pascal bernoulli resueltos" aria-label="Ir a Ejercicios del Bloque C3 — Neumática e Hidráulica, 23 ejercicios"><span class="bi">🌬️</span><span class="bk">Ej. C3</span><span class="bn">Neumática e Hidráulica (23 ej.)</span></a>
+<a href="ejercicios/ej_D1.html" class="bc ej" data-keywords="ejercicios corriente alterna impedancia rlc resonancia factor potencia resueltos" aria-label="Ir a Ejercicios del Bloque D1 — Corriente Alterna, 17 ejercicios"><span class="bi">⚡</span><span class="bk">Ej. D1</span><span class="bn">Corriente Alterna (17 ej.)</span></a>
+<a href="ejercicios/ej_D2.html" class="bc ej" data-keywords="ejercicios electrónica digital karnaugh puertas lógicas simplificación resueltos" aria-label="Ir a Ejercicios del Bloque D2 — Electrónica Digital, 12 ejercicios"><span class="bi">🧠</span><span class="bk">Ej. D2</span><span class="bn">Electrónica Digital (12 ej.)</span></a>
+<a href="ejercicios/ej_F.html" class="bc ej" data-keywords="ejercicios sistemas automáticos control lazo cerrado función transferencia pid resueltos" aria-label="Ir a Ejercicios del Bloque F — Sistemas Automáticos, 20 ejercicios"><span class="bi">🎯</span><span class="bk">Ej. F</span><span class="bn">Sist. Automáticos (20 ej.)</span></a>
+</div>
+
+<!-- ══ 3. PONENCIA 2025-26 (PRIORITARIA · material crítico del curso) ══ -->
+<div class="section-title priority">📚 Ponencia 2025-26 resuelta</div>
+<div class="bg">
+<a href="ponencia_resuelta/index_ponencia.html" class="bc destacada" data-keywords="ponencia resuelta problemas resueltos paso a paso ensayos estructuras termicas neumatica hidraulica alterna digital automaticos pevau andalucia oficial 56 57 problemas variante brinell vickers charpy traccion temple otto diesel carnot bomba calor frigorifico cilindro bernoulli pascal rlc fasorial resonancia karnaugh nand nor viga empotrada apoyada voladizo pid lazo cerrado transferencia" aria-label="Ir a Ponencia 2025-26 resuelta — 56 problemas oficiales + 1 variante con procedimiento paso a paso"><span class="bi">📚</span><span class="bk">Ponencia resuelta</span><span class="bn">56 problemas oficiales + 1 variante · 7 bloques · procedimiento paso a paso colapsable</span></a>
+</div>
+
+<!-- ══ 4. EXÁMENES TIPO 2025-26 (simulacros del curso actual) ══ -->
+<div class="section-title">🧪 Exámenes tipo PEvAU 2025-26</div>
+<table class="exam-table" data-section="tipo" aria-label="Tabla de exámenes tipo PEvAU 2025-26">
+<thead>
+<tr><th style="width:22%;">Simulacro</th><th style="width:78%;">Bloques que toca</th></tr>
+</thead>
+<tbody>
+<tr data-keywords="examen tipo 1 simulacro ponencia brinell bomba calor estructuras materiales termicas automatica electronica"><td class="ex-conv">Tipo 1</td><td><a class="ex-link reco" href="examenes/tipo_2025_26/ponencia/tipo_1_2025_26.html">Materiales · Máquinas térmicas · Estructuras + Automática · Electrónica</a></td></tr>
+<tr data-keywords="examen tipo 2 simulacro prensa hidraulica bernoulli viga rlc materiales fluidos"><td class="ex-conv">Tipo 2</td><td><a class="ex-link" href="examenes/tipo_2025_26/ponencia/tipo_2_2025_26.html">Materiales · Neumática/Hidráulica · Estructuras + Automática · Electrónica</a></td></tr>
+<tr data-keywords="examen tipo 3 simulacro estructuras viga cuerda carnot vickers charpy automatica"><td class="ex-conv">Tipo 3</td><td><a class="ex-link reco" href="examenes/tipo_2025_26/ponencia/tipo_3_2025_26.html">Estructuras · Máquinas térmicas · Materiales + Automática · Electrónica</a></td></tr>
+<tr data-keywords="examen tipo 4 simulacro carnot bomba calor zapatilla gato hidraulico materiales fluidos"><td class="ex-conv">Tipo 4</td><td><a class="ex-link" href="examenes/tipo_2025_26/ponencia/tipo_4_2025_26.html">Materiales · Máquinas térmicas · Neumática/Hidráulica · Electrónica</a></td></tr>
+<tr data-keywords="examen tipo 5 simulacro otto punzonadora bernoulli vickers brinell termicas fluidos automatica"><td class="ex-conv">Tipo 5</td><td><a class="ex-link reco" href="examenes/tipo_2025_26/ponencia/tipo_5_2025_26.html">Máquinas térmicas · Neumática/Hidráulica · Materiales + Automática · Electrónica</a></td></tr>
+<tr data-keywords="examen tipo 6 simulacro charpy viga biapoyada voladizo bernoulli rlc materiales estructuras fluidos"><td class="ex-conv">Tipo 6</td><td><a class="ex-link" href="examenes/tipo_2025_26/ponencia/tipo_6_2025_26.html">Materiales · Estructuras · Neumática/Hidráulica · Electrónica</a></td></tr>
+<tr data-keywords="examen tipo 7 simulacro fuente bernoulli carnot motor vickers pid fluidos termicas"><td class="ex-conv">Tipo 7</td><td><a class="ex-link" href="examenes/tipo_2025_26/ponencia/tipo_7_2025_26.html">Neumática/Hidráulica · Máquinas térmicas · Materiales + Automática · Electrónica</a></td></tr>
+</tbody>
+</table>
+<p style="font-size:.72rem;color:var(--t2);margin:6px 0 0;"><span style="color:#8C4400;">⭐ Recomendado para empezar</span> · 7 simulacros alineados con la Ponencia 2025-26 · todos cumplen la estructura PEvAU (4 apartados · 2,5 pt cada uno)</p>
+
+<!-- ══ 5. EXÁMENES OFICIALES PAU 2024-25 (historial) ══ -->
+<div class="section-title" id="examenes">📝 Exámenes PAU · convocatorias oficiales</div>
+<table class="exam-table" data-section="oficiales" aria-label="Tabla de exámenes oficiales PAU 2024-2025">
+<thead>
+<tr><th style="width:25%;">Convocatoria</th><th style="width:25%;">Opción A</th><th style="width:25%;">Opción B</th><th style="width:25%;">Notas</th></tr>
+</thead>
+<tbody>
+<tr data-keywords="examen pau titular 2025 ordinaria junio"><td class="ex-conv">Titular 2025</td><td><a class="ex-link" href="examenes/2025/titular_A_2025.html">Titular A</a></td><td><a class="ex-link" href="examenes/2025/titular_B_2025.html">Titular B</a></td><td class="ex-meta">4 ejercicios · con opciones</td></tr>
+<tr data-keywords="examen pau suplente1 2025 extraordinaria julio"><td class="ex-conv">Suplente 1 · 2025</td><td><a class="ex-link" href="examenes/2025/suplente1_A_2025.html">Suplente 1A</a></td><td><a class="ex-link" href="examenes/2025/suplente1_B_2025.html">Suplente 1B</a></td><td class="ex-meta">4 ejercicios · con opciones</td></tr>
+<tr data-keywords="examen pau suplente2 2025 extraordinaria"><td class="ex-conv">Suplente 2 · 2025</td><td><a class="ex-link" href="examenes/2025/suplente2_A_2025.html">Suplente 2A</a></td><td><a class="ex-link" href="examenes/2025/suplente2_B_2025.html">Suplente 2B</a></td><td class="ex-meta">4 ejercicios · con opciones</td></tr>
+<tr data-keywords="examen pau titular 2024 ordinaria junio"><td class="ex-conv">Titular 2024</td><td><a class="ex-link" href="examenes/2024/titular_A_2024.html">Titular A</a></td><td><a class="ex-link" href="examenes/2024/titular_B_2024.html">Titular B</a></td><td class="ex-meta">8 ejercicios · elegir 4</td></tr>
+<tr data-keywords="examen pau reserva 2024"><td class="ex-conv">Reserva · 2024</td><td><a class="ex-link" href="examenes/2024/reserva_A_2024.html">Reserva A</a></td><td><a class="ex-link" href="examenes/2024/reserva_B_2024.html">Reserva B</a></td><td class="ex-meta">8 ejercicios · elegir 4</td></tr>
+<tr data-keywords="examen pau suplente 2024 extraordinaria julio"><td class="ex-conv">Suplente · 2024</td><td><a class="ex-link" href="examenes/2024/suplente_A_2024.html">Suplente A</a></td><td><a class="ex-link" href="examenes/2024/suplente_B_2024.html">Suplente B</a></td><td class="ex-meta">8 ejercicios · elegir 4</td></tr>
+</tbody>
+</table>
+
+<!-- ══ 6. AUTOEVALUACIÓN ══ -->
+<div class="section-title">🎓 Autoevaluación</div>
+<div class="bg">
+<a href="autoeval.html" class="bc" data-keywords="autoevaluación flashcards fichas repaso interactivo 199 preguntas bloques" aria-label="Ir a Autoevaluación — 199 flashcards por bloque, repaso interactivo"><span class="bi">🎓</span><span class="bk">Autoevaluación</span><span class="bn">199 flashcards por bloque · repaso interactivo</span></a>
+</div>
+
+<!-- ══ 7. REPASO PREVIO ══ -->
+<div class="section-title">🔌 Repaso previo</div>
+<div class="bg">
+<a href="teoria/repaso_cc.html" class="bc" data-keywords="repaso corriente continua cc resistencia tensión intensidad ley ohm kirchhoff potencia energía eléctrica básico previo" aria-label="Ir a Repaso de Corriente Continua — lo esencial de CC para entender el Bloque D1"><span class="bi">⚡</span><span class="bk">Repaso CC</span><span class="bn">Lo esencial de Corriente Continua para entender el Bloque D1</span></a>
+</div>
+
+<!-- ══ 8. MATERIAL DE APOYO ══ -->
+<div class="section-title">📚 Material de apoyo</div>
+<div class="bg">
+<a href="apoyo/formulario.html" class="bc form" data-keywords="formulario fórmulas pevau pau apoyo referencia ecuaciones" aria-label="Ir al Formulario PEvAU — Fórmulas de referencia"><span class="bi">📐</span><span class="bk">Formulario PEvAU</span><span class="bn">Fórmulas de referencia por bloques</span></a>
+<a href="apoyo/factores_conversion.html" class="bc form" data-keywords="factores conversión conversion unidades método apoyo" aria-label="Ir a Factores de conversión — Método y equivalencias"><span class="bi">🔄</span><span class="bk">Factores de conversión</span><span class="bn">Método y equivalencias útiles</span></a>
+<a href="apoyo/unidades_conversiones.html" class="bc form" data-keywords="unidades SI conversiones tablas magnitudes apoyo" aria-label="Ir a Unidades y conversiones — Tablas por bloques"><span class="bi">📏</span><span class="bk">Unidades y conversiones</span><span class="bn">Tablas de magnitudes y unidades SI</span></a>
+<a href="apoyo/letras_griegas.html" class="bc form" data-keywords="letras griegas alfabeto símbolos sigma épsilon omega notación apoyo" aria-label="Ir a Letras griegas — Símbolos habituales en fórmulas"><span class="bi">Αα</span><span class="bk">Letras griegas</span><span class="bn">Alfabeto y símbolos frecuentes</span></a>
+</div>
+
+<!-- ══ 9. MATERIAL IMPRIMIBLE (PDF) ══ -->
+<div class="section-title">📄 Material imprimible (PDF)</div>
+<div class="bg">
+<div class="bc form pending" data-keywords="libro teoría completo pdf imprimible apuntes manual" aria-label="Libro completo de teoría — disponible próximamente"><span class="pending-badge">Próximamente</span><span class="bi">📘</span><span class="bk">Libro de teoría</span><span class="bn">En preparación · disponible próximamente</span></div>
+<div class="bc form pending" data-keywords="resumen teoría pdf imprimible condensado repaso" aria-label="Resumen de teoría — disponible próximamente"><span class="pending-badge">Próximamente</span><span class="bi">📗</span><span class="bk">Resumen de teoría</span><span class="bn">En preparación · disponible próximamente</span></div>
+<div class="bc form pending" data-keywords="ejercicios resueltos pdf imprimible cuaderno pevau paso a paso" aria-label="Cuaderno de ejercicios resueltos — disponible próximamente"><span class="pending-badge">Próximamente</span><span class="bi">📙</span><span class="bk">Ejercicios resueltos (PDF)</span><span class="bn">En preparación · disponible próximamente</span></div>
+<div class="bc form pending" data-keywords="suplemento adenda pdf imprimible competencias transversales generacion ca alternador bernoulli altura gases boyle charles gay lussac ods renovables fotovoltaica brinell chasis bastidor" aria-label="Suplemento v2.9.11 — disponible próximamente"><span class="pending-badge">Próximamente</span><span class="bi">📕</span><span class="bk">Suplemento v2.9.11</span><span class="bn">En preparación · disponible próximamente</span></div>
+</div>
+
+<!-- ══ 10. DOCUMENTACIÓN ══ -->
+<div class="section-title">📎 Documentación</div>
+<div class="bg">
+
+<a href="documentacion/Orientaciones_2025_26.pdf" class="bc" data-keywords="orientaciones pevau oficial tecnología ingeniería ii 2025 2026 documento ponencia" aria-label="Descargar PDF Orientaciones PEvAU — Documento oficial Tecnología e Ingeniería II 2025-26">
+<span class="bi">📄</span>
+<span class="bk">Orientaciones PEvAU</span>
+<span class="bn">Documento oficial Tecnología e Ingeniería II 2025–26</span>
+</a>
+
+<a href="documentacion/Problemas_Ponencia_2025_26.pdf" class="bc" data-keywords="problemas ponencia pau oficial tipo selectividad 2025 2026" aria-label="Descargar PDF Problemas Ponencia — Relación oficial de problemas tipo PAU">
+<span class="bi">🧠</span>
+<span class="bk">Problemas Ponencia</span>
+<span class="bn">Relación oficial de problemas tipo PAU</span>
+</a>
+
+</div>
+
+<p class="foot">IES Jiménez de Quesada · Santa Fe, Granada<br>Cada bloque es un archivo independiente — abre solo lo que necesites.</p>
+</div>
+
+<script>
+(function(){
+  const input = document.getElementById('gl-search');
+  if(!input) return;
+  const cards = Array.from(document.querySelectorAll('.bc'));
+  const rows  = Array.from(document.querySelectorAll('.exam-table tbody tr'));
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    cards.forEach(c => {
+      if(!q){c.style.display=''; return;}
+      const hay = (c.textContent + ' ' + (c.dataset.keywords||'')).toLowerCase();
+      c.style.display = hay.includes(q) ? '' : 'none';
+    });
+    rows.forEach(r => {
+      if(!q){r.style.display=''; return;}
+      const hay = (r.textContent + ' ' + (r.dataset.keywords||'')).toLowerCase();
+      r.style.display = hay.includes(q) ? '' : 'none';
+    });
+    document.querySelectorAll('.bg').forEach(bg => {
+      const visible = Array.from(bg.querySelectorAll('.bc')).some(c=>c.style.display!=='none');
+      bg.style.display = visible ? '' : 'none';
+    });
+    document.querySelectorAll('.exam-table').forEach(t => {
+      const visible = Array.from(t.querySelectorAll('tbody tr')).some(r=>r.style.display!=='none');
+      t.style.display = visible ? '' : 'none';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

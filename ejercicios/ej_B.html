@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II — ✏️ Ejercicios 🔩 B: Materiales y Fabricación</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+:root{--az:#1B4F8A;--az2:#2E7BC4;--hub-bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5;--nw:260px;--hh:52px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;font-family:'Barlow',system-ui,sans-serif;background:var(--hub-bg);color:var(--tx)}
+.hd{position:fixed;top:0;left:0;right:0;height:var(--hh);background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;display:flex;align-items:center;padding:0 14px;z-index:1001;box-shadow:0 2px 8px rgba(0,0,0,.15)}  /* v2.9.4: z-index 1001 explicit */
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer}.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.7rem;opacity:.6;margin-left:10px}
+.mb{display:none;background:none;border:none;color:#fff;font-size:1.3rem;cursor:pointer;margin-right:8px}
+.home-btn{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;font-size:.72rem;padding:4px 10px;border-radius:4px;cursor:pointer;margin-left:auto;transition:all .15s}
+.home-btn:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.5)}
+.ly{display:flex;position:fixed;top:var(--hh);left:0;right:0;bottom:0;overflow:hidden}  /* v2.9.4: overflow:hidden evita escape */
+.nv{width:var(--nw);flex-shrink:0;background:var(--w);border-right:1px solid var(--bd);overflow-y:auto;padding:44px 0 6px;z-index:500}  /* v2.9: padding-top 44 evita solape con navcross */
+.nb{border-bottom:1px solid #eee}.nb-h{padding:7px 10px;font-size:.76rem;font-weight:500;cursor:pointer;transition:background .15s;display:flex;align-items:center;gap:4px}
+.nb-h:hover{background:#EBF0F7}.nb.act .nb-h{background:var(--az);color:#fff}
+.nc{display:none;padding:0 0 4px}.nb.act .nc{display:block}
+.na{display:block;padding:2px 10px 2px 22px;font-size:.68rem;color:var(--t2);cursor:pointer;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.6}
+.na:hover{background:#EBF0F7;color:var(--az)}
+.ct{flex:1;overflow-y:scroll;-webkit-overflow-scrolling:touch;scroll-padding-top:44px}
+.wl{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;text-align:center;padding:40px 24px}
+.wl h2{font-family:'Barlow Condensed',sans-serif;font-size:2rem;color:var(--az);margin-bottom:6px}
+.wl p{color:var(--t2);max-width:500px;line-height:1.5;font-size:.88rem;margin-bottom:24px}
+.bg{display:grid;grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));gap:10px;max-width:700px;width:100%}
+.bc{background:var(--w);border:1px solid var(--bd);border-radius:8px;padding:14px 16px;cursor:pointer;transition:all .2s;text-align:left;display:flex;flex-direction:column;gap:4px}
+.bc:hover{border-color:var(--az);box-shadow:0 3px 12px rgba(27,79,138,.12);transform:translateY(-2px)}
+.bi{font-size:1.6rem;margin-bottom:2px}.bk{font-weight:700;font-size:.85rem;color:var(--az)}.bn{font-size:.72rem;color:var(--t2);line-height:1.3}
+.block-content{padding:0}
+@media(max-width:768px){.mb{display:block}.nv{position:fixed;top:var(--hh);left:0;bottom:0;z-index:900;transform:translateX(-100%)}.nv.open{transform:translateX(0);box-shadow:4px 0 16px rgba(0,0,0,.2)}}
+
+:root {
+  --azul:     #1B4F8A;
+  --azul2:    #2E7BC4;
+  --azul-cl:  #DDE9F7;
+  --azul-bg:  #EEF4FB;
+  --naranja:  #D4700A;
+  --naranja-cl:#FEF0DF;
+  --verde:    #1A6B3A;
+  --verde-cl: #E4F4EB;
+  --rojo:     #C0321E;
+  --rojo-cl:  #FCEAE7;
+  --gris:     #F5F6F8;
+  --borde:    #CDD7E3;
+  --texto:    #1A2430;
+  --texto2:   #455565;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Barlow', sans-serif;
+  --cond: 'Barlow Condensed', sans-serif;
+}
+body{
+  font-family:var(--sans);
+  font-size:10.5pt;
+  line-height:1.72;
+  color:var(--texto);
+}
+.pagina{
+  max-width:870px;
+  margin:0 auto;
+  background:#fff;
+  box-shadow:0 6px 48px rgba(0,0,0,.18);
+}
+.cabecera{
+  background:var(--azul);
+  padding:0;
+  display:grid;
+  grid-template-columns:6px 1fr;
+}
+.cab-banda{ background:var(--naranja); }
+.cab-inner{ padding:32px 44px 28px; }
+.cab-label{
+  font-family:var(--cond);
+  font-size:8.5pt;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.6);
+  margin-bottom:8px;
+}
+.cab-titulo{
+  font-family:var(--cond);
+  font-size:26pt;
+  font-weight:700;
+  color:#fff;
+  line-height:1.05;
+  margin-bottom:6px;
+}
+.cab-titulo span{ color:#F8C060; }
+.cab-sub{
+  font-family:var(--sans);
+  font-weight:300;
+  font-size:11.5pt;
+  color:rgba(255,255,255,.78);
+  margin-bottom:22px;
+}
+.cab-chips{ display:flex; gap:10px; flex-wrap:wrap; }
+.chip{
+  font-family:var(--sans);
+  font-size:8pt;
+  font-weight:600;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.22);
+  color:rgba(255,255,255,.85);
+  padding:3px 10px;
+  border-radius:20px;
+  letter-spacing:.5px;
+}
+
+.cuerpo{ padding:8px 44px 52px; }
+.seccion{ margin-top:38px; }
+.sec-hdr{
+  display:flex; align-items:stretch; gap:0;
+  margin-bottom:16px;
+  border-bottom:2px solid var(--azul);
+}
+.sec-num{
+  background:var(--azul);
+  color:#fff;
+  font-family:var(--cond);
+  font-weight:700;
+  font-size:15pt;
+  padding:4px 14px;
+  display:flex; align-items:center; justify-content:center;
+  min-width:46px;
+}
+.sec-tit{
+  font-family:var(--cond);
+  font-size:15pt;
+  font-weight:700;
+  color:var(--azul);
+  padding:4px 12px;
+  display:flex; align-items:center;
+  letter-spacing:.3px;
+}
+h3{
+  font-family:var(--cond);
+  font-size:11.5pt;
+  font-weight:700;
+  color:var(--azul2);
+  margin:20px 0 8px;
+  padding-left:9px;
+  border-left:3px solid var(--naranja);
+  letter-spacing:.3px;
+}
+h4{
+  font-family:var(--sans);
+  font-size:10pt;
+  font-weight:700;
+  color:var(--azul);
+  margin:14px 0 5px;
+}
+p{ margin-bottom:9px; }
+ul,ol{ margin:7px 0 11px 20px; }
+li{ margin-bottom:4px; }
+strong{ color:var(--azul); font-weight:600; }
+
+/* ── CAJAS ── */
+.caja{
+  border-radius:5px;
+  padding:12px 16px;
+  margin:12px 0;
+  font-size:10pt;
+}
+.def { background:var(--azul-bg); border-left:4px solid var(--azul2); }
+.clave { background:var(--naranja-cl); border-left:4px solid var(--naranja); }
+.aviso { background:var(--rojo-cl); border-left:4px solid var(--rojo); }
+.ok    { background:var(--verde-cl); border-left:4px solid var(--verde); }
+
+.callout{
+  display:flex; gap:10px; align-items:flex-start;
+  padding:12px 16px; border-radius:5px; margin:14px 0; font-size:10pt;
+}
+.callout-key{ background:var(--naranja-cl); border-left:4px solid var(--naranja); }
+.callout-info{ background:var(--azul-bg); border-left:4px solid var(--azul2); }
+.callout-warn{ background:var(--rojo-cl); border-left:4px solid var(--rojo); }
+.callout-ok{ background:var(--verde-cl); border-left:4px solid var(--verde); }
+.callout-icon{ font-size:14pt; flex-shrink:0; margin-top:1px; }
+
+/* ── SOLUCIÓN ── */
+.solucion{
+  border-left:3px solid var(--azul2);
+  padding:8px 16px;
+  margin:8px 0;
+  background:var(--azul-bg);
+  border-radius:0 5px 5px 0;
+  font-size:10pt;
+}
+
+/* ── RESULTADO ── */
+.resultado{
+  background:var(--verde-cl);
+  border-left:4px solid var(--verde);
+  border-radius:0 5px 5px 0;
+  padding:10px 16px;
+  margin:12px 0;
+  font-size:10pt;
+  font-weight:600;
+}
+
+.ejemplo{
+  border-left:4px solid var(--verde);
+  border-radius:0 5px 5px 0;
+  padding:12px 16px;
+  margin:12px 0;
+  background:var(--verde-cl);
+}
+.ej-tit{
+  font-family:var(--cond);
+  font-weight:700;
+  color:var(--verde);
+  font-size:8.5pt;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:9.5pt;
+  margin:12px 0;
+}
+th{
+  background:var(--azul);
+  color:#fff;
+  font-family:var(--cond);
+  font-weight:700;
+  font-size:9pt;
+  letter-spacing:.7px;
+  padding:8px 12px;
+  text-align:left;
+}
+td{
+  padding:8px 12px;
+  border-bottom:1px solid var(--borde);
+  vertical-align:top;
+}
+tr:nth-child(even) td{ background:var(--gris); }
+
+.img-container{
+  text-align:center;
+  margin:18px 0;
+}
+.img-container img{
+  max-width:100%;
+  border-radius:5px;
+  box-shadow:0 2px 12px rgba(0,0,0,.12);
+}
+
+.pie{
+  background:var(--azul);
+  color:rgba(255,255,255,.65);
+  font-family:var(--sans);
+  font-size:8pt;
+  padding:12px 44px;
+  display:flex;
+  justify-content:space-between;
+}
+
+/* ── MathJax overrides ── */
+.math.display { text-align:center; margin:10px 0; }
+.MathJax { font-size:100% !important; }
+span.math { font-family: var(--mono); }
+
+/* ── Enunciado highlighting ── */
+.enunciado {
+  background: var(--naranja-cl);
+  border-left: 4px solid var(--naranja);
+  padding: 12px 16px;
+  border-radius: 0 5px 5px 0;
+  margin: 0 0 16px;
+  font-size: 10pt;
+}
+
+hr.div{ border:none; border-top:1.5px solid var(--borde); margin:28px 0; }
+
+@media print{
+  html,body{ background:white; }
+  .pagina{ box-shadow:none; max-width:100%; }
+  .seccion{ page-break-inside:avoid; }
+}
+
+/* Override exercise standalone styles for layout integration */
+.ct .pagina { max-width:100%; box-shadow:none; margin:0; background:#fff; }
+.ct .pie { margin:0; border-radius:0; }
+
+html { background:var(--hub-bg, #F4F6F9) !important; }
+body { background:var(--hub-bg, #F4F6F9) !important; }
+
+a
+
+/* Scroll fix anchors */
+[id]{scroll-margin-top:20px;}
+
+
+/* ── NAVCROSS: barra de navegación transversal (Fase D) ── */
+
+/* v2.9: Selector de bloques */
+.nav-bloque-selector{display:inline-flex;align-items:center;gap:6px;margin-left:8px}
+.nav-bloque-selector select{font-family:'Barlow',sans-serif;font-size:.75rem;padding:4px 8px;border:1px solid #D8DDE5;border-radius:6px;background:#fff;color:#23272F;cursor:pointer;max-width:220px}
+.nav-bloque-selector select:hover{border-color:#1B4F8A}
+.nav-bloque-selector select:focus{outline:2px solid #2E7BC4;outline-offset:1px}
+.nav-bloque-flechas{display:inline-flex;gap:4px;margin-left:4px}
+.nav-bloque-flechas a{display:inline-flex;align-items:center;gap:3px;padding:4px 8px;border-radius:6px;text-decoration:none;font-size:.72rem;color:#23272F;background:#fff;border:1px solid #D8DDE5;transition:all .18s}
+.nav-bloque-flechas a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+@media(max-width:640px){.nav-bloque-selector select{max-width:140px;font-size:.7rem}.nav-bloque-flechas a span.flecha-label{display:none}}
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+.navcross span.nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8;align-self:center;user-select:none}
+@media(max-width:640px){
+/* v2.9: Selector de bloques */
+.nav-bloque-selector{display:inline-flex;align-items:center;gap:6px;margin-left:8px}
+.nav-bloque-selector select{font-family:'Barlow',sans-serif;font-size:.75rem;padding:4px 8px;border:1px solid #D8DDE5;border-radius:6px;background:#fff;color:#23272F;cursor:pointer;max-width:220px}
+.nav-bloque-selector select:hover{border-color:#1B4F8A}
+.nav-bloque-selector select:focus{outline:2px solid #2E7BC4;outline-offset:1px}
+.nav-bloque-flechas{display:inline-flex;gap:4px;margin-left:4px}
+.nav-bloque-flechas a{display:inline-flex;align-items:center;gap:3px;padding:4px 8px;border-radius:6px;text-decoration:none;font-size:.72rem;color:#23272F;background:#fff;border:1px solid #D8DDE5;transition:all .18s}
+.nav-bloque-flechas a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+@media(max-width:640px){.nav-bloque-selector select{max-width:140px;font-size:.7rem}.nav-bloque-flechas a span.flecha-label{display:none}}
+.navcross{gap:4px;padding:8px 10px;top:52px}.navcross a span.nc-lbl,.navcross span.nc-current span.nc-lbl{display:none}.navcross .nc-sep{display:none}}
+
+.difficulty{display:inline-block;margin-left:8px;color:#D4700A;font-size:11pt;letter-spacing:1px;vertical-align:middle}
+
+@media print{
+  html,body{background:#fff!important;color:#000!important}
+  .hd,.navcross,.nv,.mb,.home-btn,.sol-btn,.btn-video,.video-group{display:none!important}
+  .ly{position:static!important}
+  .ct{overflow:visible!important;padding:0}
+  .pagina{box-shadow:none!important;max-width:100%}
+  .cabecera{background:#fff!important;color:#000!important}
+  .cab-titulo,.cab-label,.cab-sub{color:#000!important}
+  h2,h3,h4{page-break-after:avoid}
+  .seccion{page-break-inside:avoid}
+  .sol-content{display:block!important}
+  img{max-width:100%;page-break-inside:avoid}
+  a{text-decoration:none;color:#000}
+  .objetivos-box,.decalogo-box{background:#fff!important;border:1px solid #aaa!important}
+}
+/* @media print v2 — ecosistema TECI2 */
+
+
+
+/* v2.9.8: soluciones colapsables */
+details.solucion-collapsible{margin-top:1rem;border-left:3px solid var(--az,#1B4F8A);padding-left:1rem}
+details.solucion-collapsible summary{cursor:pointer;font-weight:600;color:var(--az,#1B4F8A);padding:.5rem 0;user-select:none;font-size:.95rem}
+details.solucion-collapsible summary:hover{color:var(--az2,#2E7BC4)}
+details.solucion-collapsible[open] summary{color:var(--az2,#2E7BC4)}
+@media print{details.solucion-collapsible{display:block}details.solucion-collapsible>*{display:block !important}}
+</style>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)'],['$','$']],
+    displayMath: [['$$','$$'],['\\[','\\]']],
+    processEscapes: true
+  },
+  options: {
+    skipHtmlTags: ['script','noscript','style','textarea','pre']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+<div class="hd">
+<button class="mb" onclick="document.getElementById('nv').classList.toggle('open')">☰</button>
+<span class="lg" onclick="location.href='../index.html'">TECI II</span>
+<span class="sb">✏️ Ejercicios B — Materiales y Fabricación y Fabricación</span>
+<a href="../index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal"><a href="../index.html" aria-label="Ir al índice principal"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span><a href="../teoria/bloque_B.html" aria-label="Ver teoría del bloque B"><span>📖</span><span class="nc-lbl">Teoría B</span></a><span class="nc-sep">·</span><span class="nc-current" aria-current="page"><span>✏️</span><span class="nc-lbl">Ejercicios B</span></span><span class="nc-sep">·</span><a href="../index.html#examenes" aria-label="Ver índice de exámenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a><span class="nc-sep">·</span><div class="nav-bloque-selector">
+  <select onchange="if(this.value)window.location.href=this.value" aria-label="Cambiar de bloque">
+    <option value="../teoria/bloque_A.html">A — Proyectos I+D+i</option>
+    <option value="../ejercicios/ej_B.html" selected>B — Materiales y Fabricación</option>
+    <option value="../ejercicios/ej_C1.html">C1 — Estructuras</option>
+    <option value="../ejercicios/ej_C2.html">C2 — Máquinas Térmicas</option>
+    <option value="../ejercicios/ej_C3.html">C3.1 — Neumática</option>
+    <option value="../teoria/bloque_C32.html">C3.2 — Hidráulica</option>
+    <option value="../ejercicios/ej_D1.html">D1 — Corriente Alterna</option>
+    <option value="../ejercicios/ej_D2.html">D2 — Electrónica Digital</option>
+    <option value="../teoria/bloque_E.html">E — Sist. Informáticos</option>
+    <option value="../ejercicios/ej_F.html">F — Sist. Automáticos</option>
+    <option value="../teoria/bloque_G.html">G — Tecnología Sostenible</option>
+  </select>
+</div></nav>
+
+<div class="ly">
+<nav class="nv" id="nv">
+<div class="nb act" data-block="B">
+<div class="nb-h" style="background:var(--az);color:#fff;">✏️ Ej. B — Materiales y Fabricación y Fabricación</div>
+<div class="nc" style="display:block;">
+<a class="na" href="#ex_1">1. Barras Ti-6Al-4V — Ensayo de tracción comp…</a>
+<a class="na" href="#ex_2">2. Ensayo Brinell — Chapas de acero</a>
+<a class="na" href="#ex_3">3. Ensayo Vickers — Acero inoxidable</a>
+<a class="na" href="#ex_4">4. Ensayo Charpy — Pilares de aparcamiento</a>
+<a class="na" href="#ex_5">5. Tracción con diagrama σ-ε — PAU 2025/1A</a>
+<a class="na" href="#ex_6">6. Eje de transmisión — Coeficiente de segurid…</a>
+<a class="na" href="#ex_7">7. Estricción y tracción completa [PAU 2025/1B S…</a>
+<a class="na" href="#ex_8">8. Brinell inverso y cambio de penetrador [PAU t…</a>
+<a class="na" href="#ex_9">9. Vickers antes y después de temple [PAU tipo B…</a>
+<a class="na" href="#ex_10">10. Charpy: calcular sección desde resiliencia [P…</a>
+<a class="na" href="#ex_11">11. ¿Deformación permanente? [PAU tipo B1]</a>
+<a class="na" href="#ex_12">12. Tenacidad y curva σ-ε [Ponencia B1]</a>
+<a class="na" href="#ex_13">13. Brinell con temple — Duplicar dureza [Ponenc…</a>
+<a class="na" href="#ex_14">14. Brinell + Vickers misma muestra — Validez [P…</a>
+<a class="na" href="#ex_15">15. Vickers con imagen aumentada 50× [Ponencia P…</a>
+
+</div>
+</div>
+</nav>
+<div class="ct" id="ct">
+<div class="block-content" id="block-B" style="display:block"><div class="pagina">
+
+<div class="cabecera">
+  <div class="cab-banda"></div>
+  <div class="cab-inner">
+    <div class="cab-label">Tecnología e Ingeniería II · 2º Bachillerato · IES Jiménez de Quesada</div>
+    <div class="cab-titulo">Bloque B — <span>Materiales y Fabricación</span></div>
+    <div class="cab-sub">Ejercicios resueltos PEvAU · Junta de Andalucía · Curso 2025–2026 · 2,5 pts</div>
+    <div class="cab-chips">
+      <span class="chip">📐 Tracción</span>
+<span class="chip">🔵 Brinell</span>
+<span class="chip">🔷 Vickers</span>
+<span class="chip">💥 Charpy</span>
+<span class="chip">📊 Diagrama σ-ε</span>
+    </div>
+  </div>
+</div>
+
+<div class="cuerpo">
+<div class="seccion" id="ex_1">
+  <div class="sec-hdr">
+    <div class="sec-num">1</div>
+    <div class="sec-tit">Barras de aleación de titanio Ti-6Al-4V — Ensayo de tracción completo<span class="difficulty" aria-label="Dificultad ★★">★★</span></div>
+  </div>
+  <p>Una empresa que fabrica componentes para aeronaves necesita validar
+un lote de barras de aleación de titanio Ti-6Al-4V. Se ensaya a tracción
+una probeta cilíndrica de 12 mm de diámetro y 200 mm de longitud. Al
+aplicar 40 kN en zona elástica, la probeta se alarga 0,643 mm. El
+límite elástico es 880 MPa.</p>
+<p>a) Calcula el módulo de elasticidad del material.</p>
+<p>b) Determina la tensión aplicada y la deformación unitaria.</p>
+<p>c) ¿Sufrirá la probeta deformación permanente con esa carga?
+Justifica.</p>
+<p>d) Explica qué ocurre con la probeta al retirar la carga y en qué
+zona del diagrama σ-ε trabaja.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>📋 Datos previos</h4>
+<div class="solucion">
+<p><span class="math display">\[A_0\  = \ \frac{\pi \cdot D^2}{4} = \
+\frac{\pi \cdot (12)^2}{4} = \ 113,1\ mm^2\]</span></p>
+</div>
+<h4>Apartado a — Módulo de elasticidad</h4>
+<div class="solucion">
+<p>Tensión:</p>
+<p><span class="math display">\[\sigma\  = \ \frac{F}{A_0} = \ \frac{40\
+000\ N}{113,1\ mm^2} = \ 353,7\ MPa\]</span></p>
+<p>Deformación:</p>
+<p><span class="math display">\[\varepsilon\  = \ \frac{\Delta L}{L_0} =
+\ \frac{0,643\ mm}{200\ mm} = \ 3,215 \times 10^{-3}\]</span></p>
+<p>Módulo (Ley de Hooke):</p>
+<p><span class="math display">\[E\  = \ \frac{\sigma}{\varepsilon} = \
+\frac{353,7\ MPa}{3,215 \times 10^{-3}} \approx \ 110\ 000\ MPa\  = \ 110\
+GPa\]</span></p>
+</div>
+<div class="resultado"><strong>→ \(E \approx 110\) GPa · \(\sigma = 353{,}7\) MPa · \(\varepsilon = 3{,}215 \times 10^{-3}\)</strong></div>
+<h4>Apartado b — Tensión y deformación</h4>
+<div class="solucion">
+<p>Ya calculados en el apartado a: \(\sigma = 353{,}7\) MPa · \(\varepsilon = 3{,}215 \times 10^{-3}\)</p>
+</div>
+<h4>Apartado c — ¿Deformación permanente?</h4>
+<div class="solucion">
+<p>σ = 353,7 MPa &lt; σ<sub>E</sub> = 880 MPa → zona elástica → NO hay
+deformación permanente.</p>
+</div>
+<h4>Apartado d — Zona elástica y recuperación de
+forma</h4>
+<div class="solucion">
+<p>La carga aplicada de 40 kN produce σ = 353,7 MPa &lt; σ<sub>E</sub> =
+880 MPa → la probeta trabaja en zona elástica. Al retirar la carga,
+recupera su longitud inicial sin deformación permanente. Si la carga
+superase σ<sub>E</sub>, la probeta quedaría alargada de forma permanente
+(zona plástica).</p>
+<p><strong>⚠ <em>El módulo de Young del titanio puro es ≈ 110 GPa. Las
+aleaciones Ti-6Al-4V, las más utilizadas en aeronáutica y biomédica,
+rondan los 105-120 GPa. Verificar siempre que el valor calculado es
+coherente con el material declarado: si el problema se enuncia sobre
+titanio y sale un E de 320 GPa, hay un error de datos.</em></strong></p>
+</div>
+</details>
+</div>
+<div class="seccion" id="ex_2">
+  <div class="sec-hdr">
+    <div class="sec-num">2</div>
+    <div class="sec-tit">Ensayo Brinell — Chapas de acero<span class="difficulty" aria-label="Dificultad ★★">★★</span></div>
+  </div>
+  
+<p>Una empresa de fabricación metálica necesita verificar la dureza de
+unas chapas de acero antes de mecanizarlas. Se realiza un ensayo Brinell
+con una bola de acero de 10 mm de diámetro y una carga de 3000 kp
+aplicada durante 15 s. La huella circular obtenida tiene un diámetro de
+4,2 mm.</p>
+<p>a) Calcula la dureza Brinell HB del material.</p>
+<p>b) Estima el límite de rotura aproximado del acero en MPa.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Dureza HB</h4>
+<div class="solucion">
+<p>Fórmula de Brinell:</p>
+<p><span class="math display">\[HB\  = \ \frac{2F}{\pi \cdot D \cdot (D
+- \sqrt{D^2 - d^2})}\]</span></p>
+<p>Radicando: \(D^2 - d^2 = 100 - 17{,}64 = 82{,}36 \to \sqrt{82{,}36} = 9{,}075\)</p>
+<p>Sustitución:</p>
+<p><span class="math display">\[HB\  = \ \frac{2 \times 3000}{\pi \times
+10 \times (10 - 9,075)} = \ \frac{6000}{29,05} \approx \ 207\
+HBW\]</span></p>
+</div>
+<div class="resultado"><strong>→ 207 HBW 10/3000/15 Designación normalizada: valor /
+símbolo / D / F / t</strong></div>
+<h4>Apartado b — Constante K</h4>
+<div class="solucion">
+<p><span class="math display">\[K\  = \ \frac{F}{D^2} = \
+\frac{3000}{100} = \ 30\ kp/mm^2\]</span></p>
+</div>
+<h4>Apartado c — Validez</h4>
+<div class="solucion">
+<p><span class="math display">\[\frac{D}{4}\  \leq \ d\  \leq \
+\frac{D}{2}\ \  \rightarrow \ \ 2,5\  \leq \ 4,2\  \leq \ 5,0\ mm\ ✓\
+\  \rightarrow \ \ ensayo\ VÁLIDO\]</span></p>
+<p><strong>⚠ <em>F en kilopondios (kp), NO en newtons. Mezclar unidades
+invalida el resultado.</em></strong></p>
+<p><strong>⚠ <em>Condición de validez: D/4 ≤ d ≤ D/2. Si d &lt; D/4:
+carga insuficiente. Si d &gt; D/2: huella excesiva.</em></strong></p>
+<p><strong>⚠ <em>Designación normalizada: primero el número, luego HBW,
+luego D/F/t.</em></strong></p>
+</div>
+</details>
+</div>
+<div class="seccion" id="ex_3">
+  <div class="sec-hdr">
+    <div class="sec-num">3</div>
+    <div class="sec-tit">Ensayo Vickers — Acero inoxidable<span class="difficulty" aria-label="Dificultad ★">★</span></div>
+  </div>
+  
+<p>En el control de calidad de un lote de piezas de acero inoxidable
+para la industria alimentaria se realiza un ensayo Vickers con una carga
+de 40 kp aplicada durante 10 s, obteniéndose la huella de la figura.</p>
+<ol type="a">
+<li><p>Si la imagen está aumentada 50 veces, ¿cuánto mide la diagonal de
+la huella</p></li>
+</ol>
+<p>que se necesita para calcular la dureza Vickers?</p>
+<ol start="2" type="a">
+<li><p>Calcular la dureza Vickers de la pieza y escribir su valor
+normalizado.</p></li>
+</ol>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Diagonal real</h4>
+<div class="solucion">
+<p>Diagonal media en la imagen:</p>
+<p><span class="math display">\[d\_ imagen\  = \ \frac{d_1 + d_2}{2} = \
+\frac{30 + 30}{2} = \ 30,0\ mm\]</span></p>
+<p>Diagonal REAL (dividir por los aumentos):</p>
+<p><span class="math display">\[d\_ real\  = \
+\frac{d_{imagen}}{aumentos} = \ \frac{30,0}{50} = \ 0,6\ mm\]</span></p>
+</div>
+<div class="resultado"><strong>→ d<sub>real</sub></strong> = 0,60 mm <strong>¡SIEMPRE
+dividir por aumentos antes de calcular HV!</strong></div>
+<h4>Apartado b — Dureza Vickers</h4>
+<div class="solucion">
+<p><span class="math display">\[HV\  = \ \frac{1{,}8544 \cdot F}{d^2} = \
+\frac{1{,}8544 \times 40}{(0,6)^2} = \ \frac{74,18}{0,36} =
+206\frac{kp}{mm2};\ \ \ \ \ \ \ expresión\ normalizada:\ 206\ HV\
+40/10\]</span></p>
+<p><strong>⚠ <em>EL ERROR MÁS FRECUENTE: usar
+d<sub>imagen</sub></em></strong> directamente sin dividir por los
+aumentos.</p>
+<p><strong>⚠ <em>Si d₁ ≠ d₂, promediar primero: d = (d₁+d₂)/2. Luego
+dividir por aumentos.</em></strong></p>
+</div>
+</details>
+</div>
+<div class="seccion" id="ex_4">
+  <div class="sec-hdr">
+    <div class="sec-num">4</div>
+    <div class="sec-tit">Ensayo Charpy — Pilares de aparcamiento<span class="difficulty" aria-label="Dificultad ★">★</span></div>
+  </div>
+  <p>En el control de calidad de los pilares metálicos de un aparcamiento
+se realiza un ensayo Charpy sobre una probeta cuadrada de 10×10 mm con
+entalla V de 2 mm. El péndulo tiene una masa de 4 kg y se suelta desde
+una altura H = 1,2 m. Tras el impacto, el péndulo asciende hasta h =
+0,75 m.</p>
+<p>a) Calcula la energía absorbida por la probeta durante el
+impacto.</p>
+<p>b) Determina la resiliencia del material en J/cm² y en J/m².</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Energía absorbida</h4>
+<div class="solucion">
+<p><span class="math display">\[E\  = \ m \cdot g \cdot (H - h)\  = \ 4
+\times 9,81 \times (1,2 - 0,75)\  = \ 4 \times 9,81 \times
+0,45\  \approx \ 17,66\ J\]</span></p>
+</div>
+<div class="resultado"><strong>→ E = 17,66 J</strong></div>
+<h4>Apartado b — Resiliencia</h4>
+<div class="solucion">
+<p>Sección NETA (bajo la entalla):</p>
+<p><span class="math display">\[S_{neta}\  = \ 10 \times (10 - 2)\  = \
+80\ mm^2\  = \ 0,80\ cm^2\]</span></p>
+<p>Resiliencia:</p>
+<p><span class="math display">\[\rho = \ \frac{E}{S_{neta}} = \
+\frac{17,66\ J}{0,80\ cm^2} = \ 22,1\ J/cm^2\ \ ( = \ 2,21 \times 10^5\
+J/m^2)\]</span></p>
+</div>
+<div class="resultado"><strong>→ K = 22,1 J/cm²</strong></div>
+<div class="solucion">
+<p><strong>⚠ <em>Sección NETA ≠ sección bruta. Entalla de 2 mm: Sneta =
+10×8 = 80 mm², no 100 mm².</em></strong></p>
+<p><strong>⚠ <em>Unidades: S en cm² → \(\rho\) en J/cm². S en m² → \(\rho\) en
+J/m².</em></strong></p>
+</div>
+</details>
+</div>
+<div class="seccion" id="ex_5">
+  <div class="sec-hdr">
+    <div class="sec-num">5</div>
+    <div class="sec-tit">Tracción con diagrama σ-ε — PAU 2025/1A<span class="difficulty" aria-label="Dificultad ★★★">★★★</span></div>
+  </div>
+  <p>En el control de calidad de un acero estructural utilizado en
+construcción se realiza un ensayo de tracción sobre una probeta
+cilíndrica. El diagrama tensión-deformación obtenido se muestra en la
+figura, donde el punto A señala el límite elástico del material.</p>
+<p>a) Lee del diagrama los valores de la tensión límite elástica
+σ<sub>E</sub> y la deformación unitaria ε<sub>E</sub> en el punto A.</p>
+<p>b) Calcula el módulo de elasticidad E del material.</p>
+<p>c) Indica el tipo de zona que hay a la derecha del punto A y qué
+ocurre con el material en esa zona.</p>
+
+<!-- BORRADO v2.8: apartados a/b/c de la resolución heredaban datos no declarados en el enunciado (D = 25 mm, L = 75 mm, F = 20 000 N). Reajustados a los apartados realmente pedidos (σE/εE leer del diagrama, E = σE/εE, descripción de la zona plástica). Trazabilidad: AUDITORIA_COHERENCIA_v2_7_1.md §3.2/§5.2. -->
+<div class="img-container diagrama-enunciado" style="margin:12px 0;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 320" style="max-width:520px;width:100%;height:auto;background:#fff;border-radius:5px;box-shadow:0 2px 12px rgba(0,0,0,.12);font-family:Barlow,sans-serif;">
+  <!-- Ejes -->
+  <line x1="60" y1="280" x2="490" y2="280" stroke="#1A2430" stroke-width="1.5" marker-end="url(#arr5)"/>
+  <line x1="60" y1="280" x2="60" y2="20" stroke="#1A2430" stroke-width="1.5" marker-end="url(#arr5)"/>
+  <defs><marker id="arr5" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#1A2430"/></marker></defs>
+  <!-- Etiquetas ejes -->
+  <text x="480" y="300" font-size="13" fill="#1B4F8A" font-style="italic">ε</text>
+  <text x="30" y="30" font-size="13" fill="#1B4F8A" font-style="italic">σ (MPa)</text>
+  <!-- Zona elástica (lineal) -->
+  <polyline points="60,280 130,160" fill="none" stroke="#1B4F8A" stroke-width="2.2"/>
+  <!-- Punto A (límite elástico) -->
+  <circle cx="130" cy="160" r="5" fill="#D4700A" stroke="#fff" stroke-width="1.5"/>
+  <text x="138" y="155" font-size="12" font-weight="700" fill="#D4700A">A</text>
+  <!-- Zona plástica -->
+  <path d="M130,160 C160,140 200,105 260,90 Q320,78 370,82 Q410,86 430,100 Q445,115 450,140" fill="none" stroke="#1B4F8A" stroke-width="2.2"/>
+  <!-- Punto de rotura -->
+  <circle cx="450" cy="140" r="4" fill="#C0321E" stroke="#fff" stroke-width="1.5"/>
+  <text x="440" y="165" font-size="11" fill="#C0321E" font-weight="600">Rotura</text>
+  <!-- Líneas de referencia punteadas para punto A -->
+  <line x1="60" y1="160" x2="130" y2="160" stroke="#999" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <line x1="130" y1="280" x2="130" y2="160" stroke="#999" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <!-- Etiquetas sin valores numéricos -->
+  <text x="32" y="164" font-size="10" fill="#666">σ<tspan baseline-shift="sub" font-size="8">E</tspan></text>
+  <text x="122" y="296" font-size="10" fill="#666">ε<tspan baseline-shift="sub" font-size="8">E</tspan></text>
+  <!-- Zona labels -->
+  <text x="75" y="240" font-size="9" fill="#1A6B3A" font-weight="600">Zona</text>
+  <text x="72" y="252" font-size="9" fill="#1A6B3A" font-weight="600">elástica</text>
+  <text x="250" y="65" font-size="9" fill="#D4700A" font-weight="600">Zona plástica</text>
+</svg>
+<div class="img-caption" style="text-align:center;font-size:9pt;color:#555;margin-top:4px;">Diagrama σ-ε del enunciado (valores a leer del gráfico).</div>
+</div>
+
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<!-- Diagrama-solución SVG con anotaciones (v2.9.1 — sustituye al PNG base64 obsoleto) -->
+<div class="img-container diagrama-solucion" style="margin:8px 0;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 320" style="max-width:520px;width:100%;height:auto;background:#fff;border-radius:5px;box-shadow:0 2px 12px rgba(0,0,0,.12);font-family:Barlow,sans-serif;">
+  <!-- Ejes -->
+  <line x1="60" y1="280" x2="490" y2="280" stroke="#1A2430" stroke-width="1.5" marker-end="url(#arr5s)"/>
+  <line x1="60" y1="280" x2="60" y2="20" stroke="#1A2430" stroke-width="1.5" marker-end="url(#arr5s)"/>
+  <defs><marker id="arr5s" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#1A2430"/></marker></defs>
+  <!-- Etiquetas ejes -->
+  <text x="300" y="310" font-size="12" fill="#1B4F8A" text-anchor="middle">Deformación ε</text>
+  <text x="18" y="150" font-size="12" fill="#1B4F8A" text-anchor="middle" transform="rotate(-90 18 150)">Tensión σ (MPa)</text>
+  <!-- Escala eje Y: marcas -->
+  <line x1="56" y1="220" x2="60" y2="220" stroke="#1A2430" stroke-width="1"/>
+  <text x="52" y="224" font-size="9" fill="#666" text-anchor="end">100</text>
+  <line x1="56" y1="160" x2="60" y2="160" stroke="#1A2430" stroke-width="1"/>
+  <text x="52" y="164" font-size="9" fill="#666" text-anchor="end">200</text>
+  <line x1="56" y1="100" x2="60" y2="100" stroke="#1A2430" stroke-width="1"/>
+  <text x="52" y="104" font-size="9" fill="#666" text-anchor="end">300</text>
+  <line x1="56" y1="40" x2="60" y2="40" stroke="#1A2430" stroke-width="1"/>
+  <text x="52" y="44" font-size="9" fill="#666" text-anchor="end">400</text>
+  <!-- Marca 250 MPa (σ_E) -->
+  <line x1="56" y1="130" x2="60" y2="130" stroke="#D4700A" stroke-width="1.2"/>
+  <text x="52" y="134" font-size="9" fill="#D4700A" font-weight="600" text-anchor="end">250</text>
+  <!-- Zona elástica (lineal): de (60,280) a punto A (130,130) -->
+  <!-- ε_E = 0,00119 es muy pequeño; en la escala del gráfico se exagera para visibilidad -->
+  <polyline points="60,280 130,130" fill="none" stroke="#1B4F8A" stroke-width="2.2"/>
+  <!-- Zona plástica: de A hasta rotura -->
+  <path d="M130,130 C160,110 200,80 260,65 Q320,53 370,57 Q410,62 430,78 Q445,93 450,118" fill="none" stroke="#1B4F8A" stroke-width="2.2"/>
+  <!-- ====== ANOTACIONES DE SOLUCIÓN ====== -->
+  <!-- Líneas punteadas de proyección del punto A -->
+  <line x1="60" y1="130" x2="130" y2="130" stroke="#D4700A" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="130" y1="280" x2="130" y2="130" stroke="#D4700A" stroke-width="1" stroke-dasharray="4,3"/>
+  <!-- Punto A con etiqueta de valores -->
+  <circle cx="130" cy="130" r="5.5" fill="#D4700A" stroke="#fff" stroke-width="1.5"/>
+  <text x="140" y="122" font-size="11" font-weight="700" fill="#D4700A">A</text>
+  <text x="140" y="137" font-size="9" fill="#D4700A">(σ</text>
+  <text x="148" y="137" font-size="7" fill="#D4700A" baseline-shift="sub">E</text>
+  <text x="155" y="137" font-size="9" fill="#D4700A">= 250 MPa)</text>
+  <text x="140" y="150" font-size="9" fill="#D4700A">(ε</text>
+  <text x="148" y="150" font-size="7" fill="#D4700A" baseline-shift="sub">E</text>
+  <text x="155" y="150" font-size="9" fill="#D4700A">= 0,00119)</text>
+  <!-- Marca ε_E en eje X -->
+  <text x="122" y="296" font-size="8" fill="#D4700A" text-anchor="middle">ε</text>
+  <text x="130" y="296" font-size="6" fill="#D4700A" baseline-shift="sub">E</text>
+  <!-- Punto de rotura -->
+  <circle cx="450" cy="118" r="4" fill="#C0321E" stroke="#fff" stroke-width="1.5"/>
+  <text x="428" y="108" font-size="10" fill="#C0321E" font-weight="600">Rotura</text>
+  <!-- Etiquetas de zonas -->
+  <text x="72" y="225" font-size="10" fill="#1A6B3A" font-weight="600">Zona</text>
+  <text x="69" y="238" font-size="10" fill="#1A6B3A" font-weight="600">elástica</text>
+  <text x="72" y="251" font-size="9" fill="#1A6B3A" font-style="italic">(lineal)</text>
+  <text x="260" y="40" font-size="10" fill="#C0321E" font-weight="600">Zona plástica</text>
+  <text x="260" y="53" font-size="9" fill="#C0321E" font-style="italic">(def. permanente)</text>
+  <!-- Cálculo de E (cuadro resaltado arriba-derecha) -->
+  <rect x="295" y="260" width="195" height="38" rx="4" fill="#FEF0DF" stroke="#D4700A" stroke-width="0.8"/>
+  <text x="392" y="276" font-size="9.5" fill="#1A2430" text-anchor="middle" font-weight="600">E = σ</text>
+  <text x="410" y="276" font-size="7" fill="#1A2430" baseline-shift="sub">E</text>
+  <text x="416" y="276" font-size="9.5" fill="#1A2430"> / ε</text>
+  <text x="432" y="276" font-size="7" fill="#1A2430" baseline-shift="sub">E</text>
+  <text x="392" y="292" font-size="10" fill="#1B4F8A" text-anchor="middle" font-weight="700">= 250 / 0,00119 ≈ 210 GPa</text>
+</svg>
+<div class="img-caption" style="text-align:center;font-size:9pt;color:#555;margin-top:4px;">Diagrama σ-ε resuelto: punto A con valores, cálculo de E y zonas identificadas.</div>
+</div>
+
+<h4>Apartado a — Lectura del diagrama en el punto A</h4>
+<div class="solucion">
+<p>Del gráfico σ-ε, en el punto A (límite elástico) se leen directamente:</p>
+<p><span class="math display">\[\sigma_{E}\ \approx\ 250\ \text{MPa} \qquad \varepsilon_{E}\ \approx\ 0{,}00119\]</span></p>
+</div>
+<div class="resultado"><strong>→ \(\sigma_E \approx 250\) MPa · \(\varepsilon_E \approx 0{,}00119\)</strong> (valores leídos directamente sobre el diagrama)</div>
+<h4>Apartado b — Módulo de elasticidad</h4>
+<div class="solucion">
+<p>El módulo de elasticidad es la pendiente de la recta en zona elástica:</p>
+<p><span class="math display">\[E\ =\ \dfrac{\sigma_{E}}{\varepsilon_{E}}\ =\ \dfrac{250\ \text{MPa}}{0{,}00119}\ =\ 210\,084\ \text{MPa}\ \approx\ 210\ \text{GPa}\]</span></p>
+</div>
+<div class="resultado"><strong>→ E ≈ 210 GPa</strong> (la pendiente de la zona lineal del diagrama σ-ε es el módulo de elasticidad)</div>
+<h4>Apartado c — Zona a la derecha del punto A</h4>
+<div class="solucion">
+<p>A la derecha del punto A, el material entra en <strong>zona plástica</strong>: la relación σ-ε deja de ser lineal, la ley de Hooke ya no es válida y la curva se aplana (incluso aparece fluencia). Si la carga se retira, la probeta no recupera su longitud inicial: conserva una <strong>deformación permanente</strong> (alargamiento residual).</p>
+<p>Si se sigue aumentando σ, el material alcanza la resistencia a tracción σ<sub>R</sub> y, tras ella, se produce la estricción y finalmente la rotura.</p>
+</div>
+<div class="resultado"><strong>→ Zona plástica: deformación permanente, ya no rige la ley de Hooke.</strong></div>
+<div class="solucion">
+<p><strong>⚠ <em>La pendiente de la zona lineal del diagrama σ-ε ES el módulo de elasticidad E.</em></strong></p>
+<p><strong>⚠ <em>Leer siempre σ<sub>E</sub> y ε<sub>E</sub> del PUNTO A (límite elástico), no de cualquier punto de la curva.</em></strong></p>
+<p><strong>⚠ <em>A la derecha del punto A: zona plástica → deformación irreversible.</em></strong></p>
+</div>
+</details>
+</div>
+<div class="seccion" id="ex_6">
+  <div class="sec-hdr">
+    <div class="sec-num">6</div>
+    <div class="sec-tit">Eje de transmisión — Coeficiente de seguridad<span class="difficulty" aria-label="Dificultad ★★★">★★★</span></div>
+  </div>
+  <p>Una empresa de maquinaria agrícola monta un eje cilíndrico de acero
+de d = 30 mm de diámetro y L = 400 mm de longitud sujeto a tracción
+axial. El acero tiene σ<sub>E</sub> = 280 MPa, σ<sub>r</sub> = 480 MPa y
+E = 210 GPa. Se aplica una carga F = 120 kN.</p>
+<p>a) Calcula la tensión de trabajo σ e indica si el eje trabaja en zona
+elástica.</p>
+<p>b) Calcula el coeficiente de seguridad real n respecto al límite
+elástico. ¿Es suficiente para uso industrial (en la industria se exige
+un coeficiente de seguridad ≥ 2)?</p>
+<p>c) Calcula la carga máxima admisible F<sub>adm</sub> con n = 2 y el
+alargamiento ΔL que produciría esa carga.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Tensión de trabajo y zona elástica</h4>
+<div class="solucion">
+<p><span class="math display">\[A\  = \ \frac{\pi \cdot d^2}{4} = \
+\frac{\pi \times (30)^2}{4} = \ 706,9\ mm^2\]</span></p>
+<p><span class="math display">\[\sigma\  = \ \frac{F}{A} = \ \frac{120\
+000\ N}{706,9\ mm^2} = \ 169,8\ MPa\ \  &lt; \ \ \sigma_{E}\  = \ 280\
+MPa\ \  \rightarrow \ \ zona\ elástica\ ✓\]</span></p>
+</div>
+<div class="resultado"><strong>→ σ = 169,8 MPa El eje trabaja en zona
+elástica</strong></div>
+<h4>Apartado b — Coeficiente de seguridad real</h4>
+<div class="solucion">
+<p><span class="math display">\[n\  = \ \frac{\sigma_{E}}{\sigma} = \
+\frac{280\ MPa}{169,8\ MPa} = \ 1,65\]</span></p>
+<p>n = 1,65 &lt; 2 → INSUFICIENTE para uso industrial. Hay que aumentar
+diámetro o mejorar material.</p>
+</div>
+<div class="resultado"><strong>→ n<sub>real</sub></strong> = 1,65 → insuficiente (se exige
+n ≥ 2)</div>
+<h4>Apartado c — Carga admisible y alargamiento con n =
+2</h4>
+<div class="solucion">
+<p><span class="math display">\[\sigma adm\  = \ \frac{\sigma_{E}}{n} =
+\ \frac{280}{2} = \ 140\ MPa\]</span></p>
+<p><span class="math display">\[F_{adm}\  = \ \sigma_{adm} \cdot A\  = \
+140\ MPa\  \times \ 706,9\ mm^2\  = \ 98\ 970\ N\  \approx \ 99\
+kN\]</span></p>
+<p><span class="math display">\[\Delta L\  = \ \frac{\sigma_{adm} \cdot
+L}{E} = \ \frac{140\ MPa\  \times \ 400\ mm}{210\ 000\ MPa} = \ 0,267\
+mm\]</span></p>
+</div>
+<div class="resultado"><strong>→ F<sub>adm</sub></strong> ≈ 99 kN · ΔL = 0,267 mm</div>
+<div class="solucion">
+<p><strong>⚠ <em>n = σ</em></strong><sub>E</sub>/σ<sub>trabajo</sub>
+(respecto al LÍMITE ELÁSTICO, nunca respecto a σ<sub>r</sub>).</p>
+<p><strong>⚠ <em>σ</em></strong><sub>adm</sub> = σ<sub>E</sub>/n →
+F<sub>adm</sub> = σ<sub>adm</sub> × A. Despejar σ<sub>adm</sub> primero,
+luego multiplicar.</p>
+<p><strong>⚠ <em>Si E en MPa y L en mm → ΔL en mm directamente. No
+mezclar unidades.</em></strong></p>
+</div>
+</details>
+</div>
+<div class="seccion" id="ex_7">
+  <div class="sec-hdr">
+    <div class="sec-num">7</div>
+    <div class="sec-tit">Estricción y tracción completa [PAU 2025/1B Suplente 1A]<span class="difficulty" aria-label="Dificultad ★★">★★</span></div>
+  </div>
+  <p>Una empresa ensaya a tracción una varilla cilíndrica de latón: D₀ =
+10 mm, L = 1 m, σ<sub>E</sub> = 250 MPa, E = 120 GPa. Al romper, el
+diámetro en la zona de rotura queda reducido a D<sub>f</sub> = 6,1
+mm.</p>
+<p>a) ¿Sufre deformación permanente con F = 2000 N?</p>
+<p>b) Calcular el alargamiento unitario con F = 1000 N.</p>
+<p>c) Calcular la estricción a la rotura.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>📋 Datos previos</h4>
+<div class="solucion">
+<p>\(A_0 = \pi \cdot 10^2 / 4 = 78{,}54\) mm² \(\quad A_f = \pi \cdot 6{,}1^2 / 4 = 29{,}22\) mm²</p>
+</div>
+<h4>Apartado a — Deformación permanente con F = 2000
+N</h4>
+<div class="solucion">
+<p>σ = 2000/78,54 ≈ 25,5 MPa &lt; σ<sub>E</sub> = 250 MPa → zona
+ELÁSTICA → NO hay deformación permanente.</p>
+</div>
+<h4>Apartado b — Alargamiento unitario con F = 1000
+N</h4>
+<div class="solucion">
+<p>σ₂ = 1000/78,54 ≈ 12,73 MPa ε = σ₂/E = 12,73/120 000 ≈ 1,06×10⁻⁴</p>
+</div>
+<div class="resultado"><strong>→ ε ≈ 1,06×10⁻⁴</strong></div>
+<h4>Apartado c — Estricción a la rotura</h4>
+<div class="solucion">
+<p>ψ = (A₀ − A<sub>f</sub>) / A₀ × 100 = (78,54 − 29,22) / 78,54 × 100 =
+49,32 / 78,54 × 100 ≈ 62,8 %</p>
+</div>
+</details>
+</div>
+<div class="seccion" id="ex_8">
+  <div class="sec-hdr">
+    <div class="sec-num">8</div>
+    <div class="sec-tit">Brinell inverso y cambio de penetrador [PAU tipo B1]<span class="difficulty" aria-label="Dificultad ★★">★★</span></div>
+  </div>
+  <p>En el taller de metrología de Almería se ensaya una pieza metálica.
+Se sabe que la dureza Brinell del material es HB = 150 kp/mm². El primer
+ensayo se realiza con una bola de 10 mm de diámetro y una constante de
+ensayo K = 30 kp/mm².</p>
+<p>a) Calcular la carga F que se aplicó en el primer ensayo y el
+diámetro de la huella obtenida. Expresar el resultado de forma
+normalizada.</p>
+<p>b) Se repite el ensayo sobre el mismo material cambiando el
+penetrador a una bola de 5 mm de diámetro. Determinar la carga que debe
+aplicarse y el diámetro de la huella resultante.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Carga y diámetro de huella (diseño
+inverso)</h4>
+<div class="solucion">
+<p>La carga se obtiene de la definición de \(K\): \(F = K \cdot D^2\)</p>
+<p><span class="math display">\[F\  = \ K\  \cdot \ D^2\  = \ 30\  \times
+\ 10^2\  = \ 3000\ kp\]</span></p>
+<p>Despejar \(d\) de la fórmula \(\mathrm{HB} = 2F / [\pi \cdot D \cdot (D - \sqrt{D^2 - d^2})]\). Resultado
+directo vía área del casquete:</p>
+<p><span class="math display">\[A_{casquete}\  = \ F/HB\  = \
+3000/150\  = \ 20\ mm^2\ \ \  \Rightarrow \ \ \ \pi \cdot D \cdot h\  = \
+20\ \  \Rightarrow \ \ h\  = \ 20/(\pi \times 10)\  = \ 0,637\
+mm\]</span></p>
+<p><span class="math display">\[d\  = \ \sqrt{D^2\  - \ (D - 2h)^2}\  =
+\ \sqrt{100 - (10 - 1,274)^2}\  = \ \sqrt{100 - 76,14}\  = \
+\sqrt{23,86}\  = \ 4,88\ mm\]</span></p>
+<p>Verificación: d/D = 4,88/10 = 0,488 ⇒ está en el rango 0,24–0,60 ⇒
+ensayo válido ✓</p>
+<p>Notación normalizada: 150 HB 10/3000/15</p>
+</div>
+<h4>Apartado b — Cambio de penetrador (D₂ = 5 mm)</h4>
+<div class="solucion">
+<p>La constante K es propiedad del material, no del penetrador ⇒ K = 30
+kp/mm² se mantiene.</p>
+<p><span class="math display">\[F_2\  = \ K\  \cdot \ D_2^2\  = \
+30\  \times \ 5^2\  = \ 750\ kp\]</span></p>
+<p><span class="math display">\[d_2\  = \ d_1\  \times \ (D_2/D_1)\  = \
+4,88\  \times \ (5/10)\  = \ 2,44\ mm\]</span></p>
+</div>
+<div class="resultado"><strong>→ F₁=3000 kp · d₁=4,88 mm · 150 HB 10/3000/15 · D₂=5mm:
+F₂=750 kp · d₂=2,44 mm</strong></div>
+<p><em>⚠ Diseño inverso Brinell: \(F = K \cdot D^2\) ⇒ despeja \(F\) directo. Para
+despejar d: A</em><sub>casquete</sub> = F/HB, luego h = A/(π·D), luego d
+\(= \sqrt{D^2 - (D - 2h)^2}\). Al cambiar \(D\), \(K\) no cambia (es del material): \(F_2 = K \cdot D_2^2\) y
+d₂=d₁·(D₂/D₁).</p>
+</details>
+</div>
+<div class="seccion" id="ex_9">
+  <div class="sec-hdr">
+    <div class="sec-num">9</div>
+    <div class="sec-tit">Vickers antes y después de temple [PAU tipo B1]<span class="difficulty" aria-label="Dificultad ★">★</span></div>
+  </div>
+  <p>Una pieza de acero de Córdoba se somete a un ensayo de dureza Vickers
+aplicando una carga de 200 kp durante 15 s. La diagonal de la huella
+obtenida es d₁ = 1,25 mm. Tras someter la pieza a un tratamiento térmico
+de temple, se repite el ensayo con la misma carga y la diagonal de la
+nueva huella es d₂ = 0,9 mm.</p>
+<p>a) Calcular la superficie de la huella y la dureza Vickers antes del
+tratamiento. Expresar el resultado normalizado.</p>
+<p>b) Calcular la dureza Vickers después del temple. Expresar
+normalizado y justificar qué ha ocurrido con la dureza.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Antes del temple (d₁ = 1,25 mm)</h4>
+<div class="solucion">
+<p><span class="math display">\[HV\  = \ \frac{1{,}854 \cdot F}{d^2} = \ \frac{1{,}854 \times 200}{(1{,}25)^2} = \ \frac{370{,}8}{1{,}5625} \approx \ 237{,}3\ kp/mm^2\]</span></p>
+<p>Notación normalizada: 237 HV 200/15</p>
+</div>
+<h4>Apartado b — Después del temple (d₂ = 0,9 mm)</h4>
+<div class="solucion">
+<p><span class="math display">\[HV_2\  = \ \frac{1{,}854 \cdot F}{d_2^2} = \ \frac{1{,}854 \times 200}{(0{,}9)^2} = \ \frac{370{,}8}{0{,}81} \approx \ 457{,}8\ kp/mm^2\]</span></p>
+<p>Notación normalizada: 458 HV 200/15</p>
+</div>
+<div class="resultado"><strong>→ Antes: 237 HV 200/15 · Después temple: 458
+HV 200/15 · El temple aumenta la dureza al reducir la
+diagonal</strong></div>
+<p><em>⚠ Fórmula Vickers: \(\mathrm{HV} = 1{,}8544 \cdot F/d^2\) (\(F\) en kp, \(d\) = diagonal media de la huella en mm). El temple endurece el acero: la huella es menor ⇒ d menor ⇒ HV
+mayor. La notación HV F/t incluye carga en kp y tiempo en
+segundos.</em></p>
+</details>
+</div>
+<div class="seccion" id="ex_10">
+  <div class="sec-hdr">
+    <div class="sec-num">10</div>
+    <div class="sec-tit">Charpy: calcular sección desde resiliencia [PAU tipo B1]<span class="difficulty" aria-label="Dificultad ★">★</span></div>
+  </div>
+  <p>En un ensayo Charpy realizado en una planta industrial de Janús, el
+martillo de 50 kg de masa cae desde una altura de 1,6 m y después de
+romper la probeta se eleva 60 cm. La resiliencia del material ensayado
+es 75 J/cm².</p>
+<p>a) Calcular la energía absorbida por la probeta durante la
+rotura.</p>
+<p>b) Determinar la sección transversal de la probeta en la zona de
+rotura.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Energía absorbida</h4>
+<div class="solucion">
+<p><span class="math display">\[E_{abs}\  = \ m \cdot g \cdot (h_1\  - \
+h_2)\  = \ 50\  \times \ 9,8\  \times \ (1,6\  - \ 0,6)\  = \ 50\  \times
+\ 9,8\  \times \ 1,0\  = \ 490\ J\]</span></p>
+</div>
+<h4>Apartado b — Sección de la probeta (diseño
+inverso)</h4>
+<div class="solucion">
+<p>Resiliencia = E<sub>abs</sub> / S ⇒ despejando S:</p>
+<p><span class="math display">\[S\  = \ E_{abs}\ /\ \rho\  = \ 490\ J\
+/\ (75\ J/cm^2)\  = \ 6,53\ cm^2\]</span></p>
+</div>
+<div class="resultado"><strong>→ E</strong><sub>abs</sub> = 490 J · S = 6,53 cm²</div>
+<p><em>⚠ Diseño inverso Charpy: K</em><sub>c</sub> = E<sub>abs</sub>/S ⇒
+S = E<sub>abs</sub>/ρ. Cuidado con las unidades: si ρ está en J/cm²,
+E<sub>abs</sub> debe estar en J y S saldrá en cm². Si ρ está en J/mm²,
+convertir S a mm² (1 cm² = 100 mm²).</p>
+</details>
+</div>
+<div class="seccion" id="ex_11">
+  <div class="sec-hdr">
+    <div class="sec-num">11</div>
+    <div class="sec-tit">¿Deformación permanente? [PAU tipo B1]<span class="difficulty" aria-label="Dificultad ★★">★★</span></div>
+  </div>
+  <p>Una varilla de latón de 5 mm de diámetro y límite elástico
+σ<sub>e</sub> = 200 MPa se somete a una fuerza de tracción de 3000 N. El
+módulo de elasticidad del latón es E = 100 GPa.</p>
+<p>a) Calcular la tensión aplicada y determinar, justificadamente, si la
+varilla sufrirá deformación permanente al cesar la fuerza.</p>
+<p>b) Calcular el diámetro mínimo que debe tener la varilla para que la
+misma fuerza no provoque deformación permanente.</p>
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Tensión aplicada y diagnóstico</h4>
+<div class="solucion">
+<p><span class="math display">\[A\  = \ \pi d^2/4\  = \ \pi \times (5
+\times 10^{-3})^2/4\  = \ 19,63 \times 10^{-6}\ m^2\  = \ 19,63\
+mm^2\]</span></p>
+<p><span class="math display">\[\sigma\  = \ F/A\  = \ 3000/(19,63
+\times 10^{-6})\  = \ 152,9 \times 10^6\ Pa\  = \ 152,9\ MPa\]</span></p>
+<p>Como σ = 152,9 MPa &lt; σ<sub>e = 200 MPa ⇒ la varilla permanece en
+zona elástica ⇒ NO hay deformación permanente: al cesar F recupera su
+longitud original.</sub></p>
+</div>
+<h4>Apartado b — Diámetro mínimo para no superar el límite
+elástico</h4>
+<div class="solucion">
+<p>Condición: σ<sub>max</sub> = σ<sub>e ⇒ F/Amin</sub> = σ<sub>e</sub> ⇒
+A<sub>min</sub> = F/σe</p>
+<p><span class="math display">\[A_{\min}\  = \ F/\sigma_{e}\  = \
+3000/(200 \times 10^6)\  = \ 15 \times 10^{-6}\ m^2\  = \ 15\
+mm^2\]</span></p>
+<p><span class="math display">\[d_{\min}\  = \ \sqrt{4 \cdot
+A_{\min}/\pi}\  = \ \sqrt{4 \times 15/\pi}\  = \ \sqrt{19,10}\  = \
+4,37\ mm\]</span></p>
+</div>
+<div class="resultado"><strong>→ σ=152,9 MPa &lt; σ</strong><sub>e</sub>=200 MPa ⇒ NO hay
+deformación permanente · d<sub>min</sub> = 4,37 mm</div>
+<p><em>⚠ Criterio de deformación permanente: si
+σ</em><sub>aplicada</sub> &lt; σ<sub>e</sub> ⇒ zona elástica ⇒
+deformación reversible. Si σ<sub>aplicada</sub> ≥ σ<sub>e</sub> ⇒ zona
+plástica ⇒ deformación permanente. El diámetro mínimo se obtiene
+imponiendo σ = σ<sub>e</sub> como límite.</p>
+</details>
+</div>
+<div class="seccion" id="ex_12">
+  <div class="sec-hdr">
+    <div class="sec-num">12</div>
+    <div class="sec-tit">Tenacidad y curva σ-ε [Ponencia B1]<span class="difficulty" aria-label="Dificultad ★★★">★★★</span></div>
+  </div>
+  <p>En un ensayo de tracción sobre una probeta de acero estructural de
+Granada se obtienen: límite elástico σ<sub>e</sub> = 250 MPa,
+resistencia a tracción σ<sub>R</sub> = 480 MPa, deformación en rotura
+ε<sub>R</sub> = 0,22 y módulo de Young E = 210 GPa.</p>
+<p>a) Calcular la deformación unitaria en el límite elástico e
+identificar las zonas de la curva σ-ε.</p>
+<p>b) Estimar la tenacidad del material (energía por unidad de volumen
+hasta rotura) aproximando la curva como un trapézoide. Indicar sus
+unidades e interpretar el resultado.</p>
+<p>c) Indicar si el material es frágil o dúctil y justificar cómo se
+refleja eso en la curva σ-ε.</p>
+
+<div class="img-container diagrama-enunciado" style="margin:12px 0;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 320" style="max-width:520px;width:100%;height:auto;background:#fff;border-radius:5px;box-shadow:0 2px 12px rgba(0,0,0,.12);font-family:Barlow,sans-serif;">
+  <!-- Ejes -->
+  <line x1="60" y1="280" x2="490" y2="280" stroke="#1A2430" stroke-width="1.5" marker-end="url(#arr12)"/>
+  <line x1="60" y1="280" x2="60" y2="20" stroke="#1A2430" stroke-width="1.5" marker-end="url(#arr12)"/>
+  <defs><marker id="arr12" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#1A2430"/></marker></defs>
+  <!-- Etiquetas ejes -->
+  <text x="480" y="300" font-size="13" fill="#1B4F8A" font-style="italic">ε</text>
+  <text x="30" y="30" font-size="13" fill="#1B4F8A" font-style="italic">σ (MPa)</text>
+  <!-- Zona elástica (lineal, muy empinada para E=210 GPa) -->
+  <polyline points="60,280 68,168" fill="none" stroke="#1B4F8A" stroke-width="2.2"/>
+  <!-- Punto A (límite elástico) — ε_e muy pequeño -->
+  <circle cx="68" cy="168" r="5" fill="#D4700A" stroke="#fff" stroke-width="1.5"/>
+  <text x="76" y="163" font-size="12" font-weight="700" fill="#D4700A">A (σ<tspan baseline-shift="sub" font-size="9">e</tspan>)</text>
+  <!-- Zona plástica larga (ε_R = 0.22, muy ductil) -->
+  <path d="M68,168 C100,148 160,90 240,72 Q320,60 380,68 Q420,78 440,100 Q455,120 460,150" fill="none" stroke="#1B4F8A" stroke-width="2.2"/>
+  <!-- Punto de rotura -->
+  <circle cx="460" cy="150" r="4" fill="#C0321E" stroke="#fff" stroke-width="1.5"/>
+  <text x="435" y="175" font-size="11" fill="#C0321E" font-weight="600">Rotura</text>
+  <!-- Líneas de referencia -->
+  <line x1="60" y1="168" x2="68" y2="168" stroke="#999" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <line x1="60" y1="72" x2="240" y2="72" stroke="#999" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <!-- Etiquetas eje σ -->
+  <text x="28" y="172" font-size="10" fill="#666">σ<tspan baseline-shift="sub" font-size="8">e</tspan></text>
+  <text x="28" y="76" font-size="10" fill="#666">σ<tspan baseline-shift="sub" font-size="8">R</tspan></text>
+  <!-- Etiquetas eje ε -->
+  <text x="55" y="296" font-size="10" fill="#666">ε<tspan baseline-shift="sub" font-size="8">e</tspan></text>
+  <text x="448" y="296" font-size="10" fill="#666">ε<tspan baseline-shift="sub" font-size="8">R</tspan></text>
+  <line x1="460" y1="280" x2="460" y2="150" stroke="#999" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <!-- Área bajo la curva (tenacidad) sombreada suave -->
+  <path d="M60,280 L68,168 C100,148 160,90 240,72 Q320,60 380,68 Q420,78 440,100 Q455,120 460,150 L460,280 Z" fill="rgba(27,79,138,0.08)" stroke="none"/>
+  <!-- Texto orientativo -->
+  <text x="200" y="245" font-size="9" fill="#1B4F8A" font-weight="600" opacity="0.6">Tenacidad ≈ área bajo la curva</text>
+</svg>
+<div class="img-caption" style="text-align:center;font-size:9pt;color:#555;margin-top:4px;">Diagrama σ-ε del enunciado (curva esquemática de acero dúctil).</div>
+</div>
+
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<!-- Diagrama-solución con anotaciones (dentro del desplegable) -->
+<div class="img-container diagrama-solucion">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 320" style="max-width:520px;width:100%;height:auto;background:#fff;border-radius:5px;box-shadow:0 2px 12px rgba(0,0,0,.12);font-family:Barlow,sans-serif;">
+  <defs>
+    <marker id="arr12s" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#1A2430"/></marker>
+  </defs>
+  <!-- Área plástica (trapezoide) primero para quedar detrás -->
+  <path d="M68,168 C100,148 160,90 240,72 Q320,60 380,68 Q420,78 440,100 Q455,120 460,150 L460,280 L68,280 Z" fill="rgba(212,112,10,0.22)" stroke="none"/>
+  <!-- Área elástica (triángulo) encima -->
+  <path d="M60,280 L68,168 L68,280 Z" fill="rgba(27,79,138,0.35)" stroke="none"/>
+  <!-- Ejes -->
+  <line x1="60" y1="280" x2="490" y2="280" stroke="#1A2430" stroke-width="1.5" marker-end="url(#arr12s)"/>
+  <line x1="60" y1="280" x2="60" y2="20" stroke="#1A2430" stroke-width="1.5" marker-end="url(#arr12s)"/>
+  <text x="480" y="300" font-size="13" fill="#1B4F8A" font-style="italic">ε</text>
+  <text x="30" y="30" font-size="13" fill="#1B4F8A" font-style="italic">σ (MPa)</text>
+  <!-- Zona elástica lineal -->
+  <polyline points="60,280 68,168" fill="none" stroke="#1B4F8A" stroke-width="2.2"/>
+  <!-- Zona plástica -->
+  <path d="M68,168 C100,148 160,90 240,72 Q320,60 380,68 Q420,78 440,100 Q455,120 460,150" fill="none" stroke="#1B4F8A" stroke-width="2.2"/>
+  <!-- Punto A (límite elástico) -->
+  <circle cx="68" cy="168" r="5" fill="#D4700A" stroke="#fff" stroke-width="1.5"/>
+  <text x="76" y="157" font-size="11" font-weight="700" fill="#D4700A">A (σ<tspan baseline-shift="sub" font-size="9">E</tspan> = 250 MPa,</text>
+  <text x="88" y="170" font-size="11" font-weight="700" fill="#D4700A">ε<tspan baseline-shift="sub" font-size="9">E</tspan> = 0,00119)</text>
+  <!-- Punto Rotura -->
+  <circle cx="460" cy="150" r="5" fill="#C0321E" stroke="#fff" stroke-width="1.5"/>
+  <text x="340" y="140" font-size="11" fill="#C0321E" font-weight="700">Rotura (σ<tspan baseline-shift="sub" font-size="9">R</tspan> = 480 MPa,</text>
+  <text x="356" y="153" font-size="11" fill="#C0321E" font-weight="700">ε<tspan baseline-shift="sub" font-size="9">R</tspan> = 0,22)</text>
+  <!-- Líneas de referencia punteadas -->
+  <line x1="60" y1="168" x2="68" y2="168" stroke="#999" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <line x1="60" y1="72" x2="240" y2="72" stroke="#999" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <line x1="460" y1="280" x2="460" y2="150" stroke="#999" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <!-- Etiquetas de ejes -->
+  <text x="28" y="172" font-size="10" fill="#666">σ<tspan baseline-shift="sub" font-size="8">E</tspan></text>
+  <text x="28" y="76" font-size="10" fill="#666">σ<tspan baseline-shift="sub" font-size="8">R</tspan></text>
+  <text x="55" y="296" font-size="10" fill="#666">ε<tspan baseline-shift="sub" font-size="8">E</tspan></text>
+  <text x="448" y="296" font-size="10" fill="#666">ε<tspan baseline-shift="sub" font-size="8">R</tspan></text>
+  <!-- Anotaciones de las áreas -->
+  <text x="72" y="268" font-size="9" fill="#1B4F8A" font-weight="700">U<tspan baseline-shift="sub" font-size="7">e</tspan></text>
+  <text x="68" y="258" font-size="8" fill="#1B4F8A">triáng.</text>
+  <text x="240" y="210" font-size="10" fill="#8A4A05" font-weight="700">Zona plástica (U<tspan baseline-shift="sub" font-size="7">p</tspan> = trapezoide)</text>
+  <text x="82" y="235" font-size="9" fill="#1B4F8A" font-weight="600">Zona</text>
+  <text x="80" y="247" font-size="9" fill="#1B4F8A" font-weight="600">elástica</text>
+  <!-- Anotación total U_t -->
+  <rect x="298" y="25" width="210" height="46" fill="#F7ECDC" stroke="#D4700A" stroke-width="1" rx="4"/>
+  <text x="308" y="42" font-size="11" fill="#8A4A05" font-weight="700">Tenacidad total:</text>
+  <text x="308" y="58" font-size="10" fill="#1A2430">U<tspan baseline-shift="sub" font-size="8">t</tspan> = U<tspan baseline-shift="sub" font-size="8">e</tspan> + U<tspan baseline-shift="sub" font-size="8">p</tspan> ≈ 0,15 + 79,9</text>
+  <text x="308" y="70" font-size="10" fill="#1A2430" font-weight="700">≈ 80 MJ/m³</text>
+  <!-- Leyenda inferior -->
+  <g transform="translate(70,304)">
+    <rect width="10" height="10" fill="rgba(27,79,138,0.35)" stroke="#1B4F8A" stroke-width="0.6"/>
+    <text x="14" y="9" font-size="9" fill="#1A2430">U<tspan baseline-shift="sub" font-size="7">e</tspan> (elástica)</text>
+    <rect x="110" width="10" height="10" fill="rgba(212,112,10,0.22)" stroke="#D4700A" stroke-width="0.6"/>
+    <text x="124" y="9" font-size="9" fill="#1A2430">U<tspan baseline-shift="sub" font-size="7">p</tspan> (plástica)</text>
+    <circle cx="225" cy="5" r="4" fill="#D4700A"/><text x="234" y="9" font-size="9" fill="#1A2430">Límite elástico</text>
+    <circle cx="340" cy="5" r="4" fill="#C0321E"/><text x="349" y="9" font-size="9" fill="#1A2430">Rotura</text>
+  </g>
+</svg>
+<div class="img-caption" style="text-align:center;font-size:9pt;color:#555;margin-top:4px;">Solución gráfica: áreas sombreadas bajo la curva σ-ε (U<sub>e</sub> triángulo + U<sub>p</sub> trapezoide ≈ U<sub>t</sub>).</div>
+</div>
+
+<h4>Apartado a — Deformación elástica y zonas</h4>
+<div class="solucion">
+<p><span class="math display">\[\varepsilon_{e}\  = \ \sigma_{e}\ /\
+E\  = \ 250 \times 10^6\ /\ (210 \times 10^9)\  = \ 1,190 \times 10^{-3}\  =
+\ 0,00119\]</span></p>
+<p>Zonas: zona elástica lineal (0 a εe = 0,00119); zona plástica
+(ε<sub>e</sub> a ε<sub>R</sub> = 0,22). La zona plástica es mucho mayor
+que la elástica ⇒ material dúctil.</p>
+</div>
+<h4>Apartado b — Tenacidad (área bajo la curva)</h4>
+<div class="solucion">
+<p><span class="math display">\[U_{e}\  = \ ½ \cdot \sigma_{e} \cdot
+\varepsilon_{e}\  = \ ½ \times 250 \times 10^6 \times 0,00119\  = \ 148\
+810\ J/m^3\  \approx \ 0,15\ MJ/m^3\]</span></p>
+<p><span class="math display">\[U_{p}\  = \ ½ \cdot (\sigma_{e} +
+\sigma_{R}) \cdot (\varepsilon_{R} - \varepsilon_{e})\  = \ ½ \times 730
+\times 10^6 \times 0,2188\  = \ 79,9 \times 10^6\ J/m^3\  = \ 79,9\
+MJ/m^3\]</span></p>
+<p><span class="math display">\[U_{T}\  = \ U_{e}\  + \ U_{p}\  \approx
+\ 0,15\  + \ 79,9\  = \ 80,0\ MJ/m^3\ \ \lbrack J/m^3\  = \
+Pa\rbrack\]</span></p>
+<p>Interpretación: U<sub>T</sub> = 80 MJ/m³ es la energía absorbida por
+unidad de volumen antes de la rotura. Mayor tenacidad ⇒ material más
+resistente a impactos y sobrecargas dinámicas.</p>
+</div>
+<h4>Apartado c — Frágil o dúctil</h4>
+<div class="solucion">
+<p>ε<sub>R</sub> = 0,22 (22%) es muy superior al 5% ⇒ material DÚCTIL:
+soporta gran deformación plástica antes de romper. En la curva σ-ε la
+zona plástica es amplia y se observa estriccion (caída de la curva antes
+de ε<sub>R</sub>). Un material frágil romperia con ε<sub>R</sub> &lt;
+5%, sin zona plástica apreciable y sin estriccion.</p>
+</div>
+<div class="resultado"><strong>→ ε</strong><sub>e = 0,00119 · UT</sub> = 80,0 MJ/m³ ·
+Material DUCTIL (ε<sub>R</sub> = 22% &gt; 5%)</div>
+<p><em>Aviso clave: Tenacidad = area bajo la curva s-e [J/m3]. Zona
+elastica: triangulo (1/2 se ee). Zona plastica: trapezoide con bases
+s<sub>e</sub> y s<sub>R</sub>. La contribucion elastica es despreciable
+en materiales ductiles. Ductil: eR &gt; 5%; fragil: eR &lt; 5%.</em></p>
+<!-- BORRADO v2.8: bloque residual sin sustento en enunciado. El enunciado no pide estricción ni facilita A0/Af/diámetros; los restos "ψ ≈ 62,8 %" y los dos avisos sobre estricción procedían de otro ejercicio (arrastre). Trazabilidad: AUDITORIA_COHERENCIA_v2_7_1.md §3.3/§5.3. -->
+</div>
+</details>
+</div>
+
+<div class="seccion" id="ex_13">
+  <div class="sec-hdr">
+    <div class="sec-num">13</div>
+    <div class="sec-tit">Brinell con temple — Duplicar dureza [Ponencia 2025-26, P1]<span class="difficulty" aria-label="Dificultad ★★">★★</span></div>
+  </div>
+  <p>En una carpintería metálica han comprado una plancha de acero de dureza Brinell <strong>160 HB 5 650 20</strong> para fabricar la superficie de trabajo de una mesa de carnicería. Posteriormente, el cliente les ha pedido que la mesa tenga el doble de dureza, por lo que deciden aplicarle un temple a la lámina para endurecerla. Para comprobar el efecto que este tratamiento térmico ha tenido en las propiedades de la plancha, realizan varios ensayos de dureza Brinell en la plancha antes y después del temple. Ayuda al operario que realiza los ensayos a analizar los resultados contestando las siguientes cuestiones:</p>
+<p>a) ¿Cuál es la profundidad y el diámetro de la huella que deja el ensayo normalizado en la plancha original?</p>
+<p>b) Cuando el temple haya aumentado al doble la dureza de la plancha, ¿qué fuerza habrá que aplicar al acero templado para que el ensayo de dureza Brinell deje una huella igual que en el acero sin templar?</p>
+
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Profundidad y diámetro de la huella original</h4>
+<div class="solucion">
+<p><strong>Datos de la designación normalizada 160 HB 5 650 20:</strong></p>
+<ul style="margin:6px 0 6px 24px; list-style:disc;">
+<li>HB = 160 (dureza Brinell)</li>
+<li>D = 5 mm (diámetro del penetrador esférico)</li>
+<li>F = 650 kp (fuerza aplicada)</li>
+<li>t = 20 s (tiempo de aplicación)</li>
+</ul>
+
+<p><strong>Fórmula Brinell:</strong></p>
+<p><span class="math display">\[HB = \frac{2F}{\pi \cdot D \cdot \left(D - \sqrt{D^2 - d^2}\right)}\]</span></p>
+
+<p>Despejamos el término <span class="math inline">\(\sqrt{D^2 - d^2}\)</span>:</p>
+<p><span class="math display">\[D - \sqrt{D^2 - d^2} = \frac{2F}{\pi \cdot D \cdot HB} = \frac{2 \times 650}{\pi \times 5 \times 160} = 0{,}5173 \text{ mm}\]</span></p>
+
+<p><span class="math display">\[\sqrt{D^2 - d^2} = 5 - 0{,}5173 = 4{,}4827 \text{ mm}\]</span></p>
+
+<p>Elevando al cuadrado y despejando <em>d</em>:</p>
+<p><span class="math display">\[d^2 = D^2 - 4{,}4827^2 = 25 - 20{,}095 = 4{,}905\]</span></p>
+<p><span class="math display">\[\boxed{d = \sqrt{4{,}905} = 2{,}21 \text{ mm (diámetro de la huella)}}\]</span></p>
+
+<p><strong>Profundidad de la huella:</strong></p>
+<p><span class="math display">\[h = \frac{D - \sqrt{D^2 - d^2}}{2} = \frac{5 - 4{,}4827}{2}\]</span></p>
+<p><span class="math display">\[\boxed{h = 0{,}259 \text{ mm (profundidad de la huella)}}\]</span></p>
+</div>
+
+<h4>Apartado b — Fuerza necesaria con el doble de dureza</h4>
+<div class="solucion">
+<p>Tras el temple, la nueva dureza es:</p>
+<p><span class="math display">\[HB' = 2 \times 160 = 320\]</span></p>
+
+<p>Se pide la fuerza F' para que la <strong>huella sea igual</strong> que antes del temple (mismo <em>d</em> = 2,21 mm). De la fórmula Brinell, despejamos F':</p>
+<p><span class="math display">\[F' = \frac{HB' \cdot \pi \cdot D \cdot (D - \sqrt{D^2 - d^2})}{2} = \frac{320 \times \pi \times 5 \times 0{,}5173}{2}\]</span></p>
+<p><span class="math display">\[\boxed{F' = 1\,300 \text{ kp}}\]</span></p>
+
+<p>Es decir, al duplicar la dureza se necesita <strong>el doble de fuerza</strong> para obtener la misma huella. Esto es coherente con la fórmula: a igualdad de geometría de huella, F es directamente proporcional a HB.</p>
+</div>
+
+<div class="resultado"><strong>→ d = 2,21 mm · h = 0,259 mm · F' = 1 300 kp (el doble de la original)</strong></div>
+
+<p><strong>⚠ <em>Tipo Ponencia P1: ejercicio contextualizado de Brinell. Clave: la designación normalizada da todos los datos. La relación F ∝ HB a huella constante es directa. El temple duplica la dureza ⇒ duplica la fuerza necesaria.</em></strong></p>
+</details>
+</div>
+
+<div class="seccion" id="ex_14">
+  <div class="sec-hdr">
+    <div class="sec-num">14</div>
+    <div class="sec-tit">Brinell + Vickers misma muestra — Validez ensayo [Ponencia 2025-26, P3]<span class="difficulty" aria-label="Dificultad ★★★">★★★</span></div>
+  </div>
+  <p>En un laboratorio se realiza un ensayo de dureza Brinell y otro de dureza Vickers a una misma muestra de acero que se utilizará para la fabricación de rastrillos de jardinería. Se pide:</p>
+<p>a) Determinar la expresión normalizada de la dureza Vickers si en el ensayo se emplea una punta piramidal aplicando una carga de 120 kp durante 10 segundos y se obtiene como resultado una huella con diagonales de 1,25 mm y 1,23 mm.</p>
+<p>b) Determinar la expresión normalizada de la dureza Brinell si en el ensayo se obtiene una huella de 2,5 mm de diámetro aplicando una carga de 725 kp con un penetrador de 5 mm de diámetro durante 20 segundos.</p>
+<p>c) A la vista de los datos y el resultado de ensayo de la dureza Brinell, ¿se pueden considerar válido dicho resultado?</p>
+
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Dureza Vickers normalizada</h4>
+<div class="solucion">
+<p><strong>Datos:</strong> F = 120 kp, t = 10 s, d<sub>1</sub> = 1,25 mm, d<sub>2</sub> = 1,23 mm.</p>
+
+<p>Diagonal media de la huella:</p>
+<p><span class="math display">\[d = \frac{d_1 + d_2}{2} = \frac{1{,}25 + 1{,}23}{2} = 1{,}24 \text{ mm}\]</span></p>
+
+<p>Fórmula Vickers:</p>
+<p><span class="math display">\[HV = \frac{1{,}8544 \cdot F}{d^2} = \frac{1{,}8544 \times 120}{1{,}24^2} = \frac{222{,}53}{1{,}5376} = 144{,}7\]</span></p>
+
+<p><span class="math display">\[\boxed{145 \text{ HV } 120 \text{ / } 10}\]</span></p>
+
+<p><em>Nota: como t = 10 s está dentro del rango normalizado (10–15 s), también se acepta 145 HV 120 (omitiendo el tiempo).</em></p>
+</div>
+
+<h4>Apartado b — Dureza Brinell normalizada</h4>
+<div class="solucion">
+<p><strong>Datos:</strong> d = 2,5 mm (huella), F = 725 kp, D = 5 mm (penetrador), t = 20 s.</p>
+
+<p>Fórmula Brinell:</p>
+<p><span class="math display">\[HB = \frac{2F}{\pi \cdot D \cdot \left(D - \sqrt{D^2 - d^2}\right)}\]</span></p>
+
+<p>Calculamos paso a paso:</p>
+<p><span class="math display">\[\sqrt{D^2 - d^2} = \sqrt{25 - 6{,}25} = \sqrt{18{,}75} = 4{,}330 \text{ mm}\]</span></p>
+<p><span class="math display">\[D - \sqrt{D^2 - d^2} = 5 - 4{,}330 = 0{,}670 \text{ mm}\]</span></p>
+<p><span class="math display">\[HB = \frac{2 \times 725}{\pi \times 5 \times 0{,}670} = \frac{1\,450}{10{,}524} = 137{,}8\]</span></p>
+
+<p><span class="math display">\[\boxed{138 \text{ HB } 5 \text{ / } 725 \text{ / } 20}\]</span></p>
+</div>
+
+<h4>Apartado c — ¿Ensayo Brinell válido?</h4>
+<div class="solucion">
+<p>Para que un ensayo Brinell sea válido deben cumplirse dos condiciones:</p>
+
+<p><strong>1. Rango de la huella:</strong> 0,24·D ≤ d ≤ 0,6·D</p>
+<p><span class="math display">\[0{,}24 \times 5 = 1{,}2 \text{ mm} \;\leq\; d = 2{,}5 \text{ mm} \;\leq\; 0{,}6 \times 5 = 3{,}0 \text{ mm} \quad \checkmark\]</span></p>
+<p>Esta condición SÍ se cumple.</p>
+
+<p><strong>2. Constante de ensayo \(K\):</strong> \(F = K \cdot D^2\)</p>
+<p><span class="math display">\[K = \frac{F}{D^2} = \frac{725}{5^2} = \frac{725}{25} = 29\]</span></p>
+<p>Para acero, la constante normalizada es <strong>K = 30</strong>. La fuerza correcta debería ser:</p>
+<p><span class="math display">\[F_{\text{correcta}} = 30 \times 5^2 = 750 \text{ kp}\]</span></p>
+
+<p><span class="math display">\[\boxed{\text{El ensayo NO es válido: se ha aplicado } F = 725 \text{ kp en vez de } 750 \text{ kp (K = 29 ≠ 30)}}\]</span></p>
+
+<p>La constante K = 29 no corresponde a ningún material normalizado. Para acero (K = 30), la fuerza con D = 5 mm debe ser exactamente 750 kp. Al usar 725 kp se ha cometido un error en la carga y el resultado de dureza no es fiable.</p>
+</div>
+
+<div class="resultado"><strong>→ 145 HV 120/10 · 138 HB 5/725/20 · Ensayo Brinell NO válido (K = 29 ≠ 30 para acero)</strong></div>
+
+<p><strong>⚠ <em>Tipo Ponencia P3: ejercicio dual Vickers + Brinell sobre la misma muestra. La clave del apartado c) es comprobar la constante \(K = F/D^2\). Para acero K = 30; para metales blandos K = 5 o K = 10. Si K no coincide con ningún valor normalizado, el ensayo no es válido.</em></strong></p>
+</details>
+</div>
+
+<div class="seccion" id="ex_15">
+  <div class="sec-hdr">
+    <div class="sec-num">15</div>
+    <div class="sec-tit">Vickers con imagen aumentada 50× [Ponencia 2025-26, P6]<span class="difficulty" aria-label="Dificultad ★★">★★</span></div>
+  </div>
+  <p>Para medir la dureza de una plancha de acero se realiza un ensayo Vickers aplicando una carga de 40 kp durante 20 s, obteniéndose la huella de la figura.</p>
+<p>a) Si la imagen está aumentada 50 veces, ¿cuánto mide la diagonal de la huella que se necesita para calcular la dureza Vickers?</p>
+<p>b) Calcular la dureza Vickers de la plancha y escribir su valor normalizado.</p>
+
+<p><em>Nota: en la figura de la ponencia, la huella Vickers (forma de rombo) se muestra sobre una cuadrícula milimetrada de 32 × 32 mm con indicación "×50". De la lectura de la imagen, la diagonal de la huella mide aproximadamente 24 mm en la imagen ampliada.</em></p>
+
+<details class="solucion-collapsible">
+  <summary>📝 Ver resolución completa</summary>
+<h4>Apartado a — Diagonal real de la huella</h4>
+<div class="solucion">
+<p><strong>Datos:</strong> diagonal medida en la imagen ampliada: d<sub>imagen</sub> ≈ 24 mm. Factor de aumento: ×50.</p>
+
+<p>La diagonal real es la diagonal medida en la imagen dividida por el factor de aumento:</p>
+<p><span class="math display">\[d = \frac{d_{\text{imagen}}}{\text{aumento}} = \frac{24}{50} = 0{,}48 \text{ mm}\]</span></p>
+
+<p><span class="math display">\[\boxed{d = 0{,}48 \text{ mm}}\]</span></p>
+
+<p><em>En Vickers se usa una sola diagonal (o la media si hay dos lecturas). Aquí la huella es cuadrada, así que basta una diagonal.</em></p>
+</div>
+
+<h4>Apartado b — Dureza Vickers y designación normalizada</h4>
+<div class="solucion">
+<p><strong>Datos:</strong> F = 40 kp, t = 20 s, d = 0,48 mm.</p>
+
+<p>Fórmula Vickers:</p>
+<p><span class="math display">\[HV = \frac{1{,}8544 \cdot F}{d^2} = \frac{1{,}8544 \times 40}{0{,}48^2} = \frac{74{,}176}{0{,}2304}\]</span></p>
+<p><span class="math display">\[\boxed{HV = 321{,}9 \approx 322}\]</span></p>
+
+<p><strong>Designación normalizada:</strong></p>
+<p><span class="math display">\[\boxed{322 \text{ HV } 40 \text{ / } 20}\]</span></p>
+
+<p><em>La designación incluye el tiempo porque t = 20 s está fuera del rango estándar (10–15 s). Si fuera t = 10–15 s se podría omitir.</em></p>
+</div>
+
+<div class="resultado"><strong>→ d = 0,48 mm · 322 HV 40/20</strong></div>
+
+<p><strong>⚠ <em>Tipo Ponencia P6: ejercicio Vickers con lectura de imagen aumentada. La clave es dividir la diagonal medida en la imagen por el factor de aumento para obtener la diagonal real. Después se aplica la fórmula estándar \(\mathrm{HV} = 1{,}8544 \cdot F/d^2\). Cuidado con las unidades: F en kp y d en mm.</em></strong></p>
+</details>
+</div>
+
+<div class="pie">
+  <span>IES Jiménez de Quesada · Santa Fe (Granada)</span>
+  <span>Bloque B — Materiales y Fabricación y Fabricación</span>
+  <span>Curso 2025–2026</span>
+</div>
+
+</div></div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if(typeof MathJax !== 'undefined' && MathJax.typeset) MathJax.typeset();
+});
+</script>
+<script>
+(function(){
+  const container = document.getElementById('ct');
+  if(!container) return;
+
+  function jumpToHash(hash, smooth){
+    const raw = (hash || window.location.hash || '').trim();
+    if(!raw || raw === '#') return;
+    const id = decodeURIComponent(raw.slice(1));
+    const target = document.getElementById(id);
+    if(!target) return;
+
+    const cRect = container.getBoundingClientRect();
+    const tRect = target.getBoundingClientRect();
+    const top = container.scrollTop + (tRect.top - cRect.top) - 10;
+    container.scrollTo({ top: Math.max(0, top), behavior: smooth ? 'smooth' : 'auto' });
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(ev){
+      const href = this.getAttribute('href');
+      if(!href || href === '#') return;
+      const id = href.slice(1);
+      const target = document.getElementById(id);
+      if(!target) return;
+      ev.preventDefault();
+      jumpToHash(href, false);
+      if(history.replaceState){
+        history.replaceState(null, '', href);
+      } else {
+        window.location.hash = href;
+      }
+    });
+  });
+
+  window.addEventListener('hashchange', function(){
+    jumpToHash(window.location.hash, false);
+  });
+
+  window.addEventListener('load', function(){
+    if(window.location.hash){
+      setTimeout(function(){ jumpToHash(window.location.hash, false); }, 50);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

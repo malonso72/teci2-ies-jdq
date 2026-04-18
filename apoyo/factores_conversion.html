@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II — 🔄 Método de Factores de Conversión</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+:root{--az:#1B4F8A;--az2:#2E7BC4;--hub-bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5;--nw:260px;--hh:52px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;font-family:'Barlow',system-ui,sans-serif;background:var(--hub-bg);color:var(--tx)}
+.hd{position:fixed;top:0;left:0;right:0;height:var(--hh);background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;display:flex;align-items:center;padding:0 14px;z-index:1000;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer}.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.7rem;opacity:.6;margin-left:10px}
+.mb{display:none;background:none;border:none;color:#fff;font-size:1.3rem;cursor:pointer;margin-right:8px}
+.home-btn{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;font-size:.72rem;padding:4px 10px;border-radius:4px;cursor:pointer;margin-left:auto;transition:all .15s}
+.home-btn:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.5)}
+.ly{display:flex;position:fixed;top:var(--hh);left:0;right:0;bottom:0}
+.nv{width:var(--nw);flex-shrink:0;background:var(--w);border-right:1px solid var(--bd);overflow-y:auto;padding:44px 0 6px;z-index:500}  /* v2.9: padding-top 44 evita solape con navcross */
+.nb{border-bottom:1px solid #eee}.nb-h{padding:7px 10px;font-size:.76rem;font-weight:500;cursor:pointer;transition:background .15s;display:flex;align-items:center;gap:4px}
+.nb-h:hover{background:#EBF0F7}.nb.act .nb-h{background:var(--az);color:#fff}
+.nc{display:none;padding:0 0 4px}.nb.act .nc{display:block}
+.na{display:block;padding:2px 10px 2px 22px;font-size:.68rem;color:var(--t2);cursor:pointer;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.6}
+.na:hover{background:#EBF0F7;color:var(--az)}
+.ct{flex:1;overflow-y:scroll;-webkit-overflow-scrolling:touch;scroll-padding-top:44px}
+@media(max-width:768px){.mb{display:block}.nv{position:fixed;top:var(--hh);left:0;bottom:0;z-index:900;transform:translateX(-100%)}.nv.open{transform:translateX(0);box-shadow:4px 0 16px rgba(0,0,0,.2)}}
+
+:root {
+  --azul:     #1B4F8A;
+  --azul2:    #2E7BC4;
+  --azul-cl:  #DDE9F7;
+  --azul-bg:  #EEF4FB;
+  --naranja:  #D4700A;
+  --naranja-cl:#FEF0DF;
+  --verde:    #1A6B3A;
+  --verde-cl: #E4F4EB;
+  --rojo:     #C0321E;
+  --rojo-cl:  #FCEAE7;
+  --gris:     #F5F6F8;
+  --borde:    #CDD7E3;
+  --texto:    #1A2430;
+  --texto2:   #455565;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Barlow', sans-serif;
+  --cond: 'Barlow Condensed', sans-serif;
+}
+
+.formulario-content { padding: 24px 44px 52px; max-width: 100%; }
+.formulario-content h1 { 
+    font-family: var(--cond);
+    font-size: 15pt; font-weight: 700; color: var(--azul);
+    margin: 32px 0 12px; padding: 6px 0;
+    border-bottom: 2px solid var(--azul);
+}
+.formulario-content h1:first-child { margin-top: 0; }
+.formulario-content h2 {
+    font-family: var(--cond);
+    font-size: 12pt; font-weight: 700; color: var(--azul2);
+    margin: 20px 0 8px; padding-left: 9px;
+    border-left: 3px solid #D4700A;
+}
+.formulario-content table {
+    width: 100%; border-collapse: collapse; margin: 8px 0 16px;
+    font-size: 9.5pt;
+}
+.formulario-content th {
+    background: var(--azul); color: #fff;
+    padding: 6px 10px; text-align: left; font-size: 9pt;
+    font-family: var(--cond); font-weight: 700; letter-spacing: .7px;
+}
+.formulario-content td {
+    padding: 8px 10px; border: 1px solid #CDD7E3;
+    vertical-align: middle;
+}
+.formulario-content tr:nth-child(even) td { background: #F5F6F8; }
+.formulario-content p { margin: 6px 0; line-height: 1.6; font-size: 10pt; }
+strong { color: var(--azul); font-weight: 600; }
+
+.aviso-formula {
+  border-radius: 0 6px 6px 0;
+  padding: 12px 16px;
+  margin: 12px 0;
+  font-size: 9.5pt;
+  line-height: 1.65;
+}
+
+/* Caja de ejemplo resuelto */
+.ejemplo-box {
+  background: var(--gris);
+  padding: 18px 22px;
+  border-radius: 8px;
+  margin: 12px 0 20px;
+}
+.ejemplo-box p { margin: 5px 0; }
+.ejemplo-box ul { margin: 6px 0 6px 20px; font-size: 9.5pt; }
+.ejemplo-box li { margin-bottom: 3px; }
+.resultado-box {
+  margin-top: 10px;
+  padding: 8px 14px;
+  background: var(--verde-cl);
+  border-left: 4px solid var(--verde);
+  border-radius: 0 5px 5px 0;
+  font-weight: 600;
+  font-size: 10pt;
+}
+
+.math.display { text-align:center; margin:10px 0; }
+.MathJax { font-size:100% !important; }
+
+/* Pasos numerados */
+.paso-flex {
+  display: flex; gap: 12px; align-items: flex-start;
+  margin: 10px 0; padding: 10px 14px;
+  background: var(--azul-bg); border-radius: 5px;
+}
+.paso-num {
+  background: var(--azul); color: #fff;
+  font-family: var(--cond); font-weight: 700; font-size: 10pt;
+  min-width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.paso-txt { font-size: 10pt; line-height: 1.6; }
+
+[id]{scroll-margin-top:20px;}
+
+@media print{
+  html,body{ background:white; overflow:visible; height:auto; }
+  .hd,.nv,.mb,.home-btn{ display:none; }
+  .ly{ display:block; position:static; }
+  .ct{ overflow:visible; }
+}
+
+
+/* ── NAVCROSS: barra de navegación transversal (Fase D) ── */
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+.navcross span.nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8;align-self:center;user-select:none}
+@media(max-width:640px){.navcross{gap:4px;padding:8px 10px;top:52px}.navcross a span.nc-lbl,.navcross span.nc-current span.nc-lbl{display:none}.navcross .nc-sep{display:none}}
+
+@media print{
+  html,body{background:#fff!important;color:#000!important}
+  .hd,.navcross,.nv,.mb,.home-btn,.sol-btn,.btn-video,.video-group{display:none!important}
+  .ly{position:static!important}
+  .ct{overflow:visible!important;padding:0}
+  .pagina{box-shadow:none!important;max-width:100%}
+  .cabecera{background:#fff!important;color:#000!important}
+  .cab-titulo,.cab-label,.cab-sub{color:#000!important}
+  h2,h3,h4{page-break-after:avoid}
+  .seccion{page-break-inside:avoid}
+  .sol-content{display:block!important}
+  img{max-width:100%;page-break-inside:avoid}
+  a{text-decoration:none;color:#000}
+  .objetivos-box,.decalogo-box{background:#fff!important;border:1px solid #aaa!important}
+}
+/* @media print v2 — ecosistema TECI2 */
+
+</style>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)'],['$','$']],
+    displayMath: [['$$','$$'],['\\[','\\]']],
+    processEscapes: true,
+    packages: {'[+]': ['cancel']}
+  },
+  loader: {load: ['[tex]/cancel']},
+  options: {
+    skipHtmlTags: ['script','noscript','style','textarea','pre']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+<div class="hd">
+<button class="mb" onclick="document.getElementById('nv').classList.toggle('open')">☰</button>
+<span class="lg" onclick="location.href='../index.html'">TECI II</span>
+<span class="sb">🔄 Factores de Conversión</span>
+<a href="../index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal"><a href="../index.html" aria-label="Ir al índice principal"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span><a href="../index.html#teoria" aria-label="Ver índice de teoría"><span>📖</span><span class="nc-lbl">Teoría</span></a><span class="nc-sep">·</span><a href="../index.html#ejercicios" aria-label="Ver índice de ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a><span class="nc-sep">·</span><a href="../index.html#examenes" aria-label="Ver índice de exámenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a><span class="nc-sep">·</span><a href="../ponencia_resuelta/index_ponencia.html" aria-label="Ver Ponencia 2025-26 resuelta"><span>📚</span><span class="nc-lbl">Ponencia</span></a><span class="nc-sep">·</span><span class="nc-current" aria-current="page"><span>📚</span><span class="nc-lbl">Apoyo</span></span></nav>
+
+<div class="ly">
+<nav class="nv" id="nv">
+<div class="nb act">
+<div class="nb-h" style="background:var(--az);color:#fff;">🔄 Factores de Conversión</div>
+<div class="nc" style="display:block;">
+<a class="na" href="#metodo" style="font-weight:600;padding-top:6px;">El método</a>
+<a class="na" href="#reglas">Las 3 reglas de oro</a>
+<a class="na" href="#esquema">Esquema general</a>
+<a class="na" href="#pasos">Pasos a seguir</a>
+<a class="na" href="#ejemplos" style="font-weight:600;padding-top:6px;">EJEMPLOS RESUELTOS</a>
+<a class="na" href="#ej1">Ej. 1 — Velocidad (km/h → m/s)</a>
+<a class="na" href="#ej2">Ej. 2 — Densidad (kg/m³ → g/cm³)</a>
+<a class="na" href="#ej3">Ej. 3 — Presión (atm → Pa → MPa)</a>
+<a class="na" href="#ej4">Ej. 4 — Potencia calorífica (kJ/kg → J/g)</a>
+<a class="na" href="#ej5">Ej. 5 — Caudal (L/min → m³/s)</a>
+<a class="na" href="#ej6">Ej. 6 — Tensión (N/mm² → MPa)</a>
+<a class="na" href="#errores" style="font-weight:600;padding-top:6px;">ERRORES FRECUENTES</a>
+</div>
+</div>
+</nav>
+<div class="ct" id="ct">
+<div class="formulario-content">
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<h1 id="metodo"><strong>MÉTODO DE FACTORES DE CONVERSIÓN</strong></h1>
+
+<div class="aviso-formula" style="background:#E4F4EB;border-left:4px solid var(--verde);">
+<strong>¿Qué es?</strong> El método de factores de conversión (también llamado <em>análisis dimensional</em> o <em>método del factor unitario</em>) consiste en multiplicar la cantidad original por fracciones que valen 1, de forma que las unidades no deseadas se van cancelando hasta dejar solo las unidades objetivo. Es el método <strong>más seguro y sistemático</strong> para no equivocarte en un examen.
+</div>
+
+<!-- ── REGLAS ── -->
+<h2 id="reglas"><strong>Las 3 reglas de oro</strong></h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>1. Cada factor vale 1</strong></td>
+<td>Numerador y denominador representan la misma cantidad: <span class="math display">\[\frac{1\,km}{1000\,m} = 1 \qquad \frac{3600\,s}{1\,h} = 1 \qquad \frac{1\,kg}{1000\,g} = 1\]</span></td>
+</tr>
+<tr class="even">
+<td><strong>2. Colocar para cancelar</strong></td>
+<td>La unidad que quieres <em>eliminar</em> se coloca en el lado opuesto al que aparece. Si está en el numerador, ponla en el denominador del factor, y viceversa.</td>
+</tr>
+<tr class="odd">
+<td><strong>3. Comprobar al final</strong></td>
+<td>Una vez tachadas todas las cancelaciones, las únicas unidades que sobreviven deben ser exactamente las que te piden.</td>
+</tr>
+</tbody>
+</table>
+
+<!-- ── ESQUEMA ── -->
+<h2 id="esquema"><strong>Esquema general</strong></h2>
+<div style="background:#F5F6F8;padding:18px 22px;border-radius:8px;margin:12px 0;text-align:center;">
+<span class="math display">\[\boxed{\;\text{Dato con unidades} \;\times\; \frac{\text{unidad deseada}}{\text{unidad a eliminar}} \;\times\; \frac{\text{unidad deseada}}{\text{unidad a eliminar}} \;\times\; \cdots \;=\; \text{Resultado}\;}\]</span>
+</div>
+
+<!-- ── PASOS ── -->
+<h2 id="pasos"><strong>Pasos a seguir (siempre en este orden)</strong></h2>
+
+<div class="paso-flex">
+<div class="paso-num">1</div>
+<div class="paso-txt"><strong>Escribe el dato</strong> con sus unidades como fracción (el numerador arriba, el denominador abajo).</div>
+</div>
+<div class="paso-flex">
+<div class="paso-num">2</div>
+<div class="paso-txt"><strong>Identifica</strong> qué unidades tienes y cuáles necesitas. Anota las equivalencias que vas a usar.</div>
+</div>
+<div class="paso-flex">
+<div class="paso-num">3</div>
+<div class="paso-txt"><strong>Multiplica</strong> por fracciones = 1, colocando cada unidad a eliminar en el lado opuesto al que aparece.</div>
+</div>
+<div class="paso-flex">
+<div class="paso-num">4</div>
+<div class="paso-txt"><strong>Tacha</strong> las unidades que se cancelan (aparecen arriba Y abajo).</div>
+</div>
+<div class="paso-flex">
+<div class="paso-num">5</div>
+<div class="paso-txt"><strong>Opera</strong> con los números. Las unidades supervivientes son el resultado.</div>
+</div>
+<div class="paso-flex">
+<div class="paso-num">6</div>
+<div class="paso-txt"><strong>Comprueba</strong> que las unidades finales coinciden con las que te piden. Si no, revisa los factores.</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<h1 id="ejemplos"><strong>EJEMPLOS RESUELTOS</strong></h1>
+
+<!-- ── EJEMPLO 1 ── -->
+<h2 id="ej1"><strong>Ejemplo 1 — Convertir velocidad: 90 km/h → m/s</strong></h2>
+
+<div class="ejemplo-box">
+<p><strong>Dato:</strong> 90 km/h</p>
+<p><strong>Objetivo:</strong> m/s</p>
+
+<p><strong>Paso 1–2:</strong> Identifico las equivalencias necesarias:</p>
+<ul>
+<li>Tengo <em>km</em> → quiero <em>m</em> → uso: 1 km = 1000 m</li>
+<li>Tengo <em>h</em> → quiero <em>s</em> → uso: 1 h = 3600 s</li>
+</ul>
+
+<p><strong>Paso 3–4:</strong> Coloco los factores y tacho:</p>
+<span class="math display">\[90\;\frac{\cancel{km}}{\cancel{h}} \;\times\; \frac{1000\;m}{1\;\cancel{km}} \;\times\; \frac{1\;\cancel{h}}{3600\;s}\]</span>
+
+<p><strong>Paso 5:</strong> Opero solo con los números:</p>
+<span class="math display">\[\frac{90 \times 1000}{3600} = 25\;\frac{m}{s}\]</span>
+
+<div class="resultado-box">✅ Resultado: 90 km/h = 25 m/s</div>
+</div>
+
+<!-- ── EJEMPLO 2 ── -->
+<h2 id="ej2"><strong>Ejemplo 2 — Convertir densidad: 7850 kg/m³ → g/cm³</strong></h2>
+
+<div class="ejemplo-box">
+<p><strong>Dato:</strong> 7850 kg/m³ (densidad típica del acero)</p>
+<p><strong>Objetivo:</strong> g/cm³</p>
+
+<p><strong>Paso 1–2:</strong> Equivalencias necesarias:</p>
+<ul>
+<li>Tengo <em>kg</em> → quiero <em>g</em> → uso: 1 kg = 1000 g</li>
+<li>Tengo <em>m³</em> → quiero <em>cm³</em> → uso: 1 m = 100 cm, luego 1 m³ = (100)³ cm³ = 10⁶ cm³</li>
+</ul>
+
+<div class="aviso-formula" style="background:#FCEAE7;border-left:4px solid var(--rojo);margin:10px 0;">
+<strong>⚠️ Error típico PEvAU:</strong> Olvidar elevar al cubo la conversión de longitud. Si 1 m = 100 cm, entonces 1 m³ = 100³ cm³ = <strong>10⁶ cm³</strong>, NO 100 cm³.
+</div>
+
+<p><strong>Paso 3–4:</strong> Factores con cancelación:</p>
+<span class="math display">\[7850\;\frac{\cancel{kg}}{\cancel{m^3}} \;\times\; \frac{1000\;g}{1\;\cancel{kg}} \;\times\; \frac{1\;\cancel{m^3}}{10^{6}\;cm^3}\]</span>
+
+<p><strong>Paso 5:</strong></p>
+<span class="math display">\[\frac{7850 \times 1000}{10^{6}} = 7{,}85\;\frac{g}{cm^3}\]</span>
+
+<div class="resultado-box">✅ Resultado: 7850 kg/m³ = 7,85 g/cm³</div>
+</div>
+
+<!-- ── EJEMPLO 3 ── -->
+<h2 id="ej3"><strong>Ejemplo 3 — Convertir presión: 3 atm → Pa y MPa</strong></h2>
+
+<div class="ejemplo-box">
+<p><strong>Dato:</strong> 3 atm</p>
+<p><strong>Objetivo:</strong> Pa y luego MPa</p>
+
+<p><strong>a) Conversión a Pascales:</strong></p>
+<span class="math display">\[3\;\cancel{atm} \;\times\; \frac{101\,325\;Pa}{1\;\cancel{atm}} = 303\,975\;Pa \approx 3{,}04 \times 10^{5}\;Pa\]</span>
+
+<p><strong>b) Conversión encadenada a MPa (añadimos un factor más):</strong></p>
+<span class="math display">\[303\,975\;\cancel{Pa} \;\times\; \frac{1\;MPa}{10^{6}\;\cancel{Pa}} = 0{,}304\;MPa\]</span>
+
+<div class="aviso-formula" style="background:#EEF4FB;border-left:4px solid var(--azul);margin:10px 0;">
+<strong>💡 Truco:</strong> También se puede hacer todo de golpe en una sola línea:
+<span class="math display">\[3\;\cancel{atm} \;\times\; \frac{101\,325\;\cancel{Pa}}{1\;\cancel{atm}} \;\times\; \frac{1\;MPa}{10^{6}\;\cancel{Pa}} = 0{,}304\;MPa\]</span>
+</div>
+
+<div class="resultado-box">✅ Resultado: 3 atm = 303 975 Pa ≈ 0,304 MPa</div>
+</div>
+
+<!-- ── EJEMPLO 4 ── -->
+<h2 id="ej4"><strong>Ejemplo 4 — Potencia calorífica: 44 000 kJ/kg → J/g</strong></h2>
+
+<div class="ejemplo-box">
+<p><strong>Dato:</strong> P<sub>c</sub> = 44 000 kJ/kg (gasolina)</p>
+<p><strong>Objetivo:</strong> J/g</p>
+
+<p><strong>Paso 1–2:</strong> Equivalencias:</p>
+<ul>
+<li>Tengo <em>kJ</em> → quiero <em>J</em> → uso: 1 kJ = 1000 J</li>
+<li>Tengo <em>kg</em> → quiero <em>g</em> → uso: 1 kg = 1000 g</li>
+</ul>
+
+<p><strong>Paso 3–4:</strong></p>
+<span class="math display">\[44\,000\;\frac{\cancel{kJ}}{\cancel{kg}} \;\times\; \frac{1000\;J}{1\;\cancel{kJ}} \;\times\; \frac{1\;\cancel{kg}}{1000\;g}\]</span>
+
+<p><strong>Paso 5:</strong> Los «1000» se cancelan entre sí:</p>
+<span class="math display">\[\frac{44\,000 \times 1000}{1000} = 44\,000\;\frac{J}{g}\]</span>
+
+<div class="aviso-formula" style="background:#E4F4EB;border-left:4px solid var(--verde);margin:10px 0;">
+<strong>💡 Truco rápido:</strong> Cuando conviertes kJ/kg → J/g (o MJ/kg → kJ/g, etc.), el valor numérico <strong>no cambia</strong> porque ambos prefijos «kilo» se cancelan. ¡Muy útil en problemas de motores térmicos!
+</div>
+
+<div class="resultado-box">✅ Resultado: 44 000 kJ/kg = 44 000 J/g</div>
+</div>
+
+<!-- ── EJEMPLO 5 ── -->
+<h2 id="ej5"><strong>Ejemplo 5 — Caudal: 120 L/min → m³/s</strong></h2>
+
+<div class="ejemplo-box">
+<p><strong>Dato:</strong> Q = 120 L/min (caudal de bomba hidráulica)</p>
+<p><strong>Objetivo:</strong> m³/s</p>
+
+<p><strong>Paso 1–2:</strong> Equivalencias:</p>
+<ul>
+<li>Tengo <em>L</em> → quiero <em>m³</em> → uso: 1 m³ = 1000 L</li>
+<li>Tengo <em>min</em> → quiero <em>s</em> → uso: 1 min = 60 s</li>
+</ul>
+
+<p><strong>Paso 3–4:</strong></p>
+<span class="math display">\[120\;\frac{\cancel{L}}{\cancel{min}} \;\times\; \frac{1\;m^3}{1000\;\cancel{L}} \;\times\; \frac{1\;\cancel{min}}{60\;s}\]</span>
+
+<p><strong>Paso 5:</strong></p>
+<span class="math display">\[\frac{120}{1000 \times 60} = \frac{120}{60\,000} = 0{,}002\;\frac{m^3}{s} = 2 \times 10^{-3}\;\frac{m^3}{s}\]</span>
+
+<div class="resultado-box">✅ Resultado: 120 L/min = 0,002 m³/s = 2 × 10⁻³ m³/s</div>
+</div>
+
+<!-- ── EJEMPLO 6 ── -->
+<h2 id="ej6"><strong>Ejemplo 6 — Tensión: 250 N/mm² → MPa (¡son lo mismo!)</strong></h2>
+
+<div class="ejemplo-box">
+<p><strong>Dato:</strong> σ = 250 N/mm²</p>
+<p><strong>Objetivo:</strong> demostrar que N/mm² = MPa</p>
+
+<p><strong>Lo demostramos paso a paso:</strong></p>
+<span class="math display">\[1\;\frac{N}{mm^2} = 1\;\frac{N}{\cancel{mm^2}} \;\times\; \frac{(1000)^2\;\cancel{mm^2}}{1\;m^2} = \frac{10^6\;N}{m^2} = 10^6\;Pa = 1\;MPa\]</span>
+
+<div class="aviso-formula" style="background:#E4F4EB;border-left:4px solid var(--verde);margin:10px 0;">
+<strong>💡 Conclusión para la PEvAU:</strong> 1 N/mm² = 1 MPa exactamente. No hace falta convertir entre ellos, son la misma unidad con distinta notación. Aparece constantemente en Bloque B (tracción, dureza) y Bloque C1 (tensiones en barras).
+</div>
+
+<div class="resultado-box">✅ Resultado: 250 N/mm² = 250 MPa (equivalencia directa)</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<h1 id="errores"><strong>ERRORES FRECUENTES EN CONVERSIONES</strong></h1>
+
+<table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 40%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr><th>#</th><th>Error</th><th>Cómo evitarlo</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td><strong>No elevar al cubo/cuadrado</strong> al convertir m² o m³</td><td>Si 1 m = 100 cm → 1 m² = 100² = 10⁴ cm² → 1 m³ = 100³ = 10⁶ cm³. <strong>Siempre</strong> eleva el factor al exponente de la unidad.</td></tr>
+<tr><td>2</td><td><strong>Poner el factor al revés</strong> (la unidad no cancela)</td><td>Comprueba antes de operar: la unidad a eliminar debe aparecer arriba Y abajo para poder tacharla.</td></tr>
+<tr><td>3</td><td><strong>Mezclar prefijos sin cuidado</strong> (kJ con MJ, mm con cm…)</td><td>Convierte siempre a unidades base del SI primero (J, m, kg, s, Pa) y luego, si quieres, añade el prefijo final.</td></tr>
+<tr><td>4</td><td><strong>Olvidar que kg ya tiene prefijo</strong></td><td>El kilogramo es la unidad base de masa en el SI, pero «kilo» es un prefijo. Cuidado: 1 kg = 1000 g, no al revés.</td></tr>
+<tr><td>5</td><td><strong>Confundir litro con m³</strong></td><td>1 m³ = 1000 L (no 100). Un litro es un dm³ = 0,001 m³.</td></tr>
+<tr><td>6</td><td><strong>No poner unidades en el resultado final</strong></td><td>Un número sin unidades no vale nada en la PEvAU. Escribe siempre las unidades al lado del resultado.</td></tr>
+</tbody>
+</table>
+
+<div class="aviso-formula" style="background:#E4F4EB;border-left:4px solid var(--verde);margin:22px 0 12px;">
+<strong>📌 Resumen express:</strong> Escribe → Identifica → Multiplica por fracciones = 1 → Tacha → Opera → Comprueba unidades. Si al final las unidades no cuadran, algún factor está al revés. ¡Repasa!
+</div>
+
+
+</div><!-- /formulario-content -->
+</div><!-- /ct -->
+</div><!-- /ly -->
+
+<script>
+(function(){
+  const container = document.getElementById('ct');
+  if(!container) return;
+  function jumpToHash(hash, smooth){
+    const raw = (hash || window.location.hash || '').trim();
+    if(!raw || raw === '#') return;
+    const id = decodeURIComponent(raw.slice(1));
+    const target = document.getElementById(id);
+    if(!target) return;
+    const cRect = container.getBoundingClientRect();
+    const tRect = target.getBoundingClientRect();
+    const top = container.scrollTop + (tRect.top - cRect.top) - 10;
+    container.scrollTo({ top: Math.max(0, top), behavior: smooth ? 'smooth' : 'auto' });
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(ev){
+      const href = this.getAttribute('href');
+      if(!href || href === '#') return;
+      const target = document.getElementById(href.slice(1));
+      if(!target) return;
+      ev.preventDefault();
+      jumpToHash(href, false);
+      if(history.replaceState) history.replaceState(null, '', href);
+      else window.location.hash = href;
+    });
+  });
+  window.addEventListener('hashchange', function(){ jumpToHash(window.location.hash, false); });
+  window.addEventListener('load', function(){ if(window.location.hash) setTimeout(function(){ jumpToHash(window.location.hash, false); }, 50); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II · Examen tipo 2 2025-26 · IES Jiménez de Quesada</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--az:#1B4F8A;--az2:#2E7BC4;--bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5;--green:#2E7D32;--green2:#43A047;--green-soft:#EDF6EE;--green-line:#A8D5AE;--red:#C0321E}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:var(--bg);color:var(--tx)}
+.hd{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(27,79,138,.12);position:sticky;top:0;z-index:500}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer}.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.72rem;opacity:.78;margin-left:10px}
+.home-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:8px;cursor:pointer;margin-left:auto;text-decoration:none}
+.home-btn:hover{background:rgba(255,255,255,.16)}
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+.navcross span.nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8;align-self:center}
+.main{max-width:980px;margin:0 auto;padding:28px 18px 64px}
+.title-block{text-align:center;margin-bottom:28px}
+.title-block h1{font-family:'Barlow Condensed',sans-serif;font-size:1.9rem;color:var(--az);font-weight:700}
+.title-block .sub{color:var(--t2);font-size:.95rem;margin-top:4px}
+.badge{display:inline-block;background:var(--green-soft);color:var(--green);border:1px solid var(--green-line);padding:5px 14px;border-radius:999px;font-size:.8rem;font-weight:600;margin:10px 0 18px}
+.instr{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:14px 18px;margin:0 0 26px;font-size:.88rem;line-height:1.55;color:var(--t2);box-shadow:0 2px 8px rgba(27,79,138,.05)}
+.instr strong{color:var(--az)}
+.apartado{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:20px 22px;margin:0 0 22px;box-shadow:0 3px 12px rgba(27,79,138,.06)}
+.apartado h2{font-family:'Barlow Condensed',sans-serif;color:var(--az);font-size:1.35rem;margin-bottom:6px;padding-bottom:8px;border-bottom:2px solid var(--az2)}
+.apartado .bloque-tag{display:inline-block;background:#EBF0F7;color:var(--az);font-size:.72rem;font-weight:600;padding:3px 9px;border-radius:999px;margin-left:8px}
+.contexto{margin:10px 0 6px;font-style:italic;color:var(--t2);font-size:.9rem}
+.opcion{background:#FAFBFD;border-left:4px solid var(--az2);border-radius:0 8px 8px 0;padding:14px 16px;margin:14px 0}
+.opcion h3{font-family:'Barlow Condensed',sans-serif;color:var(--az);font-size:1.1rem;margin-bottom:8px}
+.enunciado{font-size:.95rem;line-height:1.65;margin:6px 0}
+.enunciado ol,.enunciado ul{margin:6px 0 6px 24px}
+.enunciado li{margin:3px 0}
+.datos{background:#F7FAFD;border:1px dashed #B8C9DD;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:.88rem;color:var(--t2)}
+.esquema{background:#F4F6F9;border:1px solid var(--bd);border-left:4px solid var(--green2);border-radius:0 8px 8px 0;padding:8px 14px;margin:10px 0;font-size:.85rem;color:var(--t2)}
+.esquema strong{color:var(--green)}
+.sol-wrap{margin:10px 0 2px;border:1px solid var(--bd);background:#fff;border-radius:10px;overflow:hidden}
+.sol-btn{display:block;width:100%;padding:10px 14px;background:#F7FAFD;color:var(--az);border:none;cursor:pointer;font:700 .85rem/1.4 Barlow,sans-serif;text-align:left}
+.sol-btn:hover{background:#EEF4FA}
+.sol-btn::after{content:'▾';float:right;color:var(--green)}
+.sol-btn.open::after{content:'▴'}
+.sol-content{display:none;padding:10px 14px 12px;border-top:1px solid #E7ECF2;font-size:.85rem;line-height:1.65;background:#fff}
+.sol-content.show{display:block}
+.sol-content .apt{display:block;margin:3px 0;color:#285E2B;font-weight:600}
+.ref-ponencia{margin:10px 0 0;padding:6px 10px;background:#EBF4FF;border-left:3px solid #2E7BC4;border-radius:0 6px 6px 0;font-size:.78rem}
+.ref-ponencia a{color:#1B4F8A;text-decoration:none;font-weight:600}
+.ref-ponencia a:hover{text-decoration:underline}
+.procedencia{background:#F4F6F9;border-left:5px solid #8C97A8;padding:16px 22px;margin:32px auto;max-width:760px;border-radius:0 6px 6px 0;font-size:.85rem}
+.procedencia h3{font-family:'Barlow Condensed',sans-serif;color:#455565;margin:0 0 10px;font-size:1.05rem}
+.procedencia ul{list-style:none;padding:0;margin:0}
+.procedencia li{padding:4px 0;color:#455565}
+.procedencia strong{color:#1B4F8A}
+@media(max-width:768px){.main{padding:16px 10px 40px}.apartado{padding:14px 12px}.title-block h1{font-size:1.4rem}}
+@media print{.hd,.navcross,.sol-btn{display:none!important}.sol-content{display:block!important}.apartado{break-inside:avoid}}
+</style>
+<script>document.addEventListener('click',function(e){if(e.target.classList.contains('sol-btn')){e.target.classList.toggle('open');e.target.nextElementSibling.classList.toggle('show');}});</script>
+</head>
+<body>
+<div class="hd">
+<span class="lg" onclick="location.href='../../../index.html'">TECI II</span>
+<span class="sb">🧪 Examen tipo 2 · 2025-26</span>
+<a href="../../../index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross"><a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span><a href="../../../index.html#teoria"><span>📖</span><span class="nc-lbl">Teoría</span></a><span class="nc-sep">·</span><a href="../../../index.html#ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a><span class="nc-sep">·</span><span class="nc-current"><span>📋</span><span class="nc-lbl">Exámenes</span></span><span class="nc-sep">·</span><a href="../../../ponencia_resuelta/index_ponencia.html" aria-label="Ver Ponencia 2025-26 resuelta"><span>📚</span><span class="nc-lbl">Ponencia</span></a><span class="nc-sep">·</span><a href="../../../apoyo/formulario.html" aria-label="Ir al material de apoyo"><span>📚</span><span class="nc-lbl">Apoyo</span></a></nav>
+
+<div class="main">
+<div class="title-block">
+<h1>Examen tipo 2 · PEvAU 2025-26</h1>
+<div class="sub">Tecnología e Ingeniería II · IES Jiménez de Quesada</div>
+<div class="badge">⏱️ 90 min · 4 apartados · Apartado 1 sin opción + Apartados 2-4 con opciones A/B</div>
+</div>
+
+<div class="instr">
+<strong>Instrucciones.</strong> La prueba consta de <strong>4 apartados de 2,5 puntos cada uno</strong>. El <strong>Apartado 1</strong> es de <em>opción única</em>. En los Apartados 2, 3 y 4 el alumno elige una opción A o B. Pesos oficiales: B=2,5 · C=4 · D=2,5 · F=1. Duración: <strong>90 minutos</strong>.
+</div>
+
+<!-- APARTADO 1 (B) -->
+<section class="apartado" id="ap1">
+<h2>Apartado 1 — Materiales (B) <span class="bloque-tag">Bloque B · 2,5 pt</span></h2>
+<p class="contexto">En un ensayo de tracción a una probeta cilíndrica de aluminio (cuadro de bicicleta) se obtiene el diagrama tensión-deformación. El punto A del límite elástico corresponde a \(\sigma = 150\ \text{MPa}\) para una deformación \(\varepsilon = 0{,}0025\). Probeta: diámetro 25 mm, longitud inicial 75 mm.</p>
+<div class="enunciado">
+<ol type="a">
+  <li>Calcula el <strong>módulo de elasticidad</strong> (Young) del material.</li>
+  <li>Si se aplica una carga de \(20\,000\ \text{N}\), calcula el <strong>alargamiento</strong> de la probeta (comprobando que se está en zona elástica).</li>
+  <li>Calcula la carga máxima que soporta la probeta sin deformarse permanentemente.</li>
+</ol>
+</div>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (Apartado 1)</button><div class="sol-content">
+<span class="apt">a) \(E = \sigma/\varepsilon = 150/0{,}0025 = 60\,000\ \text{MPa} = 60\ \text{GPa}\).</span>
+<span class="apt">b) \(A_0 = \pi D^2/4 \approx 490{,}87\ \text{mm}^2\); \(\sigma = F/A_0 \approx 40{,}74\ \text{MPa} < \sigma_E\) (elástica). \(\varepsilon = \sigma/E \approx 6{,}79\cdot 10^{-4}\); \(\Delta l = \varepsilon\cdot l_0 \approx 0{,}051\ \text{mm}\).</span>
+<span class="apt">c) \(F_{max} = \sigma_E\cdot A_0 = 150\cdot 490{,}87 \approx 73{,}63\ \text{kN}\).</span>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_B1.html#prob-2">🔗 Ver resolución completa en Ponencia resuelta (B1 · Problema 2)</a></p>
+</div></div>
+</section>
+
+<!-- APARTADO 2 (C3) -->
+<section class="apartado" id="ap2">
+<h2>Apartado 2 — Neumática e hidráulica (C3) <span class="bloque-tag">Bloque C3 · 2,5 pt</span></h2>
+
+<div class="opcion">
+<h3>Opción A · Prensa hidráulica</h3>
+<p class="contexto">En el taller de una fábrica de coches deportivos se usa una prensa hidráulica para elevar vehículos. La sección del émbolo grande \(S_2 = 250\ \text{cm}^2\) y la del pequeño \(S_1 = 10\ \text{cm}^2\).</p>
+<div class="esquema"><strong>Esquema:</strong> Prensa hidráulica en U. Émbolo pequeño a la izquierda (sección \(S_1=10\ \text{cm}^2\)), émbolo grande a la derecha (sección \(S_2=250\ \text{cm}^2\)) con el coche encima. Fluido incompresible conectando ambos.</div>
+<div class="enunciado">
+<ol type="a">
+  <li>Si el deportivo ejerce una carga de \(12\,000\ \text{N}\) y se quiere elevar \(0{,}1\ \text{m}\), calcula la fuerza sobre el émbolo pequeño y su desplazamiento.</li>
+  <li>Si se quiere poder elevar un coche de \(15\,000\ \text{N}\) <em>sin modificar la fuerza \(F_1\) del apartado a)</em>, ¿qué nueva relación \(S_2/S_1\) de las superficies se necesita?</li>
+</ol>
+</div>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (2A)</button><div class="sol-content">
+<span class="apt">a) Pascal: \(F_1/S_1 = F_2/S_2 \Rightarrow F_1 = (S_1/S_2)F_2 = (10/250)\cdot 12\,000 = 480\ \text{N}\). Volumen: \(S_1C_1=S_2C_2 \Rightarrow C_1 = (S_2/S_1)\cdot C_2 = 25\cdot 0{,}1 = 2{,}5\ \text{m}\).</span>
+<span class="apt">b) \(S_2/S_1 = F_2/F_1 = 15\,000/480 = 31{,}25\).</span>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_C3.html#prob-5">🔗 Ver resolución completa en Ponencia resuelta (C3 · Problema 5)</a></p>
+</div></div>
+</div>
+
+<div class="opcion">
+<h3>Opción B · Cilindro neumático de doble efecto</h3>
+<p class="contexto">Un grupo de ingenieros elige un cilindro neumático de doble efecto para elevar piezas en una cadena de montaje (fábrica de ensamblaje de fuselaje en Cádiz). El circuito debe ejercer una fuerza de \(8\,500\ \text{N}\) en avance. El cilindro tiene diámetro de émbolo \(D=8\ \text{cm}\), carrera \(C=10\ \text{cm}\) y diámetro de vástago \(d=5\ \text{cm}\).</p>
+<div class="enunciado">
+<ol type="a">
+  <li>Comprueba que el cilindro <em>soporta</em> la tensión de trabajo si la presión de red es \(3\ \text{MPa}\) y la tensión admisible del material del vástago es \(10\ \text{MPa}\). Calcula el área del vástago y la tensión que soporta.</li>
+  <li>Calcula el <strong>consumo de aire</strong> (medido a la presión de trabajo) si efectúa 10 ciclos por minuto.</li>
+</ol>
+</div>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (2B)</button><div class="sol-content">
+<span class="apt">a) \(A_V = \pi d^2/4 \approx 1\,963{,}5\ \text{mm}^2\); \(\sigma = F/A_V = 8\,500/1\,963{,}5 \approx 4{,}33\ \text{MPa} < 10\ \text{MPa}\) ⇒ cilindro válido.</span>
+<span class="apt">b) \(V_{av} = (\pi D^2/4)C \approx 5{,}027\cdot 10^{-4}\ \text{m}^3\); \(V_{ret} = (\pi/4)(D^2-d^2)C \approx 3{,}063\cdot 10^{-4}\ \text{m}^3\); \(V_{ciclo} \approx 8{,}09\cdot 10^{-4}\ \text{m}^3\); \(V_{trab} = 10\cdot V_{ciclo} \approx 8{,}09\ \text{L/min}\).</span>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_C3.html#prob-1">🔗 Ver resolución completa en Ponencia resuelta (C3 · Problema 1)</a></p>
+</div></div>
+</div>
+</section>
+
+<!-- APARTADO 3 (C1+F) -->
+<section class="apartado" id="ap3">
+<h2>Apartado 3 — Estructuras + Automática (C1 + F) <span class="bloque-tag">C1 1,5 pt · F 1 pt</span></h2>
+
+<div class="opcion">
+<h3>Opción A</h3>
+<p class="contexto"><strong>Parte 1 (C1, 1,5 pt).</strong> Para colgar un cartel publicitario se usa una barra horizontal de \(2{,}8\ \text{m}\) con un extremo fijo en la fachada (apoyo A) y el otro sujeto con un cable tensor fijado a la pared \(3{,}2\ \text{m}\) por encima del apoyo A. Del punto central de la barra cuelga un cartel de masa \(m = 52{,}3\ \text{kg}\) y \(1{,}9\ \text{m}\) de lado, de modo que el extremo derecho del cartel queda alineado con el extremo derecho de la barra. Peso de la barra despreciable.</p>
+<svg class="cercha-svg" viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:10px auto;max-width:100%;height:auto;font-family:'Barlow Condensed',sans-serif">
+<title>Barra horizontal sujeta a la pared por cable tensor con cartel colgante</title>
+<desc>Barra horizontal AB de 2,8 m articulada en A sobre la pared vertical. Cable tensor desde el extremo B hasta un punto 3,2 m por encima de A. Cartel cuadrado de 1,9 m de lado colgando del centro de la barra.</desc>
+<defs><marker id="t2a-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#D4700A"/></marker></defs>
+<line x1="50" y1="20" x2="50" y2="240" stroke="#555" stroke-width="3"/>
+<path d="M40,20 L50,30 M40,40 L50,50 M40,60 L50,70 M40,80 L50,90 M40,100 L50,110 M40,120 L50,130 M40,140 L50,150 M40,160 L50,170 M40,180 L50,190 M40,200 L50,210 M40,220 L50,230" stroke="#555" stroke-width="1"/>
+<line x1="50" y1="140" x2="360" y2="140" stroke="#1B4F8A" stroke-width="4"/>
+<circle cx="50" cy="140" r="5" fill="#1B4F8A"/>
+<text x="28" y="136" fill="#1B4F8A" font-size="14" font-weight="700">A</text>
+<line x1="50" y1="40" x2="360" y2="140" stroke="#1A6B3A" stroke-width="2.4" stroke-dasharray="0"/>
+<text x="160" y="78" fill="#1A6B3A" font-size="13" font-weight="700">cable F_T</text>
+<circle cx="360" cy="140" r="4" fill="#1B4F8A"/>
+<text x="364" y="136" fill="#1B4F8A" font-size="14" font-weight="700">B</text>
+<rect x="160" y="140" width="200" height="80" fill="#FDF3E3" stroke="#D4700A" stroke-width="2"/>
+<text x="222" y="185" fill="#D4700A" font-size="13" font-weight="700">Cartel m=52,3 kg</text>
+<text x="238" y="202" fill="#D4700A" font-size="12">lado 1,9 m</text>
+<line x1="50" y1="248" x2="360" y2="248" stroke="#555" stroke-width="1"/>
+<line x1="50" y1="244" x2="50" y2="252" stroke="#555" stroke-width="1"/>
+<line x1="360" y1="244" x2="360" y2="252" stroke="#555" stroke-width="1"/>
+<text x="185" y="260" fill="#555" font-size="12">2,8 m</text>
+<line x1="34" y1="40" x2="34" y2="140" stroke="#555" stroke-width="1"/>
+<line x1="30" y1="40" x2="38" y2="40" stroke="#555" stroke-width="1"/>
+<line x1="30" y1="140" x2="38" y2="140" stroke="#555" stroke-width="1"/>
+<text x="6" y="94" fill="#555" font-size="12">3,2 m</text>
+</svg>
+<div class="enunciado">
+<ol type="a">
+  <li>Calcula la tensión del cable de soporte.</li>
+  <li>Calcula las componentes horizontal y vertical de la reacción en el apoyo A.</li>
+</ol>
+</div>
+<p class="contexto"><strong>Parte 2 (F, 1 pt).</strong> ¿Un sistema que es <em>estable en lazo abierto</em> puede volverse <strong>inestable al cerrar el lazo</strong>? Justifica razonadamente e indica en qué condiciones sucede.</p>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (3A)</button><div class="sol-content">
+<span class="apt">C1) \(P = mg = 52{,}3\cdot 9{,}81 \approx 513\ \text{N}\); \(\tan\alpha = 3{,}2/2{,}8 \Rightarrow \alpha = 48{,}8^{\circ}\).</span>
+<span class="apt">a) \(\sum M_A = 0 \Rightarrow F_T\cdot\sin(48{,}8^{\circ})\cdot 2{,}8 = P\cdot 1{,}85 \Rightarrow F_T \approx 450\ \text{N}\).</span>
+<span class="apt">b) \(F_{Rx} = F_T\cos(48{,}8^{\circ}) \approx 296\ \text{N}\); \(F_{Ry} = P - F_T\sin(48{,}8^{\circ}) \approx 174\ \text{N}\).</span>
+<span class="apt">F) Sí. Los retardos o desfases en la cadena de realimentación pueden invertir el signo de la corrección, convirtiendo la realimentación negativa en positiva. Entonces el error se amplifica indefinidamente y el sistema se vuelve inestable.</span>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_C1.html#prob-6">🔗 Ver resolución completa en Ponencia resuelta (C1 · Problema 6)</a></p>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_F1.html#prob-13">🔗 Ver resolución completa en Ponencia resuelta (F1 · Problema 13)</a></p>
+</div></div>
+</div>
+
+<div class="opcion">
+<h3>Opción B</h3>
+<p class="contexto"><strong>Parte 1 (C1, 1,5 pt).</strong> Para evitar inundaciones se canaliza el Guadalquivir y se proyecta un puente con viga de hormigón (tipo Doble T) de \(50\ \text{m}\), apoyada en un extremo en soporte fijo y en el otro en apoyo móvil. Debe soportar el paso de vehículos pesados de \(65\ \text{t}\) (carga puntual). El peso propio de la viga (\(110{,}5\ \text{t}\)) se modela como carga puntual en el centro.</p>
+<svg class="cercha-svg" viewBox="0 0 520 180" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:10px auto;max-width:100%;height:auto;font-family:'Barlow Condensed',sans-serif">
+<title>Viga biapoyada de 50 m con vehículo y peso propio como cargas puntuales en el centro</title>
+<desc>Viga AB de 50 m con apoyo articulado en A y móvil en B. Dos cargas puntuales aplicadas en el centro (x=25 m): vehículo de 65 t y peso propio de la viga 110,5 t.</desc>
+<defs><marker id="t2b-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#D4700A"/></marker></defs>
+<line x1="60" y1="100" x2="460" y2="100" stroke="#1B4F8A" stroke-width="5"/>
+<polygon points="60,100 48,125 72,125" fill="none" stroke="#1B4F8A" stroke-width="2"/>
+<line x1="44" y1="128" x2="76" y2="128" stroke="#1B4F8A" stroke-width="2"/>
+<circle cx="460" cy="112" r="8" fill="none" stroke="#1B4F8A" stroke-width="2"/>
+<line x1="444" y1="125" x2="476" y2="125" stroke="#1B4F8A" stroke-width="2"/>
+<line x1="260" y1="18" x2="260" y2="96" stroke="#D4700A" stroke-width="3" marker-end="url(#t2b-ar)"/>
+<line x1="240" y1="38" x2="240" y2="96" stroke="#D4700A" stroke-width="3" marker-end="url(#t2b-ar)"/>
+<text x="170" y="30" fill="#D4700A" font-size="13" font-weight="700">65 t (vehículo)</text>
+<text x="266" y="54" fill="#D4700A" font-size="13" font-weight="700">110,5 t (viga)</text>
+<text x="54" y="90" fill="#1B4F8A" font-size="14" font-weight="700">A</text>
+<text x="452" y="90" fill="#1B4F8A" font-size="14" font-weight="700">B</text>
+<line x1="60" y1="150" x2="460" y2="150" stroke="#555" stroke-width="1"/>
+<line x1="60" y1="145" x2="60" y2="155" stroke="#555" stroke-width="1"/>
+<line x1="260" y1="145" x2="260" y2="155" stroke="#555" stroke-width="1"/>
+<line x1="460" y1="145" x2="460" y2="155" stroke="#555" stroke-width="1"/>
+<text x="150" y="165" fill="#555" font-size="12">25 m</text>
+<text x="350" y="165" fill="#555" font-size="12">25 m</text>
+</svg>
+<div class="enunciado">
+<ol type="a">
+  <li>Cuando el vehículo ha recorrido \(25\ \text{m}\), calcula las reacciones en ambos apoyos (equilibrio estático).</li>
+  <li>Determina el momento flector máximo en esa posición.</li>
+</ol>
+</div>
+<p class="contexto"><strong>Parte 2 (F, 1 pt).</strong> Un sistema de control de temperatura en lazo cerrado tiene función de transferencia \(T/T^* = \dfrac{G_1 G_2 G_3}{1 + G_1 G_2 H}\). Con \(G_1 = 10\ \text{V/V}\), \(G_2 = 23\ \text{^{\circ}C/W}\), \(G_3 = H = 0{,}1\ \text{V/^{\circ}C}\) y temperatura de consigna \(T^* = 60\ \text{^{\circ}C}\), calcula la temperatura real en régimen permanente y el error \(T^*-T\).</p>
+<svg class="cercha-svg" viewBox="0 0 540 170" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:6px auto;max-width:100%;height:auto;font-family:'Barlow Condensed',sans-serif">
+<title>Diagrama de bloques del sistema de control de temperatura en lazo cerrado</title>
+<desc>Lazo cerrado: entrada T*, sumador con entrada negativa de la realimentación H, bloques en serie G1, G2, G3 y salida T. La realimentación H toma la salida y regresa al sumador.</desc>
+<defs><marker id="t2f-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#1B4F8A"/></marker></defs>
+<line x1="20" y1="50" x2="70" y2="50" stroke="#1B4F8A" stroke-width="2" marker-end="url(#t2f-ar)"/>
+<text x="22" y="42" fill="#1B4F8A" font-size="12" font-weight="700">T*</text>
+<circle cx="82" cy="50" r="12" fill="#fff" stroke="#1B4F8A" stroke-width="2"/>
+<text x="78" y="54" fill="#1B4F8A" font-size="14" font-weight="700">+</text>
+<text x="90" y="70" fill="#C0321E" font-size="13" font-weight="700">−</text>
+<line x1="94" y1="50" x2="130" y2="50" stroke="#1B4F8A" stroke-width="2" marker-end="url(#t2f-ar)"/>
+<rect x="130" y="35" width="60" height="30" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="2"/>
+<text x="150" y="55" fill="#1B4F8A" font-size="14" font-weight="700">G₁</text>
+<line x1="190" y1="50" x2="220" y2="50" stroke="#1B4F8A" stroke-width="2" marker-end="url(#t2f-ar)"/>
+<rect x="220" y="35" width="60" height="30" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="2"/>
+<text x="240" y="55" fill="#1B4F8A" font-size="14" font-weight="700">G₂</text>
+<line x1="280" y1="50" x2="310" y2="50" stroke="#1B4F8A" stroke-width="2" marker-end="url(#t2f-ar)"/>
+<rect x="310" y="35" width="60" height="30" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="2"/>
+<text x="330" y="55" fill="#1B4F8A" font-size="14" font-weight="700">G₃</text>
+<line x1="370" y1="50" x2="510" y2="50" stroke="#1B4F8A" stroke-width="2" marker-end="url(#t2f-ar)"/>
+<text x="490" y="42" fill="#1B4F8A" font-size="12" font-weight="700">T</text>
+<circle cx="470" cy="50" r="3" fill="#1B4F8A"/>
+<line x1="470" y1="50" x2="470" y2="120" stroke="#1B4F8A" stroke-width="2"/>
+<line x1="470" y1="120" x2="310" y2="120" stroke="#1B4F8A" stroke-width="2" marker-end="url(#t2f-ar)"/>
+<rect x="250" y="105" width="60" height="30" fill="#F5EFE7" stroke="#1B4F8A" stroke-width="2"/>
+<text x="272" y="125" fill="#1B4F8A" font-size="14" font-weight="700">H</text>
+<line x1="250" y1="120" x2="82" y2="120" stroke="#1B4F8A" stroke-width="2"/>
+<line x1="82" y1="120" x2="82" y2="62" stroke="#1B4F8A" stroke-width="2" marker-end="url(#t2f-ar)"/>
+</svg>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (3B)</button><div class="sol-content">
+<span class="apt">C1-a) \(P_{viga} = 110{,}5\cdot 9{,}81 \approx 1\,084\ \text{kN}\); \(P_{veh} \approx 637{,}7\ \text{kN}\); \(P_{tot} \approx 1\,722\ \text{kN}\), aplicada a 25 m (centro). Por simetría, \(R_{Ay} = R_{By} = 861\ \text{kN}\).</span>
+<span class="apt">C1-b) \(M_{max}\) en x=25 m: \(M_{max} = R_{Ay}\cdot 25 = 21\,525\ \text{kN\cdot m}\).</span>
+<span class="apt">F) \(T = T^*\cdot G_1G_2G_3/(1+G_1G_2H) = 60\cdot (10\cdot 23\cdot 0{,}1)/(1+10\cdot 23\cdot 0{,}1) = 60\cdot 23/24 = 57{,}5\ \text{^{\circ}C}\). Error \(= 60 - 57{,}5 = 2{,}5\ \text{^{\circ}C}\).</span>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_C1.html#prob-7">🔗 Ver resolución completa en Ponencia resuelta (C1 · Problema 7)</a></p>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_F1.html#prob-3">🔗 Ver resolución completa en Ponencia resuelta (F1 · Problema 3)</a></p>
+</div></div>
+</div>
+</section>
+
+<!-- APARTADO 4 (D) -->
+<section class="apartado" id="ap4">
+<h2>Apartado 4 — Electrónica (D1 ó D2) <span class="bloque-tag">Bloque D · 2,5 pt</span></h2>
+
+<div class="opcion">
+<h3>Opción A · Corriente alterna (D1)</h3>
+<p class="contexto">Un circuito RLC serie se conecta a \(220\ \text{V}\) eficaces y \(50\ \text{Hz}\), con \(R = 50\ \Omega\), \(L = 50\ \text{mH}\) y \(C = 100\ \mu\text{F}\). Tómese la tensión del generador como origen de fases.</p>
+<svg class="cercha-svg" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:8px auto;max-width:100%;height:auto;font-family:'Barlow Condensed',sans-serif">
+<title>Circuito RLC serie alimentado por fuente alterna 220 V / 50 Hz</title>
+<desc>Lazo rectangular con fuente alterna a la izquierda y, en serie en la rama superior, una resistencia R, una bobina L y un condensador C.</desc>
+<rect x="40" y="30" width="420" height="100" fill="none" stroke="#1B4F8A" stroke-width="2"/>
+<circle cx="40" cy="80" r="18" fill="#fff" stroke="#1B4F8A" stroke-width="2"/>
+<path d="M28,80 Q34,68 40,80 T52,80" fill="none" stroke="#1B4F8A" stroke-width="1.6"/>
+<text x="4" y="60" fill="#1B4F8A" font-size="12" font-weight="700">U=220V</text>
+<text x="4" y="112" fill="#1B4F8A" font-size="11">50 Hz</text>
+<rect x="110" y="20" width="70" height="20" fill="#fff" stroke="#1B4F8A" stroke-width="2"/>
+<text x="135" y="14" fill="#1B4F8A" font-size="13" font-weight="700">R</text>
+<path d="M210,30 Q220,12 230,30 Q240,12 250,30 Q260,12 270,30 Q280,12 290,30" fill="none" stroke="#1B4F8A" stroke-width="2"/>
+<text x="240" y="14" fill="#1B4F8A" font-size="13" font-weight="700">L</text>
+<line x1="340" y1="20" x2="340" y2="40" stroke="#1B4F8A" stroke-width="3"/>
+<line x1="352" y1="20" x2="352" y2="40" stroke="#1B4F8A" stroke-width="3"/>
+<line x1="330" y1="30" x2="340" y2="30" stroke="#1B4F8A" stroke-width="2"/>
+<line x1="352" y1="30" x2="400" y2="30" stroke="#1B4F8A" stroke-width="2"/>
+<text x="338" y="14" fill="#1B4F8A" font-size="13" font-weight="700">C</text>
+</svg>
+<div class="enunciado">
+<ol type="a">
+  <li>Determina \(X_L\), \(X_C\) y la impedancia compleja \(\vec{Z}\). Indica si es inductiva o capacitiva.</li>
+  <li>Calcula la intensidad fasorial \(\vec{I}\).</li>
+  <li>Calcula las potencias activa, reactiva y aparente.</li>
+</ol>
+</div>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (4A)</button><div class="sol-content">
+<span class="apt">a) \(X_L = 2\pi f L \approx 15{,}71\ \Omega\); \(X_C = 1/(2\pi f C) \approx 31{,}83\ \Omega\); \(\vec Z = 50 - j16{,}12 \approx 52{,}53\angle{-17{,}87^{\circ}}\ \Omega\) ⇒ <strong>capacitiva</strong> (\(X_C > X_L\)).</span>
+<span class="apt">b) \(\vec I = \vec U/\vec Z = 220\angle 0^{\circ}/52{,}53\angle{-17{,}87^{\circ}} \approx 4{,}19\angle 17{,}87^{\circ}\ \text{A}\) (adelantada).</span>
+<span class="apt">c) \(P = R I^2 \approx 877{,}8\ \text{W}\); \(Q = (X_L-X_C)I^2 \approx -283\ \text{VAr}\) (capacitivo); \(S \approx 922{,}3\ \text{VA}\).</span>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_D1.html#prob-2">🔗 Ver resolución completa en Ponencia resuelta (D1 · Problema 2)</a></p>
+</div></div>
+</div>
+
+<div class="opcion">
+<h3>Opción B · Electrónica digital (D2)</h3>
+<p class="contexto">Un concentrador de agua de riego recibe cuatro tuberías con caudales: A (5 l/min), B (10 l/min), C (20 l/min) y D (30 l/min). Cada tubería lleva un sensor que vale 1 cuando circula agua. La salida \(F\) se activa cuando el caudal total al concentrador es <strong>mayor o igual a 30 l/min</strong>.</p>
+<div class="enunciado">
+<ol type="a">
+  <li>Obtén la tabla de verdad del circuito.</li>
+  <li>Simplifica por Karnaugh y dibuja el circuito lógico con puertas básicas.</li>
+  <li>Razona si existe alguna entrada que no influya en el funcionamiento.</li>
+</ol>
+</div>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (4B)</button><div class="sol-content">
+<span class="apt">a) Tabla: F=1 siempre que D=1 (30+), o B+C juntos (10+20=30). Exactamente los minterms con D=1 o con BC=11.</span>
+<span class="apt">b) Karnaugh: \(F = D + B\cdot C\). Circuito: AND(B,C) seguido de OR con D.</span>
+<span class="apt">c) La entrada <strong>A</strong> (5 l/min) no aparece en la expresión simplificada ⇒ no influye en la salida (por sí sola nunca alcanza 30 l/min, y cuando B+C o D ya lo hacen, F=1 independientemente de A).</span>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_D2.html#prob-1">🔗 Ver resolución completa en Ponencia resuelta (D2 · Problema 1)</a></p>
+</div></div>
+</div>
+</section>
+
+<div class="procedencia">
+<h3>📋 Procedencia de los ejercicios</h3>
+<ul>
+  <li><strong>Apartado 1:</strong> Ponencia 2025-26, Problema B-2 (p. 3)</li>
+  <li><strong>Apartado 2 Opción A:</strong> Ponencia 2025-26, Problema C3-5 (p. 15)</li>
+  <li><strong>Apartado 2 Opción B:</strong> Ponencia 2025-26, Problema C3-1 (p. 10)</li>
+  <li><strong>Apartado 3 Opción A (C1):</strong> Ponencia 2025-26, Problema C1-6 (p. 35)</li>
+  <li><strong>Apartado 3 Opción A (F):</strong> Ponencia 2025-26, Problema F-13 (p. 67)</li>
+  <li><strong>Apartado 3 Opción B (C1):</strong> Ponencia 2025-26, Problema C1-7 (p. 37)</li>
+  <li><strong>Apartado 3 Opción B (F):</strong> Ponencia 2025-26, Problema F-3 (p. 59) adaptado</li>
+  <li><strong>Apartado 4 Opción A:</strong> Ponencia 2025-26, Problema D1-2 (p. 48)</li>
+  <li><strong>Apartado 4 Opción B:</strong> Ponencia 2025-26, Problema D2-1 (p. 17)</li>
+</ul>
+</div>
+
+</div>
+</body>
+</html>

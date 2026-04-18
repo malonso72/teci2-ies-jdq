@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II — ⚡ Repaso CC · Corriente Continua</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+
+:root{--az:#1B4F8A;--az2:#2E7BC4;--hub-bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5;--nw:260px;--hh:52px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;font-family:'Barlow',system-ui,sans-serif;background:var(--hub-bg);color:var(--tx)}
+.hd{position:fixed;top:0;left:0;right:0;height:var(--hh);background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;display:flex;align-items:center;padding:0 14px;z-index:1000;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer}.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.7rem;opacity:.6;margin-left:10px}
+.mb{display:none;background:none;border:none;color:#fff;font-size:1.3rem;cursor:pointer;margin-right:8px}
+.home-btn{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;font-size:.72rem;padding:4px 10px;border-radius:4px;cursor:pointer;margin-left:auto;transition:all .15s}
+.home-btn:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.5)}
+.ly{display:flex;position:fixed;top:var(--hh);left:0;right:0;bottom:0}
+.nv{width:var(--nw);flex-shrink:0;background:var(--w);border-right:1px solid var(--bd);overflow-y:auto;padding:44px 0 6px;z-index:500}  /* v2.9: padding-top 44 evita solape con navcross */
+.nb{border-bottom:1px solid #eee}.nb-h{padding:7px 10px;font-size:.76rem;font-weight:500;cursor:pointer;transition:background .15s;display:flex;align-items:center;gap:4px}
+.nb-h:hover{background:#EBF0F7}.nb.act .nb-h{background:var(--az);color:#fff}
+.nc{display:none;padding:0 0 4px}.nb.act .nc{display:block}
+.na{display:block;padding:2px 10px 2px 22px;font-size:.68rem;color:var(--t2);cursor:pointer;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.6}
+.na:hover{background:#EBF0F7;color:var(--az)}
+.ct{flex:1;overflow-y:scroll;-webkit-overflow-scrolling:touch;scroll-padding-top:44px}
+.wl{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;text-align:center;padding:40px 24px}
+.wl h2{font-family:'Barlow Condensed',sans-serif;font-size:2rem;color:var(--az);margin-bottom:6px}
+.wl p{color:var(--t2);max-width:500px;line-height:1.5;font-size:.88rem;margin-bottom:24px}
+.bg{display:grid;grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));gap:10px;max-width:700px;width:100%}
+.bc{background:var(--w);border:1px solid var(--bd);border-radius:8px;padding:14px 16px;cursor:pointer;transition:all .2s;text-align:left;display:flex;flex-direction:column;gap:4px}
+.bc:hover{border-color:var(--az);box-shadow:0 3px 12px rgba(27,79,138,.12);transform:translateY(-2px)}
+.bi{font-size:1.6rem;margin-bottom:2px}.bk{font-weight:700;font-size:.85rem;color:var(--az)}.bn{font-size:.72rem;color:var(--t2);line-height:1.3}
+.block-content{padding:0}
+@media(max-width:768px){.mb{display:block}.nv{position:fixed;top:var(--hh);left:0;bottom:0;z-index:900;transform:translateX(-100%)}.nv.open{transform:translateX(0);box-shadow:4px 0 16px rgba(0,0,0,.2)}}
+
+:root {
+  --azul:     #1B4F8A;
+  --azul2:    #2E7BC4;
+  --azul-cl:  #DDE9F7;
+  --azul-bg:  #EEF4FB;
+  --naranja:  #D4700A;
+  --naranja-cl:#FEF0DF;
+  --verde:    #1A6B3A;
+  --verde-cl: #E4F4EB;
+  --rojo:     #C0321E;
+  --rojo-cl:  #FCEAE7;
+  --gris:     #F5F6F8;
+  --borde:    #CDD7E3;
+  --texto:    #1A2430;
+  --texto2:   #455565;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Barlow', sans-serif;
+  --cond: 'Barlow Condensed', sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{background:#CBD5E1;}
+body{
+  font-family:var(--sans);
+  font-size:10.5pt;
+  line-height:1.72;
+  color:var(--texto);
+  background:#CBD5E1;
+}
+.pagina{
+  max-width:870px;
+  margin:0 auto;
+  background:#fff;
+  box-shadow:0 6px 48px rgba(0,0,0,.18);
+}
+
+/* ── CABECERA ── */
+.cabecera{
+  background:var(--azul);
+  padding:0;
+  display:grid;
+  grid-template-columns:6px 1fr;
+}
+.cab-banda{ background:var(--naranja); }
+.cab-inner{
+  padding:32px 44px 28px;
+}
+.cab-label{
+  font-family:var(--cond);
+  font-size:8.5pt;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.6);
+  margin-bottom:8px;
+}
+.cab-titulo{
+  font-family:var(--cond);
+  font-size:26pt;
+  font-weight:700;
+  color:#fff;
+  line-height:1.05;
+  margin-bottom:6px;
+}
+.cab-titulo span{ color:#F8C060; }
+.cab-sub{
+  font-family:var(--sans);
+  font-weight:300;
+  font-size:11.5pt;
+  color:rgba(255,255,255,.78);
+  margin-bottom:22px;
+}
+.cab-chips{
+  display:flex; gap:10px; flex-wrap:wrap;
+}
+.chip{
+  font-family:var(--sans);
+  font-size:8pt;
+  font-weight:600;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.22);
+  color:rgba(255,255,255,.85);
+  padding:3px 10px;
+  border-radius:20px;
+  letter-spacing:.5px;
+}
+
+/* ── ÍNDICE ── */
+
+/* ── CUERPO ── */
+.cuerpo{ padding:8px 44px 52px; }
+
+/* ── SECCIÓN ── */
+.seccion{ margin-top:38px; }
+.sec-hdr{
+  display:flex; align-items:stretch; gap:0;
+  margin-bottom:16px;
+  border-bottom:2px solid var(--azul);
+}
+.sec-num{
+  background:var(--azul);
+  color:#fff;
+  font-family:var(--cond);
+  font-weight:700;
+  font-size:15pt;
+  padding:4px 14px;
+  display:flex; align-items:center; justify-content:center;
+  min-width:46px;
+}
+.sec-tit{
+  font-family:var(--cond);
+  font-size:15pt;
+  font-weight:700;
+  color:var(--azul);
+  padding:4px 12px;
+  display:flex; align-items:center;
+  letter-spacing:.3px;
+}
+
+h3{
+  font-family:var(--cond);
+  font-size:11.5pt;
+  font-weight:700;
+  color:var(--azul2);
+  margin:20px 0 8px;
+  padding-left:9px;
+  border-left:3px solid var(--naranja);
+  letter-spacing:.3px;
+}
+h4{
+  font-family:var(--sans);
+  font-size:10pt;
+  font-weight:700;
+  color:var(--azul);
+  margin:14px 0 5px;
+}
+
+p{ margin-bottom:9px; }
+ul,ol{ margin:7px 0 11px 20px; }
+li{ margin-bottom:4px; }
+strong{ color:var(--azul); font-weight:600; }
+
+/* ── CAJAS ── */
+.caja{
+  border-radius:5px;
+  padding:12px 16px;
+  margin:12px 0;
+  font-size:10pt;
+}
+.def { background:var(--azul-bg); border-left:4px solid var(--azul2); }
+.clave { background:var(--naranja-cl); border-left:4px solid var(--naranja); }
+.aviso { background:var(--rojo-cl); border-left:4px solid var(--rojo); }
+.ok    { background:var(--verde-cl); border-left:4px solid var(--verde); }
+
+/* ── CALLOUT ── */
+.callout{
+  display:flex; gap:10px; align-items:flex-start;
+  padding:12px 16px; border-radius:5px; margin:14px 0; font-size:10pt;
+}
+.callout-key{ background:var(--naranja-cl); border-left:4px solid var(--naranja); }
+.callout-info{ background:var(--azul-bg); border-left:4px solid var(--azul2); }
+.callout-warn{ background:var(--rojo-cl); border-left:4px solid var(--rojo); }
+.callout-ok{ background:var(--verde-cl); border-left:4px solid var(--verde); }
+.callout-icon{
+  font-size:14pt; flex-shrink:0; margin-top:1px;
+}
+
+/* ── EJEMPLO ── */
+.ejemplo{
+  border-left:4px solid var(--verde);
+  border-radius:0 5px 5px 0;
+  padding:12px 16px;
+  margin:12px 0;
+  background:var(--verde-cl);
+}
+.ej-tit{
+  font-family:var(--cond);
+  font-weight:700;
+  color:var(--verde);
+  font-size:8.5pt;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+
+/* ── TABLA ── */
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:9.5pt;
+  margin:12px 0;
+}
+th{
+  background:var(--azul);
+  color:#fff;
+  font-family:var(--cond);
+  font-weight:700;
+  font-size:9pt;
+  letter-spacing:.7px;
+  padding:8px 12px;
+  text-align:left;
+}
+td{
+  padding:8px 12px;
+  border-bottom:1px solid var(--borde);
+  vertical-align:top;
+}
+tr:nth-child(even) td{ background:var(--gris); }
+
+/* ── IMAGEN ── */
+.img-container{
+  text-align:center;
+  margin:18px 0;
+}
+.img-container img{
+  max-width:100%;
+  border-radius:5px;
+  box-shadow:0 2px 12px rgba(0,0,0,.12);
+}
+.img-caption{
+  font-family:var(--sans);
+  font-size:8.5pt;
+  color:var(--texto2);
+  margin-top:6px;
+  font-style:italic;
+}
+
+/* ── PASO ── */
+.paso{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin:8px 0;
+  padding:8px 12px;
+  background:var(--azul-bg);
+  border-radius:5px;
+}
+.paso-n{
+  background:var(--azul);
+  color:#fff;
+  font-family:var(--cond);
+  font-weight:700;
+  font-size:10pt;
+  min-width:26px;
+  height:26px;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+  margin-top:1px;
+}
+.paso-txt{ font-size:10pt; }
+
+hr.div{ border:none; border-top:1.5px solid var(--borde); margin:28px 0; }
+
+/* ── PIE ── */
+.pie{
+  background:var(--azul);
+  color:rgba(255,255,255,.65);
+  font-family:var(--sans);
+  font-size:8pt;
+  padding:12px 44px;
+  display:flex;
+  justify-content:space-between;
+}
+
+/* ── COMPARATIVA ── */
+.comp-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:14px 0;
+}
+.comp-card{
+  border-radius:5px;
+  padding:14px 16px;
+  font-size:9.5pt;
+}
+.comp-card h4{
+  margin:0 0 8px;
+  font-size:10pt;
+}
+.comp-card ul{ margin:4px 0 0 16px; }
+.comp-card li{ margin-bottom:2px; font-size:9pt; }
+
+/* ── FRACCIONES ── */
+.frac{
+  display:inline-flex;
+  flex-direction:column;
+  align-items:center;
+  vertical-align:middle;
+  margin:0 3px;
+}
+.frac-num{
+  border-bottom:2px solid currentColor;
+  padding:0 6px 2px;
+  line-height:1.2;
+}
+.frac-den{
+  padding:2px 6px 0;
+  line-height:1.2;
+}
+.formula-line{
+  font-family:var(--mono);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  margin:10px 0;
+  flex-wrap:wrap;
+}
+
+@media print{
+  html,body{ background:white; }
+  .pagina{ box-shadow:none; max-width:100%; }
+  .seccion{ page-break-inside:avoid; }
+}
+
+/* ── EJERCICIOS CSS ── */
+.solucion{
+  border-left:3px solid var(--azul2);
+  padding:8px 16px;
+  margin:8px 0;
+  background:var(--azul-bg);
+  border-radius:0 5px 5px 0;
+  font-size:10pt;
+}
+.resultado{
+  background:var(--verde-cl);
+  border-left:4px solid var(--verde);
+  border-radius:0 5px 5px 0;
+  padding:10px 16px;
+  margin:12px 0;
+  font-size:10pt;
+  font-weight:600;
+}
+.enunciado {
+  background: var(--naranja-cl);
+  border-left: 4px solid var(--naranja);
+  padding: 12px 16px;
+  border-radius: 0 5px 5px 0;
+  margin: 0 0 16px;
+  font-size: 10pt;
+}
+.math.display { text-align:center; margin:10px 0; }
+.MathJax { font-size:100% !important; }
+span.math { font-family: var(--mono); }
+
+/* Match exercise layout - fill content area */
+.ct .pagina { max-width:100%; box-shadow:none; margin:0; background:#fff; }
+
+.vid-btn{display:inline-flex;align-items:center;gap:6px;margin:10px 0;padding:8px 16px;background:#E8F5E9;border:1px solid #81C784;border-radius:8px;color:#2E7D32;font:600 .82rem/1.3 Barlow,sans-serif;text-decoration:none;transition:all .2s}
+.vid-btn:hover{background:#C8E6C9;border-color:#4CAF50;transform:translateY(-1px)}
+
+/* Scroll fix anchors */
+[id]{scroll-margin-top:20px;}
+
+
+
+/* details/summary styling */
+details {
+  margin: 10px 0;
+}
+details summary {
+  cursor: pointer;
+  font-family: var(--cond);
+  font-weight: 700;
+  font-size: 10pt;
+  color: var(--azul);
+  padding: 6px 12px;
+  background: var(--azul-bg);
+  border-radius: 5px;
+  border-left: 3px solid var(--azul2);
+  transition: background .15s;
+}
+details summary:hover {
+  background: var(--azul-cl);
+}
+details[open] summary {
+  border-radius: 5px 5px 0 0;
+  margin-bottom: 0;
+}
+.objetivos-box{background:linear-gradient(180deg,#E4F4EB,#EEF9F1);border-left:5px solid var(--verde);border-radius:5px;padding:18px 22px;margin:22px 0 30px;}
+.objetivos-box h2{font-family:var(--cond);font-size:16pt;color:var(--verde);margin:0 0 10px;display:flex;align-items:center;gap:8px;}
+.objetivos-box ul{list-style:none;padding-left:0;margin:0;}
+.objetivos-box li{padding:6px 0 6px 28px;position:relative;font-size:10.5pt;line-height:1.5;}
+.objetivos-box li::before{content:"✓";position:absolute;left:6px;top:6px;color:var(--verde);font-weight:bold;}
+.decalogo-box{background:linear-gradient(180deg,#FEF0DF,#FFF7E8);border-left:5px solid var(--naranja);border-radius:5px;padding:18px 22px;margin:26px 0 6px;}
+.decalogo-box h2{font-family:var(--cond);font-size:16pt;color:var(--naranja);margin:0 0 10px;display:flex;align-items:center;gap:8px;}
+.decalogo-box ol{list-style:none;padding-left:0;counter-reset:deca;margin:0;}
+.decalogo-box li{padding:8px 0 8px 44px;position:relative;counter-increment:deca;font-size:10.5pt;line-height:1.55;border-bottom:1px dashed rgba(212,112,10,.3);}
+.decalogo-box li:last-child{border-bottom:none;}
+.decalogo-box li::before{content:counter(deca);position:absolute;left:6px;top:7px;width:26px;height:26px;background:var(--naranja);color:#fff;font-family:var(--cond);font-weight:700;font-size:11pt;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+
+/* ── NAVCROSS: barra de navegación transversal (Fase D) ── */
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+.navcross span.nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8;align-self:center;user-select:none}
+@media(max-width:640px){.navcross{gap:4px;padding:8px 10px;top:52px}.navcross a span.nc-lbl,.navcross span.nc-current span.nc-lbl{display:none}.navcross .nc-sep{display:none}}
+
+@media print{
+  html,body{background:#fff!important;color:#000!important}
+  .hd,.navcross,.nv,.mb,.home-btn,.sol-btn,.btn-video,.video-group{display:none!important}
+  .ly{position:static!important}
+  .ct{overflow:visible!important;padding:0}
+  .pagina{box-shadow:none!important;max-width:100%}
+  .cabecera{background:#fff!important;color:#000!important}
+  .cab-titulo,.cab-label,.cab-sub{color:#000!important}
+  h2,h3,h4{page-break-after:avoid}
+  .seccion{page-break-inside:avoid}
+  .sol-content{display:block!important}
+  img{max-width:100%;page-break-inside:avoid}
+  a{text-decoration:none;color:#000}
+  .objetivos-box,.decalogo-box{background:#fff!important;border:1px solid #aaa!important}
+}
+/* @media print v2 — ecosistema TECI2 */
+
+</style>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    displayMath: [['\\[','\\]']],
+    processEscapes: true
+  },
+  options: {
+    skipHtmlTags: ['script','noscript','style','textarea','pre']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+<div class="hd">
+<button class="mb" onclick="document.getElementById('nv').classList.toggle('open')">☰</button>
+<span class="lg" onclick="location.href='../index.html'">TECI II</span>
+<span class="sb">⚡ Repaso de Corriente Continua</span>
+<a href="../index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal"><a href="../index.html" aria-label="Ir al índice principal"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span><span class="nc-current" aria-current="page"><span>📖</span><span class="nc-lbl">Repaso CC</span></span><span class="nc-sep">·</span><a href="../index.html#ejercicios" aria-label="Ver índice de ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a><span class="nc-sep">·</span><a href="../index.html#examenes" aria-label="Ver índice de exámenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a><span class="nc-sep">·</span><a href="../ponencia_resuelta/index_ponencia.html" aria-label="Ver Ponencia 2025-26 resuelta"><span>📚</span><span class="nc-lbl">Ponencia</span></a><span class="nc-sep">·</span><a href="../apoyo/formulario.html" aria-label="Ir al material de apoyo"><span>📚</span><span class="nc-lbl">Apoyo</span></a></nav>
+
+<div class="ly">
+<nav class="nv" id="nv">
+<div class="nb act" data-block="CC">
+<div class="nb-h" style="background:var(--az);color:#fff;">⚡ Repaso CC</div>
+<div class="nc" style="display:block;">
+<a class="na" href="#objetivos">🎯 Objetivos</a>
+<a class="na" href="#intro">¿Por qué este repaso?</a>
+<a class="na" href="#cap1">1. Magnitudes fundamentales</a>
+<a class="na" href="#cap2">2. Ley de Ohm</a>
+<a class="na" href="#cap3">3. Asociación de resistencias</a>
+<a class="na" href="#ej3">↳ Ejercicios resueltos</a>
+<a class="na" href="#cap4">4. Energía y potencia</a>
+<a class="na" href="#puente">🔗 Puente hacia CA</a>
+<a class="na" href="#decalogo">📝 Decálogo PAU</a>
+</div>
+</div>
+</nav>
+<div class="ct" id="ct">
+<div class="block-content" id="block-CC" style="display:block">
+
+<div class="pagina">
+<!-- CABECERA -->
+<div class="cabecera">
+  <div class="cab-banda"></div>
+  <div class="cab-inner">
+    <div class="cab-label">Repaso previo · Tecnología e Ingeniería II · IES Jiménez de Quesada</div>
+    <div class="cab-titulo">Repaso de <span>Corriente Continua</span></div>
+    <div class="cab-sub">Lo esencial de CC para entender los circuitos de Corriente Alterna (Bloque D1)</div>
+    <div class="cab-chips">
+      <span class="chip">⚡ Magnitudes</span>
+      <span class="chip">Ω Ley de Ohm</span>
+      <span class="chip">🔗 Serie</span>
+      <span class="chip">⑃ Paralelo</span>
+      <span class="chip">🔀 Mixto</span>
+      <span class="chip">💡 Potencia</span>
+    </div>
+  </div>
+</div>
+</div><!-- /pagina -->
+
+<!-- ═══════════════════ OBJETIVOS ═══════════════════ -->
+<div id="objetivos" class="objetivos-box">
+  <h2>🎯 Objetivos de aprendizaje</h2>
+  <ul>
+    <li>Reconocer las magnitudes fundamentales de un circuito de CC: V, I, R, P, E.</li>
+    <li>Aplicar la ley de Ohm \(V = I\cdot R\) en problemas directos e inversos.</li>
+    <li>Calcular la resistencia equivalente en asociaciones serie, paralelo y mixtas.</li>
+    <li>Aplicar divisores de tensión y divisores de corriente.</li>
+    <li>Calcular potencia y energía disipadas en una resistencia.</li>
+    <li>Tender el puente conceptual entre CC y CA para abordar el Bloque D1.</li>
+  </ul>
+</div>
+
+<!-- CUERPO -->
+<div class="cuerpo">
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- INTRODUCCIÓN                                                    -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="seccion" id="intro">
+  <div class="sec-hdr">
+    <div class="sec-num">📌</div>
+    <div class="sec-tit">¿Por qué necesitas este repaso?</div>
+  </div>
+</div>
+
+
+
+<div class="callout callout-key">
+<strong>Los circuitos de Corriente Alterna (Bloque D1) se resuelven con las mismas herramientas que los de CC</strong> — Ley de Ohm, asociaciones serie/paralelo y cálculo de potencia — pero sustituyendo resistencias por impedancias. Si dominas CC, dominas CA.
+</div>
+
+<p>Este documento resume <strong>solo los conceptos de 1º de Bachillerato que necesitas</strong> para abordar el Bloque D1 con garantías. No incluye Kirchhoff, Thévenin ni superposición porque no aparecen en los problemas de CA de la PEvAU.</p>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- CAPÍTULO 1: MAGNITUDES                                          -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="seccion" id="cap1">
+  <div class="sec-hdr">
+    <div class="sec-num">1</div>
+    <div class="sec-tit">Magnitudes eléctricas fundamentales</div>
+  </div>
+</div>
+
+
+
+<h3>1.1 Intensidad de corriente (I)</h3>
+
+<div class="caja def">
+  <strong>Definición
+</strong><br>
+  La <strong>intensidad de corriente</strong> es la cantidad de carga eléctrica que atraviesa una sección del conductor por unidad de tiempo:
+  \[I = \frac{Q}{t}\]
+  donde \(Q\) es la carga en culombios (C) y \(t\) el tiempo en segundos (s). Se mide en <strong>amperios (A)</strong>.
+</div>
+
+<p>El sentido convencional de la corriente va del polo positivo al negativo (exterior del generador), aunque los electrones se mueven en sentido contrario.</p>
+
+<h3>1.2 Tensión o diferencia de potencial (V)</h3>
+
+<div class="caja def">
+  <strong>Definición
+</strong><br>
+  La <strong>tensión</strong> (o diferencia de potencial, d.d.p.) entre dos puntos A y B es el trabajo que realiza el campo eléctrico para trasladar la unidad de carga positiva de A a B:
+  \[V_{AB} = V_A - V_B = \frac{W_{A \to B}}{Q}\]
+  Se mide en <strong>voltios (V)</strong>. Un voltio equivale a un julio por culombio: \(1\,\text{V} = 1\,\text{J/C}\).
+</div>
+
+<h3>1.3 Resistencia eléctrica (R)</h3>
+
+<div class="caja def">
+  <strong>Definición
+</strong><br>
+  La <strong>resistencia</strong> es la oposición que ofrece un material al paso de la corriente eléctrica. Depende de las características del conductor:
+  \[R = \rho \cdot \frac{L}{S}\]
+  donde \(\rho\) es la resistividad del material (\(\Omega \cdot \text{m}\)), \(L\) la longitud (m) y \(S\) la sección transversal (m²). Se mide en <strong>ohmios (\(\Omega\))</strong>.
+</div>
+
+<h3>1.4 Tabla resumen</h3>
+
+<table>
+  <tr><th>Magnitud</th><th>Símbolo</th><th>Unidad SI</th><th>Símbolo unidad</th></tr>
+  <tr><td>Intensidad</td><td>\(I\)</td><td>Amperio</td><td>A</td></tr>
+  <tr><td>Tensión</td><td>\(V\)</td><td>Voltio</td><td>V</td></tr>
+  <tr><td>Resistencia</td><td>\(R\)</td><td>Ohmio</td><td>\(\Omega\)</td></tr>
+  <tr><td>Potencia</td><td>\(P\)</td><td>Vatio</td><td>W</td></tr>
+  <tr><td>Energía</td><td>\(E\)</td><td>Julio</td><td>J</td></tr>
+  <tr><td>Carga</td><td>\(Q\)</td><td>Culombio</td><td>C</td></tr>
+</table>
+
+<div class="callout callout-key">
+<strong>Conexión con CA:</strong> En corriente alterna, \(V\) e \(I\) tienen valores eficaces (equivalentes a los valores CC que producirían la misma potencia). La resistencia \(R\) se generaliza como <strong>impedancia \(Z\)</strong>.
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- CAPÍTULO 2: LEY DE OHM                                          -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="seccion" id="cap2">
+  <div class="sec-hdr">
+    <div class="sec-num">2</div>
+    <div class="sec-tit">Ley de Ohm</div>
+  </div>
+</div>
+
+
+
+<div class="caja clave">
+  <strong>Ley de Ohm
+</strong><br>
+  La tensión en los extremos de un conductor óhmico es directamente proporcional a la intensidad de corriente que lo atraviesa:
+  \[V = I \cdot R\]
+  De donde también se deduce: \(\displaystyle I = \frac{V}{R}\) y \(\displaystyle R = \frac{V}{I}\).
+</div>
+
+<h3>2.1 Aplicación a un circuito básico</h3>
+
+<p>En un circuito con un generador ideal de f.e.m. \(\varepsilon\) y una resistencia \(R\):</p>
+
+<div class="caja def">
+  <strong>Circuito básico
+</strong><br>
+  \[I = \frac{\varepsilon}{R} \qquad V_R = I \cdot R = \varepsilon\]
+</div>
+
+<div class="ejemplo">
+  <strong>Ejemplo
+</strong><br>
+  <p><strong>Dato:</strong> Un generador de \(\varepsilon = 12\,\text{V}\) alimenta una resistencia de \(R = 4\,\Omega\).</p>
+  <p><strong>Calcular:</strong> Intensidad y potencia disipada.</p>
+  <p>\[I = \frac{12}{4} = 3\,\text{A}\]</p>
+  <p>\[P = I^2 \cdot R = 3^2 \cdot 4 = 36\,\text{W}\]</p>
+</div>
+
+<div class="callout callout-key">
+<strong>Conexión con CA:</strong> La Ley de Ohm en CA se escribe igual: \(V = I \cdot Z\), donde \(Z\) es la impedancia del circuito. Si solo hay resistencias, \(Z = R\) y todo funciona exactamente como en CC.
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- CAPÍTULO 3: ASOCIACIONES                                        -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="seccion" id="cap3">
+  <div class="sec-hdr">
+    <div class="sec-num">3</div>
+    <div class="sec-tit">Resistencias: asociación serie, paralelo y mixta</div>
+  </div>
+</div>
+
+
+
+<h3>3.1 Asociación en serie</h3>
+
+<p>Dos o más resistencias están en <strong>serie</strong> cuando están conectadas una a continuación de otra, de modo que por todas circula la <strong>misma intensidad</strong>.</p>
+
+<div class="caja def">
+  <strong>Resistencia equivalente en serie
+</strong><br>
+  \[R_{eq} = R_1 + R_2 + R_3 + \cdots\]
+</div>
+
+<p>Propiedades de la asociación en serie:</p>
+<ul>
+  <li>La intensidad es la misma en todas las resistencias: \(I = I_1 = I_2 = \cdots\)</li>
+  <li>La tensión total se reparte: \(V_T = V_1 + V_2 + \cdots\)</li>
+  <li>Cada resistencia soporta una tensión proporcional a su valor: \(V_k = I \cdot R_k\)</li>
+  <li>\(R_{eq}\) siempre es mayor que la mayor de las resistencias individuales.</li>
+</ul>
+
+<div class="callout callout callout-info">
+  <span class="callout-icon">ℹ️</span>
+  <div><strong>Divisor de tensión</strong><br>
+</div>
+  En una asociación serie alimentada con tensión \(V_T\):
+  \[V_k = V_T \cdot \frac{R_k}{R_{eq}}\]
+</div>
+
+<h3>3.2 Asociación en paralelo</h3>
+
+<p>Dos o más resistencias están en <strong>paralelo</strong> cuando sus terminales están conectados a los mismos dos nodos. Todas soportan la <strong>misma tensión</strong>.</p>
+
+<div class="caja def">
+  <strong>Resistencia equivalente en paralelo
+</strong><br>
+  \[\frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} + \cdots\]
+  <p style="text-align:left;margin-top:.4rem">Caso particular de dos resistencias: \(\displaystyle R_{eq} = \frac{R_1 \cdot R_2}{R_1 + R_2}\)</p>
+</div>
+
+<p>Propiedades de la asociación en paralelo:</p>
+<ul>
+  <li>La tensión es la misma en todas: \(V = V_1 = V_2 = \cdots\)</li>
+  <li>La intensidad total se reparte: \(I_T = I_1 + I_2 + \cdots\)</li>
+  <li>Cada rama lleva una intensidad inversamente proporcional a su resistencia: \(I_k = V / R_k\)</li>
+  <li>\(R_{eq}\) siempre es menor que la menor de las resistencias individuales.</li>
+</ul>
+
+<div class="callout callout callout-info">
+  <span class="callout-icon">ℹ️</span>
+  <div><strong>Divisor de corriente (dos resistencias)</strong><br>
+</div>
+  \[I_1 = I_T \cdot \frac{R_2}{R_1 + R_2} \qquad I_2 = I_T \cdot \frac{R_1}{R_1 + R_2}\]
+</div>
+
+<h3>3.3 Asociación mixta</h3>
+
+<p>Un circuito mixto combina asociaciones en serie y en paralelo. Para resolverlo se sigue un <strong>método sistemático</strong>:</p>
+
+<ol>
+  <li><strong>Identificar</strong> qué resistencias están en serie y cuáles en paralelo.</li>
+  <li><strong>Simplificar</strong> de dentro hacia fuera, calculando las \(R_{eq}\) parciales.</li>
+  <li><strong>Calcular</strong> la intensidad total con la Ley de Ohm: \(I_T = V_T / R_{eq}\).</li>
+  <li><strong>Deshacer</strong> la simplificación en orden inverso, calculando \(V\) e \(I\) en cada resistencia.</li>
+</ol>
+
+<div class="callout callout callout-warn">
+  <span class="callout-icon">⚠️</span>
+  <div><strong>Error frecuente</strong><br>
+</div>
+  No confundas «mismos nodos» con «estar cerca». Dos resistencias están en paralelo <strong>solo</strong> si comparten exactamente los mismos dos nodos. Dibuja siempre el circuito e identifica los nodos antes de simplificar.
+</div>
+
+<div class="callout callout-key">
+<strong>Conexión con CA:</strong> En un circuito RLC serie, la impedancia equivalente se calcula de forma análoga a la serie: \(Z = \sqrt{R^2 + (X_L - X_C)^2}\). En paralelo, se trabaja con admitancias. El método de simplificación es el mismo.
+</div>
+
+<!-- EJERCICIOS RESUELTOS -->
+<h3 id="ej3">Ejercicios resueltos — Asociación de resistencias</h3>
+
+<!-- EJERCICIO 1 -->
+<div class="enunciado">
+  <strong>Ejercicio 1 — Serie simple
+</strong><br>
+  <p>Un generador ideal de \(\varepsilon = 24\,\text{V}\) alimenta tres resistencias en serie: \(R_1 = 2\,\Omega\), \(R_2 = 4\,\Omega\) y \(R_3 = 6\,\Omega\). Calcula:</p>
+  <ol type="a">
+    <li>Resistencia equivalente</li>
+    <li>Intensidad del circuito</li>
+    <li>Tensión en cada resistencia</li>
+  </ol>
+</div>
+
+<details>
+  <summary>Ver solución</summary>
+  <div class="solucion">
+    <p><strong>a) Resistencia equivalente:</strong></p>
+    \[R_{eq} = R_1 + R_2 + R_3 = 2 + 4 + 6 = 12\,\Omega\]
+
+    <p><strong>b) Intensidad:</strong></p>
+    \[I = \frac{\varepsilon}{R_{eq}} = \frac{24}{12} = 2\,\text{A}\]
+
+    <p><strong>c) Tensión en cada resistencia:</strong></p>
+    \[V_1 = I \cdot R_1 = 2 \times 2 = 4\,\text{V}\]
+    \[V_2 = I \cdot R_2 = 2 \times 4 = 8\,\text{V}\]
+    \[V_3 = I \cdot R_3 = 2 \times 6 = 12\,\text{V}\]
+
+    <p><strong>Comprobación:</strong> \(V_1 + V_2 + V_3 = 4 + 8 + 12 = 24\,\text{V} = \varepsilon\) ✓</p>
+  </div>
+</details>
+
+<!-- EJERCICIO 2 -->
+<div class="enunciado">
+  <strong>Ejercicio 2 — Paralelo simple
+</strong><br>
+  <p>Un generador de \(\varepsilon = 12\,\text{V}\) alimenta dos resistencias en paralelo: \(R_1 = 6\,\Omega\) y \(R_2 = 3\,\Omega\). Calcula:</p>
+  <ol type="a">
+    <li>Resistencia equivalente</li>
+    <li>Intensidad total y por cada rama</li>
+    <li>Potencia disipada en cada resistencia</li>
+  </ol>
+</div>
+
+<details>
+  <summary>Ver solución</summary>
+  <div class="solucion">
+    <p><strong>a) Resistencia equivalente:</strong></p>
+    \[R_{eq} = \frac{R_1 \cdot R_2}{R_1 + R_2} = \frac{6 \times 3}{6 + 3} = \frac{18}{9} = 2\,\Omega\]
+
+    <p><strong>b) Intensidad total:</strong></p>
+    \[I_T = \frac{\varepsilon}{R_{eq}} = \frac{12}{2} = 6\,\text{A}\]
+    <p>Intensidad por cada rama (ambas tienen la misma tensión, 12 V):</p>
+    \[I_1 = \frac{V}{R_1} = \frac{12}{6} = 2\,\text{A}\]
+    \[I_2 = \frac{V}{R_2} = \frac{12}{3} = 4\,\text{A}\]
+
+    <p><strong>Comprobación:</strong> \(I_1 + I_2 = 2 + 4 = 6\,\text{A} = I_T\) ✓</p>
+
+    <p><strong>c) Potencia:</strong></p>
+    \[P_1 = I_1^2 \cdot R_1 = 2^2 \times 6 = 24\,\text{W}\]
+    \[P_2 = I_2^2 \cdot R_2 = 4^2 \times 3 = 48\,\text{W}\]
+    <p>\(P_T = P_1 + P_2 = 72\,\text{W}\). Comprobación: \(P_T = \varepsilon \cdot I_T = 12 \times 6 = 72\,\text{W}\) ✓</p>
+  </div>
+</details>
+
+<!-- EJERCICIO 3 -->
+<div class="enunciado">
+  <strong>Ejercicio 3 — Circuito mixto
+</strong><br>
+  <p>Un generador de \(\varepsilon = 30\,\text{V}\) alimenta el siguiente circuito: \(R_1 = 5\,\Omega\) en serie con el paralelo de \(R_2 = 10\,\Omega\) y \(R_3 = 10\,\Omega\). Calcula \(R_{eq}\), \(I\), y la tensión e intensidad en cada resistencia.</p>
+</div>
+
+<details>
+  <summary>Ver solución</summary>
+  <div class="solucion">
+    <p><strong>Paso 1 — Paralelo de \(R_2\) y \(R_3\):</strong></p>
+    \[R_{23} = \frac{R_2 \cdot R_3}{R_2 + R_3} = \frac{10 \times 10}{10 + 10} = 5\,\Omega\]
+
+    <p><strong>Paso 2 — Serie de \(R_1\) con \(R_{23}\):</strong></p>
+    \[R_{eq} = R_1 + R_{23} = 5 + 5 = 10\,\Omega\]
+
+    <p><strong>Paso 3 — Intensidad total:</strong></p>
+    \[I_T = \frac{\varepsilon}{R_{eq}} = \frac{30}{10} = 3\,\text{A}\]
+
+    <p><strong>Paso 4 — Tensiones:</strong></p>
+    \[V_1 = I_T \cdot R_1 = 3 \times 5 = 15\,\text{V}\]
+    \[V_{23} = I_T \cdot R_{23} = 3 \times 5 = 15\,\text{V}\]
+
+    <p><strong>Paso 5 — Intensidades en las ramas del paralelo:</strong></p>
+    \[I_2 = \frac{V_{23}}{R_2} = \frac{15}{10} = 1{,}5\,\text{A}\]
+    \[I_3 = \frac{V_{23}}{R_3} = \frac{15}{10} = 1{,}5\,\text{A}\]
+
+    <p><strong>Comprobación:</strong> \(I_2 + I_3 = 3\,\text{A} = I_T\) ✓ y \(V_1 + V_{23} = 30\,\text{V} = \varepsilon\) ✓</p>
+  </div>
+</details>
+
+<!-- EJERCICIO 4 -->
+<div class="enunciado">
+  <strong>Ejercicio 4 — Circuito mixto avanzado
+</strong><br>
+  <p>Dado \(\varepsilon = 48\,\text{V}\), con el circuito: \(R_1 = 4\,\Omega\) en serie con el paralelo de [\(R_2 = 12\,\Omega\) en serie con \(R_3 = 6\,\Omega\)] y \(R_4 = 6\,\Omega\). Calcula todas las magnitudes.</p>
+</div>
+
+<details>
+  <summary>Ver solución</summary>
+  <div class="solucion">
+    <p><strong>Paso 1 — Serie de \(R_2\) y \(R_3\) (rama superior del paralelo):</strong></p>
+    \[R_{23} = R_2 + R_3 = 12 + 6 = 18\,\Omega\]
+
+    <p><strong>Paso 2 — Paralelo de \(R_{23}\) y \(R_4\):</strong></p>
+    \[R_{\text{par}} = \frac{R_{23} \cdot R_4}{R_{23} + R_4} = \frac{18 \times 6}{18 + 6} = \frac{108}{24} = 4{,}5\,\Omega\]
+
+    <p><strong>Paso 3 — Total:</strong></p>
+    \[R_{eq} = R_1 + R_{\text{par}} = 4 + 4{,}5 = 8{,}5\,\Omega\]
+
+    <p><strong>Paso 4 — Intensidad total:</strong></p>
+    \[I_T = \frac{48}{8{,}5} \approx 5{,}647\,\text{A}\]
+
+    <p><strong>Paso 5 — Tensiones:</strong></p>
+    \[V_1 = I_T \cdot R_1 = 5{,}647 \times 4 = 22{,}59\,\text{V}\]
+    \[V_{\text{par}} = I_T \cdot R_{\text{par}} = 5{,}647 \times 4{,}5 = 25{,}41\,\text{V}\]
+
+    <p><strong>Paso 6 — Intensidades en el paralelo:</strong></p>
+    \[I_{23} = \frac{V_{\text{par}}}{R_{23}} = \frac{25{,}41}{18} = 1{,}412\,\text{A}\]
+    \[I_4 = \frac{V_{\text{par}}}{R_4} = \frac{25{,}41}{6} = 4{,}235\,\text{A}\]
+
+    <p><strong>Paso 7 — Tensiones individuales en la rama serie:</strong></p>
+    \[V_2 = I_{23} \cdot R_2 = 1{,}412 \times 12 = 16{,}94\,\text{V}\]
+    \[V_3 = I_{23} \cdot R_3 = 1{,}412 \times 6 = 8{,}47\,\text{V}\]
+
+    <p><strong>Comprobación:</strong> \(V_2 + V_3 = 25{,}41\,\text{V} = V_{\text{par}}\) ✓ &nbsp; \(I_{23} + I_4 = 5{,}647\,\text{A} = I_T\) ✓</p>
+  </div>
+</details>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- CAPÍTULO 4: ENERGÍA Y POTENCIA                                  -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="seccion" id="cap4">
+  <div class="sec-hdr">
+    <div class="sec-num">4</div>
+    <div class="sec-tit">Energía y potencia eléctrica</div>
+  </div>
+</div>
+
+
+
+<h3>4.1 Potencia eléctrica</h3>
+
+<div class="caja def">
+  <strong>Fórmulas de potencia
+</strong><br>
+  \[P = V \cdot I = I^2 \cdot R = \frac{V^2}{R}\]
+  <p style="text-align:left;margin-top:.4rem">Se mide en <strong>vatios (W)</strong>. Un vatio es un julio por segundo.</p>
+</div>
+
+<h3>4.2 Potencia suministrada por la fuente</h3>
+
+<p>Un generador de f.e.m. \(\varepsilon\) que entrega una corriente \(I\) suministra una potencia:</p>
+
+<div class="caja def">
+  <strong>Potencia del generador
+</strong><br>
+  \[P_{\text{gen}} = \varepsilon \cdot I\]
+</div>
+
+<h3>4.3 Balance de potencias</h3>
+
+<div class="caja clave">
+  <strong>Conservación de la energía
+</strong><br>
+  En todo circuito, la potencia total suministrada por las fuentes es igual a la potencia total disipada en las resistencias:
+  \[\sum P_{\text{generadores}} = \sum P_{\text{resistencias}}\]
+</div>
+
+<p>Este balance es una herramienta potente para <strong>comprobar</strong> que los cálculos de un circuito son correctos.</p>
+
+<h3>4.4 Energía consumida</h3>
+
+<div class="caja def">
+  <strong>Energía
+</strong><br>
+  \[E = P \cdot t\]
+  <p style="text-align:left;margin-top:.4rem">Se mide en <strong>julios (J)</strong>. En la práctica se usa el kilovatio-hora: \(1\,\text{kWh} = 3{,}6 \times 10^6\,\text{J}\).</p>
+</div>
+
+<div class="ejemplo">
+  <strong>Ejemplo
+</strong><br>
+  <p>Un calefactor de \(R = 20\,\Omega\) conectado a \(V = 230\,\text{V}\) funciona 3 horas diarias durante 30 días.</p>
+  <p>\[P = \frac{V^2}{R} = \frac{230^2}{20} = 2645\,\text{W} = 2{,}645\,\text{kW}\]</p>
+  <p>\[E = P \cdot t = 2{,}645 \times 3 \times 30 = 238{,}05\,\text{kWh}\]</p>
+  <p>A 0,15 €/kWh: coste = \(238{,}05 \times 0{,}15 = 35{,}71\,\text{€}\).</p>
+</div>
+
+<div class="callout callout-key">
+<strong>Conexión con CA:</strong> En corriente alterna, la potencia se desdobla en tres: <strong>activa</strong> (\(P\)), <strong>reactiva</strong> (\(Q\)) y <strong>aparente</strong> (\(S\)). La potencia activa es la que «hace trabajo» y se calcula como \(P = V \cdot I \cdot \cos\varphi\). Si \(\varphi = 0\) (circuito puramente resistivo), \(\cos\varphi = 1\) y se recupera la fórmula de CC: \(P = V \cdot I\).
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- PUENTE HACIA CA                                                 -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<div class="seccion" id="puente">
+  <div class="sec-hdr">
+    <div class="sec-num">📌</div>
+    <div class="sec-tit">Puente hacia la Corriente Alterna</div>
+  </div>
+</div>
+
+
+
+<p>Si has llegado hasta aquí, ya dominas las herramientas básicas. Ahora veamos cómo se traducen a CA:</p>
+
+<table>
+  <tr><th>Concepto en CC</th><th>Equivalente en CA</th><th>¿Qué cambia?</th></tr>
+  <tr><td>Resistencia \(R\)</td><td>Impedancia \(Z\)</td><td>\(Z\) incluye efecto de bobinas y condensadores</td></tr>
+  <tr><td>\(V = I \cdot R\)</td><td>\(V = I \cdot Z\)</td><td>Misma estructura, pero con \(Z\)</td></tr>
+  <tr><td>\(R_{serie} = R_1 + R_2\)</td><td>\(Z_{serie} = Z_1 + Z_2\)</td><td>Se suman como vectores (fasores)</td></tr>
+  <tr><td>\(P = V \cdot I\)</td><td>\(P = V \cdot I \cdot \cos\varphi\)</td><td>Aparece el factor de potencia</td></tr>
+  <tr><td>\(V\) e \(I\) constantes</td><td>\(V\) e \(I\) senoidales</td><td>Se usan valores eficaces</td></tr>
+  <tr><td>Solo resistencia disipa</td><td>Solo \(R\) disipa potencia activa</td><td>\(L\) y \(C\) almacenan y devuelven energía</td></tr>
+</table>
+
+<div class="callout callout-ok">
+<strong>Ya estás listo para el Bloque D1.</strong> Los circuitos de CA son circuitos de CC con una vuelta de tuerca: la impedancia y el desfase. Si sabes calcular \(R_{eq}\), tensiones e intensidades en un mixto de CC, sabrás hacer lo mismo en CA.
+</div>
+
+
+
+
+</div><!-- fin cuerpo -->
+
+<!-- ═══════════════════ DECÁLOGO ═══════════════════ -->
+<div id="decalogo" class="decalogo-box">
+  <h2>📝 Decálogo PAU 2025-26</h2>
+  <ol>
+    <li>Material de repaso: NO aparece como problema autónomo en PEvAU, pero sustenta todo el Bloque D1.</li>
+    <li>Ley de Ohm: \(V = I\cdot R\). Es escalar en CC; se sustituye por \(V = I\cdot Z\) en CA.</li>
+    <li>En serie: la intensidad es constante (\(I = \text{cte}\)), las tensiones se suman, \(R_{eq} = \sum R_i\).</li>
+    <li>En paralelo: la tensión es constante (\(V = \text{cte}\)), las intensidades se suman, \(\dfrac{1}{R_{eq}} = \sum\dfrac{1}{R_i}\).</li>
+    <li>Dos resistencias en paralelo: \(R_{eq} = \dfrac{R_1\cdot R_2}{R_1+R_2}\) (atajo útil).</li>
+    <li>Divisor de tensión: \(V_i = V\cdot\dfrac{R_i}{R_{eq}}\). Solo válido en serie.</li>
+    <li>Divisor de corriente: \(I_i = I\cdot\dfrac{R_{eq}}{R_i}\). Solo válido en paralelo.</li>
+    <li>Potencia disipada: \(P = V\cdot I = I^2 R = \dfrac{V^2}{R}\). Elige la expresión según los datos.</li>
+    <li>Energía: \(E = P\cdot t\). Unidades SI: J. Comercial: kWh (\(1 \text{kWh} = 3{,}6\cdot 10^6\) J).</li>
+    <li>Puente a CA: en CC todo lo reactivo (L, C) es invisible (L = cortocircuito, C = circuito abierto) en régimen permanente.</li>
+  </ol>
+</div>
+
+<!-- PIE -->
+<div class="pie">
+  <span>IES Jiménez de Quesada · Santa Fe (Granada)</span>
+  <span>Repaso CC · Corriente Continua</span>
+  <span>Curso 2025–2026</span>
+</div>
+
+</div><!-- block-content -->
+</div><!-- ct -->
+</div><!-- ly -->
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if(typeof MathJax !== 'undefined' && MathJax.typeset) MathJax.typeset();
+});
+</script>
+<script>
+(function(){
+  const container = document.getElementById('ct');
+  if(!container) return;
+  function jumpToHash(hash){
+    const raw = (hash || window.location.hash || '').trim();
+    if(!raw || raw === '#') return;
+    const id = decodeURIComponent(raw.slice(1));
+    const target = document.getElementById(id);
+    if(!target) return;
+    const cRect = container.getBoundingClientRect();
+    const tRect = target.getBoundingClientRect();
+    const top = container.scrollTop + (tRect.top - cRect.top) - 10;
+    container.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(ev){
+      const href = this.getAttribute('href');
+      if(!href || href === '#') return;
+      ev.preventDefault();
+      jumpToHash(href);
+      if(history.replaceState) history.replaceState(null, '', href);
+    });
+  });
+  window.addEventListener('hashchange', function(){ jumpToHash(window.location.hash); });
+  window.addEventListener('load', function(){ if(window.location.hash) setTimeout(function(){ jumpToHash(window.location.hash); }, 50); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II — 🌱 Bloque G: Tecnología Sostenible</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+:root{--az:#1B4F8A;--az2:#2E7BC4;--hub-bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5;--nw:260px;--hh:52px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;font-family:'Barlow',system-ui,sans-serif;background:var(--hub-bg);color:var(--tx)}
+.hd{position:fixed;top:0;left:0;right:0;height:var(--hh);background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;display:flex;align-items:center;padding:0 14px;z-index:1000;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer}.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.7rem;opacity:.6;margin-left:10px}
+.mb{display:none;background:none;border:none;color:#fff;font-size:1.3rem;cursor:pointer;margin-right:8px}
+.home-btn{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;font-size:.72rem;padding:4px 10px;border-radius:4px;cursor:pointer;margin-left:auto;transition:all .15s}
+.home-btn:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.5)}
+.ly{display:flex;position:fixed;top:var(--hh);left:0;right:0;bottom:0}
+.nv{width:var(--nw);flex-shrink:0;background:var(--w);border-right:1px solid var(--bd);overflow-y:auto;padding:44px 0 6px;z-index:500}  /* v2.9: padding-top 44 evita solape con navcross */
+.nb{border-bottom:1px solid #eee}.nb-h{padding:7px 10px;font-size:.76rem;font-weight:500;cursor:pointer;transition:background .15s;display:flex;align-items:center;gap:4px}
+.nb-h:hover{background:#EBF0F7}.nb.act .nb-h{background:var(--az);color:#fff}
+.nc{display:none;padding:0 0 4px}.nb.act .nc{display:block}
+.na{display:block;padding:2px 10px 2px 22px;font-size:.68rem;color:var(--t2);cursor:pointer;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.6}
+.na:hover{background:#EBF0F7;color:var(--az)}
+.ct{flex:1;overflow-y:scroll;-webkit-overflow-scrolling:touch;scroll-padding-top:44px}
+.wl{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;text-align:center;padding:40px 24px}
+.wl h2{font-family:'Barlow Condensed',sans-serif;font-size:2rem;color:var(--az);margin-bottom:6px}
+.wl p{color:var(--t2);max-width:500px;line-height:1.5;font-size:.88rem;margin-bottom:24px}
+.bg{display:grid;grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));gap:10px;max-width:700px;width:100%}
+.bc{background:var(--w);border:1px solid var(--bd);border-radius:8px;padding:14px 16px;cursor:pointer;transition:all .2s;text-align:left;display:flex;flex-direction:column;gap:4px}
+.bc:hover{border-color:var(--az);box-shadow:0 3px 12px rgba(27,79,138,.12);transform:translateY(-2px)}
+.bi{font-size:1.6rem;margin-bottom:2px}.bk{font-weight:700;font-size:.85rem;color:var(--az)}.bn{font-size:.72rem;color:var(--t2);line-height:1.3}
+.block-content{padding:0}
+@media(max-width:768px){.mb{display:block}.nv{position:fixed;top:var(--hh);left:0;bottom:0;z-index:900;transform:translateX(-100%)}.nv.open{transform:translateX(0);box-shadow:4px 0 16px rgba(0,0,0,.2)}}
+
+:root {
+  --azul:     #1B4F8A;
+  --azul2:    #2E7BC4;
+  --azul-cl:  #DDE9F7;
+  --azul-bg:  #EEF4FB;
+  --naranja:  #D4700A;
+  --naranja-cl:#FEF0DF;
+  --verde:    #1A6B3A;
+  --verde-cl: #E4F4EB;
+  --rojo:     #C0321E;
+  --rojo-cl:  #FCEAE7;
+  --gris:     #F5F6F8;
+  --borde:    #CDD7E3;
+  --texto:    #1A2430;
+  --texto2:   #455565;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Barlow', sans-serif;
+  --cond: 'Barlow Condensed', sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{background:#CBD5E1;}
+body{
+  font-family:var(--sans);
+  font-size:10.5pt;
+  line-height:1.72;
+  color:var(--texto);
+  background:#CBD5E1;
+}
+.pagina{
+  max-width:870px;
+  margin:0 auto;
+  background:#fff;
+  box-shadow:0 6px 48px rgba(0,0,0,.18);
+}
+
+/* ── CABECERA ── */
+.cabecera{
+  background:var(--azul);
+  padding:0;
+  display:grid;
+  grid-template-columns:6px 1fr;
+}
+.cab-banda{ background:var(--naranja); }
+.cab-inner{
+  padding:32px 44px 28px;
+}
+.cab-label{
+  font-family:var(--cond);
+  font-size:8.5pt;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.6);
+  margin-bottom:8px;
+}
+.cab-titulo{
+  font-family:var(--cond);
+  font-size:26pt;
+  font-weight:700;
+  color:#fff;
+  line-height:1.05;
+  margin-bottom:6px;
+}
+.cab-titulo span{ color:#F8C060; }
+.cab-sub{
+  font-family:var(--sans);
+  font-weight:300;
+  font-size:11.5pt;
+  color:rgba(255,255,255,.78);
+  margin-bottom:22px;
+}
+.cab-chips{
+  display:flex; gap:10px; flex-wrap:wrap;
+}
+.chip{
+  font-family:var(--sans);
+  font-size:8pt;
+  font-weight:600;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.22);
+  color:rgba(255,255,255,.85);
+  padding:3px 10px;
+  border-radius:20px;
+  letter-spacing:.5px;
+}
+
+/* ── ÍNDICE ── */
+
+/* ── CUERPO ── */
+.cuerpo{ padding:8px 44px 52px; }
+
+/* ── SECCIÓN ── */
+.seccion{ margin-top:38px; }
+.sec-hdr{
+  display:flex; align-items:stretch; gap:0;
+  margin-bottom:16px;
+  border-bottom:2px solid var(--azul);
+}
+.sec-num{
+  background:var(--azul);
+  color:#fff;
+  font-family:var(--cond);
+  font-weight:700;
+  font-size:15pt;
+  padding:4px 14px;
+  display:flex; align-items:center; justify-content:center;
+  min-width:46px;
+}
+.sec-tit{
+  font-family:var(--cond);
+  font-size:15pt;
+  font-weight:700;
+  color:var(--azul);
+  padding:4px 12px;
+  display:flex; align-items:center;
+  letter-spacing:.3px;
+}
+
+h3{
+  font-family:var(--cond);
+  font-size:11.5pt;
+  font-weight:700;
+  color:var(--azul2);
+  margin:20px 0 8px;
+  padding-left:9px;
+  border-left:3px solid var(--naranja);
+  letter-spacing:.3px;
+}
+h4{
+  font-family:var(--sans);
+  font-size:10pt;
+  font-weight:700;
+  color:var(--azul);
+  margin:14px 0 5px;
+}
+
+p{ margin-bottom:9px; }
+ul,ol{ margin:7px 0 11px 20px; }
+li{ margin-bottom:4px; }
+strong{ color:var(--azul); font-weight:600; }
+
+/* ── CAJAS ── */
+.caja{
+  border-radius:5px;
+  padding:12px 16px;
+  margin:12px 0;
+  font-size:10pt;
+}
+.def { background:var(--azul-bg); border-left:4px solid var(--azul2); }
+.clave { background:var(--naranja-cl); border-left:4px solid var(--naranja); }
+.aviso { background:var(--rojo-cl); border-left:4px solid var(--rojo); }
+.ok    { background:var(--verde-cl); border-left:4px solid var(--verde); }
+
+/* ── CALLOUT ── */
+.callout{
+  display:flex; gap:10px; align-items:flex-start;
+  padding:12px 16px; border-radius:5px; margin:14px 0; font-size:10pt;
+}
+.callout-key{ background:var(--naranja-cl); border-left:4px solid var(--naranja); }
+.callout-info{ background:var(--azul-bg); border-left:4px solid var(--azul2); }
+.callout-warn{ background:var(--rojo-cl); border-left:4px solid var(--rojo); }
+.callout-ok{ background:var(--verde-cl); border-left:4px solid var(--verde); }
+.callout-icon{
+  font-size:14pt; flex-shrink:0; margin-top:1px;
+}
+
+/* ── EJEMPLO ── */
+.ejemplo{
+  border-left:4px solid var(--verde);
+  border-radius:0 5px 5px 0;
+  padding:12px 16px;
+  margin:12px 0;
+  background:var(--verde-cl);
+}
+.ej-tit{
+  font-family:var(--cond);
+  font-weight:700;
+  color:var(--verde);
+  font-size:8.5pt;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+
+/* ── TABLA ── */
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:9.5pt;
+  margin:12px 0;
+}
+th{
+  background:var(--azul);
+  color:#fff;
+  font-family:var(--cond);
+  font-weight:700;
+  font-size:9pt;
+  letter-spacing:.7px;
+  padding:8px 12px;
+  text-align:left;
+}
+td{
+  padding:8px 12px;
+  border-bottom:1px solid var(--borde);
+  vertical-align:top;
+}
+tr:nth-child(even) td{ background:var(--gris); }
+
+/* ── IMAGEN ── */
+.img-container{
+  text-align:center;
+  margin:18px 0;
+}
+.img-container img{
+  max-width:100%;
+  border-radius:5px;
+  box-shadow:0 2px 12px rgba(0,0,0,.12);
+}
+.img-caption{
+  font-family:var(--sans);
+  font-size:8.5pt;
+  color:var(--texto2);
+  margin-top:6px;
+  font-style:italic;
+}
+
+/* ── PASO ── */
+.paso{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin:8px 0;
+  padding:8px 12px;
+  background:var(--azul-bg);
+  border-radius:5px;
+}
+.paso-n{
+  background:var(--azul);
+  color:#fff;
+  font-family:var(--cond);
+  font-weight:700;
+  font-size:10pt;
+  min-width:26px;
+  height:26px;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+  margin-top:1px;
+}
+.paso-txt{ font-size:10pt; }
+
+hr.div{ border:none; border-top:1.5px solid var(--borde); margin:28px 0; }
+
+/* ── PIE ── */
+.pie{
+  background:var(--azul);
+  color:rgba(255,255,255,.65);
+  font-family:var(--sans);
+  font-size:8pt;
+  padding:12px 44px;
+  display:flex;
+  justify-content:space-between;
+}
+
+/* ── COMPARATIVA ── */
+.comp-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:14px 0;
+}
+.comp-card{
+  border-radius:5px;
+  padding:14px 16px;
+  font-size:9.5pt;
+}
+.comp-card h4{
+  margin:0 0 8px;
+  font-size:10pt;
+}
+.comp-card ul{ margin:4px 0 0 16px; }
+.comp-card li{ margin-bottom:2px; font-size:9pt; }
+
+/* ── FRACCIONES ── */
+.frac{
+  display:inline-flex;
+  flex-direction:column;
+  align-items:center;
+  vertical-align:middle;
+  margin:0 3px;
+}
+.frac-num{
+  border-bottom:2px solid currentColor;
+  padding:0 6px 2px;
+  line-height:1.2;
+}
+.frac-den{
+  padding:2px 6px 0;
+  line-height:1.2;
+}
+.formula-line{
+  font-family:var(--mono);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  margin:10px 0;
+  flex-wrap:wrap;
+}
+
+@media print{
+  html,body{ background:white; }
+  .pagina{ box-shadow:none; max-width:100%; }
+  .seccion{ page-break-inside:avoid; }
+}
+
+/* ── EJERCICIOS CSS ── */
+.solucion{
+  border-left:3px solid var(--azul2);
+  padding:8px 16px;
+  margin:8px 0;
+  background:var(--azul-bg);
+  border-radius:0 5px 5px 0;
+  font-size:10pt;
+}
+.resultado{
+  background:var(--verde-cl);
+  border-left:4px solid var(--verde);
+  border-radius:0 5px 5px 0;
+  padding:10px 16px;
+  margin:12px 0;
+  font-size:10pt;
+  font-weight:600;
+}
+.enunciado {
+  background: var(--naranja-cl);
+  border-left: 4px solid var(--naranja);
+  padding: 12px 16px;
+  border-radius: 0 5px 5px 0;
+  margin: 0 0 16px;
+  font-size: 10pt;
+}
+.math.display { text-align:center; margin:10px 0; }
+.MathJax { font-size:100% !important; }
+span.math { font-family: var(--mono); }
+
+/* Match exercise layout - fill content area */
+.ct .pagina { max-width:100%; box-shadow:none; margin:0; background:#fff; }
+
+/* Scroll fix anchors */
+[id]{scroll-margin-top:20px;}
+
+.objetivos-box{background:linear-gradient(180deg,#E4F4EB,#EEF9F1);border-left:5px solid var(--verde);border-radius:5px;padding:18px 22px;margin:22px 0 30px;}
+.objetivos-box h2{font-family:var(--cond);font-size:16pt;color:var(--verde);margin:0 0 10px;display:flex;align-items:center;gap:8px;}
+.objetivos-box ul{list-style:none;padding-left:0;margin:0;}
+.objetivos-box li{padding:6px 0 6px 28px;position:relative;font-size:10.5pt;line-height:1.5;}
+.objetivos-box li::before{content:"✓";position:absolute;left:6px;top:6px;color:var(--verde);font-weight:bold;}
+.decalogo-box{background:linear-gradient(180deg,#FEF0DF,#FFF7E8);border-left:5px solid var(--naranja);border-radius:5px;padding:18px 22px;margin:26px 0 6px;}
+.decalogo-box h2{font-family:var(--cond);font-size:16pt;color:var(--naranja);margin:0 0 10px;display:flex;align-items:center;gap:8px;}
+.decalogo-box ol{list-style:none;padding-left:0;counter-reset:deca;margin:0;}
+.decalogo-box li{padding:8px 0 8px 44px;position:relative;counter-increment:deca;font-size:10.5pt;line-height:1.55;border-bottom:1px dashed rgba(212,112,10,.3);}
+.decalogo-box li:last-child{border-bottom:none;}
+.decalogo-box li::before{content:counter(deca);position:absolute;left:6px;top:7px;width:26px;height:26px;background:var(--naranja);color:#fff;font-family:var(--cond);font-weight:700;font-size:11pt;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+
+/* Tabla huella de carbono (Fase G/P4.7) */
+.tbl-co2{width:100%;border-collapse:collapse;margin:12px 0;font-size:9.5pt}
+.tbl-co2 th,.tbl-co2 td{border:1px solid #CDD7E3;padding:7px 10px;text-align:left;vertical-align:top}
+.tbl-co2 th{background:#D4700A;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:600}
+.tbl-co2 tr:nth-child(even) td{background:#FFF8EE}
+
+/* ── NAVCROSS: barra de navegación transversal (Fase D) ── */
+
+/* v2.9: Selector de bloques */
+.nav-bloque-selector{display:inline-flex;align-items:center;gap:6px;margin-left:8px}
+.nav-bloque-selector select{font-family:'Barlow',sans-serif;font-size:.75rem;padding:4px 8px;border:1px solid #D8DDE5;border-radius:6px;background:#fff;color:#23272F;cursor:pointer;max-width:220px}
+.nav-bloque-selector select:hover{border-color:#1B4F8A}
+.nav-bloque-selector select:focus{outline:2px solid #2E7BC4;outline-offset:1px}
+.nav-bloque-flechas{display:inline-flex;gap:4px;margin-left:4px}
+.nav-bloque-flechas a{display:inline-flex;align-items:center;gap:3px;padding:4px 8px;border-radius:6px;text-decoration:none;font-size:.72rem;color:#23272F;background:#fff;border:1px solid #D8DDE5;transition:all .18s}
+.nav-bloque-flechas a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+@media(max-width:640px){.nav-bloque-selector select{max-width:140px;font-size:.7rem}.nav-bloque-flechas a span.flecha-label{display:none}}
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+.navcross span.nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8;align-self:center;user-select:none}
+@media(max-width:640px){
+/* v2.9: Selector de bloques */
+.nav-bloque-selector{display:inline-flex;align-items:center;gap:6px;margin-left:8px}
+.nav-bloque-selector select{font-family:'Barlow',sans-serif;font-size:.75rem;padding:4px 8px;border:1px solid #D8DDE5;border-radius:6px;background:#fff;color:#23272F;cursor:pointer;max-width:220px}
+.nav-bloque-selector select:hover{border-color:#1B4F8A}
+.nav-bloque-selector select:focus{outline:2px solid #2E7BC4;outline-offset:1px}
+.nav-bloque-flechas{display:inline-flex;gap:4px;margin-left:4px}
+.nav-bloque-flechas a{display:inline-flex;align-items:center;gap:3px;padding:4px 8px;border-radius:6px;text-decoration:none;font-size:.72rem;color:#23272F;background:#fff;border:1px solid #D8DDE5;transition:all .18s}
+.nav-bloque-flechas a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+@media(max-width:640px){.nav-bloque-selector select{max-width:140px;font-size:.7rem}.nav-bloque-flechas a span.flecha-label{display:none}}
+.navcross{gap:4px;padding:8px 10px;top:52px}.navcross a span.nc-lbl,.navcross span.nc-current span.nc-lbl{display:none}.navcross .nc-sep{display:none}}
+
+@media print{
+  html,body{background:#fff!important;color:#000!important}
+  .hd,.navcross,.nv,.mb,.home-btn,.sol-btn,.btn-video,.video-group{display:none!important}
+  .ly{position:static!important}
+  .ct{overflow:visible!important;padding:0}
+  .pagina{box-shadow:none!important;max-width:100%}
+  .cabecera{background:#fff!important;color:#000!important}
+  .cab-titulo,.cab-label,.cab-sub{color:#000!important}
+  h2,h3,h4{page-break-after:avoid}
+  .seccion{page-break-inside:avoid}
+  .sol-content{display:block!important}
+  img{max-width:100%;page-break-inside:avoid}
+  a{text-decoration:none;color:#000}
+  .objetivos-box,.decalogo-box{background:#fff!important;border:1px solid #aaa!important}
+}
+/* @media print v2 — ecosistema TECI2 */
+
+</style>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)'],['$','$']],
+    displayMath: [['$$','$$'],['\\[','\\]']],
+    processEscapes: true
+  },
+  options: {
+    skipHtmlTags: ['script','noscript','style','textarea','pre']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+<div class="hd">
+<button class="mb" onclick="document.getElementById('nv').classList.toggle('open')">☰</button>
+<span class="lg" onclick="location.href='../index.html'">TECI II</span>
+<span class="sb">🌱 Tecnología Sostenible</span>
+<a href="../index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal"><a href="../index.html" aria-label="Ir al índice principal"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span><span class="nc-current" aria-current="page"><span>📖</span><span class="nc-lbl">Teoría G</span></span><span class="nc-sep">·</span><a href="../index.html#ejercicios" aria-label="Ver índice de ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a><span class="nc-sep">·</span><a href="../index.html#examenes" aria-label="Ver índice de exámenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a><span class="nc-sep">·</span><div class="nav-bloque-selector">
+  <select onchange="if(this.value)window.location.href=this.value" aria-label="Cambiar de bloque">
+    <option value="../teoria/bloque_A.html">A — Proyectos I+D+i</option>
+    <option value="../teoria/bloque_B.html">B — Materiales y Fabricación</option>
+    <option value="../teoria/bloque_C1.html">C1 — Estructuras</option>
+    <option value="../teoria/bloque_C2.html">C2 — Máquinas Térmicas</option>
+    <option value="../teoria/bloque_C31.html">C3.1 — Neumática</option>
+    <option value="../teoria/bloque_C32.html">C3.2 — Hidráulica</option>
+    <option value="../teoria/bloque_D1.html">D1 — Corriente Alterna</option>
+    <option value="../teoria/bloque_D2.html">D2 — Electrónica Digital</option>
+    <option value="../teoria/bloque_E.html">E — Sist. Informáticos</option>
+    <option value="../teoria/bloque_F.html">F — Sist. Automáticos</option>
+    <option value="../teoria/bloque_G.html" selected>G — Tecnología Sostenible</option>
+  </select>
+</div></nav>
+
+<div class="ly">
+<nav class="nv" id="nv">
+<div class="nb act" data-block="G">
+<div class="nb-h" style="background:var(--az);color:#fff;">🌱 G — Tecnología Sostenible</div>
+<div class="nc" style="display:block;">
+<a class="na" href="#objetivos">🎯 Objetivos</a>
+<a class="na" href="#G_s1">1. Impacto ambiental de los materiales</a>
+<a class="na" href="#G_s2">2. Eficiencia energética de máquinas y sistem…</a>
+<a class="na" href="#G_s3">3. Tecnologías de fabricación sostenibles</a>
+<a class="na" href="#G_s4">4. Gestión de los residuos</a>
+<a class="na" href="#G_s5">5. Evaluación del Impacto Ambiental (EIA)</a>
+<a class="na" href="#G_s6">★. Cómo se aplica este bloque</a>
+<a class="na" href="#decalogo">📝 Decálogo PAU</a>
+
+</div>
+</div>
+</nav>
+<div class="ct" id="ct">
+<div class="block-content" id="block-G" style="display:block"><div class="pagina">
+
+<div class="cabecera">
+  <div class="cab-banda"></div>
+  <div class="cab-inner">
+    <div class="cab-label">Tecnología e Ingeniería II · 2º Bachillerato · IES Jiménez de Quesada</div>
+    <div class="cab-titulo">Bloque G — <span>Tecnología Sostenible</span></div>
+    <div class="cab-sub">Apuntes adaptados para PEvAU · Junta de Andalucía · Curso 2025–2026</div>
+    <div class="cab-chips">
+      <span class="chip">🌍 Impacto ambiental de materiales</span>
+      <span class="chip">⚡ Eficiencia energética</span>
+      <span class="chip">🌱 Fabricación sostenible</span>
+      <span class="chip">♻️ Economía circular</span>
+      <span class="chip">🗑️ Gestión de residuos</span>
+      <span class="chip">📋 Evaluación de impacto ambiental</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- ═══════════════════ OBJETIVOS ═══════════════════ -->
+<div id="objetivos" class="objetivos-box">
+  <h2>🎯 Objetivos de aprendizaje</h2>
+  <ul>
+    <li>Analizar el impacto ambiental de materiales a lo largo de su ciclo de vida (ACV).</li>
+    <li>Evaluar la eficiencia energética de máquinas y sistemas térmicos, neumáticos, hidráulicos y eléctricos.</li>
+    <li>Describir tecnologías de fabricación sostenible y sus ventajas frente a las convencionales.</li>
+    <li>Aplicar la jerarquía de gestión de residuos y el modelo de economía circular (5R).</li>
+    <li>Interpretar los instrumentos y fases de la Evaluación de Impacto Ambiental (EIA).</li>
+    <li>Justificar decisiones tecnológicas alineadas con los ODS y la huella de carbono.</li>
+  </ul>
+</div>
+
+<div class="cuerpo">
+
+<!-- ═══ AVISO CONTEXTUAL ═══ -->
+<div class="callout callout-warn" style="margin-bottom:20px;">
+  <span class="callout-icon">⚑</span>
+  <div><strong>Bloque contextual:</strong> este bloque no genera preguntas propias. Sus contenidos aparecen en los enunciados para <strong>contextualizar problemas de otros bloques</strong>. La Ponencia pide: i) impacto ambiental de los materiales, ii) eficiencia energética de motores, máquinas y sistemas (térmicos, neumáticos, hidráulicos, eléctricos).</div>
+</div>
+
+<!-- ═══ SECCIÓN 1 ═══ -->
+<div class="seccion" id="G_s1">
+  <div class="sec-hdr"><div class="sec-num">1</div><div class="sec-tit">Impacto ambiental de los materiales</div></div>
+
+  <p>La tecnología sostenible busca que los productos cubran necesidades reales causando el <strong>menor impacto posible a lo largo de todo su ciclo de vida</strong>. El impacto ambiental de un material se evalúa en cinco fases:</p><div class="caja def"><strong>Ciclo de vida:</strong> el ciclo de vida de un producto comprende todas las etapas desde la extracción de materias primas hasta su eliminación o reciclaje.</div><div class="caja def"><strong>Huella de carbono:</strong> es la cantidad total de CO₂ equivalente emitida durante el ciclo de vida de un producto.</div>
+
+  <div class="paso"><div class="paso-n">1</div><div class="paso-txt"><strong>Extracción de materias primas:</strong> deforestación, contaminación de suelos y acuíferos, destrucción de hábitats. Se reduce usando materiales reciclados o con certificación sostenible.</div></div>
+  <div class="paso"><div class="paso-n">2</div><div class="paso-txt"><strong>Fabricación:</strong> emisiones de CO₂, consumo energético, residuos industriales. Se reduce con energías renovables y optimización de procesos.</div></div>
+  <div class="paso"><div class="paso-n">3</div><div class="paso-txt"><strong>Durabilidad y vida útil:</strong> un material duradero necesita menos reemplazos y genera menos residuos a largo plazo.</div></div>
+  <div class="paso"><div class="paso-n">4</div><div class="paso-txt"><strong>Residuos:</strong> contaminación si no se gestionan correctamente (lixiviados, metales pesados). La gestión sigue la jerarquía europea: prevención → reutilización → reciclaje → valorización energética → eliminación.</div></div>
+  <div class="paso"><div class="paso-n">5</div><div class="paso-txt"><strong>Reciclabilidad y reutilización:</strong> la economía circular (reducir → reutilizar → reciclar) frente al modelo lineal (extraer → fabricar → usar → desechar). Diseñar para el desmontaje facilita la recuperación de materiales.</div></div>
+</div>
+
+<!-- ═══ SECCIÓN 2 ═══ -->
+<div class="seccion" id="G_s2">
+  <div class="sec-hdr"><div class="sec-num">2</div><div class="sec-tit">Eficiencia energética de máquinas y sistemas</div></div>
+
+  <p>La eficiencia energética es la relación entre la <strong>energía útil producida</strong> y la <strong>energía total consumida</strong>. Este concepto aparece con frecuencia para contextualizar problemas de los bloques C y D.</p><div class="caja def"><div class="formula-line" style="font-size:13pt;color:var(--azul);">\(\eta = \dfrac{E_{\text{útil}}}{E_{\text{consumida}}}\)</div><p style="font-size:9pt;color:var(--texto2);">Idea clave: a mayor rendimiento, menor impacto ambiental para realizar la misma función.</p></div>
+
+  <h3>Sistemas térmicos (Bloque C2)</h3>
+  <div class="caja clave" style="margin-bottom:10px;">
+    <strong>Motor térmico:</strong> \(\eta = \dfrac{W}{Q_c}\), siempre limitado por Carnot: \(\eta = 1 - \dfrac{T_f}{T_c}\) (en Kelvin).<br>
+    <strong>Máquina frigorífica:</strong> \(\varepsilon = \dfrac{Q_f}{W}\). <strong>Bomba de calor:</strong> \(\varepsilon' = \dfrac{Q_c}{W}\).<br>
+    <p style="font-size:9pt;color:var(--texto2);">Pérdidas principales: rozamiento mecánico, calor disipado, combustión incompleta.</p>
+  </div>
+
+  <h3>Sistemas neumáticos (Bloque C3)</h3>
+  <div class="caja clave" style="margin-bottom:10px;">
+    La fuerza real del cilindro es menor que la teórica por rozamiento del émbolo, fugas de aire y trabajo del muelle de retroceso.<br>
+    <strong>Rendimientos típicos:</strong> SE \(\eta \approx 0{,}84\) · DE \(\eta \approx 0{,}90\).
+  </div>
+
+  <h3>Sistemas hidráulicos (Bloque C3)</h3>
+  <div class="caja clave" style="margin-bottom:10px;">
+    Pérdidas en tuberías (rozamiento), válvulas y juntas (fugas).<br>
+    <strong>Bombas:</strong> \(\eta = \dfrac{P_{\text{hidráulica}}}{P_{\text{mecánica}}}\).<br>
+    <strong>Pascal:</strong> \(F_{\text{salida}} = F_{\text{entrada}} \times \dfrac{A_{\text{salida}}}{A_{\text{entrada}}} \times \eta\).
+  </div>
+
+  <h3>Sistemas eléctricos (Bloque D1)</h3>
+  <div class="caja clave">
+    El <strong>factor de potencia (cos φ)</strong> indica qué fracción de la potencia aparente se transforma en trabajo útil. Un cos φ bajo genera más pérdidas Joule (P = I²R) y penalizaciones económicas. Se corrige instalando condensadores en paralelo.
+  </div>
+</div>
+
+<!-- ═══ SECCIÓN 3 ═══ -->
+<div class="seccion" id="G_s3">
+  <div class="sec-hdr"><div class="sec-num">3</div><div class="sec-tit">Tecnologías de fabricación sostenibles</div></div>
+
+  <p>No se trata solo de producir más, sino de <strong>producir mejor</strong>: con menos energía, menos materias primas y menos contaminación en todas las fases del ciclo de vida.</p>
+
+  <h3>a) Concepto y objetivos</h3>
+  <div class="caja clave" style="margin-bottom:10px;">
+    <strong>Objetivos fundamentales:</strong><br>
+    · Minimizar el consumo de materias primas y energía.<br>
+    · Reducir emisiones contaminantes.<br>
+    · Disminuir residuos generados.<br>
+    · Aumentar durabilidad y reciclabilidad.<br>
+    · Promover el ecodiseño.<br>
+    · Fomentar una economía baja en carbono.
+  </div>
+
+  <h3>b) La triple sostenibilidad</h3>
+  <div class="comp-grid">
+    <div class="comp-card ok">
+      <h4>🌱 Ambiental</h4>
+      <p>Reducir contaminación, conservar biodiversidad, eficiencia de recursos naturales.</p>
+    </div>
+    <div class="comp-card def">
+      <h4>👥 Social</h4>
+      <p>Bienestar, seguridad y equidad en las comunidades.</p>
+    </div>
+    <div class="comp-card clave">
+      <h4>💰 Económica</h4>
+      <p>Rentabilidad y viabilidad a largo plazo.</p>
+    </div>
+  </div>
+
+  <h3>c) Tecnologías más destacadas</h3>
+  <table>
+    <tr><th>Tecnología</th><th>Descripción</th></tr>
+    <tr><td><strong>Fabricación aditiva (3D)</strong></td><td>Superposición de capas. Reduce desperdicio, producción localizada.</td></tr>
+    <tr><td><strong>Automatización y robótica</strong></td><td>Mayor precisión, menor consumo energético.</td></tr>
+    <tr><td><strong>IA, ML, Big Data</strong></td><td>Predicción de fallos, optimización de consumos.</td></tr>
+    <tr><td><strong>Reciclaje y reutilización</strong></td><td>Fomenta la economía circular.</td></tr>
+    <tr><td><strong>Energías renovables</strong></td><td>Solar, eólica, hidráulica, biomasa, geotérmica, mareomotriz.</td></tr>
+    <tr><td><strong>DfE (Diseño para el medio ambiente)</strong></td><td>Ciclo de vida completo, materiales reciclables.</td></tr>
+    <tr><td><strong>Industria 4.0</strong></td><td>Sensores, IoT, sistemas ciberfísicos.</td></tr>
+  </table>
+
+  <h4>Energías renovables — qué son y por qué importan en ingeniería</h4>
+  <p>Una <strong>fuente renovable</strong> es aquella cuya tasa de regeneración natural es mayor o igual que la tasa de consumo humano. Frente a las <strong>no renovables</strong> (carbón, petróleo, gas natural, uranio), las renovables tienen tres ventajas decisivas:</p>
+  <ol>
+    <li><strong>Inagotables a escala humana:</strong> el sol seguirá brillando y el viento seguirá soplando independientemente de cuánta energía consumamos.</li>
+    <li><strong>Bajo impacto en CO₂:</strong> emiten cero o muy poco gas de efecto invernadero durante su operación. Las emisiones se concentran en la fase de fabricación de los equipos (paneles, aerogeneradores).</li>
+    <li><strong>Generación distribuida:</strong> permiten producir energía cerca del punto de consumo, reduciendo pérdidas en el transporte (relacionado con la corrección del factor de potencia que se ve en D1).</li>
+  </ol>
+  <p>Las principales tecnologías de generación renovable son: <strong>solar fotovoltaica</strong> (paneles que convierten luz en electricidad por efecto fotoeléctrico), <strong>solar térmica</strong> (calentar fluido y generar vapor que mueve una turbina), <strong>eólica</strong> (aerogeneradores con rotor de palas), <strong>hidráulica</strong> (turbinas en saltos de agua o presas), <strong>biomasa</strong> (combustión de materia orgánica), <strong>geotérmica</strong> (calor del subsuelo) y <strong>mareomotriz/undimotriz</strong> (mareas y olas).</p>
+
+  <div class="callout callout-info">
+    <span class="callout-icon">ℹ️</span>
+    <div><strong>Para enunciados contextualizados:</strong> cuando un problema PEvAU mencione «sistema alimentado por renovables» o «instalación fotovoltaica de autoconsumo», no hace falta calcular el rendimiento de los paneles solares (eso es Bachillerato de Física). Lo que se pide es razonar el ahorro de CO₂ frente a un sistema convencional, o aplicar el principio de eficiencia energética a la cadena fuente → transporte → uso.</div>
+  </div>
+
+  <h4>Objetivos de Desarrollo Sostenible (ODS)</h4>
+  <p>Los <strong>17 ODS</strong> son la hoja de ruta global aprobada por Naciones Unidas en 2015 (Agenda 2030) para erradicar la pobreza, proteger el planeta y asegurar la prosperidad de todas las personas. Cada uno de los 17 objetivos plantea metas concretas a alcanzar antes del año 2030. Para Tecnología e Ingeniería II son especialmente relevantes los siguientes:</p>
+
+  <table>
+    <tr><th>ODS</th><th>Nombre</th><th>Conexión con Tecnología e Ingeniería</th></tr>
+    <tr><td><strong>ODS 7</strong></td><td>Energía asequible y no contaminante</td><td>Renovables, eficiencia energética, electrificación, factor de potencia, ahorro en C2 y D1.</td></tr>
+    <tr><td><strong>ODS 9</strong></td><td>Industria, innovación e infraestructura</td><td>Industria 4.0, IA, fabricación aditiva, infraestructuras resilientes y sostenibles.</td></tr>
+    <tr><td><strong>ODS 11</strong></td><td>Ciudades y comunidades sostenibles</td><td>Movilidad eléctrica, edificios eficientes, EIA en proyectos urbanos.</td></tr>
+    <tr><td><strong>ODS 12</strong></td><td>Producción y consumo responsables</td><td>Economía circular, ecodiseño, reciclaje, reducción de residuos.</td></tr>
+    <tr><td><strong>ODS 13</strong></td><td>Acción por el clima</td><td>Huella de carbono, ACV, transición energética, mitigación de gases.</td></tr>
+  </table>
+
+  <div class="callout callout-key">
+    <span class="callout-icon">★</span>
+    <div><strong>Cómo usar los ODS en una respuesta:</strong> cuando un enunciado contextualizado incluya términos como «sostenibilidad», «huella ambiental» o «economía circular», justifica brevemente la decisión técnica refiriéndola al ODS pertinente. Ejemplo: «el uso de aluminio reciclado en lugar de aluminio primario reduce el consumo energético del 95 %, contribuyendo al ODS 12 (consumo responsable) y al ODS 13 (acción por el clima)». Este tipo de razonamiento puntúa positivamente en los criterios PEvAU §4 («desarrollo del planteamiento» y «valoración del resultado»).</div>
+  </div>
+
+  <h3>d) Ingeniería sostenible y ecodiseño</h3>
+  <p>Un proyecto sostenible debe ser <strong>viable técnicamente</strong>, <strong>rentable económicamente</strong> y <strong>respetuoso ambiental y socialmente</strong>. El ecodiseño minimiza el impacto desde la concepción: materiales, energía, desmontaje y reciclaje.</p><div class="caja def"><strong>Ecodiseño:</strong> consiste en diseñar productos minimizando el impacto ambiental durante todo su ciclo de vida.</div>
+
+  <h3>e) Eficiencia energética de los materiales</h3>
+  <p>La <strong>energía incorporada / huella energética</strong> es la energía total en extracción, transformación, uso y reciclado. Los más eficientes: poca energía para producirse, ahorran energía en uso, duraderos, fácilmente reciclables. Ejemplo: acero/aluminio reciclados, madera certificada.</p>
+
+  <h3>f) Economía circular</h3>
+  <div class="callout callout-key">
+    <span class="callout-icon">★</span>
+    <div><strong>Modelo lineal:</strong> extraer → fabricar → usar → desechar (insostenible).<br>
+    <strong>Economía circular:</strong> reducir → reutilizar → reciclar + reparación, remanufactura, diseño modular. Las 3R clásicas son: <strong>Reducir, Reutilizar y Reciclar</strong>.</div>
+  </div>
+</div>
+
+<!-- ═══ SECCIÓN 4 ═══ -->
+<div class="seccion" id="G_s4">
+  <div class="sec-hdr"><div class="sec-num">4</div><div class="sec-tit">Gestión de los residuos</div></div>
+
+  <p>Se distinguen: <strong>residuos sólidos urbanos (RSU)</strong> y <strong>residuos tóxicos y peligrosos (RTP)</strong>.</p><div class="caja def"><strong>RSU:</strong> residuos generados en actividades domésticas y comerciales. <br><strong>RTP:</strong> residuos peligrosos para la salud o para el medio ambiente.</div>
+
+  <h3>a) Tratamiento de los RSU</h3>
+  <table>
+    <tr><th>Método</th><th>En qué consiste</th><th>Ventajas / Observaciones</th></tr>
+    <tr><td><strong>Vertedero controlado</strong></td><td>Impermeabilización, drenaje de lixiviados, captación de biogás.</td><td>Último recurso. Biogás como fuente energética.</td></tr>
+    <tr><td><strong>Incineración</strong></td><td>Combustión 800–1200 °C con filtros electrostáticos.</td><td>Reduce 90% volumen. Valorización energética. Solo no reciclables.</td></tr>
+    <tr><td><strong>Biogás (metano)</strong></td><td>Captación del CH₄ de residuos orgánicos.</td><td>Gran poder calorífico. CH₄ = 25× peor que CO₂ si libre.</td></tr>
+    <tr><td><strong>Compostaje</strong></td><td>Descomposición aeróbica controlada → compost.</td><td>Abono natural. Requiere recogida selectiva orgánica.</td></tr>
+    <tr><td><strong>Separación</strong></td><td>En origen (contenedores) o planta (magnética, óptica).</td><td>Esencial para el rendimiento del reciclaje.</td></tr>
+    <tr><td><strong>Reciclaje</strong></td><td>Recuperar materiales para nuevos productos.</td><td>Empleo + economía circular.</td></tr>
+  </table>
+
+  <h3>b) Residuos tóxicos y peligrosos (RTP)</h3>
+  <p>Causan daños incluso en pequeñas cantidades. Ejemplos: disolventes, aceites usados, pilas, baterías, amianto. Métodos: incineración >1000 °C, tratamiento físico-químico, depósitos de seguridad.</p>
+
+  <h3>c) Jerarquía europea (Directiva 2008/98/CE)</h3>
+  <div class="caja clave">
+    <div class="paso"><div class="paso-n">1ª</div><div class="paso-txt"><strong>Prevención / reducción:</strong> evitar la generación en el origen.</div></div>
+    <div class="paso"><div class="paso-n">2ª</div><div class="paso-txt"><strong>Preparación para reutilización:</strong> nuevo uso sin reciclar.</div></div>
+    <div class="paso"><div class="paso-n">3ª</div><div class="paso-txt"><strong>Reciclaje:</strong> recuperar materiales para nuevos productos.</div></div>
+    <div class="paso"><div class="paso-n">4ª</div><div class="paso-txt"><strong>Valorización energética:</strong> aprovechar poder calorífico.</div></div>
+    <div class="paso"><div class="paso-n">5ª</div><div class="paso-txt"><strong>Eliminación final:</strong> vertido o confinamiento seguro (última opción).</div></div>
+  </div>
+</div>
+
+<!-- ═══ SECCIÓN 5 ═══ -->
+<div class="seccion" id="G_s5">
+  <div class="sec-hdr"><div class="sec-num">5</div><div class="sec-tit">Evaluación del Impacto Ambiental (EIA)</div></div>
+
+  <p>Procedimiento para identificar, prevenir, valorar y corregir efectos negativos <em>antes</em> de ejecutar un proyecto. Regulada por la <strong>Ley 21/2013 de Evaluación Ambiental</strong>.</p><div class="caja def"><strong>Evaluación de Impacto Ambiental (EIA):</strong> procedimiento administrativo que analiza los efectos ambientales de un proyecto antes de su ejecución.</div>
+
+  <h3>a) Principios básicos</h3>
+  <div class="caja def">
+    <strong>Prevención:</strong> actuar antes del daño.<br>
+    <strong>Integración:</strong> aspectos ambientales desde la planificación.<br>
+    <strong>Transparencia:</strong> participación pública.<br>
+    <strong>Responsabilidad:</strong> «quien contamina, paga».
+  </div>
+
+  <h3>b) Fases del proceso de EIA</h3>
+  <table>
+    <tr><th>Fase</th><th>Quién</th><th>En qué consiste</th></tr>
+    <tr><td><strong>1. EsIA</strong></td><td>Promotor</td><td>Describe proyecto, analiza medio, valora impactos, propone medidas.</td></tr>
+    <tr><td><strong>2. Información pública</strong></td><td>Administración + ciudadanía</td><td>Consulta pública. Alegaciones.</td></tr>
+    <tr><td><strong>3. DIA</strong></td><td>Administración</td><td>Resolución: favorable, condicionada o desfavorable. Obligado cumplimiento.</td></tr>
+  </table>
+
+  <h3>c) Medidas del EsIA</h3>
+  <table>
+    <tr><th>Tipo</th><th>Cuándo</th><th>Ejemplo</th></tr>
+    <tr><td><strong>Preventiva</strong></td><td>Antes del daño</td><td>Trazado alternativo, pantallas acústicas.</td></tr>
+    <tr><td><strong>Correctora</strong></td><td>Daño inevitable</td><td>Restaurar taludes, revegetar.</td></tr>
+    <tr><td><strong>Compensatoria</strong></td><td>No se puede evitar/corregir</td><td>Repoblar otra zona similar.</td></tr>
+  </table>
+  <p>+ <strong>Programa de vigilancia ambiental</strong> durante construcción, explotación y cierre.</p>
+</div>
+
+<!-- ═══ AVISO EXAMEN ═══ -->
+<div class="seccion" id="G_s6">
+  <div class="sec-hdr"><div class="sec-num">★</div><div class="sec-tit">Cómo se aplica este bloque</div></div>
+
+  <div class="callout callout-key">
+    <span class="callout-icon">★</span>
+    <div>Los enunciados mencionan conceptos de sostenibilidad como <strong>contexto</strong>: «una fábrica que busca reducir su huella de carbono», «eficiencia del 84% en el cilindro neumático», «corrección del factor de potencia para reducir pérdidas»…<br><br>
+    <strong>No desarrolles estos conceptos:</strong> localiza la pregunta de cálculo, que pertenecerá a los bloques C o D.</div>
+  </div>
+</div>
+
+<div class="seccion" id="G_s_huella">
+  <div class="sec-hdr"><div class="sec-num">★</div><div class="sec-tit">Huella de carbono de materiales habituales</div></div>
+  <p>La <strong>huella de carbono embebida</strong> de un material (en kg de CO₂ equivalente por kg de material) es un indicador clave de su impacto ambiental. Valores orientativos para fabricación desde materias primas:</p>
+  <table class="tbl-co2">
+    <thead><tr><th>Material</th><th>Huella (kg CO₂-eq / kg)</th><th>Reciclabilidad</th><th>Observación</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Acero (primario)</strong></td><td>1,9</td><td>Alta</td><td>Reciclar ahorra ~0,4 kg/kg</td></tr>
+      <tr><td><strong>Aluminio (primario)</strong></td><td>11,5</td><td>Muy alta</td><td>Reciclado: 0,5 kg/kg (-95%)</td></tr>
+      <tr><td><strong>Hormigón</strong></td><td>0,15</td><td>Baja</td><td>Gran volumen ⇒ impacto agregado alto</td></tr>
+      <tr><td><strong>Madera (serrada)</strong></td><td>0,45 – 1,0</td><td>Media</td><td>Fija CO₂ durante crecimiento</td></tr>
+      <tr><td><strong>Vidrio</strong></td><td>0,85</td><td>Alta</td><td>Reciclado infinito sin pérdida</td></tr>
+      <tr><td><strong>PLA (bioplástico)</strong></td><td>1,7</td><td>Compostable (industrial)</td><td>Base maíz / almidón</td></tr>
+      <tr><td><strong>ABS</strong></td><td>3,8</td><td>Media</td><td>Derivado del petróleo</td></tr>
+    </tbody>
+  </table>
+  <p><small>Fuentes: <em>Inventory of Carbon &amp; Energy (ICE) v3.0</em> (University of Bath, 2019); <em>Ecoinvent 3.8</em>; <em>Circularise Industry Reports 2023</em>. Los valores varían ±30% según origen y proceso concreto.</small></p>
+  <p><strong>Implicación de diseño:</strong> al elegir materiales en un proyecto técnico, preferir aquellos con menor huella cuando las prestaciones mecánicas lo permitan; reducir espesores; favorecer materiales con alta reciclabilidad.</p>
+</div>
+
+</div><!-- fin cuerpo -->
+
+<!-- ═══════════════════ DECÁLOGO ═══════════════════ -->
+<div id="decalogo" class="decalogo-box">
+  <h2>📝 Decálogo PAU 2025-26</h2>
+  <ol>
+    <li>Bloque transversal: no se pregunta como problema, pero aparece contextualizando enunciados de otros bloques.</li>
+    <li>Economía circular — las 5R: <strong>R</strong>echazar, <strong>R</strong>educir, <strong>R</strong>eutilizar, <strong>R</strong>eciclar, <strong>R</strong>ecuperar.</li>
+    <li>Ciclo de vida (ACV) de un material: extracción → fabricación → uso → fin de vida. Cada fase tiene impactos.</li>
+    <li>Huella de carbono: kg de CO\(_2\) equivalente. Útil para comparar opciones materiales o energéticas.</li>
+    <li>Eficiencia energética siempre ligada al rendimiento del bloque correspondiente (Carnot en C2, motores en D1, etc.).</li>
+    <li>Jerarquía de residuos: prevención > reutilización > reciclaje > valorización energética > eliminación (vertedero).</li>
+    <li>EIA = Evaluación de Impacto Ambiental (procedimiento); DIA = Declaración de Impacto Ambiental (resultado final).</li>
+    <li>Fabricación sostenible: procesos aditivos (3D) reducen residuos; procesos sustractivos generan viruta.</li>
+    <li>Fuentes renovables vs no renovables: conoce al menos 3 ejemplos de cada una.</li>
+    <li>ODS 7 (energía asequible y limpia), ODS 9 (industria e innovación) y ODS 12 (producción y consumo responsables) son los más relacionados.</li>
+  </ol>
+</div>
+
+<div class="pie">
+  <span>IES Jiménez de Quesada · Santa Fe (Granada)</span>
+  <span>Bloque G — Tecnología Sostenible</span>
+  <span>Curso 2025–2026</span>
+</div>
+
+</div></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if(typeof MathJax !== 'undefined' && MathJax.typeset) MathJax.typeset();
+});
+</script>
+<script>
+(function(){
+  const container = document.getElementById('ct');
+  if(!container) return;
+
+  function jumpToHash(hash, smooth){
+    const raw = (hash || window.location.hash || '').trim();
+    if(!raw || raw === '#') return;
+    const id = decodeURIComponent(raw.slice(1));
+    const target = document.getElementById(id);
+    if(!target) return;
+
+    const cRect = container.getBoundingClientRect();
+    const tRect = target.getBoundingClientRect();
+    const top = container.scrollTop + (tRect.top - cRect.top) - 10;
+    container.scrollTo({ top: Math.max(0, top), behavior: smooth ? 'smooth' : 'auto' });
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(ev){
+      const href = this.getAttribute('href');
+      if(!href || href === '#') return;
+      const id = href.slice(1);
+      const target = document.getElementById(id);
+      if(!target) return;
+      ev.preventDefault();
+      jumpToHash(href, false);
+      if(history.replaceState){
+        history.replaceState(null, '', href);
+      } else {
+        window.location.hash = href;
+      }
+    });
+  });
+
+  window.addEventListener('hashchange', function(){
+    jumpToHash(window.location.hash, false);
+  });
+
+  window.addEventListener('load', function(){
+    if(window.location.hash){
+      setTimeout(function(){ jumpToHash(window.location.hash, false); }, 50);
+    }
+  });
+})();
+</script>
+</body>
+</html>

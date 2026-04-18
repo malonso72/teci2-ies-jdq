@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II · Examen tipo 1 2025-26 · IES Jiménez de Quesada</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--az:#1B4F8A;--az2:#2E7BC4;--bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5;--green:#2E7D32;--green2:#43A047;--green-soft:#EDF6EE;--green-line:#A8D5AE;--red:#C0321E}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:var(--bg);color:var(--tx)}
+.hd{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(27,79,138,.12);position:sticky;top:0;z-index:500}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer}
+.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.72rem;opacity:.78;margin-left:10px}
+.home-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:8px;cursor:pointer;margin-left:auto;transition:background .15s;text-decoration:none}
+.home-btn:hover{background:rgba(255,255,255,.16)}
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+.navcross span.nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8;align-self:center;user-select:none}
+.main{max-width:980px;margin:0 auto;padding:28px 18px 64px}
+.title-block{text-align:center;margin-bottom:28px}
+.title-block h1{font-family:'Barlow Condensed',sans-serif;font-size:1.9rem;color:var(--az);font-weight:700;letter-spacing:.5px}
+.title-block .sub{color:var(--t2);font-size:.95rem;margin-top:4px}
+.badge{display:inline-block;background:var(--green-soft);color:var(--green);border:1px solid var(--green-line);padding:5px 14px;border-radius:999px;font-size:.8rem;font-weight:600;margin:10px 0 18px}
+.instr{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:14px 18px;margin:0 0 26px;font-size:.88rem;line-height:1.55;color:var(--t2);box-shadow:0 2px 8px rgba(27,79,138,.05)}
+.instr strong{color:var(--az)}
+.apartado{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:20px 22px;margin:0 0 22px;box-shadow:0 3px 12px rgba(27,79,138,.06)}
+.apartado h2{font-family:'Barlow Condensed',sans-serif;color:var(--az);font-size:1.35rem;margin-bottom:6px;padding-bottom:8px;border-bottom:2px solid var(--az2)}
+.apartado .bloque-tag{display:inline-block;background:#EBF0F7;color:var(--az);font-size:.72rem;font-weight:600;padding:3px 9px;border-radius:999px;margin-left:8px;vertical-align:middle}
+.contexto{margin:10px 0 6px;font-style:italic;color:var(--t2);font-size:.9rem}
+.opcion{background:#FAFBFD;border-left:4px solid var(--az2);border-radius:0 8px 8px 0;padding:14px 16px;margin:14px 0}
+.opcion h3{font-family:'Barlow Condensed',sans-serif;color:var(--az);font-size:1.1rem;margin-bottom:8px}
+.enunciado{font-size:.95rem;line-height:1.65;margin:6px 0}
+.enunciado ol,.enunciado ul{margin:6px 0 6px 24px}
+.enunciado li{margin:3px 0}
+.datos{background:#F7FAFD;border:1px dashed #B8C9DD;border-radius:8px;padding:8px 12px;margin:8px 0;font-size:.88rem;color:var(--t2)}
+.esquema{background:#F4F6F9;border:1px solid var(--bd);border-left:4px solid var(--green2);border-radius:0 8px 8px 0;padding:8px 14px;margin:10px 0;font-size:.85rem;color:var(--t2);font-family:'Barlow',monospace}
+.esquema strong{color:var(--green)}
+.sol-wrap{margin:10px 0 2px;border:1px solid var(--bd);background:#fff;border-radius:10px;overflow:hidden}
+.sol-btn{display:block;width:100%;padding:10px 14px;background:#F7FAFD;color:var(--az);border:none;cursor:pointer;font:700 .85rem/1.4 Barlow,sans-serif;text-align:left;transition:background .18s}
+.sol-btn:hover{background:#EEF4FA}
+.sol-btn::after{content:'▾';float:right;color:var(--green)}
+.sol-btn.open::after{content:'▴'}
+.sol-content{display:none;padding:10px 14px 12px;border-top:1px solid #E7ECF2;font-size:.85rem;line-height:1.65;background:#fff}
+.sol-content.show{display:block}
+.sol-content .apt{display:block;margin:3px 0;color:#285E2B;font-weight:600}
+.ref-ponencia{margin:10px 0 0;padding:6px 10px;background:#EBF4FF;border-left:3px solid #2E7BC4;border-radius:0 6px 6px 0;font-size:.78rem}
+.ref-ponencia a{color:#1B4F8A;text-decoration:none;font-weight:600}
+.ref-ponencia a:hover{text-decoration:underline}
+.procedencia{background:#F4F6F9;border-left:5px solid #8C97A8;padding:16px 22px;margin:32px auto;max-width:760px;border-radius:0 6px 6px 0;font-size:.85rem}
+.procedencia h3{font-family:'Barlow Condensed',sans-serif;color:#455565;margin:0 0 10px;font-size:1.05rem}
+.procedencia ul{list-style:none;padding:0;margin:0}
+.procedencia li{padding:4px 0;color:#455565}
+.procedencia strong{color:#1B4F8A}
+[id]{scroll-margin-top:120px}
+@media(max-width:768px){.main{padding:16px 10px 40px}.apartado{padding:14px 12px}.title-block h1{font-size:1.4rem}}
+@media print{.hd,.navcross,.sol-btn{display:none!important}.sol-content{display:block!important}.apartado{break-inside:avoid}}
+
+.recomendado-banner{display:flex;gap:14px;align-items:center;padding:14px 18px;margin:0 0 20px;background:linear-gradient(135deg,#FFF5E0,#FFE7BA);border:1px solid #F3A83D;border-left:5px solid #D4700A;border-radius:0 12px 12px 0;box-shadow:0 3px 12px rgba(212,112,10,.12)}
+.recomendado-banner .reco-mark{font-size:2rem;line-height:1;filter:drop-shadow(0 2px 3px rgba(212,112,10,.3))}
+.recomendado-banner .reco-txt{display:flex;flex-direction:column;gap:2px}
+.recomendado-banner strong{color:#6B3800;font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;letter-spacing:.03em;text-transform:uppercase}
+.recomendado-banner span{font-size:.85rem;color:#5C3300;line-height:1.45}
+@media print{.recomendado-banner{-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}}
+</style>
+<script>
+document.addEventListener('click',function(e){
+  if(e.target.classList.contains('sol-btn')){
+    e.target.classList.toggle('open');
+    e.target.nextElementSibling.classList.toggle('show');
+  }
+});
+</script>
+</head>
+<body>
+<div class="hd">
+<span class="lg" onclick="location.href='../../../index.html'">TECI II</span>
+<span class="sb">🧪 Examen tipo 1 · 2025-26</span>
+<a href="../../../index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal"><a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span><a href="../../../index.html#teoria"><span>📖</span><span class="nc-lbl">Teoría</span></a><span class="nc-sep">·</span><a href="../../../index.html#ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a><span class="nc-sep">·</span><span class="nc-current" aria-current="page"><span>📋</span><span class="nc-lbl">Exámenes</span></span><span class="nc-sep">·</span><a href="../../../ponencia_resuelta/index_ponencia.html" aria-label="Ver Ponencia 2025-26 resuelta"><span>📚</span><span class="nc-lbl">Ponencia</span></a><span class="nc-sep">·</span><a href="../../../apoyo/formulario.html" aria-label="Ir al material de apoyo"><span>📚</span><span class="nc-lbl">Apoyo</span></a></nav>
+
+<div class="main">
+<div class="title-block">
+<h1>Examen tipo 1 · PEvAU 2025-26</h1>
+<div class="sub">Tecnología e Ingeniería II · IES Jiménez de Quesada</div>
+<div class="badge">⏱️ 90 min · 4 apartados · Apartado 1 sin opción + Apartados 2-4 con opciones A/B</div>
+</div>
+
+
+<div class="recomendado-banner" role="note" aria-label="Examen recomendado para empezar">
+  <span class="reco-mark">⭐</span>
+  <div class="reco-txt">
+    <strong>Recomendado para empezar</strong>
+    <span>Este examen ofrece una cobertura equilibrada de los bloques PEvAU 2025-26; buen punto de partida para familiarizarse con el formato antes de abordar otros simulacros.</span>
+  </div>
+</div>
+
+<div class="instr">
+<strong>Instrucciones.</strong> La prueba consta de <strong>4 apartados de 2,5 puntos cada uno</strong>. El <strong>Apartado 1</strong> es de <em>opción única</em> y debe contestarse obligatoriamente. En los <strong>Apartados 2, 3 y 4</strong> el alumno elige <strong>una</strong> de las dos opciones (A o B). No se puede mezclar. Pesos de bloques: B = 2,5 pt, C = 4 pt (C1/C2/C3), D = 2,5 pt, F = 1 pt. Duración: <strong>90 minutos</strong>.
+</div>
+
+<!-- ═════════════ APARTADO 1 ═════════════ -->
+<section class="apartado" id="ap1">
+<h2>Apartado 1 — Materiales (B) <span class="bloque-tag">Bloque B · 2,5 pt</span></h2>
+<p class="contexto">En una carpintería metálica se ha comprado una plancha de acero de dureza Brinell \(160\ \text{HB}\ 5\ 650\ 20\) para la superficie de trabajo de una mesa de carnicería. Posteriormente se decide templar el acero para aumentar su dureza.</p>
+<div class="enunciado">
+<ol type="a">
+  <li>Calcula la <strong>profundidad \(f\)</strong> y el <strong>diámetro \(d\)</strong> de la huella que deja el ensayo Brinell normalizado en la plancha original.</li>
+  <li>Si con el temple la dureza Brinell se duplica (pasa de 160 a 320 kp/mm²), ¿qué <strong>fuerza</strong> habría que aplicar en un nuevo ensayo para dejar <em>la misma huella</em> (mismo diámetro) que en el acero sin templar?</li>
+</ol>
+</div>
+<div class="datos"><strong>Datos.</strong> \(HB = F/S\) con \(S = \pi\cdot D\cdot f\); \(d = \sqrt{D^2-(D-\tfrac{2F}{\pi D\, HB})^2}\). La norma Brinell exige \(D/4\le d\le D/2\).</div>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (Apartado 1)</button><div class="sol-content">
+<span class="apt">a) \(f = \dfrac{F}{\pi\,D\,HB} = \dfrac{650}{\pi\cdot 5\cdot 160} \approx 0{,}259\ \text{mm}\)</span>
+<span class="apt">a) \(d \approx 2{,}28\ \text{mm}\) (cumple \(D/4\le d\le D/2\))</span>
+<span class="apt">b) Misma huella ⇒ misma \(S\). \(S = F/HB = 650/160 = 4{,}0625\ \text{mm}^2\). Con \(HB' = 320\): \(F' = 320\cdot 4{,}0625 = 1\,300\ \text{kp}\).</span>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_B1.html#prob-1">🔗 Ver resolución completa en Ponencia resuelta (B1 · Problema 1)</a></p>
+</div></div>
+</section>
+
+<!-- ═════════════ APARTADO 2 ═════════════ -->
+<section class="apartado" id="ap2">
+<h2>Apartado 2 — Máquinas térmicas (C2) <span class="bloque-tag">Bloque C2 · 2,5 pt</span></h2>
+
+<div class="opcion">
+<h3>Opción A · Bomba de calor</h3>
+<p class="contexto">Se va a climatizar un hotel en un pueblo de Málaga con un sistema de <strong>bomba de calor</strong>. Se quiere mantener la temperatura interior a \(24\ \text{^{\circ}C}\) mientras que en el exterior es de \(6\ \text{^{\circ}C}\). Se elige una bomba cuya eficiencia es la <em>tercera parte</em> de la ideal y que aporta \(90\,000\ \text{J}\) en un minuto al foco caliente.</p>
+<div class="enunciado">
+<ol type="a">
+  <li>Calcula la eficiencia real de la bomba y el trabajo aplicado en una hora.</li>
+  <li>Calcula el calor que se extrae del foco frío en un minuto y la potencia calorífica en kW.</li>
+</ol>
+</div>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (2A)</button><div class="sol-content">
+<span class="apt">a) \(\varepsilon_{ideal} = T_C/(T_C-T_F) = 297/18 = 16{,}5\); \(\varepsilon_{real} = 5{,}5\). \(W_{1\text{min}} = 90\,000/5{,}5 \approx 16\,363{,}64\ \text{J}\); \(W_{1\text{h}} \approx 981{,}82\ \text{kJ}\).</span>
+<span class="apt">b) \(Q_F = Q_C - W = 90\,000 - 16\,363{,}64 \approx 73\,636{,}36\ \text{J}\); \(P = Q_C/t = 90\,000/60 = 1{,}5\ \text{kW}\).</span>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_C2.html#prob-3">🔗 Ver resolución completa en Ponencia resuelta (C2 · Problema 3)</a></p>
+</div></div>
+</div>
+
+<div class="opcion">
+<h3>Opción B · Motor Otto 4T</h3>
+<p class="contexto">Un viaje de Córdoba a Sevilla (150 km a 75 km/h) se hace en un quad con motor Otto bicilíndrico de 4T: cilindrada \(500\ \text{cm}^3\), diámetro de cilindro \(60\ \text{mm}\), relación de compresión \(10{:}1\). La potencia máxima se obtiene con un par de \(30\ \text{Nm}\) a \(5\,000\ \text{rpm}\).</p>
+<div class="enunciado">
+<ol type="a">
+  <li>Calcula la <strong>carrera del cilindro</strong> y el <strong>volumen de la cámara de combustión</strong>.</li>
+  <li>Calcula el <strong>trabajo total</strong> desarrollado en el viaje suponiendo que trabaja a potencia máxima todo el trayecto.</li>
+</ol>
+</div>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (2B)</button><div class="sol-content">
+<span class="apt">a) \(V_u = 500/2 = 250\ \text{cm}^3\); \(L = 4V_u/(\pi D^2) \approx 8{,}84\ \text{cm}\). \(V_{cc} = V_u/(R_c-1) = 250/9 \approx 27{,}78\ \text{cm}^3\).</span>
+<span class="apt">b) \(P_{max} = M\omega = 30\cdot 2\pi\cdot 5000/60 \approx 15\,708\ \text{W}\). Tiempo \(t = 150/75 = 2\ \text{h} = 7\,200\ \text{s}\). \(W = P\cdot t \approx 113{,}1\ \text{MJ}\).</span>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_C2.html#prob-2">🔗 Ver resolución completa en Ponencia resuelta (C2 · Problema 2)</a></p>
+</div></div>
+</div>
+</section>
+
+<!-- ═════════════ APARTADO 3 ═════════════ -->
+<section class="apartado" id="ap3">
+<h2>Apartado 3 — Estructuras + Automática (C1 + F) <span class="bloque-tag">C1 1,5 pt · F 1 pt</span></h2>
+
+<div class="opcion">
+<h3>Opción A</h3>
+<p class="contexto"><strong>Parte 1 (C1, 1,5 pt).</strong> Se analiza una viga biapoyada de 6 m de luz con una carga puntual \(P = 16\,000\ \text{N}\) situada a 1,5 m del apoyo izquierdo A (móvil en A, fijo en B).</p>
+<svg class="cercha-svg" viewBox="0 0 520 170" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:10px auto;max-width:100%;height:auto;font-family:'Barlow Condensed',sans-serif">
+<title>Viga biapoyada AB de 6 m con carga puntual P=16 kN a 1,5 m de A</title>
+<desc>Viga horizontal con apoyo articulado en A (izquierda) y apoyo móvil (rodillo) en B (derecha). Carga puntual vertical hacia abajo de 16 kN aplicada a 1,5 m del apoyo A.</desc>
+<defs><marker id="t1a-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#D4700A"/></marker></defs>
+<line x1="60" y1="90" x2="460" y2="90" stroke="#1B4F8A" stroke-width="4"/>
+<polygon points="60,90 48,115 72,115" fill="none" stroke="#1B4F8A" stroke-width="2"/>
+<line x1="44" y1="118" x2="76" y2="118" stroke="#1B4F8A" stroke-width="2"/>
+<circle cx="460" cy="102" r="8" fill="none" stroke="#1B4F8A" stroke-width="2"/>
+<line x1="444" y1="115" x2="476" y2="115" stroke="#1B4F8A" stroke-width="2"/>
+<line x1="160" y1="30" x2="160" y2="86" stroke="#D4700A" stroke-width="3" marker-end="url(#t1a-ar)"/>
+<text x="166" y="42" fill="#D4700A" font-size="14" font-weight="700">P = 16 kN</text>
+<text x="54" y="80" fill="#1B4F8A" font-size="14" font-weight="700">A</text>
+<text x="452" y="80" fill="#1B4F8A" font-size="14" font-weight="700">B</text>
+<line x1="60" y1="140" x2="160" y2="140" stroke="#555" stroke-width="1"/>
+<line x1="60" y1="135" x2="60" y2="145" stroke="#555" stroke-width="1"/>
+<line x1="160" y1="135" x2="160" y2="145" stroke="#555" stroke-width="1"/>
+<text x="100" y="155" fill="#555" font-size="12">1,5 m</text>
+<line x1="160" y1="140" x2="460" y2="140" stroke="#555" stroke-width="1"/>
+<line x1="460" y1="135" x2="460" y2="145" stroke="#555" stroke-width="1"/>
+<text x="290" y="155" fill="#555" font-size="12">4,5 m</text>
+</svg>
+<div class="enunciado">
+<ol type="a">
+  <li>Calcula las reacciones en ambos apoyos (equilibrio estático).</li>
+  <li>Calcula el momento flector máximo y di dónde se localiza.</li>
+</ol>
+</div>
+<p class="contexto"><strong>Parte 2 (F, 1 pt).</strong> Define las tres acciones básicas de un controlador PID (<strong>P</strong>roporcional, <strong>I</strong>ntegral, <strong>D</strong>erivativo). Para cada una indica: fórmula general, qué característica del error corrige y una limitación.</p>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (3A)</button><div class="sol-content">
+<span class="apt">C1-a) \(\sum F_x=0 \Rightarrow R_{Ax}=0\). Tomando momentos en A: \(R_{By}\cdot 6 = 16\cdot 1{,}5 \Rightarrow R_{By}=4\,000\ \text{N}\); \(R_{Ay}=12\,000\ \text{N}\).</span>
+<span class="apt">C1-b) \(M_{max}\) bajo la carga, \(x=1{,}5\ \text{m}\): \(M_{max}=R_{Ay}\cdot 1{,}5 = 18\ \text{kN\cdot m}\).</span>
+<span class="apt">F) P: \(m=K_p\cdot e\), rápida, respuesta instantánea pero deja error estacionario. I: \(m=K_i\int e\,dt\), elimina error estacionario pero es lenta y puede saturar. D: \(m=K_d\cdot de/dt\), anticipatoria, amortigua oscilaciones pero amplifica ruido.</span>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_C1.html#prob-2">🔗 Ver resolución completa en Ponencia resuelta (C1 · Problema 2)</a></p>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_F1.html#prob-8">🔗 Ver resolución completa en Ponencia resuelta (F1 · Problema 8)</a></p>
+</div></div>
+</div>
+
+<div class="opcion">
+<h3>Opción B</h3>
+<p class="contexto"><strong>Parte 1 (C1, 1,5 pt).</strong> Una viga de 5 m está <strong>empotrada en el extremo derecho B</strong>. Sobre el extremo izquierdo A actúa una carga peso de \(3\ \text{kN}\) y a 2 m del empotramiento se localiza otra carga peso de \(2\ \text{kN}\).</p>
+<svg class="cercha-svg" viewBox="0 0 520 170" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:10px auto;max-width:100%;height:auto;font-family:'Barlow Condensed',sans-serif">
+<title>Ménsula (viga en voladizo) de 5 m empotrada en B con dos cargas puntuales</title>
+<desc>Voladizo de 5 m empotrado en el extremo derecho B. Carga 3 kN aplicada en el extremo izquierdo A (x=0) y carga 2 kN a 2 m antes del empotramiento (x=3 m).</desc>
+<defs><marker id="t1b-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#D4700A"/></marker></defs>
+<line x1="60" y1="90" x2="440" y2="90" stroke="#1B4F8A" stroke-width="4"/>
+<rect x="440" y="62" width="16" height="60" fill="none" stroke="#1B4F8A" stroke-width="2"/>
+<line x1="456" y1="62" x2="472" y2="54" stroke="#1B4F8A" stroke-width="1.4"/>
+<line x1="456" y1="74" x2="472" y2="66" stroke="#1B4F8A" stroke-width="1.4"/>
+<line x1="456" y1="86" x2="472" y2="78" stroke="#1B4F8A" stroke-width="1.4"/>
+<line x1="456" y1="98" x2="472" y2="90" stroke="#1B4F8A" stroke-width="1.4"/>
+<line x1="456" y1="110" x2="472" y2="102" stroke="#1B4F8A" stroke-width="1.4"/>
+<line x1="456" y1="122" x2="472" y2="114" stroke="#1B4F8A" stroke-width="1.4"/>
+<line x1="60" y1="30" x2="60" y2="86" stroke="#D4700A" stroke-width="3" marker-end="url(#t1b-ar)"/>
+<text x="20" y="42" fill="#D4700A" font-size="14" font-weight="700">3 kN</text>
+<line x1="288" y1="30" x2="288" y2="86" stroke="#D4700A" stroke-width="3" marker-end="url(#t1b-ar)"/>
+<text x="296" y="42" fill="#D4700A" font-size="14" font-weight="700">2 kN</text>
+<text x="54" y="80" fill="#1B4F8A" font-size="14" font-weight="700">A</text>
+<text x="434" y="54" fill="#1B4F8A" font-size="14" font-weight="700">B</text>
+<line x1="60" y1="140" x2="288" y2="140" stroke="#555" stroke-width="1"/>
+<line x1="60" y1="135" x2="60" y2="145" stroke="#555" stroke-width="1"/>
+<line x1="288" y1="135" x2="288" y2="145" stroke="#555" stroke-width="1"/>
+<text x="160" y="155" fill="#555" font-size="12">3 m</text>
+<line x1="288" y1="140" x2="440" y2="140" stroke="#555" stroke-width="1"/>
+<line x1="440" y1="135" x2="440" y2="145" stroke="#555" stroke-width="1"/>
+<text x="352" y="155" fill="#555" font-size="12">2 m</text>
+</svg>
+<div class="enunciado">
+<ol type="a">
+  <li>Calcula las reacciones (fuerza y momento) del empotramiento en condiciones de equilibrio.</li>
+  <li>Determina el momento flector máximo y en qué punto se produce.</li>
+</ol>
+</div>
+<p class="contexto"><strong>Parte 2 (F, 1 pt).</strong> Enumera dos <em>ventajas</em> y dos <em>desventajas</em> del control en <strong>lazo cerrado</strong> frente al de lazo abierto. Indica un ejemplo real de cada tipo.</p>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (3B)</button><div class="sol-content">
+<span class="apt">C1-a) \(R_{Bx}=0\); \(R_{By}=P_1+P_2=5\ \text{kN}\); \(M_B = 3\cdot 5 + 2\cdot 2 = 19\ \text{kN\cdot m}\).</span>
+<span class="apt">C1-b) \(M_{max}=|M_B|=19\ \text{kN\cdot m}\), en el empotramiento (x=5 m).</span>
+<span class="apt">F) Ventajas: mayor precisión; menor sensibilidad a perturbaciones y variaciones de parámetros. Desventajas: mayor complejidad y coste; posible inestabilidad por retardos. Ejemplos: LA = temporizador de lavadora; LC = termostato de caldera.</span>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_C1.html#prob-5">🔗 Ver resolución completa en Ponencia resuelta (C1 · Problema 5)</a></p>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_F1.html#prob-12">🔗 Ver resolución completa en Ponencia resuelta (F1 · Problema 12)</a></p>
+</div></div>
+</div>
+</section>
+
+<!-- ═════════════ APARTADO 4 ═════════════ -->
+<section class="apartado" id="ap4">
+<h2>Apartado 4 — Electrónica (D1 ó D2) <span class="bloque-tag">Bloque D · 2,5 pt</span></h2>
+
+<div class="opcion">
+<h3>Opción A · Corriente alterna (D1)</h3>
+<p class="contexto">Un calefactor cuya resistencia está diseñada para \(125\ \text{V}\) eficaces y consume \(1\,000\ \text{W}\) se quiere conectar a la red de \(220\ \text{V}\) y \(50\ \text{Hz}\). Para adaptarlo, se intercala un condensador \(C\) en serie con la resistencia (circuito RC serie).</p>
+<svg class="cercha-svg" viewBox="0 0 420 180" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:8px auto;max-width:100%;height:auto;font-family:'Barlow Condensed',sans-serif">
+<title>Circuito RC serie alimentado por fuente alterna 220 V / 50 Hz</title>
+<desc>Lazo con fuente alterna a la izquierda, resistencia R en la rama superior y condensador C en la rama derecha, todo en serie.</desc>
+<rect x="40" y="40" width="340" height="100" fill="none" stroke="#1B4F8A" stroke-width="2"/>
+<circle cx="40" cy="90" r="18" fill="#fff" stroke="#1B4F8A" stroke-width="2"/>
+<path d="M28,90 Q34,78 40,90 T52,90" fill="none" stroke="#1B4F8A" stroke-width="1.6"/>
+<text x="8" y="74" fill="#1B4F8A" font-size="12" font-weight="700">U=220 V</text>
+<text x="4" y="120" fill="#1B4F8A" font-size="11">50 Hz</text>
+<rect x="170" y="30" width="80" height="20" fill="#fff" stroke="#1B4F8A" stroke-width="2"/>
+<text x="198" y="25" fill="#1B4F8A" font-size="13" font-weight="700">R</text>
+<line x1="370" y1="70" x2="390" y2="70" stroke="#1B4F8A" stroke-width="2"/>
+<line x1="370" y1="110" x2="390" y2="110" stroke="#1B4F8A" stroke-width="2"/>
+<line x1="380" y1="60" x2="380" y2="80" stroke="#1B4F8A" stroke-width="3"/>
+<line x1="380" y1="100" x2="380" y2="120" stroke="#1B4F8A" stroke-width="3"/>
+<text x="392" y="94" fill="#1B4F8A" font-size="13" font-weight="700">C</text>
+</svg>
+<div class="enunciado">
+<ol type="a">
+  <li>Calcula la corriente que atraviesa el circuito cuando funciona con normalidad.</li>
+  <li>Determina los valores de la reactancia \(X_C\) y de la capacidad \(C\) necesarios.</li>
+  <li>Calcula potencias activa, reactiva y aparente, y el factor de potencia.</li>
+</ol>
+</div>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (4A)</button><div class="sol-content">
+<span class="apt">a) \(I = P_R/U_R = 1000/125 = 8\ \text{A}\).</span>
+<span class="apt">b) \(Z = U/I = 220/8 = 27{,}5\ \Omega\); \(R = U_R/I = 15{,}625\ \Omega\); \(X_C = \sqrt{Z^2-R^2} \approx 22{,}63\ \Omega\); \(C = 1/(2\pi f X_C) \approx 140{,}66\ \mu\text{F}\).</span>
+<span class="apt">c) \(P=1\,000\ \text{W}\); \(Q = X_C\,I^2 \approx 1\,448{,}32\ \text{VAr}\); \(S = \sqrt{P^2+Q^2} \approx 1\,760\ \text{VA}\); \(\cos\varphi = P/S \approx 0{,}57\) (en adelanto).</span>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_D1.html#prob-1">🔗 Ver resolución completa en Ponencia resuelta (D1 · Problema 1)</a></p>
+</div></div>
+</div>
+
+<div class="opcion">
+<h3>Opción B · Electrónica digital (D2)</h3>
+<p class="contexto">En una habitación se utiliza un sistema automatizado para controlar una lámpara \(F\) a partir de tres entradas:</p>
+<ul class="enunciado">
+<li>Sensor de movimiento \(M\) (hay personas = 1).</li>
+<li>Sensor de luz ambiente \(L\) (luz insuficiente = 1).</li>
+<li>Interruptor manual \(S\) (encendido manual = 1).</li>
+</ul>
+<p class="enunciado">La lámpara debe encenderse si: i) se detecta movimiento Y la luz ambiente es insuficiente; ii) o bien el interruptor manual está activado, <em>independientemente</em> del resto.</p>
+<div class="enunciado">
+<ol type="a">
+  <li>Obtén la tabla de verdad y la expresión canónica de \(F\).</li>
+  <li>Simplifica por Karnaugh e implementa la función usando puertas NAND.</li>
+</ol>
+</div>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (4B)</button><div class="sol-content">
+<span class="apt">a) F=1 en filas (M,L,S): 001, 011, 101, 110, 111. Canónica: \(F = \overline{M}\,\overline{L}\,S + \overline{M}LS + M\overline{L}S + ML\overline{S} + MLS\).</span>
+<span class="apt">b) Karnaugh: \(F = S + M\cdot L\).</span>
+<span class="apt">b) NAND: \(F = \overline{\overline{S}\cdot\overline{ML}} = \overline{\overline{S}\cdot\overline{\overline{\overline{M\cdot L}}}}\) (se implementa con 3 NAND: una NAND(M,L) como AND negado, luego se combinan por De Morgan: \(F = \overline{\overline{S}\cdot\overline{M\cdot L}}\)).</span>
+<p class="ref-ponencia"><a href="../../../ponencia_resuelta/ponencia_D2.html#prob-2">🔗 Ver resolución completa en Ponencia resuelta (D2 · Problema 2)</a></p>
+</div></div>
+</div>
+</section>
+
+<div class="procedencia">
+<h3>📋 Procedencia de los ejercicios</h3>
+<ul>
+  <li><strong>Apartado 1:</strong> Adaptado de Ponencia 2025-26, Problema B-1 (p. 2)</li>
+  <li><strong>Apartado 2 Opción A:</strong> Ponencia 2025-26, Problema C2-3 (p. 8)</li>
+  <li><strong>Apartado 2 Opción B:</strong> Ponencia 2025-26, Problema C2-2 (p. 8)</li>
+  <li><strong>Apartado 3 Opción A (C1):</strong> Ponencia 2025-26, Problema C1-2 (p. 26)</li>
+  <li><strong>Apartado 3 Opción A (F):</strong> Ponencia 2025-26, Problema F-8 (p. 64)</li>
+  <li><strong>Apartado 3 Opción B (C1):</strong> Ponencia 2025-26, Problema C1-5 (p. 32)</li>
+  <li><strong>Apartado 3 Opción B (F):</strong> Ponencia 2025-26, Problema F-12 (p. 66)</li>
+  <li><strong>Apartado 4 Opción A:</strong> Ponencia 2025-26, Problema D1-1 (p. 47)</li>
+  <li><strong>Apartado 4 Opción B:</strong> Ponencia 2025-26, Problema D2-2 (p. 19)</li>
+</ul>
+</div>
+
+</div>
+</body>
+</html>

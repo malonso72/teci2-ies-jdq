@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ponencia 2025-26 resuelta — Bloque F1 · TECI II</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--az:#1B4F8A;--az2:#2E7BC4;--bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5;--green:#2E7D32;--green2:#43A047;--green-soft:#EDF6EE;--green-line:#A8D5AE;--red:#C0321E;--orange:#D4700A;--orange-soft:#FFF4E5;--orange-line:#F5C98A;--yellow:#FFA000;--yellow-soft:#FFF8E1;--yellow-line:#FFE082}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:var(--bg);color:var(--tx);line-height:1.55}
+.hd{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(27,79,138,.12);position:sticky;top:0;z-index:500}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer}
+.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.72rem;opacity:.78;margin-left:10px}
+.home-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:8px;cursor:pointer;margin-left:auto;transition:background .15s;text-decoration:none}
+.home-btn:hover{background:rgba(255,255,255,.16)}
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:var(--az);color:var(--az)}
+.navcross span.nc-current{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;border-color:var(--az);font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8;align-self:center}
+.main{max-width:1000px;margin:0 auto;padding:26px 18px 70px}
+.title-block{text-align:center;margin-bottom:26px}
+.title-block h1{font-family:'Barlow Condensed',sans-serif;font-size:2rem;color:var(--az);font-weight:700}
+.title-block .sub{color:var(--t2);font-size:.95rem;margin-top:4px}
+.intro{background:#fff;border:1px solid var(--bd);border-left:4px solid var(--az2);padding:14px 18px;border-radius:0 10px 10px 0;margin:0 0 20px;font-size:.92rem;color:var(--t2)}
+.intro strong{color:var(--az)}
+.back-portal{display:inline-block;margin-bottom:14px;padding:7px 14px;background:#fff;color:var(--az);border:1px solid var(--bd);border-radius:8px;text-decoration:none;font-size:.85rem;font-weight:600;transition:background .15s}
+.back-portal:hover{background:#EBF0F7;border-color:var(--az)}
+.conceptos{background:#fff;border:1px solid var(--bd);border-left:4px solid var(--green2);border-radius:14px;padding:20px 22px;margin:0 0 22px;box-shadow:0 3px 12px rgba(27,79,138,.06)}
+.conceptos h2{font-family:'Barlow Condensed',sans-serif;color:var(--az);font-size:1.4rem;font-weight:700;padding-bottom:10px;border-bottom:2px solid var(--green2);margin-bottom:12px}
+.conceptos h3{font-family:'Barlow',sans-serif;color:var(--az);font-size:1.05rem;font-weight:700;margin:14px 0 6px}
+.conceptos p,.conceptos li{font-size:.92rem;line-height:1.6}
+.conceptos ul{margin:6px 0 10px 22px}
+.conceptos .tabla-var{border-collapse:collapse;margin:10px 0;font-size:.9rem;width:100%}
+.conceptos .tabla-var th,.conceptos .tabla-var td{border:1px solid var(--bd);padding:6px 10px;text-align:left;vertical-align:top}
+.conceptos .tabla-var th{background:#EBF0F7;color:var(--az);font-weight:700}
+.conceptos .tabla-var td.var{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--az);width:70px;text-align:center}
+.problema{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:20px 22px;margin:0 0 22px;box-shadow:0 3px 12px rgba(27,79,138,.06)}
+.prob-header{display:flex;align-items:center;gap:14px;padding-bottom:10px;border-bottom:2px solid var(--az2);margin-bottom:12px}
+.prob-header h2{font-family:'Barlow Condensed',sans-serif;color:var(--az);font-size:1.4rem;font-weight:700;flex:1}
+.dif{font-size:.95rem;color:var(--orange);letter-spacing:1px}
+.dif[data-level="1"]{color:#43A047}
+.dif[data-level="2"]{color:var(--orange)}
+.dif[data-level="3"]{color:var(--red)}
+.enunciado{font-size:.95rem;line-height:1.65;margin:4px 0 10px}
+.enunciado p{margin:6px 0}
+.enunciado ol,.enunciado ul{margin:6px 0 6px 24px}
+.enunciado li{margin:3px 0}
+.enunciado .ref{color:var(--az2);font-weight:600;font-size:.82em;vertical-align:super}
+details.resolucion{margin-top:12px;border:1px solid var(--bd);border-radius:10px;background:#FAFBFD;overflow:hidden}
+details.resolucion summary{padding:10px 16px;cursor:pointer;font-weight:700;color:var(--az);font-size:.9rem;background:#F7FAFD;list-style:none;user-select:none;transition:background .15s}
+details.resolucion summary:hover{background:#EEF4FA}
+details.resolucion summary::-webkit-details-marker{display:none}
+details.resolucion summary::after{content:'▾';float:right;color:var(--green);transition:transform .2s}
+details.resolucion[open] summary::after{content:'▴'}
+.resol-body{padding:14px 18px;background:#fff;border-top:1px solid var(--bd)}
+.apartado{margin:10px 0 14px;padding-bottom:10px;border-bottom:1px dashed #E0E4EC}
+.apartado:last-child{border-bottom:none;padding-bottom:0}
+.apartado h3{font-family:'Barlow',sans-serif;color:var(--az);font-size:1rem;font-weight:700;margin-bottom:6px}
+.apartado p{margin:4px 0;font-size:.92rem}
+.apartado strong{color:var(--az)}
+.dato{display:inline-block;margin:2px 6px 2px 0}
+.resultado{background:var(--green-soft);border:1px solid var(--green-line);border-left:5px solid var(--green2);border-radius:0 8px 8px 0;padding:10px 14px;margin:8px 0;color:#1B4D1F;font-weight:600}
+.resultado strong{color:var(--green)}
+.aviso{background:var(--yellow-soft);border:1px solid var(--yellow-line);border-left:5px solid var(--yellow);border-radius:0 8px 8px 0;padding:10px 14px;margin:12px 0 6px;font-size:.88rem;color:#7A5500}
+.aviso strong{color:#5C3D00}
+.svg-wrap{display:block;margin:12px auto;text-align:center}
+.svg-wrap svg{display:inline-block;max-width:100%;height:auto;background:#fff;border:1px solid var(--bd);border-radius:8px;padding:6px;font-family:'Barlow Condensed',sans-serif}
+.svg-wrap .cap{display:block;font-size:.82rem;color:var(--t2);margin-top:4px;font-style:italic}
+[id]{scroll-margin-top:120px}
+@media(max-width:768px){.main{padding:16px 10px 40px}.problema{padding:14px 14px}.title-block h1{font-size:1.45rem}}
+@media print{
+  .hd,.navcross,.back-portal{display:none!important}
+  body{background:#fff}
+  .problema,.conceptos{break-inside:avoid;page-break-inside:avoid;box-shadow:none;border:1px solid #999}
+  details.resolucion,details.resolucion[open]{border:1px solid #999}
+  details.resolucion>*{display:block!important}
+  details.resolucion summary{background:#F0F0F0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  details.resolucion summary::after{display:none}
+  .resol-body{display:block!important}
+  .resultado{background:#F0F0F0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .aviso{background:#FAFAFA!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+<script>
+window.addEventListener('beforeprint',function(){
+  document.querySelectorAll('details.resolucion').forEach(function(d){d.dataset.wasOpen=d.open?'1':'0';d.open=true;});
+});
+window.addEventListener('afterprint',function(){
+  document.querySelectorAll('details.resolucion').forEach(function(d){if(d.dataset.wasOpen==='0')d.open=false;delete d.dataset.wasOpen;});
+});
+</script>
+</head>
+<body>
+<div class="hd">
+<span class="lg" onclick="location.href='../index.html'">TECI II</span>
+<span class="sb">📚 Ponencia resuelta · F1 Sistemas automáticos</span>
+<a href="../index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal">
+<a href="../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+<a href="../index.html#teoria"><span>📖</span><span class="nc-lbl">Teoría</span></a><span class="nc-sep">·</span>
+<a href="../index.html#ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a><span class="nc-sep">·</span>
+<a href="../index.html#examenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a><span class="nc-sep">·</span>
+<span class="nc-current" aria-current="page"><span>📚</span><span class="nc-lbl">Ponencia resuelta</span></span><span class="nc-sep">·</span>
+<a href="../apoyo/formulario.html"><span>📚</span><span class="nc-lbl">Apoyo</span></a>
+</nav>
+
+<div class="main">
+<a href="index_ponencia.html" class="back-portal">← Volver al portal de Ponencia resuelta</a>
+
+<div class="title-block">
+<h1>Ponencia 2025-26 resuelta — Bloque F1 Sistemas automáticos</h1>
+<div class="sub">15 problemas + conceptos previos · Comisión Estatal, noviembre 2025</div>
+</div>
+
+<p class="intro"><strong>Bloque F1 — Sistemas automáticos.</strong> Incluye identificación de diagramas de bloques normalizados, álgebra de bloques, lazo cerrado vs lazo abierto, controladores P/I/D/PID y estabilidad. La notación de la Ponencia indica el epígrafe tratado con <span class="ref">[n]</span>: [1] álgebra de bloques, [2] ventajas lazo cerrado, [3] controladores, [4] identificación, [5] estabilidad, [6] estable en abierto–inestable en cerrado, [7] sensores.</p>
+
+<!-- ============ CONCEPTOS PREVIOS ============ -->
+<section class="conceptos" id="conceptos">
+  <h2>📐 Conceptos previos · Diagrama normalizado, variables, controladores y álgebra de bloques</h2>
+
+  <h3>Diagrama de bloques normalizado de un S.C.L.C.</h3>
+  <p>La Ponencia fija como <strong>diagrama normalizado</strong> el siguiente (figura 4.1): los rectángulos representan los elementos (motores, sensores, amplificadores…), las flechas el sentido del flujo de información y el círculo es el <em>punto de suma</em> donde se calcula el error \(e = r - b\).</p>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 620 220" width="620" role="img" aria-labelledby="svg-normTit svg-normDesc">
+      <title id="svg-normTit">Diagrama de bloques normalizado</title>
+      <desc id="svg-normDesc">Lazo cerrado con señales r, e, m, c, b, p y bloques G1, G2, H.</desc>
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 0 L10 5 L0 10 z" fill="#1B4F8A"/>
+        </marker>
+      </defs>
+      <!-- r -->
+      <text x="30" y="100" font-size="16" fill="#1B4F8A" font-weight="700">r</text>
+      <line x1="45" y1="95" x2="110" y2="95" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <!-- suma -->
+      <circle cx="125" cy="95" r="15" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+      <line x1="113" y1="95" x2="137" y2="95" stroke="#1B4F8A" stroke-width="1.3"/>
+      <line x1="125" y1="83" x2="125" y2="107" stroke="#1B4F8A" stroke-width="1.3"/>
+      <text x="108" y="88" font-size="12" fill="#C0321E">+</text>
+      <text x="108" y="128" font-size="14" fill="#C0321E">-</text>
+      <!-- e -->
+      <text x="150" y="88" font-size="14" fill="#1B4F8A">e</text>
+      <line x1="140" y1="95" x2="200" y2="95" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <!-- G1 -->
+      <rect x="200" y="70" width="70" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+      <text x="235" y="100" text-anchor="middle" font-size="18" fill="#1B4F8A" font-weight="700">G1</text>
+      <!-- m -->
+      <text x="290" y="88" font-size="14" fill="#1B4F8A">m</text>
+      <line x1="270" y1="95" x2="355" y2="95" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <!-- suma perturbación -->
+      <circle cx="370" cy="95" r="15" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+      <line x1="358" y1="95" x2="382" y2="95" stroke="#1B4F8A" stroke-width="1.3"/>
+      <line x1="370" y1="83" x2="370" y2="107" stroke="#1B4F8A" stroke-width="1.3"/>
+      <text x="353" y="88" font-size="12" fill="#2E7D32">+</text>
+      <text x="378" y="88" font-size="12" fill="#2E7D32">+</text>
+      <!-- p -->
+      <text x="362" y="38" font-size="16" fill="#D4700A" font-weight="700">p</text>
+      <line x1="370" y1="45" x2="370" y2="80" stroke="#D4700A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <!-- G2 -->
+      <line x1="385" y1="95" x2="420" y2="95" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <rect x="420" y="70" width="70" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+      <text x="455" y="100" text-anchor="middle" font-size="18" fill="#1B4F8A" font-weight="700">G2</text>
+      <!-- c -->
+      <line x1="490" y1="95" x2="590" y2="95" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <text x="565" y="86" font-size="16" fill="#1B4F8A" font-weight="700">c</text>
+      <!-- realimentación -->
+      <line x1="560" y1="95" x2="560" y2="170" stroke="#1B4F8A" stroke-width="1.8"/>
+      <line x1="560" y1="170" x2="370" y2="170" stroke="#1B4F8A" stroke-width="1.8"/>
+      <rect x="300" y="150" width="70" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+      <text x="335" y="176" text-anchor="middle" font-size="18" fill="#1B4F8A" font-weight="700">H</text>
+      <line x1="300" y1="170" x2="125" y2="170" stroke="#1B4F8A" stroke-width="1.8"/>
+      <line x1="125" y1="170" x2="125" y2="112" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <text x="220" y="163" font-size="14" fill="#1B4F8A">b</text>
+    </svg>
+    <span class="cap">Fig. 4.1 — Diagrama de bloques normalizado de un sistema de control en lazo cerrado.</span>
+  </div>
+
+  <h3>Notación estándar de variables y bloques</h3>
+  <table class="tabla-var">
+    <thead><tr><th>Símbolo</th><th>Significado</th></tr></thead>
+    <tbody>
+      <tr><td class="var">r</td><td>Señal de referencia o consigna. Valor deseado de la salida.</td></tr>
+      <tr><td class="var">c</td><td>Salida o variable controlada: temperatura, velocidad, presión, etc.</td></tr>
+      <tr><td class="var">e</td><td>Señal actuante o error: <span>\(e = r - b\)</span>.</td></tr>
+      <tr><td class="var">b</td><td>Medida de la salida (señal de realimentación).</td></tr>
+      <tr><td class="var">m</td><td>Variable manipulada o de control. Actúa sobre la planta.</td></tr>
+      <tr><td class="var">p</td><td>Perturbación. Señal externa de valor desconocido que altera la salida.</td></tr>
+      <tr><td class="var">G1</td><td>Controlador o regulador. "Parte inteligente" del sistema.</td></tr>
+      <tr><td class="var">G2</td><td>Planta o sistema controlado.</td></tr>
+      <tr><td class="var">H</td><td>Elementos de medida de la salida (sensor, sonda, encoder…). Realimenta el sistema.</td></tr>
+    </tbody>
+  </table>
+  <p>Las señales que llegan al punto de suma deben ser de la misma naturaleza (p. ej. tensión y tensión). Si no lo son, se añade un <em>transductor o captador</em> G3 en la rama de consigna para convertir la referencia en el mismo tipo de señal que la realimentación.</p>
+
+  <h3>Controladores: P, I, D y PID</h3>
+  <p>El regulador G1 aplica una ley de control sobre el error. Los tipos básicos son:</p>
+  <ul>
+    <li><strong>Proporcional (P)</strong>: \(m_P(t) = K_p\, e(t)\). Acción instantánea. No anula el error en régimen permanente (si \(e=0\), también \(m=0\)).</li>
+    <li><strong>Integral (I)</strong>: \(m_I(t) = K_i \displaystyle\int_0^{t} e(\tau)\,d\tau\). Acumula el error. Anula el error en régimen permanente, pero es una acción retardada.</li>
+    <li><strong>Derivativo (D)</strong>: \(m_D(t) = K_d\, \dfrac{d\,e(t)}{dt}\). Proporcional a la velocidad de cambio del error. Efecto anticipativo; solo actúa en transitorio.</li>
+    <li><strong>PID</strong>: \(m(t) = K_p\, e(t) + K_i \displaystyle\int_0^{t} e(\tau)\,d\tau + K_d\, \dfrac{d\,e(t)}{dt}\). Combina las tres acciones; es el más empleado en la industria.</li>
+  </ul>
+
+  <h3>Álgebra de bloques — reglas básicas</h3>
+
+  <p><strong>1) Bloques en cascada (serie)</strong>: el producto de las ganancias.</p>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 520 90" width="520" role="img" aria-labelledby="svg-serieTit svg-serieDesc">
+      <title id="svg-serieTit">Bloques en cascada</title>
+      <desc id="svg-serieDesc">G1 y G2 en serie equivalen a un único bloque G1·G2.</desc>
+      <line x1="10" y1="45" x2="60" y2="45" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <rect x="60" y="25" width="60" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+      <text x="90" y="50" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G1</text>
+      <line x1="120" y1="45" x2="180" y2="45" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <rect x="180" y="25" width="60" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+      <text x="210" y="50" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G2</text>
+      <line x1="240" y1="45" x2="290" y2="45" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <text x="300" y="50" font-size="22" fill="#555">⇒</text>
+      <line x1="335" y1="45" x2="385" y2="45" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <rect x="385" y="22" width="100" height="46" fill="#EDF6EE" stroke="#2E7D32" stroke-width="1.8"/>
+      <text x="435" y="50" text-anchor="middle" font-size="15" fill="#1B4F8A" font-weight="700">G1·G2</text>
+      <line x1="485" y1="45" x2="515" y2="45" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+    </svg>
+    <span class="cap">\(G_\text{eq} = G_1 \cdot G_2\).</span>
+  </div>
+
+  <p><strong>2) Bloques en paralelo</strong>: la suma (o diferencia) de las ganancias.</p>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 520 150" width="520" role="img" aria-labelledby="svg-parTit svg-parDesc">
+      <title id="svg-parTit">Bloques en paralelo</title>
+      <desc id="svg-parDesc">G1 y G2 en paralelo equivalen a G1+G2.</desc>
+      <line x1="10" y1="75" x2="50" y2="75" stroke="#1B4F8A" stroke-width="1.8"/>
+      <circle cx="50" cy="75" r="3" fill="#1B4F8A"/>
+      <line x1="50" y1="75" x2="50" y2="35" stroke="#1B4F8A" stroke-width="1.8"/>
+      <line x1="50" y1="75" x2="50" y2="115" stroke="#1B4F8A" stroke-width="1.8"/>
+      <line x1="50" y1="35" x2="100" y2="35" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <line x1="50" y1="115" x2="100" y2="115" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <rect x="100" y="15" width="60" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+      <text x="130" y="40" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G1</text>
+      <rect x="100" y="95" width="60" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+      <text x="130" y="120" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G2</text>
+      <line x1="160" y1="35" x2="230" y2="35" stroke="#1B4F8A" stroke-width="1.8"/>
+      <line x1="160" y1="115" x2="230" y2="115" stroke="#1B4F8A" stroke-width="1.8"/>
+      <circle cx="230" cy="75" r="13" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+      <line x1="230" y1="35" x2="230" y2="62" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <line x1="230" y1="115" x2="230" y2="88" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <text x="215" y="60" font-size="11" fill="#2E7D32">+</text>
+      <text x="215" y="95" font-size="11" fill="#2E7D32">+</text>
+      <line x1="243" y1="75" x2="295" y2="75" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <text x="305" y="80" font-size="22" fill="#555">⇒</text>
+      <line x1="340" y1="75" x2="385" y2="75" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <rect x="385" y="52" width="100" height="46" fill="#EDF6EE" stroke="#2E7D32" stroke-width="1.8"/>
+      <text x="435" y="80" text-anchor="middle" font-size="15" fill="#1B4F8A" font-weight="700">G1+G2</text>
+      <line x1="485" y1="75" x2="515" y2="75" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+    </svg>
+    <span class="cap">\(G_\text{eq} = G_1 + G_2\) (o \(G_1 - G_2\) si la suma es con signo).</span>
+  </div>
+
+  <p><strong>3) Realimentación negativa</strong>: fórmula fundamental del lazo cerrado.</p>
+  <div class="svg-wrap">
+    <svg viewBox="0 0 560 160" width="560" role="img" aria-labelledby="svg-feedTit svg-feedDesc">
+      <title id="svg-feedTit">Lazo cerrado con realimentación negativa</title>
+      <desc id="svg-feedDesc">Lazo G con realimentación H se reduce a G/(1+GH).</desc>
+      <line x1="10" y1="55" x2="60" y2="55" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <circle cx="75" cy="55" r="13" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+      <text x="60" y="50" font-size="11" fill="#C0321E">+</text>
+      <text x="60" y="80" font-size="13" fill="#C0321E">-</text>
+      <line x1="88" y1="55" x2="140" y2="55" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <rect x="140" y="35" width="60" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+      <text x="170" y="60" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G</text>
+      <line x1="200" y1="55" x2="280" y2="55" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <line x1="250" y1="55" x2="250" y2="115" stroke="#1B4F8A" stroke-width="1.8"/>
+      <line x1="250" y1="115" x2="210" y2="115" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <rect x="150" y="95" width="60" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+      <text x="180" y="120" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">H</text>
+      <line x1="150" y1="115" x2="75" y2="115" stroke="#1B4F8A" stroke-width="1.8"/>
+      <line x1="75" y1="115" x2="75" y2="70" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <text x="300" y="60" font-size="22" fill="#555">⇒</text>
+      <line x1="335" y1="55" x2="385" y2="55" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      <rect x="385" y="30" width="130" height="50" fill="#EDF6EE" stroke="#2E7D32" stroke-width="1.8"/>
+      <text x="450" y="52" text-anchor="middle" font-size="14" fill="#1B4F8A" font-weight="700">G</text>
+      <line x1="400" y1="58" x2="500" y2="58" stroke="#1B4F8A" stroke-width="1.3"/>
+      <text x="450" y="74" text-anchor="middle" font-size="13" fill="#1B4F8A" font-weight="700">1+G·H</text>
+      <line x1="515" y1="55" x2="555" y2="55" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+    </svg>
+    <span class="cap">Lazo cerrado: \(\dfrac{c}{r} = \dfrac{G}{1+G\cdot H}\). Si \(H=1\) es realimentación unitaria.</span>
+  </div>
+
+  <p>Con realimentación <em>positiva</em> el denominador pasa a \(1 - G\cdot H\), lo que hace el sistema mucho más propenso a la inestabilidad.</p>
+</section>
+
+<!-- ============ PROBLEMA 1 ============ -->
+<section class="problema" id="prob-1">
+  <header class="prob-header">
+    <h2>Problema 1 <span class="dif" data-level="2">★★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p><span class="ref">[4]</span> Considerar la acción de control que lleva a cabo un conductor para mantener la velocidad de un vehículo a 80 km/h en una carretera recta con tramos llanos, subidas y bajadas. La velocidad es controlada mediante el pedal del acelerador y medida con un velocímetro digital. Se pide:</p>
+    <ol type="a">
+      <li>Identificar las señales y los bloques del diagrama de bloques mostrado con el sistema formado por el conductor, el vehículo y las características de la carretera.</li>
+      <li>En el sistema propuesto, ¿qué representaría la perturbación?</li>
+    </ol>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 620 210" width="620" role="img" aria-labelledby="p1Tit p1Desc">
+        <title id="p1Tit">Control de velocidad de crucero</title>
+        <desc id="p1Desc">Lazo cerrado: conductor (G1), vehículo (G2), perturbación p, medida H.</desc>
+        <text x="30" y="100" font-size="14" fill="#1B4F8A" font-weight="700">r = 80 km/h</text>
+        <line x1="100" y1="95" x2="155" y2="95" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <circle cx="170" cy="95" r="14" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="153" y="89" font-size="11" fill="#C0321E">+</text>
+        <text x="153" y="120" font-size="13" fill="#C0321E">-</text>
+        <text x="195" y="88" font-size="14" fill="#1B4F8A">e</text>
+        <line x1="184" y1="95" x2="235" y2="95" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <rect x="235" y="70" width="90" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="280" y="90" text-anchor="middle" font-size="12" fill="#555">conductor</text>
+        <text x="280" y="108" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G1</text>
+        <text x="340" y="88" font-size="14" fill="#1B4F8A">m</text>
+        <line x1="325" y1="95" x2="375" y2="95" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <circle cx="390" cy="95" r="14" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="374" y="88" font-size="11" fill="#2E7D32">+</text>
+        <text x="399" y="88" font-size="11" fill="#2E7D32">+</text>
+        <text x="383" y="38" font-size="14" fill="#D4700A" font-weight="700">p</text>
+        <line x1="390" y1="45" x2="390" y2="80" stroke="#D4700A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <line x1="404" y1="95" x2="440" y2="95" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <rect x="440" y="70" width="80" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="480" y="90" text-anchor="middle" font-size="12" fill="#555">vehículo</text>
+        <text x="480" y="108" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G2</text>
+        <line x1="520" y1="95" x2="600" y2="95" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <text x="570" y="86" font-size="14" fill="#1B4F8A" font-weight="700">c</text>
+        <line x1="575" y1="95" x2="575" y2="165" stroke="#1B4F8A" stroke-width="1.8"/>
+        <line x1="575" y1="165" x2="370" y2="165" stroke="#1B4F8A" stroke-width="1.8"/>
+        <rect x="300" y="145" width="70" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="335" y="171" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">H</text>
+        <line x1="300" y1="165" x2="170" y2="165" stroke="#1B4F8A" stroke-width="1.8"/>
+        <line x1="170" y1="165" x2="170" y2="110" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <text x="220" y="158" font-size="13" fill="#1B4F8A">b</text>
+      </svg>
+      <span class="cap">Diagrama de bloques del control manual de velocidad.</span>
+    </div>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+      <section class="apartado">
+        <h3>a) Identificación de señales y bloques</h3>
+        <ul>
+          <li><strong>c</strong>: variable controlada = velocidad real del vehículo.</li>
+          <li><strong>G2</strong>: planta o sistema a controlar = elementos del vehículo (motor, peso, aerodinámica, etc.).</li>
+          <li><strong>m</strong>: variable manipulada = posición del acelerador.</li>
+          <li><strong>r</strong>: valor deseado de la salida = 80 km/h.</li>
+          <li><strong>H</strong>: medida de la salida = velocímetro digital y capacidad visual del conductor.</li>
+          <li><strong>b</strong>: velocidad percibida por el conductor.</li>
+          <li><strong>e</strong>: diferencia entre la velocidad percibida y los 80 km/h de referencia.</li>
+          <li><strong>G1</strong>: controlador = conductor, que actúa sobre el acelerador según el error de velocidad.</li>
+        </ul>
+      </section>
+      <section class="apartado">
+        <h3>b) Perturbación</h3>
+        <p><strong>p</strong>: representa las <strong>condiciones del terreno</strong> — pendientes, viento, estado del firme — y cualquier variable externa al sistema que modifique su régimen estable.</p>
+        <div class="resultado">La perturbación son las variables externas (pendientes, viento…) que alteran la salida sin formar parte del lazo de control.</div>
+      </section>
+    </div>
+  </details>
+</section>
+
+<!-- ============ PROBLEMA 2 ============ -->
+<section class="problema" id="prob-2">
+  <header class="prob-header">
+    <h2>Problema 2 <span class="dif" data-level="2">★★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p><span class="ref">[4]</span> Con un grifo de cocina monomando se puede tener agua fría colocando la maneta en un extremo, muy caliente situándola en el otro extremo o una mezcla de ambas en el centro. El agua caliente procede de un termo eléctrico cuya temperatura a su salida no es constante. Considere la acción de control que lleva a cabo una persona para mantener manualmente la temperatura del agua en un valor constante como un sistema de control en lazo cerrado. Se pide:</p>
+    <ol type="a">
+      <li>Representar el sistema mediante un diagrama de bloques normalizado.</li>
+      <li>Relacionar las variables y los bloques del diagrama con el sistema descrito.</li>
+    </ol>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+      <section class="apartado">
+        <h3>a) Diagrama de bloques</h3>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 620 210" width="620" role="img" aria-labelledby="p2Tit p2Desc">
+            <title id="p2Tit">Grifo monomando en lazo cerrado</title>
+            <desc id="p2Desc">Usuario como controlador G1 y sistema hidráulico como planta G2.</desc>
+            <text x="30" y="100" font-size="14" fill="#1B4F8A" font-weight="700">r</text>
+            <line x1="45" y1="95" x2="155" y2="95" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <circle cx="170" cy="95" r="14" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="153" y="89" font-size="11" fill="#C0321E">+</text>
+            <text x="153" y="120" font-size="13" fill="#C0321E">-</text>
+            <text x="195" y="88" font-size="14" fill="#1B4F8A">e</text>
+            <line x1="184" y1="95" x2="235" y2="95" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <rect x="235" y="70" width="90" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="280" y="90" text-anchor="middle" font-size="12" fill="#555">usuario</text>
+            <text x="280" y="108" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G1</text>
+            <text x="340" y="88" font-size="14" fill="#1B4F8A">m</text>
+            <line x1="325" y1="95" x2="375" y2="95" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <circle cx="390" cy="95" r="14" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="374" y="88" font-size="11" fill="#2E7D32">+</text>
+            <text x="399" y="88" font-size="11" fill="#2E7D32">+</text>
+            <text x="383" y="38" font-size="14" fill="#D4700A" font-weight="700">p</text>
+            <line x1="390" y1="45" x2="390" y2="80" stroke="#D4700A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <line x1="404" y1="95" x2="440" y2="95" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <rect x="440" y="70" width="80" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="480" y="90" text-anchor="middle" font-size="11" fill="#555">sist. hidr.</text>
+            <text x="480" y="108" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G2</text>
+            <line x1="520" y1="95" x2="600" y2="95" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <text x="570" y="86" font-size="14" fill="#1B4F8A" font-weight="700">c</text>
+            <line x1="575" y1="95" x2="575" y2="165" stroke="#1B4F8A" stroke-width="1.8"/>
+            <line x1="575" y1="165" x2="370" y2="165" stroke="#1B4F8A" stroke-width="1.8"/>
+            <rect x="300" y="145" width="70" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="335" y="171" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">H</text>
+            <line x1="300" y1="165" x2="170" y2="165" stroke="#1B4F8A" stroke-width="1.8"/>
+            <line x1="170" y1="165" x2="170" y2="110" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <text x="220" y="158" font-size="13" fill="#1B4F8A">b</text>
+          </svg>
+        </div>
+      </section>
+      <section class="apartado">
+        <h3>b) Relación variables–sistema</h3>
+        <ul>
+          <li><strong>c</strong>: variable controlada = temperatura del agua.</li>
+          <li><strong>m</strong>: variable manipulada = posición angular de la maneta.</li>
+          <li><strong>G2</strong>: relación entre temperatura y posición de maneta — incluye válvula monomando, temperaturas y presiones del agua caliente y fría (el sistema hidráulico).</li>
+          <li><strong>r</strong>: valor deseado. Depende de la sensibilidad de la persona usuaria.</li>
+          <li><strong>H</strong>: elementos de medida de la temperatura = las manos de la persona.</li>
+          <li><strong>b</strong>: temperatura percibida por el usuario.</li>
+          <li><strong>e</strong>: diferencia entre la temperatura percibida y la deseada.</li>
+          <li><strong>G1</strong>: controlador = la persona, que actúa sobre el mando en función del error térmico.</li>
+          <li><strong>p</strong>: perturbación = cambios en la temperatura del termo de agua caliente o en el sistema hidráulico.</li>
+        </ul>
+        <div class="resultado">El usuario cumple el rol de controlador (G1) y la mano el de sensor (H); el sistema hidráulico es la planta (G2).</div>
+      </section>
+    </div>
+  </details>
+</section>
+
+<!-- ============ PROBLEMA 3 ============ -->
+<section class="problema" id="prob-3">
+  <header class="prob-header">
+    <h2>Problema 3 <span class="dif" data-level="2">★★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p><span class="ref">[4]</span> La figura muestra una cámara climática destinada a ensayos térmicos de componentes eléctricos. La temperatura de la cámara, \(T\), es regulada en lazo cerrado mediante una resistencia calefactora cuya potencia, \(P\), es suministrada por un circuito electrónico. Sabiendo que \(P = A\cdot(T^{*}-T)\), donde \(T^{*}\) es la temperatura de referencia y \(A\) la ganancia del controlador y que en régimen permanente \(T = T_\text{amb} + K\cdot P\), donde \(T_\text{amb}\) es la temperatura ambiente y \(K\) un parámetro constante de la cámara, se pide:</p>
+    <ol type="a">
+      <li>Completar el diagrama de bloques mostrado, indicando sobre él la variable manipulada, la señal de error, el controlador y la planta.</li>
+      <li>Añadir un nuevo bloque al diagrama para representar el sensor de temperatura de la cámara.</li>
+      <li>¿Se podría considerar la \(T_\text{amb}\) como una perturbación? Justificar la respuesta.</li>
+    </ol>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+      <section class="apartado">
+        <h3>a) Diagrama con controlador A y planta K</h3>
+        <p>De \(P = A\cdot(T^{*}-T)\) se deduce que \(A\) es el controlador que procesa el error \(e = T^{*}-T\) y da como salida la variable manipulada \(P\) (potencia). De \(T = T_\text{amb} + K\cdot P\), el bloque \(K\) es la planta, con \(T_\text{amb}\) sumándose como perturbación.</p>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 620 180" width="620" role="img" aria-labelledby="p3aTit p3aDesc">
+            <title id="p3aTit">Cámara climática sin sensor</title>
+            <desc id="p3aDesc">Controlador A, planta K, perturbación T_amb.</desc>
+            <text x="25" y="95" font-size="14" fill="#1B4F8A" font-weight="700">T*</text>
+            <line x1="50" y1="90" x2="115" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <circle cx="130" cy="90" r="14" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="113" y="84" font-size="11" fill="#C0321E">+</text>
+            <text x="113" y="115" font-size="13" fill="#C0321E">-</text>
+            <text x="155" y="83" font-size="14" fill="#1B4F8A">e</text>
+            <line x1="144" y1="90" x2="195" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <rect x="195" y="65" width="70" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="230" y="95" text-anchor="middle" font-size="18" fill="#1B4F8A" font-weight="700">A</text>
+            <text x="280" y="83" font-size="14" fill="#1B4F8A">P</text>
+            <line x1="265" y1="90" x2="345" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <rect x="345" y="65" width="70" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="380" y="95" text-anchor="middle" font-size="18" fill="#1B4F8A" font-weight="700">K</text>
+            <line x1="415" y1="90" x2="445" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <circle cx="460" cy="90" r="14" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="443" y="83" font-size="11" fill="#2E7D32">+</text>
+            <text x="469" y="83" font-size="11" fill="#2E7D32">+</text>
+            <text x="448" y="32" font-size="14" fill="#D4700A" font-weight="700">T_amb</text>
+            <line x1="460" y1="42" x2="460" y2="76" stroke="#D4700A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <line x1="474" y1="90" x2="580" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <text x="555" y="82" font-size="14" fill="#1B4F8A" font-weight="700">T</text>
+            <line x1="555" y1="90" x2="555" y2="150" stroke="#1B4F8A" stroke-width="1.8"/>
+            <line x1="555" y1="150" x2="130" y2="150" stroke="#1B4F8A" stroke-width="1.8"/>
+            <line x1="130" y1="150" x2="130" y2="105" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <text x="310" y="144" font-size="13" fill="#1B4F8A">T (realim. unitaria)</text>
+          </svg>
+        </div>
+      </section>
+      <section class="apartado">
+        <h3>b) Incorporación del sensor H</h3>
+        <p>El bloque <strong>H</strong> siempre comprende los elementos de medida o realimentación, situado en la rama de realimentación entre la salida y el punto de suma.</p>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 620 200" width="620" role="img" aria-labelledby="p3bTit p3bDesc">
+            <title id="p3bTit">Cámara climática con sensor H</title>
+            <desc id="p3bDesc">Incluye bloque H en la rama de realimentación.</desc>
+            <text x="25" y="95" font-size="14" fill="#1B4F8A" font-weight="700">T*</text>
+            <line x1="50" y1="90" x2="115" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <circle cx="130" cy="90" r="14" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="113" y="84" font-size="11" fill="#C0321E">+</text>
+            <text x="113" y="115" font-size="13" fill="#C0321E">-</text>
+            <text x="155" y="83" font-size="14" fill="#1B4F8A">e</text>
+            <line x1="144" y1="90" x2="195" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <rect x="195" y="65" width="70" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="230" y="95" text-anchor="middle" font-size="18" fill="#1B4F8A" font-weight="700">A</text>
+            <text x="280" y="83" font-size="14" fill="#1B4F8A">P</text>
+            <line x1="265" y1="90" x2="345" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <rect x="345" y="65" width="70" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="380" y="95" text-anchor="middle" font-size="18" fill="#1B4F8A" font-weight="700">K</text>
+            <line x1="415" y1="90" x2="445" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <circle cx="460" cy="90" r="14" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="443" y="83" font-size="11" fill="#2E7D32">+</text>
+            <text x="469" y="83" font-size="11" fill="#2E7D32">+</text>
+            <text x="448" y="32" font-size="14" fill="#D4700A" font-weight="700">T_amb</text>
+            <line x1="460" y1="42" x2="460" y2="76" stroke="#D4700A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <line x1="474" y1="90" x2="580" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <text x="555" y="82" font-size="14" fill="#1B4F8A" font-weight="700">T</text>
+            <line x1="555" y1="90" x2="555" y2="160" stroke="#1B4F8A" stroke-width="1.8"/>
+            <line x1="555" y1="160" x2="370" y2="160" stroke="#1B4F8A" stroke-width="1.8"/>
+            <rect x="300" y="140" width="70" height="40" fill="#EDF6EE" stroke="#2E7D32" stroke-width="1.8"/>
+            <text x="335" y="166" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">H</text>
+            <line x1="300" y1="160" x2="130" y2="160" stroke="#1B4F8A" stroke-width="1.8"/>
+            <line x1="130" y1="160" x2="130" y2="105" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+          </svg>
+        </div>
+      </section>
+      <section class="apartado">
+        <h3>c) ¿Es \(T_\text{amb}\) una perturbación?</h3>
+        <p><strong>Sí.</strong> Tiene las dos características de una perturbación: es una variable que <em>no</em> forma parte del lazo de control (no la genera ni la regula el sistema) y sin embargo <em>afecta a la salida</em> \(T\) del sistema.</p>
+        <div class="resultado">\(T_\text{amb}\) es una perturbación: variable externa al lazo que altera la temperatura de la cámara.</div>
+      </section>
+    </div>
+  </details>
+</section>
+
+<!-- ============ PROBLEMA 4 ============ -->
+<section class="problema" id="prob-4">
+  <header class="prob-header">
+    <h2>Problema 4 <span class="dif" data-level="1">★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p><span class="ref">[1]</span> El diagrama de bloques mostrado corresponde al control de presión de un cilindro hidráulico. El transductor \(G_1\) convierte la presión deseada, \(p^{*}\), introducida mediante un teclado, en la tensión \(v_1\). En el punto de suma se resta a \(v_1\) la tensión \(v_2\), procedente de un sensor de presión colocado en el circuito hidráulico, y la diferencia, \(v_3\), se amplifica en \(G_2\) y se aplica a la válvula \(G_3\) que controla finalmente la presión del pistón. Se pide:</p>
+    <ol type="a">
+      <li>Relación \(p/p^{*}\).</li>
+      <li>Si en régimen permanente \(G_2 = 10\ \text{V/V}\), \(G_3 = 25\cdot 10^{5}\ \text{Pa/V}\) y \(H = 0{,}1\cdot 10^{-5}\ \text{V/Pa}\), obtener \(G_1\) para que la presión del cilindro, \(p\), sea igual a la de consigna \(p^{*}\).</li>
+    </ol>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 660 200" width="660" role="img" aria-labelledby="p4Tit p4Desc">
+        <title id="p4Tit">Control de presión de cilindro hidráulico</title>
+        <desc id="p4Desc">Cadena G1 (transductor), G2 (amplificador) y G3 (válvula), con realimentación H.</desc>
+        <text x="25" y="95" font-size="14" fill="#1B4F8A" font-weight="700">p*</text>
+        <line x1="50" y1="90" x2="100" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <rect x="100" y="65" width="60" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="130" y="95" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G1</text>
+        <text x="175" y="83" font-size="13" fill="#1B4F8A">v1</text>
+        <line x1="160" y1="90" x2="215" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <circle cx="230" cy="90" r="14" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="213" y="84" font-size="11" fill="#C0321E">+</text>
+        <text x="213" y="115" font-size="13" fill="#C0321E">-</text>
+        <text x="255" y="83" font-size="13" fill="#1B4F8A">v3</text>
+        <line x1="244" y1="90" x2="295" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <rect x="295" y="65" width="60" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="325" y="95" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G2</text>
+        <text x="370" y="83" font-size="13" fill="#1B4F8A">v4</text>
+        <line x1="355" y1="90" x2="410" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <rect x="410" y="65" width="60" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="440" y="95" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G3</text>
+        <line x1="470" y1="90" x2="640" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <text x="610" y="82" font-size="14" fill="#1B4F8A" font-weight="700">p</text>
+        <line x1="600" y1="90" x2="600" y2="165" stroke="#1B4F8A" stroke-width="1.8"/>
+        <line x1="600" y1="165" x2="360" y2="165" stroke="#1B4F8A" stroke-width="1.8"/>
+        <rect x="290" y="145" width="70" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="325" y="171" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">H</text>
+        <line x1="290" y1="165" x2="230" y2="165" stroke="#1B4F8A" stroke-width="1.8"/>
+        <line x1="230" y1="165" x2="230" y2="105" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <text x="250" y="158" font-size="13" fill="#1B4F8A">v2</text>
+      </svg>
+    </div>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+      <section class="apartado">
+        <h3>a) Función de transferencia \(p/p^{*}\)</h3>
+        <p><strong>Planteamiento.</strong> Escribimos directamente la ecuación del lazo. La salida \(p\) vale el producto de las tres ganancias del camino directo por la entrada efectiva al sumador:</p>
+        \[ p = G_1\cdot G_2\cdot G_3\cdot p^{*} \;-\; G_2\cdot G_3\cdot H\cdot p \]
+        <p><strong>Agrupación.</strong></p>
+        \[ p\,(1 + G_2\cdot G_3\cdot H) = G_1\cdot G_2\cdot G_3\cdot p^{*} \]
+        <div class="resultado">\[ \dfrac{p}{p^{*}} = \dfrac{G_1\cdot G_2\cdot G_3}{1 + G_2\cdot G_3\cdot H} \]</div>
+      </section>
+      <section class="apartado">
+        <h3>b) Valor de \(G_1\) para que \(p = p^{*}\)</h3>
+        <p><strong>Datos.</strong> <span class="dato">\(G_2 = 10\ \text{V/V}\)</span> <span class="dato">\(G_3 = 25\cdot 10^{5}\ \text{Pa/V}\)</span> <span class="dato">\(H = 0{,}1\cdot 10^{-5}\ \text{V/Pa}\)</span></p>
+        <p><strong>Condición.</strong> Si el error es cero, \(p/p^{*} = 1\), luego \(G_1\cdot G_2\cdot G_3 = 1 + G_2\cdot G_3\cdot H\):</p>
+        \[ G_1 = \dfrac{1 + G_2\cdot G_3\cdot H}{G_2\cdot G_3} = \dfrac{1 + 10\cdot 25\cdot 10^{5}\cdot 0{,}1\cdot 10^{-5}}{10\cdot 25\cdot 10^{5}}\ \dfrac{\text{V}}{\text{Pa}} \]
+        \[ G_1 = \dfrac{1 + 25}{2{,}5\cdot 10^{7}} = \dfrac{26}{2{,}5\cdot 10^{7}} \approx 1{,}04\cdot 10^{-6}\ \dfrac{\text{V}}{\text{Pa}} \]
+        <div class="resultado">\( G_1 \approx 0{,}104\cdot 10^{-5}\ \text{V/Pa} = 1{,}04\cdot 10^{-6}\ \text{V/Pa} \).</div>
+      </section>
+      <div class="aviso">⚠ La condición "error cero en régimen permanente" se impone al numerador y denominador de la función de transferencia: que coincidan. Esto fija el valor de \(G_1\) (el transductor de consigna) en función de las ganancias de los demás bloques.</div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ PROBLEMA 5 ============ -->
+<section class="problema" id="prob-5">
+  <header class="prob-header">
+    <h2>Problema 5 <span class="dif" data-level="1">★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p><span class="ref">[1]</span> El siguiente diagrama de bloques corresponde al control de velocidad de dos lazos de un motor eléctrico. \(x\) es la velocidad de referencia, \(y\) la velocidad real, \(e\) el error de velocidad, \(i\) la intensidad aplicada al motor, \(G_1\) el controlador, \(G_2\) el lazo de control de intensidad, \(G_3\) el motor y \(H\) el medidor de velocidad (encoder). En régimen permanente, \(G_1 = 50\ \text{A/rpm}\), \(G_2 = 10\), \(G_3 = 2\ \text{rpm/A}\) y \(H = 1\). Se pide:</p>
+    <ol type="a">
+      <li>Relación entre la velocidad real y la de consigna \(y/x\).</li>
+      <li>Error de velocidad \((x-y)\) en rpm cuando \(x = 1000\ \text{rpm}\).</li>
+      <li>¿Qué valor debe tomar \(H\) para que el error de velocidad sea cero?</li>
+    </ol>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 680 230" width="680" role="img" aria-labelledby="p5Tit p5Desc">
+        <title id="p5Tit">Control de velocidad con dos lazos</title>
+        <desc id="p5Desc">Lazo interno de intensidad (G2) y lazo externo de velocidad con encoder H.</desc>
+        <text x="25" y="95" font-size="14" fill="#1B4F8A" font-weight="700">x</text>
+        <line x1="40" y1="90" x2="90" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <circle cx="105" cy="90" r="14" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="88" y="84" font-size="11" fill="#C0321E">+</text>
+        <text x="88" y="115" font-size="13" fill="#C0321E">-</text>
+        <text x="130" y="83" font-size="14" fill="#1B4F8A">e</text>
+        <line x1="119" y1="90" x2="165" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <rect x="165" y="65" width="60" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="195" y="95" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G1</text>
+        <text x="240" y="83" font-size="14" fill="#1B4F8A">m</text>
+        <line x1="225" y1="90" x2="275" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <circle cx="290" cy="90" r="14" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="273" y="84" font-size="11" fill="#C0321E">+</text>
+        <text x="273" y="115" font-size="13" fill="#C0321E">-</text>
+        <line x1="304" y1="90" x2="355" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <rect x="355" y="65" width="60" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="385" y="95" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G2</text>
+        <text x="430" y="83" font-size="14" fill="#1B4F8A">i</text>
+        <line x1="415" y1="90" x2="465" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <rect x="465" y="65" width="60" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="495" y="95" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G3</text>
+        <line x1="525" y1="90" x2="660" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <text x="630" y="82" font-size="14" fill="#1B4F8A" font-weight="700">y</text>
+        <!-- lazo interno: de i volver a sumador 2 -->
+        <line x1="450" y1="90" x2="450" y2="140" stroke="#1B4F8A" stroke-width="1.6"/>
+        <line x1="450" y1="140" x2="290" y2="140" stroke="#1B4F8A" stroke-width="1.6"/>
+        <line x1="290" y1="140" x2="290" y2="105" stroke="#1B4F8A" stroke-width="1.6" marker-end="url(#arr)"/>
+        <text x="360" y="135" font-size="12" fill="#555">lazo interno (i)</text>
+        <!-- lazo externo H -->
+        <line x1="620" y1="90" x2="620" y2="195" stroke="#1B4F8A" stroke-width="1.8"/>
+        <line x1="620" y1="195" x2="360" y2="195" stroke="#1B4F8A" stroke-width="1.8"/>
+        <rect x="295" y="175" width="65" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="328" y="201" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">H</text>
+        <line x1="295" y1="195" x2="105" y2="195" stroke="#1B4F8A" stroke-width="1.8"/>
+        <line x1="105" y1="195" x2="105" y2="105" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+      </svg>
+    </div>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+      <section class="apartado">
+        <h3>a) Función de transferencia \(y/x\) — Método 1 (reducciones sucesivas)</h3>
+        <p>El lazo interno lo forman \(G_2\) con realimentación unitaria (se mide \(i\) directamente), por lo que:</p>
+        \[ \dfrac{i}{m} = \dfrac{G_2}{1 + G_2} \]
+        <p>Sustituyendo ese bloque equivalente dentro del lazo externo con \(G_1\) antes y \(G_3\) después:</p>
+        \[ \dfrac{y}{x} = \dfrac{\dfrac{G_1\,G_2\,G_3}{1+G_2}}{1 + \dfrac{G_2}{1+G_2}\cdot G_1\,G_3\,H} \]
+        <p>Multiplicando numerador y denominador por \(1+G_2\):</p>
+        <div class="resultado">\[ \dfrac{y}{x} = \dfrac{G_1\,G_2\,G_3}{1 + G_2 + G_1\,G_2\,G_3\,H} \]</div>
+
+        <h3>a) Método 2 — ecuación directa en el sumador</h3>
+        <p>Aplicando \(e = x - H\,y\) y teniendo en cuenta que en el lazo interno la realimentación resta \(i\) tras \(G_2\), resulta:</p>
+        \[ y = G_1\,G_2\,G_3\,x - G_2\,G_3\,\dfrac{y}{G_3} - G_1\,G_2\,G_3\,H\,y \]
+        \[ y\,(1 + G_2 + G_1\,G_2\,G_3\,H) = G_1\,G_2\,G_3\,x \]
+        <p>Se obtiene la misma función de transferencia.</p>
+      </section>
+      <section class="apartado">
+        <h3>b) Error de velocidad para \(x = 1000\ \text{rpm}\)</h3>
+        <p><strong>Datos.</strong> <span class="dato">\(G_1 = 50\ \text{A/rpm}\)</span> <span class="dato">\(G_2 = 10\)</span> <span class="dato">\(G_3 = 2\ \text{rpm/A}\)</span> <span class="dato">\(H = 1\)</span></p>
+        \[ y = 1000\cdot \dfrac{50\cdot 10\cdot 2}{1 + 10 + 50\cdot 10\cdot 2\cdot 1}\ \text{rpm} = 1000\cdot \dfrac{1000}{1011}\ \text{rpm} \approx 989{,}1\ \text{rpm} \]
+        \[ e_\text{ss} = x - y = 1000 - 989{,}1 = 10{,}9\ \text{rpm} \]
+        <div class="resultado">Error de velocidad en régimen permanente: \( \mathbf{10{,}9\ \text{rpm}} \) (salida \(y \approx 989{,}1\ \text{rpm}\)).</div>
+      </section>
+      <section class="apartado">
+        <h3>c) Valor de \(H\) para error cero</h3>
+        <p>Imponer \(y/x = 1\) equivale a que numerador = denominador:</p>
+        \[ 1 + G_2 + G_1\,G_2\,G_3\,H = G_1\,G_2\,G_3 \]
+        <p>Despejando \(H\):</p>
+        \[ H = \dfrac{G_1\,G_2\,G_3 - 1 - G_2}{G_1\,G_2\,G_3} = \dfrac{50\cdot 10\cdot 2 - 1 - 10}{50\cdot 10\cdot 2} = \dfrac{989}{1000} \]
+        <div class="resultado">\( H = 0{,}989 \).</div>
+      </section>
+      <div class="aviso">⚠ Con lazo interno, el denominador de la función de transferencia global <em>no</em> es \(1+G_1 G_2 G_3 H\), sino \(1 + G_2 + G_1 G_2 G_3 H\). El término adicional \(G_2\) proviene del lazo de intensidad y no debe olvidarse al calcular el error estacionario.</div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ PROBLEMA 6 ============ -->
+<section class="problema" id="prob-6">
+  <header class="prob-header">
+    <h2>Problema 6 <span class="dif" data-level="1">★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p><span class="ref">[1]</span> La figura de la izquierda muestra de forma simplificada un sistema para mantener constante la presión del agua en una vivienda. La presión deseada, \(p^{*}\), fijada mediante un potenciómetro y convertida a la tensión \(v_1\) es comparada con la tensión \(v_2\); la cual procede del sensor de presión colocado a la salida de la bomba. La diferencia de tensiones \(v_1 - v_2\) es amplificada en \(G_2\) y aplicada al motor de la bomba. \(G_3\) representa la relación entre la presión de la bomba y la tensión \(v_4\). En la figura de la derecha se muestra el diagrama de bloques. Obtener la relación \(p/p^{*}\).</p>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 680 200" width="680" role="img" aria-labelledby="p6Tit p6Desc">
+        <title id="p6Tit">Control de presión de agua</title>
+        <desc id="p6Desc">Potenciómetro G1, amplificador G2 y bomba G3 en lazo cerrado.</desc>
+        <text x="25" y="95" font-size="14" fill="#1B4F8A" font-weight="700">p*</text>
+        <line x1="50" y1="90" x2="100" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <rect x="100" y="65" width="60" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="130" y="95" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G1</text>
+        <text x="175" y="83" font-size="13" fill="#1B4F8A">v1</text>
+        <line x1="160" y1="90" x2="215" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <circle cx="230" cy="90" r="14" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="213" y="84" font-size="11" fill="#C0321E">+</text>
+        <text x="213" y="115" font-size="13" fill="#C0321E">-</text>
+        <text x="255" y="83" font-size="13" fill="#1B4F8A">v3</text>
+        <line x1="244" y1="90" x2="295" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <rect x="295" y="65" width="60" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="325" y="95" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G2</text>
+        <text x="370" y="83" font-size="13" fill="#1B4F8A">v4</text>
+        <line x1="355" y1="90" x2="410" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <rect x="410" y="65" width="60" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="440" y="95" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G3</text>
+        <line x1="470" y1="90" x2="660" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <text x="630" y="82" font-size="14" fill="#1B4F8A" font-weight="700">p</text>
+        <line x1="620" y1="90" x2="620" y2="165" stroke="#1B4F8A" stroke-width="1.8"/>
+        <line x1="620" y1="165" x2="360" y2="165" stroke="#1B4F8A" stroke-width="1.8"/>
+        <rect x="290" y="145" width="70" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="325" y="171" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">H</text>
+        <line x1="290" y1="165" x2="230" y2="165" stroke="#1B4F8A" stroke-width="1.8"/>
+        <line x1="230" y1="165" x2="230" y2="105" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <text x="250" y="158" font-size="13" fill="#1B4F8A">v2</text>
+      </svg>
+    </div>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+      <section class="apartado">
+        <h3>Función de transferencia \(p/p^{*}\)</h3>
+        <p>El diagrama es idéntico al del Problema 4: \(G_1\) actúa como transductor <em>fuera del lazo</em>, y \(G_2\cdot G_3\) forman la cadena directa del lazo cerrado con realimentación \(H\):</p>
+        \[ p = G_1\cdot G_2\cdot G_3\cdot p^{*} \;-\; G_2\cdot G_3\cdot H\cdot p \]
+        \[ p\,(1 + G_2\cdot G_3\cdot H) = G_1\cdot G_2\cdot G_3\cdot p^{*} \]
+        <div class="resultado">\[ \dfrac{p}{p^{*}} = G_1\,\dfrac{G_2\cdot G_3}{1 + G_2\cdot G_3\cdot H} \]</div>
+      </section>
+      <div class="aviso">⚠ \(G_1\) queda como <em>factor multiplicativo</em> fuera del lazo cerrado porque no participa en la realimentación; solo convierte la consigna \(p^{*}\) en la tensión \(v_1\) que entra al sumador.</div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ PROBLEMA 7 ============ -->
+<section class="problema" id="prob-7">
+  <header class="prob-header">
+    <h2>Problema 7 <span class="dif" data-level="2">★★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p><span class="ref">[1] [3]</span> La figura muestra en (a) el esquema de un termo eléctrico y en (b) su diagrama de bloques. El termo consta de un depósito de agua, una resistencia eléctrica calefactora, una sonda \(H\) que mide la temperatura \(T\) del agua del depósito y la convierte a tensión con ganancia \(H = 0{,}1\ \text{V/}^{\circ}\text{C}\) y un termostato. El termostato tiene un potenciómetro con mando giratorio para fijar la temperatura de consigna \(T^{*}\) en \(^{\circ}\text{C}\) y una salida de tensión \(m\) para la resistencia calefactora. Se pide:</p>
+    <ol type="a">
+      <li>Obtener la relación \(T/T^{*}\) sin considerar la perturbación \(p\).</li>
+      <li>Si en régimen permanente \(G_1 = 10\ \text{W/V}\), \(G_2 = 23\ ^{\circ}\text{C/W}\) y \(G_3 = H = 0{,}1\ \text{V/}^{\circ}\text{C}\), obtener el error de temperatura \((T^{*}-T)\) cuando la temperatura de consigna es 60 °C.</li>
+      <li>¿Qué función cumple el bloque \(G_3\) en el diagrama?</li>
+      <li>En el sistema térmico propuesto, ¿qué representaría la perturbación?</li>
+    </ol>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 680 200" width="680" role="img" aria-labelledby="p7Tit p7Desc">
+        <title id="p7Tit">Termo eléctrico con termostato</title>
+        <desc id="p7Desc">G3 transductor consigna, G1 controlador, G2 planta térmica, H sensor.</desc>
+        <text x="25" y="95" font-size="14" fill="#1B4F8A" font-weight="700">T*</text>
+        <line x1="50" y1="90" x2="100" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <rect x="100" y="65" width="60" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="130" y="95" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G3</text>
+        <text x="175" y="83" font-size="13" fill="#1B4F8A">v1</text>
+        <line x1="160" y1="90" x2="215" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <circle cx="230" cy="90" r="14" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="213" y="84" font-size="11" fill="#C0321E">+</text>
+        <text x="213" y="115" font-size="13" fill="#C0321E">-</text>
+        <text x="255" y="83" font-size="13" fill="#1B4F8A">v3</text>
+        <line x1="244" y1="90" x2="295" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <rect x="295" y="65" width="60" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="325" y="95" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G1</text>
+        <text x="370" y="83" font-size="13" fill="#1B4F8A">m</text>
+        <line x1="355" y1="90" x2="410" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <rect x="410" y="65" width="60" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="440" y="95" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G2</text>
+        <line x1="470" y1="90" x2="660" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <text x="630" y="82" font-size="14" fill="#1B4F8A" font-weight="700">T</text>
+        <line x1="620" y1="90" x2="620" y2="165" stroke="#1B4F8A" stroke-width="1.8"/>
+        <line x1="620" y1="165" x2="360" y2="165" stroke="#1B4F8A" stroke-width="1.8"/>
+        <rect x="290" y="145" width="70" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="325" y="171" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">H</text>
+        <line x1="290" y1="165" x2="230" y2="165" stroke="#1B4F8A" stroke-width="1.8"/>
+        <line x1="230" y1="165" x2="230" y2="105" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <text x="250" y="158" font-size="13" fill="#1B4F8A">v2</text>
+      </svg>
+    </div>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+      <section class="apartado">
+        <h3>a) Función de transferencia \(T/T^{*}\)</h3>
+        <p>La consigna se convierte a tensión en \(G_3\) y entra al sumador donde se resta \(v_2 = H\cdot T\). El lazo lo forman \(G_1\cdot G_2\) con realimentación \(H\) y \(G_3\) como factor externo:</p>
+        \[ T = G_1\,G_2\,G_3\,T^{*} - G_1\,G_2\,H\,T \]
+        \[ T\,(1 + G_1\,G_2\,H) = G_1\,G_2\,G_3\,T^{*} \]
+        <div class="resultado">\[ \dfrac{T}{T^{*}} = \dfrac{G_1\,G_2\,G_3}{1 + G_1\,G_2\,H} \]</div>
+      </section>
+      <section class="apartado">
+        <h3>b) Error de temperatura para \(T^{*} = 60\ ^{\circ}\text{C}\)</h3>
+        <p><strong>Datos.</strong> <span class="dato">\(G_1 = 10\ \text{W/V}\)</span> <span class="dato">\(G_2 = 23\ ^{\circ}\text{C/W}\)</span> <span class="dato">\(G_3 = H = 0{,}1\ \text{V/}^{\circ}\text{C}\)</span></p>
+        \[ T = T^{*}\cdot \dfrac{G_1\,G_2\,G_3}{1 + G_1\,G_2\,H} = 60\cdot \dfrac{10\cdot 23\cdot 0{,}1}{1 + 10\cdot 23\cdot 0{,}1}\ ^{\circ}\text{C} = 60\cdot \dfrac{23}{24}\ ^{\circ}\text{C} = 57{,}5\ ^{\circ}\text{C} \]
+        \[ T^{*} - T = 60 - 57{,}5 = 2{,}5\ ^{\circ}\text{C} \quad\text{(la ponencia lo expresa como } T-T^{*}=-2{,}5\ ^{\circ}\text{C)} \]
+        <div class="resultado">\( T \approx 57{,}5\ ^{\circ}\text{C} \); error \( T^{*}-T = 2{,}5\ ^{\circ}\text{C} \).</div>
+      </section>
+      <section class="apartado">
+        <h3>c) Función del bloque \(G_3\)</h3>
+        <p>\(G_3\) es el <strong>transductor de consigna</strong>: convierte la temperatura marcada en el mando giratorio en una tensión eléctrica. Así la consigna y la señal del sensor \(H\) son de la misma naturaleza (V) y pueden compararse en el sumador.</p>
+      </section>
+      <section class="apartado">
+        <h3>d) Perturbación</h3>
+        <p>La perturbación \(p\) se asocia a la <strong>apertura de un grifo</strong>: al entrar agua fría se modifica la temperatura del depósito sin que el sistema lo haya ordenado. También pueden actuar como perturbación los cambios de temperatura ambiente.</p>
+      </section>
+      <div class="aviso">⚠ Un controlador puramente proporcional (como aquí) <em>no anula</em> el error estacionario: para que \(T = T^{*}\) haría falta incluir una acción integral (PI o PID).</div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ PROBLEMA 8 ============ -->
+<section class="problema" id="prob-8">
+  <header class="prob-header">
+    <h2>Problema 8 <span class="dif" data-level="1">★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p><span class="ref">[3]</span> Enumerar y comentar brevemente las principales características de los controladores proporcional, integral y derivativo.</p>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+      <section class="apartado">
+        <h3>Estructura PID</h3>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 500 180" width="500" role="img" aria-labelledby="p8Tit p8Desc">
+            <title id="p8Tit">Acciones P, I y D de un PID</title>
+            <desc id="p8Desc">El error se reparte entre las tres acciones que se suman en m.</desc>
+            <text x="10" y="95" font-size="14" fill="#1B4F8A" font-weight="700">e</text>
+            <line x1="25" y1="90" x2="70" y2="90" stroke="#1B4F8A" stroke-width="1.8"/>
+            <circle cx="75" cy="90" r="3" fill="#1B4F8A"/>
+            <line x1="75" y1="90" x2="75" y2="35" stroke="#1B4F8A" stroke-width="1.6"/>
+            <line x1="75" y1="90" x2="75" y2="145" stroke="#1B4F8A" stroke-width="1.6"/>
+            <line x1="75" y1="35" x2="150" y2="35" stroke="#1B4F8A" stroke-width="1.6" marker-end="url(#arr)"/>
+            <line x1="75" y1="90" x2="150" y2="90" stroke="#1B4F8A" stroke-width="1.6" marker-end="url(#arr)"/>
+            <line x1="75" y1="145" x2="150" y2="145" stroke="#1B4F8A" stroke-width="1.6" marker-end="url(#arr)"/>
+            <rect x="150" y="15" width="60" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="180" y="40" text-anchor="middle" font-size="15" fill="#1B4F8A" font-weight="700">P</text>
+            <rect x="150" y="70" width="60" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="180" y="95" text-anchor="middle" font-size="15" fill="#1B4F8A" font-weight="700">I</text>
+            <rect x="150" y="125" width="60" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="180" y="150" text-anchor="middle" font-size="15" fill="#1B4F8A" font-weight="700">D</text>
+            <text x="220" y="30" font-size="12" fill="#1B4F8A">mP</text>
+            <text x="220" y="85" font-size="12" fill="#1B4F8A">mI</text>
+            <text x="220" y="140" font-size="12" fill="#1B4F8A">mD</text>
+            <line x1="210" y1="35" x2="310" y2="35" stroke="#1B4F8A" stroke-width="1.6"/>
+            <line x1="210" y1="90" x2="310" y2="90" stroke="#1B4F8A" stroke-width="1.6"/>
+            <line x1="210" y1="145" x2="310" y2="145" stroke="#1B4F8A" stroke-width="1.6"/>
+            <circle cx="320" cy="90" r="15" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+            <line x1="310" y1="35" x2="320" y2="76" stroke="#1B4F8A" stroke-width="1.6" marker-end="url(#arr)"/>
+            <line x1="310" y1="90" x2="304" y2="90" stroke="#1B4F8A" stroke-width="1.6"/>
+            <line x1="305" y1="90" x2="335" y2="90" stroke="#1B4F8A" stroke-width="1.3"/>
+            <line x1="310" y1="145" x2="320" y2="105" stroke="#1B4F8A" stroke-width="1.6" marker-end="url(#arr)"/>
+            <text x="340" y="85" font-size="13" fill="#1B4F8A" font-weight="700">m</text>
+            <line x1="335" y1="90" x2="490" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+          </svg>
+          <span class="cap">Un PID suma las tres acciones: \(m = m_P + m_I + m_D\).</span>
+        </div>
+      </section>
+      <section class="apartado">
+        <h3>Acción Proporcional (P)</h3>
+        <ul>
+          <li>La variable manipulada \(m_P = K_p\,e\) es proporcional al error.</li>
+          <li><strong>No</strong> asegura error nulo en régimen permanente: si \(e=0\), también \(m=0\).</li>
+          <li>Responde instantáneamente al error.</li>
+        </ul>
+      </section>
+      <section class="apartado">
+        <h3>Acción Integral (I)</h3>
+        <ul>
+          <li>\(m_I = K_i \int e\,dt\): acumula el error en el tiempo.</li>
+          <li><strong>Posibilita error cero</strong> en régimen permanente. Si \(e\neq 0\), \(m_I\) crece (o decrece) hasta anularlo o saturar.</li>
+          <li>Es una acción <strong>retardada</strong>; requiere tiempo para ser efectiva.</li>
+        </ul>
+      </section>
+      <section class="apartado">
+        <h3>Acción Derivativa (D)</h3>
+        <ul>
+          <li>\(m_D = K_d\,\dfrac{d\,e}{dt}\): proporcional a la velocidad de cambio del error.</li>
+          <li>Efecto <strong>anticipativo</strong>.</li>
+          <li>Solo actúa en régimen <strong>transitorio</strong> (si \(e\) es constante, \(m_D = 0\)).</li>
+        </ul>
+      </section>
+    </div>
+  </details>
+</section>
+
+<!-- ============ PROBLEMA 9 ============ -->
+<section class="problema" id="prob-9">
+  <header class="prob-header">
+    <h2>Problema 9 <span class="dif" data-level="3">★★★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p><span class="ref">[3]</span> Una ducha convencional tiene un grifo monomando con el que se puede tener agua fría, caliente o una mezcla de ambas según la posición de la maneta. Considere la siguiente acción de control que lleva a cabo una persona para mantener manualmente la temperatura del agua en un valor constante: primero coloca el mando en una posición intermedia y comprueba que el agua sale fría. A continuación, mueve el mando para aumentar la temperatura y vuelve a comprobar que el agua sigue saliendo fría, repitiendo este proceso hasta alcanzar la temperatura ideal. Se pide:</p>
+    <ol type="a">
+      <li>Justificar qué tipo de control está realizando la persona: ¿P, PD o PI?</li>
+      <li>Una vez conseguida la temperatura óptima, la persona nota que sin modificar el mando el agua se va enfriando. Entonces mueve la maneta rápidamente en previsión de una disminución más acentuada de la temperatura. ¿Qué acción de control está realizando la persona ahora? Justificar la respuesta.</li>
+    </ol>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+      <section class="apartado">
+        <h3>a) Tipo de control: PI</h3>
+        <p><strong>P solo</strong>: el giro de la maneta sería proporcional al error. Error cero implicaría no mover la maneta, dejándola en la posición inicial — lo que contradice el relato.</p>
+        <p><strong>PD</strong>: la acción derivativa solo actúa ante cambios del error; tampoco elimina el error permanente.</p>
+        <p><strong>PI</strong>: el usuario va <em>acumulando</em> pequeños giros hasta alcanzar la temperatura ideal. Ese movimiento progresivo es análogo a la integral del error: la integral de un error constante es una rampa creciente, exactamente lo que describe el enunciado.</p>
+        <div class="resultado">Control <strong>PI</strong> (proporcional + integral): necesario para anular el error estacionario.</div>
+      </section>
+      <section class="apartado">
+        <h3>b) Acción derivativa</h3>
+        <p>La persona actúa en función del <strong>ritmo de cambio</strong> de la temperatura, no de su valor. Pretende <em>adelantarse</em> a una caída más brusca. Ese comportamiento anticipativo es exactamente el de la <strong>acción derivativa (D)</strong> de un controlador industrial.</p>
+        <div class="resultado">Acción <strong>D</strong> (derivativa): efecto anticipativo, reacciona ante la derivada del error.</div>
+      </section>
+    </div>
+  </details>
+</section>
+
+<!-- ============ PROBLEMA 10 ============ -->
+<section class="problema" id="prob-10">
+  <header class="prob-header">
+    <h2>Problema 10 <span class="dif" data-level="2">★★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p><span class="ref">[3]</span> La figura muestra la entrada (error) y la salida (\(m\)) de tres tipos de controladores o reguladores utilizados en sistemas de control de lazo cerrado. Indicar qué tipo de controlador es usado en cada uno de los casos y justificar las respuestas.</p>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 660 280" width="660" role="img" aria-labelledby="p10Tit p10Desc">
+        <title id="p10Tit">Respuestas de los tres controladores</title>
+        <desc id="p10Desc">Error tipo escalón (los tres iguales) y distintas respuestas m.</desc>
+        <!-- col 1 -->
+        <text x="80" y="20" font-size="13" fill="#1B4F8A" font-weight="700">Controlador 1 (D)</text>
+        <text x="10" y="50" font-size="12" fill="#555">Error</text>
+        <line x1="30" y1="85" x2="180" y2="85" stroke="#999" stroke-width="0.8"/>
+        <line x1="30" y1="50" x2="30" y2="110" stroke="#999" stroke-width="0.8"/>
+        <polyline points="30,85 80,85 80,60 180,60" fill="none" stroke="#1B4F8A" stroke-width="2"/>
+        <text x="10" y="155" font-size="12" fill="#555">m</text>
+        <line x1="30" y1="200" x2="180" y2="200" stroke="#999" stroke-width="0.8"/>
+        <line x1="30" y1="150" x2="30" y2="230" stroke="#999" stroke-width="0.8"/>
+        <polyline points="30,200 80,200 80,160 82,200 180,200" fill="none" stroke="#C0321E" stroke-width="2"/>
+        <text x="90" y="260" font-size="11" fill="#555">impulso en el cambio</text>
+        <!-- col 2 -->
+        <text x="280" y="20" font-size="13" fill="#1B4F8A" font-weight="700">Controlador 2 (I)</text>
+        <line x1="230" y1="85" x2="380" y2="85" stroke="#999" stroke-width="0.8"/>
+        <line x1="230" y1="50" x2="230" y2="110" stroke="#999" stroke-width="0.8"/>
+        <polyline points="230,85 280,85 280,60 380,60" fill="none" stroke="#1B4F8A" stroke-width="2"/>
+        <line x1="230" y1="200" x2="380" y2="200" stroke="#999" stroke-width="0.8"/>
+        <line x1="230" y1="150" x2="230" y2="230" stroke="#999" stroke-width="0.8"/>
+        <polyline points="230,200 280,200 380,155" fill="none" stroke="#C0321E" stroke-width="2"/>
+        <text x="290" y="260" font-size="11" fill="#555">rampa = ∫ e dt</text>
+        <!-- col 3 -->
+        <text x="480" y="20" font-size="13" fill="#1B4F8A" font-weight="700">Controlador 3 (PI)</text>
+        <line x1="430" y1="85" x2="580" y2="85" stroke="#999" stroke-width="0.8"/>
+        <line x1="430" y1="50" x2="430" y2="110" stroke="#999" stroke-width="0.8"/>
+        <polyline points="430,85 480,85 480,60 580,60" fill="none" stroke="#1B4F8A" stroke-width="2"/>
+        <line x1="430" y1="200" x2="580" y2="200" stroke="#999" stroke-width="0.8"/>
+        <line x1="430" y1="150" x2="430" y2="230" stroke="#999" stroke-width="0.8"/>
+        <polyline points="430,200 480,200 480,180 580,150" fill="none" stroke="#C0321E" stroke-width="2"/>
+        <text x="490" y="260" font-size="11" fill="#555">salto P + rampa I</text>
+      </svg>
+    </div>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+      <section class="apartado">
+        <h3>Clasificación de los tres controladores</h3>
+        <ul>
+          <li><strong>Controlador 1 → Derivativo (D)</strong>. La salida \(m\) es proporcional a la <em>derivada</em> del error: solo aparece un pulso en el instante del cambio del error, fuera de él \(m = 0\). No hay componente proporcional (si la hubiera, \(m\) se mantendría constante mientras \(e\) lo fuese).</li>
+          <li><strong>Controlador 2 → Integral (I)</strong>. La salida \(m\) crece como una rampa cuando el error es constante positivo: \(m\) es proporcional al <em>área bajo la curva de error</em> (su integral).</li>
+          <li><strong>Controlador 3 → Proporcional + Integral (PI)</strong>. La salida presenta un <em>salto instantáneo</em> proporcional al error (componente P) <em>más</em> una rampa (componente I), como muestra el desglose \(m = m_P + m_I\).</li>
+        </ul>
+        <div class="resultado">Controlador 1 = D · Controlador 2 = I · Controlador 3 = PI.</div>
+      </section>
+    </div>
+  </details>
+</section>
+
+<!-- ============ PROBLEMA 11 ============ -->
+<section class="problema" id="prob-11">
+  <header class="prob-header">
+    <h2>Problema 11 <span class="dif" data-level="3">★★★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p><span class="ref">[3]</span> La figura muestra un vehículo circulando con el control automático de la velocidad de crucero activado y fijado a 100 km/h. Las curvas 1 y 2 muestran las velocidades, primero en llano y después en pendiente para dos controladores o reguladores diferentes. En llano, la velocidad es prácticamente 100 km/h en ambos casos. Con el regulador 1 la velocidad decrece al tomar la pendiente y posteriormente retoma la velocidad de 100 km/h, mientras que con el regulador 2 la velocidad se mantiene durante toda la pendiente en un valor inferior a 100 km/h. ¿Qué tipo de regulador usa el control de crucero en el caso 1 y en el caso 2: P, PI o PD? Justificar la respuesta.</p>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 520 220" width="520" role="img" aria-labelledby="p11Tit p11Desc">
+        <title id="p11Tit">Velocidades en llano y pendiente</title>
+        <desc id="p11Desc">Curva 1 recupera 100 km/h, curva 2 se queda por debajo.</desc>
+        <line x1="40" y1="180" x2="490" y2="180" stroke="#555" stroke-width="1"/>
+        <line x1="40" y1="30" x2="40" y2="190" stroke="#555" stroke-width="1"/>
+        <text x="10" y="60" font-size="12" fill="#555">v (km/h)</text>
+        <text x="465" y="200" font-size="12" fill="#555">distancia</text>
+        <line x1="40" y1="60" x2="490" y2="60" stroke="#D8DDE5" stroke-width="0.8" stroke-dasharray="4 3"/>
+        <text x="5" y="65" font-size="12" fill="#555">100</text>
+        <line x1="250" y1="30" x2="250" y2="190" stroke="#D4700A" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="200" y="45" font-size="11" fill="#D4700A">inicio pendiente (A)</text>
+        <!-- curva 1: PI -->
+        <polyline points="40,60 250,60 285,100 320,80 370,65 490,60" fill="none" stroke="#1B4F8A" stroke-width="2.4"/>
+        <text x="455" y="55" font-size="14" fill="#1B4F8A" font-weight="700">1</text>
+        <!-- curva 2: P -->
+        <polyline points="40,60 250,60 285,100 330,110 490,110" fill="none" stroke="#C0321E" stroke-width="2.4"/>
+        <text x="455" y="125" font-size="14" fill="#C0321E" font-weight="700">2</text>
+      </svg>
+    </div>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+      <section class="apartado">
+        <h3>Razonamiento físico</h3>
+        <p>En terreno <strong>llano</strong> se requiere poca potencia: \(m\) y el error \(e\) son pequeños y ambos reguladores alcanzan prácticamente los 100 km/h.</p>
+        <p>Al tomar la <strong>pendiente</strong>, el motor necesita más potencia, es decir, una \(m\) mayor. El error depende entonces del tipo de regulador:</p>
+        <ul>
+          <li><strong>P</strong>: para aumentar \(m\), el error debe crecer proporcionalmente (\(m = K_p\,e\)). La velocidad queda <em>por debajo</em> de 100 km/h de forma permanente → <strong>curva 2</strong>.</li>
+          <li><strong>PD</strong>: ni la acción P ni la D anulan el error estacionario → también correspondería a curva 2.</li>
+          <li><strong>PI</strong>: el término integral hace que \(m\) siga creciendo mientras \(e>0\); aumenta la potencia hasta que la velocidad vuelve a 100 km/h → <strong>curva 1</strong>.</li>
+        </ul>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 520 130" width="520" role="img" aria-labelledby="p11bTit p11bDesc">
+            <title id="p11bTit">Lazo cerrado de control de crucero</title>
+            <desc id="p11bDesc">Regulador + motor con realimentación unitaria.</desc>
+            <text x="15" y="65" font-size="13" fill="#1B4F8A" font-weight="700">v*=100</text>
+            <line x1="70" y1="60" x2="115" y2="60" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <circle cx="130" cy="60" r="13" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="113" y="54" font-size="11" fill="#C0321E">+</text>
+            <text x="113" y="84" font-size="13" fill="#C0321E">-</text>
+            <text x="155" y="53" font-size="13" fill="#1B4F8A">e</text>
+            <line x1="143" y1="60" x2="185" y2="60" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <rect x="185" y="40" width="80" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="225" y="65" text-anchor="middle" font-size="13" fill="#1B4F8A" font-weight="700">Reg</text>
+            <text x="275" y="53" font-size="13" fill="#1B4F8A">m</text>
+            <line x1="265" y1="60" x2="305" y2="60" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <rect x="305" y="40" width="80" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="345" y="65" text-anchor="middle" font-size="13" fill="#1B4F8A" font-weight="700">Motor</text>
+            <line x1="385" y1="60" x2="505" y2="60" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <text x="485" y="53" font-size="13" fill="#1B4F8A" font-weight="700">v</text>
+            <line x1="475" y1="60" x2="475" y2="110" stroke="#1B4F8A" stroke-width="1.8"/>
+            <line x1="475" y1="110" x2="130" y2="110" stroke="#1B4F8A" stroke-width="1.8"/>
+            <line x1="130" y1="110" x2="130" y2="73" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+          </svg>
+        </div>
+        <div class="resultado">Caso 1 → <strong>PI</strong> (error estacionario cero). Caso 2 → <strong>P</strong> (error estacionario no nulo). También es válida la respuesta genérica: curva 1 = PI o PID; curva 2 = P o PD.</div>
+      </section>
+    </div>
+  </details>
+</section>
+
+<!-- ============ PROBLEMA 12 ============ -->
+<section class="problema" id="prob-12">
+  <header class="prob-header">
+    <h2>Problema 12 <span class="dif" data-level="2">★★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p><span class="ref">[2] [3] [4] [7]</span> </p>
+    <ol type="a">
+      <li>En qué bloque o bloques del diagrama adjunto se incluirían los siguientes elementos: motor eléctrico, cilindro neumático, controlador proporcional, fotocélula, potenciómetro, sonda PTC, tacómetro, regulador PID, termo eléctrico y teclado para introducir valores numéricos.</li>
+      <li>Indicar dos ventajas y dos inconvenientes de los sistemas de control de lazo cerrado frente a los de lazo abierto.</li>
+    </ol>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 640 200" width="640" role="img" aria-labelledby="p12Tit p12Desc">
+        <title id="p12Tit">Diagrama con G3 en la rama de consigna</title>
+        <desc id="p12Desc">r -> G3 -> x -> sumador -> y -> G1 -> m -> G2 -> c, y H realimenta.</desc>
+        <text x="25" y="95" font-size="14" fill="#1B4F8A" font-weight="700">r</text>
+        <line x1="40" y1="90" x2="90" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <rect x="90" y="65" width="60" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="120" y="95" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G3</text>
+        <text x="165" y="83" font-size="13" fill="#1B4F8A">x</text>
+        <line x1="150" y1="90" x2="205" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <circle cx="220" cy="90" r="14" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="203" y="84" font-size="11" fill="#C0321E">+</text>
+        <text x="203" y="115" font-size="13" fill="#C0321E">-</text>
+        <text x="245" y="83" font-size="13" fill="#1B4F8A">y</text>
+        <line x1="234" y1="90" x2="285" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <rect x="285" y="65" width="60" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="315" y="95" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G1</text>
+        <text x="360" y="83" font-size="13" fill="#1B4F8A">m</text>
+        <line x1="345" y1="90" x2="400" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <rect x="400" y="65" width="60" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="430" y="95" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">G2</text>
+        <line x1="460" y1="90" x2="620" y2="90" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <text x="595" y="82" font-size="14" fill="#1B4F8A" font-weight="700">c</text>
+        <line x1="580" y1="90" x2="580" y2="160" stroke="#1B4F8A" stroke-width="1.8"/>
+        <line x1="580" y1="160" x2="350" y2="160" stroke="#1B4F8A" stroke-width="1.8"/>
+        <rect x="280" y="140" width="70" height="40" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+        <text x="315" y="166" text-anchor="middle" font-size="16" fill="#1B4F8A" font-weight="700">H</text>
+        <line x1="280" y1="160" x2="220" y2="160" stroke="#1B4F8A" stroke-width="1.8"/>
+        <line x1="220" y1="160" x2="220" y2="105" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+        <text x="240" y="153" font-size="13" fill="#1B4F8A">b</text>
+      </svg>
+    </div>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+      <section class="apartado">
+        <h3>a) Asignación de elementos a bloques</h3>
+        <table class="tabla-var">
+          <thead><tr><th>Bloque</th><th>Elementos</th></tr></thead>
+          <tbody>
+            <tr><td class="var">G1 (regulador)</td><td>Regulador PID · Controlador proporcional</td></tr>
+            <tr><td class="var">G2 (planta)</td><td>Motor eléctrico · Cilindro neumático · Termo eléctrico</td></tr>
+            <tr><td class="var">G3 (transductor consigna)</td><td>Potenciómetro · Teclado numérico *</td></tr>
+            <tr><td class="var">H (sensor)</td><td>Potenciómetro · Sonda PTC · Fotocélula · Tacómetro</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:.85rem;color:var(--t2)">* El teclado numérico permite introducir un valor de consigna cuya salida, analógica o digital, se compara con la señal de realimentación \(b\).</p>
+      </section>
+      <section class="apartado">
+        <h3>b) Ventajas e inconvenientes del lazo cerrado</h3>
+        <p><strong>Ventajas del S.C.L.C.:</strong></p>
+        <ol>
+          <li>Mayor <strong>precisión</strong>: al medir la salida puede corregir los errores.</li>
+          <li>Menor sensibilidad a <strong>perturbaciones</strong> y a cambios de parámetros del sistema.</li>
+          <li>Respuesta más rápida.</li>
+        </ol>
+        <p><strong>Desventajas:</strong></p>
+        <ol>
+          <li>Posible <strong>inestabilidad</strong>: si por retardos o desfases la realimentación cambia de signo (se convierte en positiva), el sistema puede volverse inestable.</li>
+          <li>Son más <strong>complejos</strong> de diseñar y de controlar.</li>
+        </ol>
+      </section>
+    </div>
+  </details>
+</section>
+
+<!-- ============ PROBLEMA 13 ============ -->
+<section class="problema" id="prob-13">
+  <header class="prob-header">
+    <h2>Problema 13 <span class="dif" data-level="2">★★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p><span class="ref">[5] [6]</span> ¿Un sistema que es estable a lazo abierto puede ser inestable a lazo cerrado? Justificar la respuesta.</p>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+      <section class="apartado">
+        <h3>Respuesta: sí</h3>
+        <p>Un sistema estable en lazo abierto <strong>puede volverse inestable</strong> en lazo cerrado. En lazo cerrado, en condiciones normales, la realimentación <em>se resta</em> a la entrada y busca la estabilidad ante perturbaciones. Pero si por los <strong>retardos</strong> del sistema la señal de realimentación se <em>invierte</em> (desfase de 180°), la resta pasa a ser suma: aparece realimentación positiva y la señal de control crece indefinidamente → inestabilidad.</p>
+        <p>En un sistema de <strong>lazo abierto</strong> los retardos por sí solos <em>no</em> pueden generar inestabilidad, porque no hay bucle que los realimente.</p>
+        <p>También puede ocurrir al revés: un sistema inestable en lazo abierto puede estabilizarse mediante realimentación y un control adecuado. Ejemplos: <em>péndulo invertido</em>, <em>levitación magnética</em>.</p>
+        <div class="resultado">Sí. Retardos + lazo cerrado pueden convertir un sistema estable en inestable (y viceversa con un buen controlador).</div>
+      </section>
+    </div>
+  </details>
+</section>
+
+<!-- ============ PROBLEMA 14 ============ -->
+<section class="problema" id="prob-14">
+  <header class="prob-header">
+    <h2>Problema 14 <span class="dif" data-level="2">★★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p><span class="ref">[2] [7]</span> El alumbrado de un jardín se controla de forma automática mediante un sistema de lazo abierto compuesto por un interruptor de corte general, un programador horario para establecer las horas de encendido y apagado y un relé para el encendido de las lámparas controlado por el programador. Se pide:</p>
+    <ol type="a">
+      <li>Indicar qué elementos deben añadirse y cuáles deben eliminarse para convertirlo en un sistema de lazo cerrado.</li>
+      <li>¿Qué ventajas tiene el funcionamiento del alumbrado en lazo cerrado sobre el de lazo abierto?</li>
+    </ol>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+      <section class="apartado">
+        <h3>a) Elementos a añadir y eliminar</h3>
+        <p><strong>Añadir:</strong></p>
+        <ul>
+          <li><strong>Sensor de luminosidad</strong> (LDR o fototransistor) — bloque H.</li>
+          <li><strong>Comparador</strong> (amplificador operacional) — punto de suma.</li>
+          <li><strong>Potenciómetro</strong> para fijar la luminosidad de referencia — consigna \(r\).</li>
+        </ul>
+        <p><strong>Eliminar:</strong></p>
+        <ul>
+          <li>El <strong>interruptor horario</strong>: el encendido ya no depende de la hora, sino del <em>nivel real de iluminación</em> medido por el sensor.</li>
+        </ul>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 600 150" width="600" role="img" aria-labelledby="p14Tit p14Desc">
+            <title id="p14Tit">Alumbrado en lazo cerrado</title>
+            <desc id="p14Desc">Potenciómetro como consigna, comparador, relé-lámparas y sensor LDR.</desc>
+            <text x="15" y="75" font-size="12" fill="#1B4F8A" font-weight="700">E*</text>
+            <line x1="40" y1="70" x2="85" y2="70" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <circle cx="100" cy="70" r="13" fill="#fff" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="83" y="64" font-size="11" fill="#C0321E">+</text>
+            <text x="83" y="94" font-size="13" fill="#C0321E">-</text>
+            <line x1="113" y1="70" x2="170" y2="70" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <rect x="170" y="45" width="90" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="215" y="70" text-anchor="middle" font-size="13" fill="#1B4F8A" font-weight="700">Comparador</text>
+            <text x="215" y="87" text-anchor="middle" font-size="11" fill="#555">(AO + relé)</text>
+            <line x1="260" y1="70" x2="320" y2="70" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <rect x="320" y="45" width="90" height="50" fill="#EBF0F7" stroke="#1B4F8A" stroke-width="1.8"/>
+            <text x="365" y="75" text-anchor="middle" font-size="13" fill="#1B4F8A" font-weight="700">Lámparas</text>
+            <line x1="410" y1="70" x2="570" y2="70" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+            <text x="530" y="62" font-size="13" fill="#1B4F8A" font-weight="700">E (lux)</text>
+            <line x1="520" y1="70" x2="520" y2="125" stroke="#1B4F8A" stroke-width="1.8"/>
+            <line x1="520" y1="125" x2="240" y2="125" stroke="#1B4F8A" stroke-width="1.8"/>
+            <rect x="170" y="105" width="70" height="40" fill="#EDF6EE" stroke="#2E7D32" stroke-width="1.8"/>
+            <text x="205" y="130" text-anchor="middle" font-size="12" fill="#1B4F8A" font-weight="700">LDR</text>
+            <line x1="170" y1="125" x2="100" y2="125" stroke="#1B4F8A" stroke-width="1.8"/>
+            <line x1="100" y1="125" x2="100" y2="85" stroke="#1B4F8A" stroke-width="1.8" marker-end="url(#arr)"/>
+          </svg>
+        </div>
+      </section>
+      <section class="apartado">
+        <h3>b) Ventajas del lazo cerrado</h3>
+        <p>La luminosidad en el jardín se mantiene <strong>independientemente de las perturbaciones</strong>: nublados, cambios de hora legal o de estación, luna llena, etc. Basta que el nivel real caiga por debajo del de consigna para que se enciendan las lámparas, y viceversa.</p>
+        <div class="resultado">El sistema regula la <em>variable real</em> (luminosidad), no una variable indirecta (la hora), con lo que es insensible a cualquier perturbación óptica.</div>
+      </section>
+    </div>
+  </details>
+</section>
+
+<!-- ============ PROBLEMA 15 ============ -->
+<section class="problema" id="prob-15">
+  <header class="prob-header">
+    <h2>Problema 15 <span class="dif" data-level="2">★★</span></h2>
+  </header>
+  <div class="enunciado">
+    <p><span class="ref">[5]</span> Durante el aprendizaje de montar en bicicleta se suele perder el equilibrio al mover el manillar en el sentido contrario al necesario para mantener la estabilidad. Se pide: explicar la relación que existe entre el manejo de la bicicleta durante el aprendizaje y la condición de estabilidad de un sistema en lazo cerrado.</p>
+  </div>
+  <details class="resolucion">
+    <summary>📝 Ver resolución completa</summary>
+    <div class="resol-body">
+      <section class="apartado">
+        <h3>Estabilidad y signo de la realimentación</h3>
+        <p><strong>Definición.</strong> Un sistema es <em>estable</em> cuando, ante una perturbación, la realimentación actúa en <strong>sentido contrario</strong> para contrarrestarla; es <em>inestable</em> cuando lo hace en el <strong>mismo sentido</strong>.</p>
+        <p>En la bicicleta la perturbación es la <em>inclinación</em> del vehículo:</p>
+        <ul>
+          <li><strong>Ciclista experto</strong>: mueve el manillar y su propio cuerpo produciendo una fuerza <em>contraria</em> a la inclinación. La realimentación <em>resta</em> a la perturbación y el sistema recupera el equilibrio — análogo al sistema de control <strong>estable</strong>.</li>
+          <li><strong>Aprendiz</strong>: sus correcciones pueden ir en el <em>mismo sentido</em> que la inclinación (mueve el manillar "al revés"). La realimentación pasa a ser <em>positiva</em> y amplifica la inclinación hasta la caída — análogo al sistema <strong>inestable</strong>.</li>
+        </ul>
+        <div class="resultado">Aprender a montar en bici es aprender a convertir una realimentación positiva (desestabilizadora) en una realimentación negativa (estabilizadora). Ese cambio de signo es exactamente la diferencia entre un sistema estable y uno inestable en lazo cerrado.</div>
+      </section>
+      <div class="aviso">⚠ Este problema ilustra por qué un sistema puede ser <em>estable en lazo abierto e inestable en lazo cerrado</em>: basta con que el signo efectivo de la realimentación se invierta (por desfases, retardos… o por aprendizaje incorrecto del ciclista).</div>
+    </div>
+  </details>
+</section>
+
+</div>
+</body>
+</html>

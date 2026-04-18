@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ponencia 2025-26 resuelta · TECI II</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--az:#1B4F8A;--az2:#2E7BC4;--bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5;--green:#2E7D32;--green2:#43A047;--green-soft:#EDF6EE;--green-line:#A8D5AE;--red:#C0321E;--orange:#D4700A;--orange-soft:#FFF4E5;--orange-line:#F5C98A;--yellow:#FFA000;--yellow-soft:#FFF8E1;--yellow-line:#FFE082}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:radial-gradient(circle at top,#F9FBFE 0,#F4F6F9 40%,#EEF2F7 100%);color:var(--tx);line-height:1.55}
+
+/* Header coherente con ecosistema */
+.hd{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(27,79,138,.12);position:sticky;top:0;z-index:500}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer}
+.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.72rem;opacity:.78;margin-left:10px}
+.home-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:8px;cursor:pointer;margin-left:auto;transition:background .15s;text-decoration:none}
+.home-btn:hover{background:rgba(255,255,255,.16)}
+
+/* Navcross */
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:var(--az);color:var(--az)}
+.navcross span.nc-current{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;border-color:var(--az);font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8;align-self:center}
+@media(max-width:640px){.navcross{gap:4px;padding:8px 10px;top:52px}.navcross a span.nc-lbl,.navcross span.nc-current span.nc-lbl{display:none}.navcross .nc-sep{display:none}}
+
+.main{max-width:1080px;margin:0 auto;padding:28px 20px 70px}
+.title-block{text-align:center;margin-bottom:22px}
+.title-block h1{font-family:'Barlow Condensed',sans-serif;font-size:2.1rem;color:var(--az);font-weight:700;letter-spacing:.01em}
+.title-block .sub{color:var(--t2);font-size:.95rem;margin-top:6px}
+
+.intro{background:#fff;border:1px solid var(--bd);border-left:4px solid var(--az2);padding:16px 20px;border-radius:0 10px 10px 0;margin:0 0 24px;font-size:.95rem;color:var(--t2)}
+.intro strong{color:var(--az)}
+.intro .badges{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+.badges .bg-tag{display:inline-block;background:#EBF0F7;color:var(--az);padding:3px 10px;border-radius:12px;font-size:.78rem;font-weight:600}
+.badges .bg-tag.star{background:var(--orange-soft);color:var(--orange)}
+
+/* Buscador */
+.searchbar{max-width:640px;margin:0 auto 22px;padding:10px 18px;background:#fff;border:1px solid var(--bd);border-radius:24px;box-shadow:0 6px 18px rgba(27,79,138,.08);display:flex;align-items:center;gap:8px}
+.searchbar input{flex:1;border:0;outline:0;background:transparent;font-family:'Barlow',sans-serif;font-size:.95rem;color:var(--tx);padding:4px 6px}
+.searchbar input::placeholder{color:#8C97A8}
+.searchbar:focus-within{border-color:var(--az2);box-shadow:0 6px 18px rgba(46,123,196,.18)}
+.search-clear{background:transparent;border:0;font-size:1rem;color:#8C97A8;cursor:pointer;padding:0 4px}
+.search-clear:hover{color:var(--red)}
+.search-info{max-width:640px;margin:0 auto 12px;text-align:center;font-size:.8rem;color:var(--t2);min-height:1.2em}
+
+/* Grid de tarjetas */
+.bg{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:640px){.bg{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:960px){.bg{grid-template-columns:repeat(3,1fr)}}
+
+.bc{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0,#FBFCFE 100%);border:1px solid var(--bd);border-radius:18px;padding:20px 18px 18px;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;text-decoration:none;color:inherit;box-shadow:0 6px 20px rgba(20,42,74,.06);display:flex;flex-direction:column;gap:8px}
+.bc::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#7FB3E6,#2E7BC4)}
+.bc:hover{border-color:rgba(27,79,138,.35);box-shadow:0 12px 28px rgba(27,79,138,.12);transform:translateY(-4px)}
+.bc.hidden{display:none}
+
+/* Colores por bloque */
+.bc.b-B1::before{background:linear-gradient(90deg,#F6B26B,#D4700A)}
+.bc.b-C1::before{background:linear-gradient(90deg,#7BCB92,#1A6B3A)}
+.bc.b-C2::before{background:linear-gradient(90deg,#F08A7C,#C0321E)}
+.bc.b-C3::before{background:linear-gradient(90deg,#8BC5E8,#2E7BC4)}
+.bc.b-D1::before{background:linear-gradient(90deg,#FFD54F,#F57F17)}
+.bc.b-D2::before{background:linear-gradient(90deg,#B39DDB,#5E35B1)}
+.bc.b-F1::before{background:linear-gradient(90deg,#80CBC4,#00695C)}
+
+.bi{width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:14px;font-size:1.85rem;line-height:1;background:linear-gradient(135deg,#F2F7FD,#E5EEF9);box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 6px 14px rgba(27,79,138,.08)}
+.bc.b-B1 .bi{background:linear-gradient(135deg,#FFF4E8,#FDE8CF)}
+.bc.b-C1 .bi{background:linear-gradient(135deg,#EEF9F1,#DCF2E3)}
+.bc.b-C2 .bi{background:linear-gradient(135deg,#FFF0EE,#FFE0DB)}
+.bc.b-C3 .bi{background:linear-gradient(135deg,#E8F3FB,#D4E7F6)}
+.bc.b-D1 .bi{background:linear-gradient(135deg,#FFF8E1,#FFECB3)}
+.bc.b-D2 .bi{background:linear-gradient(135deg,#EDE7F6,#D1C4E9)}
+.bc.b-F1 .bi{background:linear-gradient(135deg,#E0F2F1,#B2DFDB)}
+
+.bk-row{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.bk{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.25rem;color:var(--az);line-height:1.1}
+.bc.b-B1 .bk{color:#C96B0E}
+.bc.b-C1 .bk{color:#1A6B3A}
+.bc.b-C2 .bk{color:#C0321E}
+.bc.b-C3 .bk{color:var(--az)}
+.bc.b-D1 .bk{color:#B06200}
+.bc.b-D2 .bk{color:#4527A0}
+.bc.b-F1 .bk{color:#00695C}
+.bc .count{display:inline-block;background:#EBF0F7;color:var(--az);padding:2px 9px;border-radius:10px;font-size:.72rem;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:.02em}
+.bn{font-size:.85rem;color:var(--t2);line-height:1.45}
+.dif-row{display:flex;align-items:center;gap:10px;margin-top:6px;font-size:.78rem;color:var(--t2);font-family:'JetBrains Mono',monospace}
+.dif-row .dif{letter-spacing:1px;font-weight:700}
+.dif-row .d1{color:#43A047}
+.dif-row .d2{color:var(--orange)}
+.dif-row .d3{color:var(--red)}
+.dif-row .dsep{color:#C9CFDB}
+
+.foot{text-align:center;margin-top:40px;font-size:.74rem;color:var(--t2);line-height:1.6}
+.foot a{color:var(--az);text-decoration:none}
+.foot a:hover{text-decoration:underline}
+
+[id]{scroll-margin-top:120px}
+
+@media(max-width:640px){
+  .title-block h1{font-size:1.55rem}
+  .main{padding:20px 14px 50px}
+  .bi{width:46px;height:46px;font-size:1.55rem}
+}
+
+@media print{
+  html,body{background:#fff!important;color:#000!important}
+  .hd,.navcross,.searchbar,.search-info{display:none!important}
+  .main{max-width:100%;padding:10px}
+  .title-block h1{color:#000}
+  .intro{border-left:4px solid #444;background:#F8F8F8!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .bg{display:block!important}
+  .bc{display:block;page-break-inside:avoid;break-inside:avoid;box-shadow:none!important;border:1px solid #999;border-radius:6px;margin:0 0 10px;padding:10px 14px;transform:none!important;background:#fff!important}
+  .bc::before{display:none}
+  .bc.hidden{display:block!important}
+  .bi{display:inline-flex;vertical-align:middle;margin-right:8px;box-shadow:none;background:#EEE!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .bk-row{display:inline-flex}
+  a{color:#000;text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<div class="hd">
+<span class="lg" onclick="location.href='../index.html'">TECI II</span>
+<span class="sb">📚 Ponencia resuelta</span>
+<a href="../index.html" class="home-btn">🏠 Índice</a>
+</div>
+
+<nav class="navcross" role="navigation" aria-label="Navegación transversal">
+<a href="../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span>
+<a href="../index.html#teoria"><span>📖</span><span class="nc-lbl">Teoría</span></a><span class="nc-sep">·</span>
+<a href="../index.html#ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a><span class="nc-sep">·</span>
+<a href="../index.html#examenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a><span class="nc-sep">·</span>
+<span class="nc-current" aria-current="page"><span>📚</span><span class="nc-lbl">Ponencia resuelta</span></span><span class="nc-sep">·</span>
+<a href="../apoyo/formulario.html"><span>📚</span><span class="nc-lbl">Apoyo</span></a>
+</nav>
+
+<div class="main">
+
+<div class="title-block">
+<h1>Ponencia 2025-26 resuelta</h1>
+<div class="sub">Problemas oficiales de la Ponencia PEvAU de Tecnología e Ingeniería II · Andalucía</div>
+</div>
+
+<p class="intro">
+<strong>56 problemas oficiales resueltos paso a paso</strong>, clasificados en los 7 bloques de la Ponencia PEvAU 2025-26. Cada resolución incluye datos, planteamiento, despeje algebraico, sustitución numérica con unidades y resultado final fiel al PDF oficial. Los desarrollos se muestran en bloques colapsables y están pensados tanto para consulta en pantalla como para imprimir en papel.
+<span class="badges">
+<span class="bg-tag">7 bloques</span>
+<span class="bg-tag">56 problemas</span>
+<span class="bg-tag star">★ baja · ★★ media · ★★★ alta</span>
+</span>
+</p>
+
+<div class="searchbar" role="search">
+<span aria-hidden="true">🔍</span>
+<input type="search" id="pn-search" placeholder="Buscar: Brinell, Otto, Pascal, RLC, Karnaugh, PID, viga…" aria-label="Buscar en las tarjetas de la Ponencia resuelta">
+<button type="button" class="search-clear" id="pn-clear" aria-label="Limpiar búsqueda" title="Limpiar">✕</button>
+</div>
+<div class="search-info" id="pn-info" aria-live="polite"></div>
+
+<div class="bg" id="pn-grid">
+
+<a href="ponencia_B1.html" class="bc b-B1" data-bloque="B1" data-keywords="b1 ensayos materiales fabricación tracción brinell vickers charpy hooke módulo young resiliencia dureza rotura hb hv designación normalizada acero aleación temple recocido probeta fluencia deformación elástica plástica sigma epsilon curva tension">
+  <span class="bi">🔩</span>
+  <div class="bk-row"><span class="bk">B1 · Ensayos</span><span class="count">6 problemas</span></div>
+  <span class="bn">Ensayos de materiales: dureza Brinell/Vickers, resiliencia Charpy, tracción, designación y temple.</span>
+  <div class="dif-row"><span class="dif d1">★</span>×1 <span class="dsep">·</span> <span class="dif d2">★★</span>×5 <span class="dsep">·</span> <span class="dif d3">★★★</span>×0</div>
+</a>
+
+<a href="ponencia_C1.html" class="bc b-C1" data-bloque="C1" data-keywords="c1 estructuras viga vigas empotrada apoyada biapoyada voladizo ménsula cercha cerchas cremona nudos tirante tensor momento flector cortante esfuerzo normal tracción compresión apoyos reacciones diagrama sólido libre carga puntual distribuida uniforme">
+  <span class="bi">🏗️</span>
+  <div class="bk-row"><span class="bk">C1 · Estructuras</span><span class="count">10 problemas</span></div>
+  <span class="bn">Vigas y estructuras articuladas: reacciones, cortantes, flectores, cerchas y tensores.</span>
+  <div class="dif-row"><span class="dif d1">★</span>×4 <span class="dsep">·</span> <span class="dif d2">★★</span>×4 <span class="dsep">·</span> <span class="dif d3">★★★</span>×2</div>
+</a>
+
+<a href="ponencia_C2.html" class="bc b-C2" data-bloque="C2" data-keywords="c2 máquinas térmicas motor otto diésel ciclo carnot rendimiento termodinámica calor trabajo bomba calor frigorífico cop eer pms pmi cilindrada compresión 2 tiempos 4 tiempos gas ideal">
+  <span class="bi">🔥</span>
+  <div class="bk-row"><span class="bk">C2 · Máquinas térmicas</span><span class="count">4 problemas</span></div>
+  <span class="bn">Ciclos de Otto, Diésel y Carnot, bomba de calor y máquina frigorífica: rendimientos y balances energéticos.</span>
+  <div class="dif-row"><span class="dif d1">★</span>×3 <span class="dsep">·</span> <span class="dif d2">★★</span>×1 <span class="dsep">·</span> <span class="dif d3">★★★</span>×0</div>
+</a>
+
+<a href="ponencia_C3.html" class="bc b-C3" data-bloque="C3" data-keywords="c3 neumática hidráulica oleohidráulica cilindro cilindros doble simple efecto válvula compresor aire comprimido pascal bernoulli caudal presión prensa hidráulica gato fuente tubería bomba iso 1219 actuador">
+  <span class="bi">💨</span>
+  <div class="bk-row"><span class="bk">C3 · Neumática e hidráulica</span><span class="count">7 problemas</span></div>
+  <span class="bn">Cilindros y circuitos ISO 1219, prensa hidráulica, gato, principios de Pascal y Bernoulli aplicados.</span>
+  <div class="dif-row"><span class="dif d1">★</span>×2 <span class="dsep">·</span> <span class="dif d2">★★</span>×3 <span class="dsep">·</span> <span class="dif d3">★★★</span>×2</div>
+</a>
+
+<a href="ponencia_D1.html" class="bc b-D1" data-bloque="D1" data-keywords="d1 corriente alterna ca rlc serie paralelo impedancia reactancia resonancia frecuencia fasorial fasores triángulo potencias factor potencia cos fi activa reactiva aparente monofásica transformador">
+  <span class="bi">⚡</span>
+  <div class="bk-row"><span class="bk">D1 · Corriente alterna</span><span class="count">10 problemas</span></div>
+  <span class="bn">Circuitos RLC serie y paralelo: impedancias, fasorial, resonancia y triángulo de potencias.</span>
+  <div class="dif-row"><span class="dif d1">★</span>×4 <span class="dsep">·</span> <span class="dif d2">★★</span>×6 <span class="dsep">·</span> <span class="dif d3">★★★</span>×0</div>
+</a>
+
+<a href="ponencia_D2.html" class="bc b-D2" data-bloque="D2" data-keywords="d2 electrónica digital tabla verdad karnaugh mapa simplificación nand nor xor puertas lógicas ansi álgebra boole minterms maxterms combinacional suma productos">
+  <span class="bi">🔢</span>
+  <div class="bk-row"><span class="bk">D2 · Electrónica digital</span><span class="count">4 + v2</span></div>
+  <span class="bn">Tablas de verdad, mapas de Karnaugh y síntesis con puertas NAND/NOR. Incluye variante v2 del P1.</span>
+  <div class="dif-row"><span class="dif d1">★</span>×5 <span class="dsep">·</span> <span class="dif d2">★★</span>×0 <span class="dsep">·</span> <span class="dif d3">★★★</span>×0</div>
+</a>
+
+<a href="ponencia_F1.html" class="bc b-F1" data-bloque="F1" data-keywords="f1 sistemas automáticos control lazo abierto cerrado realimentación función transferencia diagrama bloques álgebra reducción pid estabilidad error régimen permanente g1 g2 h servo regulador proceso">
+  <span class="bi">🔄</span>
+  <div class="bk-row"><span class="bk">F1 · Sistemas automáticos</span><span class="count">15 + teoría</span></div>
+  <span class="bn">Diagramas de bloques, lazo cerrado, función de transferencia y reguladores PID. Incluye conceptos previos.</span>
+  <div class="dif-row"><span class="dif d1">★</span>×5 <span class="dsep">·</span> <span class="dif d2">★★</span>×8 <span class="dsep">·</span> <span class="dif d3">★★★</span>×2</div>
+</a>
+
+</div>
+
+<p class="foot">
+Fuente: <em>Problemas de la Ponencia PEvAU de Tecnología e Ingeniería II, Andalucía, curso 2025-26</em>.<br>
+Resoluciones elaboradas siguiendo literalmente los procedimientos y cifras del PDF oficial.<br>
+<a href="../index.html">← Volver al índice general del ecosistema TECI II</a>
+</p>
+
+</div>
+
+<script>
+(function(){
+  var input=document.getElementById('pn-search');
+  var clear=document.getElementById('pn-clear');
+  var info=document.getElementById('pn-info');
+  var cards=document.querySelectorAll('#pn-grid .bc');
+  function norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+  function apply(){
+    var q=norm(input.value.trim());
+    var visible=0;
+    cards.forEach(function(c){
+      var hay=norm((c.dataset.keywords||'')+' '+(c.dataset.bloque||'')+' '+c.textContent);
+      var ok=!q||q.split(/\s+/).every(function(t){return hay.indexOf(t)>=0;});
+      if(ok){c.classList.remove('hidden');visible++;}
+      else c.classList.add('hidden');
+    });
+    if(!q){info.textContent='';}
+    else if(visible===0){info.textContent='Sin coincidencias para "'+input.value+'".';}
+    else{info.textContent=visible+' bloque'+(visible===1?'':'s')+' coincide'+(visible===1?'':'n')+' con "'+input.value+'".';}
+  }
+  input.addEventListener('input',apply);
+  clear.addEventListener('click',function(){input.value='';apply();input.focus();});
+  input.addEventListener('keydown',function(e){if(e.key==='Escape'){input.value='';apply();}});
+})();
+</script>
+
+</body>
+</html>

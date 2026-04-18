@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II — 📏 Unidades y Conversiones PEvAU</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+:root{--az:#1B4F8A;--az2:#2E7BC4;--hub-bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5;--nw:260px;--hh:52px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;font-family:'Barlow',system-ui,sans-serif;background:var(--hub-bg);color:var(--tx)}
+.hd{position:fixed;top:0;left:0;right:0;height:var(--hh);background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;display:flex;align-items:center;padding:0 14px;z-index:1000;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer}.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.7rem;opacity:.6;margin-left:10px}
+.mb{display:none;background:none;border:none;color:#fff;font-size:1.3rem;cursor:pointer;margin-right:8px}
+.home-btn{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;font-size:.72rem;padding:4px 10px;border-radius:4px;cursor:pointer;margin-left:auto;transition:all .15s}
+.home-btn:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.5)}
+.ly{display:flex;position:fixed;top:var(--hh);left:0;right:0;bottom:0}
+.nv{width:var(--nw);flex-shrink:0;background:var(--w);border-right:1px solid var(--bd);overflow-y:auto;padding:44px 0 6px;z-index:500}  /* v2.9: padding-top 44 evita solape con navcross */
+.nb{border-bottom:1px solid #eee}.nb-h{padding:7px 10px;font-size:.76rem;font-weight:500;cursor:pointer;transition:background .15s;display:flex;align-items:center;gap:4px}
+.nb-h:hover{background:#EBF0F7}.nb.act .nb-h{background:var(--az);color:#fff}
+.nc{display:none;padding:0 0 4px}.nb.act .nc{display:block}
+.na{display:block;padding:2px 10px 2px 22px;font-size:.68rem;color:var(--t2);cursor:pointer;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.6}
+.na:hover{background:#EBF0F7;color:var(--az)}
+.ct{flex:1;overflow-y:scroll;-webkit-overflow-scrolling:touch;scroll-padding-top:44px}
+
+:root {
+  --azul:     #1B4F8A;
+  --azul2:    #2E7BC4;
+  --azul-cl:  #DDE9F7;
+  --azul-bg:  #EEF4FB;
+  --naranja:  #D4700A;
+  --naranja-cl:#FEF0DF;
+  --verde:    #1A6B3A;
+  --verde-cl: #E4F4EB;
+  --rojo:     #C0321E;
+  --rojo-cl:  #FCEAE7;
+  --gris:     #F5F6F8;
+  --borde:    #CDD7E3;
+  --texto:    #1A2430;
+  --texto2:   #455565;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Barlow', sans-serif;
+  --cond: 'Barlow Condensed', sans-serif;
+}
+
+/* ── FORMULARIO STYLING ── */
+.formulario-content { padding: 24px 44px 52px; max-width: 100%; }
+.formulario-content h1 { 
+    font-family: var(--cond);
+    font-size: 15pt; font-weight: 700; color: var(--azul);
+    margin: 32px 0 12px; padding: 6px 0;
+    border-bottom: 2px solid var(--azul);
+}
+.formulario-content h1:first-child { margin-top: 0; }
+.formulario-content h2 {
+    font-family: var(--cond);
+    font-size: 12pt; font-weight: 700; color: var(--azul2);
+    margin: 20px 0 8px; padding-left: 9px;
+    border-left: 3px solid #D4700A;
+}
+.formulario-content h3 {
+    font-family: var(--cond);
+    font-size: 10.5pt; font-weight: 700; color: var(--azul);
+    margin: 14px 0 6px;
+}
+.formulario-content table {
+    width: 100%; border-collapse: collapse; margin: 8px 0 16px;
+    font-size: 9.5pt;
+}
+.formulario-content th {
+    background: var(--azul); color: #fff;
+    padding: 6px 10px; text-align: left; font-size: 9pt;
+    font-family: var(--cond); letter-spacing: .7px;
+}
+.formulario-content td {
+    padding: 6px 10px; border: 1px solid #CDD7E3;
+    vertical-align: middle;
+}
+.formulario-content tr:nth-child(even) td { background: #F5F6F8; }
+.formulario-content p { margin: 6px 0; line-height: 1.6; font-size: 10pt; }
+.formulario-content strong { color: var(--azul); font-weight: 600; }
+
+/* ── CAJAS ── */
+.caja{
+  border-radius:5px;
+  padding:12px 16px;
+  margin:12px 0;
+  font-size:10pt;
+}
+.aviso { background:var(--rojo-cl); border-left:4px solid var(--rojo); }
+.clave { background:var(--naranja-cl); border-left:4px solid var(--naranja); }
+.def   { background:var(--azul-bg); border-left:4px solid var(--azul2); }
+.ok    { background:var(--verde-cl); border-left:4px solid var(--verde); }
+
+/* ── PIE ── */
+.pie{
+  background:var(--azul);
+  color:rgba(255,255,255,.65);
+  font-family:var(--sans);
+  font-size:8pt;
+  padding:12px 44px;
+  display:flex;
+  justify-content:space-between;
+}
+
+/* ── MATHJAX ── */
+.math.display { text-align:center; margin:10px 0; }
+.MathJax { font-size:100% !important; }
+
+/* Scroll fix anchors */
+[id]{scroll-margin-top:20px;}
+
+@media(max-width:768px){
+  .mb{display:block}
+  .nv{position:fixed;top:var(--hh);left:0;bottom:0;z-index:900;transform:translateX(-100%)}
+  .nv.open{transform:translateX(0);box-shadow:4px 0 16px rgba(0,0,0,.2)}
+  .formulario-content { padding: 16px 18px 40px; }
+}
+
+@media print{
+  html,body{ background:white; overflow:visible; }
+  .hd,.nv,.pie{ display:none; }
+  .ly{ position:static; display:block; }
+  .ct{ overflow:visible; }
+  .formulario-content h1{ page-break-before:always; }
+  .formulario-content h1:first-child{ page-break-before:avoid; }
+}
+
+
+/* ── NAVCROSS: barra de navegación transversal (Fase D) ── */
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+.navcross span.nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8;align-self:center;user-select:none}
+@media(max-width:640px){.navcross{gap:4px;padding:8px 10px;top:52px}.navcross a span.nc-lbl,.navcross span.nc-current span.nc-lbl{display:none}.navcross .nc-sep{display:none}}
+
+@media print{
+  html,body{background:#fff!important;color:#000!important}
+  .hd,.navcross,.nv,.mb,.home-btn,.sol-btn,.btn-video,.video-group{display:none!important}
+  .ly{position:static!important}
+  .ct{overflow:visible!important;padding:0}
+  .pagina{box-shadow:none!important;max-width:100%}
+  .cabecera{background:#fff!important;color:#000!important}
+  .cab-titulo,.cab-label,.cab-sub{color:#000!important}
+  h2,h3,h4{page-break-after:avoid}
+  .seccion{page-break-inside:avoid}
+  .sol-content{display:block!important}
+  img{max-width:100%;page-break-inside:avoid}
+  a{text-decoration:none;color:#000}
+  .objetivos-box,.decalogo-box{background:#fff!important;border:1px solid #aaa!important}
+}
+/* @media print v2 — ecosistema TECI2 */
+
+</style>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)'],['$','$']],
+    displayMath: [['$$','$$'],['\\[','\\]']],
+    processEscapes: true
+  },
+  options: {
+    skipHtmlTags: ['script','noscript','style','textarea','pre']
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
+<body>
+<div class="hd">
+<button class="mb" onclick="document.getElementById('nv').classList.toggle('open')">☰</button>
+<span class="lg" onclick="location.href='../index.html'">TECI II</span>
+<span class="sb">📏 Unidades y Conversiones PEvAU</span>
+<a href="../index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal"><a href="../index.html" aria-label="Ir al índice principal"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span><a href="../index.html#teoria" aria-label="Ver índice de teoría"><span>📖</span><span class="nc-lbl">Teoría</span></a><span class="nc-sep">·</span><a href="../index.html#ejercicios" aria-label="Ver índice de ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a><span class="nc-sep">·</span><a href="../index.html#examenes" aria-label="Ver índice de exámenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a><span class="nc-sep">·</span><a href="../ponencia_resuelta/index_ponencia.html" aria-label="Ver Ponencia 2025-26 resuelta"><span>📚</span><span class="nc-lbl">Ponencia</span></a><span class="nc-sep">·</span><span class="nc-current" aria-current="page"><span>📚</span><span class="nc-lbl">Apoyo</span></span></nav>
+
+<div class="ly">
+<nav class="nv" id="nv">
+<div class="nb act">
+<div class="nb-h" style="background:var(--az);color:#fff;">📏 Unidades y Conversiones</div>
+<div class="nc" style="display:block;">
+<a class="na" href="#reglas-generales" style="font-weight:600;padding-top:6px;">REGLAS GENERALES</a>
+<a class="na" href="#prefijos-si" style="font-weight:600;padding-top:6px;">PREFIJOS DEL SI</a>
+<a class="na" href="#bloque-b" style="font-weight:600;padding-top:6px;">BLOQUE B — MATERIALES</a>
+<a class="na" href="#b-magnitudes">Magnitudes y unidades</a>
+<a class="na" href="#b-conversiones">Conversiones clave</a>
+<a class="na" href="#b-errores">Errores frecuentes</a>
+<a class="na" href="#bloque-c" style="font-weight:600;padding-top:6px;">BLOQUE C — SIST. MECÁNICOS</a>
+<a class="na" href="#c1-unidades">C1 — Estructuras</a>
+<a class="na" href="#c2-unidades">C2 — Máquinas térmicas</a>
+<a class="na" href="#c3-unidades">C3 — Neumática e Hidráulica</a>
+<a class="na" href="#c-conversiones">Conversiones clave</a>
+<a class="na" href="#c-errores">Errores frecuentes</a>
+<a class="na" href="#bloque-d" style="font-weight:600;padding-top:6px;">BLOQUE D — ELÉCT. Y ELECTRÓN.</a>
+<a class="na" href="#d1-unidades">D1 — Corriente alterna</a>
+<a class="na" href="#d1-conversiones">D1 — Conversiones</a>
+<a class="na" href="#d2-unidades">D2 — Electrónica digital</a>
+<a class="na" href="#d-errores">Errores frecuentes</a>
+<a class="na" href="#bloque-f" style="font-weight:600;padding-top:6px;">BLOQUE F — SIST. AUTOMÁTICOS</a>
+<a class="na" href="#f-unidades">Magnitudes y unidades</a>
+<a class="na" href="#f-errores">Errores frecuentes</a>
+<a class="na" href="#resumen-rapido" style="font-weight:600;padding-top:6px;">RESUMEN RÁPIDO GLOBAL</a>
+</div>
+</div>
+</nav>
+<div class="ct" id="ct">
+<div class="formulario-content">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- REGLAS GENERALES                            -->
+<!-- ═══════════════════════════════════════════ -->
+<h1 id="reglas-generales"><strong>REGLAS GENERALES SOBRE UNIDADES EN LA PEvAU</strong></h1>
+
+<div class="caja aviso">
+⚠ <strong>Sin unidades o con unidades incorrectas = hasta −50% del resultado.</strong> Es la penalización más frecuente en el examen.
+</div>
+
+<table>
+<colgroup><col style="width:5%"><col style="width:95%"></colgroup>
+<tbody>
+<tr class="odd"><td><strong>1</strong></td><td>Escribe SIEMPRE la unidad en cada resultado intermedio y final.</td></tr>
+<tr class="even"><td><strong>2</strong></td><td>Antes de sustituir, comprueba que todas las magnitudes están en unidades coherentes (normalmente SI).</td></tr>
+<tr class="odd"><td><strong>3</strong></td><td>Si una fórmula usa unidades especiales (kp, rpm, mm, bar…), convierte <strong>antes</strong> de sustituir o usa la fórmula con sus unidades propias.</td></tr>
+<tr class="even"><td><strong>4</strong></td><td>Los resultados de presión en Neumática/Hidráulica suelen darse en <strong>bar</strong> o <strong>atm</strong>, no en Pa.</td></tr>
+<tr class="odd"><td><strong>5</strong></td><td>Temperaturas en Carnot → <strong>SIEMPRE en Kelvin</strong>.</td></tr>
+</tbody>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- PREFIJOS SI                                 -->
+<!-- ═══════════════════════════════════════════ -->
+<h1 id="prefijos-si"><strong>PREFIJOS DEL SISTEMA INTERNACIONAL</strong></h1>
+
+<table>
+<colgroup><col style="width:16%"><col style="width:14%"><col style="width:18%"><col style="width:4%"><col style="width:16%"><col style="width:14%"><col style="width:18%"></colgroup>
+<thead>
+<tr><th>Prefijo</th><th>Símbolo</th><th>Factor</th><th></th><th>Prefijo</th><th>Símbolo</th><th>Factor</th></tr>
+</thead>
+<tbody>
+<tr class="odd"><td>tera</td><td>T</td><td>10¹²</td><td></td><td>deci</td><td>d</td><td>10⁻¹</td></tr>
+<tr class="even"><td>giga</td><td>G</td><td>10⁹</td><td></td><td>centi</td><td>c</td><td>10⁻²</td></tr>
+<tr class="odd"><td>mega</td><td>M</td><td>10⁶</td><td></td><td>mili</td><td>m</td><td>10⁻³</td></tr>
+<tr class="even"><td>kilo</td><td>k</td><td>10³</td><td></td><td>micro</td><td>μ</td><td>10⁻⁶</td></tr>
+<tr class="odd"><td>hecto</td><td>h</td><td>10²</td><td></td><td>nano</td><td>n</td><td>10⁻⁹</td></tr>
+<tr class="even"><td>deca</td><td>da</td><td>10¹</td><td></td><td>pico</td><td>p</td><td>10⁻¹²</td></tr>
+</tbody>
+</table>
+
+<div class="caja clave">
+🔑 <strong>Regla rápida de área y volumen:</strong> Al convertir unidades de área, el exponente del factor se <strong>duplica</strong>. Para volumen, se <strong>triplica</strong>.<br>
+Ejemplo: 1 mm² = 10⁻⁶ m² (no 10⁻³). 1 cm³ = 10⁻⁶ m³ (no 10⁻²).
+</div>
+
+<h2 id="conversiones-area-volumen"><strong>Conversiones de área y volumen habituales</strong></h2>
+<table>
+<colgroup><col style="width:40%"><col style="width:30%"><col style="width:30%"></colgroup>
+<tbody>
+<tr class="odd"><td><strong>1 m²</strong></td><td>= 10⁶ mm²</td><td>= 10⁴ cm²</td></tr>
+<tr class="even"><td><strong>1 mm²</strong></td><td>= 10⁻⁶ m²</td><td></td></tr>
+<tr class="odd"><td><strong>1 cm²</strong></td><td>= 10⁻⁴ m²</td><td>= 10² mm²</td></tr>
+<tr class="even"><td><strong>1 m³</strong></td><td>= 10⁹ mm³</td><td>= 10⁶ cm³</td></tr>
+<tr class="odd"><td><strong>1 cm³</strong></td><td>= 10⁻⁶ m³</td><td>= 1 mL</td></tr>
+<tr class="even"><td><strong>1 litro</strong></td><td>= 10⁻³ m³</td><td>= 1000 cm³</td></tr>
+</tbody>
+</table>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- BLOQUE B                                    -->
+<!-- ═══════════════════════════════════════════ -->
+<h1 id="bloque-b"><strong>BLOQUE B — MATERIALES Y FABRICACIÓN (2,5 pts)</strong></h1>
+
+<h2 id="b-magnitudes"><strong>Magnitudes y unidades</strong></h2>
+<table>
+<colgroup><col style="width:24%"><col style="width:18%"><col style="width:28%"><col style="width:30%"></colgroup>
+<thead>
+<tr><th>Magnitud</th><th>Símbolo</th><th>Unidad SI</th><th>Unidades habituales PEvAU</th></tr>
+</thead>
+<tbody>
+<tr class="odd"><td>Fuerza</td><td>$F$</td><td>N (newton)</td><td>kp, kN</td></tr>
+<tr class="even"><td>Tensión / Esfuerzo</td><td>$\sigma$</td><td>Pa (pascal)</td><td><strong>MPa = N/mm²</strong></td></tr>
+<tr class="odd"><td>Deformación unitaria</td><td>$\varepsilon$</td><td>adimensional</td><td>% (porcentaje)</td></tr>
+<tr class="even"><td>Módulo de Young</td><td>$E$</td><td>Pa</td><td><strong>GPa</strong> (10⁹ Pa)</td></tr>
+<tr class="odd"><td>Longitud probeta</td><td>$L_0$</td><td>m</td><td><strong>mm</strong></td></tr>
+<tr class="even"><td>Sección / Área</td><td>$A_0$</td><td>m²</td><td><strong>mm²</strong></td></tr>
+<tr class="odd"><td>Diámetro (probeta, bola, huella)</td><td>$D, d$</td><td>m</td><td><strong>mm</strong></td></tr>
+<tr class="even"><td>Dureza Brinell</td><td>HB</td><td>—</td><td>kp/mm² (fuerza en <strong>kp</strong>)</td></tr>
+<tr class="odd"><td>Dureza Vickers</td><td>HV</td><td>—</td><td>kp/mm² (fuerza en <strong>kp</strong>)</td></tr>
+<tr class="even"><td>Resiliencia Charpy</td><td>$\rho_k$</td><td>J/m²</td><td><strong>J/cm²</strong></td></tr>
+<tr class="odd"><td>Energía absorbida</td><td>$W$</td><td>J (julio)</td><td>J</td></tr>
+</tbody>
+</table>
+
+<h2 id="b-conversiones"><strong>Conversiones clave del Bloque B</strong></h2>
+<table>
+<colgroup><col style="width:35%"><col style="width:35%"><col style="width:30%"></colgroup>
+<tbody>
+<tr class="odd"><td><strong>Fuerza</strong></td><td>$1\,\text{kp} = 9{,}81\,\text{N}$</td><td>Brinell y Vickers usan kp</td></tr>
+<tr class="even"><td><strong>Tensión</strong></td><td>$1\,\text{MPa} = 1\,\text{N/mm²} = 10^6\,\text{Pa}$</td><td>Equivalencia fundamental</td></tr>
+<tr class="odd"><td><strong>Área circular</strong></td><td>$A = \dfrac{\pi D^2}{4}$</td><td>Con $D$ en mm → $A$ en mm²</td></tr>
+<tr class="even"><td><strong>Sección → m²</strong></td><td>$1\,\text{mm}^2 = 10^{-6}\,\text{m}^2$</td><td></td></tr>
+<tr class="odd"><td><strong>Resiliencia</strong></td><td>$1\,\text{J/cm}^2 = 10^4\,\text{J/m}^2$</td><td></td></tr>
+</tbody>
+</table>
+
+<h2 id="b-errores"><strong>Errores frecuentes — Bloque B</strong></h2>
+<div class="caja aviso">
+⚠ <strong>Mezclar N y kp.</strong> La fórmula de HB y HV usa la fuerza en <strong>kp</strong>. Si el enunciado da la fuerza en N, hay que dividir entre 9,81 antes de aplicar la fórmula.
+</div>
+<div class="caja aviso">
+⚠ <strong>Olvidar que 1 MPa = 1 N/mm².</strong> Si tensión y módulo se dan en MPa, las longitudes pueden quedar en mm sin problemas. No es necesario pasar a Pa + m² si todo es coherente.
+</div>
+<div class="caja aviso">
+⚠ <strong>Resiliencia Charpy:</strong> La sección de rotura se mide en cm², no en mm². Si das el resultado en J/cm², indícalo.
+</div>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- BLOQUE C                                    -->
+<!-- ═══════════════════════════════════════════ -->
+<h1 id="bloque-c"><strong>BLOQUE C — SISTEMAS MECÁNICOS (4 pts)</strong></h1>
+
+<h2 id="c1-unidades"><strong>C1 — Estructuras</strong></h2>
+<table>
+<colgroup><col style="width:24%"><col style="width:18%"><col style="width:28%"><col style="width:30%"></colgroup>
+<thead>
+<tr><th>Magnitud</th><th>Símbolo</th><th>Unidad SI</th><th>Habitual PEvAU</th></tr>
+</thead>
+<tbody>
+<tr class="odd"><td>Fuerza / Carga</td><td>$F, P, q$</td><td>N</td><td>kN, N/m (carga repartida)</td></tr>
+<tr class="even"><td>Momento flector</td><td>$M(x)$</td><td>N·m</td><td>kN·m</td></tr>
+<tr class="odd"><td>Esfuerzo cortante</td><td>$V(x)$</td><td>N</td><td>kN</td></tr>
+<tr class="even"><td>Longitud de viga</td><td>$L$</td><td>m</td><td>m</td></tr>
+<tr class="odd"><td>Reacciones</td><td>$R_A, R_B$</td><td>N</td><td>kN</td></tr>
+</tbody>
+</table>
+
+<h2 id="c2-unidades"><strong>C2 — Máquinas térmicas</strong></h2>
+<table>
+<colgroup><col style="width:24%"><col style="width:18%"><col style="width:28%"><col style="width:30%"></colgroup>
+<thead>
+<tr><th>Magnitud</th><th>Símbolo</th><th>Unidad SI</th><th>Habitual PEvAU</th></tr>
+</thead>
+<tbody>
+<tr class="odd"><td>Temperatura</td><td>$T$</td><td>K (kelvin)</td><td>°C (convertir a K para Carnot)</td></tr>
+<tr class="even"><td>Calor</td><td>$Q$</td><td>J</td><td>kJ, kcal</td></tr>
+<tr class="odd"><td>Trabajo</td><td>$W$</td><td>J</td><td>kJ</td></tr>
+<tr class="even"><td>Potencia</td><td>$P, N$</td><td>W (vatio)</td><td>kW, CV</td></tr>
+<tr class="odd"><td>Rendimiento</td><td>$\eta$</td><td>adimensional</td><td>% (multiplicar ×100)</td></tr>
+<tr class="even"><td>Par motor</td><td>$M_m$</td><td>N·m</td><td>N·m</td></tr>
+<tr class="odd"><td>Velocidad angular</td><td>$\omega$</td><td>rad/s</td><td>rpm (convertir)</td></tr>
+<tr class="even"><td>Cilindrada unitaria</td><td>$V_D$</td><td>m³</td><td><strong>cm³ (cc)</strong></td></tr>
+<tr class="odd"><td>Presión media efectiva</td><td>$p_{me}$</td><td>Pa</td><td><strong>bar, atm</strong></td></tr>
+<tr class="even"><td>Consumo específico</td><td>$c_e$</td><td>kg/J</td><td><strong>g/(kW·h)</strong></td></tr>
+<tr class="odd"><td>Poder calorífico</td><td>$P_c$</td><td>J/kg</td><td><strong>kJ/kg</strong></td></tr>
+</tbody>
+</table>
+
+<h2 id="c3-unidades"><strong>C3 — Neumática e Hidráulica</strong></h2>
+<table>
+<colgroup><col style="width:24%"><col style="width:18%"><col style="width:28%"><col style="width:30%"></colgroup>
+<thead>
+<tr><th>Magnitud</th><th>Símbolo</th><th>Unidad SI</th><th>Habitual PEvAU</th></tr>
+</thead>
+<tbody>
+<tr class="odd"><td>Presión</td><td>$p$</td><td>Pa</td><td><strong>bar, atm</strong></td></tr>
+<tr class="even"><td>Fuerza cilindro</td><td>$F$</td><td>N</td><td>N, kN</td></tr>
+<tr class="odd"><td>Área émbolo</td><td>$A$</td><td>m²</td><td><strong>cm², mm²</strong></td></tr>
+<tr class="even"><td>Caudal</td><td>$Q$</td><td>m³/s</td><td><strong>L/min, cm³/s</strong></td></tr>
+<tr class="odd"><td>Velocidad cilindro</td><td>$v$</td><td>m/s</td><td>m/s, cm/s</td></tr>
+<tr class="even"><td>Densidad</td><td>$\rho$</td><td>kg/m³</td><td>kg/m³</td></tr>
+<tr class="odd"><td>Peso específico</td><td>$\gamma$</td><td>N/m³</td><td>N/m³</td></tr>
+<tr class="even"><td>Altura manométrica</td><td>$h$</td><td>m</td><td>m, mm (manómetros)</td></tr>
+</tbody>
+</table>
+
+<h2 id="c-conversiones"><strong>Conversiones clave del Bloque C</strong></h2>
+<table>
+<colgroup><col style="width:35%"><col style="width:35%"><col style="width:30%"></colgroup>
+<tbody>
+<tr class="odd"><td><strong>Temperatura</strong></td><td>$T(K) = T(°C) + 273$</td><td>Obligatorio en Carnot</td></tr>
+<tr class="even"><td><strong>Potencia</strong></td><td>$1\,\text{CV} = 736\,\text{W}$</td><td></td></tr>
+<tr class="odd"><td><strong>Vel. angular</strong></td><td>$\omega = \dfrac{2\pi \cdot n}{60}$</td><td>$n$ en rpm → $\omega$ en rad/s</td></tr>
+<tr class="even"><td><strong>Presión</strong></td><td>$1\,\text{atm} = 101\,325\,\text{Pa} \approx 1\,\text{bar}$</td><td></td></tr>
+<tr class="odd"><td><strong>Presión</strong></td><td>$1\,\text{bar} = 10^5\,\text{Pa}$</td><td></td></tr>
+<tr class="even"><td><strong>Cilindrada</strong></td><td>$1\,\text{cm}^3 = 10^{-6}\,\text{m}^3$</td><td></td></tr>
+<tr class="odd"><td><strong>Caudal</strong></td><td>$1\,\text{L/min} = \dfrac{10^{-3}}{60}\,\text{m}^3/\text{s}$</td><td></td></tr>
+<tr class="even"><td><strong>Área émbolo</strong></td><td>$1\,\text{cm}^2 = 10^{-4}\,\text{m}^2$</td><td></td></tr>
+<tr class="odd"><td><strong>Energía</strong></td><td>$1\,\text{kcal} = 4\,186\,\text{J}$</td><td></td></tr>
+<tr class="even"><td><strong>Consumo específico</strong></td><td>$1\,\text{g/(kW·h)} = \dfrac{10^{-3}}{3{,}6 \times 10^6}\,\text{kg/J}$</td><td></td></tr>
+</tbody>
+</table>
+
+<div class="caja clave">
+🔑 <strong>Truco de presión × área:</strong> Si usas presión en <strong>bar</strong> y área en <strong>cm²</strong>, la fuerza sale en <strong>N</strong> directamente (1 bar × 1 cm² = 10⁵ Pa × 10⁻⁴ m² = 10 N). Pero es más seguro pasar todo a SI.
+</div>
+
+<h2 id="c-errores"><strong>Errores frecuentes — Bloque C</strong></h2>
+<div class="caja aviso">
+⚠ <strong>Carnot en °C.</strong> El error más penalizado. $\eta_{Carnot} = 1 - \frac{T_f}{T_c}$ exige temperaturas en <strong>Kelvin</strong>.
+</div>
+<div class="caja aviso">
+⚠ <strong>rpm en fórmulas de potencia.</strong> $N = M_m \cdot \omega$ necesita $\omega$ en rad/s, no en rpm. Convertir siempre con $\omega = 2\pi n / 60$.
+</div>
+<div class="caja aviso">
+⚠ <strong>Cilindrada en cm³ vs m³.</strong> Si $p_{me}$ está en Pa, la cilindrada debe estar en m³. Si mezclas cm³ con Pa, el resultado sale multiplicado por 10⁶.
+</div>
+<div class="caja aviso">
+⚠ <strong>Confundir presión absoluta y relativa.</strong> En neumática, la presión de trabajo suele ser relativa (manométrica). Para cálculos con ley de Boyle: $p_{abs} = p_{rel} + p_{atm}$.
+</div>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- BLOQUE D                                    -->
+<!-- ═══════════════════════════════════════════ -->
+<h1 id="bloque-d"><strong>BLOQUE D — SIST. ELÉCTRICOS Y ELECTRÓNICOS (2,5 pts)</strong></h1>
+
+<h2 id="d1-unidades"><strong>D1 — Corriente alterna: magnitudes y unidades</strong></h2>
+<table>
+<colgroup><col style="width:24%"><col style="width:18%"><col style="width:28%"><col style="width:30%"></colgroup>
+<thead>
+<tr><th>Magnitud</th><th>Símbolo</th><th>Unidad SI</th><th>Notas PEvAU</th></tr>
+</thead>
+<tbody>
+<tr class="odd"><td>Tensión (valor eficaz)</td><td>$V$</td><td>V (voltio)</td><td>Red: 230 V</td></tr>
+<tr class="even"><td>Tensión máxima</td><td>$V_0, \hat{V}$</td><td>V</td><td>$V_0 = V\sqrt{2}$</td></tr>
+<tr class="odd"><td>Intensidad (eficaz)</td><td>$I$</td><td>A (amperio)</td><td>mA en electrónica</td></tr>
+<tr class="even"><td>Frecuencia</td><td>$f$</td><td>Hz (hercio)</td><td>Red: 50 Hz</td></tr>
+<tr class="odd"><td>Pulsación</td><td>$\omega$</td><td>rad/s</td><td>$\omega = 2\pi f$ → Red: 314 rad/s</td></tr>
+<tr class="even"><td>Resistencia</td><td>$R$</td><td>Ω (ohmio)</td><td>kΩ, MΩ</td></tr>
+<tr class="odd"><td>Reactancia inductiva</td><td>$X_L$</td><td>Ω</td><td>$X_L = \omega L = 2\pi f L$</td></tr>
+<tr class="even"><td>Reactancia capacitiva</td><td>$X_C$</td><td>Ω</td><td>$X_C = \dfrac{1}{\omega C} = \dfrac{1}{2\pi f C}$</td></tr>
+<tr class="odd"><td>Impedancia</td><td>$Z$</td><td>Ω</td><td></td></tr>
+<tr class="even"><td>Inductancia</td><td>$L$</td><td>H (henrio)</td><td>mH (10⁻³ H)</td></tr>
+<tr class="odd"><td>Capacitancia</td><td>$C$</td><td>F (faradio)</td><td><strong>μF</strong> (10⁻⁶ F)</td></tr>
+<tr class="even"><td>Potencia activa</td><td>$P$</td><td>W (vatio)</td><td>kW</td></tr>
+<tr class="odd"><td>Potencia reactiva</td><td>$Q$</td><td>VAr</td><td></td></tr>
+<tr class="even"><td>Potencia aparente</td><td>$S$</td><td>VA</td><td></td></tr>
+<tr class="odd"><td>Factor de potencia</td><td>$\cos\varphi$</td><td>adimensional</td><td>0 ≤ cos φ ≤ 1</td></tr>
+<tr class="even"><td>Ángulo de fase</td><td>$\varphi$</td><td>rad</td><td>° (grados) habitual</td></tr>
+</tbody>
+</table>
+
+<h2 id="d1-conversiones"><strong>D1 — Conversiones de CA</strong></h2>
+<table>
+<colgroup><col style="width:35%"><col style="width:35%"><col style="width:30%"></colgroup>
+<tbody>
+<tr class="odd"><td><strong>Inductancia</strong></td><td>$1\,\text{mH} = 10^{-3}\,\text{H}$</td><td></td></tr>
+<tr class="even"><td><strong>Capacitancia</strong></td><td>$1\,\mu\text{F} = 10^{-6}\,\text{F}$</td><td>Muy frecuente en PEvAU</td></tr>
+<tr class="odd"><td><strong>Capacitancia</strong></td><td>$1\,\text{nF} = 10^{-9}\,\text{F}$</td><td></td></tr>
+<tr class="even"><td><strong>Capacitancia</strong></td><td>$1\,\text{pF} = 10^{-12}\,\text{F}$</td><td></td></tr>
+<tr class="odd"><td><strong>Eficaz ↔ Máximo</strong></td><td>$V_0 = V\sqrt{2} \quad;\quad V = \dfrac{V_0}{\sqrt{2}}$</td><td>Igual para $I$</td></tr>
+<tr class="even"><td><strong>Ángulo</strong></td><td>$\pi\,\text{rad} = 180°$</td><td></td></tr>
+<tr class="odd"><td><strong>Red eléctrica España</strong></td><td>$f = 50\,\text{Hz};\; \omega = 314\,\text{rad/s};\; V = 230\,\text{V}$</td><td>Datos implícitos</td></tr>
+</tbody>
+</table>
+
+<div class="caja clave">
+🔑 <strong>Coherencia en $X_L$ y $X_C$:</strong> Si $L$ está en mH, conviértelo a H <strong>antes</strong> de calcular $X_L = \omega L$. Si $C$ está en μF, conviértelo a F <strong>antes</strong> de calcular $X_C$.
+</div>
+
+<h2 id="d2-unidades"><strong>D2 — Electrónica digital</strong></h2>
+<table>
+<colgroup><col style="width:24%"><col style="width:18%"><col style="width:28%"><col style="width:30%"></colgroup>
+<thead>
+<tr><th>Concepto</th><th>Símbolo</th><th>Valores</th><th>Notas</th></tr>
+</thead>
+<tbody>
+<tr class="odd"><td>Nivel lógico</td><td>0 / 1</td><td>Bajo / Alto</td><td>No tiene unidad física</td></tr>
+<tr class="even"><td>Variables booleanas</td><td>$A, B, C…$</td><td>{0, 1}</td><td></td></tr>
+<tr class="odd"><td>Nº combinaciones</td><td></td><td>$2^n$</td><td>$n$ = nº variables de entrada</td></tr>
+</tbody>
+</table>
+<p><em>El Bloque D2 no requiere conversiones de unidades. Los errores son de álgebra de Boole y simplificación por Karnaugh, no de unidades.</em></p>
+
+<h2 id="d-errores"><strong>Errores frecuentes — Bloque D</strong></h2>
+<div class="caja aviso">
+⚠ <strong>μF sin convertir a F.</strong> Es el error nº 1 en problemas de CA. Si $C = 47\,\mu\text{F}$, debes usar $47 \times 10^{-6}$ en la fórmula $X_C = 1/(\omega C)$.
+</div>
+<div class="caja aviso">
+⚠ <strong>Confundir valor eficaz y máximo.</strong> Las fórmulas de potencia ($P = V \cdot I \cdot \cos\varphi$) usan valores <strong>eficaces</strong>. Si el enunciado da $V_0$, divide entre $\sqrt{2}$.
+</div>
+<div class="caja aviso">
+⚠ <strong>Ángulo en grados vs radianes.</strong> La calculadora debe estar en el modo correcto. $\cos(60°) = 0{,}5$ pero $\cos(60\,\text{rad}) \neq 0{,}5$.
+</div>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- BLOQUE F                                    -->
+<!-- ═══════════════════════════════════════════ -->
+<h1 id="bloque-f"><strong>BLOQUE F — SISTEMAS AUTOMÁTICOS (1 pt)</strong></h1>
+
+<h2 id="f-unidades"><strong>Magnitudes y unidades</strong></h2>
+<table>
+<colgroup><col style="width:24%"><col style="width:18%"><col style="width:28%"><col style="width:30%"></colgroup>
+<thead>
+<tr><th>Magnitud</th><th>Símbolo</th><th>Unidad</th><th>Notas</th></tr>
+</thead>
+<tbody>
+<tr class="odd"><td>Función de transferencia</td><td>$G(s), H(s)$</td><td>adimensional*</td><td>*Depende de magnitudes E/S</td></tr>
+<tr class="even"><td>Entrada / Referencia</td><td>$R(s)$</td><td>Según contexto</td><td>°C, V, rpm…</td></tr>
+<tr class="odd"><td>Salida</td><td>$C(s), Y(s)$</td><td>Según contexto</td><td>Misma que la entrada en lazo cerrado ideal</td></tr>
+<tr class="even"><td>Error</td><td>$E(s)$</td><td>Según contexto</td><td>$E(s) = R(s) - C(s)$</td></tr>
+<tr class="odd"><td>Ganancia estática</td><td>$K$</td><td>adimensional</td><td>$G(0) = K$ si estable</td></tr>
+</tbody>
+</table>
+
+<div class="caja def">
+📘 <strong>En el Bloque F no hay conversiones de unidades propiamente dichas.</strong> Los ejercicios son de álgebra de bloques y funciones de transferencia. El error habitual es algebraico, no de unidades.
+</div>
+
+<h2 id="f-errores"><strong>Errores frecuentes — Bloque F</strong></h2>
+<div class="caja aviso">
+⚠ <strong>Signo en el comparador.</strong> En realimentación negativa: $E(s) = R(s) - H(s) \cdot C(s)$. Confundir el signo cambia completamente la FdT del sistema.
+</div>
+<div class="caja aviso">
+⚠ <strong>Simplificar antes de reducir.</strong> No se puede simplificar directamente si hay bloques en cascada con ramas intermedias. Hay que seguir las reglas de álgebra de bloques paso a paso.
+</div>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- RESUMEN RÁPIDO GLOBAL                       -->
+<!-- ═══════════════════════════════════════════ -->
+<h1 id="resumen-rapido"><strong>RESUMEN RÁPIDO — CONVERSIONES MÁS USADAS EN PEvAU</strong></h1>
+
+<table>
+<colgroup><col style="width:30%"><col style="width:40%"><col style="width:30%"></colgroup>
+<thead>
+<tr><th>Conversión</th><th>Valor</th><th>Bloques donde aparece</th></tr>
+</thead>
+<tbody>
+<tr class="odd"><td><strong>kp → N</strong></td><td>$1\,\text{kp} = 9{,}81\,\text{N}$</td><td>B</td></tr>
+<tr class="even"><td><strong>MPa → Pa</strong></td><td>$1\,\text{MPa} = 10^6\,\text{Pa} = 1\,\text{N/mm}^2$</td><td>B</td></tr>
+<tr class="odd"><td><strong>GPa → Pa</strong></td><td>$1\,\text{GPa} = 10^9\,\text{Pa}$</td><td>B</td></tr>
+<tr class="even"><td><strong>mm² → m²</strong></td><td>$1\,\text{mm}^2 = 10^{-6}\,\text{m}^2$</td><td>B, C, D</td></tr>
+<tr class="odd"><td><strong>cm² → m²</strong></td><td>$1\,\text{cm}^2 = 10^{-4}\,\text{m}^2$</td><td>B, C</td></tr>
+<tr class="even"><td><strong>cm³ → m³</strong></td><td>$1\,\text{cm}^3 = 10^{-6}\,\text{m}^3$</td><td>C</td></tr>
+<tr class="odd"><td><strong>L → m³</strong></td><td>$1\,\text{L} = 10^{-3}\,\text{m}^3$</td><td>C</td></tr>
+<tr class="even"><td><strong>°C → K</strong></td><td>$T(K) = T(°C) + 273$</td><td>C</td></tr>
+<tr class="odd"><td><strong>CV → W</strong></td><td>$1\,\text{CV} = 736\,\text{W}$</td><td>C</td></tr>
+<tr class="even"><td><strong>rpm → rad/s</strong></td><td>$\omega = \dfrac{2\pi n}{60}$</td><td>C, D</td></tr>
+<tr class="odd"><td><strong>atm → Pa</strong></td><td>$1\,\text{atm} = 101\,325\,\text{Pa}$</td><td>C</td></tr>
+<tr class="even"><td><strong>bar → Pa</strong></td><td>$1\,\text{bar} = 10^5\,\text{Pa}$</td><td>C</td></tr>
+<tr class="odd"><td><strong>kcal → J</strong></td><td>$1\,\text{kcal} = 4\,186\,\text{J}$</td><td>C</td></tr>
+<tr class="even"><td><strong>μF → F</strong></td><td>$1\,\mu\text{F} = 10^{-6}\,\text{F}$</td><td>D</td></tr>
+<tr class="odd"><td><strong>mH → H</strong></td><td>$1\,\text{mH} = 10^{-3}\,\text{H}$</td><td>D</td></tr>
+<tr class="even"><td><strong>° → rad</strong></td><td>$\pi\,\text{rad} = 180°$</td><td>D</td></tr>
+</tbody>
+</table>
+
+<div class="caja ok">
+✅ <strong>Constantes de la red eléctrica española:</strong> $f = 50\,\text{Hz}$, $\omega = 314\,\text{rad/s}$, $V = 230\,\text{V}$
+</div>
+<div class="caja ok">
+✅ <strong>Constantes físicas:</strong> $g = 9{,}81\,\text{m/s}^2$ · $\rho_{\text{agua}} = 1000\,\text{kg/m}^3$ · $\gamma_{\text{agua}} = 9810\,\text{N/m}^3$ · $\rho_{\text{Hg}} = 13\,600\,\text{kg/m}^3$
+</div>
+<div class="caja ok">
+✅ <strong>Poderes caloríficos:</strong> Gasolina $P_c \approx 44\,000\,\text{kJ/kg}$ · Gasóleo $P_c \approx 42\,000\,\text{kJ/kg}$
+</div>
+
+<div class="pie">
+  <span>TECI II · Unidades y Conversiones PEvAU · IES Jiménez de Quesada</span>
+  <span>2025 – 2026</span>
+</div>
+
+</div><!-- /formulario-content -->
+</div><!-- /ct -->
+</div><!-- /ly -->
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if(typeof MathJax !== 'undefined' && MathJax.typeset) MathJax.typeset();
+});
+</script>
+<script>
+(function(){
+  const container = document.getElementById('ct');
+  if(!container) return;
+
+  function jumpToHash(hash, smooth){
+    const raw = (hash || window.location.hash || '').trim();
+    if(!raw || raw === '#') return;
+    const id = decodeURIComponent(raw.slice(1));
+    const target = document.getElementById(id);
+    if(!target) return;
+
+    const cRect = container.getBoundingClientRect();
+    const tRect = target.getBoundingClientRect();
+    const top = container.scrollTop + (tRect.top - cRect.top) - 10;
+    container.scrollTo({ top: Math.max(0, top), behavior: smooth ? 'smooth' : 'auto' });
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(ev){
+      const href = this.getAttribute('href');
+      if(!href || href === '#') return;
+      const id = href.slice(1);
+      const target = document.getElementById(id);
+      if(!target) return;
+      ev.preventDefault();
+      jumpToHash(href, false);
+      if(history.replaceState){
+        history.replaceState(null, '', href);
+      } else {
+        window.location.hash = href;
+      }
+    });
+  });
+
+  window.addEventListener('hashchange', function(){
+    jumpToHash(window.location.hash, false);
+  });
+
+  window.addEventListener('load', function(){
+    if(window.location.hash){
+      setTimeout(function(){ jumpToHash(window.location.hash, false); }, 50);
+    }
+  });
+})();
+</script>
+</body>
+</html>
