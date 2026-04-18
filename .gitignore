@@ -9,7 +9,10 @@
 
 # === Material privado del profesor ===
 _soluciones/
-documentacion/
+# Carpeta documentacion: ignorada salvo los 2 PDFs oficiales públicos
+documentacion/*
+!documentacion/Orientaciones_2025_26.pdf
+!documentacion/Problemas_Ponencia_2025_26.pdf
 
 # === Documentos internos del proyecto ===
 INFORME_EJECUCION_v2_9_4.md
