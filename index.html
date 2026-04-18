@@ -9,9 +9,13 @@
 :root{--az:#1B4F8A;--az2:#2E7BC4;--hub-bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:radial-gradient(circle at top,#F9FBFE 0,#F4F6F9 40%,#EEF2F7 100%);color:var(--tx);overflow-x:hidden}
-.hd{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:22px 24px 20px;text-align:center;box-shadow:0 6px 20px rgba(27,79,138,.12)}
-.hd h1{font-family:'Barlow Condensed',sans-serif;font-size:1.78rem;font-weight:700;margin-bottom:4px}
-.hd p{font-size:.86rem;opacity:.82;max-width:620px;margin:0 auto;line-height:1.5}
+.hd{position:relative;background:linear-gradient(rgba(15,30,55,.42),rgba(15,30,55,.62)),url('img/fachadaiesjdq.png') center/cover no-repeat;color:#fff;padding:70px 24px 60px;display:flex;align-items:center;justify-content:center;gap:24px;box-shadow:0 6px 20px rgba(27,79,138,.18);min-height:340px}
+.hd-logo{flex-shrink:0;width:92px;height:92px;background:#fff;border-radius:16px;padding:7px;box-shadow:0 8px 22px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center}
+.hd-logo img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.hd-text{text-align:center;min-width:0;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.hd h1{font-family:'Barlow Condensed',sans-serif;font-size:2.2rem;font-weight:700;margin-bottom:8px;letter-spacing:.01em}
+.hd p{font-size:.96rem;opacity:.95;max-width:640px;margin:0 auto;line-height:1.55}
+@media(max-width:520px){.hd{flex-direction:column;gap:14px;padding:44px 20px 38px;min-height:280px}.hd-logo{width:76px;height:76px}.hd h1{font-size:1.7rem}.hd p{font-size:.86rem}}
 .main{max-width:1080px;margin:0 auto;padding:22px 20px 50px}
 .section-title{font-family:'Barlow Condensed',sans-serif;font-size:1.14rem;font-weight:700;color:var(--az);margin:22px 0 10px;padding-left:4px;display:flex;align-items:center;gap:8px;letter-spacing:.02em;border-bottom:1px solid #E2E8F0;padding-bottom:6px}
 .section-title:first-of-type{margin-top:0}
@@ -36,6 +40,12 @@ html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:
 .bc.pending{opacity:.55;pointer-events:none;cursor:default;background:linear-gradient(180deg,#FAFAFC 0,#F4F5F8 100%)}
 .bc.pending .bk{color:var(--t2)}
 .bc.pending::before{background:linear-gradient(90deg,#C9CFD8,#8C97A8)!important}
+.aviso-construccion{max-width:720px;margin:36px auto 18px;padding:18px 24px;background:#F9FAFC;border-left:4px solid var(--az);border-radius:4px;font-size:.88rem;line-height:1.6;color:var(--tx)}
+.aviso-construccion h3{font-family:'Barlow Condensed',sans-serif;font-size:1.08rem;font-weight:700;color:var(--az);margin-bottom:10px;letter-spacing:.01em}
+.aviso-construccion p{margin:0 0 8px}
+.aviso-construccion p:last-child{margin-bottom:0}
+.aviso-construccion a{color:var(--az);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+.aviso-construccion a:hover{color:var(--az2)}
 .pending-badge{position:absolute;top:8px;right:8px;font-family:'Barlow Condensed',sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.04em;padding:3px 9px;border-radius:999px;background:linear-gradient(135deg,#E2E6EC,#C9CFD8);color:#3A4250;border:1.5px solid #B5BCC6;text-transform:uppercase;line-height:1.2;box-shadow:0 2px 6px rgba(60,70,90,.15)}
 .bc.destacada::before{background:linear-gradient(90deg,#F6B26B,#2E7BC4,#7BCB92)}
 .bc.destacada{border-color:rgba(27,79,138,.25);background:linear-gradient(180deg,#FDFBFF 0,#F4F9FD 100%)}
@@ -144,10 +154,13 @@ html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:
 </head>
 <body>
 <div class="hd">
+<div class="hd-logo"><img src="img/logoantiguo.jpg" alt="Logo IES Jiménez de Quesada"></div>
+<div class="hd-text">
 <h1>Tecnología e Ingeniería II</h1>
-<p>Profesor: Manuel Alonso Herrera<br>Apuntes completos PAU Andalucía 2025–2026<br>11 bloques de teoría · 121 ejercicios resueltos · 12 exámenes oficiales · 57 problemas de la Ponencia resueltos (56 oficiales + 1 variante)</p>
+<p>IES Jiménez de Quesada · Santa Fe (Granada)<br>Profesor: Manuel Alonso Herrera</p>
 </div>
-<nav class="navcross" role="navigation" aria-label="Navegación transversal"><span class="nc-current" aria-current="page"><span>🏠</span><span class="nc-lbl">Índice</span></span><span class="nc-sep">·</span><a href="index.html#teoria" aria-label="Ver índice de teoría"><span>📖</span><span class="nc-lbl">Teoría</span></a><span class="nc-sep">·</span><a href="index.html#ejercicios" aria-label="Ver índice de ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a><span class="nc-sep">·</span><a href="index.html#examenes" aria-label="Ver índice de exámenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a><span class="nc-sep">·</span><a href="ponencia_resuelta/index_ponencia.html" aria-label="Ver Ponencia 2025-26 resuelta"><span>📚</span><span class="nc-lbl">Ponencia</span></a><span class="nc-sep">·</span><a href="apoyo/formulario.html" aria-label="Ir al material de apoyo"><span>📚</span><span class="nc-lbl">Apoyo</span></a></nav>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal"><span class="nc-current" aria-current="page"><span>🏠</span><span class="nc-lbl">Índice</span></span><span class="nc-sep">·</span><a href="index.html#teoria" aria-label="Ver índice de teoría"><span>📖</span><span class="nc-lbl">Teoría</span></a><span class="nc-sep">·</span><a href="index.html#ejercicios" aria-label="Ver índice de ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a><span class="nc-sep">·</span><a href="index.html#examenes" aria-label="Ver índice de exámenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a><span class="nc-sep">·</span><a href="ponencia_resuelta/index_ponencia.html" aria-label="Ver Ponencia 2025-26 resuelta"><span>📚</span><span class="nc-lbl">Ponencia</span></a><span class="nc-sep">·</span><a href="apoyo/formulario.html" aria-label="Ir al Formulario PEvAU"><span>📐</span><span class="nc-lbl">Formulario</span></a></nav>
 
 <div class="searchbar" role="search"><input type="search" id="gl-search" placeholder="🔍 Buscar en todo el ecosistema..." aria-label="Buscar en el ecosistema"></div>
 
@@ -185,7 +198,9 @@ html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:
 <a href="ponencia_resuelta/index_ponencia.html" class="bc destacada" data-keywords="ponencia resuelta problemas resueltos paso a paso ensayos estructuras termicas neumatica hidraulica alterna digital automaticos pevau andalucia oficial 56 57 problemas variante brinell vickers charpy traccion temple otto diesel carnot bomba calor frigorifico cilindro bernoulli pascal rlc fasorial resonancia karnaugh nand nor viga empotrada apoyada voladizo pid lazo cerrado transferencia" aria-label="Ir a Ponencia 2025-26 resuelta — 56 problemas oficiales + 1 variante con procedimiento paso a paso"><span class="bi">📚</span><span class="bk">Ponencia resuelta</span><span class="bn">56 problemas oficiales + 1 variante · 7 bloques · procedimiento paso a paso colapsable</span></a>
 </div>
 
-<!-- ══ 4. EXÁMENES TIPO 2025-26 (simulacros del curso actual) ══ -->
+<!-- ══ 4. EXÁMENES TIPO 2025-26 (simulacros del curso actual) — OCULTOS ══ -->
+<!-- Para volver a mostrar esta sección: quita las líneas "<!--" y "-- >" que rodean el bloque (sin el espacio del cierre). -->
+<!--
 <div class="section-title">🧪 Exámenes tipo PEvAU 2025-26</div>
 <table class="exam-table" data-section="tipo" aria-label="Tabla de exámenes tipo PEvAU 2025-26">
 <thead>
@@ -202,6 +217,9 @@ html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:
 </tbody>
 </table>
 <p style="font-size:.72rem;color:var(--t2);margin:6px 0 0;"><span style="color:#8C4400;">⭐ Recomendado para empezar</span> · 7 simulacros alineados con la Ponencia 2025-26 · todos cumplen la estructura PEvAU (4 apartados · 2,5 pt cada uno)</p>
+-->
+<!-- fin sección oculta -->
+
 
 <!-- ══ 5. EXÁMENES OFICIALES PAU 2024-25 (historial) ══ -->
 <div class="section-title" id="examenes">📝 Exámenes PAU · convocatorias oficiales</div>
@@ -267,7 +285,13 @@ html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:
 
 </div>
 
-<p class="foot">IES Jiménez de Quesada · Santa Fe, Granada<br>Cada bloque es un archivo independiente — abre solo lo que necesites.</p>
+<div class="aviso-construccion">
+<h3>Nota</h3>
+<p>Este sitio está en desarrollo. Es probable que encuentres alguna errata, enlace inactivo o sección pendiente de completar.</p>
+<p>Si detectas algo o tienes alguna sugerencia, agradeceré que me escribas a <a href="mailto:malonso72@gmail.com?subject=TECI%20II%20%E2%80%94%20IES%20Jim%C3%A9nez%20de%20Quesada">malonso72@gmail.com</a> indicando la página y el detalle. Tu aportación ayuda a mejorar el material del curso.</p>
+</div>
+
+<p class="foot">IES Jiménez de Quesada · Santa Fe, Granada<br>© 2025-26 Manuel Alonso Herrera</p>
 </div>
 
 <script>
