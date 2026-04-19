@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II — Presa de las Tres Gargantas · Trabajo integrador</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script>
+MathJax = {tex: {inlineMath: [['\\(','\\)'],['$','$']], displayMath: [['\\[','\\]'],['$$','$$']]}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+<style>
+:root{--az:#1B4F8A;--az2:#2E7BC4;--or:#D4700A;--t:#23272F;--t2:#555D6B;--bd:#D8DDE5;--bg:#F4F6F9;--hh:52px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Barlow',system-ui,sans-serif;background:#CBD5E1;color:var(--t);scroll-behavior:smooth}
+.hd{position:sticky;top:0;background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:14px 24px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 10px rgba(0,0,0,.15);z-index:100}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;cursor:pointer}.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.8rem;opacity:.85;flex:1}
+.home-btn{background:rgba(255,255,255,.12);color:#fff;text-decoration:none;font-size:.78rem;padding:5px 12px;border-radius:6px;border:1px solid rgba(255,255,255,.25)}
+.home-btn:hover{background:rgba(255,255,255,.22)}
+.navcross{background:#F4F6F9;border-bottom:1px solid var(--bd);padding:9px 20px;display:flex;gap:8px;flex-wrap:wrap;font-size:.78rem;position:sticky;top:var(--hh);z-index:90}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:var(--t);background:#fff;border-color:var(--bd)}
+.navcross a:hover{background:#EBF0F7;border-color:var(--az);color:var(--az)}
+.navcross span.nc-current{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;border-color:var(--az);font-weight:600}
+.navcross .nc-sep{color:#8C97A8;align-self:center;user-select:none}
+main{max-width:870px;margin:0 auto;background:#fff;box-shadow:0 6px 48px rgba(0,0,0,.18);padding:40px 50px 80px;min-height:80vh}
+main h1{font-family:'Barlow Condensed',sans-serif;font-size:2rem;color:var(--az);margin-top:28px;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--az)}
+main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;color:var(--az2);margin-top:28px;margin-bottom:10px;padding-left:10px;border-left:4px solid var(--or)}
+main h3{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;color:var(--az);margin-top:20px;margin-bottom:8px}
+main p{margin:0 0 10px;line-height:1.68}
+main ul,main ol{margin:0 0 14px 24px;line-height:1.68}
+main li{margin-bottom:4px}
+main table{border-collapse:collapse;margin:14px 0;font-size:.92rem;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+main table th,main table td{border:1px solid var(--bd);padding:6px 12px;text-align:left;vertical-align:top}
+main table th{background:var(--az);color:#fff;font-weight:700;font-size:.85rem}
+main table tr:nth-child(even) td{background:#F5F6F8}
+main blockquote{border-left:4px solid var(--or);background:#FFF9EC;padding:10px 18px;margin:14px 0;font-style:italic;color:#5A3900}
+main hr{border:none;border-top:1px solid var(--bd);margin:26px 0}
+main strong{color:var(--az)}
+.titular{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:28px 32px;margin:-40px -50px 28px;text-align:center}
+.titular h1{color:#fff;border:none;margin:0;font-size:2.4rem;padding:0}
+.titular .subtitulo{font-size:1.1rem;opacity:.92;margin-top:6px;font-style:italic}
+.meta-box{background:#F0F6FD;border:1px solid #BAD0EA;border-left:5px solid var(--az);border-radius:4px;padding:14px 20px;margin:0 0 32px;font-size:.92rem}
+.meta-box p{margin:0 0 4px}.meta-box p:last-child{margin-bottom:0}
+.meta-box strong{color:var(--az)}
+footer{max-width:870px;margin:20px auto 40px;padding:18px 30px;text-align:center;color:var(--t2);font-size:.78rem;background:#fff;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+@media(max-width:700px){main{padding:32px 20px 40px}.titular{margin:-32px -20px 20px;padding:20px 18px}.titular h1{font-size:1.7rem}.hd{padding:10px 14px}}
+</style>
+</head>
+<body>
+<div class="hd">
+<span class="lg" onclick="location.href='./index.html'">TECI II</span>
+<span class="sb">🔨 Presa de las Tres Gargantas</span>
+<a href="./index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal">
+<a href="./index.html" aria-label="Ir al índice principal"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="./index.html#teoria" aria-label="Ver índice de teoría"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+<span class="nc-sep">·</span>
+<a href="./index.html#ejercicios" aria-label="Ver índice de ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a>
+<span class="nc-sep">·</span>
+<a href="./index.html#examenes" aria-label="Ver índice de exámenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current" aria-current="page"><span>🚀</span><span class="nc-lbl">Tres Gargantas</span></span>
+</nav>
+<main>
+<div class="titular">
+<h1>🔨 Presa de las Tres Gargantas</h1>
+<div class="subtitulo">La mayor obra hidráulica del planeta</div>
+</div>
+<div class="meta-box">
+<p><strong>IES Jiménez de Quesada</strong> · Santa Fe (Granada) · Tecnología e Ingeniería II · 2º Bachillerato A</p>
+<p><strong>Profesor:</strong> Manuel Alonso Herrera · Curso 2025-26</p>
+<p><strong>Trabajo integrador</strong> · Bloques C2 (Máquinas térmicas) y C3 (Neumática e hidráulica) · Trabajo voluntario · <strong>+1 punto en la nota del segundo trimestre</strong></p>
+</div>
+<p><strong>IES JIMÉNEZ DE QUESADA</strong></p>
+<p>TECNOLOGÍA E INGENIERÍA II</p>
+<p>2º de Bachillerato A</p>
+<p>Profesor: Manuel Alonso Herrera</p>
+<p>Curso 2025-26</p>
+<p><em>Trabajo integrador · Bloques C2 (Máquinas térmicas) y C3 (Neumática e hidráulica)</em></p>
+<p><em>Trabajo voluntario · +1 punto en la nota del segundo trimestre</em></p>
+<hr>
+<p><strong>Una pared de 185 metros contra el río más largo de Asia</strong></p>
+<p>En el centro de China, el río Yangtsé atraviesa una garganta rocosa que siempre fue un paso obligado entre el oeste montañoso y la llanura del este. Durante siglos, el río fue tan generoso como cruel: fertilizaba los arrozales río abajo pero se desbordaba cada pocos años y mataba a decenas de miles de personas. En 1954 una sola inundación se llevó 33.000 vidas. En 1998 otra se llevó 4.000 más y dejó dos mil kilómetros cuadrados de tierra de cultivo bajo el agua.</p>
+<p>En 1994, el gobierno chino empezó a construir lo que muchos ingenieros consideraban imposible: <strong>una presa de 2,3 kilómetros de longitud y 185 metros de altura que cerraría el Yangtsé como si fuera un grifo</strong>. Detrás de esa presa se formaría el mayor embalse artificial jamás construido: 600 kilómetros de largo, 1.045 kilómetros cuadrados de superficie, 39.300 millones de metros cúbicos de agua.</p>
+<p>Para construirla hubo que reubicar a 1,3 millones de personas. Se inundaron 13 ciudades, 140 poblados y 1.350 aldeas. Se movieron 102 millones de metros cúbicos de tierra y roca. Se vertieron 28 millones de metros cúbicos de hormigón. Se instalaron 463.000 toneladas de acero. Costó más de 30.000 millones de dólares y tardó 18 años en estar completamente operativa.</p>
+<p>Hoy, la Presa de las Tres Gargantas es <strong>la mayor central hidroeléctrica del planeta</strong>. Tiene 32 turbinas Francis gigantes, cada una del tamaño de un edificio de cuatro plantas, que juntas generan 22.500 megavatios — más potencia eléctrica instalada que la que tenía toda España en 1990. En 2020, la presa generó 112 teravatios-hora en un solo año. Es aproximadamente lo que consume España entera en seis meses, producido por un solo edificio.</p>
+<p>Este trabajo tiene dos partes, porque la presa tiene dos historias distintas que contar. La primera es la historia de cómo se construyó: 18 años de máquinas pesadas, motores diésel gigantes, martillos neumáticos perforando roca, casetas de obra llenas de ingenieros trabajando en turnos. Esa es la historia del bloque C2: motores de combustión interna, rendimientos, consumos, ciclos frigoríficos. La segunda es la historia de cómo funciona: agua cayendo por gravedad a través de tuberías forzadas hasta turbinas Francis que convierten energía potencial en energía eléctrica. Esa es la historia del bloque C3: hidrostática, Bernoulli, potencia hidráulica.</p>
+<p>Las dos historias confluyen al final en una pregunta que no tiene respuesta en ningún libro: <strong>¿cuánto tiempo tarda la presa en devolver, en forma de energía limpia, todo el combustible fósil que se quemó para construirla?</strong> La respuesta no es obvia. Te sorprenderá. Y solo la vas a poder responder cuando hayas terminado los dos bloques.</p>
+<p><strong>Datos reales de la Presa de las Tres Gargantas</strong></p>
+<p>Todos los datos de este apartado son cifras oficiales publicadas por la China Three Gorges Corporation (CTG), la Agencia Internacional de la Energía, Britannica, Wikipedia y estudios técnicos de la Universidad de Stanford sobre el proyecto. No hay ningún dato inventado.</p>
+<p><strong>La presa</strong></p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Río</td>
+<td>Yangtsé (Chang Jiang)</td>
+</tr>
+<tr class="odd">
+<td>Ubicación</td>
+<td>Sandouping, provincia de Hubei (China)</td>
+</tr>
+<tr class="even">
+<td>Inicio de construcción</td>
+<td>1994</td>
+</tr>
+<tr class="odd">
+<td>Cuerpo de la presa terminado</td>
+<td>2006</td>
+</tr>
+<tr class="even">
+<td>Plena operación (32 turbinas)</td>
+<td>2012</td>
+</tr>
+<tr class="odd">
+<td><strong>Altura máxima</strong></td>
+<td><strong>185 m</strong></td>
+</tr>
+<tr class="even">
+<td>Longitud total</td>
+<td>2.335 m</td>
+</tr>
+<tr class="odd">
+<td>Coste del proyecto</td>
+<td>~30.000 millones de dólares</td>
+</tr>
+<tr class="even">
+<td>Personas desplazadas</td>
+<td>1,3 millones</td>
+</tr>
+</tbody>
+</table>
+<p><strong>El embalse</strong></p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Longitud</td>
+<td>600 km</td>
+</tr>
+<tr class="odd">
+<td>Superficie</td>
+<td>1.045 km²</td>
+</tr>
+<tr class="even">
+<td><strong>Volumen total de agua almacenada</strong></td>
+<td><strong>39.300 millones de m³</strong></td>
+</tr>
+<tr class="odd">
+<td>Nivel máximo de operación</td>
+<td>175 m sobre el nivel del mar</td>
+</tr>
+<tr class="even">
+<td>Caudal máximo a través del aliviadero</td>
+<td>100.000 m³/s</td>
+</tr>
+</tbody>
+</table>
+<p><strong>La central hidroeléctrica</strong></p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Número de turbinas Francis principales</td>
+<td>32</td>
+</tr>
+<tr class="odd">
+<td>Potencia nominal por turbina</td>
+<td>700 MW</td>
+</tr>
+<tr class="even">
+<td><strong>Potencia total instalada</strong></td>
+<td><strong>22.500 MW</strong></td>
+</tr>
+<tr class="odd">
+<td>Salto útil (head) de cada turbina</td>
+<td>80,6 m</td>
+</tr>
+<tr class="even">
+<td>Caudal por turbina (diseño)</td>
+<td>~800 m³/s</td>
+</tr>
+<tr class="odd">
+<td>Diámetro del rodete Francis</td>
+<td>10,4 m</td>
+</tr>
+<tr class="even">
+<td>Velocidad de giro</td>
+<td>75 rpm</td>
+</tr>
+<tr class="odd">
+<td>Peso de cada turbina</td>
+<td>~6.000 toneladas</td>
+</tr>
+<tr class="even">
+<td>Producción eléctrica anual promedio</td>
+<td>~95 TWh/año</td>
+</tr>
+<tr class="odd">
+<td>Producción récord (2020)</td>
+<td>112 TWh</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cifras de la obra de construcción</strong></p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Duración de la obra</td>
+<td>18 años (1994–2012)</td>
+</tr>
+<tr class="odd">
+<td><strong>Tierra y roca removida</strong></td>
+<td><strong>102 millones de m³</strong></td>
+</tr>
+<tr class="even">
+<td>Hormigón vertido</td>
+<td>28 millones de m³</td>
+</tr>
+<tr class="odd">
+<td>Acero instalado</td>
+<td>463.000 toneladas</td>
+</tr>
+<tr class="even">
+<td>Trabajadores en el pico de la obra</td>
+<td>~26.000 personas</td>
+</tr>
+</tbody>
+</table>
+<h2>BLOQUE C2 — Máquinas térmicas</h2>
+<p>Durante 18 años, la obra de Tres Gargantas fue la mayor concentración de maquinaria pesada del mundo. Cientos de camiones gigantes, excavadoras, grúas, martillos perforadores y plantas de hormigón trabajaron día y noche sin parar. Todas esas máquinas tenían una cosa en común: se movían con motores Diésel.</p>
+<p>En este bloque vas a calcular la termodinámica de esos motores: el ciclo Diésel del camión dumper más grande del mundo (C2.1), el ciclo frigorífico de las bombas de calor que climatizaban las casetas de obra (C2.2), y el balance energético total del combustible quemado durante los 18 años de construcción (C2.3).</p>
+<h2>C2.1 — El motor del camión dumper Caterpillar 797F</h2>
+<p>El <strong>Caterpillar 797F</strong> es uno de los camiones más grandes del mundo. Puede transportar 363 toneladas de carga útil en un solo viaje y pesa, con la carga, 624 toneladas. Camiones de esta categoría (Caterpillar 797, Komatsu 930E, Liebherr T 284) son los que se usaron en Tres Gargantas para mover los 102 millones de metros cúbicos de tierra y roca de la obra.</p>
+<p>Su motor es el Caterpillar C175-20, un monstruo térmico con 20 cilindros en V, 4 turbocompresores, 106 litros de cilindrada total y 4.000 caballos de potencia. Estos son sus datos técnicos oficiales publicados por Caterpillar:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro del motor Cat C175-20</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Tipo</td>
+<td>Diésel 4 tiempos, V20, 4 turbos</td>
+</tr>
+<tr class="odd">
+<td>Número de cilindros</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<td>Cilindrada total</td>
+<td>106 litros</td>
+</tr>
+<tr class="odd">
+<td>Diámetro del pistón</td>
+<td>175 mm</td>
+</tr>
+<tr class="even">
+<td>Carrera</td>
+<td>220 mm</td>
+</tr>
+<tr class="odd">
+<td>Potencia máxima</td>
+<td>2.983 kW (4.000 CV)</td>
+</tr>
+<tr class="even">
+<td>Régimen de potencia máxima</td>
+<td>1.750 rpm</td>
+</tr>
+<tr class="odd">
+<td>Consumo específico de combustible</td>
+<td>205 g/kWh</td>
+</tr>
+<tr class="even">
+<td>Relación de compresión</td>
+<td>16:1</td>
+</tr>
+<tr class="odd">
+<td>Combustible</td>
+<td>Gasóleo (PCI = 42.500 kJ/kg, ρ = 0,835 kg/L)</td>
+</tr>
+</tbody>
+</table>
+<p>Calcula:</p>
+<p><strong>1.</strong> Verifica la cilindrada total del motor usando el diámetro y la carrera, y comprueba que coincide con los 106 litros oficiales (error admisible &lt; 1%).</p>
+<p><strong>2.</strong> Calcula la cilindrada unitaria (volumen de un solo cilindro) en cm³.</p>
+<p><strong>3.</strong> Calcula el volumen de la cámara de combustión de un cilindro, sabiendo que la relación de compresión es 16:1.</p>
+<p><strong>4.</strong> Calcula la velocidad media del pistón a régimen de potencia máxima (1.750 rpm). Usa Vm = 2·n·C, donde n es la velocidad de giro en rev/s y C es la carrera. Expresa el resultado en m/s.</p>
+<p><strong>5.</strong> Calcula el par motor a potencia máxima, usando P = M·ω. Expresa el resultado en Nm.</p>
+<p><strong>6.</strong> Calcula la frecuencia de explosiones del motor completo a 1.750 rpm (en Hz). Recuerda que en un motor de 4 tiempos, cada cilindro tiene una explosión cada dos vueltas del cigüeñal.</p>
+<p><strong>7.</strong> Calcula el consumo másico de combustible a plena potencia (en kg/h y en kg/s), usando el consumo específico de 205 g/kWh.</p>
+<p><strong>8.</strong> Calcula el consumo volumétrico en litros/hora a plena potencia.</p>
+<p><strong>9.</strong> Calcula el rendimiento útil del motor a plena potencia, comparando la potencia mecánica útil con la potencia térmica aportada por el combustible (Q_térmica = m_combustible · PCI).</p>
+<p><strong>10.</strong> Calcula el rendimiento térmico teórico del ciclo Diésel. simplificada aproximada:</p>
+
+<p>con Rc = 16 y γ = 1,35. Compara el rendimiento teórico ideal con el rendimiento útil real que has calculado en el apartado anterior.</p>
+<h2>C2.2 — La bomba de calor de las casetas de obra</h2>
+<p>Durante los 18 años de construcción, centenares de casetas prefabricadas alojaron las oficinas técnicas, salas de reuniones, laboratorios de control de calidad, almacenes de planos y alojamientos temporales de los ingenieros. La provincia de Hubei, donde se construyó la presa, tiene un <strong>clima continental húmedo</strong>: inviernos fríos (temperaturas entre 0 y 5 °C) y veranos muy calurosos (35 °C con alta humedad). Para que los ingenieros pudieran trabajar, todas las casetas debían estar climatizadas. La solución estándar en obras de este tamaño es instalar en cada caseta una <strong>bomba de calor aire-aire</strong> comercial, que refrigera en verano y calienta en invierno invirtiendo el ciclo termodinámico.</p>
+<p>Estos son los datos técnicos típicos de una bomba de calor comercial utilizada en casetas de obra:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro de la bomba de calor</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Potencia frigorífica nominal (Q_frío)</td>
+<td>7 kW</td>
+</tr>
+<tr class="odd">
+<td>Potencia calorífica nominal (Q_calor)</td>
+<td>8 kW</td>
+</tr>
+<tr class="even">
+<td>Potencia eléctrica consumida</td>
+<td>2 kW</td>
+</tr>
+<tr class="odd">
+<td>Temperatura exterior en verano</td>
+<td>35 °C</td>
+</tr>
+<tr class="even">
+<td>Temperatura exterior en invierno</td>
+<td>−2 °C</td>
+</tr>
+<tr class="odd">
+<td>Temperatura deseada en el interior</td>
+<td>22 °C</td>
+</tr>
+<tr class="even">
+<td>Número de casetas climatizadas en la obra</td>
+<td>200</td>
+</tr>
+<tr class="odd">
+<td>Horas de funcionamiento diarias</td>
+<td>10 h/día</td>
+</tr>
+<tr class="even">
+<td>Duración de la obra</td>
+<td>18 años (~6.570 días)</td>
+</tr>
+</tbody>
+</table>
+<p>Calcula:</p>
+<p><strong>11.</strong> El COP en modo refrigeración:</p>
+
+<p><strong>12.</strong> El COP en modo calefacción:</p>
+
+<p>Comenta brevemente por qué el COP de calefacción es mayor que el COP de refrigeración. El calor que sale por dentro de la caseta en invierno, ¿de dónde viene? ¿Solo del trabajo eléctrico, o hay algo más?</p>
+<p><strong>13.</strong> Calcula el COP ideal de Carnot en los dos modos.</p>
+
+<p>Usa las temperaturas absolutas en Kelvin. Para refrigeración: T_frío = 22 °C (interior que se quiere mantener frío) y T_caliente = 35 °C (exterior). Para calefacción: T_frío = −2 °C (exterior) y T_caliente = 22 °C (interior que se quiere mantener caliente).</p>
+<p><strong>14.</strong> Compara el COP real con el COP de Carnot ideal en ambos modos. ¿Qué porcentaje del ideal alcanza cada modo? Comenta en una frase si la bomba de calor real es eficiente o no respecto al límite teórico.</p>
+<p><strong>15.</strong> Calcula el consumo eléctrico total de las 200 bombas de calor de la obra durante los 18 años de construcción, asumiendo 10 horas de funcionamiento diarias. Expresa el resultado en MWh.</p>
+<p><strong>16.</strong> Si la electricidad venía del mix eléctrico chino de la época (factor de emisión 900 g CO₂/kWh, principalmente carbón), calcula las emisiones totales de CO₂ asociadas a la climatización de las casetas durante toda la obra. Expresa el resultado en toneladas de CO₂.</p>
+<h2>C2.3 — Balance energético total de la maquinaria de obra</h2>
+<p>Los 102 millones de metros cúbicos de tierra y roca que se movieron en Tres Gargantas no los movió un solo dumper. Hicieron falta flotas enteras de camiones iguales o parecidos al Caterpillar 797F, trabajando día y noche durante años. Vamos a hacer una estimación de orden de magnitud del combustible total consumido por toda la maquinaria de obra.</p>
+<p>Hipótesis simplificadoras (razonables para una obra de esta escala):</p>
+<p>• Un solo dumper 797F, cargado con 363 t de tierra, trabaja a plena potencia durante los recorridos de subida con carga y a potencia reducida (~30%) en los recorridos de vuelta sin carga.</p>
+<p>• Se estima que la potencia media efectiva durante un turno de trabajo es aproximadamente el 65% de la potencia máxima.</p>
+<p>• Densidad media de la tierra y roca: 2.000 kg/m³.</p>
+<p>• Cada dumper trabaja aproximadamente 5.000 horas por año (dos turnos/día, 300 días/año).</p>
+<p>• La obra tuvo una flota equivalente de 50 dumpers 797F en funcionamiento simultáneo durante los 18 años.</p>
+<p>• Todos los demás consumos de maquinaria (excavadoras, grúas, plantas de hormigón, etc.) se pueden estimar como un 100% adicional sobre el consumo de los dumpers. Es decir: por cada tonelada de gasóleo que queman los dumpers, la obra completa quema otra tonelada en otras máquinas.</p>
+<p><strong>17.</strong> Calcula la potencia media consumida por un solo dumper 797F durante la operación (65% de la potencia máxima). Expresa el resultado en kW.</p>
+<p><strong>18.</strong> Calcula el consumo másico medio de combustible de un dumper durante la operación, aplicando el consumo específico de 205 g/kWh a la potencia media del apartado anterior. Expresa el resultado en kg/h.</p>
+<p><strong>19.</strong> Calcula el consumo total de combustible de la flota de 50 dumpers durante los 18 años. Expresa el resultado en toneladas y en millones de litros de gasóleo.</p>
+<p><strong>20.</strong> Añade el consumo estimado del resto de la maquinaria (doblando la cifra anterior, como indica la hipótesis) y calcula el consumo total estimado de combustible de toda la obra de Tres Gargantas. Expresa el resultado en toneladas de gasóleo.</p>
+<p><strong>21.</strong> Calcula la energía calorífica total liberada por la combustión de ese combustible (Q = m · PCI, con PCI = 42.500 kJ/kg). Expresa el resultado en TJ (terajulios) y en TWh (teravatios-hora).</p>
+<p><strong>22.</strong> Calcula las emisiones totales de CO₂ asociadas a ese consumo de gasóleo, usando el factor de emisión del gasóleo de 2,68 kg de CO₂ por litro quemado. Expresa el resultado en miles de toneladas de CO₂.</p>
+<h2>BLOQUE C3 — Neumática e hidráulica</h2>
+<p>Ahora cambiamos de escena. Dejamos atrás los motores Diésel rugiendo en la obra y pasamos a la segunda historia de Tres Gargantas: cómo funciona la presa una vez construida.</p>
+<p>Pero antes de hablar de la hidráulica del embalse, hay un paso previo que casi nadie piensa: antes de echar el primer metro cúbico de hormigón, los ingenieros tuvieron que perforar y preparar el lecho rocoso del Yangtsé para poder anclar la presa al terreno. Y eso se hace con neumática. Por ahí empezamos.</p>
+<h2>C3.0 — El martillo perforador neumático</h2>
+<p>Para preparar los cimientos de una presa de 185 metros de altura, los ingenieros necesitan hacer <strong>miles de perforaciones profundas en la roca</strong> del lecho del río. Esas perforaciones sirven para dos cosas: (1) introducir cargas explosivas controladas que rompan la roca en bloques manejables, y (2) instalar anclajes de acero que unan mecánicamente la presa al sustrato rocoso para que nunca pueda deslizarse. El instrumento estándar para hacer estas perforaciones es el martillo perforador neumático, una máquina que funciona literalmente como un cilindro de doble efecto golpeando una broca decenas de veces por segundo.</p>
+<p>Datos técnicos de un martillo perforador neumático industrial típico (modelo similar a los usados en minería y grandes obras):</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro del martillo perforador</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Tipo</td>
+<td>Cilindro neumático de doble efecto</td>
+</tr>
+<tr class="odd">
+<td>Diámetro del émbolo</td>
+<td>D = 100 mm</td>
+</tr>
+<tr class="even">
+<td>Diámetro del vástago</td>
+<td>d = 40 mm</td>
+</tr>
+<tr class="odd">
+<td>Carrera del émbolo</td>
+<td>c = 80 mm</td>
+</tr>
+<tr class="even">
+<td>Presión de trabajo del aire</td>
+<td>p = 7 bar = 700 kPa</td>
+</tr>
+<tr class="odd">
+<td>Frecuencia de impactos</td>
+<td>f = 25 golpes/segundo</td>
+</tr>
+<tr class="even">
+<td>Rendimiento mecánico</td>
+<td>η = 85%</td>
+</tr>
+</tbody>
+</table>
+<p>Calcula:</p>
+<p><strong>23.</strong> La fuerza teórica que ejerce el émbolo durante la carrera de avance (cuando el aire entra por la cámara posterior y empuja el émbolo hacia delante). Usa F = p · S_émbolo, donde S_émbolo es la sección del émbolo.</p>
+<p><strong>24.</strong> La fuerza teórica durante la carrera de retroceso (cuando el aire entra por la cámara anterior, cuya sección útil es la sección anular S_anular = S_émbolo − S_vástago). Comenta en una frase por qué la fuerza de avance es mayor que la de retroceso.</p>
+<p><strong>25.</strong> La fuerza real de impacto del martillo, aplicando el rendimiento mecánico del 85% a la fuerza teórica de avance.</p>
+<p><strong>26.</strong> El volumen de aire consumido en cada ciclo completo (ida + vuelta del émbolo). Asume para el cálculo que en cada ciclo el cilindro se llena completamente por ambas cámaras (el volumen total consumido por ciclo es aproximadamente S_émbolo · c + S_anular · c).</p>
+<p><strong>27.</strong> El caudal de aire comprimido necesario para alimentar el martillo, sabiendo que hace 25 ciclos por segundo. Expresa el resultado en litros/minuto.</p>
+<h2>C3.1 — Presión hidrostática en la base de la presa</h2>
+<p>El embalse de Tres Gargantas contiene 39.300 millones de metros cúbicos de agua detenidos por una pared de 185 metros de altura. En la base de esa pared, la presión del agua es enorme. Es lo primero que tiene que saber cualquier ingeniero que diseñe una presa: cuánto empuja el agua contra la pared en el punto más profundo.</p>
+<p>Aplicando la ley fundamental de la hidrostática:</p>
+
+<p>donde ρ = 1.000 kg/m³ es la densidad del agua, g = 9,81 m/s² la gravedad, y h la profundidad bajo la superficie libre del embalse.</p>
+<p>Datos para el cálculo:</p>
+<p>• Altura máxima del agua embalsada (cuando el embalse está a nivel máximo de operación): h = 175 m</p>
+<p>• Presión atmosférica: 101.325 Pa ≈ 101 kPa</p>
+<p><strong>28.</strong> Calcula la presión hidrostática absoluta en el punto más profundo del embalse, al pie de la pared de la presa (sin contar la presión atmosférica). Expresa el resultado en Pa, kPa, y bar.</p>
+<p><strong>29.</strong> Calcula la presión absoluta total en el mismo punto, sumando la presión atmosférica. Expresa el resultado en bar.</p>
+<p><strong>30.</strong> Expresa esa presión como peso por metro cuadrado sobre el fondo del embalse, en toneladas/m². Para ayudar a visualizar la magnitud: ¿cuántas toneladas de agua "pesan" sobre cada metro cuadrado del fondo del embalse?</p>
+<h2>C3.2 — Bernoulli aplicado a la tubería forzada</h2>
+<p>El agua del embalse no llega directamente a las turbinas. Pasa por una tubería forzada, un conducto metálico inclinado que guía el agua desde la toma (situada a 175 metros sobre el nivel aguas abajo) hasta la entrada de la turbina (situada unos metros por encima del cauce del río). Durante el descenso, parte de la energía potencial del agua se convierte en energía cinética. Bernoulli permite calcular la velocidad con la que el agua llega a la turbina.</p>
+<p>Aplicamos el principio de Bernoulli entre la superficie del embalse (punto 1) y la entrada de la turbina (punto 2):</p>
+
+<p>Para simplificar, asumimos:</p>
+<p>• Velocidad del agua en la superficie del embalse (punto 1): v₁ ≈ 0 (el embalse es muy grande)</p>
+<p>• Presión atmosférica en los dos puntos: p₁ = p₂ = p_atm</p>
+<p>• Salto útil entre los dos puntos: z₁ − z₂ = H_útil = 80,6 m</p>
+<p>• Pérdidas de carga totales en la tubería forzada: ΔH_pérdidas = 5 m (corresponden a rozamiento del agua con las paredes)</p>
+<p><strong>31.</strong> Calcula la velocidad del agua a la entrada de la turbina, despreciando inicialmente las pérdidas de carga (cálculo ideal).</p>
+<p><strong>32.</strong> Calcula la velocidad del agua teniendo en cuenta las pérdidas de carga de 5 m. Compara con el resultado ideal: ¿qué porcentaje de la velocidad ideal se alcanza realmente?</p>
+<p><strong>33.</strong> Compara la velocidad calculada con la velocidad que tendría el agua si cayera en caída libre desde 80,6 metros de altura (sin rozamiento, usando v = √(2gH)). ¿Es la misma? Justifica por qué el resultado ideal de Bernoulli (apartado 31) coincide con el de caída libre.</p>
+<h2>C3.3 — Potencia hidráulica de una turbina Francis</h2>
+<p>Las turbinas de Tres Gargantas son <strong>turbinas Francis</strong>, un tipo de turbina hidráulica de reacción inventada en 1849 por James B. Francis. Cada rodete (el corazón de la turbina) tiene un diámetro de 10,4 metros, pesa varios cientos de toneladas y gira a 75 rpm. El agua entra perpendicular al eje, rodea los álabes del rodete y sale axialmente hacia abajo, transfiriendo su energía cinética y de presión al rodete.</p>
+<p>La potencia hidráulica bruta disponible en el salto de agua se calcula.</p>
+
+<p>donde ρ es la densidad del agua, g la gravedad, Q el caudal volumétrico que pasa por la turbina, y H el salto útil.</p>
+<p>Datos de una turbina Francis de Tres Gargantas:</p>
+<p>• Salto útil (H): 80,6 m</p>
+<p>• Caudal nominal (Q): 800 m³/s</p>
+<p>• Potencia eléctrica nominal a la salida del alternador: 700 MW</p>
+<p>• Densidad del agua: 1.000 kg/m³</p>
+<p><strong>34.</strong> Calcula la potencia hidráulica bruta disponible en el salto de agua (P_hidráulica = ρ · g · Q · H). Expresa el resultado en MW.</p>
+<p><strong>35.</strong> Calcula el rendimiento global de la turbina + alternador, comparando la potencia eléctrica nominal (700 MW) con la potencia hidráulica bruta calculada en el apartado anterior.</p>
+<p><strong>36.</strong> Compara ese rendimiento global con los rendimientos típicos de otros tipos de centrales:</p>
+<blockquote>
+<p><strong>a)</strong> Central térmica de carbón: ~35%</p>
+<p><strong>b)</strong> Central de ciclo combinado de gas: ~55%</p>
+<p><strong>c)</strong> Central nuclear: ~33%</p>
+<p><strong>d)</strong> Aerogenerador moderno: ~40% (respecto al viento disponible)</p>
+</blockquote>
+<p>Comenta en dos líneas por qué las centrales hidroeléctricas tienen rendimientos tan altos comparadas con las térmicas.</p>
+<h2>C3.4 — Potencia total y comparativa con el sistema eléctrico español</h2>
+<p><strong>37.</strong> Calcula la potencia eléctrica total instalada de la central de Tres Gargantas, considerando las 32 turbinas Francis de 700 MW. Expresa el resultado en GW.</p>
+<p><strong>38.</strong> Calcula la producción anual teórica si la central funcionara al 100% de su potencia todas las horas del año (8.760 horas). Compara con la producción real publicada (95 TWh/año promedio, 112 TWh en el año récord 2020). Calcula el factor de capacidad (producción real / producción teórica máxima).</p>
+<p><strong>39.</strong> Compara la producción anual promedio de Tres Gargantas (95 TWh) con:</p>
+<blockquote>
+<p><strong>a)</strong> El consumo eléctrico anual de España (~250 TWh)</p>
+<p><strong>b)</strong> La producción de una central nuclear española como Almaraz (~16 TWh/año)</p>
+<p><strong>c)</strong> La producción total hidroeléctrica de España (~30 TWh/año)</p>
+</blockquote>
+<p>¿Qué fracción del consumo eléctrico español podría cubrir Tres Gargantas ella sola? ¿Cuántas centrales nucleares de Almaraz equivale? ¿Cuántas veces la producción hidroeléctrica total de España?</p>
+<p><strong>La pregunta final</strong></p>
+<p>Has calculado la termodinámica de los motores Diésel que construyeron la presa, el consumo de las bombas de calor que climatizaban las casetas de obra, el combustible total quemado durante los 18 años de construcción, las emisiones de CO₂ asociadas, la presión hidrostática en la base de la presa, la velocidad del agua al llegar a las turbinas, la potencia hidráulica de una turbina Francis, y la producción eléctrica anual de la central completa.</p>
+<p>Ahora puedes responder a la pregunta con la que empezamos el trabajo. Es una pregunta que no aparece en ningún libro de texto y cuya respuesta solo se puede obtener haciendo exactamente los cálculos que has hecho.</p>
+<blockquote>
+<p><em>Tres Gargantas se construyó quemando millones de toneladas de gasóleo en sus máquinas de obra y consumiendo millones de megavatios-hora de electricidad fósil en sus instalaciones auxiliares. Fue una obra increíblemente contaminante mientras se construía. Pero hoy genera 95 teravatios-hora al año de electricidad limpia, sin quemar nada. La pregunta es:</em></p>
+<p><em><strong>¿Cuánto tiempo tarda la Presa de las Tres Gargantas en devolver, en forma de energía eléctrica limpia, toda la energía fósil que se gastó para construirla?</strong></em></p>
+</blockquote>
+<p><strong>40.</strong> Calcula el tiempo de amortización energética de la presa. Para ello:</p>
+<blockquote>
+<p><strong>a)</strong> Toma la energía calorífica total liberada por el combustible Diésel de toda la maquinaria de obra, que has calculado en el apartado 21.</p>
+<p><strong>b)</strong> Suma la energía eléctrica total consumida por las 200 bombas de calor de las casetas durante los 18 años, calculada en el apartado 15. (Para sumarlas correctamente con la energía calorífica del gasóleo, convierte los MWh eléctricos a su equivalente en energía primaria fósil, aplicando el rendimiento típico de una central térmica de carbón de 35%. Es decir: por cada kWh eléctrico consumido, se quemaron aproximadamente 1/0,35 ≈ 2,86 kWh de energía calorífica de carbón en la central).</p>
+<p><strong>c)</strong> Suma las dos cifras anteriores. Eso te da la energía fósil total (en TWh o MWh) invertida en la construcción.</p>
+<p><strong>d)</strong> Divide esa cifra entre la producción eléctrica anual promedio de la presa (95 TWh/año). El resultado es el número de años que la presa tarda en "devolver" lo que consumió para existir.</p>
+</blockquote>
+<p><strong>41.</strong> Reflexiona sobre el resultado. Si has calculado bien, la respuesta debería estar en el orden de pocos meses, no años. Comenta en tres o cuatro líneas qué te sugiere este dato sobre:</p>
+<blockquote>
+<p><strong>a)</strong> El concepto de "amortización energética" de una infraestructura limpia.</p>
+<p><strong>b)</strong> La diferencia entre una central hidroeléctrica y una central térmica en términos de balance energético a largo plazo.</p>
+<p><strong>c)</strong> Si el coste energético de construir Tres Gargantas era un argumento válido contra su construcción, o si el argumento real en contra era otro.</p>
+</blockquote>
+<p><strong>42.</strong> La pregunta final. Con todos los cálculos que has hecho en este trabajo delante, y sabiendo que la Presa de las Tres Gargantas:</p>
+<blockquote>
+<p><strong>•)</strong> Desplazó a 1,3 millones de personas de sus hogares ancestrales.</p>
+<p><strong>•)</strong> Inundó 1.350 pueblos y más de 1.200 yacimientos arqueológicos.</p>
+<p><strong>•)</strong> Cuesta 30.000 millones de dólares.</p>
+<p><strong>•)</strong> Produce 95 TWh/año de electricidad limpia, sin CO₂, sin residuos nucleares, sin depender de combustibles importados.</p>
+<p><strong>•)</strong> Devuelve su energía fósil de construcción en pocos meses.</p>
+<p><strong>•)</strong> Tiene una vida útil estimada superior a 100 años.</p>
+<p><em>¿Valió la pena? Responde con tu propia voz, sin miedo a dar una opinión personal pero usando los números que has calculado para justificarla. No hay respuesta correcta a esta pregunta. Solo hay respuestas honestas y respuestas perezosas. Esta es la pregunta que un ingeniero civil tiene que ser capaz de responder cuando firma el proyecto de una obra así.</em></p>
+</blockquote>
+<hr>
+<p><strong>Este trabajo es voluntario y suma +1 punto a la nota del segundo trimestre.</strong></p>
+<p><em>Se entrega el 12 de marzo. Se recoge corregido la primera semana tras Semana Santa.</em></p>
+<hr>
+<p><strong>Fuentes verificadas</strong></p>
+<p>• China Three Gorges Corporation — Datos oficiales del proyecto</p>
+<p>• Wikipedia inglesa — Three Gorges Dam (con referencias a CTG, Britannica, IEA)</p>
+<p>• Encyclopedia Britannica — Three Gorges Dam</p>
+<p>• U.S. Geological Survey — The World's Largest Hydroelectric Plant</p>
+<p>• Stanford University — Three Gorges Dam: An Overview (2022)</p>
+<p>• Caterpillar Inc. — 797F Off-Highway Truck Technical Specifications (datos oficiales del motor C175-20)</p>
+<p>• NS Energy — Three Gorges the world's biggest hydropower plant</p>
+<p><em>Los datos geométricos de la presa, el embalse, la central hidroeléctrica y el motor Caterpillar C175-20 son cifras oficiales publicadas por las fuentes citadas y contrastadas con al menos dos fuentes independientes. Los valores del martillo perforador neumático y de la bomba de calor son representativos de equipos estándar de uso industrial, pero no son los datos históricos exactos de los equipos concretos que se usaron en Tres Gargantas (esa información no es de dominio público). Las hipótesis sobre el balance energético de la construcción (número de dumpers, porcentaje de otras máquinas, horas de funcionamiento) son estimaciones razonables de orden de magnitud; cualquier cifra más precisa exigiría acceso a los registros internos del proyecto.</em></p>
+</main>
+<footer>
+IES Jiménez de Quesada · Santa Fe (Granada) · © 2025-26 Manuel Alonso Herrera
+</footer>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

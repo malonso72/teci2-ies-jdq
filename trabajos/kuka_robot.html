@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II — Robot industrial KUKA · Trabajo integrador</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script>
+MathJax = {tex: {inlineMath: [['\\(','\\)'],['$','$']], displayMath: [['\\[','\\]'],['$$','$$']]}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+<style>
+:root{--az:#1B4F8A;--az2:#2E7BC4;--or:#D4700A;--t:#23272F;--t2:#555D6B;--bd:#D8DDE5;--bg:#F4F6F9;--hh:52px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Barlow',system-ui,sans-serif;background:#CBD5E1;color:var(--t);scroll-behavior:smooth}
+.hd{position:sticky;top:0;background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:14px 24px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 10px rgba(0,0,0,.15);z-index:100}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;cursor:pointer}.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.8rem;opacity:.85;flex:1}
+.home-btn{background:rgba(255,255,255,.12);color:#fff;text-decoration:none;font-size:.78rem;padding:5px 12px;border-radius:6px;border:1px solid rgba(255,255,255,.25)}
+.home-btn:hover{background:rgba(255,255,255,.22)}
+.navcross{background:#F4F6F9;border-bottom:1px solid var(--bd);padding:9px 20px;display:flex;gap:8px;flex-wrap:wrap;font-size:.78rem;position:sticky;top:var(--hh);z-index:90}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:var(--t);background:#fff;border-color:var(--bd)}
+.navcross a:hover{background:#EBF0F7;border-color:var(--az);color:var(--az)}
+.navcross span.nc-current{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;border-color:var(--az);font-weight:600}
+.navcross .nc-sep{color:#8C97A8;align-self:center;user-select:none}
+main{max-width:870px;margin:0 auto;background:#fff;box-shadow:0 6px 48px rgba(0,0,0,.18);padding:40px 50px 80px;min-height:80vh}
+main h1{font-family:'Barlow Condensed',sans-serif;font-size:2rem;color:var(--az);margin-top:28px;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--az)}
+main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;color:var(--az2);margin-top:28px;margin-bottom:10px;padding-left:10px;border-left:4px solid var(--or)}
+main h3{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;color:var(--az);margin-top:20px;margin-bottom:8px}
+main p{margin:0 0 10px;line-height:1.68}
+main ul,main ol{margin:0 0 14px 24px;line-height:1.68}
+main li{margin-bottom:4px}
+main table{border-collapse:collapse;margin:14px 0;font-size:.92rem;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+main table th,main table td{border:1px solid var(--bd);padding:6px 12px;text-align:left;vertical-align:top}
+main table th{background:var(--az);color:#fff;font-weight:700;font-size:.85rem}
+main table tr:nth-child(even) td{background:#F5F6F8}
+main blockquote{border-left:4px solid var(--or);background:#FFF9EC;padding:10px 18px;margin:14px 0;font-style:italic;color:#5A3900}
+main hr{border:none;border-top:1px solid var(--bd);margin:26px 0}
+main strong{color:var(--az)}
+.titular{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:28px 32px;margin:-40px -50px 28px;text-align:center}
+.titular h1{color:#fff;border:none;margin:0;font-size:2.4rem;padding:0}
+.titular .subtitulo{font-size:1.1rem;opacity:.92;margin-top:6px;font-style:italic}
+.meta-box{background:#F0F6FD;border:1px solid #BAD0EA;border-left:5px solid var(--az);border-radius:4px;padding:14px 20px;margin:0 0 32px;font-size:.92rem}
+.meta-box p{margin:0 0 4px}.meta-box p:last-child{margin-bottom:0}
+.meta-box strong{color:var(--az)}
+footer{max-width:870px;margin:20px auto 40px;padding:18px 30px;text-align:center;color:var(--t2);font-size:.78rem;background:#fff;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+@media(max-width:700px){main{padding:32px 20px 40px}.titular{margin:-32px -20px 20px;padding:20px 18px}.titular h1{font-size:1.7rem}.hd{padding:10px 14px}}
+</style>
+</head>
+<body>
+<div class="hd">
+<span class="lg" onclick="location.href='./index.html'">TECI II</span>
+<span class="sb">🤖 Robot industrial KUKA</span>
+<a href="./index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal">
+<a href="./index.html" aria-label="Ir al índice principal"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="./index.html#teoria" aria-label="Ver índice de teoría"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+<span class="nc-sep">·</span>
+<a href="./index.html#ejercicios" aria-label="Ver índice de ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a>
+<span class="nc-sep">·</span>
+<a href="./index.html#examenes" aria-label="Ver índice de exámenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current" aria-current="page"><span>🚀</span><span class="nc-lbl">KUKA</span></span>
+</nav>
+<main>
+<div class="titular">
+<h1>🤖 Robot industrial KUKA</h1>
+<div class="subtitulo">Seis motores, seis ejes, seis millones de soldaduras al año</div>
+</div>
+<div class="meta-box">
+<p><strong>IES Jiménez de Quesada</strong> · Santa Fe (Granada) · Tecnología e Ingeniería II · 2º Bachillerato A</p>
+<p><strong>Profesor:</strong> Manuel Alonso Herrera · Curso 2025-26</p>
+<p><strong>Trabajo integrador</strong> · Bloques D1 (Corriente alterna), D2 (Electrónica digital) y F (Control automático) · Trabajo voluntario · <strong>+1 punto en la nota del tercer trimestre</strong></p>
+</div>
+<p><strong>IES JIMÉNEZ DE QUESADA</strong></p>
+<p>TECNOLOGÍA E INGENIERÍA II</p>
+<p>2º de Bachillerato A</p>
+<p>Profesor: Manuel Alonso Herrera</p>
+<p>Curso 2025-26</p>
+<p><em>Trabajo integrador · Bloques D1 (Corriente alterna), D2 (Electrónica digital) y toques introductorios de F (Control automático)</em></p>
+<p><em>Trabajo voluntario · +1 punto en la nota del tercer trimestre</em></p>
+<hr>
+<p><strong>1.200 kilos de precisión bailando a una décima de milímetro</strong></p>
+<p>En una nave industrial de Martorell, en Mercedes de Vitoria, en la factoría de Seat en Pamplona, o en cualquiera de las mil fábricas de automoción de Europa, hay un objeto que ha cambiado el mundo en los últimos cuarenta años sin que casi nadie lo sepa.</p>
+<p>Pesa 1.180 kilos. Mide algo más de tres metros. Tiene <strong>seis ejes articulados</strong> como si fuera un brazo humano exagerado: hombro, codo, muñeca. En el extremo lleva una pinza, o una antorcha de soldadura, o un pulverizador de pintura. Y se mueve. Baila. Ejecuta una coreografía que se repite miles de veces al día sin cansarse, sin equivocarse, sin necesidad de descansar, con una precisión repetida del orden de una décima de milímetro. El mismo movimiento. El mismo punto. El mismo instante. Durante veinte años, si hace falta.</p>
+<p>Se llama <strong>KUKA KR QUANTEC</strong>. Es uno de los robots industriales más usados del mundo para tareas de soldadura, manipulación y montaje en la industria del automóvil. Si tus padres tienen un coche fabricado después del año 2000, hay una probabilidad muy alta de que uno de estos robots haya tocado el chasis en algún momento de la línea de montaje.</p>
+<p>Un robot como el KR QUANTEC no es magia. Es la combinación exacta de tres cosas que tú has estudiado a lo largo de este curso:</p>
+<p>• Seis motores trifásicos de corriente alterna, alimentados desde la red eléctrica a través de un armario de control llamado KR C4 que los gestiona de forma coordinada. Eso es el bloque D1.</p>
+<p>• Una enorme cantidad de electrónica digital que interpreta las instrucciones del programador, controla los seis motores milésima a milésima, gestiona la seguridad y decide en tiempo real qué hacer cuando aparece un imprevisto. Eso es el bloque D2.</p>
+<p>• Un sistema de control en lazo cerrado para cada uno de los seis ejes: cada motor mide continuamente su posición real, la compara con la posición objetivo, y ajusta su funcionamiento para corregir el error. Eso es el bloque F.</p>
+<p>Este trabajo integra los tres bloques en el mismo objeto. No hay manera de separarlos porque en un robot real están entrelazados. El bloque D1 alimenta los motores que hacen mover el brazo. El bloque D2 decide qué tiene que hacer el robot en cada instante. Y el bloque F cierra el lazo entre las dos cosas: convierte una orden digital en un movimiento físico exacto. Sin cualquiera de los tres, el robot no existe.</p>
+<p>Y hay una pregunta que solo podrás responder al terminar el trabajo, cuando hayas calculado con tus propias manos los kilovatios que consume el robot, las ecuaciones lógicas de sus sistemas de seguridad, los bits de resolución de sus codificadores de posición y la precisión real que puede alcanzar un sistema en lazo cerrado: <strong>¿por qué un robot de 1.200 kilos puede mover una pieza con mucha más precisión que tu propia mano?</strong> La respuesta no está en la mecánica. Está en la electrónica y en el control. Y te va a sorprender.</p>
+<p><strong>Datos reales del KUKA KR QUANTEC</strong></p>
+<p>Todos los datos de este apartado son cifras oficiales publicadas por KUKA AG en sus manuales técnicos y catálogos. Se toma como referencia el modelo KR 210 R2700, uno de los más utilizados en la industria automovilística europea.</p>
+<p><strong>El robot</strong></p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Fabricante</td>
+<td>KUKA AG (Augsburgo, Alemania)</td>
+</tr>
+<tr class="odd">
+<td>Modelo</td>
+<td>KR 210 R2700 (serie QUANTEC)</td>
+</tr>
+<tr class="even">
+<td><strong>Número de ejes articulados</strong></td>
+<td><strong>6</strong></td>
+</tr>
+<tr class="odd">
+<td>Alcance máximo</td>
+<td>2.700 mm</td>
+</tr>
+<tr class="even">
+<td>Carga útil nominal</td>
+<td>210 kg</td>
+</tr>
+<tr class="odd">
+<td>Peso del robot (sin controlador)</td>
+<td>1.180 kg</td>
+</tr>
+<tr class="even">
+<td><strong>Repetibilidad de posicionamiento</strong></td>
+<td><strong>±0,06 mm</strong></td>
+</tr>
+<tr class="odd">
+<td>Tiempo medio entre fallos (MTBF)</td>
+<td>&gt;100.000 horas</td>
+</tr>
+<tr class="even">
+<td>Vida útil típica en producción</td>
+<td>15-20 años</td>
+</tr>
+</tbody>
+</table>
+<p><strong>El controlador (armario eléctrico KR C4)</strong></p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Tipo de alimentación</strong></td>
+<td><strong>Trifásica 3×400 VAC</strong></td>
+</tr>
+<tr class="odd">
+<td>Frecuencia de red</td>
+<td>50 Hz (±1 Hz)</td>
+</tr>
+<tr class="even">
+<td>Potencia aparente nominal</td>
+<td>S = 13 kVA</td>
+</tr>
+<tr class="odd">
+<td>Potencia aparente en pico (aceleraciones)</td>
+<td>S_max = 23 kVA</td>
+</tr>
+<tr class="even">
+<td>Factor de potencia típico (motores)</td>
+<td>cos φ = 0,75 inductivo</td>
+</tr>
+<tr class="odd">
+<td>Sistema de control digital</td>
+<td>KR C4 (arquitectura PC + PLC)</td>
+</tr>
+<tr class="even">
+<td>Bus interno de comunicación</td>
+<td>EtherCAT (tiempo real)</td>
+</tr>
+<tr class="odd">
+<td>Resolución de codificadores de posición</td>
+<td>~20 bits por eje</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Los seis motores del robot</strong></p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Tipo de motores</td>
+<td>Servomotores trifásicos síncronos AC</td>
+</tr>
+<tr class="odd">
+<td>Número de motores</td>
+<td>6 (uno por eje)</td>
+</tr>
+<tr class="even">
+<td>Potencia nominal por motor (eje 1-3)</td>
+<td>~1,5 kW</td>
+</tr>
+<tr class="odd">
+<td>Potencia nominal por motor (eje 4-6)</td>
+<td>~0,5 kW</td>
+</tr>
+<tr class="even">
+<td>Potencia total de los 6 motores (suma)</td>
+<td>~6 kW</td>
+</tr>
+<tr class="odd">
+<td>Tensión nominal de los motores</td>
+<td>400 V (alterna trifásica)</td>
+</tr>
+<tr class="even">
+<td>Control por inversor (variador)</td>
+<td>Modulación por ancho de pulso (PWM)</td>
+</tr>
+</tbody>
+</table>
+<h2>BLOQUE D1 — Corriente alterna</h2>
+<p>El KR QUANTEC es un consumidor eléctrico industrial trifásico. Se conecta a la red eléctrica de la fábrica a 3×400 V, 50 Hz, y de ahí alimenta sus seis motores síncronos de corriente alterna a través de un armario de control con electrónica de potencia. En este bloque vas a analizar ese sistema eléctrico desde la entrada hasta los motores, pasando por todos los tipos de problemas PEvAU de corriente alterna.</p>
+<h2>D1.1 — Potencias trifásicas del controlador</h2>
+<p>El armario KR C4 del robot tiene los siguientes datos de placa publicados por KUKA:</p>
+<p>• Tensión de línea: U = 400 V (trifásica)</p>
+<p>• Potencia aparente nominal: S = 13 kVA</p>
+<p>• Factor de potencia nominal: cos φ = 0,75 inductivo</p>
+<p>• Frecuencia: f = 50 Hz</p>
+<p><strong>1.</strong> Calcula la potencia activa P consumida por el robot en régimen nominal, aplicando P = S · cos φ. Expresa el resultado en kW.</p>
+<p><strong>2.</strong> Calcula la potencia reactiva Q consumida por el robot, aplicando Q = S · sen φ. Expresa el resultado en kVAr. (Atención: tendrás que calcular primero el seno del ángulo, sabiendo el coseno.)</p>
+<p><strong>3.</strong> Dibuja el triángulo de potencias del robot (P, Q, S) e indica el ángulo φ. Verifica geométricamente que S² = P² + Q².</p>
+<p><strong>4.</strong> Calcula la corriente de línea (I_L) que absorbe el controlador del robot, aplicando la fórmula de la potencia aparente trifásica:</p>
+
+<p>Expresa el resultado en amperios. Comenta si el resultado justifica que la instalación eléctrica de la celda robótica incluya protecciones magnetotérmicas de 25 A.</p>
+<h2>D1.2 — Corrección del factor de potencia</h2>
+<p>El factor de potencia del robot (cos φ = 0,75) es bajo para los estándares de una fábrica moderna. La compañía eléctrica penaliza a los consumidores industriales con factor de potencia inferior a 0,95 porque la potencia reactiva <strong>circula por las líneas sin hacer trabajo útil</strong>, pero obliga a sobredimensionar los cables y los transformadores. Por eso, en la instalación eléctrica de la celda robótica se añade una batería de condensadores en paralelo con el robot para corregir su factor de potencia y llevarlo cerca de la unidad.</p>
+<p><strong>5.</strong> Calcula la potencia reactiva que debe suministrar la batería de condensadores (Q_C) para llevar el factor de potencia del robot de cos φ₁ = 0,75 a cos φ₂ = 0,95, aplicando:</p>
+
+<p>Expresa el resultado en kVAr.</p>
+<p><strong>6.</strong> Calcula la capacidad C del condensador trifásico necesario, sabiendo que para una conexión en triángulo se aplica:</p>
+
+<p>donde ω = 2πf y U es la tensión de línea. Expresa el resultado en microfaradios.</p>
+<p><strong>7.</strong> Calcula la nueva corriente de línea I'_L tras la corrección del factor de potencia. Compárala con la corriente original (apartado 4) y comenta en una línea qué porcentaje de reducción se consigue. Esta reducción es la razón real por la que todas las instalaciones industriales corrigen el factor de potencia.</p>
+<h2>D1.3 — Teorema de Boucherot en la celda robótica</h2>
+<p>En la celda robótica real no solo hay un robot. Hay otros elementos eléctricos conectados en paralelo a la misma línea trifásica:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Equipo</strong></td>
+<td><strong>P (kW)</strong></td>
+<td><strong>cos φ</strong></td>
+</tr>
+<tr class="even">
+<td>Robot KR QUANTEC (ya corregido)</td>
+<td>9,75</td>
+<td>0,95 inductivo</td>
+</tr>
+<tr class="odd">
+<td>Cinta transportadora de entrada</td>
+<td>3,0</td>
+<td>0,80 inductivo</td>
+</tr>
+<tr class="even">
+<td>Iluminación de la celda (LED)</td>
+<td>0,5</td>
+<td>1,00 (resistivo)</td>
+</tr>
+<tr class="odd">
+<td>Sistema de extracción de humos de soldadura</td>
+<td>2,5</td>
+<td>0,85 inductivo</td>
+</tr>
+</tbody>
+</table>
+<p>(Nota: el valor 9,75 kW para el robot es el resultado aproximado que deberías haber obtenido en el apartado 1.)</p>
+<p><strong>8.</strong> Calcula la potencia reactiva Q de cada equipo aplicando Q = P · tan φ. Presenta los resultados en una tabla.</p>
+<p><strong>9.</strong> Calcula la potencia activa total (P_total) y la potencia reactiva total (Q_total) del conjunto, aplicando el Teorema de Boucherot (suma aritmética de las P y suma aritmética de las Q).</p>
+<p><strong>10.</strong> Calcula la potencia aparente total (S_total) y el factor de potencia global de la celda robótica (cos φ_total).</p>
+<p><strong>11.</strong> Calcula la corriente total I_L que circula por la línea trifásica que alimenta toda la celda.</p>
+<h2>BLOQUE D2 — Electrónica digital</h2>
+<p>El robot KR QUANTEC no se mueve solo. En su interior hay una enorme cantidad de electrónica digital que interpreta instrucciones, gestiona datos, toma decisiones lógicas de seguridad y controla los seis ejes coordinadamente. En este bloque vas a analizar esa electrónica desde cuatro ángulos distintos, cubriendo todos los tipos de problemas PEvAU de D2.</p>
+<h2>D2.1 — Codificadores de posición de los ejes</h2>
+<p>Cada uno de los seis ejes del robot tiene un <strong>codificador absoluto de posición (encoder)</strong> que mide continuamente el ángulo del eje y envía esa información al controlador KR C4. Los codificadores del KR QUANTEC tienen una resolución de 20 bits, lo que significa que dividen una vuelta completa del eje en 2²⁰ posiciones distintas.</p>
+<p><strong>12.</strong> Calcula cuántas posiciones distintas puede distinguir el codificador de 20 bits en una vuelta completa del eje (2²⁰).</p>
+<p><strong>13.</strong> Calcula la resolución angular del codificador, es decir, el ángulo mínimo que puede medir, sabiendo que una vuelta completa son 360°. Expresa el resultado en grados y en segundos de arco.</p>
+<p><strong>14.</strong> Si el extremo del robot (la herramienta) está a 2.700 mm del eje 1 (alcance máximo), calcula la precisión en posición lineal que corresponde a la resolución del codificador del eje 1. Compárala con la repetibilidad nominal del robot (±0,06 mm) y comenta si los codificadores son el factor limitante de la precisión o no.</p>
+<p><strong>15.</strong> Convierte el número decimal 2¹⁹ + 2¹⁷ + 2⁵ + 2² a binario y a hexadecimal. Este valor podría ser una lectura real del codificador durante el movimiento del robot.</p>
+<p><strong>16.</strong> El controlador KR C4 almacena las posiciones de los 6 ejes usando 20 bits cada una. Calcula cuántos bits en total necesita para guardar una sola pose completa del robot. Y cuántos bytes, redondeando al byte superior.</p>
+<h2>D2.2 — Álgebra de Boole: la lógica de seguridad del robot</h2>
+<p>Un robot industrial es una máquina potencialmente peligrosa: tiene inercia, fuerza y puede aplastar a un operario si no está correctamente protegido. Por eso, la normativa europea exige que un robot industrial tenga un <strong>sistema lógico de seguridad</strong> que sólo permite al robot moverse cuando se cumplen TODAS las condiciones de seguridad simultáneamente. Si alguna falla, el robot se detiene inmediatamente (parada de emergencia).</p>
+<p>Consideramos un sistema de seguridad simplificado con cuatro señales digitales de entrada (cada una vale 0 o 1):</p>
+<p>• A: Puerta de la celda cerrada (A=1 si está cerrada, A=0 si está abierta)</p>
+<p>• B: Barrera óptica no interrumpida (B=1 si no hay nada cruzándola, B=0 si hay un operario)</p>
+<p>• C: Seta de emergencia sin pulsar (C=1 si está en reposo, C=0 si alguien la ha pulsado)</p>
+<p>• D: Temperatura de los motores dentro de rango (D=1 si T &lt; 80°C, D=0 si T ≥ 80°C)</p>
+<p>La salida S es la señal "movimiento del robot permitido": S = 1 (el robot puede moverse) o S = 0 (parada del robot).</p>
+<p><strong>17.</strong> Escribe la expresión booleana de S a partir de las cuatro entradas, sabiendo que el robot solo puede moverse cuando TODAS las condiciones de seguridad se cumplen simultáneamente. </p>
+<p><strong>18.</strong> Construye la tabla de verdad completa de S con las 4 variables de entrada (2⁴ = 16 filas). Verifica que S = 1 en una sola fila.</p>
+<p>Ahora consideremos una lógica más realista: el robot también puede moverse en "modo de enseñanza" (teach mode) cuando un operario dentro de la celda está manipulando el robot manualmente con el teach pendant, siempre que pulse el botón de consentimiento (dead man's switch). Añadimos dos entradas nuevas:</p>
+<p>• E: Modo de enseñanza activo (E=1 si está en modo teach, E=0 si está en modo automático)</p>
+<p>• F: Botón de consentimiento pulsado (F=1 si está pulsado, F=0 si no)</p>
+<p><strong>19.</strong> Escribe la nueva expresión booleana de S considerando los dos modos de funcionamiento:</p>
+<blockquote>
+<p><strong>•)</strong> En modo automático (E=0): el robot se mueve si A·B·C·D = 1 (las cuatro condiciones de antes).</p>
+<p><strong>•)</strong> En modo enseñanza (E=1): el robot se mueve si C·D·F = 1 (seta sin pulsar, temperatura correcta, y el operario pulsa el botón de consentimiento). En este modo, A y B se ignoran porque el operario está legítimamente dentro de la celda.</p>
+</blockquote>
+<p>Expresa S como una suma de productos (forma canónica SOP). Simplifícala si puedes.</p>
+<h2>D2.3 — Mapa de Karnaugh: decodificación del modo de trabajo</h2>
+<p>El controlador KR C4 recibe del selector de modo del teach pendant un código binario de 3 bits que indica en qué modo de funcionamiento está el robot. Los modos posibles son:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Código (X Y Z)</strong></td>
+<td><strong>Nº modo</strong></td>
+<td><strong>Modo de funcionamiento</strong></td>
+</tr>
+<tr class="even">
+<td>0 0 0</td>
+<td>0</td>
+<td>Parado (standby)</td>
+</tr>
+<tr class="odd">
+<td>0 0 1</td>
+<td>1</td>
+<td>Modo manual T1 (velocidad reducida)</td>
+</tr>
+<tr class="even">
+<td>0 1 0</td>
+<td>2</td>
+<td>Modo manual T2 (velocidad alta)</td>
+</tr>
+<tr class="odd">
+<td>0 1 1</td>
+<td>3</td>
+<td>Modo automático AUT</td>
+</tr>
+<tr class="even">
+<td>1 0 0</td>
+<td>4</td>
+<td>Modo externo AUT EXT</td>
+</tr>
+<tr class="odd">
+<td>1 0 1</td>
+<td>5</td>
+<td>No asignado (irrelevante)</td>
+</tr>
+<tr class="even">
+<td>1 1 0</td>
+<td>6</td>
+<td>No asignado (irrelevante)</td>
+</tr>
+<tr class="odd">
+<td>1 1 1</td>
+<td>7</td>
+<td>No asignado (irrelevante)</td>
+</tr>
+</tbody>
+</table>
+<p>Queremos diseñar un circuito combinacional que active una salida M = 1 cuando el robot esté en un modo donde el movimiento está permitido. Los modos 1, 2, 3 y 4 permiten movimiento. El modo 0 (parado) no. Los modos 5, 6 y 7 son combinaciones no asignadas por KUKA, por lo que en la tabla de verdad los trataremos como "don't care" (X), que podemos asignar libremente al valor que más nos convenga para simplificar.</p>
+<p><strong>20.</strong> Construye la tabla de verdad de M con las 3 entradas X, Y, Z. Marca con 1 los modos 1-4, con 0 el modo 0, y con X (don't care) los modos 5-7.</p>
+<p><strong>21.</strong> Dibuja el mapa de Karnaugh de 3 variables para la función M. Agrupa los unos (y las X que te convengan) en el menor número posible de agrupaciones lo más grandes posibles.</p>
+<p><strong>22.</strong> Escribe la expresión booleana mínima de M a partir del mapa de Karnaugh. Deberías obtener una función muy simple — intenta que no tenga más de dos términos.</p>
+<p><strong>23.</strong> Dibuja el circuito combinacional que implementa la función M, usando solo puertas AND, OR y NOT. Estima el número de puertas necesarias.</p>
+<h2>D2.4 — Multiplexor para la lectura de sensores</h2>
+<p>El KR C4 lee continuamente los datos de los 6 codificadores de posición + 6 sensores de par (uno por eje) + 6 sensores de temperatura de los motores = <strong>18 señales distintas</strong>. Pero la electrónica de entrada del procesador central solo tiene una entrada analógica-digital. La solución clásica es usar un multiplexor para ir seleccionando una señal cada vez, de forma rápida y secuencial.</p>
+<p><strong>24.</strong> Calcula cuántos bits de selección necesita el multiplexor para poder elegir entre las 18 señales de entrada. </p>
+<p><strong>25.</strong> Si el multiplexor cambia de señal cada 100 microsegundos, calcula cuánto tiempo tarda en completar un ciclo de lectura de las 18 señales. Expresa el resultado en milisegundos.</p>
+<p><strong>26.</strong> Calcula la frecuencia de muestreo efectiva de cada sensor individual (cuántas veces por segundo se lee cada uno). Expresa el resultado en Hz.</p>
+<p><strong>27.</strong> Comenta en una línea si esa frecuencia de muestreo es suficiente para un lazo de control que tiene que corregir la posición del robot varias veces por segundo. ¿Y si el robot se mueve a 2 m/s, cuánto se mueve el extremo del brazo entre dos lecturas consecutivas del mismo sensor?</p>
+<h2>BLOQUE F — Toques introductorios al control automático</h2>
+<p>Este bloque no es un bloque completo. Es un anticipo. En el tercer trimestre empezarás a estudiar el bloque F (Sistemas automáticos) en clase, y ahí aprenderás álgebra de bloques, funciones de transferencia, estabilidad y reguladores PID. Aquí no vamos a ir tan lejos. Aquí simplemente vas a descubrir el concepto más importante del bloque F — el lazo cerrado con realimentación — aplicado al robot que has estado analizando en los bloques anteriores.</p>
+<p>Porque un robot industrial es, esencialmente, seis lazos de control cerrados trabajando en paralelo. Y sin eso, los cálculos de D1 y D2 no sirven de nada.</p>
+<h2>F.1 — Lazo abierto frente a lazo cerrado</h2>
+<p>Imagina que quieres mover el eje 1 del robot exactamente 45° en sentido horario. Tienes dos maneras de hacerlo:</p>
+<p>• Control en lazo abierto: calculas cuántos grados equivalen 45° en vueltas del motor, aplicas la corriente al motor durante el tiempo exacto para hacer esas vueltas, y confías en que el motor haya girado lo que tú le has pedido. Si hay rozamiento, inercia, un cable enganchado o cualquier otro imprevisto, el motor no girará exactamente lo que tú querías y el robot no llegará a la posición correcta. No lo sabrás, porque no mides nada.</p>
+<p>• Control en lazo cerrado: aplicas la corriente al motor, pero al mismo tiempo mides continuamente el ángulo real del eje con el codificador de 20 bits del bloque D2. Comparas el ángulo real con el ángulo objetivo y calculas el error. Si hay error, ajustas la corriente del motor para corregirlo. El proceso se repite miles de veces por segundo hasta que el error es cero. Entonces, y solo entonces, el eje está exactamente donde tú querías.</p>
+<p><strong>28.</strong> Explica con tus propias palabras, en un párrafo de 4-6 líneas, la diferencia fundamental entre un sistema de control en lazo abierto y uno en lazo cerrado. Pon un ejemplo de la vida cotidiana de cada uno (por ejemplo: un microondas con temporizador es lazo abierto, un horno con termostato es lazo cerrado).</p>
+<p><strong>29.</strong> Dibuja un diagrama de bloques del control de un eje del robot en lazo cerrado, mostrando los siguientes elementos: (1) referencia o consigna de posición, (2) comparador (nodo de resta), (3) controlador, (4) motor + eje (planta), (5) codificador de posición (sensor), (6) realimentación hacia el comparador.</p>
+<h2>F.2 — El error de posición y la precisión real</h2>
+<p>En el apartado D2.1 has calculado que el codificador de 20 bits del eje 1 puede distinguir ángulos tan pequeños como unas pocas milésimas de grado. En principio, eso permitiría al robot posicionarse con una precisión equivalente a décimas de milímetro en el extremo del brazo.</p>
+<p>Pero la realidad es más complicada. El robot no alcanza la posición objetivo de manera instantánea: la alcanza siguiendo una trayectoria asintótica. Es decir, el error entre la posición actual y la posición objetivo se va reduciendo a lo largo del tiempo, y nunca es exactamente cero. El controlador considera que el robot ha llegado cuando el error es inferior a una tolerancia preestablecida (por ejemplo, 0,06 mm, que es la repetibilidad nominal del KR QUANTEC).</p>
+<p><strong>30.</strong> Si el error de posición inicial es 10 mm y se reduce al 50% en cada ciclo de control (lazo cerrado a 1 kHz, es decir, 1.000 ciclos por segundo), calcula cuántos ciclos necesita el sistema para que el error baje de 0,06 mm.</p>
+<p><strong>31.</strong> Con el mismo dato de 1.000 ciclos por segundo, calcula cuánto tiempo en milisegundos tarda el robot en alcanzar la tolerancia de 0,06 mm. Compara con el tiempo de reacción de un humano (unos 200 ms): ¿el robot es más rápido o más lento en estabilizarse?</p>
+<p><strong>32.</strong> Reflexiona en dos o tres líneas: un humano puede coger un vaso de café con la mano casi sin pensar, pero no puede repetir el mismo gesto con precisión de una décima de milímetro. Un robot puede repetir el gesto con esa precisión, pero necesita un sistema de lazo cerrado con miles de ciclos por segundo para hacerlo. ¿Dónde está realmente la inteligencia del robot, en el motor o en el lazo de control?</p>
+<p><strong>La pregunta final</strong></p>
+<p>Has calculado las potencias trifásicas del robot, has corregido su factor de potencia, has aplicado el teorema de Boucherot a toda la celda, has analizado la resolución de sus codificadores, has diseñado la lógica booleana de su sistema de seguridad, has simplificado un circuito con mapas de Karnaugh, has dimensionado un multiplexor y has entendido el lazo cerrado de control que lo hace posible.</p>
+<p>Ahora puedes responder a la pregunta con la que empezó este trabajo.</p>
+<blockquote>
+<p><em><strong>¿Por qué un robot industrial de 1.200 kilos puede mover una pieza con una precisión de una décima de milímetro, mucho mejor que la de tu propia mano? ¿Dónde está esa precisión realmente — en la mecánica del robot, en los motores, en los codificadores, en la electrónica digital, o en otro sitio?</strong></em></p>
+</blockquote>
+<p><strong>33.</strong> Redacta una respuesta razonada a esa pregunta, apoyándote en los cálculos concretos que has hecho en este trabajo. Tu respuesta debe relacionar al menos:</p>
+<blockquote>
+<p><strong>•)</strong> Un resultado del bloque D1 (por ejemplo: la potencia activa del robot, o la corrección del factor de potencia, o la corriente de línea).</p>
+<p><strong>•)</strong> Un resultado del bloque D2 (por ejemplo: la resolución del codificador, o la simplificación del sistema de seguridad, o el multiplexor de sensores).</p>
+<p><strong>•)</strong> Un concepto del bloque F (por ejemplo: el lazo cerrado de realimentación, o el tiempo de estabilización del error de posición).</p>
+</blockquote>
+<p>Y debe terminar con una frase en tu propia voz que explique lo siguiente: un robot industrial no es una máquina mecánica con electrónica añadida. Es exactamente lo contrario. Es un sistema electrónico y de control que tiene, incidentalmente, una parte mecánica. La precisión del robot no viene de que el brazo esté bien hecho (que también). Viene de que el lazo de control corrige el error cientos de veces por segundo hasta que deja de existir.</p>
+<blockquote>
+<p><em>(Esta es la última pregunta del último trabajo integrador del curso. No hay más trabajos después de este. Si la respondes bien, has entendido una cosa importante sobre la ingeniería del siglo XXI: las máquinas modernas no se hacen con mejores materiales ni con motores más grandes. Se hacen con electrónica más inteligente y con lazos de control más rápidos. El futuro del que tanto se habla ya no lo construyen los metalúrgicos. Lo construyen los que entienden D1, D2 y F a la vez. Es decir: lo vas a construir tú.)</em></p>
+</blockquote>
+<hr>
+<p><strong>Este trabajo es voluntario y suma +1 punto a la nota del tercer trimestre.</strong></p>
+<p><em>Se entrega el 17 de abril. Se trabaja durante las dos primeras semanas del repaso final. Se recoge corregido antes del 7 de mayo.</em></p>
+<hr>
+<p><strong>Fuentes verificadas</strong></p>
+<p>• KUKA AG — KR QUANTEC Technical Datasheet (modelo KR 210 R2700)</p>
+<p>• KUKA AG — KR C4 Controller Operating Instructions</p>
+<p>• KUKA AG — Catálogos técnicos de servomotores para robots industriales</p>
+<p>• Manual técnico del KR QUANTEC-2 (V10, 29/01/2024), publicado por KUKA en www.kuka.com</p>
+<p><em>Los datos geométricos y eléctricos del robot y del controlador son cifras oficiales publicadas por KUKA AG y contrastadas con al menos dos fuentes independientes. Los valores exactos de los 6 motores individuales no son completamente públicos en todos los casos; los valores de potencia utilizados son representativos del orden de magnitud real para un robot de esta categoría. Las potencias de la celda robótica (cinta transportadora, iluminación, extracción) son valores típicos de una celda industrial de soldadura automovilística. Los números de los ejercicios están redondeados para que los cálculos salgan limpios al alumno sin perder realismo ingenieril.</em></p>
+</main>
+<footer>
+IES Jiménez de Quesada · Santa Fe (Granada) · © 2025-26 Manuel Alonso Herrera
+</footer>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II — Marina Bay Sands · Trabajo integrador</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script>
+MathJax = {tex: {inlineMath: [['\\(','\\)'],['$','$']], displayMath: [['\\[','\\]'],['$$','$$']]}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+<style>
+:root{--az:#1B4F8A;--az2:#2E7BC4;--or:#D4700A;--t:#23272F;--t2:#555D6B;--bd:#D8DDE5;--bg:#F4F6F9;--hh:52px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Barlow',system-ui,sans-serif;background:#CBD5E1;color:var(--t);scroll-behavior:smooth}
+.hd{position:sticky;top:0;background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:14px 24px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 10px rgba(0,0,0,.15);z-index:100}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;cursor:pointer}.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.8rem;opacity:.85;flex:1}
+.home-btn{background:rgba(255,255,255,.12);color:#fff;text-decoration:none;font-size:.78rem;padding:5px 12px;border-radius:6px;border:1px solid rgba(255,255,255,.25)}
+.home-btn:hover{background:rgba(255,255,255,.22)}
+.navcross{background:#F4F6F9;border-bottom:1px solid var(--bd);padding:9px 20px;display:flex;gap:8px;flex-wrap:wrap;font-size:.78rem;position:sticky;top:var(--hh);z-index:90}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:var(--t);background:#fff;border-color:var(--bd)}
+.navcross a:hover{background:#EBF0F7;border-color:var(--az);color:var(--az)}
+.navcross span.nc-current{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;border-color:var(--az);font-weight:600}
+.navcross .nc-sep{color:#8C97A8;align-self:center;user-select:none}
+main{max-width:870px;margin:0 auto;background:#fff;box-shadow:0 6px 48px rgba(0,0,0,.18);padding:40px 50px 80px;min-height:80vh}
+main h1{font-family:'Barlow Condensed',sans-serif;font-size:2rem;color:var(--az);margin-top:28px;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--az)}
+main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;color:var(--az2);margin-top:28px;margin-bottom:10px;padding-left:10px;border-left:4px solid var(--or)}
+main h3{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;color:var(--az);margin-top:20px;margin-bottom:8px}
+main p{margin:0 0 10px;line-height:1.68}
+main ul,main ol{margin:0 0 14px 24px;line-height:1.68}
+main li{margin-bottom:4px}
+main table{border-collapse:collapse;margin:14px 0;font-size:.92rem;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+main table th,main table td{border:1px solid var(--bd);padding:6px 12px;text-align:left;vertical-align:top}
+main table th{background:var(--az);color:#fff;font-weight:700;font-size:.85rem}
+main table tr:nth-child(even) td{background:#F5F6F8}
+main blockquote{border-left:4px solid var(--or);background:#FFF9EC;padding:10px 18px;margin:14px 0;font-style:italic;color:#5A3900}
+main hr{border:none;border-top:1px solid var(--bd);margin:26px 0}
+main strong{color:var(--az)}
+.titular{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:28px 32px;margin:-40px -50px 28px;text-align:center}
+.titular h1{color:#fff;border:none;margin:0;font-size:2.4rem;padding:0}
+.titular .subtitulo{font-size:1.1rem;opacity:.92;margin-top:6px;font-style:italic}
+.meta-box{background:#F0F6FD;border:1px solid #BAD0EA;border-left:5px solid var(--az);border-radius:4px;padding:14px 20px;margin:0 0 32px;font-size:.92rem}
+.meta-box p{margin:0 0 4px}.meta-box p:last-child{margin-bottom:0}
+.meta-box strong{color:var(--az)}
+footer{max-width:870px;margin:20px auto 40px;padding:18px 30px;text-align:center;color:var(--t2);font-size:.78rem;background:#fff;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+@media(max-width:700px){main{padding:32px 20px 40px}.titular{margin:-32px -20px 20px;padding:20px 18px}.titular h1{font-size:1.7rem}.hd{padding:10px 14px}}
+</style>
+</head>
+<body>
+<div class="hd">
+<span class="lg" onclick="location.href='./index.html'">TECI II</span>
+<span class="sb">🏗️ Marina Bay Sands</span>
+<a href="./index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal">
+<a href="./index.html" aria-label="Ir al índice principal"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="./index.html#teoria" aria-label="Ver índice de teoría"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+<span class="nc-sep">·</span>
+<a href="./index.html#ejercicios" aria-label="Ver índice de ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a>
+<span class="nc-sep">·</span>
+<a href="./index.html#examenes" aria-label="Ver índice de exámenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current" aria-current="page"><span>🚀</span><span class="nc-lbl">Marina Bay</span></span>
+</nav>
+<main>
+<div class="titular">
+<h1>🏗️ Marina Bay Sands</h1>
+<div class="subtitulo">El voladizo más largo del mundo</div>
+</div>
+<div class="meta-box">
+<p><strong>IES Jiménez de Quesada</strong> · Santa Fe (Granada) · Tecnología e Ingeniería II · 2º Bachillerato A</p>
+<p><strong>Profesor:</strong> Manuel Alonso Herrera · Curso 2025-26</p>
+<p><strong>Trabajo integrador</strong> · Bloques B (Materiales) y C1 (Estructuras) · Trabajo voluntario · <strong>+1 punto en la nota del primer trimestre</strong></p>
+</div>
+<p><strong>IES JIMÉNEZ DE QUESADA</strong></p>
+<p>TECNOLOGÍA E INGENIERÍA II</p>
+<p>2º de Bachillerato A</p>
+<p>Profesor: Manuel Alonso Herrera</p>
+<p>Curso 2025-26</p>
+<p><em>Trabajo integrador · Bloques B (Materiales) y C1 (Estructuras)</em></p>
+<p><em>Trabajo voluntario · +1 punto en la nota del primer trimestre</em></p>
+<hr>
+<p><strong>Un voladizo de 67 metros sobre el vacío</strong></p>
+<p>En el sur de Singapur, frente a la bahía, tres torres inclinadas de 55 plantas se apoyan una contra otra como tres naipes de una mano a punto de caer. Sobre ellas descansa una plataforma de 340 metros de longitud y 38 de anchura, suspendida a 200 metros sobre el suelo. Tiene un parque público con 250 árboles y 650 plantas, una piscina de 150 metros de largo, restaurantes, un mirador y capacidad para 3.900 personas.</p>
+<p>Se llama <strong>SkyPark</strong>. Pesa 7.000 toneladas. Se terminó en 2010. Y tiene un detalle que cambia todo: <strong>67 metros de esa plataforma no se apoyan en nada</strong>. Sobresalen de la última torre hacia el vacío, volando sobre la ciudad. Es el voladizo público más largo del mundo. Y en su extremo, donde parece que todo tendría que estar vacío para evitar el peso, los ingenieros colocaron una piscina infinita de 1.440 toneladas de agua.</p>
+<p>Esta es la foto que dio la vuelta al mundo: tres bañistas nadando hacia el borde infinito, a 200 metros sobre Singapur, en una piscina que técnicamente no debería existir porque está sobre una parte del edificio que técnicamente no debería aguantar su propio peso.</p>
+<p>¿Cómo se diseña algo así sin que se caiga? La respuesta no está en una sola cosa. Está en <strong>la combinación exacta de los materiales elegidos y las fuerzas calculadas</strong>. El acero de las vigas tiene que ser el adecuado. El hormigón de las torres tiene que resistir exactamente el peso que le llega. El vidrio del fondo de la piscina tiene que aguantar el tráfico constante de bañistas. Los pernos de las cajas fuertes de las suites de lujo tienen que tener la dureza que exige la certificación bancaria. Y las vigas del voladizo tienen que estar calculadas al milímetro para que, con peso propio, con el peso del agua, con el peso de las personas, con el viento de los tifones, el momento flector en el empotramiento no supere nunca lo que el acero puede aguantar.</p>
+<p>Nada de esto es magia. Es bloque B (materiales) y bloque C1 (estructuras) aplicados a la vez. Ingeniería, no arquitectura.</p>
+<p>En este trabajo vas a hacer lo mismo que hicieron los ingenieros de <strong>Arup</strong> (la consultora que diseñó Marina Bay Sands) en los años 2005-2010: caracterizar los materiales que iban a usar, y después calcular si las estructuras que iban a construir resistirían las cargas que tenían que soportar. El objeto es real. Los datos son reales. Los cálculos que vas a hacer son los mismos que se hicieron en Londres y en Singapur antes de que empezaran a colocar la primera viga del SkyPark.</p>
+<p>Al final del trabajo responderás a una pregunta que no tiene respuesta en ningún libro, y que solo entenderás cuando hayas hecho todos los cálculos anteriores. Esa es la forma de pensar de un ingeniero de verdad: primero las cifras, después la decisión.</p>
+<p><strong>Datos reales de Marina Bay Sands</strong></p>
+<p>Todos los datos de este apartado son cifras oficiales publicadas por Arup, Safdie Architects, JFE Engineering y la documentación técnica del proyecto. No hay ningún dato inventado.</p>
+<p><strong>Marina Bay Sands — datos generales</strong></p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Arquitecto</td>
+<td>Moshe Safdie</td>
+</tr>
+<tr class="odd">
+<td>Ingeniería estructural</td>
+<td>Arup</td>
+</tr>
+<tr class="even">
+<td>Inauguración</td>
+<td>2010</td>
+</tr>
+<tr class="odd">
+<td>Coste del proyecto</td>
+<td>5.700 millones de dólares</td>
+</tr>
+<tr class="even">
+<td>Número de torres</td>
+<td>3 (cada una con 55 plantas)</td>
+</tr>
+<tr class="odd">
+<td>Inclinación de las torres</td>
+<td>26° (se apoyan entre sí)</td>
+</tr>
+<tr class="even">
+<td>Altura de las torres</td>
+<td>198 metros</td>
+</tr>
+</tbody>
+</table>
+<p><strong>SkyPark — la plataforma en la azotea</strong></p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Longitud total</td>
+<td>340 m</td>
+</tr>
+<tr class="odd">
+<td>Anchura</td>
+<td>38 m</td>
+</tr>
+<tr class="even">
+<td>Altura sobre el suelo</td>
+<td>200 m</td>
+</tr>
+<tr class="odd">
+<td>Peso total de la estructura</td>
+<td>7.000 toneladas</td>
+</tr>
+<tr class="even">
+<td><strong>Longitud del voladizo (desde la última torre)</strong></td>
+<td><strong>67 m</strong></td>
+</tr>
+<tr class="odd">
+<td>Peso del voladizo solo</td>
+<td>3.500 toneladas</td>
+</tr>
+<tr class="even">
+<td>Peso de las vigas cajón principales</td>
+<td>1.400 toneladas</td>
+</tr>
+<tr class="odd">
+<td>Amortiguador de masa en la punta (tuned mass damper)</td>
+<td>5 toneladas</td>
+</tr>
+<tr class="even">
+<td>Capacidad máxima de personas</td>
+<td>3.900</td>
+</tr>
+<tr class="odd">
+<td>Movimiento térmico tolerado por las juntas</td>
+<td>500 mm</td>
+</tr>
+</tbody>
+</table>
+<p><strong>La piscina infinita</strong></p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Longitud</td>
+<td>150 m</td>
+</tr>
+<tr class="odd">
+<td>Superficie</td>
+<td>1.396 m²</td>
+</tr>
+<tr class="even">
+<td><strong>Volumen de agua</strong></td>
+<td><strong>1.440 m³ (= 1.440 toneladas)</strong></td>
+</tr>
+<tr class="odd">
+<td>Peso del vaso de acero inoxidable</td>
+<td>181,6 toneladas</td>
+</tr>
+<tr class="even">
+<td>Aforo de bañistas</td>
+<td>~2.000 personas/día</td>
+</tr>
+<tr class="odd">
+<td><strong>Ubicación de la piscina en el voladizo</strong></td>
+<td><strong>Tramo final (extremo del voladizo)</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>BLOQUE B — Materiales</h2>
+<p>Cada material de Marina Bay Sands fue ensayado en laboratorio antes de llegar a la obra. Un rascacielos de esta complejidad no usa un material: usa <strong>decenas de materiales distintos</strong>, cada uno elegido para su función concreta, cada uno caracterizado con el ensayo más adecuado a sus propiedades críticas.</p>
+<p>En este bloque vas a calcular las propiedades de seis materiales reales del edificio a partir de los datos de sus ensayos de caracterización. Cada ensayo va con el material donde ese ensayo es el estándar de control de calidad en la industria real.</p>
+<h2>B.1 — Ensayo de tracción del acero estructural del voladizo</h2>
+<p>Las vigas cajón principales del voladizo (1.400 toneladas de acero) están fabricadas con <strong>acero estructural de alta resistencia tipo S460</strong>. Antes de fabricar cada viga, los ingenieros de Arup realizaron ensayos de tracción sobre probetas normalizadas del acero que iban a usar, para verificar que cumplía las propiedades especificadas en el proyecto.</p>
+<p>Del ensayo de tracción de una probeta cilíndrica normalizada (diámetro inicial D₀ = 10 mm, longitud inicial entre marcas L₀ = 50 mm) se obtuvieron los siguientes datos:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro medido</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Fuerza en el límite elástico</td>
+<td>F_e = 36,1 kN</td>
+</tr>
+<tr class="odd">
+<td>Fuerza máxima (tensión de rotura)</td>
+<td>F_r = 43,0 kN</td>
+</tr>
+<tr class="even">
+<td>Fuerza en el punto A (zona elástica)</td>
+<td>F_A = 15,7 kN</td>
+</tr>
+<tr class="odd">
+<td>Alargamiento en el punto A</td>
+<td>ΔL_A = 0,05 mm</td>
+</tr>
+<tr class="even">
+<td>Longitud final tras la rotura</td>
+<td>L_f = 61 mm</td>
+</tr>
+</tbody>
+</table>
+<p>Calcula:</p>
+<p><strong>1.</strong> El módulo de elasticidad longitudinal E (módulo de Young) del acero, a partir del punto A de la zona elástica. Expresa el resultado en GPa.</p>
+<p><strong>2.</strong> El límite elástico σ_e y la tensión de rotura σ_r, en MPa. Compara estos valores con los de un acero estructural común S275 (σ_e = 275 MPa) y justifica por qué los ingenieros eligieron un acero de mayor resistencia para el voladizo.</p>
+<p><strong>3.</strong> El alargamiento porcentual de rotura A% = (L_f − L_0) / L_0 · 100. Comenta brevemente si el material es dúctil o frágil a partir de este valor.</p>
+<h2>B.2 — Ensayo Brinell del acero antitaladro de las cajas fuertes</h2>
+<p>Las suites presidenciales de Marina Bay Sands están equipadas con <strong>cajas fuertes certificadas según la norma EN 1143-1</strong>, grado V (para proteger objetos de valor hasta 100.000 €). El acero de las puertas y paredes de estas cajas es un <strong>acero antitaladro de alta dureza</strong> con láminas internas de carburos cementados. Su dureza se certifica en fábrica mediante el ensayo Brinell.</p>
+<p>Nota técnica: Brinell se usa en la industria de cajas fuertes porque deja una huella grande y visible, lo cual permite un control de calidad rápido en cada puerta fabricada, sin necesidad de equipos de laboratorio. Es menos preciso que Vickers para durezas muy altas, pero industrialmente más práctico.</p>
+<p>Del ensayo Brinell sobre el acero de la puerta de una caja fuerte de suite se obtuvo:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Diámetro del indentador (bola de carburo)</td>
+<td>D = 10 mm</td>
+</tr>
+<tr class="odd">
+<td>Carga aplicada</td>
+<td>F = 29.400 N (3.000 kgf)</td>
+</tr>
+<tr class="even">
+<td>Tiempo de aplicación de la carga</td>
+<td>15 s</td>
+</tr>
+<tr class="odd">
+<td>Diámetro medio de la huella</td>
+<td>d = 2,40 mm</td>
+</tr>
+</tbody>
+</table>
+<p>Calcula:</p>
+<p><strong>4.</strong> La dureza Brinell HB del acero antitaladro.</p>
+
+<p><strong>5.</strong> Compara el resultado con la dureza Brinell típica de un acero al carbono común (HB ≈ 150) y la de un acero de herramientas de corte (HB ≈ 400). ¿Está el acero antitaladro en un rango intermedio, superior o inferior? Justifica si el valor obtenido es coherente con la función de la pieza (resistencia al taladro de ataque).</p>
+<h2>B.3 — Ensayo Vickers del vidrio templado de la piscina infinita</h2>
+<p>El fondo de la piscina infinita del SkyPark está hecho de <strong>vidrio templado laminado de alta resistencia</strong>, no de acero inoxidable (aunque el vaso lateral sí lo sea). El vidrio se eligió porque permitía la integración visual con el entorno y porque soporta bien el tráfico constante de bañistas. Pero el vidrio tiene un punto débil: la <strong>abrasión superficial</strong>. Con 2.000 personas al día pisando el fondo con gafas, joyas, relojes y zapatillas acuáticas, el vidrio debe tener una dureza superficial muy alta para no rayarse en pocos años.</p>
+<p>La dureza del vidrio se mide con el ensayo Vickers (microdureza), porque el indentador piramidal deja una huella muy pequeña y precisa sobre materiales frágiles como el vidrio.</p>
+<p>Del ensayo Vickers sobre una probeta del vidrio templado usado en la piscina:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Carga aplicada</td>
+<td>F = 9,8 N (1 kgf)</td>
+</tr>
+<tr class="odd">
+<td>Diagonal media de la huella piramidal</td>
+<td>d = 18,5 μm</td>
+</tr>
+</tbody>
+</table>
+<p>Calcula:</p>
+<p><strong>6.</strong> La dureza Vickers HV del vidrio templado.</p>
+
+<p><strong>7.</strong> Compara el resultado con la dureza Vickers del vidrio común (HV ≈ 550) y la del acero templado (HV ≈ 800). ¿Es el vidrio templado más duro o menos duro que un acero templado? ¿Es un resultado esperable?</p>
+<h2>B.4 — Ensayo Charpy del acero estructural del voladizo</h2>
+<p>Singapur está en una zona sísmica moderada y sujeta a <strong>tifones y vientos tropicales</strong>. Un voladizo de 67 m a 200 m de altura tiene que aguantar, sin romperse, impactos puntuales de objetos arrastrados por el viento y cargas dinámicas por vibración. El acero estructural no solo tiene que tener alta resistencia (eso lo mide la tracción), también tiene que tener <strong>alta tenacidad</strong>: capacidad de absorber energía antes de romperse. La tenacidad se mide con el ensayo Charpy.</p>
+<p>Del ensayo Charpy sobre una probeta normalizada del mismo acero S460 de las vigas del voladizo, ensayada a temperatura ambiente:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Tipo de probeta</td>
+<td>Charpy V (10 × 10 × 55 mm)</td>
+</tr>
+<tr class="odd">
+<td>Sección bajo la entalla</td>
+<td>S = 0,80 cm²</td>
+</tr>
+<tr class="even">
+<td>Energía absorbida en la rotura</td>
+<td>E = 110 J</td>
+</tr>
+<tr class="odd">
+<td>Temperatura del ensayo</td>
+<td>20 °C</td>
+</tr>
+</tbody>
+</table>
+<p>Calcula:</p>
+<p><strong>8.</strong> La resiliencia KCV del acero S460.</p>
+
+<p><strong>9.</strong> La norma EN 10025 exige que los aceros estructurales S460 tengan una resiliencia mínima KCV ≥ 27 J/cm² a −20 °C para uso estructural en zonas sísmicas. El valor que has calculado es a 20 °C. Investiga (o reflexiona) por qué la temperatura del ensayo importa en el Charpy y qué fenómeno físico hace que el mismo acero pueda tener tenacidades muy distintas a 20 °C y a −20 °C. Escribe dos frases sobre la transición dúctil-frágil.</p>
+<h2>B.5 — Ensayo de compresión simple del hormigón de las torres</h2>
+<p>Las tres torres de Marina Bay Sands son de <strong>hormigón armado de alta resistencia</strong> con núcleos pretensados. Soportan 7.000 toneladas de SkyPark sobre sus cabezas, más el peso de 55 plantas de hotel y casino. El control de calidad del hormigón en obra es constante: cada pocas horas se toman probetas de cada amasada y se ensayan a compresión a los 28 días para verificar que se cumple la <strong>resistencia característica</strong> especificada en el proyecto.</p>
+<p>Aclaración técnica: el hormigón no se ensaya con Brinell, Vickers o Charpy (no tiene sentido para un material cerámico-granular como el hormigón). Su ensayo estándar es la compresión simple sobre probeta cilíndrica normalizada de 150 mm de diámetro y 300 mm de altura.</p>
+<p>De una de las probetas del hormigón de las torres, ensayada a compresión a los 28 días:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Diámetro de la probeta</td>
+<td>D = 150 mm</td>
+</tr>
+<tr class="odd">
+<td>Altura de la probeta</td>
+<td>H = 300 mm</td>
+</tr>
+<tr class="even">
+<td>Carga máxima en la rotura</td>
+<td>F = 1.060 kN</td>
+</tr>
+<tr class="odd">
+<td>Edad del hormigón en el ensayo</td>
+<td>28 días</td>
+</tr>
+</tbody>
+</table>
+<p>Calcula:</p>
+<p><strong>10.</strong> La resistencia característica a compresión fc del hormigón de las torres:</p>
+
+<p>donde A es el área de la sección transversal de la probeta. Expresa el resultado en MPa y en kp/cm².</p>
+<p><strong>11.</strong> Clasifica el hormigón según la nomenclatura estándar (HA-25, HA-30, HA-40, HA-50, HA-60.). Justifica en una línea por qué los ingenieros eligieron un hormigón de alta resistencia en vez de un hormigón convencional para una estructura de esta altura.</p>
+<h2>B.6 — Comparativa de materiales para las vigas del voladizo</h2>
+<p>Antes de elegir acero estructural S460 para las vigas cajón del voladizo, los ingenieros de Arup consideraron otras opciones. Cada material tiene ventajas e inconvenientes en peso, resistencia y coste. La decisión final depende de combinar los tres criterios, no de maximizar solo uno.</p>
+<p>Supón que los ingenieros tuvieron que dimensionar una viga principal de sección rectangular (b × h) capaz de soportar el momento flector máximo del voladizo. Con los valores aproximados del proyecto, la viga necesita:</p>
+<p>• Soportar un momento flector en el empotramiento de M ≈ 35.000 kN·m</p>
+<p>• Tener una longitud total de 67 m</p>
+<p>• Peso propio lo menor posible (cada tonelada de viga añade carga que sube por cada torre)</p>
+<p>Propiedades de los cuatro materiales candidatos:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Material</strong></td>
+<td><strong>Densidad (kg/m³)</strong></td>
+<td><strong>σ admisible (MPa)</strong></td>
+<td><strong>Precio (€/kg)</strong></td>
+</tr>
+<tr class="even">
+<td>Acero S460</td>
+<td>7.850</td>
+<td>460</td>
+<td>1,2</td>
+</tr>
+<tr class="odd">
+<td>Aluminio 7075-T6</td>
+<td>2.810</td>
+<td>500</td>
+<td>5,5</td>
+</tr>
+<tr class="even">
+<td>Titanio Ti-6Al-4V</td>
+<td>4.430</td>
+<td>880</td>
+<td>28,0</td>
+</tr>
+<tr class="odd">
+<td>Hormigón HA-60</td>
+<td>2.500</td>
+<td>60 (compresión)</td>
+<td>0,12</td>
+</tr>
+</tbody>
+</table>
+<p><strong>12.</strong> Compara los cuatro materiales aplicando los siguientes criterios ingenieriles:</p>
+<blockquote>
+<p><strong>a)</strong> Criterio de peso: para una misma resistencia mecánica, ¿qué material requeriría menos peso de viga? Usa el cociente σ_admisible / densidad como indicador (conocido como resistencia específica).</p>
+<p><strong>b)</strong> Criterio de coste total: estima el coste de una viga de cada material que soporte el mismo momento flector, usando el peso necesario multiplicado por el precio por kg.</p>
+<p><strong>c)</strong> Criterio de adecuación al uso: ¿es viable usar hormigón HA-60 en un voladizo a tracción-flexión como el del SkyPark? Justifica por qué sí o por qué no.</p>
+</blockquote>
+<p><strong>13.</strong> Con los tres criterios evaluados, justifica razonadamente por qué los ingenieros eligieron finalmente acero S460 y no aluminio (más ligero), titanio (más resistente) u hormigón (más barato). Tu respuesta debe mencionar las ventajas del acero en al menos dos de los tres criterios anteriores, y una ventaja adicional que no se vea directamente en los números .</p>
+<h2>BLOQUE C1 — Estructuras</h2>
+<p>En este bloque vas a resolver cuatro problemas estructurales sobre elementos reales de Marina Bay Sands. Cada problema tiene una configuración de carga distinta, de forma que al terminar los cuatro habrás entrenado todos los tipos de problema que pueden caer en PEvAU:</p>
+<p>• C1.1 — Viga biapoyada con carga distribuida</p>
+<p>• C1.2 — Ménsula con dos cargas distribuidas en tramos</p>
+<p>• C1.3 — Viga biapoyada con cargas puntuales</p>
+<p>• C1.4 — Ménsula con carga puntual en el extremo</p>
+<p>En cada problema debes realizar siempre los cinco pasos completos: (1) calcular las reacciones en los apoyos o empotramientos, (2) plantear las leyes V(x) y M(x) por el método de las secciones, (3) dibujar los diagramas de cortante y momento flector, (4) identificar el punto donde el momento es máximo y su valor, y (5) aplicar el criterio de signos correctamente en todos los pasos.</p>
+<h2>C1.1 — Viga biapoyada con carga distribuida: el tramo central del SkyPark entre las Torres 1 y 2</h2>
+<p>La plataforma SkyPark atraviesa las tres torres apoyándose en ellas. El tramo entre las Torres 1 y 2 se puede modelar como una viga biapoyada de 120 m de luz, cargada uniformemente por su peso propio y la sobrecarga de uso (personas, mobiliario, vegetación, agua de la zona de tránsito).</p>
+<p>Datos del modelo:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Luz entre apoyos (Torre 1 y Torre 2)</td>
+<td>L = 120 m</td>
+</tr>
+<tr class="odd">
+<td>Carga distribuida uniforme (peso propio + uso)</td>
+<td>q = 40 kN/m</td>
+</tr>
+<tr class="even">
+<td>Tipo de apoyos</td>
+<td>Apoyo simple + apoyo deslizante</td>
+</tr>
+</tbody>
+</table>
+<p>Calcula y representa:</p>
+<p><strong>14.</strong> Las reacciones verticales en los dos apoyos (R_A y R_B).</p>
+<p><strong>15.</strong> Las leyes del esfuerzo cortante V(x) y del momento flector M(x) a lo largo de toda la viga, aplicando el método de las secciones.</p>
+<p><strong>16.</strong> Los diagramas de V(x) y M(x), indicando claramente los valores en los extremos y en el centro.</p>
+<p><strong>17.</strong> El valor del momento flector máximo y el punto donde se produce.</p>
+<p><strong>18.</strong> Aplica correctamente el criterio de signos en todos los cálculos y diagramas (especifica qué criterio usas al inicio del problema).</p>
+<h2>C1.2 — Ménsula con dos cargas distribuidas: el voladizo del SkyPark con la piscina infinita</h2>
+<p>El voladizo de 67 m que sobresale de la Torre 3 soporta dos cargas distribuidas diferentes:</p>
+<p>• Una carga uniforme q₁ en toda la longitud del voladizo, que representa el peso propio del acero estructural + la sobrecarga de uso (personas, mobiliario, árboles del parque).</p>
+<p>• Una carga uniforme q₂ adicional en los últimos 12 metros del voladizo, que representa el peso del agua de la piscina infinita concentrada en la zona extrema.</p>
+<p>Datos del modelo:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Longitud total del voladizo</td>
+<td>L = 67 m</td>
+</tr>
+<tr class="odd">
+<td>Carga q₁ (peso propio + uso) en toda la longitud</td>
+<td>q₁ = 30 kN/m</td>
+</tr>
+<tr class="even">
+<td>Carga q₂ adicional (agua de la piscina) en los últimos 12 m</td>
+<td>q₂ = 120 kN/m</td>
+</tr>
+<tr class="odd">
+<td>Tramo con q₁ solo (desde empotramiento)</td>
+<td>Tramo A: 0 ≤ x ≤ 55 m</td>
+</tr>
+<tr class="even">
+<td>Tramo con q₁ + q₂ (extremo)</td>
+<td>Tramo B: 55 m ≤ x ≤ 67 m</td>
+</tr>
+</tbody>
+</table>
+<p>(Nota: tomamos x = 0 en el empotramiento, x = 67 m en el extremo libre. Las cifras de q₁ y q₂ son estimaciones realistas basadas en la masa del SkyPark y la masa del agua de la piscina.)</p>
+<p>Calcula y representa:</p>
+<p><strong>19.</strong> La reacción vertical y el momento en el empotramiento. </p>
+<p><strong>20.</strong> Las leyes V(x) y M(x) en el tramo A (0 ≤ x ≤ 55 m), por el método de las secciones.</p>
+<p><strong>21.</strong> Las leyes V(x) y M(x) en el tramo B (55 m ≤ x ≤ 67 m), teniendo en cuenta que en este tramo actúan las dos cargas distribuidas simultáneamente.</p>
+<p><strong>22.</strong> Los diagramas de cortante y momento flector completos, mostrando claramente la discontinuidad en la pendiente del diagrama en el punto de cambio de tramo (x = 55 m).</p>
+<p><strong>23.</strong> El valor del momento flector máximo y el punto donde se produce. (En una ménsula, ¿dónde esperas que esté?)</p>
+<h2>C1.3 — Viga biapoyada con cargas puntuales: una viga del forjado del lobby principal</h2>
+<p>El lobby principal de Marina Bay Sands es uno de los vestíbulos de hotel más grandes del mundo, con esculturas y obras de arte <strong>suspendidas del techo</strong> por Moshe Safdie en colaboración con artistas como Antony Gormley y Sol LeWitt. Cada escultura es una carga puntual concentrada sobre las vigas del forjado superior del lobby. Una de esas vigas soporta tres elementos colgantes con los siguientes pesos:</p>
+<p>Datos del modelo:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Luz de la viga biapoyada</td>
+<td>L = 12 m</td>
+</tr>
+<tr class="odd">
+<td>Carga puntual P₁ (lámpara decorativa)</td>
+<td>P₁ = 15 kN (en x = 3 m)</td>
+</tr>
+<tr class="even">
+<td>Carga puntual P₂ (escultura central)</td>
+<td>P₂ = 40 kN (en x = 6 m)</td>
+</tr>
+<tr class="odd">
+<td>Carga puntual P₃ (segunda escultura)</td>
+<td>P₃ = 25 kN (en x = 9 m)</td>
+</tr>
+</tbody>
+</table>
+<p>(Observa que las tres cargas no están colocadas de forma simétrica. El cálculo de reacciones requiere aplicar equilibrio de fuerzas y de momentos.)</p>
+<p>Calcula y representa:</p>
+<p><strong>24.</strong> Las reacciones verticales en los dos apoyos, R_A y R_B, aplicando Σ F_v = 0 y Σ M = 0.</p>
+<p><strong>25.</strong> Las leyes V(x) y M(x) por tramos, sabiendo que con tres cargas puntuales la viga queda dividida en cuatro tramos: (0, 3), (3, 6), (6, 9), (9, 12).</p>
+<p><strong>26.</strong> Los diagramas de cortante y momento flector, mostrando claramente los saltos del cortante en cada punto de aplicación de carga y los picos (vértices) del momento flector.</p>
+<p><strong>27.</strong> El valor del momento flector máximo y el tramo donde se produce. </p>
+<h2>C1.4 — Ménsula con carga puntual en el extremo: la grúa de limpieza de fachadas (BMU)</h2>
+<p>Todos los rascacielos del mundo tienen en su azotea una <strong>Building Maintenance Unit (BMU)</strong>: una grúa permanente instalada sobre raíles que saca una pluma en voladizo por encima del borde del edificio para que los limpiacristales bajen por la fachada en una cesta suspendida. Marina Bay Sands tiene varias BMU en el techo del SkyPark, porque limpiar los cristales de un rascacielos inclinado de 55 plantas es un trabajo permanente.</p>
+<p>La pluma de una BMU se puede modelar como una ménsula empotrada (en su carro sobre raíles) con una carga puntual en el extremo libre (la cesta con dos operarios y su equipo de limpieza).</p>
+<p>Datos del modelo:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Parámetro</strong></td>
+<td><strong>Valor</strong></td>
+</tr>
+<tr class="even">
+<td>Longitud de la pluma en voladizo</td>
+<td>L = 15 m</td>
+</tr>
+<tr class="odd">
+<td>Peso propio de la pluma (carga distribuida)</td>
+<td>q = 2 kN/m</td>
+</tr>
+<tr class="even">
+<td><strong>Carga puntual en el extremo (cesta con 2 operarios + equipo)</strong></td>
+<td><strong>P = 8 kN</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Calcula y representa:</p>
+<p><strong>28.</strong> La reacción vertical y el momento en el empotramiento (donde la pluma se une al carro de la BMU). Considera ambas cargas: el peso propio distribuido q y la carga puntual P en el extremo.</p>
+<p><strong>29.</strong> Las leyes V(x) y M(x) a lo largo de los 15 m de la pluma (x = 0 en el empotramiento, x = 15 en el extremo donde cuelga la cesta).</p>
+<p><strong>30.</strong> Los diagramas de cortante y momento flector.</p>
+<p><strong>31.</strong> El valor del momento flector máximo y el punto donde se produce.</p>
+<p><strong>32.</strong> Reflexión ingenieril: a 200 m de altura, con dos personas en la cesta, el cálculo de esta ménsula deja de ser académico. Comenta brevemente qué coeficiente de seguridad (factor multiplicador del momento calculado) crees que debería aplicar el ingeniero al dimensionar la viga de la pluma, y por qué. </p>
+<p><strong>La pregunta final</strong></p>
+<p>Has calculado las propiedades de seis materiales y resuelto cuatro problemas de estructuras. Ahora tienes suficiente información para responder a una pregunta que no es ni de materiales ni de estructuras, sino de las dos cosas a la vez. Esta pregunta vale tanto como todas las anteriores juntas.</p>
+<blockquote>
+<p><em>El voladizo del SkyPark de Marina Bay Sands pesa 3.500 toneladas, se extiende 67 metros sobre el vacío, lleva encima una piscina de 1.440 toneladas de agua, y tiene que aguantar el viento, los terremotos y el paso de 3.900 personas sobre él. Cualquier ingeniero consultado antes de 2005 habría dicho que esto no se podía hacer con los materiales disponibles.</em></p>
+<p><em>Y sin embargo, se hizo. Lleva 15 años ahí, aguantando.</em></p>
+</blockquote>
+<p><strong>33.</strong> Justifica, apoyándote en los cálculos que has hecho en este trabajo, por qué el voladizo del SkyPark es <strong>posible</strong>. Tu respuesta debe relacionar al menos <strong>tres resultados del bloque B</strong> (por ejemplo: la resistencia del acero S460 calculada en B.1, la resistencia del hormigón calculada en B.5, la comparativa de materiales de B.6) con al menos <strong>dos resultados del bloque C1</strong> (por ejemplo: el momento máximo en el empotramiento del voladizo de C1.2, o la comparación entre el comportamiento de la viga biapoyada C1.1 y la ménsula C1.2). Y debe terminar con una frase en tu propia voz que explique <strong>qué principio general de diseño en ingeniería ilustra el voladizo del SkyPark</strong>.</p>
+<blockquote>
+<p><em>(No respondas con dos líneas. Esta es la pregunta que separa al alumno que ha calculado del alumno que ha entendido. Tómate el tiempo que necesites. Si la respondes bien, has hecho algo que muy poca gente de 17 años en España puede hacer hoy: pensar como un ingeniero de estructuras, no como un calculador de ejercicios.)</em></p>
+</blockquote>
+<hr>
+<p><strong>Este trabajo es voluntario y suma +1 punto a la nota del primer trimestre.</strong></p>
+<p><em>Se entrega el 4 de diciembre. Se recoge corregido la segunda semana de enero, tras las vacaciones de Navidad.</em></p>
+<hr>
+<p><strong>Fuentes verificadas</strong></p>
+<p>• Arup — Marina Bay Sands Integrated Resort project documentation</p>
+<p>• Safdie Architects — Marina Bay Sands project files</p>
+<p>• JFE Engineering — SkyPark steel structure technical overview</p>
+<p>• Tony Gee and Partners — Marina Bay Sands SkyPark design review</p>
+<p>• WikiArquitectura — Marina Bay Sands (datos geométricos cruzados)</p>
+<p>• Wikipedia — Marina Bay Sands (referencias a Arup, Architect Magazine)</p>
+<p><em>Los datos geométricos del edificio (dimensiones, pesos, capacidades) son oficiales. Los datos numéricos de los ensayos de materiales son realistas para los materiales especificados, contrastados con normas EN 10025 (aceros), EN 1143-1 (cajas fuertes) y EHE-08 (hormigones), aunque no son los valores históricos exactos de los ensayos concretos de la obra, que no son de dominio público. Los valores de cargas en los problemas estructurales son estimaciones realistas basadas en las masas conocidas del voladizo y la piscina.</em></p>
+</main>
+<footer>
+IES Jiménez de Quesada · Santa Fe (Granada) · © 2025-26 Manuel Alonso Herrera
+</footer>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
