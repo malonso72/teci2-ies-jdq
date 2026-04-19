@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II — Del Latido al Gigante · Reto C2</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script>
+MathJax = {tex: {inlineMath: [['\\(','\\)'],['$','$']], displayMath: [['\\[','\\]'],['$$','$$']]}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+<style>
+:root{--az:#1B4F8A;--az2:#2E7BC4;--or:#D4700A;--t:#23272F;--t2:#555D6B;--bd:#D8DDE5;--bg:#F4F6F9;--hh:52px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Barlow',system-ui,sans-serif;background:#CBD5E1;color:var(--t);scroll-behavior:smooth}
+.hd{position:sticky;top:0;background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:14px 24px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 10px rgba(0,0,0,.15);z-index:100}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;cursor:pointer}.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.8rem;opacity:.85;flex:1}
+.home-btn{background:rgba(255,255,255,.12);color:#fff;text-decoration:none;font-size:.78rem;padding:5px 12px;border-radius:6px;border:1px solid rgba(255,255,255,.25)}
+.home-btn:hover{background:rgba(255,255,255,.22)}
+.navcross{background:#F4F6F9;border-bottom:1px solid var(--bd);padding:9px 20px;display:flex;gap:8px;flex-wrap:wrap;font-size:.78rem;position:sticky;top:var(--hh);z-index:90}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:var(--t);background:#fff;border-color:var(--bd)}
+.navcross a:hover{background:#EBF0F7;border-color:var(--az);color:var(--az)}
+.navcross span.nc-current{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;border-color:var(--az);font-weight:600}
+.navcross .nc-sep{color:#8C97A8;align-self:center;user-select:none}
+main{max-width:870px;margin:0 auto;background:#fff;box-shadow:0 6px 48px rgba(0,0,0,.18);padding:40px 50px 80px;min-height:80vh}
+main h1{font-family:'Barlow Condensed',sans-serif;font-size:2rem;color:var(--az);margin-top:28px;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--az)}
+main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;color:var(--az2);margin-top:28px;margin-bottom:10px;padding-left:10px;border-left:4px solid var(--or)}
+main h3{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;color:var(--az);margin-top:20px;margin-bottom:8px}
+main p{margin:0 0 10px;line-height:1.68}
+main ul,main ol{margin:0 0 14px 24px;line-height:1.68}
+main li{margin-bottom:4px}
+main table{border-collapse:collapse;margin:14px 0;font-size:.92rem;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+main table th,main table td{border:1px solid var(--bd);padding:6px 12px;text-align:left;vertical-align:top}
+main table th{background:var(--az);color:#fff;font-weight:700;font-size:.85rem}
+main table tr:nth-child(even) td{background:#F5F6F8}
+main blockquote{border-left:4px solid var(--or);background:#FFF9EC;padding:10px 18px;margin:14px 0;font-style:italic;color:#5A3900}
+main hr{border:none;border-top:1px solid var(--bd);margin:26px 0}
+main strong{color:var(--az)}
+.titular{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:28px 32px;margin:-40px -50px 28px;text-align:center}
+.titular h1{color:#fff;border:none;margin:0;font-size:2.4rem;padding:0}
+.titular .subtitulo{font-size:1.1rem;opacity:.92;margin-top:6px;font-style:italic}
+.meta-box{background:#F0F6FD;border:1px solid #BAD0EA;border-left:5px solid var(--az);border-radius:4px;padding:14px 20px;margin:0 0 32px;font-size:.92rem}
+.meta-box p{margin:0 0 4px}.meta-box p:last-child{margin-bottom:0}
+.meta-box strong{color:var(--az)}
+footer{max-width:870px;margin:20px auto 40px;padding:18px 30px;text-align:center;color:var(--t2);font-size:.78rem;background:#fff;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+@media(max-width:700px){main{padding:32px 20px 40px}.titular{margin:-32px -20px 20px;padding:20px 18px}.titular h1{font-size:1.7rem}.hd{padding:10px 14px}}
+</style>
+</head>
+<body>
+<div class="hd">
+<span class="lg" onclick="location.href='./index.html'">TECI II</span>
+<span class="sb">🏎️ Del Latido al Gigante</span>
+<a href="./index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal">
+<a href="./index.html" aria-label="Ir al índice principal"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="./index.html#teoria" aria-label="Ver índice de teoría"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+<span class="nc-sep">·</span>
+<a href="./index.html#ejercicios" aria-label="Ver índice de ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a>
+<span class="nc-sep">·</span>
+<a href="./index.html#examenes" aria-label="Ver índice de exámenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current" aria-current="page"><span>🚀</span><span class="nc-lbl">Latido</span></span>
+</nav>
+<main>
+<div class="titular"><h1>🏎️ Del Latido al Gigante</h1><div class="subtitulo">Seis motores, seis historias, una sola física</div></div>
+<div class="meta-box">
+<p><strong>IES Jiménez de Quesada</strong> · Santa Fe (Granada) · Tecnología e Ingeniería II · 2º Bachillerato A</p>
+<p><strong>Profesor:</strong> Manuel Alonso Herrera · Curso 2025-26</p>
+<p><strong>Reto aplicado</strong> · Bloque C2 (Máquinas y motores térmicos)</p>
+</div>
+
+<h1 id="horas-en-el-planeta-tierra---5-de-diciembre-de-2025">24 horas en el planeta Tierra - 5 de diciembre de 2025</h1>
+<p>Este ejercicio extraordinario te llevará en un viaje a través de seis motores, desde el más pequeño y fiable hasta el más gigantesco jamás construido. Cada uno tiene su historia, cada uno mueve el mundo de una forma diferente. Todos comparten las mismas leyes físicas. Todos están conectados sin saberlo.</p>
+<h2 id="nivel-1-el-corazón-humano">NIVEL 1: EL CORAZÓN HUMANO</h2>
+<h3 id="historia-el-maratoniano-eliud-kipchoge">Historia: El maratoniano Eliud Kipchoge</h3>
+<p>5:00 AM, Eldoret, Kenia</p>
+<p>Eliud Kipchoge se despierta para su entrenamiento matinal. Durante un maratón a ritmo de récord mundial, su corazón acelera hasta 165 latidos por minuto, desarrollando una potencia de 6 W. Este órgano extraordinario lleva latiendo sin parar desde antes de nacer. En reposo bombea 5 litros de sangre por minuto a solo 50 latidos, con una potencia de 1,5 W. Durante el maratón, lo multiplica todo por cuatro. Ha latido más de 2.500 millones de veces en su vida. <strong>Nunca ha fallado. Nunca se ha detenido. Es el motor más fiable que jamás haya existido.</strong></p>
+<p>Su rendimiento apenas llega al 25%, pero lleva <strong>40 años funcionando sin descanso y puede seguir otros cuarenta más</strong>, ininterrumpido, como si el tiempo no pudiera alcanzarlo.</p>
+<p>Y lo sorprendente es esto: <strong>la evolución necesitó 500 millones de años para crear el motor más fiable del planeta</strong>. Medio billón de años afinando un latido perfecto. Nosotros, en apenas un siglo de motores de combustión, seguimos aprendiendo a imitarlo. Pistones, explosiones, turbocompresores… todo es un intento de copiar lo que ya late dentro de ti desde antes de nacer.</p>
+<p><strong>Todos los motores de este ejercicio son solo ecos de ese latido primordial.</strong></p>
+<p><em>Ahora, calcula su potencia. A ver si tus números pueden siquiera rozar el milagro.</em></p>
+<h3 id="especificaciones-técnicas">Especificaciones técnicas</h3>
+<ul>
+<li><p>Tipo: Bomba muscular de 4 cámaras</p></li>
+</ul>
+<ul>
+<li><p>Potencia en reposo: 1,5 W</p></li>
+</ul>
+<ul>
+<li><p>Potencia máxima (ejercicio intenso): 6 W</p></li>
+</ul>
+<ul>
+<li><p>Frecuencia en reposo: 50 latidos/min (deportista élite)</p></li>
+</ul>
+<ul>
+<li><p>Frecuencia durante maratón: 165 latidos/min</p></li>
+</ul>
+<ul>
+<li><p>Volumen por latido: 100 ml</p></li>
+</ul>
+<ul>
+<li><p>Caudal en reposo: 5 litros/min</p></li>
+</ul>
+<ul>
+<li><p>Peso: 300 gramos</p></li>
+</ul>
+<ul>
+<li><p>Vida útil: 80+ años sin mantenimiento</p></li>
+</ul>
+<ul>
+<li><p>Rendimiento: ~25% (convierte energía química en trabajo mecánico)</p></li>
+</ul>
+<h2 id="nivel-2-o.s.-max-20fp-motor-glow-35-cc">NIVEL 2: O.S. MAX 20FP (motor Glow 3,5 cc)</h2>
+<h3 id="historia-el-abuelo-y-su-nieto">Historia: El abuelo y su nieto</h3>
+<p>10:00 AM, Madrid, España</p>
+<p>José, 72 años, ex ingeniero aeronáutico, lleva a su nieto Mario (8 años) al campo de vuelo. En su mano sostiene un avión de aeromodelismo con un motor de metanol que cabe en su palma. Mario no lo sabe, pero su abuelo pasó 40 años diseñando motores para aviones militares. Ahora, jubilado, aplica la misma física y las mismas ecuaciones a una escala mil veces menor. El motor zumba a 15.000 rpm, más rápido que cualquier motor de Fórmula 1. José sonríe: “La escala no importa, Mario. Las leyes son las mismas.”</p>
+<h3 id="especificaciones-técnicas-1">Especificaciones técnicas</h3>
+<ul>
+<li><p>Tipo: Monocilíndrico 2 tiempos, refrigerado por aire</p></li>
+</ul>
+<ul>
+<li><p>Cilindrada: 3,5 cc</p></li>
+</ul>
+<ul>
+<li><p>Carrera: 17 mm</p></li>
+</ul>
+<ul>
+<li><p>Potencia máxima: 0,5 CV a 15.000 rpm</p></li>
+</ul>
+<ul>
+<li><p>Combustible: Metanol + aceite sintético</p></li>
+</ul>
+<ul>
+<li><p>Consumo: 100 ml/hora</p></li>
+</ul>
+<ul>
+<li><p>Peso: 150 gramos</p></li>
+</ul>
+<h2 id="nivel-3-yamaha-sr125-motor-minarelli-ym124-monocilíndrico-4t">NIVEL 3: YAMAHA SR125 (motor Minarelli YM124 – monocilíndrico 4T)</h2>
+<h3 id="historia-el-primer-día-de-libertad">Historia: El primer día de libertad</h3>
+<p>4:00 PM, Jaén, España</p>
+<p>Lucía, 16 años, acaba de sacar el carnet A1. Por primera vez en su vida conduce sola. El motor monocilíndrico de 124 cc ronronea suavemente bajo ella. Su padre le regaló esta moto, la misma que él usó hace 30 años cuando tenía su edad. La restauró pieza a pieza durante dos años. 'Este motor te llevará a tu primer trabajo, a tu primer amor, a tu primera aventura', le dijo entregándole las llaves. Lucía acelera suavemente y siente la libertad por primera vez. El motor responde con un rugido contenido. 12 caballos. Suficiente para cambiar una vida.</p>
+<h3 id="especificaciones-técnicas-2">Especificaciones técnicas</h3>
+<ul>
+<li><p>Motor: Monocilíndrico 4 tiempos, refrigerado por líquido</p></li>
+</ul>
+<ul>
+<li><p>Cilindrada: 124 cc</p></li>
+</ul>
+<ul>
+<li><p>Diámetro x Carrera: 57 x 48,8 mm</p></li>
+</ul>
+<ul>
+<li><p>Potencia máxima: 12 CV a 6.500 rpm</p></li>
+</ul>
+<ul>
+<li><p>Par máximo: 9,8 Nm a 8.500 rpm</p></li>
+</ul>
+<ul>
+<li><p>Relación de compresión: 10:1</p></li>
+</ul>
+<ul>
+<li><p>Consumo específico: 330 g/kW·h</p></li>
+</ul>
+<ul>
+<li><p>Combustible: Gasolina 95 octanos</p></li>
+</ul>
+<ul>
+<li><p>Densidad gasolina: 0,74 kg/l</p></li>
+</ul>
+<ul>
+<li><p>Peso motor: 14 kg</p></li>
+</ul>
+<ul>
+<li><p>Capacidad depósito: 11 litros</p></li>
+</ul>
+<h2 id="nivel-4-lamborghini-huracán-sto-motor-ldf70-v10-5.2-l-atmosférico">NIVEL 4: LAMBORGHINI HURACÁN STO (motor LDF70 – V10 5.2 L atmosférico)</h2>
+<h3 id="historia-el-sueño-de-ferruccio">Historia: El sueño de Ferruccio</h3>
+<p>6:00 PM, Sant'Agata Bolognese, Italia</p>
+<p>Un grupo de visitantes recorre la fábrica Lamborghini. El guía cuenta la historia: 'En 1962, Ferruccio Lamborghini era un exitoso fabricante de tractores. Compró un Ferrari 250 GT, pero el embrague se rompía constantemente. Frustrado, fue a quejarse directamente a Enzo Ferrari. La respuesta de Ferrari fue demoledora: Tú haces tractores, yo hago coches. No me digas cómo construir deportivos. Ferruccio, herido en su orgullo, respondió: Pues haré mis propios superdeportivos. Y los haré MEJOR que los tuyos. En 1963 nació Automobili Lamborghini. De un orgullo herido nació una leyenda. Hoy, 62 años después, el Huracán desarrolla 640 CV de un V10 atmosférico. Del tractor de 50 CV al superdeportivo de 640 CV. La venganza más cara y hermosa de la historia del automovilismo.'</p>
+<h3 id="especificaciones-técnicas-3">Especificaciones técnicas</h3>
+<ul>
+<li><p>Motor: gasolina 4 tiempos , V10 atmosférico 5,2 litros</p></li>
+</ul>
+<ul>
+<li><p>Potencia máxima: 640 CV a 8.000 rpm</p></li>
+</ul>
+<ul>
+<li><p>Par máximo: 565 Nm a 6.500 rpm</p></li>
+</ul>
+<ul>
+<li><p>Carrera: 92,8 mm</p></li>
+</ul>
+<ul>
+<li><p>Relación de compresión: 12,7:1</p></li>
+</ul>
+<ul>
+<li><p>Peso del motor: 240 kg (estimado)</p></li>
+</ul>
+<ul>
+<li><p>Consumo específico: 305 g/kW·h</p></li>
+</ul>
+<ul>
+<li><p>Combustible: Gasolina 98 octanos (Pc = 43.900 kJ/kg)</p></li>
+</ul>
+<ul>
+<li><p>Densidad combustible: 0,74 kg/l</p></li>
+</ul>
+<h2 id="nivel-5-leopard-2a7-motor-mb-873-ka-501">NIVEL 5: LEOPARD 2A7+ (motor MB 873 Ka-501)</h2>
+<h3 id="historia-el-centinela-dormido">Historia: El centinela dormido</h3>
+<p>11:00 PM, Base militar alemana</p>
+<p>El sargento Klaus Müller, 52 años, mecánico jefe de Leopard 2, termina su turno. Lleva 28 años manteniendo el mismo tanque, número de serie 2A7-447. Lo conoce mejor que a su propio coche. 'Espero que nunca tenga que usarse en combate', confiesa mientras cierra la escotilla del motor. Esta semana ha estado entrenando a jóvenes soldados ucranianos. Les enseña: Este motor puede salvar vuestra vida. Mueve 62 toneladas como si fueran juguetes. Tratadlo con respeto, mantenedlo limpio, y él os traerá de vuelta a casa. Klaus piensa en su hijo, ingeniero mecánico en Stuttgart. No es el motor más potente del mundo, pero sí el más fiable bajo fuego. Esa es la diferencia entre volver a casa o no hacerlo.</p>
+<h3 id="especificaciones-técnicas-4">Especificaciones técnicas</h3>
+<ul>
+<li><p>Motor: MTU MB 873 Ka-501, V12 diesel sobrealimentado 4 tiempos</p></li>
+</ul>
+<ul>
+<li><p>Cilindrada: 47,6 litros</p></li>
+</ul>
+<ul>
+<li><p>Potencia máxima: 1.500 CV a 2.600 rpm</p></li>
+</ul>
+<ul>
+<li><p>Par máximo: 4.700 Nm a 1.600 rpm</p></li>
+</ul>
+<ul>
+<li><p>Carrera: 175 mm</p></li>
+</ul>
+<ul>
+<li><p>Relación de compresión: 17:1</p></li>
+</ul>
+<ul>
+<li><p>Relación de corte (rc): 2,0</p></li>
+</ul>
+<ul>
+<li><p>Consumo específico: 244 g/kW·h</p></li>
+</ul>
+<ul>
+<li><p>Peso del motor: 2.200 kg</p></li>
+</ul>
+<ul>
+<li><p>Peso total del tanque: 62.500 kg</p></li>
+</ul>
+<ul>
+<li><p>Combustible: Diesel (Pc = 43.000 kJ/kg, densidad 0,835 kg/l)</p></li>
+</ul>
+<ul>
+<li><p>Autonomía en combate: 250 km</p></li>
+</ul>
+<ul>
+<li><p>Depósito: 1.200 litros</p></li>
+</ul>
+<h2 id="nivel-6-emma-maersk-clase-e-motor-wärtsilä-sulzer-14rt-flex96c">NIVEL 6: EMMA MAERSK CLASE E (motor Wärtsilä-Sulzer 14RT-flex96C)</h2>
+<h3 id="historia-el-capitán-chen-y-el-emma-maersk">Historia: El capitán Chen y el Emma Maersk</h3>
+<p>Medianoche, Océano Pacífico, 2.000 km al oeste de Los Ángeles</p>
+<p>El capitán Chen Wei, 58 años, lleva 25 años en el mar. Esta noche, como cada noche de los últimos tres años, duerme mientras el Emma Maersk surca el Pacífico a 25 nudos. En las entrañas del buque, el motor más grande jamás construido ronronea con un ritmo hipnótico: 102 latidos por minuto. Cada cilindro tiene el tamaño de un salón. Cada pistón pesa 5 toneladas, como un elefante africano adulto. Se mueven arriba y abajo 2,5 metros, una distancia mayor que la altura de un hombre. El capitán Chen transporta 14.000 contenedores TEU de Shanghai a Rotterdam. Uno de esos contenedores, el TEU-4472-B, contiene piezas de recambio para el avión RC que José y su nieto Mario vuelan cada domingo en Madrid. Ni José, ni Mario, ni Lucía en su moto, ni siquiera el sargento Klaus, saben que sus vidas están conectadas por este gigante dormido. Cada día, este motor mueve más carga que 1.000 aviones de transporte juntos. En la sala de máquinas, el ingeniero jefe mira el panel de control: 108.920 caballos de fuerza. Suficiente para alimentar una ciudad pequeña. Chen sonríe en sueños. Mañana llegarán a Long Beach. El ciclo continuará. El mundo sigue girando.</p>
+<h3 id="section"></h3>
+<h3 id="especificaciones-técnicas-5">Especificaciones técnicas</h3>
+<ul>
+<li><p>Motor: 14 cilindros en línea, 2 tiempos</p></li>
+</ul>
+<ul>
+<li><p>Cilindrada total: 25.480 litros</p></li>
+</ul>
+<ul>
+<li><p>Diámetro: 960 mm</p></li>
+</ul>
+<ul>
+<li><p>Carrera: 2.500 mm</p></li>
+</ul>
+<ul>
+<li><p>Potencia máxima: 108.920 CV a 102 rpm</p></li>
+</ul>
+<ul>
+<li><p>Par máximo: 7.603.850 Nm a 90 rpm</p></li>
+</ul>
+<ul>
+<li><p>Peso por pistón: 5.000 kg</p></li>
+</ul>
+<ul>
+<li><p>Relación de compresión: 18:1</p></li>
+</ul>
+<ul>
+<li><p>Consumo a plena potencia: 13.500 l/h de fuel oil pesado</p></li>
+</ul>
+<ul>
+<li><p>Combustible: Fuel oil (Pc = 40.500 kJ/kg, densidad 0,96 kg/l)</p></li>
+</ul>
+<ul>
+<li><p>Altura del motor: 13,5 metros (edificio de 4 pisos)</p></li>
+</ul>
+<ul>
+<li><p>Longitud del motor: 27 metros</p></li>
+</ul>
+<h1 id="la-tabla-de-los-seis-niveles">LA TABLA DE LOS SEIS NIVELES</h1>
+<p>Antes de comenzar con los cálculos, observa esta tabla. Cada fila representa un salto de escala. Desde el corazón de Kipchoge hasta el motor del Emma Maersk hay un factor de 13 MILLONES. Las mismas leyes físicas, las mismas ecuaciones, seis escalas diferentes.</p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>NIVEL</strong></td>
+<td><strong>MOTOR</strong></td>
+<td><strong>POTENCIA</strong></td>
+<td><strong>CILINDRADA</strong></td>
+<td><strong>RPM</strong></td>
+<td><strong>PESO</strong></td>
+<td><strong>FACTOR vs NIVEL 1</strong></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>Corazón humano</td>
+<td>6 W</td>
+<td>-</td>
+<td>165 lat/min</td>
+<td>300 g</td>
+<td><strong>×1</strong></td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>Motor aeromodelismo</td>
+<td>370 W</td>
+<td>3,5 cc</td>
+<td>15.000</td>
+<td>150 g</td>
+<td><strong>×62</strong></td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>Yamaha SR125</td>
+<td>9.000 W</td>
+<td>124 cc</td>
+<td>9.000</td>
+<td>14 kg</td>
+<td><strong>×1.833</strong></td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>Lamborghini Huracán</td>
+<td>471.000 W</td>
+<td>5.200 cc</td>
+<td>8.000</td>
+<td>~240 kg</td>
+<td><strong>×78.500</strong></td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>Leopard 2A7</td>
+<td>1.103.000 W</td>
+<td>47.600 cc</td>
+<td>2.600</td>
+<td>2.200 kg</td>
+<td><strong>×183.833</strong></td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>Wärtsilä-Sulzer 14RT-flex96C</td>
+<td>80.000.000 W</td>
+<td>25.480.000 cc</td>
+<td>102</td>
+<td>~2.300 ton</td>
+<td><strong>×13.333.333</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="observaciones-clave">Observaciones clave:</h3>
+<ul>
+<li><p>Rango de potencia: De 6 W a 80 MW → Factor de 13 millones</p></li>
+</ul>
+<ul>
+<li><p>Rango de cilindrada: De 10 cc a 25.480 litros → Factor de 2,5 millones</p></li>
+</ul>
+<ul>
+<li><p>Rango de RPM: De 102 a 15.000 rpm → Factor de 147</p></li>
+</ul>
+<ul>
+<li><p>El más eficiente por peso: Motor RC (2.467 W/kg)</p></li>
+</ul>
+<ul>
+<li><p>El más fiable: Corazón humano (80+ años sin mantenimiento)</p></li>
+</ul>
+<ul>
+<li><p>El más poderoso: Wärtsilä (equivale a 13 millones de corazones)</p></li>
+</ul>
+<h1 id="apartado-a-parámetros-básicos">APARTADO A: PARÁMETROS BÁSICOS</h1>
+<h2 id="a1-el-corazón">A1) EL CORAZÓN </h2>
+<p>1. Calcular el trabajo que realiza el corazón de Kipchoge en un maratón completo (2h 01min) a 6 W de potencia.</p>
+<p>2. Calcular cuántos latidos da su corazón durante el maratón a 165 latidos/min.</p>
+<h2 id="a2-motor-aeromodelismo">A2) MOTOR AEROMODELISMO </h2>
+<p>1. Calcular el diámetro del cilindro (en mm).</p>
+<p>2. Calcular la velocidad media del pistón a potencia máxima (en m/s).</p>
+<p>3. Calcular la frecuencia de explosiones a 15.000 rpm (en Hz) y compararla con la que tendría un motor de 4 tiempos con el mismo régimen de giro. Explicar la diferencia.</p>
+<p>4. Calcular el par motor a potencia máxima (en Nm).</p>
+<h2 id="a3-yamaha-sr125">A3) YAMAHA SR125 </h2>
+<p>1. Verificar la cilindrada total del motor utilizando el diámetro y la carrera.</p>
+<p>2. Calcular el volumen de la cámara de combustión (en cm³).</p>
+<p>3. Calcular la velocidad media del pistón a potencia máxima (en m/s).</p>
+<p>4. Calcular el par motor a potencia máxima (en Nm).</p>
+<p>5. Calcular el consumo en l/100 km circulando a 90 km/h, usando el consumo específico indicado en las especificaciones y suponiendo que el motor trabaja a su potencia máxima.</p>
+<p>6. Calcular la distancia que puede recorrer con 10 € de gasolina (precio: 1,5 €/litro).</p>
+<h2 id="a4-lamborghini-huracán-sto">A4) LAMBORGHINI HURACÁN STO </h2>
+<p>1. Calcular la cilindrada unitaria (en cm³).</p>
+<p>2. Calcular el diámetro del cilindro (en mm).</p>
+<p>3. Calcular el volumen de la cámara de combustión (en cm³).</p>
+<p>4. Calcular la velocidad media del pistón a potencia máxima (en m/s).</p>
+<p>5. Calcular el par motor a potencia máxima.</p>
+<p>6. Calcular la potencia a par máximo.</p>
+<h2 id="a5-leopard-2a7">A5) LEOPARD 2A7+</h2>
+<p>1. Calcular la cilindrada unitaria (en cm³).</p>
+<p>2. Calcular el diámetro del cilindro (en mm).</p>
+<p>3. Calcular el volumen de la cámara de combustión (en cm³).</p>
+<p>4. Calcular la velocidad media del pistón a 2.600 rpm (en m/s).</p>
+<p>5. Calcular la frecuencia de explosiones a 2.600 rpm (en Hz).</p>
+<p>6. Calcular el consumo másico en l/h a plena potencia.</p>
+<p>7. Calcular el par motor a potencia máxima.</p>
+<p>8. Calcular la potencia a par máximo.</p>
+<h2 id="a6-emma-maersk-clase-e">A6) EMMA MAERSK CLASE E</h2>
+<p>1. Calcular la cilindrada unitaria en litros y en m³.</p>
+<p>2. Verificar el diámetro del cilindro (en mm) usando la cilindrada unitaria y la carrera.</p>
+<p>3. Calcular el volumen de la cámara de combustión (en cm³).</p>
+<p>4. Calcular la velocidad media del pistón a 102 rpm (en m/s).</p>
+<p>5. Calcular el par motor a potencia máxima, expresado en Nm.</p>
+<p>6. Calcular la potencia a par máximo, expresada en kW.</p>
+<p>7. Calcular la frecuencia de explosiones a 102 rpm (en Hz).</p>
+<h1 id="apartado-b-consumo-y-energía">APARTADO B: CONSUMO Y ENERGÍA</h1>
+<h2 id="b1-lamborghini-huracán">B1) LAMBORGHINI HURACÁN</h2>
+<p>1. Calcular el consumo másico en l/h a plena potencia.</p>
+<p>2. Calcular el consumo por ciclo y por cilindro en gramos a plena potencia.</p>
+<p>3. Calcular la distancia recorrida a velocidad máxima (325 km/h) con el depósito de 70 L, suponiendo que el motor funciona a plena potencia. Expresa el resultado en km.</p>
+<p>4. Calcular la energía calorífica consumida en 1 hora a plena potencia (en MJ y kWh).</p>
+<p>5. Calcular el trabajo útil producido en 1 hora a plena potencia (en MJ y kWh).</p>
+<h2 id="b2-leopard-2a7">B2) LEOPARD 2A7+</h2>
+<p>1. Calcular el consumo volumétrico en l/h a plena potencia.</p>
+<p>2. Calcular el consumo por ciclo y por cilindro en gramos a plena potencia.</p>
+<p>3. Calcular la autonomía en horas con el depósito de 1.200 L a plena potencia.</p>
+<p>4. Calcular la energía calorífica consumida en 1 hora a plena potencia (en MJ y kWh).</p>
+<h2 id="b3-emma-maersk-clase-e">B3) EMMA MAERSK CLASE E</h2>
+<p>1. Calcular el consumo másico en kg/h y en kg/s a plena potencia.</p>
+<p>2. Calcular el consumo por ciclo y por cilindro en kilogramos a plena potencia.</p>
+<p>3. Calcular el consumo total en el viaje de 20 días a plena potencia (en litros).</p>
+<p>4. Calcular el consumo total en el viaje de 20 días a plena potencia (en toneladas).</p>
+<p>5. Si el Emma Maersk tuviera un depósito de 8.000 toneladas de fuel oil, ¿cuántos días de navegación a plena potencia podría realizar?</p>
+<h1 id="apartado-c-rendimientos">APARTADO C: RENDIMIENTOS</h1>
+<h2 id="c1-lamborghini-huracán-sto-ciclo-otto">C1) LAMBORGHINI HURACÁN STO– Ciclo Otto</h2>
+<p>1. Calcular el rendimiento térmico teórico del ciclo Otto (<em>γ = 1,4 )</em>.</p>
+<p>2. Calcular el rendimiento útil a plena potencia (usar el consumo específico indicado en las especificaciones).</p>
+<p>3. Calcular:</p>
+<blockquote>
+<p>a) El rendimiento indicado (considerando pérdidas de diagrama del 12%).</p>
+<p>b) El rendimiento mecánico.</p>
+</blockquote>
+<p><em>Nota: Motores de gasolina de alta velocidad (8.000 rpm) tienen mayores pérdidas de diagrama.</em></p>
+<h2 id="c2-leopard-2a7-ciclo-diesel">C2) LEOPARD 2A7+ – Ciclo Diesel</h2>
+<p>1. Calcular el rendimiento térmico teórico del ciclo Diesel:</p>
+<blockquote>
+<p>a) Usando la fórmula completa del ciclo Diesel, con: Rc = 17:1, γ = 1,35 y rc = 2,0.</p>
+<p>b) Usando la fórmula simplificada del ciclo Otto (como aproximación), con: Rc = 17:1 y γ = 1,35.</p>
+<p>c) Calcular la diferencia porcentual entre ambos resultados.</p>
+</blockquote>
+<p><em>Nota 1: La fórmula del ciclo Diesel es matemáticamente compleja debido a la combustión a presión constante. En nivel de Bachillerato, se permite como aproximación válida emplear la fórmula simplificada del ciclo Otto, que proporciona resultados razonablemente cercanos (diferencia típica &lt;5%).</em></p>
+<p><img src="media/image1.png" style="width:4.74583in;height:0.73958in" /><em>Nota 2: rc (relación de corte): cociente entre el volumen al final y al inicio de la combustión a presión constante en el ciclo Diesel. γ (coeficiente adiabático): relación entre calores específicos (Cp/Cv) γ ≈ 1,4 para gasolina; γ ≈ 1,35 para diesel</em></p>
+<p>2. Calcular el rendimiento útil a plena potencia (usar el consumo específico indicado en las especificaciones).</p>
+<p>3. Calcular:</p>
+<blockquote>
+<p>a) El rendimiento indicado (considerando pérdidas de diagrama del 8%).</p>
+<p>b) El rendimiento mecánico.</p>
+</blockquote>
+<p><em>Nota: Motores diesel de velocidad media tienen menores pérdidas de diagrama que los de gasolina.</em></p>
+<h2 id="c3-emma-maersk-clase-e-diesel-2-tiempos">C3) EMMA MAERSK CLASE E – Diesel 2 tiempos</h2>
+<p>1. Calcular el rendimiento térmico teórico del ciclo Diesel:</p>
+<blockquote>
+<p>a) Usando la fórmula completa del ciclo Diesel, con: γ = 1,35; Rc = 18:1; rc = 1,8.</p>
+<p>b) Usando la fórmula simplificada del ciclo Otto (como aproximación), con: γ = 1,35 y Rc = 18:1.</p>
+<p>c) Calcular la diferencia porcentual entre ambos resultados.</p>
+</blockquote>
+<p>2. Calcular el rendimiento útil a plena potencia (usar el consumo másico calculado en B3.1).</p>
+<p>3. Calcular:</p>
+<blockquote>
+<p>a) El rendimiento indicado (considerando un rendimiento de diagrama η_diagrama = 0,96).</p>
+<p>b) El rendimiento mecánico.</p>
+</blockquote>
+<p><em>Nota: Motores diesel 2 tiempos lentos (102 rpm) tienen pérdidas de diagrama muy bajas (~4%) debido a su baja velocidad y gran tamaño.</em></p>
+<h1 id="apartado-d-impacto-ambiental">APARTADO D: IMPACTO AMBIENTAL</h1>
+<h3 id="factores-de-emisión-y-absorción">FACTORES DE EMISIÓN Y ABSORCIÓN:</h3>
+<ul>
+<li><p>Gasolina: 2,31 kg CO₂/litro</p></li>
+</ul>
+<ul>
+<li><p>Diesel: 2,68 kg CO₂/litro</p></li>
+</ul>
+<ul>
+<li><p>Fuel oil pesado: 3,15 kg CO₂/kg combustible</p></li>
+</ul>
+<ul>
+<li><p>Absorción árbol maduro: 20 kg CO₂/año</p></li>
+</ul>
+<ul>
+<li><p>Absorción bosque: 10 toneladas CO₂/hectárea/año</p></li>
+</ul>
+<ul>
+<li><p>Coche eléctrico (emisiones indirectas): 0,05 kg CO₂/km</p></li>
+</ul>
+<ul>
+<li><p>Camión diesel: 0,8 kg CO₂/km</p></li>
+</ul>
+<h2 id="d1-lamborghini-huracán-sto">D1) LAMBORGHINI HURACÁN STO</h2>
+<p>1. Calcular las emisiones totales de CO₂ con los 70 litros del depósito (en kg de CO₂).</p>
+<p>2. Calcular los árboles necesarios para compensar esas emisiones, considerando 20 kg CO₂/año por árbol.</p>
+<p>3. Comparar las emisiones por km con las de un coche eléctrico (0,05 kg CO₂/km). Considera un consumo medio de 20 L/100 km. ¿Cuántas veces más contamina el Lamborghini?</p>
+<h2 id="d2-leopard-2a7">D2) LEOPARD 2A7+</h2>
+<p>1. Calcular las emisiones de CO₂ en 1 hora de operación a plena potencia (en kg de CO₂).</p>
+<p>2. Calcular las emisiones totales de CO₂ en la autonomía completa de combate (250 km), expresando el resultado en kg de CO₂.</p>
+<p>3. Calcular las hectáreas de bosque necesarias para compensar las emisiones de 1 hora de operación a plena potencia (absorción: 10 t CO₂/ha/año). Expresar el resultado en hectáreas y en m².</p>
+<h2 id="d3-emma-maersk-clase-e">D3) EMMA MAERSK CLASE E</h2>
+<p>1. Calcular las emisiones totales de CO₂ en el viaje de 20 días a plena potencia (en toneladas de CO₂).</p>
+<p>2. Calcular las hectáreas de bosque necesarias para compensar las emisiones del viaje (absorción: 10 t CO₂/ha/año).</p>
+<p>3. La paradoja del comercio global: El Emma Maersk transporta un paquete de 500 g dentro de uno de los 14.000 contenedores. Calcular cuántos kg de CO₂ se emitieron para transportar ese único paquete durante el viaje (usar las emisiones de los 20 días a plena potencia).</p>
+<h2 id="d4-reflexión-ambiental">D4) REFLEXIÓN AMBIENTAL</h2>
+<p>Has calculado las emisiones de tres gigantes. Ahora piensa:</p>
+<p>¿Deberíamos dejar de usar estos motores? ¿Cuál es el balance entre progreso y sostenibilidad? ¿Existe alternativa real a corto plazo?</p>
+<p><em>Se valorará pensamiento crítico, comprensión de la paradoja "eficiencia vs. escala", referencia a alternativas tecnológicas y reconocimiento de la complejidad del problema.</em></p>
+<h1 id="apartado-e-la-pregunta-filosófica">APARTADO E: LA PREGUNTA FILOSÓFICA</h1>
+<p>Has calculado las especificaciones de seis motores. Desde el corazón de Kipchoge, que late sin parar durante 80 años, hasta el gigante del Emma Maersk, que mueve ciudades flotantes. Ahora reflexiona:</p>
+<h2 id="cuál-es-el-motor-más-importante">1. ¿Cuál es el motor más importante?</h2>
+<p>Puedes elegir uno de ellos o justificar que varios lo sean por motivos distintos. Considera, por ejemplo:</p>
+<ul>
+<li><p>¿El que más potencia tiene?</p></li>
+</ul>
+<ul>
+<li><p>¿El que nunca falla?</p></li>
+</ul>
+<ul>
+<li><p>¿El que da libertad?</p></li>
+</ul>
+<ul>
+<li><p>¿El que mueve el mundo?</p></li>
+</ul>
+<p><strong>Explica tu elección de forma razonada.</strong></p>
+<h2 id="todos-estos-motores-usan-las-mismas-ecuaciones-físicas">2. Todos estos motores usan las MISMAS ecuaciones físicas</h2>
+<p><img src="media/image2.png" style="width:3.74792in;height:1.33264in" /></p>
+<p>¿Qué te dice esto sobre las leyes de la física? ¿Por qué son las mismas en todas las escalas?</p>
+<h2 id="reflexión-personal">3. Reflexión personal</h2>
+<p>¿Cuál de estas seis historias te ha impactado más y por qué? Razona tu respuesta de forma personal y argumentada.</p>
+<hr>
+<h1 id="la-conexión-final">LA CONEXIÓN FINAL</h1>
+<hr>
+<p>En este momento, mientras terminas el ejercicio, el corazón de Eliud Kipchoge sigue marcando su compás en Kenia. José y Mario afinan un motor diminuto en algún campo de vuelo. Lucía descubre la libertad sobre dos ruedas. Un Lamborghini ruge en una carretera italiana. El Leopard 2 permanece en silencio, esperando no tener que demostrar nunca su fuerza. Y, en algún punto del Pacífico, el gigantesco Wärtsilä empuja un barco del tamaño de una ciudad.</p>
+<p>Motores distintos. Escalas imposibles. Historias que nunca se cruzarán. Y aun así, <strong>todos obedecen exactamente a las mismas ecuaciones</strong>. La física conecta lo que la vida separa.</p>
+<p>Del latido al gigante.<br />
+Del décimo de milímetro a los 25 metros.<br />
+De 6 W a 80.000.000 W.<br />
+La misma lógica. La misma belleza.<br />
+El mismo planeta.</p>
+</main>
+<footer>
+IES Jiménez de Quesada · Santa Fe (Granada) · © 2025-26 Manuel Alonso Herrera
+</footer>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
