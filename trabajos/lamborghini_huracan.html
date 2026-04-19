@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II — Lamborghini Huracán STO · Reto C2</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script>
+MathJax = {tex: {inlineMath: [['\\(','\\)'],['$','$']], displayMath: [['\\[','\\]'],['$$','$$']]}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+<style>
+:root{--az:#1B4F8A;--az2:#2E7BC4;--or:#D4700A;--t:#23272F;--t2:#555D6B;--bd:#D8DDE5;--bg:#F4F6F9;--hh:52px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Barlow',system-ui,sans-serif;background:#CBD5E1;color:var(--t);scroll-behavior:smooth}.hd{position:sticky;top:0;background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:14px 24px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 10px rgba(0,0,0,.15);z-index:100}.hd.lg{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;cursor:pointer}.hd.lg:hover{opacity:.85}.hd.sb{font-size:.8rem;opacity:.85;flex:1}.home-btn{background:rgba(255,255,255,.12);color:#fff;text-decoration:none;font-size:.78rem;padding:5px 12px;border-radius:6px;border:1px solid rgba(255,255,255,.25)}.home-btn:hover{background:rgba(255,255,255,.22)}.navcross{background:#F4F6F9;border-bottom:1px solid var(--bd);padding:9px 20px;display:flex;gap:8px;flex-wrap:wrap;font-size:.78rem;position:sticky;top:var(--hh);z-index:90}.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all.18s}.navcross a{color:var(--t);background:#fff;border-color:var(--bd)}.navcross a:hover{background:#EBF0F7;border-color:var(--az);color:var(--az)}.navcross span.nc-current{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;border-color:var(--az);font-weight:600}.navcross.nc-sep{color:#8C97A8;align-self:center;user-select:none}
+main{max-width:870px;margin:0 auto;background:#fff;box-shadow:0 6px 48px rgba(0,0,0,.18);padding:40px 50px 80px;min-height:80vh}
+main h1{font-family:'Barlow Condensed',sans-serif;font-size:2rem;color:var(--az);margin-top:28px;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--az)}
+main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;color:var(--az2);margin-top:28px;margin-bottom:10px;padding-left:10px;border-left:4px solid var(--or)}
+main h3{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;color:var(--az);margin-top:20px;margin-bottom:8px}
+main p{margin:0 0 10px;line-height:1.68}
+main ul,main ol{margin:0 0 14px 24px;line-height:1.68}
+main li{margin-bottom:4px}
+main table{border-collapse:collapse;margin:14px 0;font-size:.92rem;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+main table th,main table td{border:1px solid var(--bd);padding:6px 12px;text-align:left;vertical-align:top}
+main table th{background:var(--az);color:#fff;font-weight:700;font-size:.85rem}
+main table tr:nth-child(even) td{background:#F5F6F8}
+main blockquote{border-left:4px solid var(--or);background:#FFF9EC;padding:10px 18px;margin:14px 0;font-style:italic;color:#5A3900}
+main hr{border:none;border-top:1px solid var(--bd);margin:26px 0}
+main strong{color:var(--az)}.titular{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:28px 32px;margin:-40px -50px 28px;text-align:center}.titular h1{color:#fff;border:none;margin:0;font-size:2.4rem;padding:0}.titular.subtitulo{font-size:1.1rem;opacity:.92;margin-top:6px;font-style:italic}.meta-box{background:#F0F6FD;border:1px solid #BAD0EA;border-left:5px solid var(--az);border-radius:4px;padding:14px 20px;margin:0 0 32px;font-size:.92rem}.meta-box p{margin:0 0 4px}.meta-box p:last-child{margin-bottom:0}.meta-box strong{color:var(--az)}
+footer{max-width:870px;margin:20px auto 40px;padding:18px 30px;text-align:center;color:var(--t2);font-size:.78rem;background:#fff;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+@media(max-width:700px){main{padding:32px 20px 40px}.titular{margin:-32px -20px 20px;padding:20px 18px}.titular h1{font-size:1.7rem}.hd{padding:10px 14px}}
+</style>
+</head>
+<body>
+<div class="hd">
+<span class="lg" onclick="location.href='./index.html'">TECI II</span>
+<span class="sb">🏁 Lamborghini Huracán STO</span>
+<a href="./index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal">
+<a href="./index.html" aria-label="Ir al índice principal"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="./index.html#teoria" aria-label="Ver índice de teoría"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+<span class="nc-sep">·</span>
+<a href="./index.html#ejercicios" aria-label="Ver índice de ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a>
+<span class="nc-sep">·</span>
+<a href="./index.html#examenes" aria-label="Ver índice de exámenes"><span>📋</span><span class="nc-lbl">Exámenes</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current" aria-current="page"><span>🚀</span><span class="nc-lbl">Huracán</span></span>
+</nav>
+<main>
+<div class="titular"><h1>🏁 Lamborghini Huracán STO</h1><div class="subtitulo">Motor V10 atmosférico · 640 CV a 8 000 rpm</div></div>
+<div class="meta-box">
+<p><strong>IES Jiménez de Quesada</strong> · Santa Fe (Granada) · Tecnología e Ingeniería II · 2º Bachillerato A</p>
+<p><strong>Profesor:</strong> Manuel Alonso Herrera · Curso 2025-26</p>
+<p><strong>Reto aplicado</strong> · Bloque C2 (Máquinas y motores térmicos)</p>
+</div>
+
+<p>Un Lamborghini Huracán STO equipa un motor V10 atmosférico de 5,2 litros que desarrolla una potencia máxima de <strong>640 CV a 8000 rpm</strong> y un par máximo de <strong>565 Nm a 6500 rpm</strong>.</p>
+<p>La carrera de los cilindros es de 92,8 mm. El motor tiene una relación de compresión de 12,5:1. El combustible utilizado tiene una densidad de 0,74 kg/l. <strong>Se pide:</strong></p>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>ESPECIFICACIONES TÉCNICAS</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Motor:</strong></td>
+<td>V10 atmosférico 5,2 litros</td>
+</tr>
+<tr class="odd">
+<td><strong>Potencia máxima:</strong></td>
+<td>640 CV a 8000 rpm</td>
+</tr>
+<tr class="even">
+<td><strong>Par máximo:</strong></td>
+<td>565 Nm a 6500 rpm</td>
+</tr>
+<tr class="odd">
+<td><strong>Carrera:</strong></td>
+<td>92,8 mm</td>
+</tr>
+<tr class="even">
+<td><strong>Relación compresión:</strong></td>
+<td>12,5:1</td>
+</tr>
+<tr class="odd">
+<td><strong>Densidad combustible:</strong></td>
+<td>0,74 kg/l</td>
+</tr>
+</tbody>
+</table>
+<h1 id="a-parámetros-geométricos-del-motor"> A) PARÁMETROS GEOMÉTRICOS DEL MOTOR</h1>
+<ol type="1">
+<li><p>Calcular la cilindrada unitaria (cm³).</p></li>
+</ol>
+<ol type="1">
+<li><p>Calcular el volumen de la cámara de combustión (cm³).</p></li>
+<li><p>Determinar el diámetro de los cilindros (mm).</p></li>
+<li><p>Hallar la velocidad media del pistón cuando el motor gira a 8000 rpm.</p></li>
+<li><p>Calcular las distancias desde el Punto Muerto Superior y el Punto Muerto Inferior al punto más alto del cilindro.</p></li>
+</ol>
+<p>⚠ NOTA: El área de la sección A puede obtenerse como A = V<sub>u</sub>/C</p>
+<h1 id="b-potencias-y-par-motor-torque"> B) POTENCIAS Y PAR MOTOR (TORQUE)</h1>
+<ol type="1">
+<li><p>Calcular la potencia del motor al par máximo (kW).</p></li>
+<li><p>Determinar el par motor a la potencia máxima (Nm).</p></li>
+</ol>
+<h1 id="c-rendimiento-y-consumo"> C) RENDIMIENTO Y CONSUMO</h1>
+<ol type="1">
+<li><p>Calcular el rendimiento térmico teórico (η<sub>tt</sub>), suponiendo que el coeficiente adiabático (γ) es 1,4 y la relación de compresión (R<sub>c</sub>) es 12,5:1.</p></li>
+<li><p>Calcular el rendimiento indicado (η<sub>i</sub>), considerando que las pérdidas por diagrama representan un 10% del rendimiento térmico teórico.</p></li>
+<li><p>Calcular el rendimiento útil (η<sub>u</sub>), considerando un consumo másico de combustible de 141,22 kg/h, un poder calorífico del combustible de 44.500 kJ/kg y una potencia útil de 640 CV.</p></li>
+<li><p>Calcular el rendimiento mecánico (η<sub>m</sub>).</p></li>
+</ol>
+<h1 id="d-consumo-por-ciclo"> D) CONSUMO POR CICLO</h1>
+<p>El motor del Lamborghini Huracán es un motor de cuatro tiempos y consume <strong>141,22 kg/h</strong> de combustible cuando gira a plena potencia (8000 rpm). Determinar:</p>
+<ol type="1">
+<li><p>El consumo de combustible en gramos por ciclo y por cilindro.</p></li>
+<li><p>El consumo de combustible en centímetros cúbicos (cc) por ciclo y por cilindro, considerando que la densidad del combustible es 0,74 kg/l.</p></li>
+</ol>
+<h1 id="e-autonomía"> E) AUTONOMÍA</h1>
+<ol type="1">
+<li><p>Determinar la distancia (en km) que puede recorrer el Lamborghini a plena potencia con un depósito lleno de 70 litros de combustible, suponiendo una velocidad constante de 325 km/h.</p></li>
+</ol>
+<h1 id="f-emisiones-de-co2"> F) EMISIONES DE CO<sub>2</sub></h1>
+<ol type="1">
+<li><p>Calcular las emisiones de CO<sub>2</sub> por kilómetro recorrido del Lamborghini, sabiendo que el combustible tiene un factor de emisión de 2,31 kg de CO<sub>2</sub> por litro y que el consumo a plena potencia es de 190,8 l/h a 325 km/h.</p></li>
+</ol>
+<p>Ejercicio voluntario - Valor: +1 punto en la nota final del bloque</p>
+
+</main>
+<footer>
+IES Jiménez de Quesada · Santa Fe (Granada) · © 2025-26 Manuel Alonso Herrera
+</footer>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
