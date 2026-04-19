@@ -286,6 +286,21 @@ tr:nth-child(even) td{ background:var(--gris); }
 
 hr.div{ border:none; border-top:1.5px solid var(--borde); margin:28px 0; }
 
+/* ── MINI-TEST ── */
+.test-section{margin:20px 0 28px;padding:20px 24px;background:linear-gradient(180deg,#E4F4EB,#F2FAF5);border-left:5px solid var(--verde);border-radius:5px;}
+.test-section h2{font-family:var(--cond);font-size:16pt;color:var(--verde);margin:0 0 6px;display:flex;align-items:center;gap:8px;}
+.test-section .test-sub{font-size:9pt;color:var(--texto2);margin-bottom:14px;}
+.test-q{background:#fff;border:1px solid var(--borde);border-radius:5px;padding:12px 14px;margin-bottom:10px;}
+.test-qtext{font-weight:600;color:var(--texto);margin-bottom:8px;font-size:10pt;}
+.test-opts{display:flex;flex-direction:column;gap:4px;}
+.test-opt{display:block;width:100%;text-align:left;padding:8px 12px;background:#fff;border:1px solid var(--borde);border-radius:4px;cursor:pointer;font-family:var(--sans);font-size:9.5pt;color:var(--texto);transition:all .15s;line-height:1.4;}
+.test-opt:hover:not(:disabled){background:#EEF4FB;border-color:var(--azul2);}
+.test-opt:disabled{cursor:default;opacity:.95;}
+.test-opt.correct{background:#E4F4EB;border-color:var(--verde);color:var(--verde);font-weight:600;}
+.test-opt.wrong{background:#FCEAE7;border-color:var(--rojo);color:var(--rojo);}
+.test-fb{display:none;margin-top:10px;padding:10px 12px;background:#EEF4FB;border-left:3px solid var(--azul);font-size:9pt;color:var(--texto2);border-radius:0 4px 4px 0;line-height:1.5;}
+.test-q.answered .test-fb{display:block;}
+
 /* ── PIE ── */
 .pie{
   background:var(--azul);
@@ -471,8 +486,8 @@ MathJax = {
     <option value="../teoria/bloque_B.html">B — Materiales y Fabricación</option>
     <option value="../teoria/bloque_C1.html">C1 — Estructuras</option>
     <option value="../teoria/bloque_C2.html">C2 — Máquinas Térmicas</option>
-    <option value="../teoria/bloque_C31.html">C3.1 — Neumática</option>
-    <option value="../teoria/bloque_C32.html">C3.2 — Hidráulica</option>
+    <option value="../teoria/bloque_C31.html">C31 — Neumática</option>
+    <option value="../teoria/bloque_C32.html">C32 — Hidráulica</option>
     <option value="../teoria/bloque_D1.html">D1 — Corriente Alterna</option>
     <option value="../teoria/bloque_D2.html">D2 — Electrónica Digital</option>
     <option value="../teoria/bloque_E.html" selected>E — Sist. Informáticos</option>
@@ -491,6 +506,7 @@ MathJax = {
 <a class="na" href="#E_s2">2. Big Data</a>
 <a class="na" href="#E_s3">3. Bases de datos distribuidas (BDD)</a>
 <a class="na" href="#E_s4">4. Ciberseguridad</a>
+<a class="na" href="#E_test">🎯 Mini-test</a>
 <a class="na" href="#decalogo">📝 Decálogo PAU</a>
 
 </div>
@@ -868,6 +884,78 @@ MathJax = {
   </table>
 </div>
 
+<!-- ═══════════════════ MINI-TEST ═══════════════════ -->
+<div class="test-section" id="E_test">
+  <h2>🎯 Mini-test de autoevaluación</h2>
+  <p class="test-sub">6 preguntas tipo PAU. Pulsa la opción que consideres correcta y se mostrará la respuesta y la explicación.</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext">1. ¿Qué rama de la IA permite a un sistema mejorar a partir de datos sin programación explícita de cada caso?</p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">a) Programación funcional</button>
+      <button class="test-opt" data-opt="b">b) Aprendizaje automático (machine learning)</button>
+      <button class="test-opt" data-opt="c">c) Lógica simbólica clásica</button>
+      <button class="test-opt" data-opt="d">d) Sistemas expertos basados en reglas</button>
+    </div>
+    <div class="test-fb"><strong>Respuesta: b)</strong> El machine learning aprende patrones a partir de datos. Los sistemas expertos (d) usan reglas explícitas escritas por humanos.</div>
+  </div>
+
+  <div class="test-q" data-answer="c">
+    <p class="test-qtext">2. ¿Cuál de las siguientes <em>no</em> figura como una de las 7 V del Big Data?</p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">a) Volumen</button>
+      <button class="test-opt" data-opt="b">b) Veracidad</button>
+      <button class="test-opt" data-opt="c">c) Vulnerabilidad</button>
+      <button class="test-opt" data-opt="d">d) Variabilidad</button>
+    </div>
+    <div class="test-fb"><strong>Respuesta: c)</strong> Las 7 V son volumen, velocidad, variedad, veracidad, valor, variabilidad y visualización. Vulnerabilidad pertenece al campo de la ciberseguridad, no a las V del Big Data.</div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext">3. Una base de datos distribuida (BDD) se caracteriza por:</p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">a) Almacenar todos los datos en un único servidor central</button>
+      <button class="test-opt" data-opt="b">b) Estar replicada o particionada en varios nodos conectados por red</button>
+      <button class="test-opt" data-opt="c">c) Funcionar exclusivamente en local sin acceso a red</button>
+      <button class="test-opt" data-opt="d">d) Ser exclusiva de aplicaciones móviles</button>
+    </div>
+    <div class="test-fb"><strong>Respuesta: b)</strong> El concepto clave es que los datos se reparten o replican entre varios nodos físicos, gestionados como un único sistema lógico.</div>
+  </div>
+
+  <div class="test-q" data-answer="a">
+    <p class="test-qtext">4. En el triángulo CIA, la <em>integridad</em> garantiza que:</p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">a) Los datos no han sido modificados sin autorización</button>
+      <button class="test-opt" data-opt="b">b) Solo personas autorizadas acceden a los datos</button>
+      <button class="test-opt" data-opt="c">c) Los servicios están disponibles cuando se necesitan</button>
+      <button class="test-opt" data-opt="d">d) El usuario es quien dice ser</button>
+    </div>
+    <div class="test-fb"><strong>Respuesta: a)</strong> La integridad protege que los datos no se alteren. La b) es confidencialidad, la c) es disponibilidad y la d) es autenticación.</div>
+  </div>
+
+  <div class="test-q" data-answer="a">
+    <p class="test-qtext">5. La autenticación multifactor (MFA) combina típicamente:</p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">a) Algo que sabes + algo que tienes (+ algo que eres)</button>
+      <button class="test-opt" data-opt="b">b) Solo contraseñas largas y aleatorias</button>
+      <button class="test-opt" data-opt="c">c) Únicamente huella dactilar</button>
+      <button class="test-opt" data-opt="d">d) Únicamente preguntas de seguridad</button>
+    </div>
+    <div class="test-fb"><strong>Respuesta: a)</strong> Combinar varios factores independientes (conocimiento, posesión, biometría) eleva la seguridad porque comprometer un solo factor no basta.</div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext">6. Un ataque de tipo <em>phishing</em> busca:</p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">a) Saturar un servidor con peticiones (denegación de servicio)</button>
+      <button class="test-opt" data-opt="b">b) Engañar al usuario para que entregue credenciales o datos sensibles</button>
+      <button class="test-opt" data-opt="c">c) Cifrar archivos del usuario y exigir un rescate</button>
+      <button class="test-opt" data-opt="d">d) Espiar el tráfico de red sin alterarlo</button>
+    </div>
+    <div class="test-fb"><strong>Respuesta: b)</strong> El phishing es ingeniería social: suplanta una entidad de confianza (banco, empresa) para que el usuario revele datos. La c) describe el ransomware; la d), el sniffing.</div>
+  </div>
+</div>
+
 </div><!-- fin cuerpo -->
 
 <!-- ═══════════════════ DECÁLOGO ═══════════════════ -->
@@ -898,6 +986,25 @@ MathJax = {
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   if(typeof MathJax !== 'undefined' && MathJax.typeset) MathJax.typeset();
+});
+</script>
+<script>
+// Mini-test interactivo
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.test-q').forEach(function(q){
+    const correct = q.dataset.answer;
+    q.querySelectorAll('.test-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(q.classList.contains('answered')) return;
+        q.classList.add('answered');
+        q.querySelectorAll('.test-opt').forEach(function(b){
+          if(b.dataset.opt === correct) b.classList.add('correct');
+          else if(b === btn) b.classList.add('wrong');
+          b.disabled = true;
+        });
+      });
+    });
+  });
 });
 </script>
 <script>

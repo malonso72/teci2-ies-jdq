@@ -286,6 +286,21 @@ tr:nth-child(even) td{ background:var(--gris); }
 
 hr.div{ border:none; border-top:1.5px solid var(--borde); margin:28px 0; }
 
+/* ── MINI-TEST ── */
+.test-section{margin:20px 0 28px;padding:20px 24px;background:linear-gradient(180deg,#E4F4EB,#F2FAF5);border-left:5px solid var(--verde);border-radius:5px;}
+.test-section h2{font-family:var(--cond);font-size:16pt;color:var(--verde);margin:0 0 6px;display:flex;align-items:center;gap:8px;}
+.test-section .test-sub{font-size:9pt;color:var(--texto2);margin-bottom:14px;}
+.test-q{background:#fff;border:1px solid var(--borde);border-radius:5px;padding:12px 14px;margin-bottom:10px;}
+.test-qtext{font-weight:600;color:var(--texto);margin-bottom:8px;font-size:10pt;}
+.test-opts{display:flex;flex-direction:column;gap:4px;}
+.test-opt{display:block;width:100%;text-align:left;padding:8px 12px;background:#fff;border:1px solid var(--borde);border-radius:4px;cursor:pointer;font-family:var(--sans);font-size:9.5pt;color:var(--texto);transition:all .15s;line-height:1.4;}
+.test-opt:hover:not(:disabled){background:#EEF4FB;border-color:var(--azul2);}
+.test-opt:disabled{cursor:default;opacity:.95;}
+.test-opt.correct{background:#E4F4EB;border-color:var(--verde);color:var(--verde);font-weight:600;}
+.test-opt.wrong{background:#FCEAE7;border-color:var(--rojo);color:var(--rojo);}
+.test-fb{display:none;margin-top:10px;padding:10px 12px;background:#EEF4FB;border-left:3px solid var(--azul);font-size:9pt;color:var(--texto2);border-radius:0 4px 4px 0;line-height:1.5;}
+.test-q.answered .test-fb{display:block;}
+
 /* ── PIE ── */
 .pie{
   background:var(--azul);
@@ -477,8 +492,8 @@ MathJax = {
     <option value="../teoria/bloque_B.html">B — Materiales y Fabricación</option>
     <option value="../teoria/bloque_C1.html">C1 — Estructuras</option>
     <option value="../teoria/bloque_C2.html">C2 — Máquinas Térmicas</option>
-    <option value="../teoria/bloque_C31.html">C3.1 — Neumática</option>
-    <option value="../teoria/bloque_C32.html">C3.2 — Hidráulica</option>
+    <option value="../teoria/bloque_C31.html">C31 — Neumática</option>
+    <option value="../teoria/bloque_C32.html">C32 — Hidráulica</option>
     <option value="../teoria/bloque_D1.html">D1 — Corriente Alterna</option>
     <option value="../teoria/bloque_D2.html">D2 — Electrónica Digital</option>
     <option value="../teoria/bloque_E.html">E — Sist. Informáticos</option>
@@ -499,6 +514,7 @@ MathJax = {
 <a class="na" href="#G_s4">4. Gestión de los residuos</a>
 <a class="na" href="#G_s5">5. Evaluación del Impacto Ambiental (EIA)</a>
 <a class="na" href="#G_s6">★. Cómo se aplica este bloque</a>
+<a class="na" href="#G_test">🎯 Mini-test</a>
 <a class="na" href="#decalogo">📝 Decálogo PAU</a>
 
 </div>
@@ -557,7 +573,7 @@ MathJax = {
   <div class="paso"><div class="paso-n">2</div><div class="paso-txt"><strong>Fabricación:</strong> emisiones de CO₂, consumo energético, residuos industriales. Se reduce con energías renovables y optimización de procesos.</div></div>
   <div class="paso"><div class="paso-n">3</div><div class="paso-txt"><strong>Durabilidad y vida útil:</strong> un material duradero necesita menos reemplazos y genera menos residuos a largo plazo.</div></div>
   <div class="paso"><div class="paso-n">4</div><div class="paso-txt"><strong>Residuos:</strong> contaminación si no se gestionan correctamente (lixiviados, metales pesados). La gestión sigue la jerarquía europea: prevención → reutilización → reciclaje → valorización energética → eliminación.</div></div>
-  <div class="paso"><div class="paso-n">5</div><div class="paso-txt"><strong>Reciclabilidad y reutilización:</strong> la economía circular (reducir → reutilizar → reciclar) frente al modelo lineal (extraer → fabricar → usar → desechar). Diseñar para el desmontaje facilita la recuperación de materiales.</div></div>
+  <div class="paso"><div class="paso-n">5</div><div class="paso-txt"><strong>Reciclabilidad y reutilización:</strong> la economía circular (modelo de las 5R: rechazar → reducir → reutilizar → reciclar → recuperar) frente al modelo lineal (extraer → fabricar → usar → desechar). Diseñar para el desmontaje facilita la recuperación de materiales.</div></div>
 </div>
 
 <!-- ═══ SECCIÓN 2 ═══ -->
@@ -678,7 +694,7 @@ MathJax = {
   <div class="callout callout-key">
     <span class="callout-icon">★</span>
     <div><strong>Modelo lineal:</strong> extraer → fabricar → usar → desechar (insostenible).<br>
-    <strong>Economía circular:</strong> reducir → reutilizar → reciclar + reparación, remanufactura, diseño modular. Las 3R clásicas son: <strong>Reducir, Reutilizar y Reciclar</strong>.</div>
+    <strong>Economía circular:</strong> modelo de las <strong>5R — Rechazar, Reducir, Reutilizar, Reciclar, Recuperar</strong>. La ampliación incluye reparación, remanufactura y diseño modular como estrategias específicas dentro del marco general.</div>
   </div>
 </div>
 
@@ -774,6 +790,78 @@ MathJax = {
   <p><strong>Implicación de diseño:</strong> al elegir materiales en un proyecto técnico, preferir aquellos con menor huella cuando las prestaciones mecánicas lo permitan; reducir espesores; favorecer materiales con alta reciclabilidad.</p>
 </div>
 
+<!-- ═══════════════════ MINI-TEST ═══════════════════ -->
+<div class="test-section" id="G_test">
+  <h2>🎯 Mini-test de autoevaluación</h2>
+  <p class="test-sub">6 preguntas tipo PAU. Pulsa la opción que consideres correcta y se mostrará la respuesta y la explicación.</p>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext">1. La <em>huella de carbono</em> de un material mide:</p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">a) La cantidad de agua consumida en su fabricación</button>
+      <button class="test-opt" data-opt="b">b) Las emisiones equivalentes de CO₂ a lo largo de su ciclo de vida</button>
+      <button class="test-opt" data-opt="c">c) La masa de residuos sólidos generados</button>
+      <button class="test-opt" data-opt="d">d) La toxicidad del material para el suelo</button>
+    </div>
+    <div class="test-fb"><strong>Respuesta: b)</strong> Se expresa en kg CO₂ eq. por unidad (kg o m³) de material y permite comparar opciones alternativas en un diseño.</div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext">2. La eficiencia energética de un motor eléctrico se define como:</p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">a) Potencia eléctrica absorbida / potencia mecánica útil</button>
+      <button class="test-opt" data-opt="b">b) Potencia mecánica útil / potencia eléctrica absorbida</button>
+      <button class="test-opt" data-opt="c">c) Trabajo útil × tiempo</button>
+      <button class="test-opt" data-opt="d">d) Energía cinética / energía potencial</button>
+    </div>
+    <div class="test-fb"><strong>Respuesta: b)</strong> Siempre es la relación entre la energía útil obtenida y la energía absorbida. Por eso un valor &lt; 1.</div>
+  </div>
+
+  <div class="test-q" data-answer="d">
+    <p class="test-qtext">3. ¿Cuál de las siguientes <em>no</em> es una de las 5 R de la economía circular?</p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">a) Rechazar</button>
+      <button class="test-opt" data-opt="b">b) Reutilizar</button>
+      <button class="test-opt" data-opt="c">c) Recuperar</button>
+      <button class="test-opt" data-opt="d">d) Repintar</button>
+    </div>
+    <div class="test-fb"><strong>Respuesta: d)</strong> Las 5 R son: Rechazar, Reducir, Reutilizar, Reciclar y Recuperar.</div>
+  </div>
+
+  <div class="test-q" data-answer="a">
+    <p class="test-qtext">4. La fabricación aditiva (impresión 3D) reduce el impacto ambiental sobre todo porque:</p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">a) Genera menos residuo de material que el mecanizado por arranque</button>
+      <button class="test-opt" data-opt="b">b) No requiere electricidad</button>
+      <button class="test-opt" data-opt="c">c) Solo se aplica a metales</button>
+      <button class="test-opt" data-opt="d">d) Permite fabricar sin diseño previo</button>
+    </div>
+    <div class="test-fb"><strong>Respuesta: a)</strong> Los procesos aditivos depositan material solo donde hace falta; los sustractivos generan viruta (residuo). Ambos necesitan electricidad y un diseño previo.</div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext">5. La Evaluación de Impacto Ambiental (EIA) es:</p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">a) Un procedimiento voluntario para empresas pequeñas</button>
+      <button class="test-opt" data-opt="b">b) Un procedimiento obligatorio para proyectos con efectos significativos sobre el medio ambiente</button>
+      <button class="test-opt" data-opt="c">c) Un trámite aplicable únicamente a obras hidráulicas</button>
+      <button class="test-opt" data-opt="d">d) Un informe que realiza siempre la empresa promotora sin intervención de la Administración</button>
+    </div>
+    <div class="test-fb"><strong>Respuesta: b)</strong> La EIA es un procedimiento administrativo que culmina en la DIA (Declaración de Impacto Ambiental) emitida por la autoridad competente.</div>
+  </div>
+
+  <div class="test-q" data-answer="b">
+    <p class="test-qtext">6. Un Análisis del Ciclo de Vida (ACV) de un producto incluye:</p>
+    <div class="test-opts">
+      <button class="test-opt" data-opt="a">a) Únicamente la fase de uso del producto</button>
+      <button class="test-opt" data-opt="b">b) Todas las fases: extracción de materias primas, fabricación, uso y fin de vida</button>
+      <button class="test-opt" data-opt="c">c) Solamente el coste económico</button>
+      <button class="test-opt" data-opt="d">d) Solo las emisiones durante la fabricación</button>
+    </div>
+    <div class="test-fb"><strong>Respuesta: b)</strong> El ACV (o <em>cradle-to-grave</em>) cuantifica los impactos en todas las etapas del producto, no solo en una.</div>
+  </div>
+</div>
+
 </div><!-- fin cuerpo -->
 
 <!-- ═══════════════════ DECÁLOGO ═══════════════════ -->
@@ -804,6 +892,25 @@ MathJax = {
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   if(typeof MathJax !== 'undefined' && MathJax.typeset) MathJax.typeset();
+});
+</script>
+<script>
+// Mini-test interactivo
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.test-q').forEach(function(q){
+    const correct = q.dataset.answer;
+    q.querySelectorAll('.test-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(q.classList.contains('answered')) return;
+        q.classList.add('answered');
+        q.querySelectorAll('.test-opt').forEach(function(b){
+          if(b.dataset.opt === correct) b.classList.add('correct');
+          else if(b === btn) b.classList.add('wrong');
+          b.disabled = true;
+        });
+      });
+    });
+  });
 });
 </script>
 <script>

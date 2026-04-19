@@ -477,8 +477,8 @@ MathJax = {
     <option value="../teoria/bloque_B.html">B — Materiales y Fabricación</option>
     <option value="../teoria/bloque_C1.html">C1 — Estructuras</option>
     <option value="../teoria/bloque_C2.html">C2 — Máquinas Térmicas</option>
-    <option value="../teoria/bloque_C31.html">C3.1 — Neumática</option>
-    <option value="../teoria/bloque_C32.html">C3.2 — Hidráulica</option>
+    <option value="../teoria/bloque_C31.html">C31 — Neumática</option>
+    <option value="../teoria/bloque_C32.html">C32 — Hidráulica</option>
     <option value="../teoria/bloque_D1.html" selected>D1 — Corriente Alterna</option>
     <option value="../teoria/bloque_D2.html">D2 — Electrónica Digital</option>
     <option value="../teoria/bloque_E.html">E — Sist. Informáticos</option>
@@ -1195,11 +1195,26 @@ MathJax = {
   <table>
     <tr><th></th><th>Resonancia serie</th><th>Resonancia paralelo</th></tr>
     <tr><td><strong>Condición</strong></td><td>\(X_L = X_C\)</td><td>\(X_L = X_C\)</td></tr>
-    <tr><td><strong>Impedancia</strong></td><td>\(Z = R\) → <strong>mínima</strong></td><td>\(Z\) → <strong>máxima</strong></td></tr>
-    <tr><td><strong>Corriente</strong></td><td>\(I = V/R\) → <strong>máxima</strong></td><td>\(I\) → <strong>mínima</strong></td></tr>
+    <tr><td><strong>Frecuencia</strong></td><td colspan="2" style="text-align:center;">\(f_0 = \dfrac{1}{2\pi\sqrt{LC}}\) (idéntica en ambos casos)</td></tr>
+    <tr><td><strong>Impedancia</strong></td><td>\(Z = R\) → <strong>mínima</strong></td><td>\(Z \to \infty\) (ideal) → <strong>máxima</strong></td></tr>
+    <tr><td><strong>Corriente total</strong></td><td>\(I = V/R\) → <strong>máxima</strong></td><td>\(I \approx I_R = V/R\) → <strong>mínima</strong></td></tr>
     <tr><td><strong>Desfase</strong></td><td>\(\varphi = 0°\) (resistivo puro)</td><td>\(\varphi = 0°\) (resistivo puro)</td></tr>
     <tr><td><strong>\(\cos\varphi\)</strong></td><td>\(\cos\varphi = 1\)</td><td>\(\cos\varphi = 1\)</td></tr>
+    <tr><td><strong>Tensiones en L y C</strong></td><td>\(V_L = V_C\) muy <strong>elevadas</strong> → riesgo de <strong>sobretensión</strong></td><td>\(V_L = V_C = V\) (la de la fuente)</td></tr>
+    <tr><td><strong>Corrientes en L y C</strong></td><td>\(I_L = I_C = I\) (la de la fuente)</td><td>\(I_L = I_C\) muy <strong>elevadas</strong>, iguales y opuestas → <strong>corriente circulante</strong> entre L y C</td></tr>
+    <tr><td><strong>Comportamiento</strong></td><td>Filtro <em>pasa-banda</em> (aceptor)</td><td>Filtro <em>elimina-banda</em> (rechazo)</td></tr>
+    <tr><td><strong>Por debajo de \(f_0\)</strong></td><td>Capacitivo (\(X_C &gt; X_L\))</td><td>Inductivo (la rama L domina)</td></tr>
+    <tr><td><strong>Por encima de \(f_0\)</strong></td><td>Inductivo (\(X_L &gt; X_C\))</td><td>Capacitivo (la rama C domina)</td></tr>
+    <tr><td><strong>Aplicaciones</strong></td><td>Sintonía de radio/TV, filtros aceptores</td><td>Filtros de rechazo, corrección de \(\cos\varphi\)</td></tr>
   </table>
+
+  <div class="caja aviso">
+    <strong>⚠ Cuidado con la sobretensión.</strong> En resonancia <em>serie</em>, aunque la tensión de la fuente sea moderada, las tensiones \(V_L\) y \(V_C\) pueden alcanzar valores muy superiores a \(V\) (en el ejemplo numérico de esta sección: \(V = 100\) V → \(V_L = V_C = 316\) V). Hay que dimensionar el aislamiento del condensador y la bobina por encima de esa tensión.
+  </div>
+
+  <div class="caja aviso">
+    <strong>⚠ Cuidado con la corriente circulante.</strong> En resonancia <em>paralelo</em>, aunque la corriente que entrega la fuente sea pequeña, entre L y C circula una corriente interna elevada y desfasada 180°. Los conductores de la rama LC deben dimensionarse para esa corriente, no para la de la fuente.
+  </div>
 
   <div class="ejemplo">
     <div class="ej-tit">📋 EJEMPLO RESUELTO — RESONANCIA EN SERIE</div>

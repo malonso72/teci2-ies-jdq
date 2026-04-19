@@ -401,8 +401,8 @@ MathJax = {
     <option value="../ejercicios/ej_B.html">B — Materiales y Fabricación</option>
     <option value="../ejercicios/ej_C1.html">C1 — Estructuras</option>
     <option value="../ejercicios/ej_C2.html">C2 — Máquinas Térmicas</option>
-    <option value="../ejercicios/ej_C3.html">C3.1 — Neumática</option>
-    <option value="../teoria/bloque_C32.html">C3.2 — Hidráulica</option>
+    <option value="../ejercicios/ej_C3.html">C31 — Neumática</option>
+    <option value="../teoria/bloque_C32.html">C32 — Hidráulica</option>
     <option value="../ejercicios/ej_D1.html">D1 — Corriente Alterna</option>
     <option value="../ejercicios/ej_D2.html" selected>D2 — Electrónica Digital</option>
     <option value="../teoria/bloque_E.html">E — Sist. Informáticos</option>
@@ -903,14 +903,20 @@ style="width:6.69291in;height:2.71654in" /></div>
 
 <h4>Apartado a — Tabla de verdad de F (3 variables)</h4>
 <div class="solucion">
-<p>m X Y Z F Minterms activos: m0(000), m2(010), m7(111)</p>
-<p>0 0 0 0 1 m0: X̅Y̅Z̅ → F=X̅Y̅Z requiere Z=1 → F=0 aquí</p>
-<p>m X Y Z F</p>
-<p>0 0 0 0 0 1 0 0 1 1* 2 0 1 0 1* 3 0 1 1 0</p>
-<p>4 1 0 0 0 5 1 0 1 0 6 1 1 0 0 7 1 1 1 1*</p>
+<p>F tiene 3 términos: X̅Y̅Z + X̅YZ̅ + XYZ → F=1 en <strong>m1, m2, m7</strong>.</p>
+<table style="margin:8px 0;border-collapse:collapse;font-size:.92rem;">
+<tr><th style="padding:4px 10px;border:1px solid #D8DDE5;">m</th><th style="padding:4px 10px;border:1px solid #D8DDE5;">X</th><th style="padding:4px 10px;border:1px solid #D8DDE5;">Y</th><th style="padding:4px 10px;border:1px solid #D8DDE5;">Z</th><th style="padding:4px 10px;border:1px solid #D8DDE5;">F</th></tr>
+<tr><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td></tr>
+<tr><td style="padding:4px 10px;border:1px solid #D8DDE5;">1</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">1</td><td style="padding:4px 10px;border:1px solid #D8DDE5;background:#E4F4EB;"><strong>1</strong></td></tr>
+<tr><td style="padding:4px 10px;border:1px solid #D8DDE5;">2</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">1</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td><td style="padding:4px 10px;border:1px solid #D8DDE5;background:#E4F4EB;"><strong>1</strong></td></tr>
+<tr><td style="padding:4px 10px;border:1px solid #D8DDE5;">3</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">1</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">1</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td></tr>
+<tr><td style="padding:4px 10px;border:1px solid #D8DDE5;">4</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">1</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td></tr>
+<tr><td style="padding:4px 10px;border:1px solid #D8DDE5;">5</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">1</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">1</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td></tr>
+<tr><td style="padding:4px 10px;border:1px solid #D8DDE5;">6</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">1</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">1</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">0</td></tr>
+<tr><td style="padding:4px 10px;border:1px solid #D8DDE5;">7</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">1</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">1</td><td style="padding:4px 10px;border:1px solid #D8DDE5;">1</td><td style="padding:4px 10px;border:1px solid #D8DDE5;background:#E4F4EB;"><strong>1</strong></td></tr>
+</table>
 </div>
-<p>F=1 en m(1,2,7). Tabla de G (4 variables, 16 filas): G=1 en
-m(3,7,9,13).</p>
+<p>Tabla de G (4 variables, 16 filas): G=1 en <strong>m(3, 7, 9, 13)</strong>.</p>
 <div class="solucion">
 <p>m3 =0011: A̅B̅CD✓ m7=0111: A̅BCD✓ m9=1001: AB̅C̅D✓ m13=1101: ABC̅D✓</p>
 </div>

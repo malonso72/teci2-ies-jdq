@@ -482,8 +482,8 @@ MathJax = {
     <option value="../teoria/bloque_B.html">B — Materiales y Fabricación</option>
     <option value="../teoria/bloque_C1.html">C1 — Estructuras</option>
     <option value="../teoria/bloque_C2.html" selected>C2 — Máquinas Térmicas</option>
-    <option value="../teoria/bloque_C31.html">C3.1 — Neumática</option>
-    <option value="../teoria/bloque_C32.html">C3.2 — Hidráulica</option>
+    <option value="../teoria/bloque_C31.html">C31 — Neumática</option>
+    <option value="../teoria/bloque_C32.html">C32 — Hidráulica</option>
     <option value="../teoria/bloque_D1.html">D1 — Corriente Alterna</option>
     <option value="../teoria/bloque_D2.html">D2 — Electrónica Digital</option>
     <option value="../teoria/bloque_E.html">E — Sist. Informáticos</option>
@@ -512,6 +512,7 @@ MathJax = {
 <a class="na" href="#C2_s12">12. Balance energético y rendimientos</a>
 <a class="na" href="#C2_s13">13. Potencias, par motor y consumo específico</a>
 <a class="na" href="#C2_s14">14. Tabla resumen de fórmulas — Motor de combu…</a>
+<a class="na" href="#C2_errores">⚠️ Errores típicos</a>
 <a class="na" href="#decalogo">📝 Decálogo PAU</a>
 
 </div>
@@ -543,7 +544,7 @@ MathJax = {
 <div id="objetivos" class="objetivos-box">
   <h2>🎯 Objetivos de aprendizaje</h2>
   <ul>
-    <li>Aplicar el primer principio de la termodinámica (\(W = Q_c - Q_f\)) a máquinas térmicas.</li>
+    <li>Aplicar el balance energético (\(W = Q_c - Q_f\)) en máquinas térmicas como caso particular del primer principio de la termodinámica.</li>
     <li>Calcular el rendimiento de Carnot \(\eta_C = 1 - \dfrac{T_f}{T_c}\) con temperaturas en Kelvin.</li>
     <li>Diferenciar máquina térmica, máquina frigorífica y bomba de calor y aplicar sus respectivas expresiones de \(\eta\) y \(\varepsilon\).</li>
     <li>Calcular par motor, potencia efectiva y consumo específico en motores de combustión interna.</li>
@@ -969,6 +970,49 @@ MathJax = {
     </tbody>
   </table>
   <p>El rendimiento efectivo de un motor Otto real está en torno al <strong>25-35%</strong>; el de un Diésel, al <strong>35-45%</strong>; un ciclo combinado de central térmica supera el 60%.</p>
+</div>
+
+<!-- ═══════════════════ ERRORES TÍPICOS ═══════════════════ -->
+<div class="seccion" id="C2_errores">
+  <div class="sec-hdr">
+    <div class="sec-num">⚠</div>
+    <div class="sec-tit">Errores típicos que conviene evitar</div>
+  </div>
+
+  <div class="caja aviso">
+    <strong>1. Usar temperaturas en °C en el rendimiento de Carnot.</strong>
+    La fórmula \(\eta_{Carnot} = 1 - T_f/T_c\) exige <em>Kelvin</em> en ambos focos. Si se trabaja en °C, los cocientes pierden todo sentido físico y el rendimiento sale absurdo.
+  </div>
+
+  <div class="caja aviso">
+    <strong>2. Confundir rendimiento \(\eta\) con eficiencia \(\varepsilon\).</strong>
+    El motor térmico transforma calor en trabajo: \(\eta \leq 1\). La máquina frigorífica y la bomba de calor hacen lo contrario (consumen trabajo para mover calor): su eficiencia \(\varepsilon\) o \(\varepsilon'\) puede ser mayor que 1 y no es un rendimiento.
+  </div>
+
+  <div class="caja aviso">
+    <strong>3. Olvidar el convenio de signos en Q y W.</strong>
+    En motores térmicos conviene trabajar con magnitudes positivas y cuidar las <em>flechas</em> de energía: \(Q_c\) entra del foco caliente, \(Q_f\) sale al foco frío y \(W = Q_c - Q_f\). Mezclar criterios (Q absorbido positivo vs negativo) es una fuente habitual de errores de signo.
+  </div>
+
+  <div class="caja aviso">
+    <strong>4. Dar rendimientos de motores reales mayores que el de Carnot.</strong>
+    \(\eta_{Carnot}\) es el techo teórico entre esos dos focos. Si te sale \(\eta_{real} &gt; \eta_{Carnot}\), revisa unidades, temperaturas y cálculos: hay un error seguro.
+  </div>
+
+  <div class="caja aviso">
+    <strong>5. Confundir potencia indicada, efectiva y al freno.</strong>
+    La indicada es la del gas sobre el pistón; la efectiva (o al freno) es la que llega al cigüeñal, menor por rozamientos. En el par motor: \(P_e = M\cdot\omega\) con \(\omega = 2\pi n/60\) (n en rpm, \(\omega\) en rad/s).
+  </div>
+
+  <div class="caja aviso">
+    <strong>6. Trabajar con \(n\) en rpm dentro de las fórmulas de potencia.</strong>
+    Antes de sustituir en \(P = M\cdot\omega\), convierte siempre las rpm a rad/s. Olvidarlo da potencias con un factor 60 o \(2\pi\) equivocado.
+  </div>
+
+  <div class="caja aviso">
+    <strong>7. Decir que el pistón "sube 4 veces por ciclo" en un motor de 4 tiempos.</strong>
+    En un ciclo completo de 4T el pistón hace 4 carreras, pero el cigüeñal gira <em>dos</em> vueltas. Por eso en motores de 4T el número de ciclos por minuto es \(n/2\) (no \(n\)).
+  </div>
 </div>
 
 </div><!-- fin cuerpo -->

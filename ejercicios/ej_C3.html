@@ -381,8 +381,8 @@ MathJax = {
     <option value="../ejercicios/ej_B.html">B — Materiales y Fabricación</option>
     <option value="../ejercicios/ej_C1.html">C1 — Estructuras</option>
     <option value="../ejercicios/ej_C2.html">C2 — Máquinas Térmicas</option>
-    <option value="../ejercicios/ej_C3.html" selected>C3.1 — Neumática</option>
-    <option value="../teoria/bloque_C32.html">C3.2 — Hidráulica</option>
+    <option value="../ejercicios/ej_C3.html" selected>C31 — Neumática</option>
+    <option value="../teoria/bloque_C32.html">C32 — Hidráulica</option>
     <option value="../ejercicios/ej_D1.html">D1 — Corriente Alterna</option>
     <option value="../ejercicios/ej_D2.html">D2 — Electrónica Digital</option>
     <option value="../teoria/bloque_E.html">E — Sist. Informáticos</option>
@@ -648,8 +648,8 @@ delantera.</em></strong></p>
 <p><strong>Datos comunes:</strong> D<sub>e</sub> = 8 cm = 0,08 m; d<sub>v</sub> = 5 cm = 0,05 m; L = 10 cm; F<sub>avance</sub> = 8 500 N.</p>
 
 <p>La tensión a la que se somete el vástago durante el avance (compresión):</p>
-<p><span class="math display">\[A_v = \frac{\pi \cdot d_v^2}{4} = \frac{\pi \times 0{,}05^2}{4} = 1{,}963 \times 10^{-3} \text{ m}^2\]</span></p>
-<p><span class="math display">\[\sigma_v = \frac{F}{A_v} = \frac{8\,500}{1{,}963 \times 10^{-3}} = 4{,}33 \text{ MPa}\]</span></p>
+<p><span class="math display">\[S_v = \frac{\pi \cdot d_v^2}{4} = \frac{\pi \times 0{,}05^2}{4} = 1{,}963 \times 10^{-3} \text{ m}^2\]</span></p>
+<p><span class="math display">\[\sigma_v = \frac{F}{S_v} = \frac{8\,500}{1{,}963 \times 10^{-3}} = 4{,}33 \text{ MPa}\]</span></p>
 
 <p>Comparación con los dos modelos:</p>
 <ul style="margin:6px 0 6px 24px; list-style:disc;">
@@ -659,7 +659,7 @@ delantera.</em></strong></p>
 
 <p><span class="math display">\[\boxed{\text{Se elige el modelo A (\sigma _{máx} = 10 MPa)}}\]</span></p>
 
-<p>Verificación adicional: la presión necesaria en el émbolo es \(P = F/A_e = 8\,500/(\pi \times 0{,}08^2/4) = 1{,}69\) MPa \(< 3\) MPa (presión de red) → el cilindro puede generar la fuerza requerida.</p>
+<p>Verificación adicional: la presión necesaria en el émbolo es \(P = F/S_a = 8\,500/(\pi \times 0{,}08^2/4) = 1{,}69\) MPa \(< 3\) MPa (presión de red) → el cilindro puede generar la fuerza requerida.</p>
 </div>
 
 <h4>Apartado b — Consumo de aire a presión de trabajo</h4>
@@ -667,11 +667,11 @@ delantera.</em></strong></p>
 <p><strong>Datos:</strong> 10 ciclos/min, P<sub>red</sub> = 3 MPa.</p>
 
 <p>Áreas:</p>
-<p><span class="math display">\[A_e = \frac{\pi \times 0{,}08^2}{4} = 50{,}27 \text{ cm}^2 \qquad A_v = \frac{\pi \times 0{,}05^2}{4} = 19{,}63 \text{ cm}^2\]</span></p>
-<p><span class="math display">\[A_{\text{retroceso}} = A_e - A_v = 50{,}27 - 19{,}63 = 30{,}63 \text{ cm}^2\]</span></p>
+<p><span class="math display">\[S_a = \frac{\pi \times 0{,}08^2}{4} = 50{,}27 \text{ cm}^2 \qquad S_v = \frac{\pi \times 0{,}05^2}{4} = 19{,}63 \text{ cm}^2\]</span></p>
+<p><span class="math display">\[S_r = S_a - S_v = 50{,}27 - 19{,}63 = 30{,}63 \text{ cm}^2\]</span></p>
 
 <p>Volumen por ciclo completo (avance + retroceso):</p>
-<p><span class="math display">\[V_{\text{ciclo}} = (A_e + A_{\text{ret}}) \times L = (50{,}27 + 30{,}63) \times 10 = 809{,}0 \text{ cm}^3\]</span></p>
+<p><span class="math display">\[V_{\text{ciclo}} = (S_a + S_r) \times L = (50{,}27 + 30{,}63) \times 10 = 809{,}0 \text{ cm}^3\]</span></p>
 
 <p>Consumo a presión de trabajo:</p>
 <p><span class="math display">\[\boxed{Q_{P_{trab}} = V_{\text{ciclo}} \times n = 809{,}0 \times 10 = 8\,090 \text{ cm}^3\text{/min} \approx 8{,}09 \text{ l/min}}\]</span></p>
@@ -741,17 +741,17 @@ la fuerza de rozamiento es el 10 % de la fuerza teórica.</p>
 <h4>Apartado a — Despejar carrera desde consumo
 total</h4>
 <div class="solucion">
-<p><span class="math display">\[A_{émbolo}\  = \ \pi(0,040)^2/4\  = \
-1,257 \times 10^{-3}\ m^2\ \ \ A_{vástago}\  = \ \pi(0,040^2 - 0,012^2)/4\  =
+<p><span class="math display">\[S_a\  = \ \pi(0,040)^2/4\  = \
+1,257 \times 10^{-3}\ m^2\ \ \ S_v\  = \ \pi(0,040^2 - 0,012^2)/4\  =
 \ 1,144 \times 10^{-3}\ m^2\]</span></p>
 <p><span class="math display">\[{V_{CN}}_{total}\  = \
 V_{trabajo}\  \times \ (p/p_{0})\  \times \ n_{ciclos}\ \  \Rightarrow \
-\ 80\ L\  = \ (A_{emb}\  + \ A_{ret}) \cdot L \cdot (p/p_{0}) \cdot
+\ 80\ L\  = \ (S_a\  + \ S_r) \cdot L \cdot (p/p_{0}) \cdot
 20\]</span></p>
 <p><span class="math display">\[p/p_{0}\  = \ 7 \times 10^5/10^5\  = \ 7\
-\ \  \cdot \ \ \ A_{emb}\  + \ A_{ret}\  = \ (1,257\  + \ 1,144) \times
+\ \  \cdot \ \ \ S_a\  + \ S_r\  = \ (1,257\  + \ 1,144) \times
 10^{-3}\  = \ 2,401 \times 10^{-3}\ m^2\]</span></p>
-<p><span class="math display">\[L\  = \ V_{CN}/(A_{total}\  \times \
+<p><span class="math display">\[L\  = \ V_{CN}/(S_{total}\  \times \
 p/p_{0}\  \times \ n)\  = \ 0,080\ /\ (2,401 \times 10^{-3}\  \times \
 7\  \times \ 20)\  = \ 0,080/0,3361\  = \ 0,238\ m\  \approx \ 23,8\
 cm\]</span></p>
@@ -760,10 +760,10 @@ cm\]</span></p>
 <h4>Apartado b — Fuerzas reales de avance y
 retroceso</h4>
 <div class="solucion">
-<p><span class="math display">\[F_{avance}\  = \ p \cdot A_{emb} \cdot
+<p><span class="math display">\[F_{avance}\  = \ p \cdot S_a \cdot
 (1 - 0,10)\  = \ 7 \times 10^5 \times 1,257 \times 10^{-3} \times 0,90\  = \
 792\ N\]</span></p>
-<p><span class="math display">\[F_{retroceso}\  = \ p \cdot A_{ret}
+<p><span class="math display">\[F_{retroceso}\  = \ p \cdot S_r
 \cdot (1 - 0,10)\  = \ 7 \times 10^5 \times 1,144 \times 10^{-3} \times
 0,90\  = \ 720\ N\]</span></p>
 </div>
@@ -793,8 +793,8 @@ ambas.</p>
 <p><strong>Datos:</strong> D<sub>e</sub> = 10 cm = 0,10 m; D<sub>e</sub>/d<sub>v</sub> = 5 → d<sub>v</sub> = 2 cm = 0,02 m; P<sub>man</sub> = 2 MPa; n = 15 ciclos/min; Q<sub>CN</sub> = 583 l/min.</p>
 
 <p>Áreas:</p>
-<p><span class="math display">\[A_e = \frac{\pi \times 10^2}{4} = 78{,}54 \text{ cm}^2 \qquad A_v = \frac{\pi \times 2^2}{4} = 3{,}14 \text{ cm}^2\]</span></p>
-<p><span class="math display">\[A_{\text{ret}} = A_e - A_v = 78{,}54 - 3{,}14 = 75{,}40 \text{ cm}^2\]</span></p>
+<p><span class="math display">\[S_a = \frac{\pi \times 10^2}{4} = 78{,}54 \text{ cm}^2 \qquad S_v = \frac{\pi \times 2^2}{4} = 3{,}14 \text{ cm}^2\]</span></p>
+<p><span class="math display">\[S_r = S_a - S_v = 78{,}54 - 3{,}14 = 75{,}40 \text{ cm}^2\]</span></p>
 
 <p><strong>Conversión de caudal CN a presión de trabajo</strong> (Boyle-Mariotte):</p>
 <p><span class="math display">\[Q_{CN} \times P_{atm} = Q_{P_{trab}} \times P_{abs}\]</span></p>
@@ -802,8 +802,8 @@ ambas.</p>
 <p><span class="math display">\[Q_{P_{trab}} = \frac{583 \times 0{,}1013}{2{,}1013} = \frac{59{,}06}{2{,}1013} = 28{,}11 \text{ l/min}\]</span></p>
 
 <p><strong>Volumen por ciclo y despeje de L:</strong></p>
-<p><span class="math display">\[Q_{P_{trab}} = (A_e + A_{\text{ret}}) \times L \times n\]</span></p>
-<p><span class="math display">\[L = \frac{Q_{P_{trab}}}{(A_e + A_{\text{ret}}) \times n} = \frac{28\,110 \text{ cm}^3\text{/min}}{(78{,}54 + 75{,}40) \times 15}\]</span></p>
+<p><span class="math display">\[Q_{P_{trab}} = (S_a + S_r) \times L \times n\]</span></p>
+<p><span class="math display">\[L = \frac{Q_{P_{trab}}}{(S_a + S_r) \times n} = \frac{28\,110 \text{ cm}^3\text{/min}}{(78{,}54 + 75{,}40) \times 15}\]</span></p>
 <p><span class="math display">\[L = \frac{28\,110}{2\,309{,}1} = 12{,}17 \text{ cm}\]</span></p>
 <p><span class="math display">\[\boxed{L \approx 12{,}2 \text{ cm}}\]</span></p>
 </div>
@@ -843,14 +843,14 @@ cilindro C1 realiza 10 ciclos/min, C2 realiza 20 ciclos/min y C3 realiza
 <h4>Apartado a — Consumo individual (cilindros
 idénticos)</h4>
 <div class="solucion">
-<p><span class="math display">\[A_{emb}\  = \ \pi(0,080)^2/4\  = \ 5,027
-\times 10^{-3}\ m^2\ \ \ A_{ret}\  = \ \pi(0,080^2 - 0,020^2)/4\  = \ 4,712
+<p><span class="math display">\[S_a\  = \ \pi(0,080)^2/4\  = \ 5,027
+\times 10^{-3}\ m^2\ \ \ S_r\  = \ \pi(0,080^2 - 0,020^2)/4\  = \ 4,712
 \times 10^{-3}\ m^2\]</span></p>
-<p><span class="math display">\[{V_{ciclo}}_{CN}\  = \ (A_{emb}\  + \
-A_{ret}) \cdot L \cdot (p/p_{0})\  = \ (5,027 + 4,712) \times 10^{-3}
+<p><span class="math display">\[{V_{ciclo}}_{CN}\  = \ (S_a\  + \
+S_r) \cdot L \cdot (p/p_{0})\  = \ (5,027 + 4,712) \times 10^{-3}
 \times 0,200 \times 7\  = \ 0,013635\ m^3\  = \ 13,635\ L\]</span></p>
-<p><span class="math display">\[Q_{C1}\  = \ 11,687 \times 10\  = \
-116,9\ L/min\ \ \ Q_{C2}\  = \ 13,635 \times 20\  = \ 272,7\ L/min\ \ \
+<p><span class="math display">\[Q_{C1}\  = \ 13,635 \times 10\  = \
+136,4\ L/min\ \ \ Q_{C2}\  = \ 13,635 \times 20\  = \ 272,7\ L/min\ \ \
 Q_{C3}\  = \ 13,635 \times 30\  = \ 409,1\ L/min\]</span></p>
 </div>
 <h4>Apartado b — Consumo total</h4>
@@ -859,7 +859,7 @@ Q_{C3}\  = \ 13,635 \times 30\  = \ 409,1\ L/min\]</span></p>
 \ Q_{C3}\  = \ 136,4\  + \ 272,7\  + \ 409,1\  = \ 818,2\ L/min\
 (CN)\]</span></p>
 </div>
-<div class="resultado"><strong>→ Q</strong><sub>C1</sub>=116,9 · Q<sub>C2</sub>=272,7 ·
+<div class="resultado"><strong>→ Q</strong><sub>C1</sub>=136,4 · Q<sub>C2</sub>=272,7 ·
 Q<sub>C3</sub>=409,1 · Q<sub>total</sub>=818,2 L/min (CN)</div>
 <p><em>⚠ En una instalación con varios cilindros el caudal del compresor
 debe cubrir la suma de todos los caudales individuales. Cada cilindro
@@ -885,14 +885,14 @@ consume en proporción a su frecuencia de ciclos.</em></p>
 <p><strong>Datos:</strong> D<sub>e</sub> = 5 cm, d<sub>v</sub> = 1 cm, L = 24 cm, P = 6 kp/cm².</p>
 
 <p>Áreas:</p>
-<p><span class="math display">\[A_e = \frac{\pi \times 5^2}{4} = 19{,}63 \text{ cm}^2 \qquad A_v = \frac{\pi \times 1^2}{4} = 0{,}785 \text{ cm}^2\]</span></p>
-<p><span class="math display">\[A_{\text{ret}} = A_e - A_v = 19{,}63 - 0{,}785 = 18{,}85 \text{ cm}^2\]</span></p>
+<p><span class="math display">\[S_a = \frac{\pi \times 5^2}{4} = 19{,}63 \text{ cm}^2 \qquad S_v = \frac{\pi \times 1^2}{4} = 0{,}785 \text{ cm}^2\]</span></p>
+<p><span class="math display">\[S_r = S_a - S_v = 19{,}63 - 0{,}785 = 18{,}85 \text{ cm}^2\]</span></p>
 
 <p><strong>Fuerza de avance</strong> (presión actúa sobre toda el área del émbolo):</p>
-<p><span class="math display">\[\boxed{F_{\text{avance}} = P \times A_e = 6 \times 19{,}63 = 117{,}8 \text{ kp} \approx 1\,155{,}6 \text{ N}}\]</span></p>
+<p><span class="math display">\[\boxed{F_{\text{avance}} = P \times S_a = 6 \times 19{,}63 = 117{,}8 \text{ kp} \approx 1\,155{,}6 \text{ N}}\]</span></p>
 
 <p><strong>Fuerza de retroceso</strong> (presión actúa sobre el área anular):</p>
-<p><span class="math display">\[\boxed{F_{\text{retroceso}} = P \times A_{\text{ret}} = 6 \times 18{,}85 = 113{,}1 \text{ kp} \approx 1\,109{,}5 \text{ N}}\]</span></p>
+<p><span class="math display">\[\boxed{F_{\text{retroceso}} = P \times S_r = 6 \times 18{,}85 = 113{,}1 \text{ kp} \approx 1\,109{,}5 \text{ N}}\]</span></p>
 </div>
 
 <h4>Apartado b — Funcionamiento del circuito</h4>
@@ -1147,22 +1147,22 @@ retroceso.</p>
   <summary>📝 Ver resolución completa</summary>
 <h4>Apartado a — Fuerzas con rendimiento</h4>
 <div class="solucion">
-<p><span class="math display">\[A_{emb}\  = \ \pi(0,070)^2/4\  = \ 3,848
-\times 10^{-3}\ m^2\ \ \ A_{ret}\  = \ \pi(0,070^2 - 0,035^2)/4\  = \ 2,886
+<p><span class="math display">\[S_a\  = \ \pi(0,070)^2/4\  = \ 3,848
+\times 10^{-3}\ m^2\ \ \ S_r\  = \ \pi(0,070^2 - 0,035^2)/4\  = \ 2,886
 \times 10^{-3}\ m^2\]</span></p>
-<p><span class="math display">\[F_{avance}\  = \ p \cdot A_{emb} \cdot
+<p><span class="math display">\[F_{avance}\  = \ p \cdot S_a \cdot
 \eta\  = \ 20 \times 10^5 \times 3,848 \times 10^{-3} \times 0,85\  = \ 6\
 542\ N\]</span></p>
-<p><span class="math display">\[F_{retroceso}\  = \ p \cdot A_{ret}
+<p><span class="math display">\[F_{retroceso}\  = \ p \cdot S_r
 \cdot \eta\  = \ 20 \times 10^5 \times 2,886 \times 10^{-3} \times 0,85\  =
 \ 4\ 907\ N\]</span></p>
 </div>
 <h4>Apartado b — Volumen de aceite por ciclo</h4>
 <div class="solucion">
-<p><span class="math display">\[V_{avance}\  = \ A_{emb} \cdot L\  = \
+<p><span class="math display">\[V_{avance}\  = \ S_a \cdot L\  = \
 3,848 \times 10^{-3} \times 0,900\  = \ 3,463 \times 10^{-3}\ m^3\  = \ 3,463\
 L\]</span></p>
-<p><span class="math display">\[V_{retroceso}\  = \ A_{ret} \cdot L\  =
+<p><span class="math display">\[V_{retroceso}\  = \ S_r \cdot L\  =
 \ 2,886 \times 10^{-3} \times 0,900\  = \ 2,597 \times 10^{-3}\ m^3\  = \
 2,597\ L\]</span></p>
 <p><span class="math display">\[{V_{total}}_{ciclo}\  = \ V_{avance}\  +
@@ -1560,7 +1560,7 @@ m/s\]</span></p>
 superficie→B)</h4>
 <div class="solucion">
 <p><span class="math display">\[v_{B}\  = \ v_{A} \cdot
-(A_{A}/A_{B})\  = \ v_{A} \cdot (D_{A}/D_{B})^2\  = \ 10,85 \times
+(S_{A}/S_{B})\  = \ v_{A} \cdot (D_{A}/D_{B})^2\  = \ 10,85 \times
 (10/30)^2\  = \ 10,85 \times 0,1111\  = \ 1,206\ m/s\]</span></p>
 <p><span class="math display">\[p_{B}(man)\  = \ \rho g(6 - 2)\  - \
 ½{\rho v}_{B^2}\  = \ 1000 \times 9,81 \times 4\  - \ ½ \times 1000

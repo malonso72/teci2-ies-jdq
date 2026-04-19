@@ -490,8 +490,8 @@ MathJax = {
     <option value="../teoria/bloque_B.html">B — Materiales y Fabricación</option>
     <option value="../teoria/bloque_C1.html" selected>C1 — Estructuras</option>
     <option value="../teoria/bloque_C2.html">C2 — Máquinas Térmicas</option>
-    <option value="../teoria/bloque_C31.html">C3.1 — Neumática</option>
-    <option value="../teoria/bloque_C32.html">C3.2 — Hidráulica</option>
+    <option value="../teoria/bloque_C31.html">C31 — Neumática</option>
+    <option value="../teoria/bloque_C32.html">C32 — Hidráulica</option>
     <option value="../teoria/bloque_D1.html">D1 — Corriente Alterna</option>
     <option value="../teoria/bloque_D2.html">D2 — Electrónica Digital</option>
     <option value="../teoria/bloque_E.html">E — Sist. Informáticos</option>
@@ -515,6 +515,7 @@ MathJax = {
 <a class="na" href="#C1_s7">7. Método de las secciones — ejemplo resuelto</a>
 <a class="na" href="#C1_s8">8. Comparativa: biapoyada vs ménsula</a>
 <a class="na" href="#C1_s9">9. Cerchas y Cremona (ampliación)</a>
+<a class="na" href="#C1_errores">⚠️ Errores típicos</a>
 <a class="na" href="#decalogo">📝 Decálogo PAU</a>
 
 </div>
@@ -1422,6 +1423,44 @@ MathJax = {
     <strong>Nota didáctica.</strong> El método de Cremona fue la herramienta estándar antes del cálculo matricial. Hoy lo aprenden los ingenieros como <em>control cualitativo rápido</em>: si el polígono no cierra, el análisis tiene un error. Es además una manera muy visual de comprender qué barras se comprimen y cuáles se traccionan en una cercha compleja.
   </div>
 
+</div>
+
+<!-- ═══════════════════ ERRORES TÍPICOS ═══════════════════ -->
+<div class="seccion" id="C1_errores">
+  <div class="sec-hdr">
+    <div class="sec-num">⚠</div>
+    <div class="sec-tit">Errores típicos que conviene evitar</div>
+  </div>
+
+  <div class="caja aviso">
+    <strong>1. Sustituir la carga distribuida por su resultante al dibujar V(x) y M(x).</strong>
+    La resultante solo sirve para calcular las reacciones. Una vez halladas, al trazar los diagramas hay que trabajar con la carga distribuida original, tramo a tramo.
+  </div>
+
+  <div class="caja aviso">
+    <strong>2. Olvidar que V y M cambian con el convenio de signos.</strong>
+    Lo importante no es qué convenio se use, sino <em>declararlo</em> en el enunciado y respetarlo en todos los tramos. Un signo cambiado arrastra el error hasta el final.
+  </div>
+
+  <div class="caja aviso">
+    <strong>3. Confundir los apoyos y contar mal las incógnitas.</strong>
+    Fijo = 2 reacciones (H y V); rodillo/deslizante = 1 (V); empotramiento = 3 (H, V y M). Antes de plantear nada, contar incógnitas y compararlas con las 3 ecuaciones de equilibrio en 2D.
+  </div>
+
+  <div class="caja aviso">
+    <strong>4. No marcar el punto donde V = 0.</strong>
+    Ahí está el extremo de M (máximo o mínimo). Si no se localiza, no se puede dimensionar la sección más desfavorable.
+  </div>
+
+  <div class="caja aviso">
+    <strong>5. Mezclar unidades en el último paso.</strong>
+    Fuerzas en N o kN, momentos en N·m o kN·m, longitudes en m. Pasar todo a un único sistema <em>antes</em> de operar evita errores de factor 1000 en el resultado final.
+  </div>
+
+  <div class="caja aviso">
+    <strong>6. Confundir esfuerzo cortante V con momento flector M en los diagramas.</strong>
+    Regla rápida: una carga puntual produce un <em>salto</em> en V y un <em>quiebro</em> (cambio de pendiente) en M. Un momento puntual produce un <em>salto</em> en M pero no afecta a V.
+  </div>
 </div>
 
 </div><!-- fin cuerpo -->
