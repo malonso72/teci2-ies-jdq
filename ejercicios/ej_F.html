@@ -1214,30 +1214,30 @@ Ingeniería II · PEvAU Andalucía 2025-26</em></p>
 <h4>Resolución — Controlador 1</h4>
 <div class="solucion">
 <p>En el Controlador 1 observamos:</p>
-<p>• La entrada (error) es un <strong>escalón</strong>: pasa bruscamente de 0 a un valor constante en un instante.</p>
-<p>• La salida (m) es una <strong>rampa</strong>: crece linealmente con el tiempo mientras el error se mantiene constante.</p>
-<p>Esto corresponde al <strong>controlador integral (I)</strong>:</p>
-<p>$$m(t) = K_i \cdot \int e(t)\,dt$$</p>
-<p>Si e(t) = constante (escalón), entonces m(t) = K<sub>i</sub> · e₀ · t → una recta que crece con pendiente constante. Mientras el error no sea cero, la salida sigue aumentando.</p>
+<p>• La entrada (error) tiene forma <strong>trapezoidal</strong>: sube hasta un valor constante, se mantiene durante un tiempo y vuelve a bajar.</p>
+<p>• La salida (m) presenta dos <strong>impulsos</strong> breves: uno positivo en el flanco de subida del error y otro negativo en el flanco de bajada. Mientras el error es constante, la salida es cero.</p>
+<p>Esto corresponde al <strong>controlador derivativo (D)</strong>:</p>
+<p>$$m(t) = K_d \cdot \frac{de(t)}{dt}$$</p>
+<p>La salida solo es ≠ 0 cuando el error <em>cambia</em>. En los flancos de subida y bajada, la derivada es muy grande y produce un pico (positivo o negativo según el sentido). En la meseta, el error es constante y la derivada es cero.</p>
 </div>
-<div class="resultado"><strong>→ Controlador 1 = Integral (I). Entrada escalón → salida rampa.</strong></div>
+<div class="resultado"><strong>→ Controlador 1 = Derivativo (D). Solo actúa en los cambios del error (impulsos en los flancos).</strong></div>
 
 <h4>Resolución — Controlador 2</h4>
 <div class="solucion">
 <p>En el Controlador 2 observamos:</p>
-<p>• La entrada (error) es una <strong>rampa</strong>: crece linealmente con el tiempo.</p>
-<p>• La salida (m) es un <strong>escalón</strong>: toma un valor constante inmediatamente.</p>
-<p>Esto corresponde al <strong>controlador derivativo (D)</strong>:</p>
-<p>$$m(t) = K_d \cdot \frac{de(t)}{dt}$$</p>
-<p>Si e(t) = rampa (crece linealmente), entonces de/dt = constante → m(t) = K<sub>d</sub> · constante = escalón. La derivada de una rampa es una constante.</p>
+<p>• La entrada (error) es un <strong>escalón</strong>: pasa bruscamente de 0 a un valor constante.</p>
+<p>• La salida (m) es una <strong>rampa</strong>: crece linealmente con el tiempo mientras el error se mantiene constante.</p>
+<p>Esto corresponde al <strong>controlador integral (I)</strong>:</p>
+<p>$$m(t) = K_i \cdot \int e(t)\,dt$$</p>
+<p>Si e(t) = constante (escalón), entonces m(t) = K<sub>i</sub> · e₀ · t → una recta que crece con pendiente constante. Mientras el error no sea cero, la salida sigue aumentando (acumulando el error).</p>
 </div>
-<div class="resultado"><strong>→ Controlador 2 = Derivativo (D). Entrada rampa → salida escalón.</strong></div>
+<div class="resultado"><strong>→ Controlador 2 = Integral (I). Acumula el error en el tiempo: entrada escalón → salida rampa.</strong></div>
 
 <div class="caja clave">
 <strong>🔑 Regla rápida para identificar controladores por gráficas:</strong><br>
 • P: escalón → escalón (misma forma, diferente amplitud).<br>
 • I: escalón → rampa (integra = acumula en el tiempo).<br>
-• D: rampa → escalón (deriva = extrae la pendiente).
+• D: rampa → escalón, o trapezoide → impulsos en los flancos (deriva = extrae la pendiente; solo actúa cuando el error <em>cambia</em>).
 </div>
 </details>
 </div>

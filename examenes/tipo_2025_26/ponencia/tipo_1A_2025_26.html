@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II · Examen tipo 1 · Examen A · 2025-26 · IES Jiménez de Quesada</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--az:#1B4F8A;--az2:#2E7BC4;--bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5;--green:#2E7D32;--green2:#43A047;--green-soft:#EDF6EE;--green-line:#A8D5AE;--red:#C0321E}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:var(--bg);color:var(--tx)}
+.hd{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(27,79,138,.12);position:sticky;top:0;z-index:500}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer}
+.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.72rem;opacity:.78;margin-left:10px}
+.home-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:8px;cursor:pointer;margin-left:auto;transition:background .15s;text-decoration:none}
+.home-btn:hover{background:rgba(255,255,255,.16)}
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+.navcross span.nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8;align-self:center;user-select:none}
+.main{max-width:980px;margin:0 auto;padding:28px 18px 64px}
+.title-block{text-align:center;margin-bottom:28px}
+.title-block h1{font-family:'Barlow Condensed',sans-serif;font-size:1.9rem;color:var(--az);font-weight:700;letter-spacing:.5px}
+.title-block .sub{color:var(--t2);font-size:.95rem;margin-top:4px}
+.badge{display:inline-block;background:var(--green-soft);color:var(--green);border:1px solid var(--green-line);padding:5px 14px;border-radius:999px;font-size:.8rem;font-weight:600;margin:10px 0 18px}
+.pair-link{display:inline-block;margin-left:8px;padding:5px 14px;background:#FFF5E0;color:#6B3800;border:1px solid #F3A83D;border-radius:999px;font-size:.8rem;font-weight:600;text-decoration:none}
+.pair-link:hover{background:#FFE7BA}
+.instr{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:14px 18px;margin:0 0 26px;font-size:.88rem;line-height:1.55;color:var(--t2);box-shadow:0 2px 8px rgba(27,79,138,.05)}
+.instr strong{color:var(--az)}
+.apartado{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:20px 22px;margin:0 0 22px;box-shadow:0 3px 12px rgba(27,79,138,.06)}
+.apartado h2{font-family:'Barlow Condensed',sans-serif;color:var(--az);font-size:1.35rem;margin-bottom:6px;padding-bottom:8px;border-bottom:2px solid var(--az2)}
+.apartado .bloque-tag{display:inline-block;background:#EBF0F7;color:var(--az);font-size:.72rem;font-weight:600;padding:3px 9px;border-radius:999px;margin-left:8px;vertical-align:middle}
+.contexto{margin:10px 0 6px;color:var(--tx);font-size:.95rem;line-height:1.65}
+.opcion{background:#FAFBFD;border-left:4px solid var(--az2);border-radius:0 8px 8px 0;padding:14px 16px;margin:14px 0}
+.opcion h3{font-family:'Barlow Condensed',sans-serif;color:var(--az);font-size:1.1rem;margin-bottom:8px}
+.enunciado{font-size:.95rem;line-height:1.65;margin:6px 0}
+.enunciado ol,.enunciado ul{margin:6px 0 6px 24px}
+.enunciado li{margin:6px 0}
+.enunciado li .pts{float:right;color:var(--green);font-weight:600;font-size:.85rem}
+.datos{background:#F7FAFD;border:1px dashed #B8C9DD;border-radius:8px;padding:8px 12px;margin:10px 0;font-size:.88rem;color:var(--t2)}
+.esquema{background:#F4F6F9;border:1px solid var(--bd);border-left:4px solid var(--green2);border-radius:0 8px 8px 0;padding:10px 14px;margin:10px 0;font-size:.85rem;color:var(--t2);text-align:center}
+.fig-svg{display:block;margin:12px auto;max-width:100%;height:auto;background:#fff;border:1px solid #E3E8F0;border-radius:8px}
+.sol-wrap{margin:10px 0 2px;border:1px solid var(--bd);background:#fff;border-radius:10px;overflow:hidden}
+.sol-btn{display:block;width:100%;padding:10px 14px;background:#F7FAFD;color:var(--az);border:none;cursor:pointer;font:700 .85rem/1.4 Barlow,sans-serif;text-align:left;transition:background .18s}
+.sol-btn:hover{background:#EEF4FA}
+.sol-btn::after{content:'▾';float:right;color:var(--green)}
+.sol-btn.open::after{content:'▴'}
+.sol-content{display:none;padding:10px 14px 12px;border-top:1px solid #E7ECF2;font-size:.85rem;line-height:1.65;background:#fff}
+.sol-content.show{display:block}
+.sol-content .apt{display:block;margin:6px 0;color:#285E2B}
+.sol-content .apt strong{color:#1B5E20}
+[id]{scroll-margin-top:120px}
+@media(max-width:768px){.main{padding:16px 10px 40px}.apartado{padding:14px 12px}.title-block h1{font-size:1.4rem}}
+@media print{.hd,.navcross,.sol-btn{display:none!important}.sol-content{display:block!important}.apartado{break-inside:avoid}}
+</style>
+<script>
+document.addEventListener('click',function(e){
+  if(e.target.classList.contains('sol-btn')){
+    e.target.classList.toggle('open');
+    e.target.nextElementSibling.classList.toggle('show');
+  }
+});
+</script>
+</head>
+<body>
+<div class="hd">
+<span class="lg" onclick="location.href='../../../index.html'">TECI II</span>
+<span class="sb">🧪 Examen tipo 1 · Examen A · 2025-26</span>
+<a href="../../../index.html" class="home-btn">🏠 Índice</a>
+</div>
+<nav class="navcross" role="navigation" aria-label="Navegación transversal"><a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a><span class="nc-sep">·</span><a href="../../../index.html#teoria"><span>📖</span><span class="nc-lbl">Teoría</span></a><span class="nc-sep">·</span><a href="../../../index.html#ejercicios"><span>✏️</span><span class="nc-lbl">Ejercicios</span></a><span class="nc-sep">·</span><span class="nc-current" aria-current="page"><span>📋</span><span class="nc-lbl">Exámenes</span></span><span class="nc-sep">·</span><a href="../../../ponencia_resuelta/index_ponencia.html" aria-label="Ver Ponencia 2025-26 resuelta"><span>📚</span><span class="nc-lbl">Ponencia</span></a><span class="nc-sep">·</span><a href="../../../apoyo/formulario.html" aria-label="Ir al material de apoyo"><span>📚</span><span class="nc-lbl">Apoyo</span></a></nav>
+
+<div class="main">
+<div class="title-block">
+<h1>Examen tipo 1 · Examen A · PEvAU 2025-26</h1>
+<div class="sub">Tecnología e Ingeniería II · IES Jiménez de Quesada</div>
+<div>
+  <span class="badge">⏱️ 90 min · 4 apartados · 10 puntos</span>
+  <a class="pair-link" href="tipo_1B_2025_26.html">🔄 Ver Examen B (complementario)</a>
+</div>
+</div>
+
+<div class="instr">
+<strong>Instrucciones.</strong> La prueba consta de <strong>4 apartados de 2,5 puntos cada uno</strong>. El <strong>Apartado 1</strong> es de <em>opción única</em> y debe contestarse obligatoriamente. En los <strong>Apartados 2, 3 y 4</strong> el alumno elige <strong>una</strong> de las dos opciones (A o B). No se puede mezclar. Pesos de bloques: B = 2,5 pt, C = 4 pt (C1/C2/C3), D = 2,5 pt, F = 1 pt. Duración: <strong>90 minutos</strong>. Calculadora monolínea (no programable). Los resultados se expresarán en unidades del S.I. salvo que se pidan en otras.
+</div>
+
+<!-- ═════════════ APARTADO 1 ═════════════ -->
+<section class="apartado" id="ap1">
+<h2>Apartado 1 — Materiales (B) <span class="bloque-tag">Bloque B · 2,5 pt</span></h2>
+
+<p class="contexto">En una carpintería metálica se ha comprado una plancha de <strong>acero</strong> con dureza Brinell \(160\ \text{HB}\ 5\ 650\ 20\) para la superficie de trabajo de una mesa de carnicería. Posteriormente se decide <strong>templar</strong> el acero para aumentar su dureza.</p>
+
+<div class="enunciado">
+<ol type="a">
+  <li>Calcula la <strong>profundidad \(f\)</strong> y el <strong>diámetro \(d\)</strong> de la huella que deja el ensayo Brinell normalizado en la plancha original. Comprueba que el ensayo cumple la norma Brinell. <span class="pts">(1,25 pt)</span></li>
+  <li>Si tras el temple la dureza Brinell <strong>se duplica</strong> (pasa de 160 a 320 kp/mm²), ¿qué <strong>fuerza</strong> habría que aplicar en un nuevo ensayo con la misma bola para dejar la <em>misma huella</em> (mismo diámetro) que en el acero sin templar? <span class="pts">(1,25 pt)</span></li>
+</ol>
+</div>
+
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (Apartado 1)</button><div class="sol-content">
+<span class="apt"><strong>a)</strong> Lectura de la nomenclatura: HB = 160 kp/mm², D = 5 mm, F = 650 kp, t = 20 s.</span>
+<span class="apt">\(f = \dfrac{F}{\pi\cdot D\cdot HB} = \dfrac{650}{\pi\cdot 5\cdot 160} \approx 0{,}259\ \text{mm}\)</span>
+<span class="apt">\(d = \sqrt{D^2 - (D - 2f)^2} \approx 2{,}28\ \text{mm}\)</span>
+<span class="apt">Comprobación norma: \(D/4 = 1{,}25 \le d \le D/2 = 2{,}5\) ✓</span>
+<span class="apt"><strong>b)</strong> Misma huella ⇒ misma superficie \(S\). \(S = F/HB = 650/160 = 4{,}0625\ \text{mm}^2\).</span>
+<span class="apt">Con \(HB' = 320\ \text{kp/mm}^2\): \(F' = HB' \cdot S = 320 \cdot 4{,}0625 = \boxed{1\,300\ \text{kp}}\)</span>
+</div></div>
+</section>
+
+<!-- ═════════════ APARTADO 2 ═════════════ -->
+<section class="apartado" id="ap2">
+<h2>Apartado 2 — Máquinas térmicas y fluidos <span class="bloque-tag">C2 / C3 · 2,5 pt</span></h2>
+
+<div class="opcion">
+<h3>Opción A · Bomba de calor reversible (C2)</h3>
+<p class="contexto">Una <strong>vivienda unifamiliar</strong> se climatiza mediante una <strong>bomba de calor reversible</strong> que mantiene la temperatura interior a <strong>22 °C</strong> durante todo el año. La temperatura media exterior es <strong>6 °C en invierno</strong> y <strong>32 °C en verano</strong>. La máquina tiene una eficiencia real igual al <strong>35 %</strong> de la ideal y el compresor consume <strong>3 kW</strong> de potencia eléctrica.</p>
+<div class="enunciado">
+<ol type="a">
+  <li>Calcula la <strong>eficiencia</strong> de la máquina en invierno (como bomba de calor) y en verano (como máquina frigorífica). <span class="pts">(1,25 pt)</span></li>
+  <li>Calcula el <strong>calor cedido al local cada día en invierno</strong> y el <strong>calor extraído del local cada día en verano</strong>, suponiendo <strong>6 horas de funcionamiento</strong> diario en cada caso. <span class="pts">(1,25 pt)</span></li>
+</ol>
+</div>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (2·A)</button><div class="sol-content">
+<span class="apt"><strong>Invierno (bomba de calor).</strong> \(T_c = 295\ \text{K}\), \(T_f = 279\ \text{K}\).</span>
+<span class="apt">\(\varepsilon'_{\text{ideal}} = \dfrac{T_c}{T_c - T_f} = \dfrac{295}{16} \approx 18{,}44\)</span>
+<span class="apt">\(\varepsilon'_{\text{real}} = 0{,}35 \cdot 18{,}44 \approx \boxed{6{,}45}\)</span>
+<span class="apt"><strong>Verano (frigorífica).</strong> \(T_c = 305\ \text{K}\), \(T_f = 295\ \text{K}\).</span>
+<span class="apt">\(\varepsilon_{\text{ideal}} = \dfrac{T_f}{T_c - T_f} = \dfrac{295}{10} = 29{,}5\) → \(\varepsilon_{\text{real}} = 0{,}35 \cdot 29{,}5 \approx \boxed{10{,}32}\)</span>
+<span class="apt"><strong>b) Calor diario.</strong> \(W_{\text{diario}} = P\cdot t = 3\ \text{kW} \cdot 6\ \text{h} \cdot 3600\ \text{s/h} = 64\,800\ \text{kJ}\).</span>
+<span class="apt">Invierno: \(Q_c = \varepsilon'_{\text{real}} \cdot W = 6{,}45 \cdot 64\,800 \approx \boxed{418\ \text{MJ/día}}\)</span>
+<span class="apt">Verano: \(Q_f = \varepsilon_{\text{real}} \cdot W = 10{,}32 \cdot 64\,800 \approx \boxed{669\ \text{MJ/día}}\)</span>
+</div></div>
+</div>
+
+<div class="opcion">
+<h3>Opción B · Cilindro neumático de doble efecto (C3)</h3>
+<p class="contexto">Un <strong>brazo manipulador</strong> de una línea de ensamblaje dispone de un <strong>cilindro neumático de doble efecto</strong> con émbolo de diámetro <strong>D = 40 mm</strong>, vástago de diámetro <strong>d = 16 mm</strong> y carrera <strong>L = 100 mm</strong>. Está alimentado a una <strong>presión relativa de 6 bar</strong> y el cilindro realiza <strong>n = 20 ciclos por minuto</strong>. El rendimiento del cilindro debido a pérdidas por rozamiento en las juntas es <strong>η = 0,90</strong>.</p>
+<div class="enunciado">
+<ol type="a">
+  <li>Calcula la <strong>fuerza real de avance</strong> y la <strong>fuerza real de retroceso</strong> que ejerce el cilindro, teniendo en cuenta su rendimiento. <span class="pts">(1,25 pt)</span></li>
+  <li>Calcula el <strong>consumo de aire</strong> del cilindro expresado en <strong>L/min en condiciones normales</strong>. <span class="pts">(1,25 pt)</span></li>
+</ol>
+</div>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (2·B)</button><div class="sol-content">
+<span class="apt"><strong>a)</strong> Secciones:</span>
+<span class="apt">\(S_a = \dfrac{\pi D^2}{4} = \dfrac{\pi (0{,}04)^2}{4} = 1{,}257\cdot 10^{-3}\ \text{m}^2\)</span>
+<span class="apt">\(S_r = \dfrac{\pi (D^2 - d^2)}{4} = \dfrac{\pi (0{,}04^2 - 0{,}016^2)}{4} = 1{,}056\cdot 10^{-3}\ \text{m}^2\)</span>
+<span class="apt">\(F_{\text{avance}}^{\text{real}} = \eta\cdot p\cdot S_a = 0{,}90 \cdot 6\cdot 10^5 \cdot 1{,}257\cdot 10^{-3} \approx \boxed{679\ \text{N}}\)</span>
+<span class="apt">\(F_{\text{retroceso}}^{\text{real}} = \eta\cdot p\cdot S_r = 0{,}90 \cdot 6\cdot 10^5 \cdot 1{,}056\cdot 10^{-3} \approx \boxed{570\ \text{N}}\)</span>
+<span class="apt"><strong>b)</strong> Volumen por ciclo (avance + retroceso):</span>
+<span class="apt">\(V_{\text{ciclo}} = (S_a + S_r)\cdot L = (12{,}57 + 10{,}56)\cdot 10 = 231{,}3\ \text{cm}^3\)</span>
+<span class="apt">\(Q_{\text{trabajo}} = V_{\text{ciclo}}\cdot n = 231{,}3 \cdot 20 = 4\,626\ \text{cm}^3/\text{min} \approx 4{,}63\ \text{L/min}\)</span>
+<span class="apt">Paso a condiciones normales: \(Q_{CN} = Q_{\text{trabajo}} \cdot \dfrac{p_{\text{abs}}}{p_0} = 4{,}63 \cdot 7 \approx \boxed{32{,}4\ \text{L/min}}\)</span>
+</div></div>
+</div>
+</section>
+
+<!-- ═════════════ APARTADO 3 ═════════════ -->
+<section class="apartado" id="ap3">
+<h2>Apartado 3 — Estructuras + Automática <span class="bloque-tag">C1 1,5 pt · F 1 pt</span></h2>
+
+<div class="opcion">
+<h3>Opción A · Viga biapoyada con dos cargas puntuales + Control de velocidad</h3>
+<p class="contexto"><strong>Parte 1 (C1, 1,5 pt).</strong> En el forjado de un taller, una <strong>viga biapoyada</strong> de longitud <strong>L = 8 m</strong> soporta dos cargas puntuales procedentes de dos pilares superiores. El apoyo <strong>A</strong> (en x = 0) es <strong>articulado fijo</strong> y el apoyo <strong>B</strong> (en x = 8 m) es <strong>móvil</strong> (rodillo). Las cargas son <strong>P₁ = 15 kN</strong> aplicada a <strong>x = 2 m</strong> de A y <strong>P₂ = 10 kN</strong> aplicada a <strong>x = 6 m</strong> de A.</p>
+<svg class="fig-svg" viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg">
+  <line x1="60" y1="130" x2="540" y2="130" stroke="#1B4F8A" stroke-width="8"/>
+  <polygon points="60,130 48,160 72,160" fill="#1B4F8A"/>
+  <line x1="40" y1="168" x2="80" y2="168" stroke="#1B4F8A" stroke-width="2"/>
+  <text x="60" y="190" text-anchor="middle" font-size="13" fill="#23272F">A</text>
+  <polygon points="540,130 528,160 552,160" fill="#1B4F8A" fill-opacity="0.5"/>
+  <circle cx="534" cy="163" r="4" fill="none" stroke="#1B4F8A"/>
+  <circle cx="546" cy="163" r="4" fill="none" stroke="#1B4F8A"/>
+  <text x="540" y="190" text-anchor="middle" font-size="13" fill="#23272F">B</text>
+  <line x1="180" y1="50" x2="180" y2="125" stroke="#C0321E" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="180" y="42" text-anchor="middle" font-size="13" fill="#C0321E" font-weight="bold">P₁ = 15 kN</text>
+  <line x1="420" y1="50" x2="420" y2="125" stroke="#C0321E" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="420" y="42" text-anchor="middle" font-size="13" fill="#C0321E" font-weight="bold">P₂ = 10 kN</text>
+  <line x1="60" y1="205" x2="180" y2="205" stroke="#555" stroke-width="1"/>
+  <text x="120" y="200" text-anchor="middle" font-size="11" fill="#555">2 m</text>
+  <line x1="180" y1="205" x2="420" y2="205" stroke="#555" stroke-width="1"/>
+  <text x="300" y="200" text-anchor="middle" font-size="11" fill="#555">4 m</text>
+  <line x1="420" y1="205" x2="540" y2="205" stroke="#555" stroke-width="1"/>
+  <text x="480" y="200" text-anchor="middle" font-size="11" fill="#555">2 m</text>
+  <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0321E"/></marker></defs>
+</svg>
+<div class="enunciado">
+<ol type="a">
+  <li>Calcula las <strong>reacciones</strong> \(R_A\) y \(R_B\) en los apoyos. <span class="pts">(0,5 pt)</span></li>
+  <li>Obtén las <strong>leyes del cortante V(x) y del momento flector M(x)</strong> en cada tramo, representa los <strong>diagramas</strong> correspondientes e indica el valor y la localización del <strong>momento flector máximo</strong>. <span class="pts">(1 pt)</span></li>
+</ol>
+</div>
+<p class="contexto"><strong>Parte 2 (F, 1 pt).</strong> La figura muestra el diagrama de bloques de un sistema de control de velocidad de un motor eléctrico: el regulador G₁ recibe el error entre la consigna y la velocidad medida, la planta G₂ representa el motor, y H es el tacómetro de realimentación. Datos: <strong>G₁ = 5</strong>, <strong>G₂ = 2 rpm/V</strong>, <strong>H = 0,1 V/rpm</strong>.</p>
+<div class="esquema">r → ⊕ → [G₁] → [G₂] → c ·&nbsp;&nbsp;&nbsp;&nbsp;· c → [H] → realimentación al ⊕</div>
+<div class="enunciado">
+<ol type="a" start="3">
+  <li>Obtén la <strong>función de transferencia c/r</strong> del sistema en lazo cerrado. <span class="pts">(0,5 pt)</span></li>
+  <li>Calcula la <strong>velocidad de régimen permanente</strong> c cuando la consigna es <strong>r = 200 V</strong>. <span class="pts">(0,5 pt)</span></li>
+</ol>
+</div>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (3·A)</button><div class="sol-content">
+<span class="apt"><strong>a)</strong> \(\sum M_A = 0: R_B\cdot 8 = 15\cdot 2 + 10\cdot 6 = 90 \Rightarrow \boxed{R_B = 11{,}25\ \text{kN}}\)</span>
+<span class="apt">\(\sum F_y = 0: R_A = 15 + 10 - 11{,}25 = \boxed{13{,}75\ \text{kN}}\)</span>
+<span class="apt"><strong>b) Tramos:</strong></span>
+<span class="apt">AC (0 ≤ x ≤ 2): V = +13,75 kN · M(x) = 13,75·x → M(0) = 0 · M(2) = 27,5 kN·m</span>
+<span class="apt">CD (2 ≤ x ≤ 6): V = −1,25 kN · M(x) = −1,25·x + 30 → M(2) = 27,5 · M(6) = 22,5 kN·m</span>
+<span class="apt">DB (6 ≤ x ≤ 8): V = −11,25 kN · M(x) = −11,25·x + 90 → M(6) = 22,5 · M(8) = 0 ✓</span>
+<span class="apt">\(\boxed{M_{\text{máx}} = 27{,}5\ \text{kN·m en x = 2 m (bajo P}_1)}\)</span>
+<span class="apt"><strong>c)</strong> \(\dfrac{c}{r} = \dfrac{G_1 G_2}{1 + G_1 G_2 H} = \dfrac{10}{1 + 1} = \boxed{5\ \text{rpm/V}}\)</span>
+<span class="apt"><strong>d)</strong> \(c = 5 \cdot 200 = \boxed{1\,000\ \text{rpm}}\)</span>
+</div></div>
+</div>
+
+<div class="opcion">
+<h3>Opción B · Ménsula con carga puntual + Control de nivel</h3>
+<p class="contexto"><strong>Parte 1 (C1, 1,5 pt).</strong> La <strong>terraza voladiza</strong> de una vivienda se modela como una <strong>viga en voladizo (ménsula)</strong> empotrada en el extremo <strong>B</strong> (fachada) y con el extremo <strong>A</strong> libre. La viga tiene una longitud <strong>L = 4 m</strong>. En el punto <strong>C</strong>, situado a <strong>1,5 m del extremo libre A</strong> (es decir, a 2,5 m del empotramiento B), se aplica una carga puntual vertical hacia abajo <strong>P = 12 kN</strong> debida al peso de una zona habilitada como solárium.</p>
+<svg class="fig-svg" viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg">
+  <rect x="470" y="80" width="30" height="100" fill="#888"/>
+  <line x1="470" y1="80" x2="470" y2="180" stroke="#555" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="80" y1="130" x2="470" y2="130" stroke="#1B4F8A" stroke-width="8"/>
+  <text x="80" y="155" text-anchor="middle" font-size="13" fill="#23272F">A</text>
+  <text x="470" y="205" text-anchor="middle" font-size="13" fill="#23272F">B (empotramiento)</text>
+  <line x1="226" y1="50" x2="226" y2="125" stroke="#C0321E" stroke-width="2" marker-end="url(#arr2)"/>
+  <text x="226" y="42" text-anchor="middle" font-size="13" fill="#C0321E" font-weight="bold">P = 12 kN</text>
+  <text x="226" y="172" text-anchor="middle" font-size="11" fill="#555">C</text>
+  <line x1="80" y1="190" x2="226" y2="190" stroke="#555" stroke-width="1"/>
+  <text x="153" y="186" text-anchor="middle" font-size="11" fill="#555">1,5 m</text>
+  <line x1="226" y1="190" x2="470" y2="190" stroke="#555" stroke-width="1"/>
+  <text x="348" y="186" text-anchor="middle" font-size="11" fill="#555">2,5 m</text>
+  <defs><marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0321E"/></marker></defs>
+</svg>
+<div class="enunciado">
+<ol type="a">
+  <li>Calcula las <strong>reacciones</strong> (fuerza y momento) en el empotramiento B. <span class="pts">(0,5 pt)</span></li>
+  <li>Obtén las <strong>leyes del cortante V(x) y del momento flector M(x)</strong>, representa los <strong>diagramas</strong> correspondientes e indica el <strong>momento flector máximo</strong> y el punto donde se produce. <span class="pts">(1 pt)</span></li>
+</ol>
+</div>
+<p class="contexto"><strong>Parte 2 (F, 1 pt).</strong> El control de <strong>nivel de agua en un depósito</strong> se realiza mediante un sistema en lazo cerrado con realimentación unitaria (H = 1). La válvula de llenado se modela como una planta con ganancia <strong>G₂ = 10</strong> y el regulador es proporcional con ganancia <strong>G₁</strong> ajustable.</p>
+<div class="enunciado">
+<ol type="a" start="3">
+  <li>Obtén la expresión del <strong>error e/r</strong> del sistema en función de G₁ y G₂ (con H = 1). <span class="pts">(0,5 pt)</span></li>
+  <li>Determina el <strong>valor mínimo de G₁</strong> necesario para que el error en régimen permanente sea inferior al <strong>10 %</strong> de la consigna. <span class="pts">(0,5 pt)</span></li>
+</ol>
+</div>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (3·B)</button><div class="sol-content">
+<span class="apt"><strong>a)</strong> \(\sum F_y = 0: R_{By} = P = \boxed{12\ \text{kN} \uparrow}\)</span>
+<span class="apt">\(\sum M_B = 0: M_B = P\cdot 2{,}5 = \boxed{30\ \text{kN·m (antihorario)}}\)</span>
+<span class="apt"><strong>b)</strong> Tomando origen en A, x hacia B:</span>
+<span class="apt">AC (0 ≤ x ≤ 1,5): V(x) = 0 · M(x) = 0</span>
+<span class="apt">CB (1,5 ≤ x ≤ 4): V(x) = −12 kN · M(x) = −12(x − 1,5) → M(1,5) = 0 · M(4) = −30 kN·m</span>
+<span class="apt">\(\boxed{|M_{\text{máx}}| = 30\ \text{kN·m en el empotramiento B}}\) (fibras superiores en tracción)</span>
+<span class="apt"><strong>c)</strong> \(\dfrac{e}{r} = \dfrac{1}{1 + G_1 G_2} = \dfrac{1}{1 + 10 G_1}\)</span>
+<span class="apt"><strong>d)</strong> \(\dfrac{1}{1 + 10 G_1} &lt; 0{,}1 \Rightarrow 1 + 10 G_1 &gt; 10 \Rightarrow \boxed{G_1 &gt; 0{,}9}\)</span>
+</div></div>
+</div>
+</section>
+
+<!-- ═════════════ APARTADO 4 ═════════════ -->
+<section class="apartado" id="ap4">
+<h2>Apartado 4 — Electrónica (D1 / D2) <span class="bloque-tag">Bloque D · 2,5 pt</span></h2>
+
+<div class="opcion">
+<h3>Opción A · Circuito RLC serie · Corriente alterna (D1)</h3>
+<p class="contexto">Un circuito <strong>RLC serie</strong> se conecta a una <strong>tensión alterna U = 230 V (eficaz)</strong> y <strong>frecuencia f = 50 Hz</strong>. Los componentes del circuito son: <strong>R = 30 Ω</strong>, <strong>L = 100 mH</strong> y <strong>C = 300 μF</strong>.</p>
+<div class="enunciado">
+<ol type="a">
+  <li>Calcula las <strong>reactancias X_L y X_C</strong>, la <strong>impedancia total Z</strong> y la <strong>intensidad eficaz I</strong> que circula por el circuito. <span class="pts">(0,5 pt)</span></li>
+  <li>Calcula las <strong>tensiones eficaces en cada elemento</strong> (V_R, V_L, V_C) e indica el carácter del circuito (inductivo, capacitivo o resistivo). Dibuja el <strong>diagrama fasorial de tensiones</strong> tomando la intensidad como referencia. <span class="pts">(0,5 pt)</span></li>
+  <li>Calcula las <strong>potencias activa (P), reactiva (Q) y aparente (S)</strong>, el <strong>factor de potencia (cos φ)</strong> y el <strong>desfase φ</strong>. <span class="pts">(0,75 pt)</span></li>
+  <li>Para mejorar la eficiencia, se conecta en <strong>paralelo</strong> con el circuito un condensador que lleva el factor de potencia a <strong>cos φ' = 0,95</strong>. Calcula <strong>la capacidad del condensador</strong>. <span class="pts">(0,75 pt)</span></li>
+</ol>
+</div>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (4·A)</button><div class="sol-content">
+<span class="apt"><strong>a)</strong> \(\omega = 2\pi f = 314{,}16\ \text{rad/s}\)</span>
+<span class="apt">\(X_L = \omega L = 31{,}42\ \Omega \qquad X_C = 1/(\omega C) = 10{,}61\ \Omega\)</span>
+<span class="apt">\(X = X_L - X_C = 20{,}81\ \Omega\) (inductivo); \(Z = \sqrt{R^2+X^2} = 36{,}51\ \Omega\)</span>
+<span class="apt">\(I = U/Z = 230/36{,}51 = \boxed{6{,}30\ \text{A}}\)</span>
+<span class="apt"><strong>b)</strong> \(V_R = I\cdot R = 189\ \text{V}\) · \(V_L = I\cdot X_L = 198\ \text{V}\) · \(V_C = I\cdot X_C = 66{,}8\ \text{V}\)</span>
+<span class="apt">Verificación: \(U = \sqrt{V_R^2 + (V_L - V_C)^2} = 230\ \text{V}\) ✓ · Carácter: <strong>inductivo</strong> (X_L &gt; X_C)</span>
+<span class="apt"><strong>c)</strong> \(\cos\varphi = R/Z = 0{,}822\) · \(\varphi = +34{,}72°\) (I retrasa respecto a U)</span>
+<span class="apt">\(P = UI\cos\varphi = \boxed{1\,191\ \text{W}}\) · \(Q = UI\sin\varphi = \boxed{824\ \text{VAr}}\) · \(S = UI = \boxed{1\,449\ \text{VA}}\)</span>
+<span class="apt"><strong>d)</strong> \(\tan\varphi = 0{,}807\) · \(\tan\varphi' = \tan(\arccos 0{,}95) = 0{,}329\)</span>
+<span class="apt">\(\Delta Q = P(\tan\varphi - \tan\varphi') = 1\,191 \cdot 0{,}478 \approx 506\ \text{VAr}\)</span>
+<span class="apt">\(C = \dfrac{\Delta Q}{U^2\cdot\omega} = \dfrac{506}{230^2 \cdot 314{,}16} \approx \boxed{30{,}4\ \mu\text{F}}\)</span>
+</div></div>
+</div>
+
+<div class="opcion">
+<h3>Opción B · Sistema de alarma · Electrónica digital (D2)</h3>
+<p class="contexto">Un sistema de seguridad controla el <strong>timbre de alarma S</strong> de una nave industrial mediante tres sensores: <strong>A</strong> = sensor de movimiento (A = 1 si detecta movimiento), <strong>B</strong> = sensor de la puerta principal (B = 1 si la puerta está abierta) y <strong>C</strong> = sensor de la ventana trasera (C = 1 si la ventana está abierta).</p>
+<p class="contexto">El timbre debe <strong>sonar (S = 1)</strong> cuando se cumpla alguna de las siguientes condiciones: la <strong>puerta principal</strong> está abierta (independientemente del resto) o se <strong>detecta movimiento Y la ventana trasera</strong> está abierta (indicio de intrusión).</p>
+<div class="enunciado">
+<ol type="a">
+  <li>Obtén la <strong>tabla de verdad</strong> del sistema y escribe la <strong>función lógica S en forma canónica</strong> (suma de minterms). <span class="pts">(1 pt)</span></li>
+  <li>Simplifica la función S mediante el <strong>método de Karnaugh</strong> y obtén su <strong>expresión mínima</strong>. <span class="pts">(0,75 pt)</span></li>
+  <li>Implementa la función simplificada utilizando <strong>únicamente puertas NAND</strong> de dos entradas. Dibuja el esquema lógico. <span class="pts">(0,75 pt)</span></li>
+</ol>
+</div>
+<div class="sol-wrap"><button class="sol-btn">Ver resultado (4·B)</button><div class="sol-content">
+<span class="apt"><strong>a) Tabla de verdad</strong> (S = 1 si B = 1 OR (A = 1 AND C = 1)):</span>
+<span class="apt">m0(000)=0, m1(001)=0, m2(010)=1, m3(011)=1, m4(100)=0, m5(101)=1, m6(110)=1, m7(111)=1</span>
+<span class="apt">Forma canónica: \(S = \sum(2, 3, 5, 6, 7) = \bar{A}B\bar{C} + \bar{A}BC + A\bar{B}C + AB\bar{C} + ABC\)</span>
+<span class="apt"><strong>b) Karnaugh</strong>: agrupación de 4 celdas (B = 1, cualquier A y C) + agrupación de 2 celdas (A·C).</span>
+<span class="apt">\(\boxed{S = B + A\cdot C}\)</span>
+<span class="apt"><strong>c) Implementación con NAND</strong> (aplicando De Morgan: S = NOT(NOT(B)·NOT(A·C))):</span>
+<span class="apt">G1: NAND(A, C) → NOT(A·C) ·&nbsp; G2: NAND(B, B) → NOT(B) ·&nbsp; G3: NAND(G1, G2) → S</span>
+<span class="apt">Total: <strong>3 puertas NAND</strong> de dos entradas.</span>
+</div></div>
+</div>
+</section>
+
+<div style="text-align:center;color:var(--t2);font-size:.78rem;padding:20px 0 0">
+IES Jiménez de Quesada · Santa Fe (Granada) · TECI II · Curso 2025-26
+</div>
+</div>
+</body>
+</html>

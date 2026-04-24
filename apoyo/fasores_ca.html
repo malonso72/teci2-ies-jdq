@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fasores y ondas en CA v2 — IES Jiménez de Quesada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* IES Jiménez de Quesada — paleta institucional */
+    --jq-navy:        #0b1e4f;
+    --jq-blue-dark:   #1e3a8a;
+    --jq-blue:        #2563eb;
+    --jq-blue-soft:   #dbeafe;
+    --jq-blue-faint:  #eff6ff;
+    --jq-gold:        #b45309;
+    --jq-gold-soft:   #fef3c7;
+    --jq-green:       #047857;
+    --jq-green-soft:  #d1fae5;
+
+    /* Canales de señal */
+    --v-color:        #1e3a8a;   /* tensión — azul institucional */
+    --i-color:        #b91c1c;   /* corriente — rojo */
+    --v-soft:         rgba(30, 58, 138, 0.12);
+    --i-soft:         rgba(185, 28, 28, 0.12);
+
+    --ink:            #0f172a;
+    --ink-muted:      #475569;
+    --paper:          #fbfbf8;
+    --panel:          #ffffff;
+    --border:         #e2e8f0;
+    --border-strong:  #cbd5e1;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.5;
+  }
+
+  /* ========== HEADER ========== */
+  header {
+    background: linear-gradient(135deg, var(--jq-navy) 0%, var(--jq-blue-dark) 100%);
+    color: white;
+    padding: 1.25rem 2rem;
+    border-bottom: 4px solid var(--jq-gold);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: "";
+    position: absolute;
+    right: -60px; top: -40px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin-bottom: 0.25rem;
+  }
+  header h1 {
+    font-family: "Crimson Pro", Georgia, serif;
+    margin: 0;
+    font-size: 1.9rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  header .subtitle {
+    margin: 0.25rem 0 0;
+    opacity: 0.85;
+    font-size: 0.95rem;
+  }
+
+  /* ========== LAYOUT ========== */
+  .container {
+    max-width: 1280px;
+    margin: 1.5rem auto;
+    padding: 0 1.5rem;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 1px 2px rgba(11, 30, 79, 0.03);
+  }
+
+  .panel-title {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--jq-blue-dark);
+    font-weight: 600;
+    margin: 0 0 0.9rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ========== CIRCUIT SELECTOR ========== */
+  .circuit-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+  .circuit-btn {
+    flex: 1;
+    min-width: 90px;
+    padding: 0.75rem 0.5rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    background: white;
+    color: var(--jq-blue-dark);
+    border: 1.5px solid var(--border-strong);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    position: relative;
+  }
+  .circuit-btn:hover {
+    border-color: var(--jq-blue);
+    color: var(--jq-blue);
+    background: var(--jq-blue-faint);
+  }
+  .circuit-btn.active {
+    background: var(--jq-blue-dark);
+    color: white;
+    border-color: var(--jq-blue-dark);
+    box-shadow: 0 2px 8px rgba(30, 58, 138, 0.25);
+  }
+  .circuit-btn small {
+    display: block;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 400;
+    font-size: 0.68rem;
+    letter-spacing: 0;
+    opacity: 0.7;
+    margin-top: 2px;
+    text-transform: none;
+  }
+
+  /* ========== SLIDERS ========== */
+  .sliders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.1rem;
+  }
+  .slider-group {
+    transition: opacity 0.25s ease;
+  }
+  .slider-group.disabled { opacity: 0.3; }
+  .slider-group label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    margin-bottom: 0.35rem;
+  }
+  .slider-group label .name {
+    font-weight: 600;
+    color: var(--jq-blue-dark);
+  }
+  .slider-group label .value {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+  input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--jq-blue-dark);
+    border: 2px solid white;
+    box-shadow: 0 1px 4px rgba(11, 30, 79, 0.3);
+    cursor: pointer;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--jq-blue-dark);
+    border: 2px solid white;
+    box-shadow: 0 1px 4px rgba(11, 30, 79, 0.3);
+    cursor: pointer;
+  }
+  input[type="range"]:disabled::-webkit-slider-thumb {
+    background: var(--border-strong);
+  }
+
+  /* ========== CANVAS ========== */
+  .canvas-panel {
+    padding: 1rem;
+  }
+  .canvas-wrapper {
+    position: relative;
+    width: 100%;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .canvas-legend {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    display: flex;
+    gap: 1rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    pointer-events: none;
+  }
+  .legend-item { display: flex; align-items: center; gap: 0.35rem; }
+  .legend-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+  }
+  .legend-v .legend-dot { background: var(--v-color); }
+  .legend-i .legend-dot { background: var(--i-color); }
+
+  /* ========== READOUTS ========== */
+  .readouts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+  }
+  .readout {
+    padding: 0.75rem 1rem;
+    background: var(--jq-blue-faint);
+    border-left: 3px solid var(--jq-blue);
+    border-radius: 0 6px 6px 0;
+  }
+  .readout .readout-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 500;
+  }
+  .readout .readout-value {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--jq-navy);
+    margin-top: 0.15rem;
+  }
+
+  .resonance-card {
+    margin-top: 1rem;
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    background: var(--jq-gold-soft);
+    border-left: 4px solid var(--jq-gold);
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    transition: all 0.3s ease;
+  }
+  .resonance-card.at-resonance {
+    background: var(--jq-green-soft);
+    border-left-color: var(--jq-green);
+    box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.15);
+  }
+  .resonance-card .icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+  .resonance-card .body {
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+  .resonance-card .body strong {
+    display: block;
+    font-family: "Crimson Pro", serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.15rem;
+  }
+  .resonance-card code {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.85rem;
+    background: rgba(255, 255, 255, 0.55);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  /* ========== ANIMATION CONTROLS ========== */
+  .anim-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+  }
+  .btn {
+    padding: 0.6rem 1.1rem;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    transition: all 0.15s ease;
+  }
+  .btn-primary {
+    background: var(--jq-blue-dark);
+    color: white;
+    border-color: var(--jq-blue-dark);
+  }
+  .btn-primary:hover { background: var(--jq-navy); }
+  .btn-secondary {
+    background: white;
+    color: var(--jq-blue-dark);
+    border-color: var(--border-strong);
+  }
+  .btn-secondary:hover {
+    border-color: var(--jq-blue);
+    color: var(--jq-blue);
+  }
+  .btn-resonance {
+    background: var(--jq-gold);
+    color: white;
+    border-color: var(--jq-gold);
+  }
+  .btn-resonance:hover { background: #92400e; }
+
+  .speed-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+    margin-left: auto;
+  }
+  .speed-control label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    font-weight: 600;
+  }
+  .speed-control input[type="range"] {
+    width: 140px;
+  }
+  .speed-control .speed-value {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 700;
+    min-width: 3em;
+    color: var(--jq-blue-dark);
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.05em;
+  }
+  footer .dot { color: var(--jq-gold); margin: 0 0.5rem; }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 640px) {
+    header { padding: 1rem; }
+    header h1 { font-size: 1.4rem; }
+    .container { padding: 0 0.75rem; }
+    .panel { padding: 1rem; }
+    .speed-control { margin-left: 0; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Tecnología e Ingeniería II · Bloque C · Corriente Alterna</div>
+  <h1>Fasores y ondas en CA</h1>
+  <p class="subtitle">Simulador interactivo de circuitos R, L, C, RL, RC y RLC serie · v2</p>
+</header>
+
+<div class="container">
+
+  <!-- === CONTROLES === -->
+  <div class="panel">
+    <h2 class="panel-title">1 · Circuito y parámetros</h2>
+
+    <div class="circuit-row">
+      <button class="circuit-btn" data-circuit="R">R<small>resistivo</small></button>
+      <button class="circuit-btn" data-circuit="L">L<small>inductivo</small></button>
+      <button class="circuit-btn" data-circuit="C">C<small>capacitivo</small></button>
+      <button class="circuit-btn" data-circuit="RL">R-L<small>en serie</small></button>
+      <button class="circuit-btn" data-circuit="RC">R-C<small>en serie</small></button>
+      <button class="circuit-btn active" data-circuit="RLC">R-L-C<small>en serie</small></button>
+    </div>
+
+    <div class="sliders-grid">
+      <div class="slider-group" id="f-group">
+        <label><span class="name">Frecuencia f</span><span class="value" id="f-value">50 Hz</span></label>
+        <input type="range" id="f-slider" min="10" max="250" step="1" value="50">
+      </div>
+      <div class="slider-group" id="v-group">
+        <label><span class="name">Tensión Vmax</span><span class="value" id="v-value">325 V</span></label>
+        <input type="range" id="v-slider" min="50" max="500" step="5" value="325">
+      </div>
+      <div class="slider-group" id="r-group">
+        <label><span class="name">Resistencia R</span><span class="value" id="r-value">10 Ω</span></label>
+        <input type="range" id="r-slider" min="1" max="100" step="0.5" value="10">
+      </div>
+      <div class="slider-group" id="l-group">
+        <label><span class="name">Inductancia L</span><span class="value" id="l-value">30 mH</span></label>
+        <input type="range" id="l-slider" min="1" max="300" step="1" value="30">
+      </div>
+      <div class="slider-group" id="c-group">
+        <label><span class="name">Capacidad C</span><span class="value" id="c-value">100 µF</span></label>
+        <input type="range" id="c-slider" min="1" max="500" step="1" value="100">
+      </div>
+    </div>
+  </div>
+
+  <!-- === CANVAS === -->
+  <div class="panel canvas-panel">
+    <h2 class="panel-title">2 · Diagrama fasorial y formas de onda</h2>
+    <div class="canvas-wrapper">
+      <canvas id="main-canvas" width="1100" height="440"></canvas>
+      <div class="canvas-legend">
+        <span class="legend-item legend-v"><span class="legend-dot"></span>v(t)</span>
+        <span class="legend-item legend-i"><span class="legend-dot"></span>i(t)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- === READOUTS === -->
+  <div class="panel">
+    <h2 class="panel-title">3 · Magnitudes calculadas</h2>
+    <div class="readouts-grid">
+      <div class="readout">
+        <div class="readout-label">Impedancia |Z|</div>
+        <div class="readout-value" id="z-out">—</div>
+      </div>
+      <div class="readout">
+        <div class="readout-label">Reactancia XL</div>
+        <div class="readout-value" id="xl-out">—</div>
+      </div>
+      <div class="readout">
+        <div class="readout-label">Reactancia XC</div>
+        <div class="readout-value" id="xc-out">—</div>
+      </div>
+      <div class="readout">
+        <div class="readout-label">Desfase φ</div>
+        <div class="readout-value" id="phi-out">—</div>
+      </div>
+      <div class="readout">
+        <div class="readout-label">cos φ · F.P.</div>
+        <div class="readout-value" id="cosphi-out">—</div>
+      </div>
+      <div class="readout">
+        <div class="readout-label">Imax</div>
+        <div class="readout-value" id="imax-out">—</div>
+      </div>
+      <div class="readout">
+        <div class="readout-label">Ief (rms)</div>
+        <div class="readout-value" id="ief-out">—</div>
+      </div>
+      <div class="readout">
+        <div class="readout-label">Carácter</div>
+        <div class="readout-value" id="character-out" style="font-size:0.95rem">—</div>
+      </div>
+    </div>
+
+    <div class="resonance-card" id="resonance-card">
+      <div class="icon" id="resonance-icon">◎</div>
+      <div class="body" id="resonance-body">
+        <strong>Resonancia serie</strong>
+        <span id="resonance-text">—</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- === ANIMATION CONTROLS === -->
+  <div class="panel">
+    <h2 class="panel-title">4 · Control de animación</h2>
+    <div class="anim-controls">
+      <button class="btn btn-primary" id="play-pause-btn">⏸ Pausar</button>
+      <button class="btn btn-secondary" id="reset-btn">↻ Reiniciar</button>
+      <button class="btn btn-resonance" id="resonance-btn">📍 Ajustar f = f₀</button>
+      <div class="speed-control">
+        <label>velocidad</label>
+        <input type="range" id="speed-slider" min="0.1" max="3" step="0.1" value="1">
+        <span class="speed-value" id="speed-value">1.0×</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  IES Jiménez de Quesada<span class="dot">·</span>Santa Fe, Granada<span class="dot">·</span>PEvAU 2025-26
+</footer>
+
+<script>
+// =============================================================================
+//  FÍSICA: cálculo de magnitudes derivadas
+// =============================================================================
+const state = {
+  circuit: 'RLC',
+  f: 50,        // Hz
+  Vmax: 325,    // V
+  R: 10,        // Ω
+  L: 30e-3,     // H
+  C: 100e-6,    // F
+  t: 0,         // s simulado
+  playing: true,
+  speed: 1,
+};
+
+function computeDerivedQuantities() {
+  const w = 2 * Math.PI * state.f;
+  let R, XL, XC;
+
+  switch (state.circuit) {
+    case 'R':   R = state.R; XL = 0;          XC = 0;                break;
+    case 'L':   R = 0;       XL = w * state.L; XC = 0;                break;
+    case 'C':   R = 0;       XL = 0;          XC = 1 / (w * state.C); break;
+    case 'RL':  R = state.R; XL = w * state.L; XC = 0;                break;
+    case 'RC':  R = state.R; XL = 0;          XC = 1 / (w * state.C); break;
+    case 'RLC': R = state.R; XL = w * state.L; XC = 1 / (w * state.C); break;
+  }
+
+  const X = XL - XC;
+  const Z = Math.sqrt(R*R + X*X);
+
+  let phi;
+  if (Z === 0)       phi = 0;
+  else if (R === 0)  phi = X > 0 ? Math.PI/2 : -Math.PI/2;
+  else               phi = Math.atan2(X, R);
+
+  const Imax = Z > 0 ? state.Vmax / Z : 0;
+  const Ief  = Imax / Math.sqrt(2);
+  const Vef  = state.Vmax / Math.sqrt(2);
+
+  // Frecuencia de resonancia (requiere L y C)
+  const f0 = (state.circuit === 'RLC' || state.circuit === 'RL' || state.circuit === 'RC' || state.circuit === 'LC')
+    ? 1 / (2 * Math.PI * Math.sqrt(state.L * state.C))
+    : null;
+
+  let character;
+  const phiDeg = phi * 180 / Math.PI;
+  if (Math.abs(phiDeg) < 0.5)     character = 'Resistivo puro';
+  else if (phiDeg > 0)            character = 'Inductivo (I retrasa)';
+  else                            character = 'Capacitivo (I adelanta)';
+
+  return { w, R, XL, XC, X, Z, phi, phiDeg, Imax, Ief, Vef, f0, character };
+}
+
+// =============================================================================
+//  DIBUJO: un único canvas con fasores (izquierda) y ondas (derecha)
+// =============================================================================
+const canvas = document.getElementById('main-canvas');
+const ctx    = canvas.getContext('2d');
+const DPR    = window.devicePixelRatio || 1;
+
+// Layout lógico (se reescala al tamaño real del canvas)
+const LOGICAL = { w: 1100, h: 440 };
+const LAYOUT = {
+  phasorCx:  200,
+  phasorCy:  LOGICAL.h / 2,
+  phasorRV:  150,            // radio del fasor V
+  phasorRI:  75,             // radio del fasor I (mitad que V, para diferenciar visualmente)
+  waveX0:    400,
+  waveX1:    1070,
+  waveCy:    LOGICAL.h / 2,
+  waveAmpV:  150,            // amplitud pintada de v(t)
+  waveAmpI:  75,             // amplitud pintada de i(t) = mitad que v(t)
+};
+
+function resizeCanvas() {
+  const rect = canvas.getBoundingClientRect();
+  canvas.width  = rect.width * DPR;
+  canvas.height = (rect.width * LOGICAL.h / LOGICAL.w) * DPR;
+  canvas.style.height = (rect.width * LOGICAL.h / LOGICAL.w) + 'px';
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+function applyTransform() {
+  const scaleX = canvas.width  / LOGICAL.w;
+  const scaleY = canvas.height / LOGICAL.h;
+  ctx.setTransform(scaleX, 0, 0, scaleY, 0, 0);
+}
+
+function drawArrow(x1, y1, x2, y2, color, width, label, labelOffset) {
+  const angle = Math.atan2(y2 - y1, x2 - x1);
+  const headLen = 14;
+
+  ctx.strokeStyle = color;
+  ctx.fillStyle   = color;
+  ctx.lineWidth   = width;
+  ctx.lineCap     = 'round';
+
+  // Cuerpo
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2 - headLen * 0.6 * Math.cos(angle),
+             y2 - headLen * 0.6 * Math.sin(angle));
+  ctx.stroke();
+
+  // Punta
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - headLen * Math.cos(angle - Math.PI/6),
+             y2 - headLen * Math.sin(angle - Math.PI/6));
+  ctx.lineTo(x2 - headLen * Math.cos(angle + Math.PI/6),
+             y2 - headLen * Math.sin(angle + Math.PI/6));
+  ctx.closePath();
+  ctx.fill();
+
+  // Etiqueta
+  if (label) {
+    const off = labelOffset || 16;
+    ctx.font = '700 16px "IBM Plex Mono", monospace';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    // Fondo blanco detrás del texto para legibilidad
+    const metrics = ctx.measureText(label);
+    const lx = x2 + off * Math.cos(angle) - 2;
+    const ly = y2 + off * Math.sin(angle);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
+    ctx.fillRect(lx, ly - 9, metrics.width + 6, 18);
+    ctx.fillStyle = color;
+    ctx.fillText(label, lx + 2, ly);
+  }
+}
+
+function drawPhasorZone(q) {
+  const cx = LAYOUT.phasorCx, cy = LAYOUT.phasorCy;
+  const RV = LAYOUT.phasorRV, RI = LAYOUT.phasorRI;
+
+  // Fondo suave
+  ctx.fillStyle = '#fafbfd';
+  ctx.fillRect(20, 20, 360, LOGICAL.h - 40);
+  ctx.strokeStyle = '#e2e8f0';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(20, 20, 360, LOGICAL.h - 40);
+
+  // Título zona
+  ctx.font = '600 11px "IBM Plex Mono", monospace';
+  ctx.fillStyle = '#475569';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'top';
+  ctx.fillText('DIAGRAMA FASORIAL', 30, 30);
+
+  // Ejes
+  ctx.strokeStyle = '#cbd5e1';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(cx - RV - 15, cy);
+  ctx.lineTo(cx + RV + 15, cy);
+  ctx.moveTo(cx, cy - RV - 15);
+  ctx.lineTo(cx, cy + RV + 15);
+  ctx.stroke();
+
+  // Etiquetas ejes
+  ctx.font = 'italic 11px "Crimson Pro", serif';
+  ctx.fillStyle = '#64748b';
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'top';
+  ctx.fillText('Im', cx - 4, cy - RV - 13);
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'bottom';
+  ctx.fillText('Re', cx + RV + 13, cy + 12);
+
+  // Círculos de trayectoria (externo para V, interno para I)
+  ctx.strokeStyle = 'rgba(30, 58, 138, 0.18)';
+  ctx.setLineDash([4, 4]);
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.arc(cx, cy, RV, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.strokeStyle = 'rgba(185, 28, 28, 0.18)';
+  ctx.beginPath();
+  ctx.arc(cx, cy, RI, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Ángulo de giro (rotación del fasor V)
+  const theta = state.w * state.t;
+  const thetaV = theta;
+  const thetaI = theta - q.phi;
+
+  // Fasor V (radio grande)
+  const Vx = cx + RV * Math.cos(thetaV);
+  const Vy = cy - RV * Math.sin(thetaV);
+
+  // Fasor I (radio pequeño, mitad)
+  const Ix = cx + RI * Math.cos(thetaI);
+  const Iy = cy - RI * Math.sin(thetaI);
+
+  // Arco de φ (entre V e I) — dibujado a un radio intermedio
+  if (Math.abs(q.phi) > 0.005) {
+    const arcR = 42;
+    const canvasThetaV = -thetaV;
+    const canvasThetaI = -thetaI;
+    ctx.strokeStyle = 'rgba(180, 83, 9, 0.85)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    if (q.phi > 0) {
+      ctx.arc(cx, cy, arcR, canvasThetaV, canvasThetaI, false);
+    } else {
+      ctx.arc(cx, cy, arcR, canvasThetaV, canvasThetaI, true);
+    }
+    ctx.stroke();
+
+    // Etiqueta φ
+    const midA = (thetaV + thetaI) / 2;
+    ctx.font = 'italic 700 15px "Crimson Pro", serif';
+    ctx.fillStyle = '#b45309';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    const lx = cx + (arcR + 16) * Math.cos(midA);
+    const ly = cy - (arcR + 16) * Math.sin(midA);
+    ctx.fillText('φ', lx, ly);
+  }
+
+  // Líneas de proyección horizontal: desde la punta del fasor hasta el borde IZQUIERDO
+  // de la zona de ondas (que representa "ahora" — t = state.t)
+  // CLAVE PEDAGÓGICA: la altura de la proyección = valor instantáneo que se escribe ahora mismo
+  // en la onda, que luego se desplaza hacia la derecha.
+  ctx.setLineDash([3, 4]);
+  ctx.lineWidth = 1.2;
+
+  // Proyección V
+  ctx.strokeStyle = 'rgba(30, 58, 138, 0.55)';
+  ctx.beginPath();
+  ctx.moveTo(Vx, Vy);
+  ctx.lineTo(LAYOUT.waveX0, Vy);
+  ctx.stroke();
+
+  // Proyección I
+  ctx.strokeStyle = 'rgba(185, 28, 28, 0.55)';
+  ctx.beginPath();
+  ctx.moveTo(Ix, Iy);
+  ctx.lineTo(LAYOUT.waveX0, Iy);
+  ctx.stroke();
+
+  ctx.setLineDash([]);
+
+  // Fasores (por encima de las proyecciones)
+  drawArrow(cx, cy, Vx, Vy, '#1e3a8a', 3.5, 'V', 16);
+  drawArrow(cx, cy, Ix, Iy, '#b91c1c', 3, 'I', 14);
+
+  // Punto en origen
+  ctx.fillStyle = '#0f172a';
+  ctx.beginPath();
+  ctx.arc(cx, cy, 3.5, 0, Math.PI * 2);
+  ctx.fill();
+
+}
+
+function drawWaveZone(q) {
+  const x0 = LAYOUT.waveX0, x1 = LAYOUT.waveX1;
+  const cy = LAYOUT.waveCy;
+  const ampV = LAYOUT.waveAmpV;
+  const ampI = LAYOUT.waveAmpI;
+  const w = x1 - x0;
+
+  const T = 1 / state.f;
+  const tWindow = 2 * T; // ventana visible: 2 periodos del pasado
+
+  // Fondo
+  ctx.fillStyle = '#fafbfd';
+  ctx.fillRect(x0 - 10, 20, w + 20, LOGICAL.h - 40);
+  ctx.strokeStyle = '#e2e8f0';
+  ctx.strokeRect(x0 - 10, 20, w + 20, LOGICAL.h - 40);
+
+  ctx.font = '600 11px "IBM Plex Mono", monospace';
+  ctx.fillStyle = '#475569';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'top';
+  ctx.fillText('FORMAS DE ONDA  v(t), i(t)', x0 - 2, 30);
+
+  // Indicador "pasado →" arriba a la derecha
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#94a3b8';
+  ctx.fillText('← más antiguo', x1 - 4, 30);
+
+  // Eje cero
+  ctx.strokeStyle = '#cbd5e1';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(x0, cy);
+  ctx.lineTo(x1, cy);
+  ctx.stroke();
+
+  // Marcas de amplitud Vmax (línea punteada)
+  ctx.strokeStyle = 'rgba(30, 58, 138, 0.25)';
+  ctx.setLineDash([2, 4]);
+  ctx.beginPath();
+  ctx.moveTo(x0, cy - ampV); ctx.lineTo(x1, cy - ampV);
+  ctx.moveTo(x0, cy + ampV); ctx.lineTo(x1, cy + ampV);
+  ctx.stroke();
+
+  // Marcas de amplitud Imax (línea punteada, distinto color)
+  ctx.strokeStyle = 'rgba(185, 28, 28, 0.25)';
+  ctx.beginPath();
+  ctx.moveTo(x0, cy - ampI); ctx.lineTo(x1, cy - ampI);
+  ctx.moveTo(x0, cy + ampI); ctx.lineTo(x1, cy + ampI);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Etiquetas de amplitud
+  ctx.font = '600 10px "IBM Plex Mono", monospace';
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#1e3a8a';
+  ctx.fillText('+Vmax', x0 - 6, cy - ampV);
+  ctx.fillText('−Vmax', x0 - 6, cy + ampV);
+  ctx.fillStyle = '#b91c1c';
+  ctx.fillText('+Imax', x0 - 6, cy - ampI);
+  ctx.fillText('−Imax', x0 - 6, cy + ampI);
+  ctx.fillStyle = '#64748b';
+  ctx.fillText('0', x0 - 6, cy);
+
+  // Marcas de periodo (T, 2T hacia el pasado) - el tiempo crece hacia la izquierda dentro
+  // de la ventana, así que los marcadores T, 2T se colocan desde x0 hacia x1.
+  ctx.strokeStyle = 'rgba(148, 163, 184, 0.6)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([1, 3]);
+  ctx.font = '10px "IBM Plex Mono", monospace';
+  ctx.fillStyle = '#64748b';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  for (let k = 1; k <= 2; k++) {
+    const xk = x0 + (k * T / tWindow) * w;
+    ctx.beginPath();
+    ctx.moveTo(xk, cy - ampV - 5);
+    ctx.lineTo(xk, cy + ampV + 5);
+    ctx.stroke();
+    ctx.fillText(`−${k}T (${(k * T * 1000).toFixed(1)} ms)`, xk, cy + ampV + 8);
+  }
+  ctx.setLineDash([]);
+
+  // Etiqueta "AHORA" sobre el borde izquierdo
+  ctx.font = '700 11px "IBM Plex Mono", monospace';
+  ctx.fillStyle = '#0b1e4f';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'bottom';
+  ctx.fillText('AHORA', x0, cy - ampV - 12);
+  // Pequeño triángulo apuntando hacia abajo sobre el borde izquierdo
+  ctx.fillStyle = '#0b1e4f';
+  ctx.beginPath();
+  ctx.moveTo(x0, cy - ampV - 2);
+  ctx.lineTo(x0 - 5, cy - ampV - 8);
+  ctx.lineTo(x0 + 5, cy - ampV - 8);
+  ctx.closePath();
+  ctx.fill();
+
+  // Onda v(t) — SCROLL: en x = x0+i mostramos v(state.t − (i/w)·tWindow)
+  // Así el borde izquierdo (x=x0) es el VALOR ACTUAL (= proyección del fasor V)
+  // y según avanzamos a la derecha vemos valores más antiguos.
+  ctx.strokeStyle = '#1e3a8a';
+  ctx.lineWidth = 2.5;
+  ctx.lineJoin = 'round';
+  ctx.beginPath();
+  for (let i = 0; i <= w; i++) {
+    const tDisp = state.t - (i / w) * tWindow;
+    const vNorm = Math.sin(state.w * tDisp);
+    const y = cy - vNorm * ampV;
+    if (i === 0) ctx.moveTo(x0 + i, y);
+    else         ctx.lineTo(x0 + i, y);
+  }
+  ctx.stroke();
+
+  // Onda i(t) — misma lógica, amplitud mitad
+  if (q.Imax > 0) {
+    ctx.strokeStyle = '#b91c1c';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    for (let i = 0; i <= w; i++) {
+      const tDisp = state.t - (i / w) * tWindow;
+      const iNorm = Math.sin(state.w * tDisp - q.phi);
+      const y = cy - iNorm * ampI;
+      if (i === 0) ctx.moveTo(x0 + i, y);
+      else         ctx.lineTo(x0 + i, y);
+    }
+    ctx.stroke();
+  }
+
+  // Puntos instantáneos (en el borde izquierdo = ahora)
+  const theta = state.w * state.t;
+  const vNow = Math.sin(theta);
+  const vY   = cy - vNow * ampV;
+  ctx.fillStyle = '#1e3a8a';
+  ctx.strokeStyle = 'white';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.arc(x0, vY, 7, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+
+  if (q.Imax > 0) {
+    const iNow = Math.sin(theta - q.phi);
+    const iY   = cy - iNow * ampI;
+    ctx.fillStyle = '#b91c1c';
+    ctx.beginPath();
+    ctx.arc(x0, iY, 6, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+  }
+
+  // Línea vertical fina en el borde izquierdo ("línea de ahora")
+  ctx.strokeStyle = 'rgba(11, 30, 79, 0.35)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(x0, cy - ampV - 5);
+  ctx.lineTo(x0, cy + ampV + 5);
+  ctx.stroke();
+}
+
+function drawAll() {
+  applyTransform();
+  ctx.clearRect(0, 0, LOGICAL.w, LOGICAL.h);
+
+  const q = computeDerivedQuantities();
+  state.w = q.w;  // cache para uso en drawWaveZone
+
+  drawPhasorZone(q);
+  drawWaveZone(q);
+
+  return q;
+}
+
+// =============================================================================
+//  UI: actualización de lecturas numéricas
+// =============================================================================
+function fmt(x, unit, dec = 2) {
+  if (!isFinite(x)) return '—';
+  return `${x.toFixed(dec)} ${unit}`;
+}
+
+function updateReadouts(q) {
+  document.getElementById('z-out').textContent        = fmt(q.Z, 'Ω');
+  document.getElementById('xl-out').textContent       = fmt(q.XL, 'Ω');
+  document.getElementById('xc-out').textContent       = fmt(q.XC, 'Ω');
+  document.getElementById('phi-out').textContent      = fmt(q.phiDeg, '°', 1);
+  document.getElementById('cosphi-out').textContent   = fmt(Math.cos(q.phi), '', 3);
+  document.getElementById('imax-out').textContent     = fmt(q.Imax, 'A');
+  document.getElementById('ief-out').textContent      = fmt(q.Ief, 'A');
+  document.getElementById('character-out').textContent = q.character;
+
+  // Tarjeta de resonancia
+  const card = document.getElementById('resonance-card');
+  const icon = document.getElementById('resonance-icon');
+  const text = document.getElementById('resonance-text');
+  const title = card.querySelector('strong');
+
+  if (state.circuit === 'RLC' && q.f0) {
+    const detuning = Math.abs(state.f - q.f0) / q.f0;
+    if (detuning < 0.015) {
+      card.classList.add('at-resonance');
+      icon.textContent = '✓';
+      title.textContent = `¡Resonancia serie a f₀ = ${q.f0.toFixed(1)} Hz!`;
+      text.innerHTML = `XL = XC ⇒ <code>Z = R = ${state.R.toFixed(1)} Ω</code>, φ = 0°, cos φ = 1. La corriente alcanza su valor máximo: <code>Imax = Vmax/R = ${(state.Vmax / state.R).toFixed(2)} A</code>.`;
+    } else {
+      card.classList.remove('at-resonance');
+      icon.textContent = '◎';
+      title.textContent = `Frecuencia de resonancia: f₀ = ${q.f0.toFixed(1)} Hz`;
+      const delta = state.f - q.f0;
+      const direction = delta > 0 ? 'por encima' : 'por debajo';
+      text.innerHTML = `Estás ${direction} de f₀ (Δf = ${Math.abs(delta).toFixed(1)} Hz). Usa el botón <em>Ajustar f = f₀</em> para ver la resonancia.`;
+    }
+  } else if (state.circuit === 'RL' || state.circuit === 'RC') {
+    card.classList.remove('at-resonance');
+    icon.textContent = '◎';
+    title.textContent = 'Resonancia serie';
+    text.innerHTML = 'Solo existe resonancia cuando hay <strong>L y C en serie</strong>. Activa el circuito <strong>R-L-C</strong>.';
+  } else {
+    card.classList.remove('at-resonance');
+    icon.textContent = '◎';
+    title.textContent = 'Resonancia serie';
+    text.innerHTML = 'Selecciona el circuito <strong>R-L-C serie</strong> para estudiar la resonancia.';
+  }
+}
+
+// =============================================================================
+//  Visibilidad de sliders según circuito
+// =============================================================================
+function updateControlsVisibility() {
+  const showR = ['R', 'RL', 'RC', 'RLC'].includes(state.circuit);
+  const showL = ['L', 'RL', 'RLC'].includes(state.circuit);
+  const showC = ['C', 'RC', 'RLC'].includes(state.circuit);
+  setGroup('r-group', 'r-slider', showR);
+  setGroup('l-group', 'l-slider', showL);
+  setGroup('c-group', 'c-slider', showC);
+}
+function setGroup(groupId, sliderId, enabled) {
+  const g = document.getElementById(groupId);
+  const s = document.getElementById(sliderId);
+  g.classList.toggle('disabled', !enabled);
+  s.disabled = !enabled;
+}
+
+// =============================================================================
+//  Bucle de animación
+// =============================================================================
+let lastTime = null;
+const SLOWDOWN = 40;  // 1 s real = 1/40 s simulado → se ve bien un periodo de 50 Hz
+
+function animate(timestamp) {
+  const dtReal = lastTime === null ? 0 : (timestamp - lastTime) / 1000;
+  lastTime = timestamp;
+
+  if (state.playing) {
+    state.t += dtReal * state.speed / SLOWDOWN;
+  }
+
+  const q = drawAll();
+  updateReadouts(q);
+
+  requestAnimationFrame(animate);
+}
+
+// =============================================================================
+//  Event wiring
+// =============================================================================
+document.querySelectorAll('.circuit-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.circuit-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.circuit = btn.dataset.circuit;
+    updateControlsVisibility();
+  });
+});
+
+function bindSlider(id, key, unit, scale, decimals) {
+  const slider  = document.getElementById(id + '-slider');
+  const display = document.getElementById(id + '-value');
+  const update = () => {
+    state[key] = parseFloat(slider.value) * scale;
+    display.textContent = `${parseFloat(slider.value).toFixed(decimals)} ${unit}`;
+  };
+  slider.addEventListener('input', update);
+  update();
+}
+bindSlider('f', 'f',    'Hz', 1,    0);
+bindSlider('v', 'Vmax', 'V',  1,    0);
+bindSlider('r', 'R',    'Ω',  1,    1);
+bindSlider('l', 'L',    'mH', 1e-3, 0);
+bindSlider('c', 'C',    'µF', 1e-6, 0);
+
+document.getElementById('play-pause-btn').addEventListener('click', (e) => {
+  state.playing = !state.playing;
+  e.target.textContent = state.playing ? '⏸ Pausar' : '▶ Reanudar';
+});
+document.getElementById('reset-btn').addEventListener('click', () => {
+  state.t = 0;
+});
+document.getElementById('speed-slider').addEventListener('input', (e) => {
+  state.speed = parseFloat(e.target.value);
+  document.getElementById('speed-value').textContent = state.speed.toFixed(1) + '×';
+});
+document.getElementById('resonance-btn').addEventListener('click', () => {
+  const f0 = 1 / (2 * Math.PI * Math.sqrt(state.L * state.C));
+  const fSlider = document.getElementById('f-slider');
+  const fMin = parseFloat(fSlider.min);
+  const fMax = parseFloat(fSlider.max);
+  const fRounded = Math.max(fMin, Math.min(fMax, Math.round(f0)));
+  fSlider.value = fRounded;
+  state.f = fRounded;
+  document.getElementById('f-value').textContent = `${fRounded} Hz`;
+});
+
+// Atajo de teclado: barra espaciadora para play/pause
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space' && e.target.tagName !== 'INPUT') {
+    e.preventDefault();
+    document.getElementById('play-pause-btn').click();
+  }
+});
+
+// Activar RLC como circuito por defecto
+document.querySelector('[data-circuit="RLC"]').click();
+
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
