@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TECI II · Banco de modelos PEvAU 2025-26 · IES Jiménez de Quesada</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--az:#1B4F8A;--az2:#2E7BC4;--bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5;--green:#2E7D32;--green-soft:#EDF6EE;--green-line:#A8D5AE;--orange:#D4700A;--orange-bg:#FEF0DF}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:var(--bg);color:var(--tx)}
+.hd{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(27,79,138,.12);position:sticky;top:0;z-index:500}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer}
+.hd .lg:hover{opacity:.85}
+.hd .sb{font-size:.72rem;opacity:.78;margin-left:10px}
+.home-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:8px;cursor:pointer;margin-left:auto;transition:background .15s;text-decoration:none}
+.home-btn:hover{background:rgba(255,255,255,.16)}
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+.navcross span.nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8;align-self:center;user-select:none}
+.main{max-width:1180px;margin:0 auto;padding:28px 18px 64px}
+.title-block{text-align:center;margin-bottom:28px}
+.title-block h1{font-family:'Barlow Condensed',sans-serif;font-size:2rem;color:var(--az);font-weight:700;letter-spacing:.5px}
+.title-block .sub{color:var(--t2);font-size:.95rem;margin-top:4px}
+.badge{display:inline-block;background:var(--green-soft);color:var(--green);border:1px solid var(--green-line);padding:5px 14px;border-radius:999px;font-size:.8rem;font-weight:600;margin:10px 0 0}
+.intro{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:16px 20px;margin:0 0 26px;font-size:.92rem;line-height:1.6;color:var(--t2);box-shadow:0 2px 8px rgba(27,79,138,.05)}
+.intro strong{color:var(--az)}
+.intro p+p{margin-top:8px}
+.tabla-wrap{background:#fff;border:1px solid var(--bd);border-radius:12px;overflow:hidden;box-shadow:0 3px 12px rgba(27,79,138,.06)}
+table.modelos{width:100%;border-collapse:collapse;font-size:.85rem}
+table.modelos th{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:12px 10px;text-align:left;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.5px;text-transform:uppercase}
+table.modelos td{padding:14px 10px;vertical-align:top;border-top:1px solid #ECF0F4}
+table.modelos tr:hover td{background:#F8FAFD}
+.cod{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--az);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.15rem;border-radius:50%}
+.tema{font-size:.84rem;line-height:1.45;color:#3A4452}
+.tema small{display:block;color:var(--t2);font-size:.78rem;font-style:italic}
+.bloque-tag{display:inline-block;background:#EBF0F7;color:var(--az);font-size:.7rem;font-weight:600;padding:2px 7px;border-radius:6px;margin-right:4px}
+.btn-pdf{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--orange);color:#fff;border:none;border-radius:6px;font-family:'Barlow',sans-serif;font-weight:600;font-size:.82rem;text-decoration:none;transition:all .15s;box-shadow:0 2px 6px rgba(212,112,10,.25);white-space:nowrap}
+.btn-pdf:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 4px 10px rgba(212,112,10,.35)}
+.note{margin-top:20px;padding:12px 16px;background:#EFF6FF;border-left:4px solid var(--az2);border-radius:0 8px 8px 0;font-size:.86rem;color:var(--t2);line-height:1.5}
+.note strong{color:var(--az)}
+.foot{text-align:center;color:var(--t2);font-size:.78rem;padding:24px 0 0}
+@media(max-width:768px){
+  .main{padding:16px 10px 40px}
+  .title-block h1{font-size:1.5rem}
+  table.modelos{font-size:.78rem}
+  table.modelos th,table.modelos td{padding:10px 6px}
+  .tema{font-size:.78rem}
+  .btn-pdf{font-size:.72rem;padding:6px 10px}
+  table.modelos th:nth-child(3),table.modelos td:nth-child(3),
+  table.modelos th:nth-child(4),table.modelos td:nth-child(4){display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="hd">
+<span class="lg" onclick="location.href='../../index.html'">TECI II</span>
+<span class="sb">📋 Banco de modelos · PEvAU 2025-26</span>
+<a href="../../index.html" class="home-btn">🏠 Índice</a>
+</div>
+
+<nav class="navcross" role="navigation" aria-label="Navegación transversal">
+<a href="../../index.html"><span>🏠</span><span>Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../../index.html#teoria"><span>📖</span><span>Teoría</span></a>
+<span class="nc-sep">·</span>
+<a href="../../index.html#ejercicios"><span>✏️</span><span>Ejercicios</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>📋</span><span>Exámenes</span></span>
+<span class="nc-sep">·</span>
+<a href="../../ponencia_resuelta/index_ponencia.html"><span>📚</span><span>Ponencia</span></a>
+<span class="nc-sep">·</span>
+<a href="../../apoyo/formulario.html"><span>📚</span><span>Apoyo</span></a>
+</nav>
+
+<div class="main">
+
+<div class="title-block">
+<h1>Banco de modelos · PEvAU 2025-26</h1>
+<div class="sub">8 simulacros completos siguiendo la estructura oficial de la Ponencia · Tecnología e Ingeniería II · IES Jiménez de Quesada</div>
+<div class="badge">⏱️ 90 min · 4 apartados · 10 pt cada modelo</div>
+</div>
+
+<div class="intro">
+<p><strong>Estructura común:</strong> los 8 modelos siguen la misma plantilla oficial. <strong>Apartado 1</strong> sin opción (Bloque B, Materiales). <strong>Apartados 2, 3 y 4</strong> con dos opciones A/B entre las que el alumno elige una.</p>
+<p><strong>Cobertura de bloques</strong> (en cada modelo): Bloque B = 2,5 pt · Bloque C (C1/C2/C3) = 4 pt · Bloque D (D1/D2) = 2,5 pt · Bloque F = 1 pt.</p>
+<p><strong>Variedad de temas:</strong> los 8 modelos cubren un repertorio amplio de configuraciones PAU: ensayos (Brinell, tracción, Charpy, Vickers), máquinas térmicas (Carnot, Otto, Diésel, frigoríficas, bombas de calor), neumática e hidráulica (cilindros, Bernoulli, Pascal, bombas), estructuras (vigas biapoyadas con cargas variadas, ménsulas, cable tensor), automática (PID, álgebra de bloques con perturbación, control de nivel/velocidad), corriente alterna (RLC serie/paralelo, corrección del fdp, resonancia) y electrónica digital (alarmas, votación, riego automático, NAND/NOR, maxterms).</p>
+</div>
+
+<div class="tabla-wrap">
+<table class="modelos">
+<thead>
+<tr>
+  <th style="width:60px">#</th>
+  <th>Apartado 1 · Materiales (B)</th>
+  <th>Apartado 2 · Máq. térm. y fluidos (C2 / C3)</th>
+  <th>Apartado 3 · Estructuras + Automática (C1 + F)</th>
+  <th>Apartado 4 · Electrónica (D1 / D2)</th>
+  <th style="width:120px">Descarga</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+  <td><span class="cod">A</span></td>
+  <td class="tema"><span class="bloque-tag">B</span> Brinell con temple</td>
+  <td class="tema"><span class="bloque-tag">C2</span> Bomba de calor reversible<small>vs</small><span class="bloque-tag">C3</span> Cilindro neumático doble efecto</td>
+  <td class="tema"><span class="bloque-tag">C1</span> Biapoyada · 2 cargas puntuales + control de velocidad<small>vs</small><span class="bloque-tag">C1</span> Ménsula puntual + control de nivel</td>
+  <td class="tema"><span class="bloque-tag">D1</span> RLC serie + corrección fdp<small>vs</small><span class="bloque-tag">D2</span> Sistema de alarma (3 vars, NAND)</td>
+  <td><a class="btn-pdf" href="Examen_TECI_II_Modelo_A_v2.pdf" target="_blank">📄 PDF</a></td>
+</tr>
+
+<tr>
+  <td><span class="cod">B</span></td>
+  <td class="tema"><span class="bloque-tag">B</span> Tracción (σ-ε)</td>
+  <td class="tema"><span class="bloque-tag">C2</span> Motor Diésel 4T<small>vs</small><span class="bloque-tag">C3</span> Efecto Venturi (Bernoulli + Reynolds)</td>
+  <td class="tema"><span class="bloque-tag">C1</span> Biapoyada · carga repartida parcial + perturbación<small>vs</small><span class="bloque-tag">C1</span> Cable tensor + doble realimentación</td>
+  <td class="tema"><span class="bloque-tag">D1</span> RLC paralelo + corrección fdp<small>vs</small><span class="bloque-tag">D2</span> Control de riego automático (4 vars)</td>
+  <td><a class="btn-pdf" href="Examen_TECI_II_Modelo_B_v2.pdf" target="_blank">📄 PDF</a></td>
+</tr>
+
+<tr>
+  <td><span class="cod">C</span></td>
+  <td class="tema"><span class="bloque-tag">B</span> Charpy (resiliencia, acero al C)</td>
+  <td class="tema"><span class="bloque-tag">C2</span> Motor Otto 4T<small>vs</small><span class="bloque-tag">C3</span> Bomba centrífuga · elevación de agua</td>
+  <td class="tema"><span class="bloque-tag">C1</span> Biapoyada · 3 cargas puntuales + control<small>vs</small><span class="bloque-tag">C1</span> Ménsula 2 cargas + lazo cerrado</td>
+  <td class="tema"><span class="bloque-tag">D1</span> Motor monofásico · corrección fdp<small>vs</small><span class="bloque-tag">D2</span> Sistema de votación · función mayoría</td>
+  <td><a class="btn-pdf" href="Examen_TECI_II_Modelo_C_v2.pdf" target="_blank">📄 PDF</a></td>
+</tr>
+
+<tr>
+  <td><span class="cod">D</span></td>
+  <td class="tema"><span class="bloque-tag">B</span> Vickers (acero al C)</td>
+  <td class="tema"><span class="bloque-tag">C2</span> Máquina frigorífica industrial<small>vs</small><span class="bloque-tag">C3</span> Prensa hidráulica · principio de Pascal</td>
+  <td class="tema"><span class="bloque-tag">C1</span> Biapoyada · cargas asimétricas + identificación<small>vs</small><span class="bloque-tag">C1</span> Ménsula 3 cargas + análisis de sistema</td>
+  <td class="tema"><span class="bloque-tag">D1</span> RLC serie en resonancia<small>vs</small><span class="bloque-tag">D2</span> Sistema de ventilación inteligente</td>
+  <td><a class="btn-pdf" href="Examen_TECI_II_Modelo_D_v2.pdf" target="_blank">📄 PDF</a></td>
+</tr>
+
+<tr>
+  <td><span class="cod">E</span></td>
+  <td class="tema"><span class="bloque-tag">B</span> Brinell (200 HB 10/3000/15)</td>
+  <td class="tema"><span class="bloque-tag">C2</span> Bomba de calor en modo invierno<small>vs</small><span class="bloque-tag">C3</span> Cilindro hidráulico de doble efecto</td>
+  <td class="tema"><span class="bloque-tag">C1</span> Biapoyada con voladizo + identificación controlador<small>vs</small><span class="bloque-tag">C1</span> Ménsula 2 cargas + clasificación elementos</td>
+  <td class="tema"><span class="bloque-tag">D1</span> RLC serie + corrección fdp<small>vs</small><span class="bloque-tag">D2</span> Análisis de circuito lógico</td>
+  <td><a class="btn-pdf" href="Examen_TECI_II_Modelo_E_v2.pdf" target="_blank">📄 PDF</a></td>
+</tr>
+
+<tr>
+  <td><span class="cod">F</span></td>
+  <td class="tema"><span class="bloque-tag">B</span> Charpy (acero al Mn, entalla U)</td>
+  <td class="tema"><span class="bloque-tag">C2</span> Motor Diésel 4T<small>vs</small><span class="bloque-tag">C3</span> Bomba centrífuga · elevación de agua</td>
+  <td class="tema"><span class="bloque-tag">C1</span> Biapoyada con dos voladizos + identificación regulador<small>vs</small><span class="bloque-tag">C1</span> Ménsula 1 carga + lazo abierto/cerrado</td>
+  <td class="tema"><span class="bloque-tag">D1</span> RLC paralelo<small>vs</small><span class="bloque-tag">D2</span> Análisis con puertas NAND</td>
+  <td><a class="btn-pdf" href="Examen_TECI_II_Modelo_F_v2.pdf" target="_blank">📄 PDF</a></td>
+</tr>
+
+<tr>
+  <td><span class="cod">G</span></td>
+  <td class="tema"><span class="bloque-tag">B</span> Tracción (acero S275)</td>
+  <td class="tema"><span class="bloque-tag">C2</span> Ciclo de Carnot directo<small>vs</small><span class="bloque-tag">C3</span> Bernoulli con desnivel · fuente ornamental</td>
+  <td class="tema"><span class="bloque-tag">C1</span> Cable tensor + identificación regulador<small>vs</small><span class="bloque-tag">C1</span> Biapoyada 2 cargas + estabilidad</td>
+  <td class="tema"><span class="bloque-tag">D1</span> Múltiples cargas en paralelo · corrección fdp<small>vs</small><span class="bloque-tag">D2</span> Sensores de nivel · términos imposibles</td>
+  <td><a class="btn-pdf" href="Examen_TECI_II_Modelo_G_v2.pdf" target="_blank">📄 PDF</a></td>
+</tr>
+
+<tr>
+  <td><span class="cod">H</span></td>
+  <td class="tema"><span class="bloque-tag">B</span> Brinell + endurecimiento (S275)</td>
+  <td class="tema"><span class="bloque-tag">C2</span> Motor Otto 4T · rendimiento teórico<small>vs</small><span class="bloque-tag">C3</span> Cilindro simple efecto + muelle de retorno</td>
+  <td class="tema"><span class="bloque-tag">C1</span> Biapoyada · carga repartida + acción<small>vs</small><span class="bloque-tag">C1</span> Ménsula con repartida y puntual</td>
+  <td class="tema"><span class="bloque-tag">D1</span> RLC paralelo · valores instantáneos + fasorial<small>vs</small><span class="bloque-tag">D2</span> Maxterms con puertas NOR</td>
+  <td><a class="btn-pdf" href="Examen_TECI_II_Modelo_H_v2.pdf" target="_blank">📄 PDF</a></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="note">
+<strong>💡 Recomendación de uso.</strong> Los modelos están diseñados para hacerse cronometrados (90 min) en condiciones de examen. Para preparación intensiva PAU, hacer 1-2 modelos completos por semana en las últimas 4 semanas antes del examen. Cada modelo cubre una combinación distinta de temas, así que repartirlos da una buena cobertura del temario.
+</div>
+
+<div class="foot">
+IES Jiménez de Quesada · Santa Fe (Granada) · TECI II · Curso 2025-26
+</div>
+
+</div>
+</body>
+</html>
