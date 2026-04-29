@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animación · Regulador D · Señales · TECI II</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #FAF7F0;
+  --paper-2: #F4EFE3;
+  --ink: #1A1814;
+  --ink-soft: #3A352E;
+  --muted: #7A736A;
+  --rule: #D9D2C2;
+  --rule-soft: #E8E2D3;
+  --surface: #FFFFFF;
+
+  --reference: #1A1814;
+  --output: #1A1814;        /* la entrada e(t) en negro - es la "señal de prueba" */
+  --output-light: #BFE2F4;
+  --output-tint: rgba(26, 24, 20, 0.10);
+  --error: #B5341E;
+  --error-light: #F2D2C9;
+  --error-tint: rgba(181, 52, 30, 0.18);
+
+  --control: #B5841A;       /* naranja = señal de control m, mismo color que la D */
+  --control-light: rgba(181, 132, 26, 0.18);
+
+  /* Mantengo el nombre --reg-p como variable de "color del regulador"
+     para no tocar 50 selectores. En esta animación apunta al naranja del D. */
+  --reg-p: #B5841A;
+
+  --shadow-1: 0 1px 2px rgba(26, 24, 20, 0.04), 0 4px 12px rgba(26, 24, 20, 0.06);
+  --shadow-2: 0 2px 4px rgba(26, 24, 20, 0.04), 0 12px 32px rgba(26, 24, 20, 0.10);
+
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse at top left, rgba(181, 132, 26, 0.06), transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(26, 24, 20, 0.04), transparent 50%);
+  background-attachment: fixed;
+}
+
+.container { max-width: 1320px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+/* ============ HEADER ============ */
+header.masthead {
+  border-top: 4px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 1.25rem 0 2.5rem;
+  margin-bottom: 3rem;
+}
+.masthead-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.masthead-meta .left, .masthead-meta .right { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+
+h1.title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 4.5vw, 3.4rem);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144;
+  margin-bottom: 1rem;
+}
+h1.title em { font-style: italic; font-weight: 400; color: var(--ink-soft); }
+
+.subtitle {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  color: var(--ink-soft);
+  max-width: 64ch;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+
+.scope-pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+.scope-pill {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  padding: 0.35rem 0.7rem;
+  border-radius: 2px;
+}
+
+/* ============ SECTIONS ============ */
+section { margin-bottom: 3.5rem; }
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.section-label::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--ink);
+}
+
+h2.section-heading {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.25rem;
+  max-width: 36ch;
+}
+h2.section-heading em { font-style: italic; color: var(--ink-soft); }
+
+.lede {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 65ch;
+  font-weight: 400;
+}
+.lede em { color: var(--ink); font-style: italic; font-weight: 500; }
+.lede strong { color: var(--ink); font-weight: 600; font-style: normal; }
+
+/* ============ ANIMATION STAGE ============ */
+.stage {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  box-shadow: var(--shadow-2);
+  padding: 0;
+  overflow: hidden;
+}
+
+.stage-header {
+  background: var(--paper-2);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.stage-header .title-block {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.stage-header .title-block .accent { color: var(--reg-p); }
+.stage-header .status {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+.stage-header .status .dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--output);
+  margin-right: 0.4rem;
+  vertical-align: middle;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse { 50% { opacity: 0.35; } }
+
+.stage-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr 1.4fr;
+  gap: 0;
+  background: var(--surface);
+}
+@media (max-width: 980px) {
+  .stage-grid { grid-template-columns: 1fr; }
+}
+
+.panel {
+  padding: 1.5rem;
+  border-right: 1px solid var(--rule-soft);
+  display: flex;
+  flex-direction: column;
+}
+.panel:last-child { border-right: none; }
+@media (max-width: 980px) {
+  .panel { border-right: none; border-bottom: 1px solid var(--rule-soft); }
+}
+
+.panel-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+.panel-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+/* === FAN PANEL === */
+.fan-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper-2);
+  border-radius: 4px;
+  padding: 1rem;
+  position: relative;
+  min-height: 240px;
+}
+.fan-svg { width: 100%; max-width: 240px; height: auto; }
+/* La rotación se aplica como atributo SVG transform="rotate(deg 100 100)"
+   desde JavaScript, garantizando uso de coordenadas del viewBox.        */
+
+.fan-readout {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+.fan-readout .item {
+  flex: 1;
+  background: var(--paper-2);
+  padding: 0.55rem 0.7rem;
+  border-radius: 3px;
+  border-left: 3px solid var(--ink);
+}
+.fan-readout .item.ref { border-left-color: var(--ink); }
+.fan-readout .item.out { border-left-color: var(--output); }
+.fan-readout .item.err { border-left-color: var(--error); }
+.fan-readout .lab { font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 2px; }
+.fan-readout .val { font-size: 0.95rem; font-weight: 600; color: var(--ink); }
+.fan-readout .val .unit { font-size: 0.65rem; color: var(--muted); font-weight: 400; margin-left: 2px; }
+
+/* === BOTONES DE INYECCIÓN DE SEÑAL === */
+.senal-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 1.2rem;
+}
+.senal-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  padding: 0.7rem 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  text-align: left;
+}
+.senal-btn svg { color: var(--ink-soft); }
+.senal-btn:hover {
+  background: var(--paper-2);
+  border-color: var(--ink-soft);
+}
+.senal-btn.on {
+  background: var(--reg-p);
+  border-color: var(--reg-p);
+  color: var(--paper);
+}
+.senal-btn.on svg { color: var(--paper); }
+.senal-btn.on .senal-sub { color: rgba(250, 247, 240, 0.75); }
+.senal-lab {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+}
+.senal-sub {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.info-card {
+  background: var(--paper-2);
+  border-left: 3px solid var(--ink);
+  padding: 0.85rem 1rem;
+  border-radius: 0 3px 3px 0;
+}
+.info-card .info-label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+.info-card .info-text {
+  font-family: var(--serif);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--ink);
+  font-style: italic;
+}
+.info-card .info-text strong { font-weight: 600; font-style: normal; }
+
+/* === BLOCK DIAGRAM PANEL === */
+.bd-svg { width: 100%; height: auto; }
+
+.bd-explainer {
+  margin-top: 1rem;
+  font-family: var(--serif);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.bd-explainer code {
+  font-family: var(--mono);
+  background: var(--paper-2);
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-size: 0.86em;
+  color: var(--ink);
+}
+.bd-explainer .reg-p-label { color: var(--reg-p); font-weight: 600; }
+
+/* === GRAPHS PANEL === */
+.graph-block { margin-bottom: 1rem; }
+.graph-block:last-child { margin-bottom: 0; }
+.graph-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.4rem;
+}
+.graph-title {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.legend {
+  display: flex;
+  gap: 0.85rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+.legend .swatch {
+  display: inline-block;
+  width: 14px;
+  height: 2px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+.legend .ref-sw { background: var(--reference); }
+.legend .out-sw { background: var(--output); height: 3px; }
+.legend .err-sw { background: var(--error); }
+.legend .ctrl-sw { background: var(--control); }
+
+canvas.graph {
+  width: 100%;
+  display: block;
+  background: var(--paper-2);
+  border-radius: 3px;
+  border: 1px solid var(--rule-soft);
+}
+
+/* === CONTROLS === */
+.controls {
+  background: var(--paper-2);
+  border-top: 1px solid var(--rule);
+  padding: 1.25rem 1.5rem;
+  display: grid;
+  grid-template-columns: 1.4fr auto auto;
+  gap: 1.5rem;
+  align-items: end;
+}
+@media (max-width: 980px) {
+  .controls { grid-template-columns: 1fr; }
+  .controls .speed-controls,
+  .controls .btn { grid-column: span 1; }
+  .controls .speed-controls { justify-self: stretch; }
+  .controls .speed-btn { flex: 1; }
+}
+
+.ctrl {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.ctrl-label {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+}
+.ctrl-label .val {
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--rule);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--reg-p);
+  border: 2px solid var(--surface);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--reg-p);
+  border: 2px solid var(--surface);
+  cursor: pointer;
+}
+
+button.btn {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.6rem 1rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+button.btn:hover { background: var(--ink); color: var(--paper); }
+button.btn.active {
+  background: var(--error);
+  color: var(--paper);
+  border-color: var(--error);
+}
+button.btn.reset { border-color: var(--muted); color: var(--muted); }
+button.btn.reset:hover { background: var(--muted); color: var(--paper); }
+
+/* === CONTROLES DE VELOCIDAD === */
+.speed-controls {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.speed-btn {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  padding: 0.6rem 0.65rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: none;
+  border-right: 1px solid var(--rule);
+  cursor: pointer;
+  transition: all 0.12s ease;
+  min-width: 38px;
+  text-align: center;
+}
+.speed-btn:last-child { border-right: none; }
+.speed-btn:hover { background: var(--paper-2); }
+.speed-btn.on {
+  background: var(--reg-p);
+  color: var(--paper);
+}
+.speed-btn.step-btn { background: var(--paper-2); }
+.speed-btn.step-btn:hover { background: var(--ink); color: var(--paper); }
+.speed-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* === PANEL DE NARRACIÓN === */
+.narration {
+  margin-top: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--reg-p);
+  border-radius: 4px;
+  padding: 1.2rem 1.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.2rem;
+  align-items: center;
+  box-shadow: var(--shadow-1);
+  transition: border-left-color 0.4s ease;
+  min-height: 92px;
+}
+.narration.phase-arranque { border-left-color: var(--reg-p); }
+.narration.phase-subiendo { border-left-color: var(--reg-p); }
+.narration.phase-pico { border-left-color: var(--control); }
+.narration.phase-oscilando { border-left-color: var(--control); }
+.narration.phase-estable { border-left-color: var(--error); }
+.narration.phase-perturbado { border-left-color: var(--error); }
+.narration.phase-parado { border-left-color: var(--muted); }
+
+.narration .phase-tag {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  padding-right: 1.2rem;
+  border-right: 1px solid var(--rule-soft);
+  min-width: 110px;
+}
+.narration .phase-tag .num {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 2rem;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.narration .phase-tag .lab {
+  display: block;
+  font-size: 0.6rem;
+}
+.narration .text-block { line-height: 1.5; }
+.narration .msg {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+  transition: opacity 0.25s ease;
+}
+.narration .msg em { font-style: italic; color: var(--ink-soft); }
+.narration .msg strong { font-weight: 600; }
+.narration .detail {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  transition: opacity 0.25s ease;
+}
+.narration .detail code {
+  font-family: var(--mono);
+  background: var(--paper-2);
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-size: 0.86em;
+}
+
+/* === OBSERVE / Q&A === */
+.observe {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.obs-card {
+  background: var(--surface);
+  border: 1px solid var(--rule-soft);
+  border-radius: 4px;
+  padding: 1.3rem 1.2rem;
+  border-top: 3px solid var(--reg-p);
+}
+.obs-card .num {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+.obs-card h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.08rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+.obs-card p {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.obs-card p em { color: var(--ink); font-style: italic; font-weight: 500; }
+.obs-card .try {
+  margin-top: 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--reg-p);
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--rule);
+}
+
+footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="masthead">
+  <div class="masthead-meta">
+    <div class="left">
+      <span>TECI II · Bloque F</span>
+      <span>Anexo · Animaciones de reguladores</span>
+    </div>
+    <div class="right">
+      <span>2º Bachillerato</span>
+      <span>PEvAU 2025–26</span>
+    </div>
+  </div>
+  <h1 class="title">Regulador <em>derivativo</em><br>en acción</h1>
+  <p class="subtitle">La D <em>no es</em> un regulador funcional por sí solo. Solo reacciona a los <em>cambios</em> del error. Un experimento sin sistema físico para ver con qué responde a cada tipo de señal.</p>
+
+  <div class="scope-pills">
+    <span class="scope-pill">Animación · 03 / 06</span>
+    <span class="scope-pill">Regulador D</span>
+    <span class="scope-pill">Sistema: ninguno</span>
+  </div>
+</header>
+
+<!-- ============ INTRO ============ -->
+<section>
+  <div class="section-label">§ Planteamiento</div>
+  <p class="lede">
+    A diferencia de las dos animaciones anteriores, aquí <em>no hay</em> consigna, ni planta, ni realimentación. Sólo un <em>generador de señales</em> que inyecta distintos errores <strong>e(t)</strong> al regulador D, y observamos qué señal de control <strong>m(t)</strong> produce. La fórmula es simple: <em>m = K<sub>d</sub> · de/dt</em>. Es decir: la D <em>solo</em> mira con qué velocidad cambia el error. Si el error está quieto, m vale cero — sea lo que sea ese error.
+  </p>
+  <p class="note-prose" style="font-family: var(--serif); font-size: 1.02rem; line-height: 1.65; color: var(--ink-soft); max-width: 70ch; margin-top: 1.5rem;">
+    Esa es la razón por la que la D <em>rara vez</em> aparece sola en la industria: si el error es constante (por ejemplo, 5° por debajo del setpoint), no hace nada. Pero combinada con P o con I, su capacidad de <em>anticipar</em> cambios es enormemente útil — y se ve aquí, lección pura.
+  </p>
+</section>
+
+<!-- ============ ANIMATION STAGE ============ -->
+<section>
+  <div class="section-label">§ Simulación interactiva</div>
+
+  <div class="stage">
+
+    <div class="stage-header">
+      <div class="title-block"><span class="accent">●</span> Experimento abierto · Regulador D + señal de prueba</div>
+      <div class="status"><span class="dot"></span><span id="statusText">EN MARCHA</span></div>
+    </div>
+
+    <div class="stage-grid">
+
+      <!-- PANEL 1: INYECTOR DE SEÑALES -->
+      <div class="panel">
+        <div class="panel-label">Generador</div>
+        <div class="panel-title">Inyectar error e(t)</div>
+
+        <p style="font-family: var(--serif); font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5; margin-bottom: 1rem;">
+          Pulsa cualquier forma de señal y observa cómo responde la D.
+        </p>
+
+        <div class="senal-buttons" id="senalButtons">
+          <button class="senal-btn" data-senal="constante" title="e constante: ¿qué hace la D?">
+            <svg viewBox="0 0 60 30" width="50" height="25"><line x1="2" y1="15" x2="58" y2="15" stroke="currentColor" stroke-width="2.5"/></svg>
+            <span class="senal-lab">Constante</span>
+            <span class="senal-sub">e fijo</span>
+          </button>
+          <button class="senal-btn on" data-senal="escalon" title="Salto brusco del error">
+            <svg viewBox="0 0 60 30" width="50" height="25"><path d="M 2 22 L 25 22 L 25 6 L 58 6" stroke="currentColor" stroke-width="2.5" fill="none"/></svg>
+            <span class="senal-lab">Escalón</span>
+            <span class="senal-sub">salto</span>
+          </button>
+          <button class="senal-btn" data-senal="rampa" title="El error sube linealmente">
+            <svg viewBox="0 0 60 30" width="50" height="25"><path d="M 2 22 L 12 22 L 50 6 L 58 6" stroke="currentColor" stroke-width="2.5" fill="none"/></svg>
+            <span class="senal-lab">Rampa</span>
+            <span class="senal-sub">pendiente</span>
+          </button>
+          <button class="senal-btn" data-senal="pulso" title="Sube y baja rápidamente">
+            <svg viewBox="0 0 60 30" width="50" height="25"><path d="M 2 22 L 14 22 L 14 6 L 38 6 L 38 22 L 58 22" stroke="currentColor" stroke-width="2.5" fill="none"/></svg>
+            <span class="senal-lab">Pulso</span>
+            <span class="senal-sub">sube y baja</span>
+          </button>
+          <button class="senal-btn" data-senal="sinusoide" title="El error oscila">
+            <svg viewBox="0 0 60 30" width="50" height="25"><path d="M 2 15 Q 11 2, 20 15 T 38 15 T 56 15" stroke="currentColor" stroke-width="2.5" fill="none"/></svg>
+            <span class="senal-lab">Sinusoide</span>
+            <span class="senal-sub">oscila</span>
+          </button>
+        </div>
+
+        <div class="info-card">
+          <div class="info-label">Pregunta clave</div>
+          <p class="info-text">¿En cuál de estas señales <strong>no</strong> hace nada la D? ¿Por qué?</p>
+        </div>
+      </div>
+
+      <!-- PANEL 2: ESQUEMA REG D (sin lazo cerrado) -->
+      <div class="panel">
+        <div class="panel-label">Regulador</div>
+        <div class="panel-title">Acción derivativa</div>
+
+        <svg class="bd-svg" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace">
+          <!-- Entrada e -->
+          <text x="14" y="58" font-size="14" fill="#1A1814" font-weight="600">e(t)</text>
+          <text x="14" y="74" font-size="9" fill="#7A736A">señal de error</text>
+          <line x1="50" y1="90" x2="100" y2="90" stroke="#1A1814" stroke-width="2"/>
+          <polygon points="100,86 108,90 100,94" fill="#1A1814"/>
+
+          <!-- Bloque regulador D -->
+          <rect x="110" y="62" width="80" height="56" rx="4" fill="#FFFFFF" stroke="#B5841A" stroke-width="2.5"/>
+          <text x="150" y="82" font-size="12" text-anchor="middle" fill="#B5841A" font-weight="700">REG D</text>
+          <text x="150" y="100" font-size="11" text-anchor="middle" fill="#B5841A" font-style="italic">K_d · de/dt</text>
+
+          <!-- Salida m -->
+          <line x1="190" y1="90" x2="240" y2="90" stroke="#1A1814" stroke-width="2"/>
+          <polygon points="240,86 248,90 240,94" fill="#1A1814"/>
+          <text x="252" y="86" font-size="14" fill="#B5841A" font-weight="600">m(t)</text>
+          <text x="252" y="100" font-size="9" fill="#7A736A">señal de</text>
+          <text x="252" y="110" font-size="9" fill="#7A736A">control</text>
+
+          <!-- Anotación: NO hay realimentación en esta animación -->
+          <g opacity="0.6">
+            <path d="M 230 130 Q 150 165 70 130" stroke="#7A736A" stroke-width="1" stroke-dasharray="4 3" fill="none"/>
+            <text x="150" y="180" font-size="9" text-anchor="middle" fill="#7A736A" font-style="italic">(sin realimentación: éste es un experimento abierto)</text>
+          </g>
+        </svg>
+
+        <p class="bd-explainer">
+          La D <em>solo</em> mira <strong>la velocidad</strong> a la que cambia el error. <code>m = K<sub>d</sub>·de/dt</code>. Si <code>e</code> es constante, <code>de/dt = 0</code> y <strong>m vale cero</strong> — sea cual sea ese error. Esa es la propiedad clave: la D <em>no</em> empuja por estar lejos, sólo por estar <em>cambiando</em>.
+        </p>
+      </div>
+
+      <!-- PANEL 3: GRÁFICAS -->
+      <div class="panel">
+        <div class="panel-label">Evolución temporal</div>
+        <div class="panel-title">Señales en el tiempo</div>
+
+        <div class="graph-block">
+          <div class="graph-head">
+            <span class="graph-title">Señal de entrada e(t)</span>
+            <div class="legend">
+              <span><span class="swatch out-sw"></span>error inyectado</span>
+            </div>
+          </div>
+          <canvas class="graph" id="graphVel" width="600" height="200"></canvas>
+        </div>
+
+        <div class="graph-block">
+          <div class="graph-head">
+            <span class="graph-title">Salida del regulador m(t)</span>
+            <div class="legend">
+              <span><span class="swatch ctrl-sw"></span>m = K<sub>d</sub>·de/dt</span>
+            </div>
+          </div>
+          <canvas class="graph" id="graphCtrl" width="600" height="200"></canvas>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CONTROLES -->
+    <div class="controls">
+      <div class="ctrl">
+        <div class="ctrl-label">
+          <span>Ganancia K<sub>d</sub></span>
+          <span class="val"><span id="lblKp">1.0</span></span>
+        </div>
+        <input type="range" id="sldKp" min="0.1" max="3.0" value="1.0" step="0.1">
+      </div>
+      <div class="speed-controls" role="group" aria-label="Velocidad de simulación">
+        <button class="speed-btn" id="spdPause" title="Pausar">▮▮</button>
+        <button class="speed-btn step-btn" id="spdStep" title="Avanzar 0,1 s (sólo en pausa)" disabled>▶|</button>
+        <button class="speed-btn" id="spd025" title="Cámara muy lenta">¼×</button>
+        <button class="speed-btn" id="spd050" title="Cámara lenta">½×</button>
+        <button class="speed-btn on" id="spd1" title="Velocidad normal">1×</button>
+      </div>
+      <button class="btn reset" id="btnReset">Reiniciar señal</button>
+    </div>
+
+  </div>
+
+  <!-- ============ PANEL NARRATIVO ============ -->
+  <div class="narration phase-parado" id="narration">
+    <div class="phase-tag">
+      <span class="num" id="narrNum">00</span>
+      <span class="lab" id="narrLab">EN ESPERA</span>
+    </div>
+    <div class="text-block">
+      <div class="msg" id="narrMsg">Por defecto se inyecta un <strong>escalón</strong>. Mira cómo la D pega un latigazo y se va. Pulsa otros tipos de señal para ver qué ocurre en cada caso.</div>
+      <div class="detail" id="narrDetail">Recomendado: usa <code>¼×</code> o <code>½×</code> para ver bien los picos instantáneos. El escalón ocurre tan rápido que en velocidad normal se pierde casi.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUÉ OBSERVAR ============ -->
+<section>
+  <div class="section-label">§ Qué observar</div>
+  <h2 class="section-heading">Tres cosas <em>que solo</em> hace el regulador D</h2>
+
+  <div class="observe">
+
+    <div class="obs-card">
+      <div class="num">OBSERVACIÓN 01</div>
+      <h3>Si el error es constante, no hace nada.</h3>
+      <p>Pulsa <em>Constante</em>. El error vale siempre 50, pero <code>m = 0</code> todo el rato. La D es <em>ciega</em> a errores estables: solo se entera de los <strong>cambios</strong>. Por eso rara vez se usa como regulador independiente — dejaría error en régimen permanente como el P, pero sin siquiera empujar.</p>
+      <div class="try">▸ Compáralo con el P, que sí empujaba aunque fuese poco.</div>
+    </div>
+
+    <div class="obs-card">
+      <div class="num">OBSERVACIÓN 02</div>
+      <h3>Ante un escalón, pega un latigazo.</h3>
+      <p>Pulsa <em>Escalón</em>. El error sube de golpe y la D responde con un <em>pico instantáneo</em> de <code>m</code> que se va inmediatamente. Ese pico saturado es la marca del D ante cambios bruscos. En la práctica industrial, esto se filtra para no estresar al actuador.</p>
+      <div class="try">▸ Sube K<sub>d</sub> y mira cómo el pico es más alto.</div>
+    </div>
+
+    <div class="obs-card">
+      <div class="num">OBSERVACIÓN 03</div>
+      <h3>Ante un cambio sostenido, da una respuesta sostenida.</h3>
+      <p>Pulsa <em>Rampa</em>. El error sube despacio y constante, así que <code>de/dt</code> es constante también: <code>m</code> sale como un <em>nivel fijo</em> mientras dure la rampa. La D <em>anticipa</em> hacia dónde va el error sin esperar a que llegue allí.</p>
+      <div class="try">▸ Esa anticipación es lo que aporta cuando se combina con P o I.</div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  Material didáctico para Tecnología e Ingeniería II · Bloque F · Apartado 7 · Animación 03 de 06
+</footer>
+
+</div>
+
+<script>
+// =========================================================================
+//   SIMULACIÓN: Generador de señales + Regulador D (sin sistema físico)
+// =========================================================================
+//
+// No hay planta ni realimentación. Sólo:
+//   1. Una función e(t) generada según el tipo de señal seleccionado
+//   2. La D calcula m(t) = K_d · de/dt (saturada a [-100, 100])
+//
+// Cada vez que el usuario pulsa un botón de señal se REINICIA el experimento:
+//   t_local empieza en 0, el buffer se vacía, y se ve la señal "desde el principio".
+// =========================================================================
+
+const SIM = {
+  // Estado
+  e: 0,                // error actual
+  e_prev: 0,           // error en el paso anterior (para derivada)
+  m: 0,                // salida del regulador
+  Kp: 1.0,             // ganancia derivativa K_d (mantengo nombre Kp por compatibilidad de slider)
+
+  // Tipo de señal y parámetros
+  tipoSenal: 'escalon',  // 'constante' | 'escalon' | 'rampa' | 'pulso' | 'sinusoide'
+  ampSenal: 50,
+  tInyeccion: 0,         // tiempo absoluto en que se inyectó la señal actual
+
+  // Tiempo
+  t: 0,
+  dt: 0.01,            // 100 Hz: necesario para que el escalón se vea limpio en la derivada
+
+  // Buffers para gráficas (10 segundos = 1000 muestras)
+  buffer: [],          // {t, ref, y, m}
+  bufferLen: 1000,
+
+  // Saturación de m
+  mMax: 100,
+  mMin: -100,
+
+  // Aliases para compatibilidad con renderizado existente del v3
+  // (las gráficas y el cursor "AHORA" usan SIM.y; aquí y = e)
+  y: 0,
+  v: 0,
+  ref: 0,
+  pert: 0,
+  fanAngle: 0,
+
+  // Control de velocidad
+  speedMul: 1.0,
+  paused: false
+};
+
+// =========================================================================
+//   ESTADO DE NARRACIÓN AUTOMÁTICA
+// =========================================================================
+const NARR = {
+  fase: 'parado',          // parado | arranque | subiendo | pico | oscilando | estable | perturbado_caida | perturbado_estable
+  numFase: 0,
+  estableCounter: 0,       // contador de pasos con velocidad baja
+  pertWasActive: false,
+  ultimaV: 0,
+  ultimaY: 0,
+  ultimaRef: 1500,
+  ultimaKp: 0.30,
+  fadeTimer: 0,
+  tEntradaFase: 0          // tiempo de simulación al entrar en la fase actual
+};
+
+// =========================================================================
+//   GENERADOR DE SEÑALES
+// =========================================================================
+function calcularError(t_local) {
+  const A = SIM.ampSenal;
+  const tipo = SIM.tipoSenal;
+
+  // Margen inicial: 0.5 s a cero antes de empezar (para que se vea bien el "antes")
+  const t0 = 0.5;
+
+  switch (tipo) {
+    case 'constante':
+      // e = A todo el tiempo, también desde t<t0
+      return A;
+
+    case 'escalon': {
+      if (t_local < t0) return 0;
+      const dt_trans = 0.05;
+      if (t_local < t0 + dt_trans) return A * (t_local - t0) / dt_trans;
+      return A;
+    }
+
+    case 'rampa': {
+      if (t_local < t0) return 0;
+      const dur = 4.0;
+      if (t_local < t0 + dur) return A * (t_local - t0) / dur;
+      return A;
+    }
+
+    case 'pulso': {
+      const dt_trans = 0.05;
+      const ancho = 1.5;
+      if (t_local < t0) return 0;
+      if (t_local < t0 + dt_trans) return A * (t_local - t0) / dt_trans;
+      if (t_local < t0 + dt_trans + ancho) return A;
+      if (t_local < t0 + 2*dt_trans + ancho) return A * (1 - (t_local - t0 - dt_trans - ancho) / dt_trans);
+      return 0;
+    }
+
+    case 'sinusoide': {
+      // Centrada en A/2, amplitud A/2, periodo 2.5s.
+      // Usamos 1-cos en vez de sin para empezar limpiamente en e=0, de/dt=0.
+      const periodo = 2.5;
+      const omega = 2 * Math.PI / periodo;
+      return (A/2) * (1 - Math.cos(omega * t_local));
+    }
+
+    default:
+      return 0;
+  }
+}
+
+// =========================================================================
+//   PASO DE SIMULACIÓN
+// =========================================================================
+function step() {
+  // 1. Calcular el error desde el generador, en tiempo local desde la inyección
+  const t_local = SIM.t - SIM.tInyeccion;
+  SIM.e_prev = SIM.e;
+  SIM.e = calcularError(t_local);
+
+  // 2. Acción D: derivada discreta del error, saturada
+  const de_dt = (SIM.e - SIM.e_prev) / SIM.dt;
+  let m_raw = SIM.Kp * de_dt;
+  SIM.m = Math.max(SIM.mMin, Math.min(SIM.mMax, m_raw));
+
+  // Aliases para compatibilidad con render
+  SIM.y = SIM.e;
+  SIM.v = de_dt;
+
+  // 3. Avanzar tiempo
+  SIM.t += SIM.dt;
+
+  // 4. Guardar muestra (formato compatible con renderizado: {t, ref, y, m})
+  SIM.buffer.push({ t: SIM.t, ref: 0, y: SIM.e, m: SIM.m });
+  if (SIM.buffer.length > SIM.bufferLen) SIM.buffer.shift();
+}
+
+// =========================================================================
+//   NARRACIÓN AUTOMÁTICA: cambia según el tipo de señal inyectada
+// =========================================================================
+//
+// La narración aquí no detecta fases dinámicas como en P o I, porque no hay
+// transitorio en lazo cerrado. En su lugar, cambia inmediatamente al inyectar
+// una señal nueva, explicando qué hace la D en cada caso.
+
+const FASES = {
+  parado:           { num: '00', lab: 'EN ESPERA',                cls: 'phase-parado' },
+  s_constante:      { num: '01', lab: 'SEÑAL · CONSTANTE',        cls: 'phase-estable' },
+  s_escalon:        { num: '02', lab: 'SEÑAL · ESCALÓN',          cls: 'phase-pico' },
+  s_escalon_post:   { num: '03', lab: 'TRAS EL ESCALÓN',          cls: 'phase-estable' },
+  s_rampa:          { num: '04', lab: 'SEÑAL · RAMPA',            cls: 'phase-subiendo' },
+  s_rampa_post:     { num: '05', lab: 'RAMPA TERMINADA',          cls: 'phase-estable' },
+  s_pulso_sube:     { num: '06', lab: 'PULSO · SUBIDA',           cls: 'phase-pico' },
+  s_pulso_techo:    { num: '07', lab: 'PULSO · MESETA',           cls: 'phase-estable' },
+  s_pulso_baja:     { num: '08', lab: 'PULSO · BAJADA',           cls: 'phase-perturbado' },
+  s_sinusoide:      { num: '09', lab: 'SEÑAL · SINUSOIDAL',       cls: 'phase-oscilando' }
+};
+
+function setNarr(fase, msg, detail) {
+  if (NARR.fase === fase) return;
+  NARR.fase = fase;
+  NARR.tEntradaFase = SIM.t;
+  const f = FASES[fase] || FASES.parado;
+  document.getElementById('narrNum').textContent = f.num;
+  document.getElementById('narrLab').textContent = f.lab;
+  document.getElementById('narrMsg').innerHTML = msg;
+  document.getElementById('narrDetail').innerHTML = detail;
+  const panel = document.getElementById('narration');
+  panel.className = 'narration ' + f.cls;
+}
+
+const MIN_FASE_DUR = 0.15;
+function puedeTransitar() { return (SIM.t - (NARR.tEntradaFase || 0)) >= MIN_FASE_DUR; }
+
+function updateNarration() {
+  // Siempre depende del tipo de señal y del tiempo local desde la inyección.
+  const tLoc = SIM.t - SIM.tInyeccion;
+  const tipo = SIM.tipoSenal;
+
+  // Mensajes específicos según el tipo de señal y el momento dentro del experimento
+  switch (tipo) {
+    case 'constante':
+      if (NARR.fase !== 's_constante') {
+        setNarr('s_constante',
+          'El error vale <strong>50</strong> y no cambia. La D <em>no actúa</em>: <code>m = 0</code> todo el rato.',
+          'Esto es lo más importante de la D: <em>es ciega a errores estables</em>. Aunque haya un error enorme, si no cambia, la D no empuja. Por eso la D <strong>no</strong> puede ser regulador independiente — no eliminaría ningún error en régimen permanente.'
+        );
+      }
+      break;
+
+    case 'escalon':
+      if (tLoc < 0.5 && NARR.fase !== 's_escalon') {
+        setNarr('s_escalon',
+          'A los 0,5 s el error <em>salta</em> de 0 a 50 instantáneamente. Mira la salida <code>m</code>…',
+          'En el instante del salto, la D ve una velocidad de cambio enorme: <code>de/dt → ∞</code>. Su salida <em>se satura</em> al máximo durante ese instante, y vuelve a cero en cuanto el error queda otra vez constante.'
+        );
+      } else if (tLoc >= 0.7 && tLoc < 1.5 && NARR.fase !== 's_escalon_post' && puedeTransitar()) {
+        setNarr('s_escalon_post',
+          'El error vale <strong>50</strong>, igual que en "Constante". Pero ya no cambia → la D vuelve a estar <em>en silencio</em>.',
+          'La D ha "olvidado" el escalón. Solo dejó constancia mediante el pico instantáneo. Esa es la forma característica de la D ante un cambio brusco: <em>un latigazo y a otra cosa</em>.'
+        );
+      }
+      break;
+
+    case 'rampa':
+      if (tLoc < 0.7 && NARR.fase !== 's_rampa') {
+        setNarr('s_rampa',
+          'El error sube <em>linealmente</em> a lo largo de 4 segundos. La velocidad de cambio es <em>constante</em>.',
+          'Por tanto <code>m = K<sub>d</sub>·de/dt</code> también es constante: la D produce un <em>nivel fijo</em> mientras dure la rampa. Es como si dijera: "veo que el error sube de forma constante, doy una respuesta constante".'
+        );
+      } else if (tLoc > 4.6 && NARR.fase !== 's_rampa_post' && puedeTransitar()) {
+        setNarr('s_rampa_post',
+          'Rampa terminada. El error se queda en <strong>50</strong>. La D vuelve a callarse: <code>m = 0</code>.',
+          'Otra vez la lección: el error puede ser grande, pero si no cambia, la D no actúa. Solo le importa <em>la pendiente</em>, no <em>el valor</em>.'
+        );
+      }
+      break;
+
+    case 'pulso':
+      if (tLoc < 0.6 && NARR.fase !== 's_pulso_sube') {
+        setNarr('s_pulso_sube',
+          'Subida brusca: la D pega un <em>pico positivo</em> instantáneo de <code>m</code>.',
+          'Ese pico es la "anticipación" de la D ante el cambio brusco. Igual que en el escalón.'
+        );
+      } else if (tLoc > 0.7 && tLoc < 2.0 && NARR.fase !== 's_pulso_techo' && puedeTransitar()) {
+        setNarr('s_pulso_techo',
+          'Meseta del pulso: el error se mantiene en 50. La D <em>no actúa</em> durante esta parte plana.',
+          'Aunque el error sea grande, no cambia, así que <code>m = 0</code>. Esta zona equivale al caso "Constante".'
+        );
+      } else if (tLoc > 2.05 && tLoc < 2.5 && NARR.fase !== 's_pulso_baja' && puedeTransitar()) {
+        setNarr('s_pulso_baja',
+          'Bajada brusca: ahora la D pega un pico <em>negativo</em> — el error está cambiando hacia abajo.',
+          'Compáralo con el pico positivo del principio: misma magnitud, signo opuesto. La D detecta los <em>cambios</em> sin importarle el valor del error.'
+        );
+      }
+      break;
+
+    case 'sinusoide':
+      if (NARR.fase !== 's_sinusoide') {
+        setNarr('s_sinusoide',
+          'El error oscila como una onda. La D oscila <em>también</em> — pero <strong>adelantada 90°</strong> respecto al error.',
+          'Cuando <code>e</code> está pasando por su máximo, <code>de/dt</code> vale cero (la pendiente es plana arriba). Cuando <code>e</code> cruza su valor medio bajando, <code>de/dt</code> es <em>mínima</em>. Esa anticipación de un cuarto de ciclo es lo que da a la D su poder predictivo en sistemas con dinámica oscilante.'
+        );
+      }
+      break;
+  }
+}
+// =========================================================================
+//   RENDER (en esta animación no hay sistema físico ni readouts numéricos)
+// =========================================================================
+// El renderFan se mantiene por compatibilidad con el loop principal pero no hace nada.
+function renderFan(deltaSec) { /* no hay sistema físico que animar */ }
+
+// readouts y diagrama no aplican aquí
+function renderReadouts() { /* sin readouts numéricos en esta animación */ }
+function renderDiagram() { /* el diagrama del REG D es estático (no tiene pulso) */ }
+
+// =========================================================================
+//   RENDER DE GRÁFICAS
+// =========================================================================
+const cvVel = document.getElementById('graphVel');
+const ctxVel = cvVel.getContext('2d');
+const cvCtrl = document.getElementById('graphCtrl');
+const ctxCtrl = cvCtrl.getContext('2d');
+
+function setupCanvas(cv, ctx) {
+  // Hi-DPI
+  const ratio = window.devicePixelRatio || 1;
+  const rect = cv.getBoundingClientRect();
+  cv.width = rect.width * ratio;
+  cv.height = rect.height * ratio;
+  ctx.scale(ratio, ratio);
+  return { w: rect.width, h: rect.height };
+}
+
+let velDims = setupCanvas(cvVel, ctxVel);
+let ctrlDims = setupCanvas(cvCtrl, ctxCtrl);
+
+window.addEventListener('resize', () => {
+  // Reset canvas para hi-dpi tras resize
+  ctxVel.setTransform(1, 0, 0, 1, 0, 0);
+  ctxCtrl.setTransform(1, 0, 0, 1, 0, 0);
+  velDims = setupCanvas(cvVel, ctxVel);
+  ctrlDims = setupCanvas(cvCtrl, ctxCtrl);
+});
+
+function renderGraphs() {
+  if (SIM.buffer.length < 2) return;
+
+  // ----- Gráfica velocidad -----
+  const { w: W, h: H } = velDims;
+  const padL = 36, padR = 8, padT = 10, padB = 22;
+  const plotW = W - padL - padR;
+  const plotH = H - padT - padB;
+
+  ctxVel.clearRect(0, 0, W, H);
+
+  // Fondo cuadriculado sutil
+  ctxVel.strokeStyle = '#E8E2D3';
+  ctxVel.lineWidth = 0.5;
+  for (let i = 0; i <= 4; i++) {
+    const y = padT + (plotH * i / 4);
+    ctxVel.beginPath();
+    ctxVel.moveTo(padL, y);
+    ctxVel.lineTo(W - padR, y);
+    ctxVel.stroke();
+  }
+
+  // Ejes
+  ctxVel.strokeStyle = '#7A736A';
+  ctxVel.lineWidth = 1;
+  ctxVel.beginPath();
+  ctxVel.moveTo(padL, padT);
+  ctxVel.lineTo(padL, H - padB);
+  ctxVel.lineTo(W - padR, H - padB);
+  ctxVel.stroke();
+
+  // Etiquetas Y (señal e en su rango)
+  ctxVel.fillStyle = '#7A736A';
+  ctxVel.font = '9px JetBrains Mono, monospace';
+  ctxVel.textAlign = 'right';
+  ctxVel.textBaseline = 'middle';
+  const yMax = 60;
+  for (let i = 0; i <= 4; i++) {
+    const val = yMax * (1 - i/4);
+    const y = padT + (plotH * i / 4);
+    ctxVel.fillText(Math.round(val), padL - 4, y);
+  }
+
+  // Eje X (tiempo): muestra los últimos 5s (señales rápidas)
+  const tWindow = 5;
+  const tNow = SIM.t;
+  const tMin = tNow - tWindow;
+  ctxVel.textAlign = 'center';
+  ctxVel.textBaseline = 'top';
+  for (let i = 0; i <= 5; i++) {
+    const x = padL + plotW * i / 5;
+    const tVal = tMin + tWindow * i / 5;
+    if (tVal >= 0) {
+      ctxVel.fillText(tVal.toFixed(1) + 's', x, H - padB + 4);
+    }
+  }
+
+  // Función mapeo
+  const tToX = (t) => padL + plotW * (t - tMin) / tWindow;
+  const yToY = (val) => padT + plotH * (1 - val / yMax);
+
+  // Área bajo e(t) (relleno tenue)
+  ctxVel.fillStyle = 'rgba(26, 24, 20, 0.10)';
+  ctxVel.beginPath();
+  let startedE = false;
+  for (const s of SIM.buffer) {
+    if (s.t < tMin) continue;
+    if (!startedE) {
+      ctxVel.moveTo(tToX(s.t), yToY(0));
+      ctxVel.lineTo(tToX(s.t), yToY(s.y));
+      startedE = true;
+    } else {
+      ctxVel.lineTo(tToX(s.t), yToY(s.y));
+    }
+  }
+  if (startedE) {
+    const lastT = SIM.buffer[SIM.buffer.length - 1].t;
+    ctxVel.lineTo(tToX(lastT), yToY(0));
+    ctxVel.closePath();
+    ctxVel.fill();
+  }
+
+  // Línea de e(t) en negro grueso (es la entrada del experimento)
+  ctxVel.strokeStyle = '#1A1814';
+  ctxVel.lineWidth = 2.2;
+  ctxVel.beginPath();
+  let first = true;
+  for (const s of SIM.buffer) {
+    if (s.t < tMin) continue;
+    const x = tToX(s.t);
+    const y = yToY(s.y);
+    if (first) { ctxVel.moveTo(x, y); first = false; }
+    else ctxVel.lineTo(x, y);
+  }
+  ctxVel.stroke();
+
+  // Cursor vertical "AHORA" cuando está en pausa o cámara lenta
+  if (SIM.speedMul < 1.0 && SIM.buffer.length > 0) {
+    const tNowReal = SIM.buffer[SIM.buffer.length - 1].t;
+    const xNow = tToX(tNowReal);
+    if (xNow > padL && xNow < W - padR) {
+      ctxVel.strokeStyle = SIM.paused ? '#B5341E' : '#7A736A';
+      ctxVel.lineWidth = SIM.paused ? 1.5 : 1;
+      ctxVel.setLineDash(SIM.paused ? [] : [3, 3]);
+      ctxVel.beginPath();
+      ctxVel.moveTo(xNow, padT);
+      ctxVel.lineTo(xNow, H - padB);
+      ctxVel.stroke();
+      ctxVel.setLineDash([]);
+      // Etiqueta "AHORA"
+      if (SIM.paused) {
+        ctxVel.fillStyle = '#B5341E';
+        ctxVel.font = 'bold 9px JetBrains Mono, monospace';
+        ctxVel.textAlign = 'left';
+        ctxVel.textBaseline = 'top';
+        ctxVel.fillText('AHORA', xNow + 3, padT + 2);
+      }
+    }
+  }
+
+  // ----- Gráfica señal de control m -----
+  const { w: W2, h: H2 } = ctrlDims;
+  const padL2 = 36, padR2 = 8, padT2 = 8, padB2 = 18;
+  const plotW2 = W2 - padL2 - padR2;
+  const plotH2 = H2 - padT2 - padB2;
+
+  ctxCtrl.clearRect(0, 0, W2, H2);
+
+  // Fondo cuadriculado sutil con línea cero más marcada
+  ctxCtrl.strokeStyle = '#E8E2D3';
+  ctxCtrl.lineWidth = 0.5;
+  for (let i = 0; i <= 4; i++) {
+    const y = padT2 + (plotH2 * i / 4);
+    ctxCtrl.beginPath();
+    ctxCtrl.moveTo(padL2, y);
+    ctxCtrl.lineTo(W2 - padR2, y);
+    ctxCtrl.stroke();
+  }
+
+  // Ejes
+  ctxCtrl.strokeStyle = '#7A736A';
+  ctxCtrl.lineWidth = 1;
+  ctxCtrl.beginPath();
+  ctxCtrl.moveTo(padL2, padT2);
+  ctxCtrl.lineTo(padL2, H2 - padB2);
+  ctxCtrl.lineTo(W2 - padR2, H2 - padB2);
+  ctxCtrl.stroke();
+
+  // Etiquetas Y (-100, -50, 0, +50, +100)
+  ctxCtrl.fillStyle = '#7A736A';
+  ctxCtrl.font = '9px JetBrains Mono, monospace';
+  ctxCtrl.textAlign = 'right';
+  ctxCtrl.textBaseline = 'middle';
+  const mMax = 100;
+  const mRangeFull = 200; // de -100 a +100
+  const labels = [+100, +50, 0, -50, -100];
+  for (let i = 0; i < labels.length; i++) {
+    const y = padT2 + (plotH2 * i / 4);
+    const lbl = labels[i] > 0 ? '+' + labels[i] : labels[i].toString();
+    ctxCtrl.fillText(lbl, padL2 - 4, y);
+  }
+
+  // Línea cero remarcada
+  const yZero = padT2 + plotH2 * 0.5;
+  ctxCtrl.strokeStyle = '#1A1814';
+  ctxCtrl.lineWidth = 1;
+  ctxCtrl.beginPath();
+  ctxCtrl.moveTo(padL2, yZero);
+  ctxCtrl.lineTo(W2 - padR2, yZero);
+  ctxCtrl.stroke();
+
+  // Mapeo (-100 → bottom, +100 → top, 0 → centro)
+  const tToX2 = (t) => padL2 + plotW2 * (t - tMin) / tWindow;
+  const mToY = (val) => {
+    const v = Math.max(-mMax, Math.min(mMax, val));
+    return padT2 + plotH2 * (1 - (v + mMax) / mRangeFull);
+  };
+
+  // Área bajo m (relleno tenue) — desde el eje cero, no desde el suelo.
+  ctxCtrl.fillStyle = 'rgba(181, 132, 26, 0.15)';
+  ctxCtrl.beginPath();
+  let started2 = false;
+  for (const s of SIM.buffer) {
+    if (s.t < tMin) continue;
+    if (!started2) {
+      ctxCtrl.moveTo(tToX2(s.t), yZero);
+      ctxCtrl.lineTo(tToX2(s.t), mToY(s.m));
+      started2 = true;
+    } else {
+      ctxCtrl.lineTo(tToX2(s.t), mToY(s.m));
+    }
+  }
+  if (started2) {
+    const lastT = SIM.buffer[SIM.buffer.length - 1].t;
+    ctxCtrl.lineTo(tToX2(lastT), yZero);
+    ctxCtrl.closePath();
+    ctxCtrl.fill();
+  }
+
+  // Línea m
+  ctxCtrl.strokeStyle = '#B5841A';
+  ctxCtrl.lineWidth = 2;
+  ctxCtrl.beginPath();
+  let first2 = true;
+  for (const s of SIM.buffer) {
+    if (s.t < tMin) continue;
+    const x = tToX2(s.t);
+    const y = mToY(s.m);
+    if (first2) { ctxCtrl.moveTo(x, y); first2 = false; }
+    else ctxCtrl.lineTo(x, y);
+  }
+  ctxCtrl.stroke();
+
+  // Cursor "AHORA" también en gráfica de m
+  if (SIM.speedMul < 1.0 && SIM.buffer.length > 0) {
+    const tNowReal = SIM.buffer[SIM.buffer.length - 1].t;
+    const xNow = tToX2(tNowReal);
+    if (xNow > padL2 && xNow < W2 - padR2) {
+      ctxCtrl.strokeStyle = SIM.paused ? '#B5341E' : '#7A736A';
+      ctxCtrl.lineWidth = SIM.paused ? 1.5 : 1;
+      ctxCtrl.setLineDash(SIM.paused ? [] : [3, 3]);
+      ctxCtrl.beginPath();
+      ctxCtrl.moveTo(xNow, padT2);
+      ctxCtrl.lineTo(xNow, H2 - padB2);
+      ctxCtrl.stroke();
+      ctxCtrl.setLineDash([]);
+    }
+  }
+}
+
+// =========================================================================
+//   LOOP PRINCIPAL
+// =========================================================================
+let lastTimestamp = 0;
+let accumulator = 0;
+
+function loop(timestamp) {
+  const deltaMs = lastTimestamp ? (timestamp - lastTimestamp) : 16;
+  lastTimestamp = timestamp;
+  const deltaSec = Math.min(deltaMs / 1000, 0.1); // cap
+
+  // Avanzar simulación a paso fijo dt, modulado por speedMul (0=pausa)
+  // Cuando speedMul=0, el accumulator no crece y no se ejecuta step().
+  // El render sigue activo (las gráficas se siguen redibujando con el último estado).
+  accumulator += deltaSec * SIM.speedMul;
+  while (accumulator >= SIM.dt) {
+    step();
+    updateNarration();
+    accumulator -= SIM.dt;
+  }
+
+  // En esta animación renderFan es vacío (no hay sistema físico)
+  renderFan(deltaSec * SIM.speedMul);
+  renderReadouts();
+  renderGraphs();
+  renderDiagram();
+
+  requestAnimationFrame(loop);
+}
+
+// =========================================================================
+//   CONTROLES UI
+// =========================================================================
+const sldKp = document.getElementById('sldKp');
+const lblKp = document.getElementById('lblKp');
+const btnReset = document.getElementById('btnReset');
+const senalButtons = document.querySelectorAll('.senal-btn');
+
+sldKp.addEventListener('input', () => {
+  SIM.Kp = parseFloat(sldKp.value);
+  lblKp.textContent = SIM.Kp.toFixed(1);
+});
+
+// Función central para inyectar una señal nueva: reinicia el experimento
+function inyectarSenal(tipo) {
+  SIM.tipoSenal = tipo;
+  SIM.tInyeccion = SIM.t;
+  SIM.buffer = [];
+  // Inicializar e y e_prev AL MISMO VALOR para que el primer paso vea
+  // de/dt = 0 (no un "salto artificial" desde el estado anterior)
+  const e0 = calcularError(0);
+  SIM.e = e0;
+  SIM.e_prev = e0;
+  SIM.m = 0;
+  // Marcar el botón activo
+  senalButtons.forEach(b => b.classList.remove('on'));
+  document.querySelector(`.senal-btn[data-senal="${tipo}"]`).classList.add('on');
+  // Forzar transición narrativa
+  NARR.fase = 'parado';
+}
+
+senalButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    inyectarSenal(btn.dataset.senal);
+  });
+});
+
+btnReset.addEventListener('click', () => {
+  // Reiniciar el experimento completo manteniendo la señal seleccionada
+  SIM.tInyeccion = SIM.t;
+  SIM.buffer = [];
+  SIM.e = 0;
+  SIM.e_prev = 0;
+  SIM.m = 0;
+  NARR.fase = 'parado';
+});
+
+// =========================================================================
+//   CONTROLES DE VELOCIDAD Y PAUSA
+// =========================================================================
+const spdPause = document.getElementById('spdPause');
+const spdStep = document.getElementById('spdStep');
+const spd025 = document.getElementById('spd025');
+const spd050 = document.getElementById('spd050');
+const spd1   = document.getElementById('spd1');
+const speedBtns = [spdPause, spd025, spd050, spd1];
+
+function setSpeed(mul, btn) {
+  SIM.speedMul = mul;
+  SIM.paused = (mul === 0);
+  speedBtns.forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  spdStep.disabled = !SIM.paused;
+  // Vaciar el accumulator al cambiar de velocidad para no arrastrar tiempo acumulado
+  accumulator = 0;
+  // Actualizar status del header
+  const statusText = document.getElementById('statusText');
+  const statusDot = document.querySelector('.status .dot');
+  if (mul === 0) {
+    statusText.textContent = 'PAUSADO';
+    statusDot.style.background = 'var(--error)';
+    statusDot.style.animation = 'none';
+  } else if (mul === 1) {
+    statusText.textContent = 'EN MARCHA';
+    statusDot.style.background = 'var(--output)';
+    statusDot.style.animation = 'pulse 1.6s ease-in-out infinite';
+  } else {
+    statusText.textContent = 'CÁMARA LENTA · ' + (mul === 0.25 ? '¼×' : '½×');
+    statusDot.style.background = 'var(--control)';
+    statusDot.style.animation = 'pulse 1.6s ease-in-out infinite';
+  }
+}
+
+spdPause.addEventListener('click', () => setSpeed(0, spdPause));
+spd025.addEventListener('click',  () => setSpeed(0.25, spd025));
+spd050.addEventListener('click',  () => setSpeed(0.5, spd050));
+spd1.addEventListener('click',    () => setSpeed(1.0, spd1));
+
+// Paso a paso: avanza ~0.1 s (10 pasos de dt=0.01) cuando está en pausa
+spdStep.addEventListener('click', () => {
+  if (!SIM.paused) return;
+  for (let i = 0; i < 10; i++) {
+    step();
+    updateNarration();
+  }
+});
+
+// Arrancar
+requestAnimationFrame(loop);
+
+</script>
+
+</body>
+</html>

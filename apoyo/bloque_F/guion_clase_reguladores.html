@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Guión de clase · Reguladores PID · TECI II</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  --paper: #FAF7F0;
+  --paper-2: #F2EDE0;
+  --ink: #1A1814;
+  --ink-soft: #3A352E;
+  --muted: #7A736A;
+  --rule: #D9D2C2;
+  --rule-soft: #E8E2D5;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Outfit', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --reg-p: #1A75BC;
+  --reg-i: #0B6E4F;
+  --reg-d: #B5841A;
+  --reg-pi: #6E4FA0;
+  --reg-pd: #B5651D;
+  --reg-pid: #1A1814;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.5;
+  font-size: 11pt;
+}
+
+.wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2.5rem 2.5rem 4rem;
+}
+
+header {
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+h1 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 2.2rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+  line-height: 1.15;
+}
+h1 em { font-style: italic; font-weight: 500; color: var(--ink-soft); }
+.subtitle {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.timeline {
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.4rem 1.6rem;
+  margin: 2rem 0 2.5rem;
+}
+.timeline h2 {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 1rem;
+  font-weight: 600;
+}
+.timeline-row {
+  display: grid;
+  grid-template-columns: 70px 130px 1fr;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px dashed var(--rule);
+  font-size: 0.95rem;
+}
+.timeline-row:last-child { border-bottom: none; }
+.tl-time {
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.tl-block {
+  font-family: var(--serif);
+  font-weight: 600;
+}
+.tl-takeaway { color: var(--ink-soft); font-style: italic; }
+
+.bloque {
+  border-top: 3px solid;
+  background: white;
+  padding: 1.6rem 1.7rem;
+  margin: 1.4rem 0;
+  border-radius: 0 0 4px 4px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.bloque.intro { border-top-color: var(--ink); }
+.bloque.p { border-top-color: var(--reg-p); }
+.bloque.i { border-top-color: var(--reg-i); }
+.bloque.d { border-top-color: var(--reg-d); }
+.bloque.pi { border-top-color: var(--reg-pi); }
+.bloque.pd { border-top-color: var(--reg-pd); }
+.bloque.pid { border-top-color: var(--reg-pid); }
+.bloque.cierre { border-top-color: var(--ink); }
+
+.bloque-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.bloque-num {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.bloque.p .bloque-num { color: var(--reg-p); }
+.bloque.i .bloque-num { color: var(--reg-i); }
+.bloque.d .bloque-num { color: var(--reg-d); }
+.bloque.pi .bloque-num { color: var(--reg-pi); }
+.bloque.pd .bloque-num { color: var(--reg-pd); }
+.bloque.pid .bloque-num { color: var(--reg-pid); }
+.bloque-tiempo {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.bloque h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin: 0.3rem 0 0;
+  letter-spacing: -0.01em;
+}
+.bloque h3 em { font-style: italic; font-weight: 500; }
+
+.linea {
+  margin: 0.9rem 0;
+  display: grid;
+  grid-template-columns: 95px 1fr;
+  gap: 0.85rem;
+  align-items: start;
+}
+.linea-tag {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 0.18rem;
+}
+.linea-content {
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+.dices {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.02rem;
+  color: var(--ink);
+  border-left: 2px solid var(--ink);
+  padding-left: 0.85rem;
+}
+.haces { color: var(--ink-soft); }
+.haces code {
+  font-family: var(--mono);
+  background: var(--paper-2);
+  padding: 0.05rem 0.35rem;
+  border-radius: 2px;
+  font-size: 0.88em;
+}
+.pizarra {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-weight: 600;
+  padding: 0.55rem 0.85rem;
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 0.92rem;
+}
+.pregunta {
+  background: #FFF8E6;
+  border-left: 3px solid #B5841A;
+  padding: 0.7rem 1rem;
+  border-radius: 0 3px 3px 0;
+  font-size: 0.92rem;
+}
+.pregunta-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8B6310;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.cierre-box {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 1.6rem 1.8rem;
+  border-radius: 6px;
+  margin-top: 2rem;
+}
+.cierre-box h3 {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  margin: 0 0 1rem;
+  font-weight: 600;
+}
+.cierre-box .truco {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(250, 247, 240, 0.92);
+}
+.cierre-box .truco strong { font-style: normal; color: var(--paper); }
+.tabla-firmas {
+  margin-top: 1.2rem;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  font-family: var(--mono);
+}
+.tabla-firmas th, .tabla-firmas td {
+  padding: 0.55rem 0.6rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(250, 247, 240, 0.18);
+}
+.tabla-firmas th {
+  font-weight: 700;
+  color: rgba(250, 247, 240, 0.7);
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+@media print {
+  body { font-size: 10pt; }
+  .wrap { padding: 1.5rem; max-width: 100%; }
+  .bloque { page-break-inside: avoid; }
+  .timeline { page-break-after: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Guión de clase · Tecnología e Ingeniería II · Bloque F · Apartado 7</div>
+  <h1>Reguladores <em>P, I, D</em><br>en 20 minutos</h1>
+  <p class="subtitle">Recorrido por las seis animaciones interactivas con frases concretas, indicaciones de qué pulsar y resúmenes de pizarra. Pensado para una clase de 50 minutos donde los reguladores son la mitad: 20&nbsp;min de exposición guiada + 30&nbsp;min para que los alumnos jueguen con las animaciones por su cuenta.</p>
+</header>
+
+<div class="timeline">
+  <h2>Línea de tiempo</h2>
+  <div class="timeline-row"><span class="tl-time">0 – 2</span><span class="tl-block">Pizarra inicial</span><span class="tl-takeaway">Qué es regular: ref, salida, error</span></div>
+  <div class="timeline-row"><span class="tl-time">2 – 5</span><span class="tl-block">P · Ventilador</span><span class="tl-takeaway">P se queda corto</span></div>
+  <div class="timeline-row"><span class="tl-time">5 – 8</span><span class="tl-block">I · Depósito</span><span class="tl-takeaway">I llega exacto, pero oscila</span></div>
+  <div class="timeline-row"><span class="tl-time">8 – 10</span><span class="tl-block">D · Señales</span><span class="tl-takeaway">D mira velocidad. No sirve sola</span></div>
+  <div class="timeline-row"><span class="tl-time">10 – 13</span><span class="tl-block">PD · Brazo</span><span class="tl-takeaway">PD frena a tiempo, pero deja error</span></div>
+  <div class="timeline-row"><span class="tl-time">13 – 15</span><span class="tl-block">PI · Cinta</span><span class="tl-takeaway">PI = lo más usado en industria</span></div>
+  <div class="timeline-row"><span class="tl-time">15 – 19</span><span class="tl-block">PID · Horno</span><span class="tl-takeaway">PID = los tres + robusto a perturbaciones</span></div>
+  <div class="timeline-row"><span class="tl-time">19 – 20</span><span class="tl-block">Cierre</span><span class="tl-takeaway">Truco mnemotécnico</span></div>
+</div>
+
+<!-- ============ INTRO ============ -->
+<section class="bloque intro">
+  <div class="bloque-header">
+    <span class="bloque-num">00 · Introducción</span>
+    <span class="bloque-tiempo">Min 0 → 2</span>
+  </div>
+  <h3>Pizarra inicial · <em>antes de tocar nada</em></h3>
+
+  <div class="linea">
+    <span class="linea-tag">Dices</span>
+    <div class="linea-content dices">
+      "Controlar es esto: tienes una consigna — lo que quieres — y una salida — lo que el sistema te da. La diferencia entre las dos es el ERROR. El regulador mira el error y decide qué señal mandar al motor o al calefactor. Hoy vamos a ver tres maneras distintas de mirar el error, y cómo se combinan para conseguir lo mejor de cada una."
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Haces</span>
+    <div class="linea-content haces">
+      Dibujas en pizarra: una flecha "<code>r</code>" entrando, un bloque "regulador", un bloque "sistema", una flecha "<code>c</code>" saliendo. Marca con un círculo rojo el sumador donde se calcula <code>e = r − c</code>.
+    </div>
+  </div>
+</section>
+
+<!-- ============ P ============ -->
+<section class="bloque p">
+  <div class="bloque-header">
+    <span class="bloque-num">01 · Regulador P</span>
+    <span class="bloque-tiempo">Min 2 → 5</span>
+  </div>
+  <h3>Ventilador con regulador <em>proporcional</em></h3>
+
+  <div class="linea">
+    <span class="linea-tag">Abres</span>
+    <div class="linea-content haces">Anim. 01 · <code>Animacion_Reg_P_Ventilador_v3.html</code></div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Dices</span>
+    <div class="linea-content dices">
+      "Esto es lo más simple. El regulador P mira el error <em>ahora</em>. Si el error es grande, empuja fuerte; si es pequeño, empuja poco. Vamos a ver qué pasa."
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Haces</span>
+    <div class="linea-content haces">
+      Pulsa <code>½×</code> y luego play. Antes de que termine, pregunta a los alumnos: <em>"¿Llegará a 1500 rpm o no?"</em> Que apuesten a mano alzada.
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Resultado</span>
+    <div class="linea-content haces">
+      El ventilador se queda en torno a <strong>1320 rpm</strong>. Hay un hueco de unos 180 rpm que no desaparece nunca.
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Dices</span>
+    <div class="linea-content dices">
+      "¿Por qué no llega? Porque cuando el error es pequeño, la señal del regulador es pequeña, y eso no basta para vencer el rozamiento. El P se queda corto. Es lo habitual con un P puro: deja un <em>error en régimen permanente</em> siempre que hay rozamientos, pérdidas o cargas que mantienen el error."
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Haces</span>
+    <div class="linea-content haces">
+      Mueve el slider de <code>K<sub>p</sub></code> a 1,5. Llega más cerca pero oscila. Vuelve a 0,3. Conclusión: subir Kp ayuda pero no elimina el error.
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Pizarra</span>
+    <div class="linea-content"><span class="pizarra">P → suele dejar error en régimen permanente</span></div>
+  </div>
+
+  <div class="pregunta">
+    <span class="pregunta-tag">Si te preguntan</span>
+    <em>"Y si Kp fuera infinito, ¿llegaría a la consigna?"</em> — Sí, en teoría, pero la realidad es que el motor satura, el sistema oscila salvajemente y se vuelve inestable. Subir Kp tiene un límite práctico.
+  </div>
+</section>
+
+<!-- ============ I ============ -->
+<section class="bloque i">
+  <div class="bloque-header">
+    <span class="bloque-num">02 · Regulador I</span>
+    <span class="bloque-tiempo">Min 5 → 8</span>
+  </div>
+  <h3>Depósito con regulador <em>integral</em></h3>
+
+  <div class="linea">
+    <span class="linea-tag">Abres</span>
+    <div class="linea-content haces">Anim. 02 · <code>Animacion_Reg_I_Deposito_v1.html</code></div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Dices</span>
+    <div class="linea-content dices">
+      "¿Cómo eliminamos ese error que dejaba el P? Con MEMORIA. La I no mira solo el error de ahora — suma todo el error que ha habido desde el principio. Por eso, aunque el error sea pequeño, la I sigue creciendo, sigue empujando, hasta que el error es exactamente cero."
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Haces</span>
+    <div class="linea-content haces">
+      Pulsa play. Mira el agua subir hasta el 60% exacto. Hace un pequeño overshoot, baja, y se asienta clavada en 60%.
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Dices</span>
+    <div class="linea-content dices">
+      "¿Veis? Llega exacto. La I no se rinde hasta que el error es cero. Pero también veis que ha oscilado un poco al llegar. Esa es la pega de la I: es exacta, pero un poco lenta y tiende a sobrepasar."
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Pizarra</span>
+    <div class="linea-content"><span class="pizarra">I → llega exacto. Pero oscila al llegar</span></div>
+  </div>
+
+  <div class="pregunta">
+    <span class="pregunta-tag">Si te preguntan</span>
+    <em>"¿Por qué oscila si el agua ya estaba llegando bien?"</em> — Porque la integral, al haber acumulado mucho error durante la subida, sigue empujando incluso cuando ya estamos en el setpoint. Es como un coche que viene rápido y aunque sueltes el acelerador, la inercia te lleva un poco más allá. La I tiene "inercia matemática".
+  </div>
+</section>
+
+<!-- ============ D ============ -->
+<section class="bloque d">
+  <div class="bloque-header">
+    <span class="bloque-num">03 · Regulador D</span>
+    <span class="bloque-tiempo">Min 8 → 10</span>
+  </div>
+  <h3>Cinco señales por un derivador <em>puro</em></h3>
+
+  <div class="linea">
+    <span class="linea-tag">Abres</span>
+    <div class="linea-content haces">Anim. 03 · <code>Animacion_Reg_D_Senales_v1.html</code></div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Dices</span>
+    <div class="linea-content dices">
+      "Antes de combinar nada, vamos a entender qué hace la D sola. La D mira la VELOCIDAD del error: si el error está cambiando rápido, reacciona; si está quieto, no hace nada. Aquí no hay realimentación: solo el derivador en abierto recibiendo distintos tipos de error."
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Haces</span>
+    <div class="linea-content haces">
+      Pulsa los 5 botones de señal en orden, brevemente: <strong>constante</strong> (m=0, ¡no hace nada!), <strong>escalón</strong> (un pico instantáneo), <strong>rampa</strong> (m constante), <strong>pulso</strong> (dos picos), <strong>sinusoide</strong> (señal desfasada 90°).
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Dices</span>
+    <div class="linea-content dices">
+      "Por eso la D rara vez se usa sola: si vuestra consigna es estable, la D no hace nada. La D tiene sentido ACOMPAÑANDO a un P o a un PI."
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Pizarra</span>
+    <div class="linea-content"><span class="pizarra">D → anticipa. Rara vez se usa sola</span></div>
+  </div>
+</section>
+
+<!-- ============ PD ============ -->
+<section class="bloque pd">
+  <div class="bloque-header">
+    <span class="bloque-num">04 · Regulador PD</span>
+    <span class="bloque-tiempo">Min 10 → 13</span>
+  </div>
+  <h3>Brazo robótico con <em>PD</em></h3>
+
+  <div class="linea">
+    <span class="linea-tag">Abres</span>
+    <div class="linea-content haces">Anim. 05 · <code>Animacion_Reg_PD_BrazoRobot_v2.html</code></div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Dices</span>
+    <div class="linea-content dices">
+      "Aquí la D demuestra para qué sirve. Tenemos un brazo que tiene que llegar a 90°. Lo voy a probar primero con P solo."
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Haces</span>
+    <div class="linea-content haces">
+      Asegúrate de que está en modo <strong>P solo</strong>, <code>K<sub>p</sub></code>=0,5. Pulsa play.
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Resultado</span>
+    <div class="linea-content haces">
+      El brazo se vuelve loco: pasa de 90 a 164°, se vuelve, oscila eternamente.
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Dices</span>
+    <div class="linea-content dices">
+      "¿Veis? El P solo no puede frenar. Reacciona al error pero, cuando el brazo va lanzado, no tiene cómo detenerlo. Ahora encendemos la D."
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Haces</span>
+    <div class="linea-content haces">
+      Pulsa <strong>Reiniciar</strong>. Cambia el toggle a <strong>PD</strong>. Mismo <code>K<sub>p</sub></code>=0,5. Pulsa play.
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Resultado</span>
+    <div class="linea-content haces">
+      El brazo va a 90,5° y se queda. Limpio, en 2,7 segundos.
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Dices</span>
+    <div class="linea-content dices">
+      "La D ha detectado que el brazo iba muy rápido HACIA la consigna y ha empezado a frenar antes de llegar. ¿Veis cómo el indicador del motor se vuelve azul a mitad de camino? Eso es la D restando potencia. Frenando. Y la oscilación queda mucho más amortiguada."
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Pizarra</span>
+    <div class="linea-content"><span class="pizarra">PD → rápido y amortiguado. Pero suele dejar error (no hay I)</span></div>
+  </div>
+</section>
+
+<!-- ============ PI ============ -->
+<section class="bloque pi">
+  <div class="bloque-header">
+    <span class="bloque-num">05 · Regulador PI</span>
+    <span class="bloque-tiempo">Min 13 → 15</span>
+  </div>
+  <h3>Cinta transportadora con <em>PI</em></h3>
+
+  <div class="linea">
+    <span class="linea-tag">Abres</span>
+    <div class="linea-content haces">Anim. 04 · <code>Animacion_Reg_PI_Cinta_v3.html</code></div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Dices</span>
+    <div class="linea-content dices">
+      "El PI es uno de los reguladores más usados en la industria. La P para reaccionar e la I para eliminar el error permanente."
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Haces</span>
+    <div class="linea-content haces">
+      Pulsa el toggle <strong>P solo</strong> y play. Se queda corto. Reinicia. Cambia a <strong>PI</strong>. Play. Llega exacto.
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Pizarra</span>
+    <div class="linea-content"><span class="pizarra">PI → rápido + exacto. Muy usado en industria</span></div>
+  </div>
+</section>
+
+<!-- ============ PID ============ -->
+<section class="bloque pid">
+  <div class="bloque-header">
+    <span class="bloque-num">06 · Regulador PID</span>
+    <span class="bloque-tiempo">Min 15 → 19</span>
+  </div>
+  <h3>Horno industrial con <em>las cuatro acciones comparadas</em></h3>
+
+  <div class="linea">
+    <span class="linea-tag">Abres</span>
+    <div class="linea-content haces">Anim. 06 · <code>Animacion_Reg_PID_Horno_v1.html</code></div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Dices</span>
+    <div class="linea-content dices">
+      "Y ahora el plato fuerte. Las tres acciones juntas. P para reaccionar rápido. I para llegar exacto. D para amortiguar las oscilaciones. Esto es el PID."
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Haces</span>
+    <div class="linea-content haces">
+      Asegúrate de que el toggle está en <strong>PID</strong>. Pulsa play. La temperatura sube, llega cerca de 80°C con un overshoot moderado, se asienta en torno a 80.
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Dices</span>
+    <div class="linea-content dices">
+      "Llega exacto. Pero ahora viene la prueba real. Imaginad que un cocinero abre la puerta del horno para meter una bandeja fría. Entra aire frío. ¿Qué hace cada regulador?"
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Haces</span>
+    <div class="linea-content haces">
+      Cuando el horno esté estable, pulsa <strong>"Abrir puerta"</strong>. Drop de temperatura. La I detecta el error sostenido y compensa. Vuelve a 80°C en pocos segundos.
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Dices</span>
+    <div class="linea-content dices">
+      "Ahora os pregunto: ¿qué pasaría si estuviéramos en modo P? ¿O en modo PD? Os doy una pista: ninguno de los dos tiene I. Y la I es la única que detecta error sostenido."
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Haces</span>
+    <div class="linea-content haces">
+      <em>Si te queda tiempo</em>: cambia a modo <strong>P</strong>, reinicia, deja correr, abre puerta. Verás que NO se recupera. Cierra el bucle: solo PI y PID corrigen perturbaciones.
+    </div>
+  </div>
+
+  <div class="linea">
+    <span class="linea-tag">Pizarra</span>
+    <div class="linea-content"><span class="pizarra">PID bien ajustado → rápido + exacto + amortiguado + robusto a perturbaciones</span></div>
+  </div>
+
+  <div class="pregunta">
+    <span class="pregunta-tag">Si te preguntan</span>
+    <em>"¿Por qué se usa PID y no siempre solo PI si ya es exacto?"</em> — Porque cuando el sistema tiene mucha inercia (un horno grande, un brazo pesado, un coche), el PI por sí solo oscila demasiado al llegar. La D es la que da el toque de suavidad final. PID es PI + amortiguamiento.
+  </div>
+</section>
+
+<!-- ============ CIERRE ============ -->
+<section class="bloque cierre">
+  <div class="bloque-header">
+    <span class="bloque-num">07 · Cierre</span>
+    <span class="bloque-tiempo">Min 19 → 20</span>
+  </div>
+  <h3>El truco que cuela en cualquier examen</h3>
+
+  <div class="cierre-box">
+    <h3>El nombre del regulador <em>contiene</em> sus virtudes.</h3>
+    <p class="truco">
+      Si lleva la <strong>P</strong> → reacciona rápido.<br>
+      Si lleva la <strong>I</strong> → llega exacto (elimina el error permanente).<br>
+      Si lleva la <strong>D</strong> → reduce oscilaciones (es más suave).
+    </p>
+    <p class="truco" style="margin-top: 1rem;">
+      <strong>En el examen:</strong> "¿qué regulador uso para X?" → mira qué necesitas. ¿Precisión absoluta? Necesita I. ¿No debe sobrepasarse mucho? Necesita D. ¿Tiene que reaccionar rápido? Necesita P. Suma las letras y tienes el regulador.
+    </p>
+
+    <table class="tabla-firmas">
+      <tr><th>Regulador</th><th>Rápido</th><th>Exacto</th><th>Suave</th></tr>
+      <tr><td><strong>P</strong></td><td>✓</td><td>—</td><td>—</td></tr>
+      <tr><td><strong>I</strong></td><td>—</td><td>✓</td><td>—</td></tr>
+      <tr><td><strong>D</strong></td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td><strong>PI</strong></td><td>✓</td><td>✓</td><td>—</td></tr>
+      <tr><td><strong>PD</strong></td><td>✓</td><td>—</td><td>✓</td></tr>
+      <tr><td><strong>PID</strong></td><td>✓</td><td>✓</td><td>✓</td></tr>
+    </table>
+    <p class="truco" style="margin-top: 1.2rem; font-size: 0.85rem; opacity: 0.8;">
+      <strong>Nota técnica:</strong> "rápido" se refiere a respuesta inmediata al error; "exacto" a eliminar el error en régimen permanente; "amortiguado" a reducir las oscilaciones. Un PID bien ajustado las consigue las tres; uno mal ajustado puede oscilar igual.
+    </p>
+  </div>
+</section>
+
+<footer>
+  Guión de clase v2 · TECI II · Bloque F · Apartado 7 · IES Jiménez de Quesada
+</footer>
+
+</div>
+</body>
+</html>

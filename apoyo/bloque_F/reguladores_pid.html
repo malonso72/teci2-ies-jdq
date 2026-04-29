@@ -1,0 +1,3150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reguladores · P, I, D y combinaciones · TECI II · Bloque F</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #FAF7F0;
+  --paper-2: #F4EFE3;
+  --ink: #1A1814;
+  --ink-soft: #3A352E;
+  --muted: #7A736A;
+  --rule: #D9D2C2;
+  --rule-soft: #E8E2D3;
+  --surface: #FFFFFF;
+
+  --reference: #1A1814;
+  --output: #0B6E4F;
+  --output-light: #C7E9D9;
+  --output-tint: rgba(11, 110, 79, 0.08);
+  --error: #B5341E;
+  --error-light: #F2D2C9;
+  --error-tint: rgba(181, 52, 30, 0.18);
+
+  --signal: #1A75BC;
+  --signal-light: #BFE2F4;
+
+  --warning: #B5841A;
+  --warning-light: rgba(181, 132, 26, 0.12);
+  --warning-tint: rgba(181, 132, 26, 0.18);
+
+  /* Colores específicos para cada regulador */
+  --reg-p: #1A75BC;
+  --reg-i: #0B6E4F;
+  --reg-d: #B5841A;
+  --reg-pi: #6E4FA0;
+  --reg-pd: #B5651D;
+  --reg-pid: #1A1814;
+
+  --shadow-1: 0 1px 2px rgba(26, 24, 20, 0.04), 0 4px 12px rgba(26, 24, 20, 0.06);
+  --shadow-2: 0 2px 4px rgba(26, 24, 20, 0.04), 0 12px 32px rgba(26, 24, 20, 0.10);
+
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse at top left, rgba(26, 117, 188, 0.04), transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(11, 110, 79, 0.04), transparent 50%);
+  background-attachment: fixed;
+}
+
+.container { max-width: 1320px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+/* ============ HEADER ============ */
+header.masthead {
+  border-top: 4px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 1.25rem 0 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.masthead-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.masthead-meta .left, .masthead-meta .right { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+
+h1.title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2rem, 5.5vw, 4.2rem);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144;
+  margin-bottom: 1rem;
+}
+h1.title em { font-style: italic; font-weight: 400; color: var(--ink-soft); }
+
+.subtitle {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  color: var(--ink-soft);
+  max-width: 64ch;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+
+.scope-pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+.scope-pill {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  padding: 0.35rem 0.7rem;
+  border-radius: 2px;
+}
+
+/* ============ SECTIONS ============ */
+section { margin-bottom: 4rem; }
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.section-label::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--ink);
+}
+
+h2.section-heading {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.25rem;
+  max-width: 36ch;
+}
+h2.section-heading em { font-style: italic; color: var(--ink-soft); }
+
+.lede {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 65ch;
+  font-weight: 400;
+}
+.lede .dropcap {
+  font-family: var(--serif);
+  font-weight: 700;
+  float: left;
+  font-size: 4.2rem;
+  line-height: 0.85;
+  padding: 0.4rem 0.6rem 0 0;
+  color: var(--ink);
+}
+.lede em { color: var(--ink); font-style: italic; font-weight: 500; }
+.lede strong { color: var(--ink); font-weight: 600; font-style: normal; }
+
+.note-prose {
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 70ch;
+  margin-top: 1.5rem;
+}
+.note-prose em { color: var(--ink); font-style: italic; font-weight: 500; }
+.note-prose strong { color: var(--ink); font-weight: 600; font-style: normal; }
+.note-prose code { font-family: var(--mono); font-size: 0.92em; background: var(--warning-light); padding: 1px 6px; border-radius: 2px; color: var(--ink); }
+
+/* ============ CONCEPTS ============ */
+.concepts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+.concept {
+  background: var(--surface);
+  border: 1px solid var(--rule-soft);
+  border-radius: 4px;
+  padding: 1.5rem 1.4rem 1.4rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.concept:hover { transform: translateY(-2px); box-shadow: var(--shadow-1); }
+.concept .num {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+.concept h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+.concept p { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.55; }
+.concept .formula {
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--rule);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* ============ BLOCK DIAGRAM ============ */
+.block-section {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 2rem;
+  margin-top: 2rem;
+  box-shadow: var(--shadow-1);
+}
+.diagram-wrap {
+  background: var(--paper-2);
+  border-radius: 4px;
+  padding: 1.5rem 1rem;
+  position: relative;
+}
+.diagram-wrap svg { width: 100%; height: auto; display: block; }
+
+/* ============ THREE ACTIONS GRID (P/I/D pure visualization) ============ */
+.three-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+@media (max-width: 800px) { .three-actions { grid-template-columns: 1fr; } }
+
+.action-card {
+  background: var(--surface);
+  border: 1px solid var(--rule-soft);
+  border-radius: 6px;
+  padding: 1.4rem;
+  border-top: 3px solid;
+}
+.action-card.p { border-top-color: var(--reg-p); }
+.action-card.i { border-top-color: var(--reg-i); }
+.action-card.d { border-top-color: var(--reg-d); }
+
+.action-card .ac-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.action-card.p .ac-tag { color: var(--reg-p); }
+.action-card.i .ac-tag { color: var(--reg-i); }
+.action-card.d .ac-tag { color: var(--reg-d); }
+
+.action-card h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+.action-card .ac-formula {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: var(--paper-2);
+  padding: 0.5rem 0.75rem;
+  border-radius: 3px;
+  margin: 0.5rem 0 0.85rem;
+}
+.action-card.p .ac-formula { color: var(--reg-p); }
+.action-card.i .ac-formula { color: var(--reg-i); }
+.action-card.d .ac-formula { color: var(--reg-d); }
+.action-card p {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.action-card .ac-mini-canvas {
+  background: var(--paper-2);
+  border-radius: 3px;
+  margin-top: 0.85rem;
+  padding: 0.4rem;
+}
+.action-card canvas { display: block; width: 100%; height: auto; }
+
+/* ============ ANIMATION CARDS (§ 09) ============ */
+.anim-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+@media (max-width: 1000px) { .anim-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .anim-grid { grid-template-columns: 1fr; } }
+
+.anim-card {
+  background: var(--surface);
+  border: 1px solid var(--rule-soft);
+  border-radius: 6px;
+  padding: 1.5rem 1.4rem 1.3rem;
+  border-top: 3px solid;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.anim-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px -8px rgba(0,0,0,0.18);
+}
+
+.anim-card.p   { border-top-color: var(--reg-p); }
+.anim-card.i   { border-top-color: var(--reg-i); }
+.anim-card.d   { border-top-color: var(--reg-d); }
+.anim-card.pi  { border-top-color: var(--reg-pi); }
+.anim-card.pd  { border-top-color: var(--reg-pd); }
+.anim-card.pid { border-top-color: var(--reg-pid); }
+
+.anim-card .ac-num {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.anim-card .ac-tag {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.anim-card .ac-tag::before {
+  content: "●";
+  font-size: 0.85rem;
+}
+.anim-card.p   .ac-tag { color: var(--reg-p); }
+.anim-card.i   .ac-tag { color: var(--reg-i); }
+.anim-card.d   .ac-tag { color: var(--reg-d); }
+.anim-card.pi  .ac-tag { color: var(--reg-pi); }
+.anim-card.pd  .ac-tag { color: var(--reg-pd); }
+.anim-card.pid .ac-tag { color: var(--reg-pid); }
+
+.anim-card h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.18rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.45rem;
+  line-height: 1.25;
+}
+
+.anim-card .ac-system {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.anim-card .ac-desc {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  flex-grow: 1;
+  margin-bottom: 1.1rem;
+}
+.anim-card .ac-desc em {
+  color: var(--ink);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.anim-card .ac-launch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.7rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.anim-card.p   .ac-launch { background: var(--reg-p); }
+.anim-card.i   .ac-launch { background: var(--reg-i); }
+.anim-card.d   .ac-launch { background: var(--reg-d); }
+.anim-card.pi  .ac-launch { background: var(--reg-pi); }
+.anim-card.pd  .ac-launch { background: var(--reg-pd); }
+.anim-card.pid .ac-launch { background: var(--reg-pid); }
+.anim-card .ac-launch:hover { filter: brightness(1.1); }
+
+.anim-card .ac-launch svg {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+}
+
+/* Nota sobre cómo abrir las animaciones */
+.anim-prelude {
+  background: var(--paper-2);
+  border-left: 3px solid var(--ink);
+  padding: 1.1rem 1.4rem;
+  border-radius: 0 4px 4px 0;
+  margin-top: 1.5rem;
+  font-size: 0.93rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.anim-prelude strong { color: var(--ink); }
+
+
+/* ============ REGULATOR SECTION (P, I, D individual) ============ */
+.regulator-block {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.75rem;
+  margin-top: 2rem;
+  box-shadow: var(--shadow-1);
+  border-left: 4px solid;
+}
+.regulator-block.p { border-left-color: var(--reg-p); }
+.regulator-block.i { border-left-color: var(--reg-i); }
+.regulator-block.d { border-left-color: var(--reg-d); }
+
+.regulator-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.regulator-header h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: -0.015em;
+}
+.regulator-block.p .regulator-header h3 em { color: var(--reg-p); font-style: italic; font-weight: 500; }
+.regulator-block.i .regulator-header h3 em { color: var(--reg-i); font-style: italic; font-weight: 500; }
+.regulator-block.d .regulator-header h3 em { color: var(--reg-d); font-style: italic; font-weight: 500; }
+
+.regulator-formula {
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.45rem 0.85rem;
+  background: var(--paper-2);
+  border-radius: 3px;
+  border: 1px dashed var(--rule);
+}
+.regulator-block.p .regulator-formula { color: var(--reg-p); }
+.regulator-block.i .regulator-formula { color: var(--reg-i); }
+.regulator-block.d .regulator-formula { color: var(--reg-d); }
+
+.regulator-grid-content {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+@media (max-width: 800px) { .regulator-grid-content { grid-template-columns: 1fr; } }
+
+.reg-text-content p {
+  font-size: 0.96rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin-bottom: 0.85rem;
+}
+.reg-text-content p strong { color: var(--ink); font-weight: 600; }
+.reg-text-content p em { color: var(--ink); font-style: italic; }
+
+.reg-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+@media (max-width: 600px) { .reg-features { grid-template-columns: 1fr; } }
+
+.reg-feat {
+  padding: 0.55rem 0.75rem;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.reg-feat.pro { background: var(--output-tint); color: var(--output); border: 1px solid var(--output-light); }
+.reg-feat.con { background: var(--error-tint); color: var(--error); border: 1px solid var(--error-light); }
+.reg-feat .icon { font-weight: 700; }
+
+.reg-example {
+  margin-top: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--paper-2);
+  border-radius: 4px;
+  border-left: 3px solid var(--rule);
+}
+.reg-example .ex-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.reg-example p {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  margin-bottom: 0;
+}
+
+.reg-canvas-wrap {
+  background: var(--paper-2);
+  border-radius: 4px;
+  padding: 0.8rem;
+  position: relative;
+}
+.reg-canvas-wrap canvas { display: block; width: 100%; height: auto; }
+.reg-canvas-caption {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  text-align: center;
+  margin-top: 0.5rem;
+  line-height: 1.45;
+}
+
+/* ============ COMBINED REGULATORS GRID (PI, PD, PID) ============ */
+.combined-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+@media (max-width: 900px) { .combined-grid { grid-template-columns: 1fr; } }
+
+.combined-card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.5rem;
+  border-top: 4px solid;
+  box-shadow: var(--shadow-1);
+  display: flex;
+  flex-direction: column;
+}
+.combined-card.pi { border-top-color: var(--reg-pi); }
+.combined-card.pd { border-top-color: var(--reg-pd); }
+.combined-card.pid { border-top-color: var(--reg-pid); }
+
+.combined-card .cc-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.combined-card.pi .cc-tag { color: var(--reg-pi); }
+.combined-card.pd .cc-tag { color: var(--reg-pd); }
+.combined-card.pid .cc-tag { color: var(--reg-pid); }
+
+.combined-card h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: -0.015em;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.combined-card .cc-formula {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: var(--paper-2);
+  padding: 0.5rem 0.7rem;
+  border-radius: 3px;
+  margin-bottom: 0.85rem;
+}
+.combined-card.pi .cc-formula { color: var(--reg-pi); }
+.combined-card.pd .cc-formula { color: var(--reg-pd); }
+.combined-card.pid .cc-formula { color: var(--reg-pid); }
+
+.combined-card .cc-canvas-wrap {
+  background: var(--paper-2);
+  border-radius: 3px;
+  padding: 0.4rem;
+  margin-bottom: 0.85rem;
+}
+.combined-card canvas { display: block; width: 100%; height: auto; }
+
+.combined-card p {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  margin-bottom: 0.75rem;
+}
+.combined-card .cc-summary {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--rule);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+.combined-card .cc-summary strong { color: var(--ink); font-weight: 700; }
+
+/* ============ COMPARISON SIM ============ */
+.comparison-sim {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.75rem;
+  margin-top: 2rem;
+  box-shadow: var(--shadow-1);
+}
+
+.comparison-sim .sim-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.sim-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--signal);
+  font-weight: 600;
+}
+.sim-title {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.comparison-sim .canvas-wrap {
+  background: var(--paper-2);
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+.comparison-sim canvas { display: block; width: 100%; height: auto; }
+
+.comparison-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  background: var(--paper-2);
+  border-radius: 4px;
+}
+
+.sim-btn {
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.15s ease;
+}
+.sim-btn:hover { background: var(--signal); }
+.sim-btn.secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+}
+.sim-btn.secondary:hover { background: var(--paper); border-color: var(--ink); }
+.sim-btn svg { width: 11px; height: 11px; }
+
+.regulator-toggles {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.reg-toggle {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  user-select: none;
+  transition: all 0.15s ease;
+}
+.reg-toggle .swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  transition: opacity 0.15s ease;
+}
+.reg-toggle.off { opacity: 0.4; }
+.reg-toggle.off .swatch { background: var(--rule); }
+
+/* ============ COMPARACIONES GUIADAS (presets §08) ============ */
+.comparison-presets {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--rule);
+}
+.cp-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.85rem;
+}
+.cp-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.cp-btn {
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.55rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.cp-btn:hover {
+  background: var(--surface);
+  border-color: var(--ink);
+  transform: translateY(-1px);
+}
+.cp-btn.active {
+  background: var(--ink);
+  color: var(--surface);
+  border-color: var(--ink);
+}
+.cp-context {
+  margin-top: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border-left: 3px solid var(--ink);
+  border-radius: 0 4px 4px 0;
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.cp-context strong { color: var(--ink); }
+.cp-context-title {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+
+/* ============ DECISION TABLE ============ */
+.decision-table {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  margin-top: 2rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-1);
+}
+.decision-table .dt-header {
+  background: var(--paper-2);
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  font-weight: 600;
+}
+.decision-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.4fr 220px;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--rule-soft);
+  gap: 1.25rem;
+}
+@media (max-width: 800px) { .decision-row { grid-template-columns: 1fr; gap: 0.5rem; } }
+.decision-row:first-of-type { border-top: 0; }
+
+.decision-row .dt-cell {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.decision-row .dt-cell.cond {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.decision-row .dt-cell.example {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.95rem;
+}
+.decision-row .dt-pill {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: 3px;
+  border: 1px solid;
+}
+.decision-row .dt-pill.p { background: rgba(26, 117, 188, 0.10); color: var(--reg-p); border-color: rgba(26, 117, 188, 0.3); }
+.decision-row .dt-pill.pi { background: rgba(110, 79, 160, 0.10); color: var(--reg-pi); border-color: rgba(110, 79, 160, 0.3); }
+.decision-row .dt-pill.pd { background: rgba(181, 101, 29, 0.10); color: var(--reg-pd); border-color: rgba(181, 101, 29, 0.3); }
+.decision-row .dt-pill.pid { background: rgba(26, 24, 20, 0.06); color: var(--ink); border-color: rgba(26, 24, 20, 0.2); }
+
+/* ============ KEY POINTS ============ */
+.key-points {
+  background: var(--paper-2);
+  border-radius: 6px;
+  padding: 2rem;
+  margin-top: 2rem;
+  border: 1px solid var(--rule-soft);
+}
+.key-points h3 {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+}
+.key-points ol { list-style: none; counter-reset: kp; }
+.key-points li {
+  counter-increment: kp;
+  padding: 0.85rem 0 0.85rem 3.25rem;
+  position: relative;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+.key-points li:last-child { border-bottom: 0; }
+.key-points li::before {
+  content: counter(kp, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.85rem;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+  width: 2.25rem;
+  text-align: right;
+  padding-right: 0.5rem;
+  border-right: 1px solid var(--ink);
+}
+.key-points li strong {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-style: italic;
+  color: var(--ink);
+}
+.key-points li code {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  background: rgba(26, 24, 20, 0.06);
+  color: var(--ink);
+  padding: 1px 6px;
+  border-radius: 2px;
+}
+
+.formula-recap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.formula-recap .frec {
+  background: var(--surface);
+  border: 1px solid var(--rule-soft);
+  border-radius: 4px;
+  padding: 0.85rem 1rem;
+}
+.formula-recap .frec-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+.formula-recap .frec-formula {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ============ IDEA FINAL (cierre §11) ============ */
+.idea-final {
+  margin-top: 3.5rem;
+  padding: 3rem 0 2.5rem;
+  border-top: 2px solid var(--ink);
+  text-align: center;
+}
+.idea-final-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2.2rem;
+}
+.idea-final-rows {
+  display: inline-block;
+  text-align: left;
+}
+.idea-final-row {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 1.1rem;
+}
+.idea-final-row:last-child { margin-bottom: 0; }
+.idea-final-letter {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 2.4rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  width: 1.5em;
+  text-align: center;
+  flex-shrink: 0;
+  margin-right: 1.2rem;
+}
+.idea-final-arrow {
+  font-family: var(--mono);
+  color: var(--muted);
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  margin-right: 1rem;
+}
+.idea-final-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+@media (max-width: 540px) {
+  .idea-final-letter { font-size: 1.9rem; margin-right: 0.8rem; }
+  .idea-final-text { font-size: 1.1rem; }
+  .idea-final-arrow { margin-right: 0.7rem; }
+}
+
+/* ============ FOOTER ============ */
+footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+footer .signature {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  color: var(--ink-soft);
+}
+
+/* ============ DIAGRAM SVG STYLES ============ */
+.block-rect { fill: var(--surface); stroke: var(--ink); stroke-width: 1.5; }
+.block-rect.regulator { fill: rgba(26, 117, 188, 0.12); stroke: var(--reg-p); stroke-width: 2; }
+.block-text-label {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 600;
+  fill: var(--ink);
+  text-anchor: middle;
+}
+.block-text-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  fill: var(--muted);
+  text-anchor: middle;
+}
+.signal-line { stroke: var(--ink); stroke-width: 1.6; fill: none; }
+.signal-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--ink);
+}
+.feedback-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  fill: var(--muted);
+  font-style: italic;
+}
+.summing-circle {
+  fill: var(--surface);
+  stroke: var(--ink);
+  stroke-width: 1.8;
+}
+.sign-text {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--ink);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+/* ============ ETIQUETA CLAVE PEvAU ============ */
+.pill-pevau {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  padding: 0.22rem 0.6rem;
+  border-radius: 2px;
+  margin-left: 0.6rem;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* ============ SUMARIO §10 ============ */
+.ej-summary {
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.4rem 1.75rem;
+  margin: 1.5rem 0 2.5rem;
+}
+.ej-summary-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.85rem;
+}
+.ej-summary-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem 1.5rem;
+}
+.ej-summary-list li { margin: 0; }
+.ej-summary-list a {
+  display: flex;
+  align-items: baseline;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 0.5rem 0.7rem;
+  border-radius: 4px;
+  transition: background 0.15s ease;
+}
+.ej-summary-list a:hover {
+  background: var(--surface);
+}
+.ej-summary-list .ejs-num {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted);
+  width: 2.2em;
+  flex-shrink: 0;
+}
+.ej-summary-list .ejs-title {
+  font-family: var(--serif);
+  font-size: 0.96rem;
+  flex: 1;
+  margin-right: 0.5rem;
+}
+.ej-summary-list .ejs-tag {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+@media (max-width: 700px) {
+  .ej-summary-list { grid-template-columns: 1fr; }
+}
+
+/* ============ PRACTICE CARDS (interactivo) ============ */
+.practice-block {
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 2rem 2.25rem;
+  margin-top: 2.5rem;
+}
+.practice-block-title {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.practice-block-sub {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  margin-bottom: 1.5rem;
+}
+.practice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+.practice-card {
+  background: var(--surface);
+  border: 1px solid var(--rule-soft);
+  border-radius: 6px;
+  padding: 1.4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.practice-num {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+.practice-svg {
+  background: var(--paper);
+  border: 1px solid var(--rule-soft);
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+.practice-question {
+  font-size: 0.98rem;
+  margin-bottom: 1rem;
+  color: var(--ink);
+}
+.practice-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.practice-options button {
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 0.6rem 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.practice-options button:hover:not(.locked) {
+  background: var(--paper);
+  border-color: var(--ink);
+  transform: translateY(-1px);
+}
+.practice-options button.correct {
+  background: var(--output-tint);
+  border-color: var(--output);
+  color: var(--output);
+}
+.practice-options button.wrong {
+  background: var(--error-tint);
+  border-color: var(--error);
+  color: var(--error);
+}
+.practice-options button.locked {
+  cursor: default;
+  opacity: 0.55;
+}
+.practice-options button.locked.correct,
+.practice-options button.locked.wrong {
+  opacity: 1;
+}
+.practice-feedback {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  padding: 0.85rem 1rem;
+  border-radius: 4px;
+  margin-top: auto;
+}
+.practice-feedback.ok {
+  background: var(--output-tint);
+  border-left: 3px solid var(--output);
+  color: var(--ink-soft);
+}
+.practice-feedback.bad {
+  background: var(--error-tint);
+  border-left: 3px solid var(--error);
+  color: var(--ink-soft);
+}
+.practice-feedback strong { color: var(--ink); }
+.practice-reset {
+  margin-top: 1.25rem;
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 0.55rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+  cursor: pointer;
+}
+.practice-reset:hover { color: var(--ink); border-color: var(--ink); }
+@media (max-width: 600px) {
+  .practice-options { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+
+<!-- ═══ TECI II Cabecera global ═══ -->
+<style id="teci-header-style">
+.teci-hd{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(27,79,138,.12);font-family:'Barlow',system-ui,sans-serif;}
+.teci-hd .teci-lg{font-family:'Barlow Condensed','Barlow',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer;color:#fff;text-decoration:none;}
+.teci-hd .teci-lg:hover{opacity:.85;}
+.teci-hd .teci-sb{font-size:.72rem;opacity:.78;margin-left:10px;color:#fff;}
+.teci-hd .teci-home-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:8px;cursor:pointer;margin-left:auto;transition:background .15s;text-decoration:none;}
+.teci-hd .teci-home-btn:hover{background:rgba(255,255,255,.16);}
+.teci-navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;}
+.teci-navcross a,.teci-navcross span.teci-nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s;}
+.teci-navcross a{color:#23272F;background:#fff;border-color:#D8DDE5;}
+.teci-navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A;}
+.teci-navcross span.teci-nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default;}
+.teci-navcross .teci-nc-sep{color:#8C97A8;align-self:center;user-select:none;}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- ═══ TECI II Cabecera ═══ -->
+<div class="teci-hd">
+<a class="teci-lg" href="../../index.html">TECI II</a>
+<span class="teci-sb">🎛 Reguladores PID · Bloque F</span>
+<a href="../../index.html" class="teci-home-btn">🏠 Índice</a>
+</div>
+<nav class="teci-navcross" role="navigation" aria-label="Navegación transversal">
+<a href="../../index.html"><span>🏠</span><span>Índice</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../teoria/bloque_F.html"><span>📖</span><span>Teoría F</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../ejercicios/ej_F.html"><span>✏️</span><span>Ejercicios F</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../examenes/tipo_2025_26/ponencia/tipo_1A_2025_26.html"><span>📋</span><span>Exámenes</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../ponencia_resuelta/index_ponencia.html"><span>📚</span><span>Ponencia</span></a>
+<span class="teci-nc-sep">·</span>
+<span class="teci-nc-current"><span>🧰</span><span>Apoyo</span></span>
+</nav>
+
+
+<div class="container">
+
+<header class="masthead">
+  <div class="masthead-meta">
+    <div class="left">
+      <span>TECI II · Bloque F</span>
+      <span>Apartado 7 · Reguladores industriales</span>
+    </div>
+    <div class="right">
+      <span>2º Bachillerato</span>
+      <span>PEvAU 2025–26</span>
+    </div>
+  </div>
+  <h1 class="title">Reguladores <em>P, I, D</em><br>y combinaciones</h1>
+  <p class="subtitle">El cerebro del lazo de control: cómo cada tipo de regulador transforma la señal de error en una orden que mueve el sistema, y cuál se elige en cada caso.</p>
+
+  <div class="scope-pills">
+    <span class="scope-pill">Apuntes 7.1 – 7.9</span>
+    <span class="scope-pill">Ponencia nov 2025</span>
+    <span class="scope-pill">Enfoque cualitativo</span>
+  </div>
+</header>
+
+<!-- ============ § 01 PLANTEAMIENTO ============ -->
+<section>
+  <div class="section-label">§ 01 — Planteamiento</div>
+  <p class="lede">
+    <span class="dropcap">E</span>n el lazo cerrado que ya conocemos, el bloque <strong>G₁</strong> es el regulador. Recibe la señal de error <em>e = r − H·c</em> y la transforma en una <em>señal de control m</em> que mueve la planta. La pregunta es: ¿cómo decide el regulador qué señal generar a partir del error? Hay tres acciones básicas — proporcional, integral y derivativa — que se combinan para resolver problemas distintos: <em>llegar rápido</em>, <em>llegar exacto</em>, y <em>amortiguar las oscilaciones</em>.
+  </p>
+  <p class="note-prose">
+    Conexión con el bloque anterior: el <em>error en régimen permanente</em> que vimos al estudiar la estabilidad — esa diferencia que queda entre lo que pides y lo que el sistema te da — es exactamente lo que algunos reguladores eliminan y otros no. El integral lo elimina, el proporcional lo deja. Esa es la idea central de este apartado.
+  </p>
+</section>
+
+<!-- ============ § 02 CONCEPTOS CLAVE ============ -->
+<section>
+  <div class="section-label">§ 02 — Conceptos clave</div>
+  <h2 class="section-heading">Cuatro palabras <em>antes</em> de mirar los tipos</h2>
+
+  <div class="concepts">
+    <div class="concept">
+      <div class="num">CONCEPTO 01</div>
+      <h3>Señal de error e(t)</h3>
+      <p>Diferencia entre la referencia r y la salida realimentada b. Es la entrada del regulador. Si <em>e</em> es grande, hay mucho que corregir; si es cero, la salida ya coincide con lo deseado.</p>
+      <div class="formula">e(t) = r(t) − b(t)</div>
+    </div>
+
+    <div class="concept">
+      <div class="num">CONCEPTO 02</div>
+      <h3>Señal de control m(t)</h3>
+      <p>Salida del regulador, lo que se aplica al actuador. Es la "decisión" del regulador. Cada tipo (P, I, D) calcula esta señal a partir del error de manera distinta.</p>
+      <div class="formula">m(t) = f(e(t))</div>
+    </div>
+
+    <div class="concept">
+      <div class="num">CONCEPTO 03</div>
+      <h3>Ganancia del regulador</h3>
+      <p>Las constantes <em>K<sub>p</sub>, K<sub>i</sub>, K<sub>d</sub></em> regulan la fuerza de cada acción. Más ganancia = más reacción ante el error. Pero subir la ganancia indefinidamente desestabiliza el sistema.</p>
+      <div class="formula">K<sub>p</sub> &middot; K<sub>i</sub> &middot; K<sub>d</sub></div>
+    </div>
+
+    <div class="concept">
+      <div class="num">CONCEPTO 04</div>
+      <h3>Acción correctora</h3>
+      <p>Manera de generar <em>m</em> a partir de <em>e</em>. Hay tres básicas: <em>proporcional</em> (responde al error actual), <em>integral</em> (al error acumulado) y <em>derivativa</em> (a la velocidad de cambio del error).</p>
+      <div class="formula">P · I · D</div>
+    </div>
+
+    <div class="concept">
+      <div class="num">CONCEPTO 05</div>
+      <h3>Transitorio y permanente</h3>
+      <p>Toda respuesta tiene dos fases: el <em>transitorio</em>, mientras el sistema se acomoda, y el <em>régimen permanente</em>, una vez estabilizado. La <strong>D</strong> solo actúa en el transitorio; solo la <strong>I</strong> puede anular el error permanente; la <strong>P</strong> actúa en ambas.</p>
+      <div class="formula">e<sub>∞</sub> = lim<sub>t→∞</sub> e(t)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ § 03 LAS TRES ACCIONES BÁSICAS ============ -->
+<section>
+  <div class="section-label">§ 03 — Las tres acciones básicas</div>
+  <h2 class="section-heading">Tres maneras de <em>reaccionar</em> al error</h2>
+  <p class="lede" style="font-size: 1.05rem; max-width: 70ch;">
+    Antes de combinarlas, vamos a ver qué hace cada acción por separado. Cada una mira el error de una forma distinta: el proporcional mira <em>cuánto vale ahora</em>, el integral mira <em>cuánto ha valido a lo largo del tiempo</em>, y el derivativo mira <em>a qué velocidad está cambiando</em>.
+  </p>
+
+  <div class="three-actions">
+    <div class="action-card p">
+      <div class="ac-tag">● Acción proporcional</div>
+      <h3>Mira el error actual</h3>
+      <div class="ac-formula">m = K<sub>p</sub> · e</div>
+      <p>El regulador multiplica el error por una constante. <em>Error grande, acción grande. Error pequeño, acción pequeña. Error cero, no actúa.</em></p>
+      <div class="ac-mini-canvas"><canvas id="actionP"></canvas></div>
+    </div>
+
+    <div class="action-card i">
+      <div class="ac-tag">● Acción integral</div>
+      <h3>Acumula el error</h3>
+      <div class="ac-formula">m = K<sub>i</sub> · ∫ e dt</div>
+      <p>Suma todo el error desde el principio. Si el error <em>persiste</em>, la acción crece sin parar. Por eso puede eliminar el error permanente.</p>
+      <div class="ac-mini-canvas"><canvas id="actionI"></canvas></div>
+    </div>
+
+    <div class="action-card d">
+      <div class="ac-tag">● Acción derivativa</div>
+      <h3>Mira la velocidad del error</h3>
+      <div class="ac-formula">m = K<sub>d</sub> · de/dt</div>
+      <p>Reacciona a <em>la rapidez con que cambia</em> el error. Si el error está cambiando rápido, actúa fuerte. Si es constante, no actúa. Anticipa.</p>
+      <div class="ac-mini-canvas"><canvas id="actionD"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ § 04 REGULADOR P ============ -->
+<section>
+  <div class="section-label">§ 04 — Apuntes 7.2 · Regulador proporcional</div>
+  <h2 class="section-heading">Regulador P: <em>rápido</em>, pero deja error</h2>
+
+  <div class="regulator-block p">
+    <div class="regulator-header">
+      <h3>Regulador <em>proporcional</em></h3>
+      <div class="regulator-formula">m(t) = K<sub>p</sub> · e(t)</div>
+    </div>
+
+    <div class="regulator-grid-content">
+      <div class="reg-text-content">
+        <p>El más simple. La señal de control es proporcional al error: si la temperatura está 4 °C por debajo, calienta el doble que si solo faltan 2 °C. <strong>Reacciona rápido</strong> porque actúa de forma inmediata sobre el error actual.</p>
+
+        <p>Su limitación: <em>cuando el sistema se acerca a la consigna, el error se hace pequeño y la acción se hace pequeña</em>. Pero si la acción se hace muy pequeña, no compensa las pérdidas (calor que se escapa, rozamiento, etc.) y el sistema se estabiliza ligeramente por debajo del valor deseado. <strong>En este tipo de sistemas suele quedar un error residual</strong> ante pérdidas, rozamiento o perturbaciones sostenidas.</p>
+
+        <div class="reg-features">
+          <div class="reg-feat pro"><span class="icon">✓</span>Respuesta rápida</div>
+          <div class="reg-feat con"><span class="icon">✗</span>Error permanente</div>
+        </div>
+
+        <div class="reg-example">
+          <div class="ex-label">Ejemplo · Calefacción a 22 °C con K<sub>p</sub> = 25 % por °C</div>
+          <p><strong>Inicio:</strong> habitación a 18 °C. Error <em>e</em> = 22 − 18 = 4 °C. Acción <em>m</em> = K<sub>p</sub>·e = 25·4 = <strong>100 %</strong>. Calefacción a tope.</p>
+          <p><strong>Sube:</strong> a 21 °C. Error 1 °C. Acción <em>m</em> = 25·1 = <strong>25 %</strong>. La calefacción baja proporcionalmente.</p>
+          <p><strong>Se estabiliza:</strong> en torno a <em>21,5 °C, no en 22 °C exactos</em>. Si llegara a 22 °C, el error sería cero y la calefacción se apagaría — la habitación se enfriaría. El sistema busca el equilibrio donde el calor aportado iguala al perdido por las paredes. Ese punto suele estar <em>por debajo</em> de la consigna: es el <strong>error permanente</strong>.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="reg-canvas-wrap"><canvas id="canvasP"></canvas></div>
+        <div class="reg-canvas-caption">La salida sube rápido pero queda en y∞ &lt; 1. La franja roja es el error que no llega a anularse.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ § 05 REGULADOR I ============ -->
+<section>
+  <div class="section-label">§ 05 — Apuntes 7.3 · Regulador integral</div>
+  <h2 class="section-heading">Regulador I: <em>exacto</em>, pero lento</h2>
+
+  <div class="regulator-block i">
+    <div class="regulator-header">
+      <h3>Regulador <em>integral</em></h3>
+      <div class="regulator-formula">m(t) = K<sub>i</sub> · ∫ e(t) dt</div>
+    </div>
+
+    <div class="regulator-grid-content">
+      <div class="reg-text-content">
+        <p>Mientras el error sea distinto de cero, la integral sigue creciendo y el regulador sigue empujando. <strong>No descansa hasta que el error es exactamente cero.</strong> Por eso elimina el error permanente. <span class="pill-pevau">Clave PEvAU</span></p>
+
+        <p>El precio: es <em>lento</em>, porque la acción se construye poco a poco a base de acumular. Y como sigue acumulando incluso cuando el sistema está a punto de llegar al objetivo, suele <em>pasarse</em> y luego corregir hacia atrás. El resultado son oscilaciones antes de estabilizarse. Por esto <strong>rara vez se usa solo</strong>.</p>
+
+        <div class="reg-features">
+          <div class="reg-feat pro"><span class="icon">✓</span>Sin error permanente</div>
+          <div class="reg-feat con"><span class="icon">✗</span>Lento y oscila</div>
+        </div>
+
+        <div class="reg-example">
+          <div class="ex-label">Ejemplo · Calefacción a 22 °C con regulador integral</div>
+          <p><strong>Inicio:</strong> 20 °C, error 2 °C. El integral empieza a acumular y a aplicar potencia. Pasa el tiempo: 21,5 °C (error 0,5 °C, sigue empujando), 21,8 °C, 21,9 °C…</p>
+          <p><strong>Llega:</strong> a <em>22 °C exactos</em>. Error 0. El integral deja de crecer pero <em>recuerda</em> el valor acumulado y mantiene la calefacción en el punto justo. <strong>Cero error permanente.</strong></p>
+          <p><strong>Pero se pasa:</strong> mientras subía hasta 22 °C, el integral seguía acumulando. Llega con tanta inercia que sobrepasa hasta 22,3 °C, luego corrige a 21,8, oscila un poco… y se estabiliza en 22,0 exactos. Por eso rara vez se usa solo: el P frena esa inercia.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="reg-canvas-wrap"><canvas id="canvasI"></canvas></div>
+        <div class="reg-canvas-caption">La salida llega a y∞ = 1 (sin error), pero con sobrepaso y oscilaciones que tardan en amortiguarse.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ § 06 REGULADOR D ============ -->
+<section>
+  <div class="section-label">§ 06 — Apuntes 7.4 · Regulador derivativo</div>
+  <h2 class="section-heading">Regulador D: <em>anticipa</em>, pero no corrige</h2>
+
+  <div class="regulator-block d">
+    <div class="regulator-header">
+      <h3>Regulador <em>derivativo</em></h3>
+      <div class="regulator-formula">m(t) = K<sub>d</sub> · de(t)/dt</div>
+    </div>
+
+    <div class="regulator-grid-content">
+      <div class="reg-text-content">
+        <p>No se fija en el valor del error sino en <em>a qué velocidad está cambiando</em>. Si el sistema se acerca al objetivo muy deprisa, anticipa que va a pasarse y reduce la acción para frenar. Es como el freno de un coche: no importa dónde estés, importa a qué velocidad vas.</p>
+
+        <p><strong>Nunca se usa solo</strong>, porque tiene un problema fundamental: <em>si el error es constante, su derivada es cero y el regulador no actúa</em>. Aunque el error sea de 50 grados, mientras no cambie, el derivativo se queda quieto. Sirve solo como complemento de P o de PI. <span class="pill-pevau">Clave PEvAU</span></p>
+
+        <p>Pero su papel es esencial cuando se combina: la D es lo que <em>reduce las oscilaciones</em> y suaviza la respuesta del sistema. Sin ella, el PI llegaría a la consigna pero con sobrepaso; el PID añade D precisamente para evitarlo.</p>
+
+        <div class="reg-features">
+          <div class="reg-feat pro"><span class="icon">✓</span>Reduce oscilaciones</div>
+          <div class="reg-feat con"><span class="icon">✗</span>No actúa con error constante</div>
+        </div>
+
+        <div class="reg-example">
+          <div class="ex-label">Ejemplo · Calefacción a 22 °C con regulador derivativo</div>
+          <p><strong>El sistema sube rápido:</strong> 18 → 20 → 21 °C en poco tiempo. La derivada del error es grande (negativa, porque el error está disminuyendo deprisa). El derivativo detecta la velocidad y <em>reduce</em> la potencia <strong>antes</strong> de llegar a 22 °C. Frena el calentamiento. La temperatura se posa suave, sin pasarse.</p>
+          <p><strong>Pero si el error es constante:</strong> imagina que la habitación lleva una hora a 20 °C sin cambiar. El error es 2 °C constantes. La derivada vale <em>cero</em>. El derivativo <strong>no actúa</strong>. La temperatura no sube. Por eso rara vez se usa solo: no corrige errores estáticos, solo amortigua los cambios.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="reg-canvas-wrap"><canvas id="canvasD"></canvas></div>
+        <div class="reg-canvas-caption">Solo, el derivativo apenas mueve la salida. Tras el pequeño impulso inicial, no corrige el error sostenido.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ § 07 COMBINADOS PI / PD / PID ============ -->
+<section>
+  <div class="section-label">§ 07 — Apuntes 7.5–7.7 · Combinaciones</div>
+  <h2 class="section-heading">Las combinaciones <em>útiles</em>: PI, PD y PID</h2>
+  <p class="lede" style="font-size: 1.05rem; max-width: 70ch;">
+    Las acciones P, I y D rara vez se usan solas. Se combinan para sumar virtudes y compensar defectos. Cada combinación tiene un perfil distinto y se elige según las prioridades del proceso.
+  </p>
+
+  <div class="combined-grid">
+
+    <div class="combined-card pi">
+      <div class="cc-tag">● PI · Proporcional + integral</div>
+      <h3>El más usado en la industria <span class="pill-pevau">Clave PEvAU</span></h3>
+      <div class="cc-formula">m = K<sub>p</sub>·e + K<sub>i</sub>·∫e dt</div>
+      <div class="cc-canvas-wrap"><canvas id="canvasPI"></canvas></div>
+      <p>El P arranca rápido, el I termina el trabajo. <em>Llega rápido y llega exacto.</em> Sin error permanente y sin la lentitud del integral solo.</p>
+      <p>Algo de sobreoscilación residual, pero bien sintonizado es una opción habitual en muchos procesos industriales porque resuelve el principal defecto del proporcional puro sin la complejidad del derivativo.</p>
+      <div class="cc-summary">Aplicaciones: <strong>presión en tuberías, caudal de líquidos, velocidad de motores industriales, temperatura de procesos no críticos.</strong></div>
+    </div>
+
+    <div class="combined-card pd">
+      <div class="cc-tag">● PD · Proporcional + derivativo</div>
+      <h3>Cuando importa no pasarse</h3>
+      <div class="cc-formula">m = K<sub>p</sub>·e + K<sub>d</sub>·de/dt</div>
+      <div class="cc-canvas-wrap"><canvas id="canvasPD"></canvas></div>
+      <p>El P empuja, el D frena antes de llegar. <em>Rápido, suave, con menor sobreoscilación.</em> Pero como no hay integral, queda un pequeño error permanente.</p>
+      <p>Se usa cuando las oscilaciones son inaceptables (por estabilidad mecánica o seguridad) y el error pequeño es asumible.</p>
+      <div class="cc-summary">Aplicaciones: <strong>posicionamiento de cabezales, estabilizadores de cámara, control de balance.</strong></div>
+    </div>
+
+    <div class="combined-card pid">
+      <div class="cc-tag">● PID · Las tres acciones</div>
+      <h3>El estándar industrial completo</h3>
+      <div class="cc-formula">m = K<sub>p</sub>·e + K<sub>i</sub>·∫e dt + K<sub>d</sub>·de/dt</div>
+      <div class="cc-canvas-wrap"><canvas id="canvasPID"></canvas></div>
+      <p>P para velocidad, D para suavidad, I para precisión. <em>Bien ajustado, puede llegar rápido, con poco sobrepaso y sin error permanente.</em> La solución más completa cuando se requieren los tres requisitos a la vez.</p>
+      <p>Más complejo de sintonizar (tres ganancias), pero indispensable en aplicaciones críticas.</p>
+      <div class="cc-summary">Aplicaciones: <strong>hornos industriales críticos, drones, robots multieje, inyección de combustible.</strong></div>
+    </div>
+
+  </div>
+
+  <p class="note-prose" style="margin-top: 2.5rem;">
+    <strong>Identificar un regulador a partir de la gráfica.</strong> Si en un examen te dan la curva del error <em>e(t)</em> y la curva de la señal de control <em>m(t)</em>, puedes deducir qué tipo de regulador hay mirando cómo responde m a los cambios de e:
+  </p>
+
+  <div class="decision-table" style="margin-top: 1rem;">
+    <div class="dt-header">Patrón en la gráfica de m(t) frente al error e(t)</div>
+
+    <div class="decision-row">
+      <div class="dt-cell cond">m salta cuando salta el error</div>
+      <div class="dt-cell">La señal de control sigue al error escalado: si el error sube de golpe, m sube de golpe.</div>
+      <div class="dt-cell example">Reacción inmediata y proporcional al error en cada instante.</div>
+      <div class="dt-pill p">Regulador P</div>
+    </div>
+
+    <div class="decision-row">
+      <div class="dt-cell cond">m crece en rampa mientras el error persiste</div>
+      <div class="dt-cell">Aunque el error sea constante, m sigue subiendo (acumulando).</div>
+      <div class="dt-cell example">No descansa hasta que el error es cero.</div>
+      <div class="dt-pill pi" style="background: rgba(11,110,79,0.10); color: var(--reg-i); border-color: rgba(11,110,79,0.3);">Regulador I</div>
+    </div>
+
+    <div class="decision-row">
+      <div class="dt-cell cond">m solo aparece en los cambios bruscos del error</div>
+      <div class="dt-cell">Picos puntuales cuando el error cambia de valor; cero si el error es constante.</div>
+      <div class="dt-cell example">Reacciona a la velocidad del cambio, no al valor del error.</div>
+      <div class="dt-pill" style="background: rgba(181,132,26,0.12); color: var(--reg-d); border-color: rgba(181,132,26,0.3);">Regulador D</div>
+    </div>
+
+    <div class="decision-row">
+      <div class="dt-cell cond">m tiene salto inicial y luego rampa</div>
+      <div class="dt-cell">Una respuesta inmediata (P) seguida de una contribución que sigue creciendo (I).</div>
+      <div class="dt-cell example">Combinación clásica: rápido y exacto.</div>
+      <div class="dt-pill pi">Regulador PI</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ § 08 COMPARATIVA INTERACTIVA ============ -->
+<section>
+  <div class="section-label">§ 08 — Comparativa interactiva</div>
+  <h2 class="section-heading">Mismo escalón. <em>Seis reguladores.</em></h2>
+  <p class="lede" style="font-size: 1.05rem; max-width: 70ch;">
+    Aplicamos a un mismo sistema un escalón unitario y vemos la respuesta de los seis reguladores en una sola gráfica. Pulsa cada etiqueta para activar o desactivar cada curva. Los colores están alineados con las secciones anteriores.
+  </p>
+
+  <div class="comparison-sim">
+    <div class="sim-header">
+      <div>
+        <div class="sim-tag">SIMULADOR · COMPARATIVA</div>
+        <div class="sim-title">Respuesta a escalón unitario · seis reguladores en paralelo</div>
+      </div>
+    </div>
+
+    <div class="canvas-wrap"><canvas id="canvasComparison"></canvas></div>
+
+    <div class="comparison-controls">
+      <button class="sim-btn" id="playComparison">
+        <svg viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11" fill="currentColor"/></svg>
+        Reproducir
+      </button>
+      <button class="sim-btn secondary" id="resetComparison">↺ Reiniciar</button>
+    </div>
+
+    <div class="regulator-toggles" id="regulatorToggles">
+      <span class="reg-toggle" data-reg="p" style="border-color: var(--reg-p)"><span class="swatch" style="background: var(--reg-p)"></span>P</span>
+      <span class="reg-toggle" data-reg="i" style="border-color: var(--reg-i)"><span class="swatch" style="background: var(--reg-i)"></span>I</span>
+      <span class="reg-toggle" data-reg="d" style="border-color: var(--reg-d)"><span class="swatch" style="background: var(--reg-d)"></span>D</span>
+      <span class="reg-toggle" data-reg="pi" style="border-color: var(--reg-pi)"><span class="swatch" style="background: var(--reg-pi)"></span>PI</span>
+      <span class="reg-toggle" data-reg="pd" style="border-color: var(--reg-pd)"><span class="swatch" style="background: var(--reg-pd)"></span>PD</span>
+      <span class="reg-toggle" data-reg="pid" style="border-color: var(--reg-pid)"><span class="swatch" style="background: var(--reg-pid)"></span>PID</span>
+    </div>
+
+    <div class="comparison-presets">
+      <div class="cp-label">Comparaciones guiadas</div>
+      <div class="cp-buttons">
+        <button class="cp-btn" data-preset="p-vs-pi">P solo · vs · PI</button>
+        <button class="cp-btn" data-preset="pi-vs-pid">PI · vs · PID</button>
+        <button class="cp-btn" data-preset="all">Mostrar todos</button>
+      </div>
+      <div class="cp-context" id="presetContext" hidden></div>
+    </div>
+  </div>
+
+  <div style="margin-top: 2rem; padding: 1.5rem 1.75rem; background: var(--paper-2); border-left: 3px solid var(--ink); border-radius: 4px;">
+    <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem;">Lectura guiada · qué buscar en cada curva</div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
+      <div>
+        <div style="font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--reg-i); margin-bottom: 0.35rem;">¿Llega exactamente a y = 1?</div>
+        <p style="font-size: 0.92rem; color: var(--ink-soft); margin: 0;">Sí → tiene acción <strong>I</strong> (I, PI, PID). No → no la tiene (P, D, PD).</p>
+      </div>
+      <div>
+        <div style="font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--reg-d); margin-bottom: 0.35rem;">¿Oscila al llegar?</div>
+        <p style="font-size: 0.92rem; color: var(--ink-soft); margin: 0;">Mucho → no tiene <strong>D</strong> (P, I, PI). Suave → sí la tiene (D, PD, PID).</p>
+      </div>
+      <div>
+        <div style="font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--reg-p); margin-bottom: 0.35rem;">¿Reacciona rápido al inicio?</div>
+        <p style="font-size: 0.92rem; color: var(--ink-soft); margin: 0;">Sí, salto inmediato → tiene <strong>P</strong>. Lento, en rampa → solo <strong>I</strong>.</p>
+      </div>
+    </div>
+    <p style="margin-top: 1.25rem; font-size: 0.92rem; color: var(--ink-soft); padding-top: 1rem; border-top: 1px solid var(--rule-soft);">
+      <strong>Truco operativo:</strong> el nombre del regulador <em>contiene</em> sus virtudes. <strong>P</strong> = rápido. <strong>I</strong> = exacto (anula el error permanente). <strong>D</strong> = suave (reduce oscilación). El <strong>PID</strong> tiene las tres letras y por eso tiene las tres virtudes.
+    </p>
+  </div>
+
+  <p class="note-prose">
+    Lo que se ve de un vistazo: los reguladores con <em>I</em> (en su nombre — I, PI, PID) llegan a <code>y = 1</code> sin error. Los que <em>no</em> llevan I (P, D, PD) se quedan por debajo. Los que llevan <em>D</em> (D, PD, PID) tienen menos oscilación. El PID combina lo mejor de los tres: rápido, exacto y suave.
+  </p>
+</section>
+
+
+<!-- ============ § 09 ANIMACIONES INTERACTIVAS ============ -->
+<section>
+  <div class="section-label">§ 09 — Animaciones interactivas</div>
+  <h2 class="section-heading">Cada regulador, <em>jugable</em>.</h2>
+  <p class="lede" style="font-size: 1.05rem; max-width: 70ch;">
+    La comparativa de arriba muestra las seis curvas en un mismo gráfico. Aquí cada regulador tiene su propia animación con <em>su sistema físico real</em> — un ventilador, un depósito, un brazo robótico, un horno —, controles de velocidad, sliders para tunear las ganancias en directo y un panel narrativo que va explicando lo que pasa <em>mientras pasa</em>. Cada animación se abre en una pestaña nueva.
+  </p>
+
+  <div class="anim-grid">
+
+    <!-- 01 · P · Ventilador -->
+    <div class="anim-card p">
+      <div class="ac-num">ANIMACIÓN 01 / 06</div>
+      <div class="ac-tag">Regulador P</div>
+      <h3>Ventilador con regulador proporcional</h3>
+      <div class="ac-system">Sistema · ventilador 2º orden</div>
+      <p class="ac-desc">El ventilador se queda <em>anclado por debajo de la consigna</em>. Mira el hueco rojo entre <code>r</code> y <code>c</code>: ese es el <em>error en régimen permanente</em>, la firma inconfundible del regulador P puro.</p>
+      <a class="ac-launch" href="Animacion_Reg_P_Ventilador_v5.html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11" fill="currentColor"/></svg>
+        Abrir animación
+      </a>
+    </div>
+
+    <!-- 02 · I · Depósito -->
+    <div class="anim-card i">
+      <div class="ac-num">ANIMACIÓN 02 / 06</div>
+      <div class="ac-tag">Regulador I</div>
+      <h3>Depósito de agua con regulador integral</h3>
+      <div class="ac-system">Sistema · depósito 1er orden</div>
+      <p class="ac-desc">La integral <em>elimina el error</em>: el depósito llega exactamente al nivel pedido. Pero llega <em>oscilando</em> y un poco lento. Observa cómo la I sigue acumulando hasta que el error es exactamente cero.</p>
+      <a class="ac-launch" href="Animacion_Reg_I_Deposito_v2.html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11" fill="currentColor"/></svg>
+        Abrir animación
+      </a>
+    </div>
+
+    <!-- 03 · D · Señales -->
+    <div class="anim-card d">
+      <div class="ac-num">ANIMACIÓN 03 / 06</div>
+      <div class="ac-tag">Regulador D</div>
+      <h3>Cinco señales por un derivador puro</h3>
+      <div class="ac-system">Sistema · sin realimentación</div>
+      <p class="ac-desc">Sin lazo cerrado: solo el derivador en bucle abierto recibiendo distintas formas de error. Verás por qué <em>la D no se usa sola</em>: ante una señal constante no hace nada, y dispara al ver cualquier cambio.</p>
+      <a class="ac-launch" href="Animacion_Reg_D_Senales_v2.html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11" fill="currentColor"/></svg>
+        Abrir animación
+      </a>
+    </div>
+
+    <!-- 04 · PI · Cinta transportadora -->
+    <div class="anim-card pi">
+      <div class="ac-num">ANIMACIÓN 04 / 06</div>
+      <div class="ac-tag">Regulador PI</div>
+      <h3>Cinta transportadora con PI</h3>
+      <div class="ac-system">Sistema · cinta 2º orden</div>
+      <p class="ac-desc">El más usado en la industria. P lleva rápido al setpoint y la I se encarga de los <em>últimos metros sin error</em>. Toggle <code>P solo</code> / <code>PI</code> para comparar a igualdad de Kp el papel exacto que aporta la integral.</p>
+      <a class="ac-launch" href="Animacion_Reg_PI_Cinta_v5.html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11" fill="currentColor"/></svg>
+        Abrir animación
+      </a>
+    </div>
+
+    <!-- 05 · PD · Brazo robótico -->
+    <div class="anim-card pd">
+      <div class="ac-num">ANIMACIÓN 05 / 06</div>
+      <div class="ac-tag">Regulador PD</div>
+      <h3>Brazo robótico con PD</h3>
+      <div class="ac-system">Sistema · doble integrador</div>
+      <p class="ac-desc">P solo da un overshoot del 80% y oscila eternamente. Activa la D y el brazo <em>se posiciona limpio en 2,7 s</em>: la D frena anticipadamente. Sin I queda un pequeño error, pero la suavidad lo compensa.</p>
+      <a class="ac-launch" href="Animacion_Reg_PD_BrazoRobot_v4.html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11" fill="currentColor"/></svg>
+        Abrir animación
+      </a>
+    </div>
+
+    <!-- 06 · PID · Horno industrial -->
+    <div class="anim-card pid">
+      <div class="ac-num">ANIMACIÓN 06 / 06</div>
+      <div class="ac-tag">Regulador PID</div>
+      <h3>Horno industrial con PID completo</h3>
+      <div class="ac-system">Sistema · 4 modos comparados</div>
+      <p class="ac-desc">Toggle de <em>cuatro modos</em> en el mismo sistema: P, PI, PD, PID. Pulsa <em>“Abrir puerta”</em> para inyectar una perturbación y compruébalo: solo los modos con I se recuperan. <em>La mejor demostración pedagógica del PID completo</em>.</p>
+      <a class="ac-launch" href="Animacion_Reg_PID_Horno_v2.html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11" fill="currentColor"/></svg>
+        Abrir animación
+      </a>
+    </div>
+
+  </div>
+
+  <div class="anim-prelude">
+    <strong>Cómo aprovecharlas en clase.</strong> Cada animación es independiente y arranca con valores que muestran claramente la firma del regulador. Recomendado: empezar con velocidad <code>½×</code> o <code>¼×</code> para que se aprecien los transitorios. El panel narrativo de la izquierda explica cada fase mientras ocurre — útil para detener en cualquier momento y comentar lo que se ve. Los sliders permiten experimentar con las ganancias y descubrir los compromisos típicos de la sintonización.
+  </div>
+</section>
+
+<!-- ============ § 10 TABLA DECISIÓN ============ -->
+<section>
+  <div class="section-label">§ 10 — Apuntes 7.8 · ¿Qué regulador uso?</div>
+  <h2 class="section-heading">La regla de decisión <em>en una tabla</em></h2>
+  <p class="lede" style="font-size: 1rem; max-width: 65ch;">
+    Dos preguntas determinan qué regulador conviene. Para cada combinación de respuestas, hay una elección habitual:
+  </p>
+
+  <div class="decision-table">
+    <div class="dt-header">¿Necesito llegar exacto? · ¿El sistema oscila?</div>
+
+    <div class="decision-row">
+      <div class="dt-cell cond">No · No</div>
+      <div class="dt-cell">Precisión absoluta no es crítica y el sistema no tiende a oscilar.</div>
+      <div class="dt-cell example">Velocidad de un ventilador, brillo de una lámpara, motor sencillo.</div>
+      <div class="dt-pill p">Regulador P</div>
+    </div>
+
+    <div class="decision-row">
+      <div class="dt-cell cond">Sí · No</div>
+      <div class="dt-cell">Necesitamos llegar exacto al valor de consigna y el sistema es estable.</div>
+      <div class="dt-cell example">Presión en tuberías, velocidad de motor industrial, caudal de líquidos.</div>
+      <div class="dt-pill pi">Regulador PI</div>
+    </div>
+
+    <div class="decision-row">
+      <div class="dt-cell cond">No · Sí</div>
+      <div class="dt-cell">El sistema tiende a oscilar o a pasarse, y un pequeño error final es tolerable.</div>
+      <div class="dt-cell example">Estabilizador de cámara, posicionamiento rápido, control de balance.</div>
+      <div class="dt-pill pd">Regulador PD</div>
+    </div>
+
+    <div class="decision-row">
+      <div class="dt-cell cond">Sí · Sí</div>
+      <div class="dt-cell">Necesitamos rapidez, exactitud y estabilidad simultáneamente. Proceso crítico.</div>
+      <div class="dt-cell example">Horno industrial, dron en vuelo estático, robot multieje, inyección de combustible.</div>
+      <div class="dt-pill pid">Regulador PID</div>
+    </div>
+  </div>
+
+  <p class="note-prose">
+    <strong>Resumen mental:</strong> el <em>I</em> en el nombre <em>elimina el error permanente</em> en condiciones normales de estabilidad. <span class="pill-pevau">Clave PEvAU</span> El <em>D</em> en el nombre <em>ayuda a reducir las oscilaciones</em>. El <em>P</em> suele estar presente, porque es lo que aporta la velocidad de respuesta inicial. <em>D sola rara vez</em> — no corrige errores constantes.
+  </p>
+</section>
+
+<!-- ============ § 10 EJERCICIOS TIPO PONENCIA ============ -->
+<section>
+  <div class="section-label">§ 11 — Preparar la prueba</div>
+  <h2 class="section-heading">Resolver preguntas <em>tipo Ponencia</em></h2>
+  <p class="lede" style="font-size: 1.05rem; max-width: 70ch;">
+    Seis ejercicios al estilo de los que aparecen en la Ponencia oficial de Tecnología e Ingeniería II. Antes de mirar la solución, lee el enunciado y trata de razonar tú: ¿qué pista te da la situación o la gráfica? ¿qué <em>letra</em> de regulador casa con esa pista?
+  </p>
+
+  <nav class="ej-summary" aria-label="Índice de ejercicios">
+    <div class="ej-summary-label">Índice</div>
+    <ol class="ej-summary-list">
+      <li><a href="#ej1"><span class="ejs-num">01</span><span class="ejs-title">Control manual de la temperatura del agua</span><span class="ejs-tag">situación</span></a></li>
+      <li><a href="#ej2"><span class="ejs-num">02</span><span class="ejs-title">¿Qué tipo de regulador es cada uno?</span><span class="ejs-tag">gráficas e/m</span></a></li>
+      <li><a href="#ej3"><span class="ejs-num">03</span><span class="ejs-title">Control de crucero subiendo una pendiente</span><span class="ejs-tag">respuesta</span></a></li>
+      <li><a href="#ej4"><span class="ejs-num">04</span><span class="ejs-title">¿Qué falta para llegar exacto?</span><span class="ejs-tag">diagnóstico</span></a></li>
+      <li><a href="#ej5"><span class="ejs-num">05</span><span class="ejs-title">Rápido pero impreciso · lento pero exacto</span><span class="ejs-tag">comparación</span></a></li>
+      <li><a href="#ej6"><span class="ejs-num">06</span><span class="ejs-title">Reducir oscilaciones y eliminar el error</span><span class="ejs-tag">combinadas</span></a></li>
+      <li><a href="#practiceBlock"><span class="ejs-num">★</span><span class="ejs-title">Practica tú · 8 preguntas con autoevaluación</span><span class="ejs-tag">interactivo</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ===== EJERCICIO 1 ===== -->
+  <article id="ej1" style="background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 2rem 2.25rem; margin-bottom: 2rem; box-shadow: var(--shadow-1);">
+    <div style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--rule-soft);">
+      <div style="font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">Ejercicio 1 · identificar a partir de una situación</div>
+    </div>
+    <h3 style="font-family: var(--serif); font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem;">Control manual de la temperatura del agua</h3>
+
+    <div style="background: var(--paper-2); padding: 1.25rem 1.5rem; border-radius: 6px; margin-bottom: 1.5rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;">Enunciado</div>
+      <p style="margin: 0;">Una persona ajusta el grifo monomando de la ducha para conseguir la temperatura ideal. Coloca primero el mando en una posición intermedia: el agua sale fría. Lo mueve un poco hacia caliente: sigue saliendo fría. Lo vuelve a mover, comprueba, repite el ajuste varias veces hasta que la temperatura es la deseada.</p>
+      <p style="margin-top: 0.75rem; margin-bottom: 0;"><strong>Pregunta:</strong> ¿qué tipo de regulador realiza la persona — P, PD o PI? Justifica la respuesta.</p>
+    </div>
+
+    <div style="margin-bottom: 1.25rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;">Razonamiento</div>
+      <p>Vamos descartando opciones, una por una.</p>
+      <p><strong>¿Es un P solo?</strong> No. Un control proporcional puro hace que la posición del mando sea proporcional al error de temperatura. Para que el sistema se quede fijo en la temperatura deseada, el error debería ser cero — pero entonces el mando no se movería. Hay <em>error permanente</em>. Aquí la persona <em>sí</em> consigue eliminar el error, así que no es solo P.</p>
+      <p><strong>¿Es un PD?</strong> Tampoco. La acción derivativa solo reacciona cuando el error <em>cambia</em>. No corrige errores constantes ni elimina el error permanente. Igual que el P, el PD se estabilizaría con un error residual.</p>
+      <p><strong>¿Es un PI?</strong> Sí. La persona repite el ajuste mientras el error persiste; cada nuevo ajuste se suma al anterior. Esa <em>acumulación de pequeños movimientos hasta anular el error</em> es exactamente lo que hace una acción integral. La persona realiza un control con componente integral. Equivale a un comportamiento tipo PI: hay una reacción inicial al error grande (parte proporcional) y una acumulación de correcciones sucesivas hasta anularlo (parte integral).</p>
+    </div>
+
+    <div style="background: rgba(11,110,79,0.08); border-left: 3px solid var(--reg-i); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--reg-i); margin-bottom: 0.4rem;">Solución</div>
+      <p style="margin: 0;"><strong>Regulador PI</strong> (proporcional + integral). La clave es que la persona <em>elimina</em> el error, no solo lo reduce — eso solo lo hace una acción integral.</p>
+    </div>
+  </article>
+
+  <!-- ===== EJERCICIO 2 ===== -->
+  <article id="ej2" style="background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 2rem 2.25rem; margin-bottom: 2rem; box-shadow: var(--shadow-1);">
+    <div style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--rule-soft);">
+      <div style="font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">Ejercicio 2 · identificar a partir de gráficas e(t) y m(t)</div>
+    </div>
+    <h3 style="font-family: var(--serif); font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem;">¿Qué tipo de regulador es cada uno?</h3>
+
+    <div style="background: var(--paper-2); padding: 1.25rem 1.5rem; border-radius: 6px; margin-bottom: 1.5rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;">Enunciado</div>
+      <p style="margin: 0;">A tres reguladores distintos se les aplica el mismo error en escalón <em>e(t)</em>. Sus respuestas <em>m(t)</em> son las que muestran las gráficas. Identifica cada uno y justifica la respuesta.</p>
+    </div>
+
+    <!-- SVG con los 3 patrones -->
+    <div style="background: var(--paper); border: 1px solid var(--rule-soft); border-radius: 6px; padding: 1.5rem; margin-bottom: 1.5rem;">
+      <svg viewBox="0 0 840 320" style="width: 100%; height: auto; font-family: var(--sans);">
+        <!-- ===== Caso A — Proporcional ===== -->
+        <text x="140" y="22" text-anchor="middle" font-size="13" font-weight="600" fill="#1A1814">Caso A</text>
+        <!-- e(t) -->
+        <text x="20" y="55" font-size="11" fill="#7A736A" font-style="italic">e(t)</text>
+        <line x1="50" y1="80" x2="240" y2="80" stroke="#D9D2C2" stroke-width="1"/>
+        <line x1="60" y1="40" x2="60" y2="100" stroke="#D9D2C2" stroke-width="1"/>
+        <polyline points="60,80 110,80 110,55 240,55" fill="none" stroke="#B5341E" stroke-width="2.5"/>
+        <text x="245" y="58" font-size="10" fill="#B5341E">e₀</text>
+        <!-- m(t) -->
+        <text x="20" y="170" font-size="11" fill="#7A736A" font-style="italic">m(t)</text>
+        <line x1="50" y1="195" x2="240" y2="195" stroke="#D9D2C2" stroke-width="1"/>
+        <line x1="60" y1="155" x2="60" y2="215" stroke="#D9D2C2" stroke-width="1"/>
+        <polyline points="60,195 110,195 110,170 240,170" fill="none" stroke="#1A75BC" stroke-width="2.5"/>
+        <text x="245" y="173" font-size="10" fill="#1A75BC">K<sub>p</sub>·e₀</text>
+        <text x="50" y="245" font-size="11" fill="#3A352E" font-style="italic">m salta cuando salta el error</text>
+        <text x="50" y="262" font-size="11" fill="#3A352E">y queda fijo en K<sub>p</sub>·e₀.</text>
+        <text x="50" y="290" font-size="13" font-weight="700" fill="#1A75BC">→ Regulador P</text>
+
+        <!-- ===== Caso B — Integral ===== -->
+        <text x="420" y="22" text-anchor="middle" font-size="13" font-weight="600" fill="#1A1814">Caso B</text>
+        <!-- e(t) -->
+        <line x1="330" y1="80" x2="520" y2="80" stroke="#D9D2C2" stroke-width="1"/>
+        <line x1="340" y1="40" x2="340" y2="100" stroke="#D9D2C2" stroke-width="1"/>
+        <polyline points="340,80 390,80 390,55 520,55" fill="none" stroke="#B5341E" stroke-width="2.5"/>
+        <text x="525" y="58" font-size="10" fill="#B5341E">e₀</text>
+        <!-- m(t) -->
+        <line x1="330" y1="195" x2="520" y2="195" stroke="#D9D2C2" stroke-width="1"/>
+        <line x1="340" y1="155" x2="340" y2="215" stroke="#D9D2C2" stroke-width="1"/>
+        <polyline points="340,195 390,195 520,160" fill="none" stroke="#0B6E4F" stroke-width="2.5"/>
+        <text x="525" y="163" font-size="10" fill="#0B6E4F">↗</text>
+        <text x="330" y="245" font-size="11" fill="#3A352E" font-style="italic">m crece en rampa mientras</text>
+        <text x="330" y="262" font-size="11" fill="#3A352E">el error persista.</text>
+        <text x="330" y="290" font-size="13" font-weight="700" fill="#0B6E4F">→ Regulador I</text>
+
+        <!-- ===== Caso C — Derivativo ===== -->
+        <text x="700" y="22" text-anchor="middle" font-size="13" font-weight="600" fill="#1A1814">Caso C</text>
+        <!-- e(t) -->
+        <line x1="610" y1="80" x2="800" y2="80" stroke="#D9D2C2" stroke-width="1"/>
+        <line x1="620" y1="40" x2="620" y2="100" stroke="#D9D2C2" stroke-width="1"/>
+        <polyline points="620,80 670,80 670,55 800,55" fill="none" stroke="#B5341E" stroke-width="2.5"/>
+        <text x="805" y="58" font-size="10" fill="#B5341E">e₀</text>
+        <!-- m(t) -->
+        <line x1="610" y1="195" x2="800" y2="195" stroke="#D9D2C2" stroke-width="1"/>
+        <line x1="620" y1="155" x2="620" y2="215" stroke="#D9D2C2" stroke-width="1"/>
+        <polyline points="620,195 668,195 670,162 672,195 800,195" fill="none" stroke="#B5841A" stroke-width="2.5"/>
+        <text x="676" y="160" font-size="10" fill="#B5841A">pico</text>
+        <text x="610" y="245" font-size="11" fill="#3A352E" font-style="italic">m solo aparece en el</text>
+        <text x="610" y="262" font-size="11" fill="#3A352E">cambio brusco del error.</text>
+        <text x="610" y="290" font-size="13" font-weight="700" fill="#B5841A">→ Regulador D</text>
+      </svg>
+    </div>
+
+    <div style="margin-bottom: 1.25rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;">Razonamiento</div>
+      <p><strong>Caso A — el escalón en m sigue al escalón en e.</strong> La señal de control es una copia escalada del error: cuando <em>e</em> sube de golpe, <em>m</em> también sube de golpe y se queda en <em>K<sub>p</sub>·e₀</em>. Esto es exactamente <em>m = K<sub>p</sub>·e</em>: <strong>regulador proporcional</strong>.</p>
+      <p><strong>Caso B — m crece como una rampa mientras el error es constante.</strong> El error se mantiene en <em>e₀</em> pero la salida del regulador no para de crecer. Esto solo lo hace una integral: la integral de una función constante es una rampa creciente. Es la firma del <strong>regulador integral</strong>.</p>
+      <p><strong>Caso C — m da un pico en el flanco y vuelve a cero.</strong> En el momento del cambio del error, la <em>velocidad de cambio</em> es muy alta — pero solo durante un instante. Una vez que el error está fijo en <em>e₀</em>, la derivada vale cero y la salida del regulador también. Es el <strong>regulador derivativo</strong>.</p>
+    </div>
+
+    <div style="background: rgba(26,24,20,0.04); border-left: 3px solid var(--ink); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem;">Solución</div>
+      <p style="margin: 0;"><strong>A → P</strong> · <strong>B → I</strong> · <strong>C → D</strong>. Truco para identificar de un vistazo: <em>escalón en m = P</em>, <em>rampa en m = I</em>, <em>pico en m = D</em>.</p>
+    </div>
+  </article>
+
+  <!-- ===== EJERCICIO 3 ===== -->
+  <article id="ej3" style="background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 2rem 2.25rem; margin-bottom: 2rem; box-shadow: var(--shadow-1);">
+    <div style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--rule-soft);">
+      <div style="font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">Ejercicio 3 · identificar a partir de la respuesta del sistema</div>
+    </div>
+    <h3 style="font-family: var(--serif); font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem;">Control de crucero subiendo una pendiente</h3>
+
+    <div style="background: var(--paper-2); padding: 1.25rem 1.5rem; border-radius: 6px; margin-bottom: 1.5rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;">Enunciado</div>
+      <p style="margin: 0;">Un coche circula con el control automático de crucero ajustado a 100 km/h. Al inicio el terreno es llano; en el punto A toma una pendiente de subida. Las gráficas muestran la velocidad real para dos reguladores distintos.</p>
+      <p style="margin-top: 0.75rem; margin-bottom: 0;"><strong>Regulador 1:</strong> al iniciar la pendiente la velocidad cae, pero después <em>retoma</em> los 100 km/h. <strong>Regulador 2:</strong> la velocidad cae al iniciar la pendiente y <em>se mantiene baja</em> durante toda la subida.</p>
+      <p style="margin-top: 0.75rem; margin-bottom: 0;"><strong>Pregunta:</strong> ¿qué tipo de regulador usa cada uno — P, PI o PD?</p>
+    </div>
+
+    <!-- SVG comparativa -->
+    <div style="background: var(--paper); border: 1px solid var(--rule-soft); border-radius: 6px; padding: 1.5rem; margin-bottom: 1.5rem;">
+      <svg viewBox="0 0 720 280" style="width: 100%; height: auto; font-family: var(--sans);">
+        <!-- Eje y -->
+        <line x1="60" y1="40" x2="60" y2="220" stroke="#1A1814" stroke-width="1"/>
+        <text x="20" y="50" font-size="11" fill="#7A736A">v (km/h)</text>
+        <text x="35" y="80" font-size="10" fill="#7A736A">100</text>
+        <text x="42" y="220" font-size="10" fill="#7A736A">0</text>
+        <!-- Eje x -->
+        <line x1="60" y1="220" x2="700" y2="220" stroke="#1A1814" stroke-width="1"/>
+        <text x="640" y="240" font-size="11" fill="#7A736A">distancia</text>
+        <!-- Línea de referencia 100 km/h -->
+        <line x1="60" y1="80" x2="700" y2="80" stroke="#1A1814" stroke-width="1" stroke-dasharray="4,4" opacity="0.4"/>
+        <!-- Marca punto A (inicio pendiente) -->
+        <line x1="280" y1="220" x2="280" y2="40" stroke="#7A736A" stroke-width="1" stroke-dasharray="2,3" opacity="0.5"/>
+        <text x="270" y="38" font-size="11" fill="#7A736A" font-weight="600">A</text>
+        <!-- Suelo con pendiente -->
+        <line x1="60" y1="218" x2="280" y2="218" stroke="#7A736A" stroke-width="1.5"/>
+        <line x1="280" y1="218" x2="700" y2="195" stroke="#7A736A" stroke-width="1.5"/>
+        <!-- Curva 1: regulador con I (verde, recupera) -->
+        <path d="M 60 80 L 280 80 Q 320 120 360 130 Q 420 135 480 100 Q 560 82 700 80" fill="none" stroke="#0B6E4F" stroke-width="2.5"/>
+        <text x="600" y="70" font-size="11" fill="#0B6E4F" font-weight="600">Regulador 1</text>
+        <!-- Curva 2: regulador sin I (azul, queda por debajo) -->
+        <path d="M 60 80 L 280 80 Q 320 110 380 120 L 700 120" fill="none" stroke="#1A75BC" stroke-width="2.5"/>
+        <text x="540" y="135" font-size="11" fill="#1A75BC" font-weight="600">Regulador 2</text>
+        <!-- Etiqueta error permanente -->
+        <line x1="650" y1="80" x2="650" y2="120" stroke="#B5341E" stroke-width="1.5"/>
+        <line x1="645" y1="80" x2="655" y2="80" stroke="#B5341E" stroke-width="1.5"/>
+        <line x1="645" y1="120" x2="655" y2="120" stroke="#B5341E" stroke-width="1.5"/>
+        <text x="660" y="105" font-size="10" fill="#B5341E">e<tspan font-style="italic">∞</tspan></text>
+      </svg>
+    </div>
+
+    <div style="margin-bottom: 1.25rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;">Razonamiento</div>
+      <p>La pregunta clave es: <em>¿queda error permanente?</em></p>
+      <p><strong>Regulador 1.</strong> En la pendiente el coche necesita más potencia para mantener los 100 km/h. Al principio la velocidad cae (la potencia tarda en aumentar), pero <em>vuelve a 100 km/h</em>. Eso significa que el regulador termina aplicando exactamente la potencia necesaria para que el error sea cero. Solo una acción <strong>I</strong> consigue eso: mientras el error sea distinto de cero, el integral sigue acumulando potencia hasta anularlo. Por tanto, el regulador 1 tiene <em>I</em> en su nombre. Encaja con un <strong>PI</strong> (también podría ser PID, pero el enunciado nos da P, PI o PD).</p>
+      <p><strong>Regulador 2.</strong> En la pendiente la velocidad cae y <em>se queda</em> fija por debajo de 100 km/h. Hay <em>error permanente</em>. Esto es la firma de un regulador sin acción integral: el P solo, o el PD. Como el enunciado nos da las tres opciones (P, PI, PD), tanto P como PD encajan. La diferencia entre ambos solo se vería en la forma de la transición (PD frenaría la caída y la haría más suave). Aquí el ejercicio acepta cualquiera de los dos, pero la respuesta más simple es <strong>P</strong>.</p>
+    </div>
+
+    <div style="background: rgba(11,110,79,0.06); border-left: 3px solid var(--reg-pi); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--reg-pi); margin-bottom: 0.4rem;">Solución</div>
+      <p style="margin: 0;"><strong>Regulador 1 → PI</strong> (recupera los 100 km/h: tiene I). <strong>Regulador 2 → P</strong> o PD (queda con error permanente: no tiene I). La regla operativa para PEvAU: <em>el error en régimen permanente solo se anula si hay acción integral</em>.</p>
+    </div>
+  </article>
+
+  <!-- ===== EJERCICIO 4 ===== -->
+  <article id="ej4" style="background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 2rem 2.25rem; margin-bottom: 2rem; box-shadow: var(--shadow-1);">
+    <div style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--rule-soft);">
+      <div style="font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">Ejercicio 4 · diagnóstico y modificación</div>
+    </div>
+    <h3 style="font-family: var(--serif); font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem;">¿Qué falta para llegar exacto?</h3>
+
+    <div style="background: var(--paper-2); padding: 1.25rem 1.5rem; border-radius: 6px; margin-bottom: 1.5rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;">Enunciado</div>
+      <p style="margin: 0;">Un sistema de calefacción alcanza rápidamente la temperatura deseada, pero <em>se queda ligeramente por debajo</em> del valor fijado de forma permanente.</p>
+      <p style="margin-top: 0.75rem; margin-bottom: 0;"><strong>Pregunta:</strong> ¿qué tipo de regulador está actuando? ¿Qué modificarías para eliminar ese error?</p>
+    </div>
+
+    <div style="margin-bottom: 1.25rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;">Razonamiento</div>
+      <p>Dos pistas en el enunciado: <em>respuesta rápida</em> y <em>error permanente</em>. La rapidez indica acción <strong>P</strong> presente. El error que no se anula nos dice que <em>no</em> hay acción <strong>I</strong>. Como además no se mencionan oscilaciones (lo que indicaría D), la opción más simple compatible con los dos hechos es un <strong>regulador P puro</strong>.</p>
+      <p>Para eliminar el error permanente sin perder la rapidez del P actual, basta con añadir una acción <strong>integral</strong>. La I irá acumulando el pequeño error residual y empujará la temperatura hasta el valor exacto, mientras la P sigue dando la respuesta rápida inicial. El resultado es un <strong>regulador PI</strong> — el más usado en la industria precisamente por esto.</p>
+    </div>
+
+    <div style="background: rgba(11,110,79,0.06); border-left: 3px solid var(--reg-pi); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--reg-pi); margin-bottom: 0.4rem;">Solución</div>
+      <p style="margin: 0;">Está actuando un <strong>regulador P</strong>. Para eliminar el error permanente se añade acción integral, pasando a <strong>PI</strong>.</p>
+    </div>
+  </article>
+
+  <!-- ===== EJERCICIO 5 ===== -->
+  <article id="ej5" style="background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 2rem 2.25rem; margin-bottom: 2rem; box-shadow: var(--shadow-1);">
+    <div style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--rule-soft);">
+      <div style="font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">Ejercicio 5 · comparación de dos sistemas</div>
+    </div>
+    <h3 style="font-family: var(--serif); font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem;">Rápido pero impreciso · lento pero exacto</h3>
+
+    <div style="background: var(--paper-2); padding: 1.25rem 1.5rem; border-radius: 6px; margin-bottom: 1.5rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;">Enunciado</div>
+      <p style="margin: 0;">Dos sistemas distintos parten del mismo error inicial frente a un escalón de consigna:</p>
+      <ul style="margin: 0.6rem 0 0 1.2rem; padding: 0;">
+        <li><strong>Sistema A</strong>: llega rápido al entorno del valor de referencia, pero <em>deja un error permanente</em>.</li>
+        <li><strong>Sistema B</strong>: tarda más en estabilizarse, pero <em>alcanza exactamente el valor deseado</em>.</li>
+      </ul>
+      <p style="margin-top: 0.75rem; margin-bottom: 0;"><strong>Pregunta:</strong> identifica el tipo de regulador en cada caso.</p>
+    </div>
+
+    <div style="background: var(--paper); border: 1px solid var(--rule-soft); border-radius: 6px; padding: 1.5rem; margin-bottom: 1.5rem;">
+      <svg viewBox="0 0 720 280" style="width: 100%; height: auto; font-family: var(--sans);">
+        <!-- Ejes -->
+        <line x1="60" y1="40" x2="60" y2="220" stroke="#1A1814" stroke-width="1"/>
+        <line x1="60" y1="220" x2="700" y2="220" stroke="#1A1814" stroke-width="1"/>
+        <text x="20" y="50" font-size="11" fill="#7A736A">y</text>
+        <text x="35" y="80" font-size="10" fill="#7A736A">1</text>
+        <text x="42" y="223" font-size="10" fill="#7A736A">0</text>
+        <text x="640" y="240" font-size="11" fill="#7A736A">tiempo</text>
+        <!-- Línea de referencia y=1 -->
+        <line x1="60" y1="80" x2="700" y2="80" stroke="#1A1814" stroke-dasharray="4,4" opacity="0.4"/>
+        <text x="610" y="73" font-size="10" fill="#7A736A" font-style="italic">consigna</text>
+        <!-- Sistema A: rápido, queda en y≈0.7 -->
+        <path d="M 60 220 L 100 220 Q 130 150 160 120 Q 190 105 230 105 L 700 105" fill="none" stroke="#1A75BC" stroke-width="2.5"/>
+        <text x="540" y="120" font-size="11" fill="#1A75BC" font-weight="600">Sistema A</text>
+        <!-- Sistema B: lento, oscila amortiguado, llega a 1 -->
+        <path d="M 60 220 L 100 220 Q 160 200 220 165 Q 280 130 330 88 Q 360 65 390 60 Q 430 65 470 95 Q 500 110 530 100 Q 560 90 590 84 Q 620 81 700 80" fill="none" stroke="#0B6E4F" stroke-width="2.5"/>
+        <text x="370" y="48" font-size="11" fill="#0B6E4F" font-weight="600">Sistema B</text>
+        <!-- Marcador error permanente sistema A -->
+        <line x1="650" y1="80" x2="650" y2="105" stroke="#B5341E" stroke-width="1.5"/>
+        <line x1="645" y1="80" x2="655" y2="80" stroke="#B5341E" stroke-width="1.5"/>
+        <line x1="645" y1="105" x2="655" y2="105" stroke="#B5341E" stroke-width="1.5"/>
+        <text x="660" y="96" font-size="10" fill="#B5341E">e<tspan font-style="italic">∞</tspan></text>
+      </svg>
+    </div>
+
+    <div style="margin-bottom: 1.25rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;">Razonamiento</div>
+      <p><strong>Sistema A.</strong> Respuesta rápida (hay <strong>P</strong>) y error permanente (no hay <strong>I</strong>). No se mencionan oscilaciones, así que tampoco hace falta D. La opción más sencilla es un <strong>regulador P</strong>.</p>
+      <p><strong>Sistema B.</strong> Tarda en estabilizarse y alcanza el valor exacto. La precisión sin error indica acción <strong>I</strong>. Si el sistema sólo tuviera I (sin P) la respuesta sería <em>muy</em> lenta y oscilaría notablemente; el enunciado dice que tarda más pero no que sea inestable, así que lo razonable es un <strong>PI</strong>: el P acelera la respuesta del I solo, manteniendo la exactitud final.</p>
+      <p>Compara con el ejercicio 3: el patrón es idéntico — <em>quien anula error tiene I, quien deja error no la tiene</em>.</p>
+    </div>
+
+    <div style="background: rgba(11,110,79,0.06); border-left: 3px solid var(--reg-pi); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--reg-pi); margin-bottom: 0.4rem;">Solución</div>
+      <p style="margin: 0;"><strong>Sistema A → P</strong> (rápido, deja error). <strong>Sistema B → PI</strong> (más lento, llega exacto).</p>
+    </div>
+  </article>
+
+  <!-- ===== EJERCICIO 6 ===== -->
+  <article id="ej6" style="background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 2rem 2.25rem; margin-bottom: 2rem; box-shadow: var(--shadow-1);">
+    <div style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--rule-soft);">
+      <div style="font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">Ejercicio 6 · acciones combinadas</div>
+    </div>
+    <h3 style="font-family: var(--serif); font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem;">Reducir oscilaciones y eliminar el error</h3>
+
+    <div style="background: var(--paper-2); padding: 1.25rem 1.5rem; border-radius: 6px; margin-bottom: 1.5rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;">Enunciado</div>
+      <p style="margin: 0;">Un sistema presenta oscilaciones alrededor del valor deseado.</p>
+      <p style="margin-top: 0.75rem; margin-bottom: 0;"><strong>a)</strong> ¿Qué tipo de acción permitiría reducir esas oscilaciones?<br>
+      <strong>b)</strong> ¿Qué regulador usarías si <em>además</em> quieres eliminar el error permanente?</p>
+    </div>
+
+    <div style="margin-bottom: 1.25rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;">Razonamiento</div>
+      <p><strong>Apartado a.</strong> La acción que reacciona ante <em>cambios</em> rápidos del error y los amortigua es la <strong>derivativa (D)</strong>. Cuando la salida se acerca al valor deseado a alta velocidad, la D detecta esa velocidad de cambio y reduce la potencia <em>antes</em> de llegar — frena el sistema y evita el sobrepaso. Por eso reduce las oscilaciones.</p>
+      <p><strong>Apartado b.</strong> Si además queremos eliminar el error permanente, hace falta acción <strong>integral (I)</strong>. Combinando las tres acciones — P para velocidad inicial, D para amortiguar oscilaciones, I para anular el error final — obtenemos un <strong>regulador PID</strong>. Es la solución completa cuando se exigen los tres requisitos a la vez: rápido, suave y exacto.</p>
+      <p>Nota: NO basta con un PI. El PI llega exacto pero suele tener cierto sobreoscilación. Para reducir aún más las oscilaciones suele añadirse la D — es decir, el PID.</p>
+    </div>
+
+    <div style="background: rgba(26,24,20,0.05); border-left: 3px solid var(--reg-pid); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--reg-pid); margin-bottom: 0.4rem;">Solución</div>
+      <p style="margin: 0;"><strong>a)</strong> Acción <strong>derivativa (D)</strong>. <strong>b)</strong> Regulador <strong>PID</strong>: P (velocidad) + I (anular error) + D (amortiguar oscilaciones).</p>
+    </div>
+  </article>
+
+  <p class="note-prose" style="margin-top: 2rem;">
+    <strong>Patrón común a los seis ejercicios.</strong> En todos ellos la pregunta clave es la misma: <em>¿el error permanente se anula o no?</em> Si se anula → hay <strong>I</strong>. Si no → no hay I (y será P o PD según los detalles del transitorio). La acción D no determina nada por sí sola: solo modifica la forma del transitorio (más amortiguado, con menor sobreoscilación). <span class="pill-pevau">Clave PEvAU</span>
+  </p>
+
+  <!-- ===== Practica tú ===== -->
+  <div class="practice-block" id="practiceBlock">
+    <div class="practice-block-title">Practica tú · 8 preguntas con autoevaluación</div>
+    <div class="practice-block-sub">Para cada pregunta, observa la situación o la gráfica y elige la opción que crees correcta. Tras cada clic verás si has acertado y por qué. Si te equivocas, lee la explicación y prueba con otra opción.</div>
+
+    <div class="practice-grid">
+
+      <!-- ===== Pregunta 1 ===== -->
+      <div class="practice-card" data-q="1">
+        <div class="practice-num">Pregunta 1</div>
+        <div class="practice-svg">
+          <svg viewBox="0 0 280 150" style="width:100%; height:auto;">
+            <!-- ejes -->
+            <line x1="30" y1="110" x2="270" y2="110" stroke="#1A1814" stroke-width="1"/>
+            <line x1="30" y1="20" x2="30" y2="110" stroke="#1A1814" stroke-width="1"/>
+            <text x="10" y="55" font-size="9" fill="#7A736A">y=1</text>
+            <text x="22" y="120" font-size="9" fill="#7A736A">0</text>
+            <text x="265" y="125" font-size="9" fill="#7A736A">t</text>
+            <!-- línea de referencia y=1 -->
+            <line x1="30" y1="50" x2="270" y2="50" stroke="#1A1814" stroke-dasharray="3,3" opacity="0.35"/>
+            <!-- escalón r(t) opcional muy tenue -->
+            <polyline points="30,110 50,110 50,50 270,50" fill="none" stroke="#B5341E" stroke-width="1" opacity="0.35"/>
+            <!-- curva I (lenta, oscila amortiguada, llega a 1) -->
+            <path d="M 30 110 L 50 110 Q 80 100 100 75 Q 120 50 140 28 Q 155 18 165 22 Q 180 35 190 60 Q 200 75 210 70 Q 225 60 235 50 Q 250 44 270 50" fill="none" stroke="#0B6E4F" stroke-width="2.2"/>
+          </svg>
+        </div>
+        <p class="practice-question">La salida sube <em>despacio</em>, sobrepasa la referencia, oscila varias veces y termina llegando a y=1. ¿Qué regulador es?</p>
+        <div class="practice-options">
+          <button data-correct="false" data-fb="P es rápido pero deja error permanente — no llegaría a y=1.">P</button>
+          <button data-correct="true" data-fb="Correcto. Llega a y=1 (tiene I) y oscila mucho con respuesta lenta — es la firma del I solo.">I</button>
+          <button data-correct="false" data-fb="PI llegaría a y=1 pero con mucha más velocidad inicial gracias al P. Aquí la subida es claramente lenta.">PI</button>
+          <button data-correct="false" data-fb="PD no llegaría a y=1 (no tiene I) y la D suprimiría las oscilaciones que se ven aquí.">PD</button>
+        </div>
+        <div class="practice-feedback" hidden></div>
+      </div>
+
+      <!-- ===== Pregunta 2 ===== -->
+      <div class="practice-card" data-q="2">
+        <div class="practice-num">Pregunta 2</div>
+        <div class="practice-svg">
+          <svg viewBox="0 0 280 150" style="width:100%; height:auto;">
+            <line x1="30" y1="110" x2="270" y2="110" stroke="#1A1814" stroke-width="1"/>
+            <line x1="30" y1="20" x2="30" y2="110" stroke="#1A1814" stroke-width="1"/>
+            <text x="10" y="55" font-size="9" fill="#7A736A">y=1</text>
+            <text x="22" y="120" font-size="9" fill="#7A736A">0</text>
+            <text x="265" y="125" font-size="9" fill="#7A736A">t</text>
+            <line x1="30" y1="50" x2="270" y2="50" stroke="#1A1814" stroke-dasharray="3,3" opacity="0.35"/>
+            <polyline points="30,110 50,110 50,50 270,50" fill="none" stroke="#B5341E" stroke-width="1" opacity="0.35"/>
+            <!-- curva PD: sube rápido, sin oscilar, queda en y≈0.7 (y=68px) -->
+            <path d="M 30 110 L 50 110 Q 60 105 75 90 Q 90 78 105 72 Q 125 68 270 68" fill="none" stroke="#B5651D" stroke-width="2.2"/>
+          </svg>
+        </div>
+        <p class="practice-question">La salida sube <em>rápido</em>, prácticamente sin oscilar y se estabiliza en y≈0,7. ¿Qué regulador es?</p>
+        <div class="practice-options">
+          <button data-correct="false" data-fb="P solo también deja error, pero no aplana la respuesta tan limpiamente. La forma sin oscilación apunta a algo con D.">P</button>
+          <button data-correct="false" data-fb="I es lento y oscila — todo lo contrario de lo que muestra la gráfica.">I</button>
+          <button data-correct="true" data-fb="Correcto. Sin oscilación (hay D, que frena suavemente) y con error permanente (no hay I): es PD.">PD</button>
+          <button data-correct="false" data-fb="PI llegaría a y=1 sin error. Aquí queda en 0,7, así que no tiene I.">PI</button>
+        </div>
+        <div class="practice-feedback" hidden></div>
+      </div>
+
+      <!-- ===== Pregunta 3 ===== -->
+      <div class="practice-card" data-q="3">
+        <div class="practice-num">Pregunta 3</div>
+        <div class="practice-svg">
+          <svg viewBox="0 0 280 150" style="width:100%; height:auto;">
+            <line x1="30" y1="110" x2="270" y2="110" stroke="#1A1814" stroke-width="1"/>
+            <line x1="30" y1="20" x2="30" y2="110" stroke="#1A1814" stroke-width="1"/>
+            <text x="10" y="55" font-size="9" fill="#7A736A">y=1</text>
+            <text x="22" y="120" font-size="9" fill="#7A736A">0</text>
+            <text x="265" y="125" font-size="9" fill="#7A736A">t</text>
+            <line x1="30" y1="50" x2="270" y2="50" stroke="#1A1814" stroke-dasharray="3,3" opacity="0.35"/>
+            <polyline points="30,110 50,110 50,50 270,50" fill="none" stroke="#B5341E" stroke-width="1" opacity="0.35"/>
+            <!-- curva PID: sube rápido, sin oscilar, llega exacto a y=1 -->
+            <path d="M 30 110 L 50 110 Q 60 102 72 78 Q 85 58 105 52 Q 130 50 270 50" fill="none" stroke="#1A1814" stroke-width="2.2"/>
+          </svg>
+        </div>
+        <p class="practice-question">La salida sube <em>rápido</em>, sin oscilaciones, y llega <em>exacta</em> a y=1. ¿Qué regulador es?</p>
+        <div class="practice-options">
+          <button data-correct="false" data-fb="P deja error permanente — no llegaría exactamente a y=1.">P</button>
+          <button data-correct="false" data-fb="PI llega a y=1 pero suele tener algo de sobreoscilación inicial. La forma totalmente suave indica que también hay D.">PI</button>
+          <button data-correct="false" data-fb="PD no llegaría a y=1 — al no tener I, dejaría error permanente.">PD</button>
+          <button data-correct="true" data-fb="Correcto. Rápido (P) + amortiguado (D) + exacto (I) = las tres virtudes juntas. Es PID.">PID</button>
+        </div>
+        <div class="practice-feedback" hidden></div>
+      </div>
+
+      <!-- ===== Pregunta 4 (textual) ===== -->
+      <div class="practice-card" data-q="4">
+        <div class="practice-num">Pregunta 4 · situación</div>
+        <div style="background: var(--paper); border: 1px solid var(--rule-soft); border-radius: 4px; padding: 0.8rem 1rem; margin-bottom: 1rem; font-style: italic; color: var(--ink-soft); font-size: 0.93rem;">
+          Hay que controlar la velocidad de un ventilador de refrigeración. Si la consigna es 1000 rpm y el sistema se queda fijo en 980 rpm, no pasa nada para la aplicación. Lo importante es que sea barato y simple, y que la respuesta sea rápida.
+        </div>
+        <p class="practice-question">¿Qué regulador es suficiente?</p>
+        <div class="practice-options">
+          <button data-correct="true" data-fb="Correcto. La aplicación tolera error permanente, así que no hace falta I. Tampoco hay problema de oscilaciones, así que no hace falta D. P es suficiente y el más simple.">P</button>
+          <button data-correct="false" data-fb="PI elimina el error permanente — pero el enunciado dice que no es necesario llegar exacto. Es complejidad innecesaria.">PI</button>
+          <button data-correct="false" data-fb="PD añade D para evitar oscilaciones, pero el enunciado no menciona problemas de oscilación. Sobra.">PD</button>
+          <button data-correct="false" data-fb="PID es el más completo, pero también el más complejo. Aquí no se necesita ni precisión exacta ni amortiguar oscilaciones — sobra.">PID</button>
+        </div>
+        <div class="practice-feedback" hidden></div>
+      </div>
+
+      <!-- ===== Pregunta 5 (conceptual) ===== -->
+      <div class="practice-card" data-q="5">
+        <div class="practice-num">Pregunta 5 · concepto</div>
+        <p class="practice-question">Para <em>eliminar el error permanente</em> con respuesta rápida, ¿qué regulador es la mejor opción?</p>
+        <div class="practice-options">
+          <button data-correct="false" data-fb="P es rápido pero deja error permanente — exactamente lo que queremos evitar.">P</button>
+          <button data-correct="false" data-fb="I sí anula el error, pero es lento. La pregunta pide además respuesta rápida.">I</button>
+          <button data-correct="true" data-fb="Correcto. PI combina la rapidez del P con la capacidad del I para anular el error permanente. Es por esto que es el más utilizado en la industria.">PI</button>
+          <button data-correct="false" data-fb="D sola rara vez se usa: si el error es constante su derivada es cero y no actúa.">D</button>
+        </div>
+        <div class="practice-feedback" hidden></div>
+      </div>
+
+      <!-- ===== Pregunta 6 (conceptual) ===== -->
+      <div class="practice-card" data-q="6">
+        <div class="practice-num">Pregunta 6 · concepto</div>
+        <p class="practice-question">¿Cuál de estos reguladores <em>NO</em> elimina el error permanente?</p>
+        <div class="practice-options">
+          <button data-correct="true" data-fb="Correcto. P no acumula el error, así que se queda con un error residual cuando la salida se acerca al objetivo. Para anularlo hace falta acción I.">P</button>
+          <button data-correct="false" data-fb="I sí anula el error: acumula el error mientras exista y empuja la salida hasta hacerlo cero.">I</button>
+          <button data-correct="false" data-fb="PI sí anula el error porque incluye acción I.">PI</button>
+          <button data-correct="false" data-fb="PID sí anula el error porque incluye acción I.">PID</button>
+        </div>
+        <div class="practice-feedback" hidden></div>
+      </div>
+
+      <!-- ===== Pregunta 7 (conceptual) ===== -->
+      <div class="practice-card" data-q="7">
+        <div class="practice-num">Pregunta 7 · concepto</div>
+        <p class="practice-question">Para <em>reducir oscilaciones</em> y evitar que el sistema sobrepase el valor deseado, ¿qué acción debe estar presente?</p>
+        <div class="practice-options">
+          <button data-correct="false" data-fb="P actúa proporcionalmente al error, no a su velocidad. No previene oscilaciones; según su ganancia incluso las puede provocar.">P</button>
+          <button data-correct="false" data-fb="I, si se usa sola, suele introducir oscilaciones porque sigue acumulando incluso cuando el sistema está a punto de llegar al objetivo.">I</button>
+          <button data-correct="true" data-fb="Correcto. D reacciona a la velocidad de cambio del error: cuando el sistema se acerca rápido al objetivo, frena la acción antes de llegar y evita el sobrepaso.">D</button>
+          <button data-correct="false" data-fb="Ninguna acción no es la respuesta — sí existe una específica para esto.">Ninguna</button>
+        </div>
+        <div class="practice-feedback" hidden></div>
+      </div>
+
+      <!-- ===== Pregunta 8 (conceptual) ===== -->
+      <div class="practice-card" data-q="8">
+        <div class="practice-num">Pregunta 8 · concepto</div>
+        <p class="practice-question">¿Cuál combina <em>rapidez, exactitud y estabilidad</em> simultáneamente?</p>
+        <div class="practice-options">
+          <button data-correct="false" data-fb="P solo da rapidez, pero deja error permanente y no amortigua oscilaciones.">P</button>
+          <button data-correct="false" data-fb="PI da rapidez y exactitud, pero le falta D para reducir más las oscilaciones.">PI</button>
+          <button data-correct="false" data-fb="PD da rapidez y estabilidad, pero le falta I para eliminar el error permanente.">PD</button>
+          <button data-correct="true" data-fb="Correcto. PID combina las tres: P para velocidad, I para anular el error permanente, D para amortiguar oscilaciones. Es la solución completa.">PID</button>
+        </div>
+        <div class="practice-feedback" hidden></div>
+      </div>
+
+      <!-- ===== Pregunta 9 — firma del PI en gráfica m(t) ===== -->
+      <div class="practice-card" data-q="9">
+        <div class="practice-num">Pregunta 9</div>
+        <div class="practice-svg">
+          <svg viewBox="0 0 280 150" style="width:100%; height:auto;">
+            <line x1="30" y1="110" x2="270" y2="110" stroke="#1A1814" stroke-width="1"/>
+            <line x1="30" y1="20" x2="30" y2="110" stroke="#1A1814" stroke-width="1"/>
+            <text x="10" y="55" font-size="9" fill="#7A736A">m</text>
+            <text x="22" y="120" font-size="9" fill="#7A736A">0</text>
+            <text x="265" y="125" font-size="9" fill="#7A736A">t</text>
+            <!-- Error en escalón (referencia tenue) -->
+            <polyline points="30,110 50,110 50,75 270,75" fill="none" stroke="#B5341E" stroke-width="1" opacity="0.35"/>
+            <text x="56" y="68" font-size="9" fill="#B5341E" opacity="0.7" font-style="italic">e(t)</text>
+            <!-- Curva m(t): escalón al subir el error + rampa creciente -->
+            <polyline points="30,110 50,110 50,85 270,30" fill="none" stroke="#6E4FA0" stroke-width="2.4"/>
+            <text x="200" y="50" font-size="9" fill="#6E4FA0" font-style="italic">m(t)</text>
+          </svg>
+        </div>
+        <p class="practice-question">El error es un escalón constante; la señal de control <em>m</em> da un salto inicial y a partir de ahí <em>crece como una rampa</em>. ¿Qué regulador es?</p>
+        <div class="practice-options">
+          <button data-correct="false" data-fb="P solo daría un escalón fijo en m, sin rampa posterior. Aquí m sigue creciendo después del salto inicial.">P</button>
+          <button data-correct="false" data-fb="I solo daría rampa pura, sin salto inicial. Aquí hay claramente un escalón al principio.">I</button>
+          <button data-correct="true" data-fb="Correcto. Salto inicial = acción P. Rampa posterior mientras el error persiste = acción I. La suma es la firma del PI: el más utilizado en la industria.">PI</button>
+          <button data-correct="false" data-fb="PD daría un pico inicial (por la D al cambiar el error) más un escalón (por la P), pero sin rampa creciente — la D no acumula. Aquí la rampa indica I.">PD</button>
+        </div>
+        <div class="practice-feedback" hidden></div>
+      </div>
+
+    </div>
+
+    <button class="practice-reset" id="practiceReset">↺ Volver a empezar</button>
+  </div>
+
+  <div style="margin-top: 2.5rem; background: var(--paper-2); border-left: 4px solid var(--reg-pid); border-radius: 0 6px 6px 0; padding: 1.5rem 1.75rem;">
+    <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;">Para más práctica · Banco de ejercicios v27</div>
+    <p style="font-family: var(--serif); font-size: 1rem; color: var(--ink-soft); margin-bottom: 0.75rem;">Estos seis ejercicios y las nueve preguntas autoevaluadas dan la base. Para profundizar, en el banco de ejercicios encontrarás resueltos los problemas oficiales de la Ponencia 2025-26 que entrenan exactamente lo que se pregunta en PEvAU sobre reguladores:</p>
+    <ul style="font-family: var(--serif); font-size: 0.95rem; color: var(--ink-soft); padding-left: 1.5rem; line-height: 1.7;">
+      <li><strong>P8 · Características de los reguladores P, I y D.</strong> Pregunta de redacción estructurada — ver plantilla en el § 11 de aquí abajo.</li>
+      <li><strong>P9 · Control de temperatura de una ducha.</strong> Identificación PI a partir de una situación realista (ajustes sucesivos hasta anular el error).</li>
+      <li><strong>P10 · Identificación de controladores por sus gráficas.</strong> Tres patrones e(t)/m(t) → P, I, D.</li>
+      <li><strong>P11 · Velocidad de crucero subiendo pendiente.</strong> Distinción entre P (deja error) y PI (lo elimina).</li>
+    </ul>
+    <p style="font-family: var(--serif); font-size: 0.95rem; color: var(--ink-soft); margin-top: 0.75rem; font-style: italic;">→ Banco de ejercicios v27 · sección «Problemas tipo PEvAU».</p>
+  </div>
+</section>
+
+<!-- ============ § 11 PARA RECORDAR ============ -->
+<section>
+  <div class="section-label">§ 12 — Para recordar</div>
+  <h2 class="section-heading">Lo esencial <em>para PEvAU</em></h2>
+
+  <div class="key-points">
+    <h3>Resumen operativo · Apartado 7 · Bloque F</h3>
+    <ol>
+      <li>El <strong>regulador</strong> (G₁ del diagrama) es el elemento del lazo cerrado que recibe el error <em>e</em> y genera la señal de control <em>m</em> que actúa sobre la planta.</li>
+      <li>La acción <strong>proporcional (P)</strong> responde al error <em>actual</em>: <code>m = K<sub>p</sub>·e</code>. Rápida, pero deja error permanente.</li>
+      <li>La acción <strong>integral (I)</strong> responde al error <em>acumulado</em>: <code>m = K<sub>i</sub>·∫e dt</code>. Elimina el error permanente, pero es lenta y oscila si se usa sola.</li>
+      <li>La acción <strong>derivativa (D)</strong> responde a la <em>velocidad de cambio</em> del error: <code>m = K<sub>d</sub>·de/dt</code>. Anticipa y reduce oscilaciones, pero <em>rara vez se usa sola</em> porque no actúa con error constante.</li>
+      <li>El regulador <strong>PI</strong> es el más usado en la industria: rápido (P) y exacto (I). El <strong>PD</strong> da velocidad sin oscilaciones, pero deja error. El <strong>PID</strong> combina las tres acciones — rápido, exacto y estable.</li>
+      <li>Regla de elección: si necesitas <em>llegar exacto</em>, usa algo con I; si quieres <em>evitar oscilaciones</em>, usa algo con D; el P aporta velocidad.</li>
+      <li>En PEvAU el regulador suele aparecer como una <em>ganancia G₁</em> dentro de un diagrama de bloques. Las preguntas habituales son cualitativas: <em>papel del regulador</em>, <em>identificación de elementos</em>, <em>por qué un sistema estable en lazo abierto puede ser inestable en cerrado</em>. Las fórmulas integrales y derivativas no se piden calcular.</li>
+    </ol>
+  </div>
+
+  <div class="formula-recap">
+    <div class="frec">
+      <div class="frec-label">P · proporcional</div>
+      <div class="frec-formula">m = K<sub>p</sub> · e</div>
+    </div>
+    <div class="frec">
+      <div class="frec-label">I · integral</div>
+      <div class="frec-formula">m = K<sub>i</sub> · ∫ e dt</div>
+    </div>
+    <div class="frec">
+      <div class="frec-label">D · derivativo</div>
+      <div class="frec-formula">m = K<sub>d</sub> · de/dt</div>
+    </div>
+    <div class="frec">
+      <div class="frec-label">PID · completo</div>
+      <div class="frec-formula">m = K<sub>p</sub>e + K<sub>i</sub>∫e + K<sub>d</sub> de/dt</div>
+    </div>
+  </div>
+
+  <div class="idea-final">
+    <div class="idea-final-label">La idea final</div>
+    <div class="idea-final-rows">
+      <div class="idea-final-row">
+        <div class="idea-final-letter" style="color: var(--reg-p)">P</div>
+        <div class="idea-final-arrow">→</div>
+        <div class="idea-final-text">rapidez</div>
+      </div>
+      <div class="idea-final-row">
+        <div class="idea-final-letter" style="color: var(--reg-i)">I</div>
+        <div class="idea-final-arrow">→</div>
+        <div class="idea-final-text">elimina el error permanente</div>
+      </div>
+      <div class="idea-final-row">
+        <div class="idea-final-letter" style="color: var(--reg-d)">D</div>
+        <div class="idea-final-arrow">→</div>
+        <div class="idea-final-text">reduce oscilaciones</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PLANTILLA RESPUESTA TIPO P8 PONENCIA ============ -->
+  <div style="margin-top: 3rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 2rem 2.25rem; box-shadow: var(--shadow-1);">
+    <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem;">Plantilla de respuesta · Problema 8 de Ponencia</div>
+    <h3 style="font-family: var(--serif); font-weight: 600; font-size: 1.5rem; margin-bottom: 0.75rem; letter-spacing: -0.01em;">Cómo redactar las <em>características</em> de los reguladores</h3>
+    <p style="font-family: var(--serif); font-size: 1rem; color: var(--ink-soft); margin-bottom: 1.5rem; line-height: 1.6; max-width: 70ch;">
+      El Problema 8 de la Ponencia pide «enumerar y comentar brevemente las principales características de los controladores P, I y D». Es una pregunta de <em>redacción</em>, no de identificación. Esta es la plantilla mínima que cubre lo evaluable. Memorízala con esta estructura: <strong>cómo actúa</strong> · <strong>cuándo actúa</strong> · <strong>una virtud</strong> · <strong>un defecto</strong>.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.25rem;">
+
+      <!-- P -->
+      <div style="background: var(--paper-2); border-left: 4px solid var(--reg-p); border-radius: 0 6px 6px 0; padding: 1.25rem 1.5rem;">
+        <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--reg-p); font-weight: 700; margin-bottom: 0.5rem;">Acción proporcional · P</div>
+        <div style="font-family: var(--mono); font-size: 0.85rem; background: var(--surface); padding: 0.4rem 0.7rem; border-radius: 3px; margin-bottom: 1rem; color: var(--ink); border: 1px solid var(--rule-soft);">m = K<sub>p</sub>·e</div>
+        <ul style="list-style: none; padding: 0; font-size: 0.92rem; line-height: 1.55; color: var(--ink-soft);">
+          <li style="margin-bottom: 0.6rem;"><strong style="color: var(--ink);">Cómo actúa:</strong> la señal de control es proporcional al error actual.</li>
+          <li style="margin-bottom: 0.6rem;"><strong style="color: var(--ink);">Cuándo actúa:</strong> de forma instantánea, tanto en transitorio como en régimen permanente.</li>
+          <li style="margin-bottom: 0.6rem;"><strong style="color: var(--reg-i);">Ventaja:</strong> respuesta rápida ante cambios.</li>
+          <li><strong style="color: var(--error);">Inconveniente:</strong> no asegura error cero en régimen permanente: si el error es cero la acción se anula y el sistema deja de corregir.</li>
+        </ul>
+      </div>
+
+      <!-- I -->
+      <div style="background: var(--paper-2); border-left: 4px solid var(--reg-i); border-radius: 0 6px 6px 0; padding: 1.25rem 1.5rem;">
+        <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--reg-i); font-weight: 700; margin-bottom: 0.5rem;">Acción integral · I</div>
+        <div style="font-family: var(--mono); font-size: 0.85rem; background: var(--surface); padding: 0.4rem 0.7rem; border-radius: 3px; margin-bottom: 1rem; color: var(--ink); border: 1px solid var(--rule-soft);">m = K<sub>i</sub>·∫ e dt</div>
+        <ul style="list-style: none; padding: 0; font-size: 0.92rem; line-height: 1.55; color: var(--ink-soft);">
+          <li style="margin-bottom: 0.6rem;"><strong style="color: var(--ink);">Cómo actúa:</strong> acumula el error en el tiempo (integral del error).</li>
+          <li style="margin-bottom: 0.6rem;"><strong style="color: var(--ink);">Cuándo actúa:</strong> con efecto retardado: necesita tiempo para que la acumulación sea efectiva.</li>
+          <li style="margin-bottom: 0.6rem;"><strong style="color: var(--reg-i);">Ventaja:</strong> elimina el error en régimen permanente — anula completamente la diferencia entre referencia y salida.</li>
+          <li><strong style="color: var(--error);">Inconveniente:</strong> respuesta lenta y tendencia a oscilar; rara vez se usa sola, habitualmente combinada con P.</li>
+        </ul>
+      </div>
+
+      <!-- D -->
+      <div style="background: var(--paper-2); border-left: 4px solid var(--reg-d); border-radius: 0 6px 6px 0; padding: 1.25rem 1.5rem;">
+        <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--reg-d); font-weight: 700; margin-bottom: 0.5rem;">Acción derivativa · D</div>
+        <div style="font-family: var(--mono); font-size: 0.85rem; background: var(--surface); padding: 0.4rem 0.7rem; border-radius: 3px; margin-bottom: 1rem; color: var(--ink); border: 1px solid var(--rule-soft);">m = K<sub>d</sub>·de/dt</div>
+        <ul style="list-style: none; padding: 0; font-size: 0.92rem; line-height: 1.55; color: var(--ink-soft);">
+          <li style="margin-bottom: 0.6rem;"><strong style="color: var(--ink);">Cómo actúa:</strong> proporcional a la velocidad de cambio del error (su derivada).</li>
+          <li style="margin-bottom: 0.6rem;"><strong style="color: var(--ink);">Cuándo actúa:</strong> solo en régimen transitorio. Con error constante su derivada es cero y no actúa.</li>
+          <li style="margin-bottom: 0.6rem;"><strong style="color: var(--reg-i);">Ventaja:</strong> efecto anticipativo: reduce sobreoscilaciones y suaviza la respuesta.</li>
+          <li><strong style="color: var(--error);">Inconveniente:</strong> rara vez se usa sola, porque no corrige errores estáticos. Habitualmente actúa como complemento de P o de PI.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 1.5rem; padding: 1rem 1.25rem; background: var(--ink); color: var(--paper); border-radius: 4px;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem;">Cierre de la respuesta</div>
+      <p style="margin: 0; font-size: 0.95rem; line-height: 1.55;">«Las tres acciones se suelen combinar: <strong>PI</strong> es el más usado en la industria (rápido y exacto), <strong>PD</strong> se emplea cuando importa no sobrepasar el valor deseado (respuesta amortiguada), y <strong>PID</strong> es la solución completa cuando se requieren las tres virtudes — rapidez, exactitud y estabilidad — simultáneamente.»</p>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <div class="signature">Material didáctico para Tecnología e Ingeniería II · Bloque F · Apartado 7</div>
+  <div>v1.9 · IES Jiménez de Quesada · Manuel Alonso Herrera</div>
+</footer>
+
+</div>
+
+<script>
+// =================================================================
+// CANVAS UTILITIES
+// =================================================================
+function setupCanvas(canvas, w, h) {
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  canvas.style.width = w + 'px';
+  canvas.style.height = h + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  return ctx;
+}
+
+const COLORS = {
+  ref: '#1A1814',
+  output: '#0B6E4F',
+  outputFill: 'rgba(11, 110, 79, 0.18)',
+  error: '#B5341E',
+  errorFill: 'rgba(181, 52, 30, 0.18)',
+  warning: '#B5841A',
+  warningFill: 'rgba(181, 132, 26, 0.22)',
+  signal: '#1A75BC',
+  grid: '#D9D2C2',
+  muted: '#7A736A',
+  ink: '#1A1814',
+  paper2: '#F4EFE3',
+
+  reg_p: '#1A75BC',
+  reg_i: '#0B6E4F',
+  reg_d: '#B5841A',
+  reg_pi: '#6E4FA0',
+  reg_pd: '#B5651D',
+  reg_pid: '#1A1814',
+};
+
+// Pinta las zonas TRANSITORIO/PERMANENTE en el canvas.
+// Si tSettle >= tMax, todo el área se considera transitoria.
+function drawRegimeZones(ctx, opts) {
+  const { marginL, marginT, plotW, plotH, tToX, tSettle, tMax } = opts;
+  const xT = tToX(Math.min(tSettle, tMax));
+
+  ctx.fillStyle = COLORS.warningFill;
+  ctx.fillRect(marginL, marginT, xT - marginL, plotH);
+
+  if (tSettle < tMax) {
+    ctx.fillStyle = COLORS.outputFill;
+    ctx.fillRect(xT, marginT, marginL + plotW - xT, plotH);
+  }
+
+  ctx.font = '600 10px "JetBrains Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = COLORS.warning;
+  if (xT > marginL + 60) ctx.fillText('TRANSITORIO', (marginL + xT) / 2, marginT + 14);
+  if (tSettle < tMax) {
+    ctx.fillStyle = COLORS.output;
+    if (xT < marginL + plotW - 60) ctx.fillText('PERMANENTE', (xT + marginL + plotW) / 2, marginT + 14);
+  }
+}
+
+// Tiempo de establecimiento aproximado (criterio del 2 %) por regulador, según las funciones de RESP
+const T_SETTLE = {
+  p: 4.0,    // primer orden tau=1.0 → 4·tau
+  i: 24.7,   // sub-am zeta=0.18 wn=0.9 → 4/(zeta·wn) — no se establece en 10s
+  d: 8.0,    // tau=2.0 → 4·tau
+  pi: 6.35,  // sub-am zeta=0.45 wn=1.4
+  pd: 2.2,   // primer orden tau=0.55
+  pid: 2.86, // sub-am zeta=0.7 wn=2.0
+};
+
+// =================================================================
+// RESPONSE FUNCTIONS — características cualitativas de cada regulador
+// =================================================================
+const RESP = {
+  p: function(t) {
+    // tiende a 0.7, error permanente 0.3
+    return 0.7 * (1 - Math.exp(-t / 1.0));
+  },
+  i: function(t) {
+    // sub-amortiguada lenta hasta 1
+    const zeta = 0.18, wn = 0.9;
+    const wd = wn * Math.sqrt(1 - zeta*zeta);
+    return 1 - Math.exp(-zeta*wn*t) * (Math.cos(wd*t) + (zeta/Math.sqrt(1-zeta*zeta))*Math.sin(wd*t));
+  },
+  d: function(t) {
+    // poco se mueve - error permanente grande
+    return 0.05 * (1 - Math.exp(-t / 2));
+  },
+  pi: function(t) {
+    // sub-amortiguada moderada hasta 1
+    const zeta = 0.45, wn = 1.4;
+    const wd = wn * Math.sqrt(1 - zeta*zeta);
+    return 1 - Math.exp(-zeta*wn*t) * (Math.cos(wd*t) + (zeta/Math.sqrt(1-zeta*zeta))*Math.sin(wd*t));
+  },
+  pd: function(t) {
+    // sobre-amortiguada hasta 0.7 (con error)
+    return 0.7 * (1 - Math.exp(-t / 0.55));
+  },
+  pid: function(t) {
+    // bien amortiguada hasta 1
+    const zeta = 0.7, wn = 2.0;
+    const wd = wn * Math.sqrt(1 - zeta*zeta);
+    return 1 - Math.exp(-zeta*wn*t) * (Math.cos(wd*t) + (zeta/Math.sqrt(1-zeta*zeta))*Math.sin(wd*t));
+  }
+};
+
+// =================================================================
+// MINI ACTION ILLUSTRATIONS (§03 — three actions)
+// Show: error e(t) (entrada) y respuesta m(t) (salida) que ilustra la naturaleza de cada acción
+// =================================================================
+function drawActionMini(canvasId, kind) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const W = 260, H = 110;
+  const ctx = setupCanvas(canvas, W, H);
+  const margin = { l: 28, r: 16, t: 18, b: 22 };
+  const plotW = W - margin.l - margin.r;
+  const plotH = H - margin.t - margin.b;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Eje horizontal
+  ctx.strokeStyle = COLORS.grid;
+  ctx.lineWidth = 0.5;
+  ctx.beginPath();
+  ctx.moveTo(margin.l, margin.t + plotH);
+  ctx.lineTo(margin.l + plotW, margin.t + plotH);
+  ctx.stroke();
+
+  // Eje Y
+  ctx.beginPath();
+  ctx.moveTo(margin.l, margin.t);
+  ctx.lineTo(margin.l, margin.t + plotH);
+  ctx.stroke();
+
+  // Línea cero
+  ctx.strokeStyle = COLORS.ink;
+  ctx.lineWidth = 1;
+  const yZero = margin.t + plotH * 0.7;
+  ctx.beginPath();
+  ctx.moveTo(margin.l, yZero);
+  ctx.lineTo(margin.l + plotW, yZero);
+  ctx.stroke();
+
+  // Función didáctica:
+  //   e(t) = ESCALÓN PERSISTENTE en t = 0.6 (sube a 0.7 y se queda)
+  //   m(t) según el tipo de regulador:
+  //     P: línea horizontal Kp·e (proporcional al valor del error)
+  //     I: rampa creciente sin parar (la integral acumula sin límite)
+  //     D: pico instantáneo en el escalón, luego CERO (la D solo ve cambios)
+  //
+  // Esta elección hace que las tres firmas sean visualmente DISTINTAS y
+  // coincidan con el lenguaje pedagógico:
+  //   - P → "responde proporcionalmente"
+  //   - I → "crece mientras haya error"
+  //   - D → "reacciona al cambio, no al valor"
+  const tMax = 5;
+  const tStep = 0.6;        // instante del escalón
+  const eAmp = 0.70;        // amplitud del error (escalón persistente)
+  const xOf = (t) => margin.l + (t / tMax) * plotW;
+  const yOf = (v) => yZero - v * plotH * 0.55;
+
+  // Función e(t): escalón persistente
+  const eFn = (t) => (t < tStep ? 0 : eAmp);
+
+  // Curva del error e(t) (gris discontinuo)
+  ctx.strokeStyle = COLORS.muted;
+  ctx.lineWidth = 1.4;
+  ctx.setLineDash([3, 3]);
+  ctx.beginPath();
+  // Tramo antes del escalón
+  ctx.moveTo(xOf(0), yOf(0));
+  ctx.lineTo(xOf(tStep), yOf(0));
+  // Salto vertical en el escalón
+  ctx.lineTo(xOf(tStep), yOf(eAmp));
+  // Tramo después: escalón sostenido
+  ctx.lineTo(xOf(tMax), yOf(eAmp));
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Curva m(t) según tipo
+  let stroke;
+  ctx.lineWidth = 2.6;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+
+  if (kind === 'p') {
+    stroke = COLORS.reg_p;
+    ctx.strokeStyle = stroke;
+    // m = Kp · e — escalón a Kp·eAmp = 0.55 (un poco por debajo de e para que se vean separadas)
+    const mP = 0.55;
+    ctx.beginPath();
+    ctx.moveTo(xOf(0), yOf(0));
+    ctx.lineTo(xOf(tStep), yOf(0));
+    ctx.lineTo(xOf(tStep), yOf(mP));
+    ctx.lineTo(xOf(tMax), yOf(mP));
+    ctx.stroke();
+  } else if (kind === 'i') {
+    stroke = COLORS.reg_i;
+    ctx.strokeStyle = stroke;
+    // m = Ki · ∫e dt — rampa creciente continua tras el escalón
+    // Pendiente Ki·eAmp; elegida para que llegue a ~1.0 al final del eje
+    const slope = 0.30;
+    ctx.beginPath();
+    ctx.moveTo(xOf(0), yOf(0));
+    ctx.lineTo(xOf(tStep), yOf(0));
+    for (let i = 0; i <= 200; i++) {
+      const t = tStep + ((tMax - tStep) * i) / 200;
+      const m = Math.min(1.0, slope * (t - tStep));
+      ctx.lineTo(xOf(t), yOf(m));
+    }
+    ctx.stroke();
+  } else if (kind === 'd') {
+    stroke = COLORS.reg_d;
+    ctx.strokeStyle = stroke;
+    // m = Kd · de/dt — pico estrecho en el escalón, luego CERO
+    // El pico es teóricamente impulsivo; se dibuja como un triángulo estrecho
+    const peakW = 0.08;       // anchura del pico (en unidades de tiempo)
+    const peakH = 0.95;       // altura del pico
+    ctx.beginPath();
+    ctx.moveTo(xOf(0), yOf(0));
+    ctx.lineTo(xOf(tStep - peakW/2), yOf(0));
+    ctx.lineTo(xOf(tStep), yOf(peakH));
+    ctx.lineTo(xOf(tStep + peakW/2), yOf(0));
+    ctx.lineTo(xOf(tMax), yOf(0));
+    ctx.stroke();
+  }
+
+  // Etiquetas
+  ctx.font = '500 9px "JetBrains Mono", monospace';
+  ctx.fillStyle = COLORS.muted;
+  ctx.textAlign = 'left';
+  ctx.fillText('e', margin.l + 4, margin.t + 10);
+  ctx.fillStyle = stroke;
+  ctx.fillText('m', margin.l + plotW - 14, margin.t + 10);
+  ctx.fillStyle = COLORS.muted;
+  ctx.textAlign = 'center';
+  ctx.fillText('t', margin.l + plotW / 2, margin.t + plotH + 14);
+}
+
+// =================================================================
+// REGULATOR RESPONSE CANVAS (§04, §05, §06, §07)
+// =================================================================
+function drawRegulatorResponse(canvasId, regKind, opts) {
+  opts = opts || {};
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const W = opts.W || 380, H = opts.H || 200;
+  const ctx = setupCanvas(canvas, W, H);
+  const margin = { l: 36, r: 16, t: 22, b: 28 };
+  const plotW = W - margin.l - margin.r;
+  const plotH = H - margin.t - margin.b;
+  const tMax = opts.tMax || 10;
+  const yMax = 1.8;
+
+  const tToX = (t) => margin.l + (t / tMax) * plotW;
+  const yToPx = (y) => margin.t + plotH - (y / yMax) * plotH;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Zonas transitorio/permanente según el regulador
+  const tSettle = T_SETTLE[regKind] || tMax;
+  drawRegimeZones(ctx, {
+    marginL: margin.l, marginT: margin.t,
+    plotW: plotW, plotH: plotH,
+    tToX: tToX, tSettle: tSettle, tMax: tMax
+  });
+
+  // Grid
+  ctx.strokeStyle = COLORS.grid;
+  ctx.lineWidth = 0.5;
+  [0, 0.5, 1, 1.5].forEach(y => {
+    const py = yToPx(y);
+    ctx.beginPath(); ctx.moveTo(margin.l, py); ctx.lineTo(margin.l + plotW, py); ctx.stroke();
+    ctx.fillStyle = COLORS.muted;
+    ctx.font = '500 9px "JetBrains Mono", monospace';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(y.toFixed(1), margin.l - 5, py);
+  });
+  for (let t = 0; t <= tMax; t += 2) {
+    const px = tToX(t);
+    ctx.beginPath(); ctx.moveTo(px, margin.t); ctx.lineTo(px, margin.t + plotH); ctx.stroke();
+    ctx.fillStyle = COLORS.muted;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText(t + 's', px, margin.t + plotH + 5);
+  }
+
+  // Ejes
+  ctx.strokeStyle = COLORS.ink;
+  ctx.lineWidth = 1.2;
+  ctx.beginPath();
+  ctx.moveTo(margin.l, yToPx(0));
+  ctx.lineTo(margin.l + plotW, yToPx(0));
+  ctx.moveTo(margin.l, margin.t);
+  ctx.lineTo(margin.l, margin.t + plotH);
+  ctx.stroke();
+
+  // Referencia
+  ctx.strokeStyle = COLORS.ref;
+  ctx.setLineDash([5, 3]);
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(margin.l, yToPx(1));
+  ctx.lineTo(margin.l + plotW, yToPx(1));
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = COLORS.ref;
+  ctx.font = '600 10px "JetBrains Mono", monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText('r = 1', margin.l + 6, yToPx(1) - 5);
+
+  // Función de respuesta
+  const fn = RESP[regKind];
+  const N = 300;
+
+  // Sombreado del error si tiene error permanente conocido (P, D, PD)
+  const yInf = fn(tMax * 5); // valor asintótico aproximado
+  const hasError = (Math.abs(yInf - 1) > 0.05);
+
+  if (hasError) {
+    ctx.fillStyle = COLORS.errorFill;
+    ctx.beginPath();
+    ctx.moveTo(margin.l, yToPx(1));
+    for (let i = 0; i <= N; i++) {
+      const t = (tMax * i) / N;
+      const y = fn(t);
+      const py = yToPx(Math.min(yMax, Math.max(0, y)));
+      ctx.lineTo(tToX(t), py);
+    }
+    ctx.lineTo(margin.l + plotW, yToPx(1));
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // Curva
+  const colorMap = { p: COLORS.reg_p, i: COLORS.reg_i, d: COLORS.reg_d, pi: COLORS.reg_pi, pd: COLORS.reg_pd, pid: COLORS.reg_pid };
+  ctx.strokeStyle = colorMap[regKind];
+  ctx.lineWidth = 2.4;
+  ctx.beginPath();
+  for (let i = 0; i <= N; i++) {
+    const t = (tMax * i) / N;
+    const y = fn(t);
+    const yC = Math.min(yMax, Math.max(0, y));
+    const px = tToX(t);
+    const py = yToPx(yC);
+    if (i === 0) ctx.moveTo(px, py);
+    else ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+
+  // Asintota y∞ (si hay error)
+  if (hasError) {
+    ctx.strokeStyle = colorMap[regKind];
+    ctx.setLineDash([2, 4]);
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(margin.l, yToPx(yInf));
+    ctx.lineTo(margin.l + plotW, yToPx(yInf));
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = colorMap[regKind];
+    ctx.font = '600 10px "JetBrains Mono", monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText('y∞ = ' + yInf.toFixed(2), margin.l + plotW - 6, yToPx(yInf) - 5);
+  }
+}
+
+// =================================================================
+// COMPARISON SIMULATOR (§08)
+// =================================================================
+class ComparisonSim {
+  constructor() {
+    this.canvas = document.getElementById('canvasComparison');
+    this.W = 900; this.H = 360;
+    this.ctx = setupCanvas(this.canvas, this.W, this.H);
+    this.margin = { l: 50, r: 30, t: 30, b: 40 };
+    this.plotW = this.W - this.margin.l - this.margin.r;
+    this.plotH = this.H - this.margin.t - this.margin.b;
+    this.tMax = 10;
+    this.yMax = 1.8;
+    this.t = this.tMax;  // dibuja completo al inicio
+    this.playing = false;
+    this.lastFrame = null;
+    this.active = { p: true, i: true, d: true, pi: true, pd: true, pid: true };
+    this.setup();
+    this.draw();
+  }
+
+  setup() {
+    document.getElementById('playComparison').addEventListener('click', () => this.play());
+    document.getElementById('resetComparison').addEventListener('click', () => this.reset());
+
+    document.querySelectorAll('.reg-toggle').forEach(el => {
+      el.addEventListener('click', () => {
+        const reg = el.dataset.reg;
+        this.active[reg] = !this.active[reg];
+        el.classList.toggle('off', !this.active[reg]);
+        this.draw();
+        // Si toca un toggle manualmente, desactivar visualmente cualquier preset
+        document.querySelectorAll('.cp-btn').forEach(b => b.classList.remove('active'));
+      });
+    });
+
+    // Presets de comparación guiada
+    document.querySelectorAll('.cp-btn').forEach(btn => {
+      btn.addEventListener('click', () => this.applyPreset(btn.dataset.preset, btn));
+    });
+  }
+
+  applyPreset(preset, clickedBtn) {
+    const presets = {
+      'p-vs-pi': {
+        active: { p: true, i: false, d: false, pi: true, pd: false, pid: false },
+        title: 'P solo vs PI',
+        body: 'Mira el final de las dos curvas. <strong>P</strong> se queda por debajo de la consigna — error permanente. <strong>PI</strong> termina llegando exactamente a y = 1. Esa diferencia es el efecto de la acción I: <em>la integral acumula el error y empuja hasta anularlo</em>. Es el motivo por el que el PI es el regulador más usado en la industria.'
+      },
+      'pi-vs-pid': {
+        active: { p: false, i: false, d: false, pi: true, pd: false, pid: true },
+        title: 'PI vs PID',
+        body: 'Las dos curvas llegan a y = 1 — ambas tienen acción I. La diferencia está en el transitorio: el <strong>PI</strong> sobrepasa la consigna y oscila antes de estabilizarse, el <strong>PID</strong> llega más suave y sin sobrepaso. Esa diferencia es el efecto de la D: <em>frena el sistema antes de llegar y evita las oscilaciones</em>.'
+      },
+      'all': {
+        active: { p: true, i: true, d: true, pi: true, pd: true, pid: true },
+        title: 'Todos los reguladores',
+        body: 'Las seis curvas a la vez. <strong>I</strong> en el nombre = llega a y = 1. <strong>D</strong> en el nombre = sin oscilaciones. <strong>PID</strong> es el único que cumple las tres: rápido, exacto y suave.'
+      }
+    };
+
+    const p = presets[preset];
+    if (!p) return;
+
+    // Activar toggles según preset
+    Object.entries(p.active).forEach(([reg, isActive]) => {
+      this.active[reg] = isActive;
+      const el = document.querySelector(`.reg-toggle[data-reg="${reg}"]`);
+      if (el) el.classList.toggle('off', !isActive);
+    });
+
+    // Marcar botón activo
+    document.querySelectorAll('.cp-btn').forEach(b => b.classList.remove('active'));
+    if (clickedBtn) clickedBtn.classList.add('active');
+
+    // Mostrar leyenda contextual
+    const ctx = document.getElementById('presetContext');
+    if (ctx) {
+      ctx.hidden = false;
+      ctx.innerHTML = `<div class="cp-context-title">${p.title}</div>${p.body}`;
+    }
+
+    this.draw();
+  }
+
+  tToX(t) { return this.margin.l + (t / this.tMax) * this.plotW; }
+  yToPx(y) { return this.margin.t + this.plotH - (y / this.yMax) * this.plotH; }
+
+  draw() {
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.W, this.H);
+
+    // Grid
+    ctx.strokeStyle = COLORS.grid;
+    ctx.lineWidth = 0.5;
+    [0, 0.5, 1, 1.5].forEach(y => {
+      if (y > this.yMax) return;
+      const py = this.yToPx(y);
+      ctx.beginPath(); ctx.moveTo(this.margin.l, py); ctx.lineTo(this.margin.l + this.plotW, py); ctx.stroke();
+      ctx.fillStyle = COLORS.muted;
+      ctx.font = '500 10px "JetBrains Mono", monospace';
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(y.toFixed(2), this.margin.l - 6, py);
+    });
+    for (let t = 0; t <= this.tMax; t += 2) {
+      const px = this.tToX(t);
+      ctx.beginPath(); ctx.moveTo(px, this.margin.t); ctx.lineTo(px, this.margin.t + this.plotH); ctx.stroke();
+      ctx.fillStyle = COLORS.muted;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      ctx.fillText(t + 's', px, this.margin.t + this.plotH + 6);
+    }
+
+    // Ejes
+    ctx.strokeStyle = COLORS.ink;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(this.margin.l, this.yToPx(0));
+    ctx.lineTo(this.margin.l + this.plotW, this.yToPx(0));
+    ctx.moveTo(this.margin.l, this.margin.t);
+    ctx.lineTo(this.margin.l, this.margin.t + this.plotH);
+    ctx.stroke();
+
+    // Referencia
+    ctx.strokeStyle = COLORS.ref;
+    ctx.setLineDash([5, 3]);
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(this.margin.l, this.yToPx(1));
+    ctx.lineTo(this.margin.l + this.plotW, this.yToPx(1));
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = COLORS.ref;
+    ctx.font = '600 11px "JetBrains Mono", monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('r = 1', this.margin.l + 8, this.yToPx(1) - 6);
+
+    // Curvas activas
+    const palette = {
+      p: COLORS.reg_p, i: COLORS.reg_i, d: COLORS.reg_d,
+      pi: COLORS.reg_pi, pd: COLORS.reg_pd, pid: COLORS.reg_pid
+    };
+
+    const labels = { p: 'P', i: 'I', d: 'D', pi: 'PI', pd: 'PD', pid: 'PID' };
+
+    Object.keys(this.active).forEach(reg => {
+      if (!this.active[reg]) return;
+      const fn = RESP[reg];
+      const N = 300;
+      ctx.strokeStyle = palette[reg];
+      ctx.lineWidth = 2.2;
+      ctx.beginPath();
+      const tEnd = this.t;
+      for (let i = 0; i <= N; i++) {
+        const t = (tEnd * i) / N;
+        const y = fn(t);
+        const yC = Math.min(this.yMax, Math.max(0, y));
+        const px = this.tToX(t);
+        const py = this.yToPx(yC);
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+
+      // Etiqueta al final de la curva
+      const yLast = fn(tEnd);
+      const yLastC = Math.min(this.yMax, Math.max(0, yLast));
+      ctx.fillStyle = palette[reg];
+      ctx.font = '700 11px "JetBrains Mono", monospace';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(labels[reg], this.tToX(tEnd) + 4, this.yToPx(yLastC));
+    });
+  }
+
+  play() {
+    this.t = 0;
+    this.playing = true;
+    this.lastFrame = performance.now();
+    requestAnimationFrame((n) => this.tick(n));
+  }
+  reset() { this.playing = false; this.t = this.tMax; this.draw(); }
+  tick(now) {
+    if (!this.playing) return;
+    const dt = (now - this.lastFrame) / 1000;
+    this.lastFrame = now;
+    this.t = Math.min(this.tMax, this.t + dt * 1.4);
+    this.draw();
+    if (this.t < this.tMax) requestAnimationFrame((n) => this.tick(n));
+    else this.playing = false;
+  }
+}
+
+// =================================================================
+// INIT
+// =================================================================
+window.addEventListener('load', () => {
+  // §03 Tres acciones básicas
+  drawActionMini('actionP', 'p');
+  drawActionMini('actionI', 'i');
+  drawActionMini('actionD', 'd');
+
+  // §04, §05, §06 Reguladores individuales
+  drawRegulatorResponse('canvasP', 'p', { W: 380, H: 220 });
+  drawRegulatorResponse('canvasI', 'i', { W: 380, H: 220 });
+  drawRegulatorResponse('canvasD', 'd', { W: 380, H: 220 });
+
+  // §07 Combinados
+  drawRegulatorResponse('canvasPI', 'pi', { W: 280, H: 160 });
+  drawRegulatorResponse('canvasPD', 'pd', { W: 280, H: 160 });
+  drawRegulatorResponse('canvasPID', 'pid', { W: 280, H: 160 });
+
+  // §08 Comparativa
+  new ComparisonSim();
+
+  // §10 Practica tú
+  initPracticeBlock();
+});
+
+// =================================================================
+// PRACTICE BLOCK (§ 10 — autoevaluación)
+// =================================================================
+function initPracticeBlock() {
+  const block = document.getElementById('practiceBlock');
+  if (!block) return;
+
+  const cards = block.querySelectorAll('.practice-card');
+  cards.forEach(card => {
+    const buttons = card.querySelectorAll('.practice-options button');
+    const feedback = card.querySelector('.practice-feedback');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.classList.contains('locked')) return;
+
+        const isCorrect = btn.dataset.correct === 'true';
+        const fbText = btn.dataset.fb || '';
+
+        // Marca el botón pulsado
+        btn.classList.add(isCorrect ? 'correct' : 'wrong');
+
+        // Bloquea todos los botones de esta tarjeta
+        buttons.forEach(b => b.classList.add('locked'));
+
+        // Si fue incorrecto, además resalta el correcto en sombra suave
+        if (!isCorrect) {
+          buttons.forEach(b => {
+            if (b.dataset.correct === 'true') {
+              b.classList.add('correct');
+            }
+          });
+        }
+
+        // Muestra el feedback
+        feedback.hidden = false;
+        feedback.className = 'practice-feedback ' + (isCorrect ? 'ok' : 'bad');
+        const prefix = isCorrect ? '✓' : '✗';
+        feedback.innerHTML = `<strong>${prefix} ${isCorrect ? 'Acierto' : 'Falla'}.</strong> ${fbText}`;
+      });
+    });
+  });
+
+  // Botón reset global
+  const resetBtn = document.getElementById('practiceReset');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      cards.forEach(card => {
+        const buttons = card.querySelectorAll('.practice-options button');
+        const feedback = card.querySelector('.practice-feedback');
+        buttons.forEach(b => {
+          b.classList.remove('correct', 'wrong', 'locked');
+        });
+        feedback.hidden = true;
+        feedback.innerHTML = '';
+      });
+    });
+  }
+}
+</script>
+</body>
+</html>

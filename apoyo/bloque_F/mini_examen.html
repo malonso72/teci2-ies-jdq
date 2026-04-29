@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini-examen Bloque F · TECI II PEvAU 2025-26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #FAF7F0;
+  --paper-2: #F4EFE3;
+  --ink: #1A1814;
+  --ink-soft: #3A352E;
+  --muted: #7A736A;
+  --rule: #D9D2C2;
+  --rule-soft: #E8E2D3;
+  --surface: #FFFFFF;
+  --output: #0B6E4F;
+  --output-light: #C7E9D9;
+  --output-tint: rgba(11, 110, 79, 0.10);
+  --error: #B5341E;
+  --error-light: #F2D2C9;
+  --error-tint: rgba(181, 52, 30, 0.10);
+  --signal: #1A75BC;
+  --signal-tint: rgba(26, 117, 188, 0.08);
+  --warning: #B5841A;
+  --warning-tint: rgba(181, 132, 26, 0.12);
+  --shadow-1: 0 1px 2px rgba(26, 24, 20, 0.04), 0 4px 12px rgba(26, 24, 20, 0.06);
+  --shadow-2: 0 2px 4px rgba(26, 24, 20, 0.04), 0 12px 32px rgba(26, 24, 20, 0.10);
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 980px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+header.masthead {
+  border-top: 4px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 1.25rem 0 2rem;
+  margin-bottom: 2rem;
+}
+.masthead-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+  margin-bottom: 1.25rem; padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.masthead-meta .left, .masthead-meta .right { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+h1.title {
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(1.8rem, 4.5vw, 3rem); line-height: 1.05;
+  letter-spacing: -0.02em; margin-bottom: 0.75rem;
+}
+h1.title em { font-style: italic; color: var(--ink-soft); }
+.subtitle {
+  font-family: var(--serif); font-style: italic;
+  font-size: 1.1rem; color: var(--ink-soft);
+  max-width: 60ch;
+}
+
+/* === PANEL DE INSTRUCCIONES === */
+.instructions {
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 6px; padding: 1.5rem 1.75rem;
+  margin-bottom: 2rem; box-shadow: var(--shadow-1);
+}
+.instructions h2 {
+  font-family: var(--serif); font-weight: 600;
+  font-size: 1.2rem; margin-bottom: 0.75rem;
+}
+.instructions p { color: var(--ink-soft); font-size: 0.94rem; margin-bottom: 0.6rem; }
+.instructions ul {
+  padding-left: 1.5rem; color: var(--ink-soft);
+  font-size: 0.92rem; margin: 0.5rem 0;
+}
+.instructions li { margin-bottom: 0.3rem; }
+
+.exam-meta {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem; margin: 1rem 0 0;
+  padding-top: 1rem; border-top: 1px solid var(--rule-soft);
+}
+.exam-meta-item {
+  font-family: var(--mono); font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+.exam-meta-item strong { color: var(--ink); }
+
+/* === BARRA SUPERIOR FIJA === */
+.exam-bar {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--paper);
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.timer {
+  font-family: var(--mono); font-weight: 600;
+  font-size: 1.1rem; padding: 0.4rem 1rem;
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 4px; min-width: 100px; text-align: center;
+}
+.timer.warn { border-color: var(--warning); color: var(--warning); }
+.timer.danger { border-color: var(--error); color: var(--error); }
+.timer.done { border-color: var(--output); color: var(--output); background: var(--output-tint); }
+
+.score-display {
+  font-family: var(--mono); font-size: 0.85rem;
+  color: var(--ink-soft); display: none;
+}
+.score-display.visible { display: inline; }
+.score-display strong { color: var(--ink); font-size: 1rem; }
+
+.exam-buttons { margin-left: auto; display: flex; gap: 0.5rem; }
+.btn {
+  font-family: var(--sans); font-size: 0.88rem; font-weight: 500;
+  padding: 0.5rem 1rem; border-radius: 4px;
+  border: 1px solid var(--ink); background: var(--ink);
+  color: var(--paper); cursor: pointer;
+  transition: all 0.15s;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-1); }
+.btn.secondary { background: var(--surface); color: var(--ink); }
+.btn.success { background: var(--output); border-color: var(--output); }
+.btn:disabled {
+  background: var(--rule); border-color: var(--rule);
+  color: var(--muted); cursor: not-allowed;
+  transform: none; box-shadow: none;
+}
+
+/* === PREGUNTA === */
+.question {
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 6px; padding: 1.75rem 2rem;
+  margin-bottom: 1.5rem; box-shadow: var(--shadow-1);
+}
+.question.locked { opacity: 0.7; }
+.question-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 1rem; padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.q-num {
+  font-family: var(--mono); font-size: 0.75rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted);
+}
+.q-points {
+  font-family: var(--mono); font-size: 0.78rem;
+  color: var(--ink-soft); font-weight: 600;
+}
+.q-statement {
+  font-family: var(--serif); font-size: 1.05rem;
+  line-height: 1.6; color: var(--ink);
+  margin-bottom: 1.25rem;
+}
+.q-statement strong { font-weight: 600; }
+.q-statement em { font-style: italic; color: var(--ink-soft); }
+.q-figure {
+  background: var(--paper-2); border: 1px solid var(--rule-soft);
+  border-radius: 4px; padding: 1.25rem; margin: 1rem 0;
+  text-align: center;
+}
+.q-figure svg { max-width: 100%; height: auto; }
+
+.q-options {
+  display: grid; grid-template-columns: 1fr;
+  gap: 0.6rem; margin-top: 1rem;
+}
+.q-option {
+  display: flex; align-items: center; gap: 0.85rem;
+  padding: 0.85rem 1.1rem; cursor: pointer;
+  background: var(--paper); border: 1.5px solid var(--rule);
+  border-radius: 4px;
+  font-size: 0.95rem; color: var(--ink);
+  transition: all 0.12s;
+}
+.q-option:hover {
+  background: var(--surface); border-color: var(--ink-soft);
+}
+.q-option.selected {
+  background: var(--signal-tint); border-color: var(--signal);
+}
+.q-option.correct {
+  background: var(--output-tint); border-color: var(--output); color: var(--ink);
+}
+.q-option.incorrect {
+  background: var(--error-tint); border-color: var(--error); color: var(--ink);
+}
+.q-option.disabled {
+  pointer-events: none; opacity: 0.7;
+}
+.q-option-mark {
+  width: 22px; height: 22px;
+  border: 1.5px solid var(--rule); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; background: var(--surface);
+  font-family: var(--mono); font-size: 0.7rem; font-weight: 700;
+  color: var(--muted);
+}
+.q-option.selected .q-option-mark {
+  background: var(--signal); border-color: var(--signal); color: var(--paper);
+}
+.q-option.correct .q-option-mark {
+  background: var(--output); border-color: var(--output); color: var(--paper);
+}
+.q-option.incorrect .q-option-mark {
+  background: var(--error); border-color: var(--error); color: var(--paper);
+}
+
+.q-feedback {
+  margin-top: 1rem; padding: 0.9rem 1.1rem;
+  border-radius: 4px; font-size: 0.92rem;
+  line-height: 1.55; display: none;
+}
+.q-feedback.visible { display: block; }
+.q-feedback.correct {
+  background: var(--output-tint); border-left: 3px solid var(--output);
+  color: var(--ink-soft);
+}
+.q-feedback.incorrect {
+  background: var(--error-tint); border-left: 3px solid var(--error);
+  color: var(--ink-soft);
+}
+.q-feedback strong { color: var(--ink); }
+.q-feedback .ref-link {
+  display: inline-block; margin-top: 0.5rem;
+  font-family: var(--mono); font-size: 0.78rem;
+  color: var(--output); padding: 0.25rem 0.6rem;
+  background: rgba(11, 110, 79, 0.12); border-radius: 3px;
+}
+
+/* === MULTI-FILL === */
+.q-fill {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem;
+  margin-top: 0.75rem;
+}
+.fill-row {
+  display: grid; grid-template-columns: 100px 1fr;
+  gap: 0.75rem; align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: var(--paper-2); border-radius: 4px;
+}
+.fill-row .fill-label {
+  font-family: var(--mono); font-weight: 700;
+  color: var(--ink); font-size: 0.92rem;
+}
+.fill-row select {
+  font-family: var(--sans); font-size: 0.9rem;
+  padding: 0.4rem 0.6rem; border: 1px solid var(--rule);
+  border-radius: 3px; background: var(--surface);
+  color: var(--ink); cursor: pointer;
+}
+.fill-row.correct {
+  background: var(--output-tint);
+  border-left: 3px solid var(--output);
+}
+.fill-row.incorrect {
+  background: var(--error-tint);
+  border-left: 3px solid var(--error);
+}
+.fill-row.correct .fill-label,
+.fill-row.incorrect .fill-label { color: var(--ink); }
+
+/* === RESULTADO FINAL === */
+.results {
+  background: linear-gradient(135deg, var(--output) 0%, #0a8a64 100%);
+  color: var(--paper); border-radius: 6px;
+  padding: 2rem 2.25rem; margin: 2rem 0;
+  display: none;
+}
+.results.visible { display: block; }
+.results.fail {
+  background: linear-gradient(135deg, var(--error) 0%, #c44a36 100%);
+}
+.results h2 {
+  font-family: var(--serif); font-weight: 600;
+  font-size: 1.6rem; margin-bottom: 0.75rem;
+  color: var(--paper);
+}
+.results-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem; margin: 1.25rem 0;
+}
+.result-stat {
+  background: rgba(255, 255, 255, 0.12); padding: 1rem;
+  border-radius: 4px; text-align: center;
+}
+.result-stat .label {
+  font-family: var(--mono); font-size: 0.7rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7); margin-bottom: 0.4rem;
+}
+.result-stat .value {
+  font-family: var(--serif); font-weight: 700;
+  font-size: 1.8rem; color: var(--paper); line-height: 1;
+}
+.results p { color: rgba(255, 255, 255, 0.92); font-size: 0.95rem; margin-top: 1rem; }
+.results .next-steps {
+  background: rgba(0, 0, 0, 0.15); padding: 1rem 1.25rem;
+  border-radius: 4px; margin-top: 1rem; font-size: 0.92rem;
+}
+
+footer {
+  margin-top: 3rem; padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  text-align: center;
+  font-family: var(--mono); font-size: 0.72rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted);
+}
+footer .signature { margin-bottom: 0.4rem; color: var(--ink-soft); font-weight: 600; }
+</style>
+
+<!-- ═══ TECI II Cabecera global ═══ -->
+<style id="teci-header-style">
+.teci-hd{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(27,79,138,.12);font-family:'Barlow',system-ui,sans-serif;}
+.teci-hd .teci-lg{font-family:'Barlow Condensed','Barlow',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer;color:#fff;text-decoration:none;}
+.teci-hd .teci-lg:hover{opacity:.85;}
+.teci-hd .teci-sb{font-size:.72rem;opacity:.78;margin-left:10px;color:#fff;}
+.teci-hd .teci-home-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:8px;cursor:pointer;margin-left:auto;transition:background .15s;text-decoration:none;}
+.teci-hd .teci-home-btn:hover{background:rgba(255,255,255,.16);}
+.teci-navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;}
+.teci-navcross a,.teci-navcross span.teci-nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s;}
+.teci-navcross a{color:#23272F;background:#fff;border-color:#D8DDE5;}
+.teci-navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A;}
+.teci-navcross span.teci-nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default;}
+.teci-navcross .teci-nc-sep{color:#8C97A8;align-self:center;user-select:none;}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- ═══ TECI II Cabecera ═══ -->
+<div class="teci-hd">
+<a class="teci-lg" href="../../index.html">TECI II</a>
+<span class="teci-sb">📝 Mini-examen · Bloque F</span>
+<a href="../../index.html" class="teci-home-btn">🏠 Índice</a>
+</div>
+<nav class="teci-navcross" role="navigation" aria-label="Navegación transversal">
+<a href="../../index.html"><span>🏠</span><span>Índice</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../teoria/bloque_F.html"><span>📖</span><span>Teoría F</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../ejercicios/ej_F.html"><span>✏️</span><span>Ejercicios F</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../examenes/tipo_2025_26/ponencia/tipo_1A_2025_26.html"><span>📋</span><span>Exámenes</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../ponencia_resuelta/index_ponencia.html"><span>📚</span><span>Ponencia</span></a>
+<span class="teci-nc-sep">·</span>
+<span class="teci-nc-current"><span>🧰</span><span>Apoyo</span></span>
+</nav>
+
+<div class="container">
+
+<header class="masthead">
+  <div class="masthead-meta">
+    <div class="left">
+      <span>TECI II · Bloque F</span>
+      <span>Mini-examen simulado</span>
+    </div>
+    <div class="right">
+      <span>2º Bachillerato</span>
+      <span>PEvAU 2025–26</span>
+    </div>
+  </div>
+  <h1 class="title">Mini-examen <em>Bloque F</em></h1>
+  <p class="subtitle">Cinco preguntas. Diez minutos. La presión temporal del examen real, en formato compacto.</p>
+</header>
+
+<div class="instructions">
+  <h2>Instrucciones</h2>
+  <p>Este mini-examen reproduce, a escala reducida, lo que típicamente cae en Bloque F del examen PEvAU. Hay <strong>cinco preguntas</strong> con un tiempo total de <strong>diez minutos</strong>. Cada pregunta tiene un peso proporcional al de su categoría en el examen real.</p>
+  <ul>
+    <li>Pulsa <strong>Empezar</strong> para arrancar el cronómetro. No puedes responder antes.</li>
+    <li>Selecciona tu respuesta en cada pregunta. Puedes cambiarla mientras quede tiempo.</li>
+    <li>Cuando termines (o al agotarse el tiempo) pulsa <strong>Comprobar</strong> y verás la corrección, el feedback de cada pregunta y el desglose final.</li>
+    <li>Cada pregunta enlaza a la sección del material que la entrena, para que repases lo que falles.</li>
+  </ul>
+  <div class="exam-meta">
+    <div class="exam-meta-item"><strong>5</strong> preguntas</div>
+    <div class="exam-meta-item"><strong>10 min</strong> de tiempo</div>
+    <div class="exam-meta-item"><strong>1 punto</strong> total (escala PEvAU)</div>
+    <div class="exam-meta-item"><strong>≥ 0,6</strong> aprobado en bloque</div>
+  </div>
+</div>
+
+<div class="exam-bar">
+  <div class="timer" id="timer">10:00</div>
+  <div class="score-display" id="scoreDisplay"><strong>0,00</strong> / 1,00</div>
+  <div class="exam-buttons">
+    <button class="btn" id="startBtn" onclick="startExam()">Empezar</button>
+    <button class="btn success" id="checkBtn" onclick="checkExam()" disabled>Comprobar</button>
+    <button class="btn secondary" id="resetBtn" onclick="resetExam()">Reiniciar</button>
+  </div>
+</div>
+
+<!-- ========== PREGUNTA 1 — IDENTIFICACIÓN DE ELEMENTOS (peso: 0,3) ========== -->
+<div class="question locked" id="q1">
+  <div class="question-header">
+    <span class="q-num">Pregunta 1 · Identificación de elementos</span>
+    <span class="q-points">0,30 puntos</span>
+  </div>
+  <div class="q-statement">
+    En el sistema de control automático del nivel de agua de un depósito industrial, una sonda mide el nivel y envía la señal a un autómata que abre o cierra una electroválvula motorizada. El operario fija el nivel deseado en una pantalla táctil. Asocia cada elemento del sistema con el bloque del diagrama estándar.
+  </div>
+  <div class="q-figure">
+    <svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrQ1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <polygon points="0,0 8,4 0,8" fill="#1A1814"/>
+        </marker>
+      </defs>
+      <text x="20" y="78" font-family="JetBrains Mono" font-size="14" fill="#1A1814" font-weight="700">r</text>
+      <line x1="40" y1="85" x2="115" y2="85" stroke="#1A1814" stroke-width="1.5" marker-end="url(#arrQ1)"/>
+      <circle cx="135" cy="85" r="16" fill="#fff" stroke="#1A1814" stroke-width="1.8"/>
+      <text x="135" y="91" font-family="JetBrains Mono" font-size="14" font-weight="700" text-anchor="middle">Σ</text>
+      <text x="125" y="73" font-size="11" font-weight="700">+</text>
+      <text x="142" y="108" font-size="11" font-weight="700">−</text>
+      <line x1="151" y1="85" x2="200" y2="85" stroke="#1A1814" stroke-width="1.5" marker-end="url(#arrQ1)"/>
+      <text x="170" y="78" font-family="JetBrains Mono" font-size="11" fill="#7A736A">e</text>
+      <rect x="200" y="60" width="100" height="50" rx="4" fill="#fff" stroke="#1A1814" stroke-width="1.5"/>
+      <text x="250" y="92" font-family="Fraunces" font-size="22" font-weight="700" fill="#B5841A" text-anchor="middle">G₁</text>
+      <line x1="300" y1="85" x2="350" y2="85" stroke="#1A1814" stroke-width="1.5" marker-end="url(#arrQ1)"/>
+      <text x="320" y="78" font-family="JetBrains Mono" font-size="11" fill="#7A736A">m</text>
+      <rect x="350" y="60" width="100" height="50" rx="4" fill="#fff" stroke="#1A1814" stroke-width="1.5"/>
+      <text x="400" y="92" font-family="Fraunces" font-size="22" font-weight="700" fill="#0B6E4F" text-anchor="middle">G₂</text>
+      <line x1="450" y1="85" x2="640" y2="85" stroke="#1A1814" stroke-width="1.5" marker-end="url(#arrQ1)"/>
+      <text x="650" y="80" font-family="JetBrains Mono" font-size="14" font-weight="700">c</text>
+      <circle cx="540" cy="85" r="3" fill="#1A1814"/>
+      <line x1="540" y1="85" x2="540" y2="155" stroke="#1A1814" stroke-width="1.5"/>
+      <rect x="380" y="135" width="80" height="40" rx="4" fill="#fff" stroke="#1A1814" stroke-width="1.5"/>
+      <text x="420" y="161" font-family="Fraunces" font-size="20" font-weight="700" fill="#1A75BC" text-anchor="middle">H</text>
+      <line x1="540" y1="155" x2="460" y2="155" stroke="#1A1814" stroke-width="1.5" marker-end="url(#arrQ1)"/>
+      <line x1="380" y1="155" x2="135" y2="155" stroke="#1A1814" stroke-width="1.5" marker-end="url(#arrQ1)"/>
+      <line x1="135" y1="155" x2="135" y2="101" stroke="#1A1814" stroke-width="1.5"/>
+    </svg>
+  </div>
+  <div class="q-fill" data-q="1">
+    <div class="fill-row" data-correct="autómata">
+      <span class="fill-label">G₁ =</span>
+      <select onchange="onFillChange(1)" data-key="g1">
+        <option value="">— elige —</option>
+        <option value="autómata">Autómata programable</option>
+        <option value="sonda">Sonda de nivel</option>
+        <option value="depósito">Depósito de agua</option>
+        <option value="electroválvula">Electroválvula motorizada</option>
+        <option value="pantalla">Pantalla táctil</option>
+      </select>
+    </div>
+    <div class="fill-row" data-correct="depósito">
+      <span class="fill-label">G₂ =</span>
+      <select onchange="onFillChange(1)" data-key="g2">
+        <option value="">— elige —</option>
+        <option value="autómata">Autómata programable</option>
+        <option value="sonda">Sonda de nivel</option>
+        <option value="depósito">Depósito de agua</option>
+        <option value="electroválvula">Electroválvula motorizada</option>
+        <option value="pantalla">Pantalla táctil</option>
+      </select>
+    </div>
+    <div class="fill-row" data-correct="sonda">
+      <span class="fill-label">H =</span>
+      <select onchange="onFillChange(1)" data-key="h">
+        <option value="">— elige —</option>
+        <option value="autómata">Autómata programable</option>
+        <option value="sonda">Sonda de nivel</option>
+        <option value="depósito">Depósito de agua</option>
+        <option value="electroválvula">Electroválvula motorizada</option>
+        <option value="pantalla">Pantalla táctil</option>
+      </select>
+    </div>
+    <div class="fill-row" data-correct="pantalla">
+      <span class="fill-label">r =</span>
+      <select onchange="onFillChange(1)" data-key="r">
+        <option value="">— elige —</option>
+        <option value="autómata">Autómata programable</option>
+        <option value="sonda">Sonda de nivel</option>
+        <option value="depósito">Depósito de agua</option>
+        <option value="electroválvula">Electroválvula motorizada</option>
+        <option value="pantalla">Pantalla táctil</option>
+      </select>
+    </div>
+  </div>
+  <div class="q-feedback" id="q1-fb"></div>
+</div>
+
+<!-- ========== PREGUNTA 2 — ÁLGEBRA DE BLOQUES (peso: 0,2) ========== -->
+<div class="question locked" id="q2">
+  <div class="question-header">
+    <span class="q-num">Pregunta 2 · Álgebra de bloques</span>
+    <span class="q-points">0,20 puntos</span>
+  </div>
+  <div class="q-statement">
+    Un sistema de control de lazo cerrado tiene un bloque directo <code style="background:#F4EFE3;padding:1px 5px;border-radius:2px;font-family:JetBrains Mono">G = 9</code> y un sensor de realimentación <code style="background:#F4EFE3;padding:1px 5px;border-radius:2px;font-family:JetBrains Mono">H = 1/3</code>. ¿Cuánto vale la <strong>función de transferencia equivalente</strong> C/R?
+  </div>
+  <div class="q-options" data-q="2">
+    <div class="q-option" data-correct="false" data-fb="C/R = G/(1+G·H), no G·(1+G·H). Recuerda: lazo cerrado en realimentación negativa siempre divide entre (1+G·H).">
+      <div class="q-option-mark">A</div>
+      <span>C/R = 12</span>
+    </div>
+    <div class="q-option" data-correct="true" data-fb="Correcto. Aplicas la fórmula reina: C/R = G/(1+G·H) = 9/(1+9·1/3) = 9/(1+3) = 9/4 = 2,25.">
+      <div class="q-option-mark">B</div>
+      <span>C/R = 2,25</span>
+    </div>
+    <div class="q-option" data-correct="false" data-fb="Has olvidado el +1 del denominador. La fórmula es G/(1+G·H), no G/(G·H). Sin el +1, el cálculo sale 9/3 = 3, que no es la respuesta correcta.">
+      <div class="q-option-mark">C</div>
+      <span>C/R = 3</span>
+    </div>
+    <div class="q-option" data-correct="false" data-fb="Has aplicado realimentación positiva: G/(1−G·H). Para realimentación negativa el denominador es (1+G·H), no (1−G·H).">
+      <div class="q-option-mark">D</div>
+      <span>C/R = −4,5</span>
+    </div>
+  </div>
+  <div class="q-feedback" id="q2-fb"></div>
+</div>
+
+<!-- ========== PREGUNTA 3 — ESTABILIDAD (peso: 0,2) ========== -->
+<div class="question locked" id="q3">
+  <div class="question-header">
+    <span class="q-num">Pregunta 3 · Estabilidad y error permanente</span>
+    <span class="q-points">0,20 puntos</span>
+  </div>
+  <div class="q-statement">
+    Un sistema de control en lazo cerrado tiene un bloque directo <code style="background:#F4EFE3;padding:1px 5px;border-radius:2px;font-family:JetBrains Mono">G = 8</code> y un sensor de realimentación con <code style="background:#F4EFE3;padding:1px 5px;border-radius:2px;font-family:JetBrains Mono">H = −0,125</code>. Razona si el sistema es <em>estable, crítico o inestable</em>.
+  </div>
+  <div class="q-options" data-q="3">
+    <div class="q-option" data-correct="false" data-fb="El signo negativo de H es la pista. Calcula 1+G·H = 1+8·(−0,125) = 1 − 1 = 0. El denominador se anula → no es estable.">
+      <div class="q-option-mark">A</div>
+      <span>Estable, porque G·H es negativo</span>
+    </div>
+    <div class="q-option" data-correct="true" data-fb="Correcto. 1+G·H = 1+8·(−0,125) = 1−1 = 0. Denominador igual a cero → ganancia equivalente tiende a infinito → sistema crítico (límite de la inestabilidad). Es el caso del Problema 13 de Ponencia.">
+      <div class="q-option-mark">B</div>
+      <span>Crítico, denominador (1+G·H) = 0</span>
+    </div>
+    <div class="q-option" data-correct="false" data-fb="No diverge: el denominador se anula exactamente, no se hace negativo. Es el caso límite — crítico, no claramente inestable.">
+      <div class="q-option-mark">C</div>
+      <span>Inestable, porque H es negativo</span>
+    </div>
+    <div class="q-option" data-correct="false" data-fb="Que H sea negativo importa: invierte el signo de la realimentación. Calcula 1+G·H y mira el signo. Sale exactamente cero.">
+      <div class="q-option-mark">D</div>
+      <span>Estable, el signo de H no cambia nada</span>
+    </div>
+  </div>
+  <div class="q-feedback" id="q3-fb"></div>
+</div>
+
+<!-- ========== PREGUNTA 4 — IDENTIFICACIÓN DE REGULADOR (peso: 0,15) ========== -->
+<div class="question locked" id="q4">
+  <div class="question-header">
+    <span class="q-num">Pregunta 4 · Identificación de regulador</span>
+    <span class="q-points">0,15 puntos</span>
+  </div>
+  <div class="q-statement">
+    Un coche con control automático de crucero ajustado a 110 km/h sube una pendiente. La velocidad cae al iniciar la pendiente y <em>permanece</em> en 105 km/h durante toda la subida, sin volver a recuperar los 110 km/h. ¿Qué tipo de regulador tiene el sistema?
+  </div>
+  <div class="q-options" data-q="4">
+    <div class="q-option" data-correct="true" data-fb="Correcto. Si el regulador no es capaz de eliminar el error en régimen permanente (queda fijo en 105 km/h en lugar de 110), no tiene acción integral. Sin oscilaciones mencionadas tampoco hay D. La opción más simple es regulador P.">
+      <div class="q-option-mark">A</div>
+      <span>Regulador P</span>
+    </div>
+    <div class="q-option" data-correct="false" data-fb="Si tuviera I, el sistema acumularía el error de 5 km/h y empujaría la potencia hasta volver a los 110. Aquí no lo hace — no tiene I.">
+      <div class="q-option-mark">B</div>
+      <span>Regulador PI</span>
+    </div>
+    <div class="q-option" data-correct="false" data-fb="El derivativo solo no se usa nunca: si el error es constante (5 km/h fijos), su derivada es cero y el regulador no actúa. Además no eliminaría el error.">
+      <div class="q-option-mark">C</div>
+      <span>Regulador D</span>
+    </div>
+    <div class="q-option" data-correct="false" data-fb="PID llevaría I, que anularía el error. Aquí queda error permanente — el regulador no tiene I, así que no es PID.">
+      <div class="q-option-mark">D</div>
+      <span>Regulador PID</span>
+    </div>
+  </div>
+  <div class="q-feedback" id="q4-fb"></div>
+</div>
+
+<!-- ========== PREGUNTA 5 — SENSORES Y ACTUADORES (peso: 0,15) ========== -->
+<div class="question locked" id="q5">
+  <div class="question-header">
+    <span class="q-num">Pregunta 5 · Selección de sensor y actuador</span>
+    <span class="q-points">0,15 puntos</span>
+  </div>
+  <div class="q-statement">
+    Para controlar la temperatura de un horno industrial que opera a 800 °C con regulador PID, ¿qué <strong>pareja sensor + actuador</strong> usarías?
+  </div>
+  <div class="q-options" data-q="5">
+    <div class="q-option" data-correct="false" data-fb="El termistor (NTC/PTC) no aguanta 800 °C: trabaja en rangos bajos, típicamente hasta 150 °C. Para hornos industriales se necesita termopar.">
+      <div class="q-option-mark">A</div>
+      <span>Termistor + servomotor</span>
+    </div>
+    <div class="q-option" data-correct="true" data-fb="Correcto. Es la pareja PEvAU por excelencia. El termopar mide temperatura alta (hornos, hasta &gt;1000 °C). La resistencia calefactora transforma la señal eléctrica del PID en calor por efecto Joule. Pareja clásica que conviene memorizar.">
+      <div class="q-option-mark">B</div>
+      <span>Termopar + resistencia calefactora</span>
+    </div>
+    <div class="q-option" data-correct="false" data-fb="LDR mide iluminación, no temperatura. La electroválvula es para fluidos. Esta pareja no aplica al control térmico.">
+      <div class="q-option-mark">C</div>
+      <span>LDR + electroválvula</span>
+    </div>
+    <div class="q-option" data-correct="false" data-fb="El encoder mide posición o velocidad de un eje, no temperatura. El cilindro neumático produce movimiento lineal, no calor. Pareja inadecuada.">
+      <div class="q-option-mark">D</div>
+      <span>Encoder + cilindro neumático</span>
+    </div>
+  </div>
+  <div class="q-feedback" id="q5-fb"></div>
+</div>
+
+<!-- ========== RESULTADOS ========== -->
+<div class="results" id="results">
+  <h2 id="resultsTitle">Resultados del mini-examen</h2>
+  <div class="results-grid">
+    <div class="result-stat"><div class="label">Acertadas</div><div class="value" id="statCorrect">0/5</div></div>
+    <div class="result-stat"><div class="label">Puntuación</div><div class="value" id="statScore">0,00 / 1</div></div>
+    <div class="result-stat"><div class="label">Tiempo usado</div><div class="value" id="statTime">—</div></div>
+    <div class="result-stat"><div class="label">Sobre el bloque</div><div class="value" id="statPct">— %</div></div>
+  </div>
+  <p id="resultsMsg"></p>
+  <div class="next-steps" id="nextSteps"></div>
+</div>
+
+<footer>
+  <div class="signature">Material didáctico · TECI II · Bloque F · Mini-examen simulado</div>
+  <div>v1.0 · IES Jiménez de Quesada · Manuel Alonso Herrera</div>
+</footer>
+
+</div>
+
+<script>
+// ===================== ESTADO =====================
+const questions = [
+  { id: 1, type: 'fill', weight: 0.30, ref: 'Apuntes § 3 · Banco P12 · Presentación slide 20-bis', perfect: 4 },
+  { id: 2, type: 'option', weight: 0.20, ref: 'Apuntes § 5.4 · Banco Ej. 5 · HTML Estabilidad § 5' },
+  { id: 3, type: 'option', weight: 0.20, ref: 'Apuntes § 6.4 · Banco P13 · HTML Estabilidad § 7-9' },
+  { id: 4, type: 'option', weight: 0.15, ref: 'Apuntes § 7.2 · Banco P11 · HTML Reguladores Ej. 3' },
+  { id: 5, type: 'option', weight: 0.15, ref: 'Apuntes § 8.4 + § 9.4 · Banco P12 · Presentación slide 21' },
+];
+let started = false;
+let finished = false;
+let timeLeft = 600;
+let timerInterval = null;
+let startTimestamp = null;
+
+// ===================== TIMER =====================
+function formatTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+}
+function updateTimer() {
+  const el = document.getElementById('timer');
+  el.textContent = formatTime(timeLeft);
+  if (finished) { el.classList.add('done'); return; }
+  el.classList.remove('warn', 'danger');
+  if (timeLeft <= 60) el.classList.add('danger');
+  else if (timeLeft <= 180) el.classList.add('warn');
+}
+
+// ===================== ARRANQUE =====================
+function startExam() {
+  if (started) return;
+  started = true;
+  startTimestamp = Date.now();
+  document.querySelectorAll('.question').forEach(q => q.classList.remove('locked'));
+  document.getElementById('startBtn').disabled = true;
+  document.getElementById('checkBtn').disabled = false;
+  timerInterval = setInterval(() => {
+    if (finished) return;
+    timeLeft--;
+    updateTimer();
+    if (timeLeft <= 0) { timeLeft = 0; checkExam(); }
+  }, 1000);
+  // habilita selecciones
+  document.querySelectorAll('.q-option').forEach(opt => {
+    opt.addEventListener('click', () => onOptionClick(opt));
+  });
+}
+
+function onOptionClick(opt) {
+  if (finished) return;
+  const parent = opt.parentElement;
+  parent.querySelectorAll('.q-option').forEach(o => o.classList.remove('selected'));
+  opt.classList.add('selected');
+}
+
+function onFillChange(qNum) {
+  // nada en tiempo real; la corrección viene en checkExam
+}
+
+// ===================== COMPROBACIÓN =====================
+function checkExam() {
+  if (finished) return;
+  finished = true;
+  clearInterval(timerInterval);
+  updateTimer();
+  document.getElementById('checkBtn').disabled = true;
+
+  let totalScore = 0;
+  let correctCount = 0;
+
+  questions.forEach(q => {
+    const card = document.getElementById('q' + q.id);
+    const fbEl = document.getElementById('q' + q.id + '-fb');
+    let isCorrect = false;
+    let fbHTML = '';
+
+    if (q.type === 'option') {
+      const sel = card.querySelector('.q-option.selected');
+      const opts = card.querySelectorAll('.q-option');
+      let selectedFb = '';
+      opts.forEach(o => {
+        o.classList.add('disabled');
+        if (o.dataset.correct === 'true') o.classList.add('correct');
+      });
+      if (sel) {
+        if (sel.dataset.correct === 'true') {
+          isCorrect = true;
+          selectedFb = sel.dataset.fb;
+        } else {
+          sel.classList.add('incorrect');
+          selectedFb = sel.dataset.fb;
+        }
+      } else {
+        selectedFb = 'No has respondido a esta pregunta.';
+      }
+      fbHTML = `<strong>${isCorrect ? '✓ Correcto.' : '✗ Incorrecto.'}</strong> ${selectedFb} <span class="ref-link">→ ${q.ref}</span>`;
+    } else if (q.type === 'fill') {
+      const rows = card.querySelectorAll('.fill-row');
+      let rowsCorrect = 0;
+      rows.forEach(row => {
+        const select = row.querySelector('select');
+        if (select.value === row.dataset.correct) {
+          row.classList.add('correct');
+          rowsCorrect++;
+        } else {
+          row.classList.add('incorrect');
+        }
+        select.disabled = true;
+      });
+      const partial = rowsCorrect / q.perfect;
+      isCorrect = (partial === 1);
+      const score = (q.weight * partial).toFixed(2);
+      const correctSummary = `Asignación correcta: G₁ = autómata programable (regulador) · G₂ = depósito (planta) · H = sonda de nivel (sensor) · r = pantalla táctil (consigna).`;
+      fbHTML = `<strong>${rowsCorrect}/${q.perfect} casillas correctas</strong> · puntuación parcial: ${score}/${q.weight.toFixed(2)}.<br>${correctSummary} <span class="ref-link">→ ${q.ref}</span>`;
+      totalScore += q.weight * partial;
+      if (isCorrect) correctCount++;
+      fbEl.classList.add('visible', isCorrect ? 'correct' : 'incorrect');
+      fbEl.innerHTML = fbHTML;
+      return; // ya hemos sumado puntos para fill
+    }
+
+    fbEl.classList.add('visible', isCorrect ? 'correct' : 'incorrect');
+    fbEl.innerHTML = fbHTML;
+    if (isCorrect) {
+      totalScore += q.weight;
+      correctCount++;
+    }
+  });
+
+  // mostrar resultados
+  showResults(totalScore, correctCount);
+}
+
+function showResults(totalScore, correctCount) {
+  const elapsedMs = Date.now() - startTimestamp;
+  const elapsedSec = Math.min(600, Math.round(elapsedMs / 1000));
+  const used = formatTime(elapsedSec);
+
+  const scoreEl = document.getElementById('scoreDisplay');
+  scoreEl.classList.add('visible');
+  scoreEl.innerHTML = `<strong>${totalScore.toFixed(2)}</strong> / 1,00`;
+
+  document.getElementById('statCorrect').textContent = `${correctCount}/5`;
+  document.getElementById('statScore').textContent = `${totalScore.toFixed(2)} / 1`;
+  document.getElementById('statTime').textContent = used;
+  document.getElementById('statPct').textContent = `${Math.round(totalScore * 100)} %`;
+
+  const results = document.getElementById('results');
+  const title = document.getElementById('resultsTitle');
+  const msg = document.getElementById('resultsMsg');
+  const nextSteps = document.getElementById('nextSteps');
+
+  if (totalScore >= 0.8) {
+    results.classList.remove('fail');
+    title.textContent = 'Resultado · ¡muy bien!';
+    msg.innerHTML = 'Dominas Bloque F. Sigue practicando los problemas P12 y P13 del banco para mantener el nivel y refresca la tabla esencial PEvAU la noche antes.';
+  } else if (totalScore >= 0.6) {
+    results.classList.remove('fail');
+    title.textContent = 'Resultado · aprobado en bloque';
+    msg.innerHTML = 'Tienes la base, pero hay margen. Repasa las preguntas que has fallado y dedica una sesión extra a los problemas oficiales P1–P15 del banco.';
+  } else {
+    results.classList.add('fail');
+    title.textContent = 'Resultado · necesita repaso';
+    msg.innerHTML = 'Hay huecos importantes. Vuelve a la ruta de aprendizaje del dashboard y trabaja por orden los Apuntes y los HTMLs antes de volver a intentarlo.';
+  }
+
+  nextSteps.innerHTML = `
+    <strong>Próximo paso:</strong> revisa el feedback de cada pregunta. Cada respuesta enlaza a la sección concreta del material que la entrena. Las preguntas que fallaste son las que más te conviene repasar — no las que aprobaste.
+  `;
+  results.classList.add('visible');
+  results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ===================== RESET =====================
+function resetExam() {
+  if (timerInterval) clearInterval(timerInterval);
+  started = false; finished = false;
+  timeLeft = 600;
+  startTimestamp = null;
+  updateTimer();
+
+  document.getElementById('startBtn').disabled = false;
+  document.getElementById('checkBtn').disabled = true;
+  document.getElementById('scoreDisplay').classList.remove('visible');
+  document.getElementById('results').classList.remove('visible', 'fail');
+
+  document.querySelectorAll('.question').forEach(q => q.classList.add('locked'));
+  document.querySelectorAll('.q-option').forEach(o => {
+    o.classList.remove('selected', 'correct', 'incorrect', 'disabled');
+  });
+  document.querySelectorAll('.q-feedback').forEach(f => {
+    f.classList.remove('visible', 'correct', 'incorrect');
+    f.innerHTML = '';
+  });
+  document.querySelectorAll('.fill-row').forEach(r => {
+    r.classList.remove('correct', 'incorrect');
+    const sel = r.querySelector('select');
+    if (sel) { sel.value = ''; sel.disabled = false; }
+  });
+  document.getElementById('timer').classList.remove('warn', 'danger', 'done');
+}
+
+updateTimer();
+</script>
+</body>
+</html>

@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animación · Regulador PI · Cinta transportadora · TECI II</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #FAF7F0;
+  --paper-2: #F4EFE3;
+  --ink: #1A1814;
+  --ink-soft: #3A352E;
+  --muted: #7A736A;
+  --rule: #D9D2C2;
+  --rule-soft: #E8E2D3;
+  --surface: #FFFFFF;
+
+  --reference: #1A1814;
+  --output: #1A75BC;        /* azul = salida del sistema */
+  --output-light: #BFE2F4;
+  --output-tint: rgba(26, 117, 188, 0.10);
+  --error: #B5341E;
+  --error-light: #F2D2C9;
+  --error-tint: rgba(181, 52, 30, 0.18);
+
+  --control: #B5841A;       /* naranja = señal de control m */
+  --control-light: rgba(181, 132, 26, 0.18);
+
+  /* En PI = púrpura. Mantengo --reg-p como nombre de variable. */
+  --reg-p: #6E4FA0;
+
+  --shadow-1: 0 1px 2px rgba(26, 24, 20, 0.04), 0 4px 12px rgba(26, 24, 20, 0.06);
+  --shadow-2: 0 2px 4px rgba(26, 24, 20, 0.04), 0 12px 32px rgba(26, 24, 20, 0.10);
+
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse at top left, rgba(110, 79, 160, 0.05), transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(26, 117, 188, 0.04), transparent 50%);
+  background-attachment: fixed;
+}
+
+.container { max-width: 1320px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+/* ============ HEADER ============ */
+header.masthead {
+  border-top: 4px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 1.25rem 0 2.5rem;
+  margin-bottom: 3rem;
+}
+.masthead-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.masthead-meta .left, .masthead-meta .right { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+
+h1.title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 4.5vw, 3.4rem);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144;
+  margin-bottom: 1rem;
+}
+h1.title em { font-style: italic; font-weight: 400; color: var(--ink-soft); }
+
+.subtitle {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  color: var(--ink-soft);
+  max-width: 64ch;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+
+.scope-pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+.scope-pill {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  padding: 0.35rem 0.7rem;
+  border-radius: 2px;
+}
+
+/* ============ SECTIONS ============ */
+section { margin-bottom: 3.5rem; }
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.section-label::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--ink);
+}
+
+h2.section-heading {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.25rem;
+  max-width: 36ch;
+}
+h2.section-heading em { font-style: italic; color: var(--ink-soft); }
+
+.lede {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 65ch;
+  font-weight: 400;
+}
+.lede em { color: var(--ink); font-style: italic; font-weight: 500; }
+.lede strong { color: var(--ink); font-weight: 600; font-style: normal; }
+
+/* ============ ANIMATION STAGE ============ */
+.stage {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  box-shadow: var(--shadow-2);
+  padding: 0;
+  overflow: hidden;
+}
+
+.stage-header {
+  background: var(--paper-2);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.stage-header .title-block {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.stage-header .title-block .accent { color: var(--reg-p); }
+.stage-header .status {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+.stage-header .status .dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--output);
+  margin-right: 0.4rem;
+  vertical-align: middle;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse { 50% { opacity: 0.35; } }
+
+.stage-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr 1.4fr;
+  gap: 0;
+  background: var(--surface);
+}
+@media (max-width: 980px) {
+  .stage-grid { grid-template-columns: 1fr; }
+}
+
+.panel {
+  padding: 1.5rem;
+  border-right: 1px solid var(--rule-soft);
+  display: flex;
+  flex-direction: column;
+}
+.panel:last-child { border-right: none; }
+@media (max-width: 980px) {
+  .panel { border-right: none; border-bottom: 1px solid var(--rule-soft); }
+}
+
+.panel-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+.panel-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+/* === FAN PANEL === */
+.fan-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper-2);
+  border-radius: 4px;
+  padding: 1rem;
+  position: relative;
+  min-height: 240px;
+}
+.fan-svg { width: 100%; max-width: 240px; height: auto; }
+/* La rotación se aplica como atributo SVG transform="rotate(deg 100 100)"
+   desde JavaScript, garantizando uso de coordenadas del viewBox.        */
+
+.fan-readout {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+.fan-readout .item {
+  flex: 1;
+  background: var(--paper-2);
+  padding: 0.55rem 0.7rem;
+  border-radius: 3px;
+  border-left: 3px solid var(--ink);
+}
+.fan-readout .item.ref { border-left-color: var(--ink); }
+.fan-readout .item.out { border-left-color: var(--output); }
+.fan-readout .item.err { border-left-color: var(--error); }
+.fan-readout .lab { font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 2px; }
+.fan-readout .val { font-size: 0.95rem; font-weight: 600; color: var(--ink); }
+.fan-readout .val .unit { font-size: 0.65rem; color: var(--muted); font-weight: 400; margin-left: 2px; }
+
+/* === BLOCK DIAGRAM PANEL === */
+.bd-svg { width: 100%; height: auto; }
+
+.bd-explainer {
+  margin-top: 1rem;
+  font-family: var(--serif);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.bd-explainer code {
+  font-family: var(--mono);
+  background: var(--paper-2);
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-size: 0.86em;
+  color: var(--ink);
+}
+.bd-explainer .reg-p-label { color: var(--reg-p); font-weight: 600; }
+
+/* === GRAPHS PANEL === */
+.graph-block { margin-bottom: 1rem; }
+.graph-block:last-child { margin-bottom: 0; }
+.graph-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.4rem;
+}
+.graph-title {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.legend {
+  display: flex;
+  gap: 0.85rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+.legend .swatch {
+  display: inline-block;
+  width: 14px;
+  height: 2px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+.legend .ref-sw { background: var(--reference); }
+.legend .out-sw { background: var(--output); height: 3px; }
+.legend .err-sw { background: var(--error); }
+.legend .ctrl-sw { background: var(--control); }
+
+canvas.graph {
+  width: 100%;
+  display: block;
+  background: var(--paper-2);
+  border-radius: 3px;
+  border: 1px solid var(--rule-soft);
+}
+
+/* === CONTROLS === */
+.controls {
+  background: var(--paper-2);
+  border-top: 1px solid var(--rule);
+  padding: 1.25rem 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto auto auto auto;
+  gap: 1rem;
+  align-items: end;
+}
+@media (max-width: 1100px) {
+  .controls { grid-template-columns: 1fr 1fr 1fr; }
+  .controls .speed-controls,
+  .controls .modo-controls,
+  .controls .btn { grid-column: span 3; }
+  .controls .speed-controls,
+  .controls .modo-controls { justify-self: stretch; }
+  .controls .speed-btn,
+  .controls .modo-btn { flex: 1; }
+}
+
+.modo-controls {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.modo-btn {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  padding: 0.65rem 1rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: none;
+  border-right: 1px solid var(--rule);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.modo-btn:last-child { border-right: none; }
+.modo-btn:hover { background: var(--paper-2); }
+.modo-btn.on {
+  background: var(--reg-p);
+  color: var(--paper);
+}
+
+.ctrl.disabled { opacity: 0.4; pointer-events: none; }
+
+.ctrl {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.ctrl-label {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+}
+.ctrl-label .val {
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--rule);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--reg-p);
+  border: 2px solid var(--surface);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--reg-p);
+  border: 2px solid var(--surface);
+  cursor: pointer;
+}
+
+button.btn {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.6rem 1rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+button.btn:hover { background: var(--ink); color: var(--paper); }
+button.btn.active {
+  background: var(--error);
+  color: var(--paper);
+  border-color: var(--error);
+}
+button.btn.reset { border-color: var(--muted); color: var(--muted); }
+button.btn.reset:hover { background: var(--muted); color: var(--paper); }
+
+/* === CONTROLES DE VELOCIDAD === */
+.speed-controls {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.speed-btn {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  padding: 0.6rem 0.65rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: none;
+  border-right: 1px solid var(--rule);
+  cursor: pointer;
+  transition: all 0.12s ease;
+  min-width: 38px;
+  text-align: center;
+}
+.speed-btn:last-child { border-right: none; }
+.speed-btn:hover { background: var(--paper-2); }
+.speed-btn.on {
+  background: var(--reg-p);
+  color: var(--paper);
+}
+.speed-btn.step-btn { background: var(--paper-2); }
+.speed-btn.step-btn:hover { background: var(--ink); color: var(--paper); }
+.speed-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* === PANEL DE NARRACIÓN === */
+.narration {
+  margin-top: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--reg-p);
+  border-radius: 4px;
+  padding: 1.2rem 1.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.2rem;
+  align-items: center;
+  box-shadow: var(--shadow-1);
+  transition: border-left-color 0.4s ease;
+  min-height: 92px;
+}
+.narration.phase-arranque { border-left-color: var(--reg-p); }
+.narration.phase-subiendo { border-left-color: var(--reg-p); }
+.narration.phase-pico { border-left-color: var(--control); }
+.narration.phase-oscilando { border-left-color: var(--control); }
+.narration.phase-estable { border-left-color: var(--error); }
+.narration.phase-perturbado { border-left-color: var(--error); }
+.narration.phase-parado { border-left-color: var(--muted); }
+
+.narration .phase-tag {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  padding-right: 1.2rem;
+  border-right: 1px solid var(--rule-soft);
+  min-width: 110px;
+}
+.narration .phase-tag .num {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 2rem;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.narration .phase-tag .lab {
+  display: block;
+  font-size: 0.6rem;
+}
+.narration .text-block { line-height: 1.5; }
+.narration .msg {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+  transition: opacity 0.25s ease;
+}
+.narration .msg em { font-style: italic; color: var(--ink-soft); }
+.narration .msg strong { font-weight: 600; }
+.narration .detail {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  transition: opacity 0.25s ease;
+}
+.narration .detail code {
+  font-family: var(--mono);
+  background: var(--paper-2);
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-size: 0.86em;
+}
+
+/* === OBSERVE / Q&A === */
+.observe {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.obs-card {
+  background: var(--surface);
+  border: 1px solid var(--rule-soft);
+  border-radius: 4px;
+  padding: 1.3rem 1.2rem;
+  border-top: 3px solid var(--reg-p);
+}
+.obs-card .num {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+.obs-card h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.08rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+.obs-card p {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.obs-card p em { color: var(--ink); font-style: italic; font-weight: 500; }
+.obs-card .try {
+  margin-top: 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--reg-p);
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--rule);
+}
+
+footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="masthead">
+  <div class="masthead-meta">
+    <div class="left">
+      <span>TECI II · Bloque F</span>
+      <span>Anexo · Animaciones de reguladores</span>
+    </div>
+    <div class="right">
+      <span>2º Bachillerato</span>
+      <span>PEvAU 2025–26</span>
+    </div>
+  </div>
+  <h1 class="title">Regulador <em>PI</em><br>en acción</h1>
+  <p class="subtitle">Velocidad de una cinta transportadora industrial. La combinación más usada en la industria: <em>la rapidez del P</em> + <em>la precisión del I</em>. Compáralo con P solo y verás por qué el PI es una de las soluciones más habituales en la industria.</p>
+
+  <div class="scope-pills">
+    <span class="scope-pill">Animación · 04 / 06</span>
+    <span class="scope-pill">Regulador PI</span>
+    <span class="scope-pill">Sistema: cinta industrial</span>
+  </div>
+</header>
+
+<!-- ============ INTRO ============ -->
+<section>
+  <div class="section-label">§ Planteamiento</div>
+  <p class="lede">
+    Ya conoces los dos ingredientes. El regulador <strong>P</strong> reacciona <em>rápido</em> al error, pero deja un hueco permanente. El regulador <strong>I</strong> es <em>lento</em>, pero llega exactamente al setpoint. ¿Y si los <em>combinas</em>? El P <em>arranca</em> el sistema con energía, y la I <em>cierra el último hueco</em>: <em>m = K<sub>p</sub>·e + K<sub>i</sub>·∫e dt</em>.
+  </p>
+  <p class="note-prose" style="font-family: var(--serif); font-size: 1.02rem; line-height: 1.65; color: var(--ink-soft); max-width: 70ch; margin-top: 1.5rem;">
+    El experimento aquí: una cinta transportadora con motor industrial. Hay un <em>toggle</em> para alternar entre <strong>Modo P</strong> y <strong>Modo PI</strong>. Hazlo, mira la gráfica, y entenderás por qué el PI es el caballo de batalla del control industrial.
+  </p>
+</section>
+
+<!-- ============ ANIMATION STAGE ============ -->
+<section>
+  <div class="section-label">§ Simulación interactiva</div>
+
+  <div class="stage">
+
+    <div class="stage-header">
+      <div class="title-block"><span class="accent">●</span> Lazo de control · Regulador PI + Cinta transportadora</div>
+      <div class="status"><span class="dot"></span><span id="statusText">EN MARCHA</span></div>
+    </div>
+
+    <div class="stage-grid">
+
+      <!-- PANEL 1: CINTA TRANSPORTADORA -->
+      <div class="panel">
+        <div class="panel-label">Sistema físico</div>
+        <div class="panel-title">Cinta transportadora</div>
+
+        <div class="fan-wrap" style="min-height: 240px;">
+          <svg class="fan-svg" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" style="max-width: 320px;">
+            <defs>
+              <linearGradient id="cintaGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3A352E"/>
+                <stop offset="100%" stop-color="#1A1814"/>
+              </linearGradient>
+              <pattern id="cintaPattern" x="0" y="0" width="20" height="14" patternUnits="userSpaceOnUse">
+                <rect width="20" height="14" fill="url(#cintaGrad)"/>
+                <line x1="10" y1="0" x2="10" y2="14" stroke="#7A736A" stroke-width="0.8" opacity="0.5"/>
+              </pattern>
+            </defs>
+
+            <!-- Estructura: bastidor -->
+            <line x1="20" y1="160" x2="260" y2="160" stroke="#3A352E" stroke-width="1.5"/>
+            <line x1="40" y1="120" x2="40" y2="160" stroke="#3A352E" stroke-width="2"/>
+            <line x1="240" y1="120" x2="240" y2="160" stroke="#3A352E" stroke-width="2"/>
+
+            <!-- Rodillos -->
+            <circle cx="40"  cy="120" r="22" fill="#FAF7F0" stroke="#1A1814" stroke-width="2"/>
+            <circle cx="240" cy="120" r="22" fill="#FAF7F0" stroke="#1A1814" stroke-width="2"/>
+
+            <!-- Marcas en los rodillos -->
+            <g id="rodIzqMarca">
+              <line x1="40" y1="120" x2="40" y2="100" stroke="#1A1814" stroke-width="1.8"/>
+              <line x1="40" y1="120" x2="58" y2="130" stroke="#1A1814" stroke-width="1.8"/>
+              <line x1="40" y1="120" x2="22" y2="130" stroke="#1A1814" stroke-width="1.8"/>
+              <circle cx="40" cy="120" r="3" fill="#1A1814"/>
+            </g>
+            <g id="rodDerMarca">
+              <line x1="240" y1="120" x2="240" y2="100" stroke="#1A1814" stroke-width="1.8"/>
+              <line x1="240" y1="120" x2="258" y2="130" stroke="#1A1814" stroke-width="1.8"/>
+              <line x1="240" y1="120" x2="222" y2="130" stroke="#1A1814" stroke-width="1.8"/>
+              <circle cx="240" cy="120" r="3" fill="#1A1814"/>
+            </g>
+
+            <!-- Correa superior (visible) -->
+            <rect id="cintaSup" x="40" y="88" width="200" height="10" fill="url(#cintaPattern)"/>
+            <line x1="40" y1="88" x2="240" y2="88" stroke="#1A1814" stroke-width="0.8"/>
+            <line x1="40" y1="98" x2="240" y2="98" stroke="#1A1814" stroke-width="0.8"/>
+            <!-- Correa inferior (vuelta) -->
+            <rect x="40" y="138" width="200" height="6" fill="#3A352E" opacity="0.45"/>
+
+            <!-- Paquetes (grupo dinámico) -->
+            <g id="paquetes"></g>
+
+            <!-- Etiqueta "carga extra" -->
+            <g id="cargaTag" opacity="0">
+              <rect x="100" y="30" width="80" height="20" rx="3" fill="#B5341E" stroke="#1A1814" stroke-width="1"/>
+              <text x="140" y="44" font-family="JetBrains Mono, monospace" font-size="9"
+                    text-anchor="middle" fill="#FFFFFF" font-weight="600">+ CARGA</text>
+              <polygon points="135,52 145,52 140,60" fill="#B5341E"/>
+            </g>
+
+            <!-- Motor lateral (a la izquierda del rodillo izq) -->
+            <g transform="translate(15, 130)">
+              <rect x="-12" y="-12" width="20" height="20" fill="#5a5550" stroke="#1A1814" stroke-width="1" rx="2"/>
+              <circle cx="-2" cy="-2" r="6" fill="#3A352E"/>
+              <text x="-2" y="-18" font-family="JetBrains Mono, monospace" font-size="6" text-anchor="middle" fill="#7A736A">MOTOR</text>
+              <circle id="motorPower" cx="-2" cy="-2" r="0" fill="#6E4FA0" opacity="0.7"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="fan-readout">
+          <div class="item ref">
+            <span class="lab">Consigna r</span>
+            <span class="val"><span id="readRef">1.50</span><span class="unit">m/s</span></span>
+          </div>
+          <div class="item out">
+            <span class="lab">Velocidad y</span>
+            <span class="val"><span id="readOut">0.00</span><span class="unit">m/s</span></span>
+          </div>
+          <div class="item err">
+            <span class="lab">Error e</span>
+            <span class="val"><span id="readErr">1.50</span><span class="unit">m/s</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 2: DIAGRAMA DE BLOQUES -->
+      <div class="panel">
+        <div class="panel-label">Lazo de control</div>
+        <div class="panel-title">Diagrama de bloques</div>
+
+        <svg class="bd-svg" viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace">
+          <!-- Entrada r -->
+          <text x="10" y="78" font-size="11" fill="#1A1814" font-weight="600">r</text>
+          <line x1="20" y1="75" x2="55" y2="75" stroke="#1A1814" stroke-width="1.5"/>
+          <polygon points="55,72 60,75 55,78" fill="#1A1814"/>
+
+          <!-- Sumador -->
+          <circle cx="68" cy="75" r="9" fill="#FFFFFF" stroke="#1A1814" stroke-width="1.5"/>
+          <text x="68" y="79" font-size="10" text-anchor="middle" fill="#1A1814">Σ</text>
+          <text x="80" y="68" font-size="9" fill="#7A736A">+</text>
+          <text x="80" y="93" font-size="9" fill="#7A736A">−</text>
+
+          <!-- Salida del sumador: error e -->
+          <line x1="77" y1="75" x2="115" y2="75" stroke="#1A1814" stroke-width="1.5"/>
+          <polygon points="115,72 120,75 115,78" fill="#1A1814"/>
+          <text x="92" y="68" font-size="10" fill="#B5341E" font-weight="600">e</text>
+
+          <!-- Bloque regulador PI -->
+          <rect x="115" y="55" width="60" height="40" rx="3" fill="#FFFFFF" stroke="#6E4FA0" stroke-width="2"/>
+          <text x="145" y="73" font-size="10" text-anchor="middle" fill="#6E4FA0" font-weight="700">REG PI</text>
+          <text x="145" y="85" font-size="8" text-anchor="middle" fill="#6E4FA0">K_p · e</text>
+          <text x="145" y="93" font-size="8" text-anchor="middle" fill="#6E4FA0">+ K_i·∫e</text>
+
+          <!-- Salida del regulador: m -->
+          <line x1="175" y1="75" x2="200" y2="75" stroke="#1A1814" stroke-width="1.5"/>
+          <polygon points="200,72 205,75 200,78" fill="#1A1814"/>
+          <text x="183" y="68" font-size="10" fill="#B5841A" font-weight="600">m</text>
+
+          <!-- Bloque planta -->
+          <rect x="205" y="58" width="55" height="34" rx="3" fill="#FFFFFF" stroke="#1A1814" stroke-width="1.5"/>
+          <text x="232" y="74" font-size="9" text-anchor="middle" fill="#1A1814">CINTA +</text>
+          <text x="232" y="86" font-size="9" text-anchor="middle" fill="#1A1814">MOTOR</text>
+
+          <!-- Salida y (velocidad) -->
+          <line x1="260" y1="75" x2="285" y2="75" stroke="#1A1814" stroke-width="1.5"/>
+          <line x1="285" y1="75" x2="285" y2="155" stroke="#1A1814" stroke-width="1.5"/>
+          <text x="270" y="68" font-size="11" fill="#1A75BC" font-weight="600">y</text>
+
+          <!-- Bifurcación a salida -->
+          <line x1="285" y1="75" x2="295" y2="75" stroke="#1A1814" stroke-width="1.5"/>
+
+          <!-- Realimentación: c -> sumador -->
+          <line x1="285" y1="155" x2="68" y2="155" stroke="#1A1814" stroke-width="1.5"/>
+          <line x1="68" y1="155" x2="68" y2="84" stroke="#1A1814" stroke-width="1.5"/>
+          <polygon points="65,89 68,84 71,89" fill="#1A1814"/>
+
+          <!-- Perturbación (entra al ventilador) -->
+          <text x="232" y="30" font-size="10" fill="#7A736A" id="pertLabel">carga d</text>
+          <line x1="232" y1="35" x2="232" y2="55" stroke="#7A736A" stroke-width="1" stroke-dasharray="3 2" id="pertLine"/>
+          <polygon points="229,52 232,57 235,52" fill="#7A736A" id="pertArrow"/>
+
+          <!-- Indicador animado: pulso de error -->
+          <circle id="errPulse" cx="92" cy="75" r="3" fill="#B5341E" opacity="0.8"/>
+        </svg>
+
+        <p class="bd-explainer">
+          El sumador calcula <code>e = r − y</code>. El <span class="reg-p-label">regulador PI</span> aplica <code>m = K<sub>p</sub>·e + K<sub>i</sub>·∫e dt</code> — la suma de la acción proporcional y la integral. El motor recibe <code>m</code> y mueve la cinta a velocidad <code>y</code>, que se realimenta.
+        </p>
+      </div>
+
+      <!-- PANEL 3: GRÁFICAS -->
+      <div class="panel">
+        <div class="panel-label">Evolución temporal</div>
+        <div class="panel-title">Señales en el tiempo</div>
+
+        <div class="graph-block">
+          <div class="graph-head">
+            <span class="graph-title">Velocidad (m/s)</span>
+            <div class="legend">
+              <span><span class="swatch ref-sw"></span>r consigna</span>
+              <span><span class="swatch out-sw"></span>y velocidad</span>
+              <span><span class="swatch err-sw"></span>error</span>
+            </div>
+          </div>
+          <canvas class="graph" id="graphVel" width="600" height="220"></canvas>
+        </div>
+
+        <div class="graph-block">
+          <div class="graph-head">
+            <span class="graph-title">Señal de control m</span>
+            <div class="legend">
+              <span><span class="swatch ctrl-sw"></span>m = K<sub>p</sub>·e + K<sub>i</sub>·∫e dt</span>
+            </div>
+          </div>
+          <canvas class="graph" id="graphCtrl" width="600" height="100"></canvas>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CONTROLES -->
+    <div class="controls">
+      <div class="ctrl">
+        <div class="ctrl-label">
+          <span>Consigna r</span>
+          <span class="val"><span id="lblRef">1.50</span> m/s</span>
+        </div>
+        <input type="range" id="sldRef" min="0.5" max="2.5" value="1.5" step="0.1">
+      </div>
+      <div class="ctrl">
+        <div class="ctrl-label">
+          <span>Ganancia K<sub>p</sub></span>
+          <span class="val"><span id="lblKp">0.40</span></span>
+        </div>
+        <input type="range" id="sldKp" min="0.05" max="2.0" value="0.40" step="0.05">
+      </div>
+      <div class="ctrl" id="ctrlKi">
+        <div class="ctrl-label">
+          <span>Ganancia K<sub>i</sub></span>
+          <span class="val"><span id="lblKi">0.40</span></span>
+        </div>
+        <input type="range" id="sldKi" min="0.0" max="2.0" value="0.40" step="0.05">
+      </div>
+      <div class="modo-controls" role="group" aria-label="Modo de regulador">
+        <button class="modo-btn" id="modoP" title="Solo acción proporcional">P solo</button>
+        <button class="modo-btn on" id="modoPI" title="Acción proporcional + integral">PI</button>
+      </div>
+      <div class="speed-controls" role="group" aria-label="Velocidad de simulación">
+        <button class="speed-btn" id="spdPause" title="Pausar">▮▮</button>
+        <button class="speed-btn step-btn" id="spdStep" title="Avanzar 0,1 s (sólo en pausa)" disabled>▶|</button>
+        <button class="speed-btn" id="spd025" title="Cámara muy lenta">¼×</button>
+        <button class="speed-btn" id="spd050" title="Cámara lenta">½×</button>
+        <button class="speed-btn on" id="spd1" title="Velocidad normal">1×</button>
+      </div>
+      <button class="btn" id="btnPert">Carga extra</button>
+      <button class="btn reset" id="btnReset">Reiniciar</button>
+    </div>
+
+  </div>
+
+  <!-- ============ PANEL NARRATIVO ============ -->
+  <div class="narration phase-parado" id="narration">
+    <div class="phase-tag">
+      <span class="num" id="narrNum">00</span>
+      <span class="lab" id="narrLab">EN ESPERA</span>
+    </div>
+    <div class="text-block">
+      <div class="msg" id="narrMsg">Pulsa <em>Reiniciar</em> y observa el arranque, o usa los controles de velocidad para ir paso a paso.</div>
+      <div class="detail" id="narrDetail">Recomendado: pulsa <code>¼×</code> o <code>½×</code> para ver con calma cómo se construye la respuesta.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUÉ OBSERVAR ============ -->
+<section>
+  <div class="section-label">§ Qué observar</div>
+  <h2 class="section-heading">Tres cosas <em>que aprenderás</em> alternando P y PI</h2>
+
+  <div class="observe">
+
+    <div class="obs-card">
+      <div class="num">OBSERVACIÓN 01</div>
+      <h3>P solo: lo de siempre.</h3>
+      <p>Pulsa <em>P solo</em>. La cinta se queda en torno a <em>1,20 m/s</em> con la consigna pidiendo 1,50. Quedan 0,3 m/s de hueco que no se cierran — es el mismo error en régimen permanente que viste en el ventilador, igual de inevitable con el P puro.</p>
+      <div class="try">▸ Es la misma firma del P. Sirve, pero no llega del todo.</div>
+    </div>
+
+    <div class="obs-card">
+      <div class="num">OBSERVACIÓN 02</div>
+      <h3>Pulsa PI y mira el hueco cerrarse.</h3>
+      <p>Sin tocar nada más, pulsa <em>PI</em>. El sistema arranca igual de rápido (gracias al P), pero ahora la integral va <em>cerrando el último hueco</em>: la cinta llega exactamente a 1,50 m/s. Lo mejor de los dos mundos en uno.</p>
+      <div class="try">▸ Hay un poco de overshoot — el precio modesto que se paga por la I.</div>
+    </div>
+
+    <div class="obs-card">
+      <div class="num">OBSERVACIÓN 03</div>
+      <h3>La carga extra <em>tampoco</em> deja error.</h3>
+      <p>Con el PI activo, pulsa <em>carga extra</em> (un paquete pesado adicional sobre la cinta). La velocidad cae brevemente — el motor tiene que esforzarse — pero la integral lo lleva de vuelta a 1,50 m/s exacto. Eso es lo que hace al PI <em>el caballo de batalla</em> del control industrial.</p>
+      <div class="try">▸ Ahora vuelve a P solo y pulsa carga extra: el error se hace aún más grande.</div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  Material didáctico para Tecnología e Ingeniería II · Bloque F · Apartado 7 · Animación 04 de 06
+</footer>
+
+</div>
+
+<script>
+// =========================================================================
+//   SIMULACIÓN: Cinta transportadora (2º orden) + Regulador P o PI
+// =========================================================================
+//
+// Modelo físico (planta de 2º orden subamortiguado):
+//   d²y/dt² + 2ζωn·dy/dt + ωn²·y = K·ωn²·m - ωn²·d_pert
+// Regulador conmutable:
+//   modo 'P'  → m = K_p·e
+//   modo 'PI' → m = K_p·e + K_i·∫e dt   (con anti-windup por clamping)
+// =========================================================================
+
+const SIM = {
+  // Parámetros físicos del motor + cinta (planta)
+  K_planta: 10.0,      // ganancia: m/s por unidad de m
+  wn: 5.0,             // frecuencia natural (rad/s)
+  zeta: 0.85,          // amortiguamiento
+  pertAmp: 0.4,        // amplitud de la perturbación (m/s equivalente de carga)
+
+  // Estado
+  y: 0,                // velocidad actual (m/s)
+  v: 0,                // derivada de la velocidad (m/s²)
+  I: 0,                // integral acumulada del error (sólo se usa en modo PI)
+  m: 0,                // señal de control (par, %)
+  e: 0,                // error
+  ref: 1.5,            // consigna (m/s)
+  Kp: 0.40,            // ganancia proporcional
+  Ki: 0.40,            // ganancia integral
+  pert: 0,             // perturbación activa
+
+  // Modo del regulador
+  modo: 'PI',          // 'P' o 'PI'
+
+  // Tiempo
+  t: 0,
+  dt: 0.02,
+
+  // Visual
+  fanAngle: 0,         // ángulo acumulado de los rodillos (deg)
+  paquetesX: [],       // posiciones x de los paquetes sobre la cinta
+
+  // Buffers para gráficas (12 segundos = 600 muestras)
+  buffer: [],
+  bufferLen: 600,
+
+  // Saturación de m
+  mMax: 1.0,
+  mMin: 0,
+
+  // Control de velocidad
+  speedMul: 1.0,
+  paused: false
+};
+
+// =========================================================================
+//   ESTADO DE NARRACIÓN AUTOMÁTICA
+// =========================================================================
+const NARR = {
+  fase: 'parado',
+  numFase: 0,
+  estableCounter: 0,
+  pertWasActive: false,
+  ultimaV: 0,
+  ultimaY: 0,
+  ultimaRef: 1.5,
+  ultimaKp: 0.40,
+  ultimaKi: 0.40,
+  ultimoModo: 'PI',
+  fadeTimer: 0,
+  tEntradaFase: 0
+};
+
+// =========================================================================
+//   PASO DE SIMULACIÓN
+// =========================================================================
+function step() {
+  // 1. Calcular error
+  SIM.e = SIM.ref - SIM.y;
+
+  // 2. Acción del regulador (según modo)
+  let m_raw;
+  if (SIM.modo === 'P') {
+    m_raw = SIM.Kp * SIM.e;
+    SIM.I = 0;  // En modo P, mantener integral a cero
+  } else {
+    // PI con anti-windup por clamping
+    const I_tent = SIM.I + SIM.e * SIM.dt;
+    const m_tent = SIM.Kp * SIM.e + SIM.Ki * I_tent;
+    const enSatSup = m_tent > SIM.mMax && SIM.e > 0;
+    const enSatInf = m_tent < SIM.mMin && SIM.e < 0;
+    if (!enSatSup && !enSatInf) {
+      SIM.I = I_tent;
+    }
+    m_raw = SIM.Kp * SIM.e + SIM.Ki * SIM.I;
+  }
+  SIM.m = Math.max(SIM.mMin, Math.min(SIM.mMax, m_raw));
+
+  // 3. Dinámica de la planta
+  const wn2 = SIM.wn * SIM.wn;
+  const v_dot = SIM.K_planta * wn2 * SIM.m
+              - 2 * SIM.zeta * SIM.wn * SIM.v
+              - wn2 * SIM.y
+              - wn2 * SIM.pert;
+
+  SIM.v += v_dot * SIM.dt;
+  SIM.y += SIM.v * SIM.dt;
+
+  if (SIM.y < 0) { SIM.y = 0; if (SIM.v < 0) SIM.v = 0; }
+
+  // 4. Avanzar tiempo
+  SIM.t += SIM.dt;
+
+  // 5. Guardar muestra
+  SIM.buffer.push({ t: SIM.t, ref: SIM.ref, y: SIM.y, m: SIM.m });
+  if (SIM.buffer.length > SIM.bufferLen) SIM.buffer.shift();
+}
+
+// =========================================================================
+//   NARRACIÓN AUTOMÁTICA
+// =========================================================================
+const FASES = {
+  parado:                { num: '00', lab: 'EN ESPERA',           cls: 'phase-parado' },
+  arranque:              { num: '01', lab: 'ARRANQUE',            cls: 'phase-arranque' },
+  subiendo:              { num: '02', lab: 'ACELERANDO',          cls: 'phase-subiendo' },
+  pico:                  { num: '03', lab: 'OVERSHOOT',           cls: 'phase-pico' },
+  oscilando:             { num: '04', lab: 'OSCILACIÓN',          cls: 'phase-oscilando' },
+  estable_P:             { num: '05', lab: 'P · CON ERROR',       cls: 'phase-perturbado' },
+  estable_PI:            { num: '05', lab: 'PI · ERROR CERO',     cls: 'phase-estable' },
+  perturbado_caida:      { num: '06', lab: 'CARGA EXTRA',         cls: 'phase-perturbado' },
+  perturbado_estable_P:  { num: '07', lab: 'P · ERROR EMPEORADO', cls: 'phase-perturbado' },
+  perturbado_estable_PI: { num: '07', lab: 'PI · RECUPERADO',     cls: 'phase-estable' },
+  cambio_modo:           { num: '★',  lab: 'MODO CAMBIADO',       cls: 'phase-arranque' }
+};
+
+function setNarr(fase, msg, detail) {
+  if (NARR.fase === fase) return;
+  NARR.fase = fase;
+  NARR.tEntradaFase = SIM.t;
+  const f = FASES[fase] || FASES.parado;
+  document.getElementById('narrNum').textContent = f.num;
+  document.getElementById('narrLab').textContent = f.lab;
+  document.getElementById('narrMsg').innerHTML = msg;
+  document.getElementById('narrDetail').innerHTML = detail;
+  const panel = document.getElementById('narration');
+  panel.className = 'narration ' + f.cls;
+}
+
+const MIN_FASE_DUR = 0.20;
+function puedeTransitar() { return (SIM.t - (NARR.tEntradaFase || 0)) >= MIN_FASE_DUR; }
+
+function finalizarTransitorio() {
+  const ySS = SIM.y.toFixed(2);
+  const errorFinal = Math.abs(SIM.e).toFixed(3);
+  if (SIM.modo === 'P') {
+    setNarr('estable_P',
+      `<strong>Régimen permanente con P</strong>: la cinta se queda en <strong>${ySS} m/s</strong>. Faltan <strong>${errorFinal} m/s</strong>.`,
+      `Esto es <code>e<sub>ss</sub> = r/(1+K·K<sub>p</sub>) ≈ ${(SIM.ref/(1+SIM.K_planta*SIM.Kp)).toFixed(3)}</code>. ¿Quieres cerrar el hueco? <em>Pulsa PI</em>.`
+    );
+  } else {
+    setNarr('estable_PI',
+      `<strong>Régimen permanente con PI</strong>: la cinta se queda en <strong>${ySS} m/s</strong>. Error: <strong>cero</strong>.`,
+      `La integral ha acumulado el valor exacto que el P por sí solo no podía generar. <em>Hueco cerrado</em>. ¿Quieres ver el contraste? Cambia a <em>P solo</em>.`
+    );
+  }
+}
+
+function updateNarration() {
+  const dvSign = Math.sign(SIM.v) !== Math.sign(NARR.ultimaV) && Math.abs(NARR.ultimaV) > 0.05;
+
+  // === EVENTO: cambio de modo P ↔ PI ===
+  if (SIM.modo !== NARR.ultimoModo) {
+    if (SIM.modo === 'PI') {
+      setNarr('cambio_modo',
+        'Modo cambiado a <strong>PI</strong>. La integral se activa: empezará a acumular el error que dejó el P.',
+        'Observa cómo, sin tocar nada más, el sistema converge hacia la consigna y cierra el hueco. La integral hace su trabajo silenciosamente, en segundo plano.'
+      );
+    } else {
+      setNarr('cambio_modo',
+        'Modo cambiado a <strong>P solo</strong>. La integral se reinicia a cero: ahora sólo manda <code>K<sub>p</sub>·e</code>.',
+        'Espera unos segundos: el sistema irá a un nuevo régimen permanente con error visible. Es exactamente lo que viste en la animación del ventilador.'
+      );
+    }
+    NARR.ultimoModo = SIM.modo;
+    NARR.estableCounter = 0;
+    return;
+  }
+
+  // === EVENTO: perturbación aplicada ===
+  if (SIM.pert > 0 && !NARR.pertWasActive) {
+    setNarr('perturbado_caida',
+      'Carga extra: un paquete pesado se ha colocado sobre la cinta. La velocidad cae bruscamente.',
+      SIM.modo === 'P'
+        ? 'En modo P, el regulador subirá <code>m</code> proporcionalmente al nuevo error, pero <em>no recuperará del todo</em>. El error final empeorará respecto al de antes.'
+        : 'En modo PI, observa cómo la integral va corrigiendo el error <em>poco a poco</em> hasta cerrarlo del todo, incluso con la carga puesta.'
+    );
+    NARR.pertWasActive = true;
+    NARR.estableCounter = 0;
+    NARR.ultimaV = 0;
+    return;
+  }
+  if (SIM.pert === 0 && NARR.pertWasActive) {
+    setNarr(SIM.modo === 'P' ? 'estable_P' : 'estable_PI',
+      'Carga retirada. El sistema vuelve hacia su régimen permanente sin perturbación.',
+      'En P, el error vuelve al valor "normal" del P. En PI, el error vuelve a cero como antes.'
+    );
+    NARR.pertWasActive = false;
+    NARR.estableCounter = 0;
+    return;
+  }
+
+  // === Estabilización tras perturbación ===
+  if (NARR.pertWasActive && NARR.fase === 'perturbado_caida' && Math.abs(SIM.v) < 0.05 && SIM.t > 0.5) {
+    NARR.estableCounter++;
+    if (NARR.estableCounter > 80 && puedeTransitar()) {
+      const errorActual = Math.abs(SIM.e).toFixed(3);
+      const yNew = SIM.y.toFixed(2);
+      if (SIM.modo === 'P') {
+        setNarr('perturbado_estable_P',
+          `<strong>P con perturbación</strong>: la cinta se queda en <strong>${yNew} m/s</strong>. Error: <strong>${errorActual} m/s</strong> — peor que sin carga.`,
+          'El regulador P sólo empuja proporcionalmente al error actual. Como no tiene memoria, no encuentra el <code>m</code> exacto que compensa la carga: queda corto.'
+        );
+      } else {
+        setNarr('perturbado_estable_PI',
+          `<strong>PI con perturbación</strong>: la cinta vuelve a <strong>${yNew} m/s</strong>. Error: prácticamente <strong>cero</strong>.`,
+          'La integral ha encontrado el valor de <code>m</code> que compensa exactamente la carga. <em>El PI es invariable a perturbaciones constantes</em>: ésta es la propiedad estrella del control industrial.'
+        );
+      }
+      NARR.estableCounter = 0;
+    }
+    NARR.ultimaV = SIM.v;
+    return;
+  }
+
+  // === Lógica del transitorio normal (sin perturbación) ===
+  if (!NARR.pertWasActive) {
+    switch (NARR.fase) {
+      case 'parado':
+      case 'cambio_modo':
+        if (SIM.t > 0.05 && SIM.y > 0.005 && puedeTransitar()) {
+          setNarr('arranque',
+            SIM.modo === 'P'
+              ? 'Error <em>máximo</em>: cinta parada, consigna 1,5 m/s. El P aplica <code>m = K<sub>p</sub>·e</code>: el motor recibe la orden de empujar fuerte.'
+              : 'Error <em>máximo</em>: cinta parada, consigna 1,5 m/s. El PI aplica <code>K<sub>p</sub>·e</code> (igual que el P) y además la integral empieza a acumular.',
+            'En esta fase inicial, las dos acciones empujan en el mismo sentido. La diferencia entre P y PI se notará al final del transitorio.'
+          );
+        }
+        break;
+      case 'arranque':
+        if (SIM.y > 0.4 && puedeTransitar()) {
+          setNarr('subiendo',
+            'La cinta acelera. Conforme se acerca a la consigna, el error baja, y la acción proporcional baja con él.',
+            SIM.modo === 'P'
+              ? 'Llegará un momento en que el sistema "se queda corto": el error pequeño no genera acción suficiente para alcanzar el setpoint.'
+              : 'Pero la integral sigue aumentando, acumulando el error histórico. Esto es lo que cerrará el último hueco que el P por sí solo no podría.'
+          );
+        }
+        break;
+      case 'subiendo':
+        if (SIM.e < 0 && puedeTransitar()) {
+          setNarr('pico',
+            'La cinta se ha pasado de la consigna. Inercia mecánica: cuando llegó al setpoint todavía estaba acelerando.',
+            SIM.modo === 'PI'
+              ? 'Ahora <code>e &lt; 0</code> y la integral empieza a <em>decrecer</em>. La m baja y la cinta volverá a 1,5 m/s.'
+              : 'Ahora <code>e &lt; 0</code> y <code>m</code> cae a cero. La cinta perderá velocidad por la fricción del sistema.'
+          );
+        }
+        break;
+      case 'pico':
+        if (dvSign && SIM.v > 0 && puedeTransitar()) {
+          setNarr('oscilando',
+            'Vaivén amortiguado: cada oscilación es más pequeña que la anterior.',
+            'El sistema disipa energía en cada ciclo. Pronto se asentará — y ahí verás la <em>diferencia clave</em> entre P y PI.'
+          );
+        }
+        if (Math.abs(SIM.v) < 0.05) NARR.estableCounter++;
+        else NARR.estableCounter = 0;
+        if (NARR.estableCounter > 80 && puedeTransitar()) {
+          finalizarTransitorio();
+          NARR.estableCounter = 0;
+        }
+        break;
+      case 'oscilando':
+        if (Math.abs(SIM.v) < 0.05) NARR.estableCounter++;
+        else NARR.estableCounter = 0;
+        if (NARR.estableCounter > 80 && puedeTransitar()) {
+          finalizarTransitorio();
+          NARR.estableCounter = 0;
+        }
+        break;
+    }
+  }
+
+  // === EVENTO: cambio de consigna o ganancias ===
+  if ((NARR.fase === 'estable_P' || NARR.fase === 'estable_PI' ||
+       NARR.fase === 'perturbado_estable_P' || NARR.fase === 'perturbado_estable_PI') &&
+      (Math.abs(SIM.ref - NARR.ultimaRef) > 0.005 ||
+       Math.abs(SIM.Kp - NARR.ultimaKp) > 0.005 ||
+       Math.abs(SIM.Ki - NARR.ultimaKi) > 0.005)) {
+    setNarr('arranque',
+      'Has cambiado un parámetro. El error reaparece y el sistema busca un nuevo equilibrio.',
+      'En modo PI, llegará al nuevo setpoint sin error. En modo P, dejará un nuevo hueco.'
+    );
+    NARR.estableCounter = 0;
+  }
+
+  NARR.ultimaV = SIM.v;
+  NARR.ultimaY = SIM.y;
+  NARR.ultimaRef = SIM.ref;
+  NARR.ultimaKp = SIM.Kp;
+  NARR.ultimaKi = SIM.Ki;
+}
+
+// =========================================================================
+//   RENDER DE LA CINTA TRANSPORTADORA
+// =========================================================================
+const cintaSup = document.getElementById('cintaSup');
+const rodIzqMarca = document.getElementById('rodIzqMarca');
+const rodDerMarca = document.getElementById('rodDerMarca');
+const motorPower = document.getElementById('motorPower');
+const cargaTag = document.getElementById('cargaTag');
+const paquetesG = document.getElementById('paquetes');
+
+// Inicializar paquetes con posiciones distribuidas
+function inicializarPaquetes() {
+  SIM.paquetesX = [60, 110, 165, 220, 275];  // posiciones X
+  renderPaquetes();
+}
+
+// Constantes geométricas de la cinta (coords del SVG: 280x200)
+const CINTA_X_MIN = 50, CINTA_X_MAX = 230, CINTA_Y_TOP = 88;
+const PAQUETE_W = 18, PAQUETE_H = 14;
+
+function renderPaquetes() {
+  // Limpiar y dibujar cada paquete según su posición actual
+  paquetesG.innerHTML = '';
+  for (let i = 0; i < SIM.paquetesX.length; i++) {
+    const x = SIM.paquetesX[i];
+    if (x < CINTA_X_MIN - PAQUETE_W || x > CINTA_X_MAX + PAQUETE_W) continue;
+    const isHeavy = (SIM.pert > 0 && i === 0);  // primer paquete es el "pesado" cuando hay carga
+    const w = isHeavy ? PAQUETE_W * 1.6 : PAQUETE_W;
+    const h = isHeavy ? PAQUETE_H * 1.4 : PAQUETE_H;
+    const fill = isHeavy ? '#B5341E' : '#9B7B47';
+    paquetesG.innerHTML += `<rect x="${x - w/2}" y="${CINTA_Y_TOP - h}" width="${w}" height="${h}" fill="${fill}" stroke="#1A1814" stroke-width="0.8" rx="1"/>`;
+    // Decoraciones del paquete (líneas tipo cinta de embalaje)
+    paquetesG.innerHTML += `<line x1="${x}" y1="${CINTA_Y_TOP - h}" x2="${x}" y2="${CINTA_Y_TOP}" stroke="#5a4015" stroke-width="0.6"/>`;
+  }
+}
+
+function renderCinta(deltaSec) {
+  // 1. Mover los paquetes con la velocidad de la cinta
+  //    velocidad visual: 1 m/s real → ~40 px/s visual
+  const visualSpeedFactor = 40;
+  const dx = SIM.y * visualSpeedFactor * deltaSec;
+  const SPACING = 55;  // espacio entre paquetes
+  for (let i = 0; i < SIM.paquetesX.length; i++) {
+    SIM.paquetesX[i] += dx;
+    // Si un paquete sale por la derecha, lo recolocamos por la izquierda
+    if (SIM.paquetesX[i] > CINTA_X_MAX + 30) {
+      // Buscar la posición x mínima actual
+      const minX = Math.min(...SIM.paquetesX);
+      SIM.paquetesX[i] = minX - SPACING;
+    }
+  }
+  renderPaquetes();
+
+  // 2. Rotar las marcas de los rodillos (mismo principio que las aspas del ventilador)
+  //    Velocidad angular = velocidad lineal / radio (radio rodillo = 22 px ≈ 0.11 m)
+  const radio = 0.11;
+  const omega = SIM.y / radio;  // rad/s
+  const degPerSec = omega * 180 / Math.PI * 0.3;  // factor visual
+  SIM.fanAngle += degPerSec * deltaSec;
+  SIM.fanAngle %= 360;
+  rodIzqMarca.setAttribute('transform', `rotate(${SIM.fanAngle} 40 120)`);
+  rodDerMarca.setAttribute('transform', `rotate(${SIM.fanAngle} 240 120)`);
+
+  // 3. Indicador de potencia del motor: círculo púrpura dentro del bloque del motor
+  const power = SIM.m / SIM.mMax;  // 0..1
+  motorPower.setAttribute('r', power * 9);
+
+  // 4. Etiqueta de carga visible cuando hay perturbación
+  cargaTag.setAttribute('opacity', SIM.pert > 0 ? 1.0 : 0.0);
+}
+
+// Wrapper para mantener nombre histórico (loop principal llama renderFan)
+function renderFan(deltaSec) { renderCinta(deltaSec); }
+
+// =========================================================================
+//   RENDER DE LECTURAS NUMÉRICAS
+// =========================================================================
+const readRef = document.getElementById('readRef');
+const readOut = document.getElementById('readOut');
+const readErr = document.getElementById('readErr');
+
+function renderReadouts() {
+  readRef.textContent = SIM.ref.toFixed(2);
+  readOut.textContent = SIM.y.toFixed(2);
+  readErr.textContent = SIM.e.toFixed(2);
+}
+
+// Inicializar paquetes al cargar
+inicializarPaquetes();
+
+// =========================================================================
+//   RENDER DE GRÁFICAS
+// =========================================================================
+const cvVel = document.getElementById('graphVel');
+const ctxVel = cvVel.getContext('2d');
+const cvCtrl = document.getElementById('graphCtrl');
+const ctxCtrl = cvCtrl.getContext('2d');
+
+function setupCanvas(cv, ctx) {
+  // Hi-DPI
+  const ratio = window.devicePixelRatio || 1;
+  const rect = cv.getBoundingClientRect();
+  cv.width = rect.width * ratio;
+  cv.height = rect.height * ratio;
+  ctx.scale(ratio, ratio);
+  return { w: rect.width, h: rect.height };
+}
+
+let velDims = setupCanvas(cvVel, ctxVel);
+let ctrlDims = setupCanvas(cvCtrl, ctxCtrl);
+
+window.addEventListener('resize', () => {
+  // Reset canvas para hi-dpi tras resize
+  ctxVel.setTransform(1, 0, 0, 1, 0, 0);
+  ctxCtrl.setTransform(1, 0, 0, 1, 0, 0);
+  velDims = setupCanvas(cvVel, ctxVel);
+  ctrlDims = setupCanvas(cvCtrl, ctxCtrl);
+});
+
+function renderGraphs() {
+  if (SIM.buffer.length < 2) return;
+
+  // ----- Gráfica velocidad -----
+  const { w: W, h: H } = velDims;
+  const padL = 36, padR = 8, padT = 10, padB = 22;
+  const plotW = W - padL - padR;
+  const plotH = H - padT - padB;
+
+  ctxVel.clearRect(0, 0, W, H);
+
+  // Fondo cuadriculado sutil
+  ctxVel.strokeStyle = '#E8E2D3';
+  ctxVel.lineWidth = 0.5;
+  for (let i = 0; i <= 4; i++) {
+    const y = padT + (plotH * i / 4);
+    ctxVel.beginPath();
+    ctxVel.moveTo(padL, y);
+    ctxVel.lineTo(W - padR, y);
+    ctxVel.stroke();
+  }
+
+  // Ejes
+  ctxVel.strokeStyle = '#7A736A';
+  ctxVel.lineWidth = 1;
+  ctxVel.beginPath();
+  ctxVel.moveTo(padL, padT);
+  ctxVel.lineTo(padL, H - padB);
+  ctxVel.lineTo(W - padR, H - padB);
+  ctxVel.stroke();
+
+  // Etiquetas Y (rpm)
+  ctxVel.fillStyle = '#7A736A';
+  ctxVel.font = '9px JetBrains Mono, monospace';
+  ctxVel.textAlign = 'right';
+  ctxVel.textBaseline = 'middle';
+  const yMax = 3.0;
+  for (let i = 0; i <= 4; i++) {
+    const val = yMax * (1 - i/4);
+    const y = padT + (plotH * i / 4);
+    ctxVel.fillText(val.toFixed(1), padL - 4, y);
+  }
+
+  // Eje X (tiempo): muestra los últimos 12s
+  const tWindow = 12;
+  const tNow = SIM.t;
+  const tMin = tNow - tWindow;
+  ctxVel.textAlign = 'center';
+  ctxVel.textBaseline = 'top';
+  for (let i = 0; i <= 5; i++) {
+    const x = padL + plotW * i / 5;
+    const tVal = tMin + tWindow * i / 5;
+    if (tVal >= 0) {
+      ctxVel.fillText(tVal.toFixed(1) + 's', x, H - padB + 4);
+    }
+  }
+
+  // Función mapeo
+  const tToX = (t) => padL + plotW * (t - tMin) / tWindow;
+  const yToY = (val) => padT + plotH * (1 - val / yMax);
+
+  // BANDA DE ERROR (sombreado entre ref y y)
+  ctxVel.fillStyle = 'rgba(181, 52, 30, 0.15)';
+  ctxVel.beginPath();
+  let started = false;
+  for (const s of SIM.buffer) {
+    if (s.t < tMin) continue;
+    if (!started) {
+      ctxVel.moveTo(tToX(s.t), yToY(s.ref));
+      started = true;
+    } else {
+      ctxVel.lineTo(tToX(s.t), yToY(s.ref));
+    }
+  }
+  // Volver por la línea de y
+  for (let i = SIM.buffer.length - 1; i >= 0; i--) {
+    const s = SIM.buffer[i];
+    if (s.t < tMin) break;
+    ctxVel.lineTo(tToX(s.t), yToY(s.y));
+  }
+  ctxVel.closePath();
+  ctxVel.fill();
+
+  // Línea de referencia r (negra fina)
+  ctxVel.strokeStyle = '#1A1814';
+  ctxVel.lineWidth = 1.2;
+  ctxVel.beginPath();
+  let first = true;
+  for (const s of SIM.buffer) {
+    if (s.t < tMin) continue;
+    const x = tToX(s.t);
+    const y = yToY(s.ref);
+    if (first) { ctxVel.moveTo(x, y); first = false; }
+    else ctxVel.lineTo(x, y);
+  }
+  ctxVel.stroke();
+
+  // Línea de salida c (azul gruesa)
+  ctxVel.strokeStyle = '#1A75BC';
+  ctxVel.lineWidth = 2.2;
+  ctxVel.beginPath();
+  first = true;
+  for (const s of SIM.buffer) {
+    if (s.t < tMin) continue;
+    const x = tToX(s.t);
+    const y = yToY(s.y);
+    if (first) { ctxVel.moveTo(x, y); first = false; }
+    else ctxVel.lineTo(x, y);
+  }
+  ctxVel.stroke();
+
+  // Cursor vertical "AHORA" cuando está en pausa o cámara lenta
+  if (SIM.speedMul < 1.0 && SIM.buffer.length > 0) {
+    const tNowReal = SIM.buffer[SIM.buffer.length - 1].t;
+    const xNow = tToX(tNowReal);
+    if (xNow > padL && xNow < W - padR) {
+      ctxVel.strokeStyle = SIM.paused ? '#B5341E' : '#7A736A';
+      ctxVel.lineWidth = SIM.paused ? 1.5 : 1;
+      ctxVel.setLineDash(SIM.paused ? [] : [3, 3]);
+      ctxVel.beginPath();
+      ctxVel.moveTo(xNow, padT);
+      ctxVel.lineTo(xNow, H - padB);
+      ctxVel.stroke();
+      ctxVel.setLineDash([]);
+      // Etiqueta "AHORA"
+      if (SIM.paused) {
+        ctxVel.fillStyle = '#B5341E';
+        ctxVel.font = 'bold 9px JetBrains Mono, monospace';
+        ctxVel.textAlign = 'left';
+        ctxVel.textBaseline = 'top';
+        ctxVel.fillText('AHORA', xNow + 3, padT + 2);
+      }
+    }
+  }
+
+  // ----- Gráfica señal de control m -----
+  const { w: W2, h: H2 } = ctrlDims;
+  const padL2 = 36, padR2 = 8, padT2 = 8, padB2 = 18;
+  const plotW2 = W2 - padL2 - padR2;
+  const plotH2 = H2 - padT2 - padB2;
+
+  ctxCtrl.clearRect(0, 0, W2, H2);
+
+  // Fondo cuadriculado sutil
+  ctxCtrl.strokeStyle = '#E8E2D3';
+  ctxCtrl.lineWidth = 0.5;
+  for (let i = 0; i <= 2; i++) {
+    const y = padT2 + (plotH2 * i / 2);
+    ctxCtrl.beginPath();
+    ctxCtrl.moveTo(padL2, y);
+    ctxCtrl.lineTo(W2 - padR2, y);
+    ctxCtrl.stroke();
+  }
+
+  // Ejes
+  ctxCtrl.strokeStyle = '#7A736A';
+  ctxCtrl.lineWidth = 1;
+  ctxCtrl.beginPath();
+  ctxCtrl.moveTo(padL2, padT2);
+  ctxCtrl.lineTo(padL2, H2 - padB2);
+  ctxCtrl.lineTo(W2 - padR2, H2 - padB2);
+  ctxCtrl.stroke();
+
+  // Etiquetas Y (m en escala 0..1)
+  ctxCtrl.fillStyle = '#7A736A';
+  ctxCtrl.font = '9px JetBrains Mono, monospace';
+  ctxCtrl.textAlign = 'right';
+  ctxCtrl.textBaseline = 'middle';
+  const mMax = 1.0;
+  for (let i = 0; i <= 2; i++) {
+    const val = mMax * (1 - i/2);
+    const y = padT2 + (plotH2 * i / 2);
+    ctxCtrl.fillText(val.toFixed(2), padL2 - 4, y);
+  }
+
+  // Mapeo
+  const tToX2 = (t) => padL2 + plotW2 * (t - tMin) / tWindow;
+  const mToY = (val) => padT2 + plotH2 * (1 - Math.max(0, Math.min(mMax, val)) / mMax);
+
+  // Área bajo m (relleno tenue)
+  ctxCtrl.fillStyle = 'rgba(181, 132, 26, 0.15)';
+  ctxCtrl.beginPath();
+  let started2 = false;
+  for (const s of SIM.buffer) {
+    if (s.t < tMin) continue;
+    if (!started2) {
+      ctxCtrl.moveTo(tToX2(s.t), H2 - padB2);
+      ctxCtrl.lineTo(tToX2(s.t), mToY(s.m));
+      started2 = true;
+    } else {
+      ctxCtrl.lineTo(tToX2(s.t), mToY(s.m));
+    }
+  }
+  if (started2) {
+    const lastT = SIM.buffer[SIM.buffer.length - 1].t;
+    ctxCtrl.lineTo(tToX2(lastT), H2 - padB2);
+    ctxCtrl.closePath();
+    ctxCtrl.fill();
+  }
+
+  // Línea m
+  ctxCtrl.strokeStyle = '#B5841A';
+  ctxCtrl.lineWidth = 2;
+  ctxCtrl.beginPath();
+  let first2 = true;
+  for (const s of SIM.buffer) {
+    if (s.t < tMin) continue;
+    const x = tToX2(s.t);
+    const y = mToY(s.m);
+    if (first2) { ctxCtrl.moveTo(x, y); first2 = false; }
+    else ctxCtrl.lineTo(x, y);
+  }
+  ctxCtrl.stroke();
+
+  // Cursor "AHORA" también en gráfica de m
+  if (SIM.speedMul < 1.0 && SIM.buffer.length > 0) {
+    const tNowReal = SIM.buffer[SIM.buffer.length - 1].t;
+    const xNow = tToX2(tNowReal);
+    if (xNow > padL2 && xNow < W2 - padR2) {
+      ctxCtrl.strokeStyle = SIM.paused ? '#B5341E' : '#7A736A';
+      ctxCtrl.lineWidth = SIM.paused ? 1.5 : 1;
+      ctxCtrl.setLineDash(SIM.paused ? [] : [3, 3]);
+      ctxCtrl.beginPath();
+      ctxCtrl.moveTo(xNow, padT2);
+      ctxCtrl.lineTo(xNow, H2 - padB2);
+      ctxCtrl.stroke();
+      ctxCtrl.setLineDash([]);
+    }
+  }
+}
+
+// =========================================================================
+//   PULSO ANIMADO EN EL DIAGRAMA (indica que hay error)
+// =========================================================================
+const errPulse = document.getElementById('errPulse');
+const pertLabel = document.getElementById('pertLabel');
+const pertLine = document.getElementById('pertLine');
+const pertArrow = document.getElementById('pertArrow');
+
+function renderDiagram() {
+  // El "pulso" del error es proporcional al error normalizado
+  const errNorm = Math.min(1, Math.abs(SIM.e) / 1500);
+  const r = 2 + errNorm * 5;
+  errPulse.setAttribute('r', r);
+  errPulse.setAttribute('opacity', 0.3 + errNorm * 0.6);
+
+  // Resaltar perturbación cuando está activa
+  if (SIM.pert > 0) {
+    pertLabel.setAttribute('fill', '#B5341E');
+    pertLine.setAttribute('stroke', '#B5341E');
+    pertLine.setAttribute('stroke-width', '1.6');
+    pertArrow.setAttribute('fill', '#B5341E');
+  } else {
+    pertLabel.setAttribute('fill', '#7A736A');
+    pertLine.setAttribute('stroke', '#7A736A');
+    pertLine.setAttribute('stroke-width', '1');
+    pertArrow.setAttribute('fill', '#7A736A');
+  }
+}
+
+// =========================================================================
+//   LOOP PRINCIPAL
+// =========================================================================
+let lastTimestamp = 0;
+let accumulator = 0;
+
+function loop(timestamp) {
+  const deltaMs = lastTimestamp ? (timestamp - lastTimestamp) : 16;
+  lastTimestamp = timestamp;
+  const deltaSec = Math.min(deltaMs / 1000, 0.1); // cap
+
+  // Avanzar simulación a paso fijo dt, modulado por speedMul (0=pausa)
+  // Cuando speedMul=0, el accumulator no crece y no se ejecuta step().
+  // El render sigue activo (las gráficas se siguen redibujando con el último estado).
+  accumulator += deltaSec * SIM.speedMul;
+  while (accumulator >= SIM.dt) {
+    step();
+    updateNarration();
+    accumulator -= SIM.dt;
+  }
+
+  // El ventilador también se ralentiza con la simulación
+  renderFan(deltaSec * SIM.speedMul);
+  renderReadouts();
+  renderGraphs();
+  renderDiagram();
+
+  requestAnimationFrame(loop);
+}
+
+// =========================================================================
+//   CONTROLES UI
+// =========================================================================
+const sldRef = document.getElementById('sldRef');
+const sldKp = document.getElementById('sldKp');
+const sldKi = document.getElementById('sldKi');
+const lblRef = document.getElementById('lblRef');
+const lblKp = document.getElementById('lblKp');
+const lblKi = document.getElementById('lblKi');
+const ctrlKi = document.getElementById('ctrlKi');
+const modoP = document.getElementById('modoP');
+const modoPI = document.getElementById('modoPI');
+const btnPert = document.getElementById('btnPert');
+const btnReset = document.getElementById('btnReset');
+
+sldRef.addEventListener('input', () => {
+  SIM.ref = parseFloat(sldRef.value);
+  lblRef.textContent = SIM.ref.toFixed(2);
+});
+
+sldKp.addEventListener('input', () => {
+  SIM.Kp = parseFloat(sldKp.value);
+  lblKp.textContent = SIM.Kp.toFixed(2);
+});
+
+sldKi.addEventListener('input', () => {
+  SIM.Ki = parseFloat(sldKi.value);
+  lblKi.textContent = SIM.Ki.toFixed(2);
+});
+
+// Toggle Modo P / PI
+function setModo(nuevoModo) {
+  SIM.modo = nuevoModo;
+  if (nuevoModo === 'P') {
+    modoP.classList.add('on');
+    modoPI.classList.remove('on');
+    ctrlKi.classList.add('disabled');
+    SIM.I = 0;
+  } else {
+    modoPI.classList.add('on');
+    modoP.classList.remove('on');
+    ctrlKi.classList.remove('disabled');
+  }
+}
+modoP.addEventListener('click', () => setModo('P'));
+modoPI.addEventListener('click', () => setModo('PI'));
+
+btnPert.addEventListener('click', () => {
+  if (SIM.pert > 0) {
+    SIM.pert = 0;
+    btnPert.classList.remove('active');
+    btnPert.textContent = 'Carga extra';
+  } else {
+    SIM.pert = SIM.pertAmp;
+    btnPert.classList.add('active');
+    btnPert.textContent = 'Quitar carga';
+  }
+});
+
+btnReset.addEventListener('click', () => {
+  SIM.y = 0;
+  SIM.v = 0;
+  SIM.I = 0;
+  SIM.m = 0;
+  SIM.e = SIM.ref;
+  SIM.t = 0;
+  SIM.fanAngle = 0;
+  SIM.buffer = [];
+  SIM.pert = 0;
+  inicializarPaquetes();
+  btnPert.classList.remove('active');
+  btnPert.textContent = 'Carga extra';
+  NARR.fase = 'parado';
+  NARR.estableCounter = 0;
+  NARR.pertWasActive = false;
+  NARR.ultimaV = 0;
+  NARR.ultimaY = 0;
+  NARR.ultimaRef = SIM.ref;
+  NARR.ultimaKp = SIM.Kp;
+  NARR.ultimaKi = SIM.Ki;
+  NARR.ultimoModo = SIM.modo;
+  setNarr('parado',
+    `Sistema reiniciado en modo <strong>${SIM.modo}</strong>. La cinta está parada y la consigna pide <strong>${SIM.ref.toFixed(2)} m/s</strong>.`,
+    'Recomendado: pulsa <code>¼×</code> o <code>½×</code> para ver con calma cómo se construye la respuesta. Y prueba a alternar entre P y PI durante el régimen permanente.'
+  );
+  NARR.fase = 'parado';
+});
+
+// =========================================================================
+//   CONTROLES DE VELOCIDAD Y PAUSA
+// =========================================================================
+const spdPause = document.getElementById('spdPause');
+const spdStep = document.getElementById('spdStep');
+const spd025 = document.getElementById('spd025');
+const spd050 = document.getElementById('spd050');
+const spd1   = document.getElementById('spd1');
+const speedBtns = [spdPause, spd025, spd050, spd1];
+
+function setSpeed(mul, btn) {
+  SIM.speedMul = mul;
+  SIM.paused = (mul === 0);
+  speedBtns.forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  spdStep.disabled = !SIM.paused;
+  // Vaciar el accumulator al cambiar de velocidad para no arrastrar tiempo acumulado
+  accumulator = 0;
+  // Actualizar status del header
+  const statusText = document.getElementById('statusText');
+  const statusDot = document.querySelector('.status .dot');
+  if (mul === 0) {
+    statusText.textContent = 'PAUSADO';
+    statusDot.style.background = 'var(--error)';
+    statusDot.style.animation = 'none';
+  } else if (mul === 1) {
+    statusText.textContent = 'EN MARCHA';
+    statusDot.style.background = 'var(--output)';
+    statusDot.style.animation = 'pulse 1.6s ease-in-out infinite';
+  } else {
+    statusText.textContent = 'CÁMARA LENTA · ' + (mul === 0.25 ? '¼×' : '½×');
+    statusDot.style.background = 'var(--control)';
+    statusDot.style.animation = 'pulse 1.6s ease-in-out infinite';
+  }
+}
+
+spdPause.addEventListener('click', () => setSpeed(0, spdPause));
+spd025.addEventListener('click',  () => setSpeed(0.25, spd025));
+spd050.addEventListener('click',  () => setSpeed(0.5, spd050));
+spd1.addEventListener('click',    () => setSpeed(1.0, spd1));
+
+// Paso a paso: avanza ~0.1 s (5 pasos de dt=0.02) cuando está en pausa
+spdStep.addEventListener('click', () => {
+  if (!SIM.paused) return;
+  for (let i = 0; i < 5; i++) {
+    step();
+    updateNarration();
+  }
+  // El ventilador avanza visualmente esos 0.1 s
+  SIM.fanAngle += SIM.y * 6 * 0.18 * 0.1;
+  SIM.fanAngle %= 360;
+});
+
+// Arrancar
+requestAnimationFrame(loop);
+
+</script>
+
+</body>
+</html>

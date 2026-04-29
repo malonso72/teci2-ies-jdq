@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bloque F · Sensores y Actuadores · TECI II PEvAU 2025-26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --azul:#1e3a8a; --azul-2:#2563eb; --azul-3:#3b82f6; --azul-bg:#eff6ff;
+  --naranja:#ea580c; --naranja-2:#f97316; --naranja-bg:#fff7ed;
+  --gris-1:#f8fafc; --gris-2:#e2e8f0; --gris-3:#94a3b8; --gris-4:#475569; --gris-5:#1e293b;
+  --verde:#16a34a; --verde-bg:#f0fdf4;
+  --rojo:#dc2626;
+  --header-h:64px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:'Barlow',system-ui,sans-serif;background:var(--gris-1);color:var(--gris-5);overflow:hidden}
+body{display:flex;flex-direction:column}
+
+/* HEADER */
+header{
+  height:var(--header-h);
+  background:linear-gradient(135deg,var(--azul) 0%,var(--azul-2) 100%);
+  color:#fff;display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px;box-shadow:0 2px 12px rgba(30,58,138,.25);z-index:50;flex-shrink:0;
+}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-mark{
+  width:38px;height:38px;border-radius:8px;background:var(--naranja);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Barlow Condensed';font-weight:800;font-size:18px;letter-spacing:.5px;
+}
+.brand-text{font-family:'Barlow Condensed';font-weight:600;letter-spacing:.5px}
+.brand-text .t1{font-size:18px;line-height:1}
+.brand-text .t2{font-size:12px;opacity:.85;text-transform:uppercase;letter-spacing:1px}
+.progress-wrap{flex:1;max-width:360px;margin:0 32px}
+.progress-bar{height:4px;background:rgba(255,255,255,.2);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--naranja);width:0%;transition:width .3s ease}
+.slide-counter{font-family:'JetBrains Mono';font-size:13px;opacity:.9;min-width:70px;text-align:right}
+
+/* MAIN */
+main{flex:1;position:relative;overflow:hidden}
+.slide{
+  position:absolute;inset:0;padding:36px 48px 80px;
+  overflow-y:auto;display:none;animation:fadeIn .35s ease;
+}
+.slide.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* TIPOGRAFÍA SLIDES */
+.eyebrow{
+  font-family:'Barlow Condensed';font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--naranja);font-size:14px;margin-bottom:8px;
+}
+h1.slide-title{
+  font-family:'Barlow Condensed';font-weight:700;font-size:42px;line-height:1.1;
+  color:var(--azul);margin-bottom:8px;
+}
+h2.slide-subtitle{
+  font-family:'Barlow';font-weight:500;font-size:18px;color:var(--gris-4);margin-bottom:24px;
+}
+h3{font-family:'Barlow Condensed';font-weight:700;font-size:24px;color:var(--azul);margin:18px 0 10px}
+p{font-size:15px;line-height:1.55;margin-bottom:12px;color:var(--gris-5)}
+.lead{font-size:17px;color:var(--gris-4)}
+strong{color:var(--azul);font-weight:600}
+code{font-family:'JetBrains Mono';font-size:13px;background:var(--gris-2);padding:2px 6px;border-radius:4px}
+
+/* PORTADA */
+.cover{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;min-height:calc(100vh - var(--header-h));padding:48px;
+  background:radial-gradient(ellipse at top,#f1f5f9 0%,#fff 60%);
+  margin:-36px -48px -80px;
+}
+.cover-tag{
+  font-family:'Barlow Condensed';font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--naranja);font-size:15px;margin-bottom:18px;
+}
+.cover h1{
+  font-family:'Barlow Condensed';font-weight:700;font-size:74px;line-height:1;
+  color:var(--azul);max-width:900px;margin-bottom:14px;
+}
+.cover .accent-line{width:120px;height:5px;background:var(--naranja);margin:18px auto;border-radius:3px}
+.cover h2{font-family:'Barlow';font-weight:400;font-size:24px;color:var(--gris-4);margin-bottom:36px;max-width:760px}
+.cover-meta{
+  display:flex;gap:48px;margin-top:28px;font-family:'Barlow';font-size:14px;color:var(--gris-4);
+  flex-wrap:wrap;justify-content:center;
+}
+.cover-meta>div{text-align:center;padding:0 18px}
+.cover-meta .label{font-family:'Barlow Condensed';font-weight:600;text-transform:uppercase;letter-spacing:1.5px;font-size:11px;color:var(--naranja);margin-bottom:4px}
+.cover-bottom{margin-top:48px;font-size:13px;color:var(--gris-3);font-family:'Barlow Condensed';letter-spacing:1px}
+
+/* ÍNDICE */
+.toc{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.toc-card{
+  background:#fff;border-left:4px solid var(--azul-2);padding:18px 20px;border-radius:6px;
+  box-shadow:0 1px 4px rgba(0,0,0,.06);cursor:pointer;transition:all .2s;
+}
+.toc-card:hover{transform:translateX(4px);box-shadow:0 4px 12px rgba(0,0,0,.1);border-left-color:var(--naranja)}
+.toc-card .num{font-family:'JetBrains Mono';font-size:12px;color:var(--naranja);font-weight:600}
+.toc-card .ttl{font-family:'Barlow Condensed';font-weight:700;font-size:18px;color:var(--azul);margin:2px 0 6px}
+.toc-card .desc{font-size:13px;color:var(--gris-4);line-height:1.4}
+
+/* SECCIÓN SEPARADORA */
+.section-divider{
+  min-height:calc(100vh - var(--header-h));
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  padding-left:80px;background:linear-gradient(135deg,var(--azul) 0%,var(--azul-2) 100%);color:#fff;
+  margin:-36px -48px -80px;
+  position:relative;
+}
+.section-divider .num{
+  font-family:'Barlow Condensed';font-weight:800;font-size:200px;line-height:.8;
+  color:rgba(255,255,255,.15);position:absolute;right:80px;bottom:40px;
+}
+.section-divider .label{
+  font-family:'Barlow Condensed';font-weight:700;letter-spacing:4px;text-transform:uppercase;
+  color:var(--naranja-2);font-size:16px;margin-bottom:14px;
+}
+.section-divider h1{
+  font-family:'Barlow Condensed';font-weight:700;font-size:96px;line-height:1;color:#fff;margin-bottom:18px;
+}
+.section-divider p{font-size:20px;color:rgba(255,255,255,.85);max-width:640px;line-height:1.5}
+
+/* DIAGRAMA LAZO */
+.lazo-svg{width:100%;max-width:780px;margin:14px 0 18px;display:block}
+.lazo-svg .block{fill:#fff;stroke:var(--gris-3);stroke-width:1.5}
+.lazo-svg .block-label{font-family:'Barlow Condensed';font-weight:700;font-size:18px;fill:var(--azul);text-anchor:middle}
+.lazo-svg .signal-label{font-family:'JetBrains Mono';font-size:13px;fill:var(--gris-4);font-weight:600}
+.lazo-svg .arrow{stroke:var(--gris-4);stroke-width:1.8;fill:none}
+.lazo-svg .highlight{fill:var(--naranja-bg);stroke:var(--naranja);stroke-width:2.5}
+.lazo-svg .highlight-label{fill:var(--naranja)}
+.lazo-svg .comparator{fill:#fff;stroke:var(--gris-3);stroke-width:1.5}
+.lazo-svg .sign{font-family:'Barlow';font-weight:700;font-size:14px;fill:var(--gris-5);text-anchor:middle}
+
+/* TARJETAS */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:14px}
+.card{
+  background:#fff;border-radius:8px;padding:14px;border:1px solid var(--gris-2);
+  cursor:pointer;transition:all .2s;position:relative;min-height:130px;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.08);border-color:var(--azul-3)}
+.card.expanded{border-color:var(--naranja);box-shadow:0 6px 16px rgba(234,88,12,.15)}
+.card.has-image{padding:0}
+.card.has-image .card-thumb{
+  width:100%;aspect-ratio:1/1;background:#f8fafc;background-size:cover;background-position:center;
+  border-bottom:1px solid var(--gris-2);position:relative;
+}
+.card.has-image .card-thumb::after{
+  content:'🔍';position:absolute;bottom:6px;right:6px;background:rgba(30,58,138,.85);color:#fff;
+  width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:11px;opacity:0;transition:opacity .2s;
+}
+.card.has-image:hover .card-thumb::after{opacity:1}
+.card.has-image .card-body{padding:12px 14px 14px;flex:1;display:flex;flex-direction:column}
+.card-name{font-family:'Barlow Condensed';font-weight:700;font-size:17px;color:var(--azul);margin-bottom:4px;line-height:1.15}
+.card-magnitude{font-size:11px;color:var(--naranja);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.card-desc{font-size:12.5px;line-height:1.4;color:var(--gris-4);flex:1}
+.card-detail{
+  font-size:12.5px;line-height:1.5;color:var(--gris-5);margin-top:10px;padding-top:10px;
+  border-top:1px dashed var(--gris-2);display:none;
+}
+.card.expanded .card-detail{display:block}
+.card-tag{
+  display:inline-block;background:var(--azul-bg);color:var(--azul);font-size:10px;
+  padding:2px 7px;border-radius:10px;margin-top:6px;font-weight:600;align-self:flex-start;
+  text-transform:uppercase;letter-spacing:.5px;
+}
+.card-tag.clave{background:#fee2e2;color:#991b1b}
+.card-tag.clave::before{content:'● ';color:#dc2626}
+.card-tag.frecuente{background:var(--naranja-bg);color:var(--naranja)}
+.card-tag.frecuente::before{content:'● ';color:#f97316}
+.card-tag.ampliacion{background:#f1f5f9;color:#64748b}
+.card-tag.ampliacion::before{content:'○ ';color:#94a3b8}
+.card-tag.pevau{background:var(--naranja-bg);color:var(--naranja)} /* compat */
+
+/* MODAL LIGHTBOX */
+.lightbox{
+  position:fixed;inset:0;background:rgba(15,23,42,.92);z-index:200;
+  display:none;align-items:center;justify-content:center;padding:30px;
+  animation:fadeIn .2s ease;
+}
+.lightbox.open{display:flex}
+.lightbox-img{
+  max-width:min(95vw,900px);max-height:90vh;border-radius:8px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);object-fit:contain;
+}
+.lightbox-close{
+  position:absolute;top:20px;right:24px;background:rgba(255,255,255,.15);color:#fff;
+  border:none;width:42px;height:42px;border-radius:50%;font-size:22px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:background .15s;
+}
+.lightbox-close:hover{background:rgba(255,255,255,.3)}
+.lightbox-caption{
+  position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:#fff;
+  font-family:'Barlow Condensed';font-weight:600;font-size:14px;letter-spacing:1px;
+  text-transform:uppercase;opacity:.8;
+}
+.lightbox-nav{
+  position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);color:#fff;
+  border:none;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:background .15s;
+}
+.lightbox-nav:hover{background:rgba(255,255,255,.3)}
+.lightbox-prev{left:20px}
+.lightbox-next{right:20px}
+
+/* FILTROS */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}
+.filter-btn{
+  font-family:'Barlow Condensed';font-weight:600;font-size:14px;letter-spacing:.5px;
+  padding:7px 16px;border:1.5px solid var(--gris-2);background:#fff;color:var(--gris-4);
+  border-radius:18px;cursor:pointer;transition:all .15s;text-transform:uppercase;
+}
+.filter-btn:hover{border-color:var(--azul-3);color:var(--azul)}
+.filter-btn.active{background:var(--azul);color:#fff;border-color:var(--azul)}
+
+/* TABLA RESUMEN */
+.table-wrap{margin-top:14px;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead{background:var(--azul);color:#fff}
+thead th{
+  font-family:'Barlow Condensed';font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+  font-size:13px;padding:10px 14px;text-align:left;
+}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--gris-2)}
+tbody tr:hover{background:var(--azul-bg)}
+tbody tr.hidden{display:none}
+.cat-pill{
+  display:inline-block;font-family:'Barlow Condensed';font-weight:600;font-size:11px;
+  padding:2px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:.5px;
+}
+.cat-posicion{background:#dbeafe;color:#1e40af}
+.cat-velocidad{background:#fef3c7;color:#92400e}
+.cat-temperatura{background:#fee2e2;color:#991b1b}
+.cat-presion{background:#e0e7ff;color:#3730a3}
+.cat-luz{background:#fef9c3;color:#854d0e}
+.cat-electrico{background:#dbeafe;color:#1e40af}
+.cat-fluido{background:#cffafe;color:#155e75}
+.cat-termico{background:#fee2e2;color:#991b1b}
+.cat-otro{background:#f3f4f6;color:#4b5563}
+
+/* QUIZ EMPAREJAR */
+.quiz-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:14px}
+.quiz-col h4{font-family:'Barlow Condensed';font-weight:700;font-size:16px;text-transform:uppercase;letter-spacing:1px;color:var(--gris-4);margin-bottom:10px}
+.quiz-item{
+  background:#fff;border:2px solid var(--gris-2);border-radius:6px;padding:10px 14px;
+  margin-bottom:8px;cursor:pointer;font-family:'Barlow';font-size:14px;font-weight:500;
+  transition:all .15s;user-select:none;
+}
+.quiz-item:hover{border-color:var(--azul-3)}
+.quiz-item.selected{border-color:var(--naranja);background:var(--naranja-bg);color:var(--naranja)}
+.quiz-item.matched{border-color:var(--verde);background:var(--verde-bg);color:#15803d;cursor:default;opacity:.85}
+.quiz-item.matched::after{content:" ✓";font-weight:700}
+.quiz-item.wrong{animation:shake .35s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.quiz-status{
+  margin-top:14px;padding:10px 14px;border-radius:6px;font-size:14px;font-weight:600;
+  background:var(--azul-bg);color:var(--azul);text-align:center;
+}
+.quiz-status.complete{background:var(--verde-bg);color:#15803d}
+.quiz-reset{
+  font-family:'Barlow Condensed';font-weight:600;font-size:13px;background:transparent;
+  border:1.5px solid var(--gris-3);color:var(--gris-4);padding:6px 14px;border-radius:14px;
+  cursor:pointer;margin-left:10px;text-transform:uppercase;letter-spacing:.5px;
+}
+.quiz-reset:hover{border-color:var(--naranja);color:var(--naranja)}
+
+/* EJEMPLO PEvAU */
+.pevau-block{
+  background:#fff;border:1px solid var(--gris-2);border-radius:8px;padding:18px 22px;margin-bottom:12px;
+}
+.pevau-question{font-size:15px;line-height:1.5;margin-bottom:10px}
+.pevau-question .letter{
+  font-family:'Barlow Condensed';font-weight:700;color:var(--naranja);margin-right:6px;
+}
+.reveal-btn{
+  font-family:'Barlow Condensed';font-weight:600;font-size:13px;letter-spacing:.5px;text-transform:uppercase;
+  background:var(--azul);color:#fff;border:none;padding:7px 16px;border-radius:14px;cursor:pointer;
+  transition:background .15s;
+}
+.reveal-btn:hover{background:var(--azul-2)}
+.reveal-btn.opened{background:var(--gris-3)}
+.pevau-answer{
+  display:none;margin-top:10px;padding:12px 14px;background:var(--verde-bg);border-left:3px solid var(--verde);
+  border-radius:0 6px 6px 0;font-size:14px;line-height:1.5;color:#15803d;
+}
+.pevau-answer.show{display:block}
+.pevau-intro{
+  background:var(--naranja-bg);border-left:4px solid var(--naranja);padding:14px 18px;
+  border-radius:0 6px 6px 0;margin-bottom:18px;font-size:14px;line-height:1.5;
+}
+
+/* CIERRE */
+.closing-hero{
+  display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  min-height:calc(100vh - var(--header-h));padding:48px;background:linear-gradient(160deg,#fff 0%,var(--azul-bg) 100%);
+  margin:-36px -48px -80px;
+}
+.closing-hero h1{font-family:'Barlow Condensed';font-weight:700;font-size:56px;color:var(--azul);margin-bottom:14px;line-height:1.05}
+.key-points{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:900px;margin:30px 0 20px}
+.key-point{background:#fff;border-radius:8px;padding:18px 20px;text-align:left;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.key-point .kp-num{
+  font-family:'Barlow Condensed';font-weight:800;font-size:32px;color:var(--naranja);line-height:1;margin-bottom:6px;
+}
+.key-point .kp-text{font-size:14px;color:var(--gris-5);line-height:1.45}
+
+/* CONTROLS */
+.controls{
+  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+  display:flex;gap:8px;background:#fff;padding:8px 12px;border-radius:24px;box-shadow:0 4px 16px rgba(0,0,0,.12);z-index:40;
+}
+.ctrl-btn{
+  width:36px;height:36px;border-radius:50%;border:none;background:var(--gris-1);color:var(--azul);
+  font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;
+}
+.ctrl-btn:hover:not(:disabled){background:var(--azul);color:#fff}
+.ctrl-btn:disabled{opacity:.4;cursor:not-allowed}
+.ctrl-btn.home{background:var(--naranja-bg);color:var(--naranja)}
+.ctrl-btn.home:hover{background:var(--naranja);color:#fff}
+.kbd-hint{
+  position:absolute;bottom:24px;right:32px;font-family:'JetBrains Mono';font-size:11px;
+  color:var(--gris-3);z-index:40;
+}
+.kbd-hint kbd{background:#fff;border:1px solid var(--gris-2);border-radius:3px;padding:1px 5px;font-size:10px}
+
+/* RESPONSIVE menor */
+@media (max-width:760px){
+  .toc, .quiz-grid, .key-points{grid-template-columns:1fr}
+  .cover h1{font-size:48px}
+  h1.slide-title{font-size:32px}
+  .section-divider h1{font-size:64px}
+  .section-divider .num{font-size:140px}
+}
+</style>
+
+<!-- ═══ TECI II Cabecera global ═══ -->
+<style id="teci-header-style">
+.teci-hd{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(27,79,138,.12);font-family:'Barlow',system-ui,sans-serif;}
+.teci-hd .teci-lg{font-family:'Barlow Condensed','Barlow',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer;color:#fff;text-decoration:none;}
+.teci-hd .teci-lg:hover{opacity:.85;}
+.teci-hd .teci-sb{font-size:.72rem;opacity:.78;margin-left:10px;color:#fff;}
+.teci-hd .teci-home-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:8px;cursor:pointer;margin-left:auto;transition:background .15s;text-decoration:none;}
+.teci-hd .teci-home-btn:hover{background:rgba(255,255,255,.16);}
+.teci-navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;}
+.teci-navcross a,.teci-navcross span.teci-nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s;}
+.teci-navcross a{color:#23272F;background:#fff;border-color:#D8DDE5;}
+.teci-navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A;}
+.teci-navcross span.teci-nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default;}
+.teci-navcross .teci-nc-sep{color:#8C97A8;align-self:center;user-select:none;}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- ═══ TECI II Cabecera ═══ -->
+<div class="teci-hd">
+<a class="teci-lg" href="../../index.html">TECI II</a>
+<span class="teci-sb">🔍 Sensores y actuadores · Bloque F</span>
+<a href="../../index.html" class="teci-home-btn">🏠 Índice</a>
+</div>
+<nav class="teci-navcross" role="navigation" aria-label="Navegación transversal">
+<a href="../../index.html"><span>🏠</span><span>Índice</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../teoria/bloque_F.html"><span>📖</span><span>Teoría F</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../ejercicios/ej_F.html"><span>✏️</span><span>Ejercicios F</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../examenes/tipo_2025_26/ponencia/tipo_1A_2025_26.html"><span>📋</span><span>Exámenes</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../ponencia_resuelta/index_ponencia.html"><span>📚</span><span>Ponencia</span></a>
+<span class="teci-nc-sep">·</span>
+<span class="teci-nc-current"><span>🧰</span><span>Apoyo</span></span>
+</nav>
+
+
+<header>
+  <div class="brand">
+    <div class="brand-mark">F</div>
+    <div class="brand-text">
+      <div class="t1">BLOQUE F · Sistemas Automáticos</div>
+      <div class="t2">Sensores y Actuadores · TECI II PEvAU</div>
+    </div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+  <div class="slide-counter" id="slideCounter">01 / 23</div>
+</header>
+
+<main id="main">
+
+<!-- 1. PORTADA -->
+<section class="slide active">
+  <div class="cover">
+    <div class="cover-tag">Bloque F · Apartados 8 y 9</div>
+    <h1>Sensores y Actuadores</h1>
+    <div class="accent-line"></div>
+    <h2>Los componentes que permiten al sistema ver y actuar sobre el mundo físico</h2>
+    <div class="cover-meta">
+      <div><div class="label">Asignatura</div>Tecnología e Ingeniería II</div>
+      <div><div class="label">Curso</div>2.º Bachillerato · 2025–26</div>
+      <div><div class="label">Bloque PEvAU</div>F · Sistemas Automáticos</div>
+    </div>
+    <div class="cover-bottom">IES Jiménez de Quesada · Santa Fe, Granada · Prof. Manuel Alonso Herrera</div>
+  </div>
+</section>
+
+<!-- 2. ÍNDICE -->
+<section class="slide">
+  <div class="eyebrow">Contenidos</div>
+  <h1 class="slide-title">¿Qué vamos a ver?</h1>
+  <h2 class="slide-subtitle">Dos apartados, una idea común: los elementos físicos del lazo de control.</h2>
+
+  <div class="toc">
+    <div class="toc-card" onclick="goTo(2)">
+      <div class="num">APARTADO 8</div>
+      <div class="ttl">Sensores y transductores</div>
+      <div class="desc">Concepto, sensores de posición, velocidad, temperatura, presión, iluminación y humedad. Tabla resumen y mini-quiz de identificación.</div>
+    </div>
+    <div class="toc-card" onclick="goTo(12)">
+      <div class="num">APARTADO 9</div>
+      <div class="ttl">Actuadores</div>
+      <div class="desc">Concepto, motores eléctricos, cilindros, resistencias calefactoras, válvulas y otros. Ejemplo tipo PEvAU resuelto paso a paso.</div>
+    </div>
+    <div class="toc-card" style="border-left-color:#dc2626" onclick="goTo(21)">
+      <div class="num">⭐ TABLA ESENCIAL PEvAU</div>
+      <div class="ttl">Lo imprescindible</div>
+      <div class="desc">Si solo te aprendes esto, ya tienes la mayor parte resuelta. Etiquetas <span style="color:#dc2626">●</span>CLAVE / <span style="color:#f97316">●</span>FRECUENTE / <span style="color:#94a3b8">○</span>AMPLIACIÓN para priorizar el estudio.</div>
+    </div>
+    <div class="toc-card" style="border-left-color:var(--naranja)">
+      <div class="num">CÓMO USAR</div>
+      <div class="ttl">Navegación</div>
+      <div class="desc">Flechas <kbd>←</kbd> <kbd>→</kbd> del teclado o los botones inferiores. Las miniaturas de las fichas se amplían a tamaño real al pulsarlas; el quiz es interactivo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. SECCIÓN 8 -->
+<section class="slide">
+  <div class="section-divider" style="position:relative">
+    <div class="label">Apartado 8</div>
+    <h1>Sensores y<br>transductores</h1>
+    <p>Cómo el sistema mide la variable controlada y devuelve esa información al comparador.</p>
+    <div class="num">08</div>
+  </div>
+</section>
+
+<!-- 3.5 SLIDE PUENTE: dualidad sensor/actuador -->
+<section class="slide">
+  <div class="eyebrow">Idea-puente · Apartados 8 y 9</div>
+  <h1 class="slide-title">Sensor mide y(t), actuador ejecuta u(t)</h1>
+  <h2 class="slide-subtitle">Los dos componentes físicos que conectan el lazo de control con el mundo real.</h2>
+
+  <svg viewBox="0 0 980 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:920px;display:block;margin:14px auto 8px">
+    <!-- entrada r -->
+    <text x="20" y="135" font-family="JetBrains Mono" font-size="16" font-weight="600" fill="#475569">r(t)</text>
+    <line x1="50" y1="142" x2="118" y2="142" stroke="#475569" stroke-width="2" marker-end="url(#ar)"/>
+    <!-- comparador -->
+    <circle cx="135" cy="142" r="17" fill="#fff" stroke="#94a3b8" stroke-width="1.8"/>
+    <text x="135" y="148" font-family="Barlow" font-size="16" font-weight="700" text-anchor="middle">+</text>
+    <text x="135" y="180" font-family="Barlow" font-size="16" font-weight="700" text-anchor="middle">−</text>
+    <!-- e -->
+    <text x="170" y="135" font-family="JetBrains Mono" font-size="14" fill="#475569">e(t)</text>
+    <line x1="152" y1="142" x2="218" y2="142" stroke="#475569" stroke-width="2" marker-end="url(#ar)"/>
+    <!-- regulador -->
+    <rect x="218" y="115" width="100" height="54" rx="5" fill="#fff" stroke="#94a3b8" stroke-width="1.8"/>
+    <text x="268" y="148" font-family="Barlow Condensed" font-size="20" font-weight="700" fill="#1e3a8a" text-anchor="middle">Regulador</text>
+    <!-- u(t) DESTACADO -->
+    <text x="345" y="125" font-family="JetBrains Mono" font-size="16" font-weight="700" fill="#dc2626">u(t)</text>
+    <line x1="318" y1="142" x2="395" y2="142" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arr)"/>
+    <!-- actuador DESTACADO -->
+    <rect x="395" y="105" width="120" height="74" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5"/>
+    <text x="455" y="138" font-family="Barlow Condensed" font-size="22" font-weight="800" fill="#dc2626" text-anchor="middle">ACTUADOR</text>
+    <text x="455" y="162" font-family="Barlow" font-size="13" fill="#991b1b" text-anchor="middle">ejecuta u(t)</text>
+    <!-- planta -->
+    <line x1="515" y1="142" x2="565" y2="142" stroke="#475569" stroke-width="2" marker-end="url(#ar)"/>
+    <rect x="565" y="115" width="90" height="54" rx="5" fill="#fff" stroke="#94a3b8" stroke-width="1.8"/>
+    <text x="610" y="148" font-family="Barlow Condensed" font-size="20" font-weight="700" fill="#1e3a8a" text-anchor="middle">Planta</text>
+    <!-- y(t) DESTACADO -->
+    <text x="690" y="125" font-family="JetBrains Mono" font-size="16" font-weight="700" fill="#1e3a8a">y(t)</text>
+    <line x1="655" y1="142" x2="900" y2="142" stroke="#475569" stroke-width="2" marker-end="url(#ar)"/>
+    <line x1="800" y1="142" x2="800" y2="240" stroke="#475569" stroke-width="2"/>
+    <!-- sensor DESTACADO -->
+    <rect x="535" y="215" width="120" height="60" rx="6" fill="#dbeafe" stroke="#1e3a8a" stroke-width="2.5"/>
+    <text x="595" y="245" font-family="Barlow Condensed" font-size="22" font-weight="800" fill="#1e3a8a" text-anchor="middle">SENSOR</text>
+    <text x="595" y="265" font-family="Barlow" font-size="13" fill="#1e3a8a" text-anchor="middle">mide y(t)</text>
+    <line x1="800" y1="240" x2="655" y2="240" stroke="#475569" stroke-width="2" marker-end="url(#ar)"/>
+    <line x1="535" y1="240" x2="135" y2="240" stroke="#475569" stroke-width="2" marker-end="url(#ar)"/>
+    <line x1="135" y1="240" x2="135" y2="159" stroke="#475569" stroke-width="2"/>
+    <text x="335" y="232" font-family="JetBrains Mono" font-size="14" fill="#1e3a8a" font-weight="600">b(t) = H · y(t)</text>
+    <defs>
+      <marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+        <polygon points="0,0 8,4 0,8" fill="#475569"/>
+      </marker>
+      <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+        <polygon points="0,0 8,4 0,8" fill="#dc2626"/>
+      </marker>
+    </defs>
+  </svg>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:16px;max-width:920px">
+    <div style="background:#fee2e2;border-left:4px solid #dc2626;border-radius:0 6px 6px 0;padding:14px 18px">
+      <div style="font-family:'Barlow Condensed';font-weight:800;color:#991b1b;font-size:13px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px">Actuador → u(t)</div>
+      <p style="font-size:14px;color:#7f1d1d;margin:0;line-height:1.5">Recibe la señal de control <code style="background:#fff">u(t)</code> del regulador y la convierte en una <strong>acción física</strong> sobre la planta: calor, giro, fuerza, caudal, luz…</p>
+    </div>
+    <div style="background:#dbeafe;border-left:4px solid #1e3a8a;border-radius:0 6px 6px 0;padding:14px 18px">
+      <div style="font-family:'Barlow Condensed';font-weight:800;color:#1e3a8a;font-size:13px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px">Sensor → y(t)</div>
+      <p style="font-size:14px;color:#1e40af;margin:0;line-height:1.5">Mide la variable controlada <code style="background:#fff">y(t)</code> y devuelve la señal realimentada al comparador. Sin sensor no hay lazo cerrado.</p>
+    </div>
+  </div>
+
+  <div style="background:var(--gris-1);border:1px solid var(--gris-2);border-radius:8px;padding:12px 18px;margin-top:14px;max-width:920px;font-size:13.5px;color:var(--gris-4);line-height:1.5">
+    <strong style="color:var(--azul)">Cómo identificar el componente en un problema:</strong>
+    pregúntate qué <em>magnitud</em> hay que medir o sobre la que hay que actuar — eso fija la familia. Después justifica el componente concreto por sus características (precisión, contacto/no contacto, fuerza, tipo de señal…).
+  </div>
+</section>
+
+<!-- 4. 8.1 CONCEPTO -->
+<section class="slide">
+  <div class="eyebrow">8.1 · Concepto</div>
+  <h1 class="slide-title">¿Qué es un sensor?</h1>
+  <h2 class="slide-subtitle">Mide una magnitud física y la convierte en una señal utilizable por el sistema de control.</h2>
+
+  <p class="lead">En el lazo cerrado, el sensor se sitúa en la <strong>rama de realimentación</strong>: mide la variable controlada <code>c</code> y produce la señal <code>b = H · c</code> que vuelve al comparador.</p>
+
+  <svg class="lazo-svg" viewBox="0 0 780 240" xmlns="http://www.w3.org/2000/svg">
+    <!-- entrada r -->
+    <text x="20" y="92" class="signal-label">r</text>
+    <line x1="32" y1="100" x2="105" y2="100" class="arrow" marker-end="url(#a1)"/>
+    <!-- comparador -->
+    <circle cx="120" cy="100" r="15" class="comparator"/>
+    <text x="120" y="105" class="sign">+</text>
+    <text x="120" y="135" class="sign">−</text>
+    <!-- e -->
+    <text x="148" y="92" class="signal-label">e</text>
+    <line x1="135" y1="100" x2="200" y2="100" class="arrow" marker-end="url(#a1)"/>
+    <!-- regulador G1 -->
+    <rect x="200" y="75" width="90" height="50" rx="4" class="block"/>
+    <text x="245" y="105" class="block-label">G₁</text>
+    <text x="245" y="68" class="signal-label" text-anchor="middle">Regulador</text>
+    <!-- m -->
+    <text x="305" y="92" class="signal-label">m</text>
+    <line x1="290" y1="100" x2="355" y2="100" class="arrow" marker-end="url(#a1)"/>
+    <!-- planta G2 -->
+    <rect x="355" y="75" width="90" height="50" rx="4" class="block"/>
+    <text x="400" y="105" class="block-label">G₂</text>
+    <text x="400" y="68" class="signal-label" text-anchor="middle">Planta</text>
+    <!-- c -->
+    <text x="465" y="92" class="signal-label">c</text>
+    <line x1="445" y1="100" x2="650" y2="100" class="arrow" marker-end="url(#a1)"/>
+    <line x1="565" y1="100" x2="565" y2="180" class="arrow"/>
+    <!-- sensor H (DESTACADO) -->
+    <rect x="370" y="155" width="90" height="50" rx="4" class="block highlight"/>
+    <text x="415" y="185" class="block-label highlight-label">H</text>
+    <text x="415" y="148" class="signal-label" fill="#ea580c" text-anchor="middle" font-weight="700">SENSOR</text>
+    <line x1="565" y1="180" x2="460" y2="180" class="arrow" marker-end="url(#a1)"/>
+    <!-- b -->
+    <text x="350" y="174" class="signal-label" fill="#ea580c">b = H·c</text>
+    <line x1="370" y1="180" x2="120" y2="180" class="arrow" marker-end="url(#a1)"/>
+    <line x1="120" y1="180" x2="120" y2="115" class="arrow"/>
+    <defs>
+      <marker id="a1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+        <polygon points="0,0 8,4 0,8" fill="#475569"/>
+      </marker>
+    </defs>
+  </svg>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:6px">
+    <div>
+      <h3 style="font-size:18px;margin-top:4px">Magnitudes que mide</h3>
+      <p style="font-size:14px">Temperatura · posición · velocidad · presión · nivel · iluminación · humedad…</p>
+    </div>
+    <div>
+      <h3 style="font-size:18px;margin-top:4px">Sensor vs. transductor</h3>
+      <p style="font-size:14px">En sentido estricto, un transductor transforma una magnitud en otra; en la práctica se usan como sinónimos. El <em>captador</em> es el transductor situado en la realimentación.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. 8.2 POSICIÓN/PROXIMIDAD -->
+<section class="slide">
+  <div class="eyebrow">8.2 · Sensores de posición y proximidad</div>
+  <h1 class="slide-title">¿Dónde está? ¿Hay algo cerca?</h1>
+  <h2 class="slide-subtitle">Pulsa cualquier tarjeta para desplegar su detalle.</h2>
+
+  <div class="cards-grid" id="cards-pos"></div>
+</section>
+
+<!-- 6. 8.3 VELOCIDAD -->
+<section class="slide">
+  <div class="eyebrow">8.3 · Sensores de velocidad</div>
+  <h1 class="slide-title">¿A qué velocidad gira?</h1>
+  <h2 class="slide-subtitle">Aplicaciones típicas: control de motores, maquinaria, sistemas de transporte.</h2>
+
+  <div class="cards-grid" id="cards-vel"></div>
+</section>
+
+<!-- 7. 8.4 TEMPERATURA -->
+<section class="slide">
+  <div class="eyebrow">8.4 · Sensores de temperatura</div>
+  <h1 class="slide-title">¿Cuánto se calienta?</h1>
+  <h2 class="slide-subtitle">De los termistores domésticos al pirómetro sin contacto para hornos.</h2>
+
+  <div class="cards-grid" id="cards-temp"></div>
+</section>
+
+<!-- 8. 8.5 PRESIÓN/FUERZA -->
+<section class="slide">
+  <div class="eyebrow">8.5 · Sensores de presión y fuerza</div>
+  <h1 class="slide-title">¿Cuánta fuerza? ¿Qué presión?</h1>
+  <h2 class="slide-subtitle">Desde sensores eléctricos modernos hasta los clásicos manómetros mecánicos.</h2>
+
+  <div class="cards-grid" id="cards-pres"></div>
+</section>
+
+<!-- 9. 8.6 ILUMINACIÓN/HUMEDAD -->
+<section class="slide">
+  <div class="eyebrow">8.6 · Sensores de iluminación y humedad</div>
+  <h1 class="slide-title">¿Hay luz? ¿Está húmedo? ¿Cuánto fluye?</h1>
+  <h2 class="slide-subtitle">Domótica, agricultura, comunicaciones ópticas, fluidos.</h2>
+
+  <div class="cards-grid" id="cards-lum"></div>
+</section>
+
+<!-- 10. 8.7 TABLA RESUMEN -->
+<section class="slide">
+  <div class="eyebrow">8.7 · Tabla resumen</div>
+  <h1 class="slide-title">Todos los sensores de un vistazo</h1>
+  <h2 class="slide-subtitle">Filtra por categoría para repasar por bloques.</h2>
+
+  <div class="filters" id="filters-sens">
+    <button class="filter-btn active" data-cat="all">Todos</button>
+    <button class="filter-btn" data-cat="posicion">Posición</button>
+    <button class="filter-btn" data-cat="velocidad">Velocidad</button>
+    <button class="filter-btn" data-cat="temperatura">Temperatura</button>
+    <button class="filter-btn" data-cat="presion">Presión</button>
+    <button class="filter-btn" data-cat="luz">Luz / humedad</button>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Sensor</th><th>Magnitud</th><th>Categoría</th><th>Salida</th><th>Aplicación típica</th></tr></thead>
+      <tbody id="tbody-sens"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 11. QUIZ -->
+<section class="slide">
+  <div class="eyebrow">Repaso interactivo</div>
+  <h1 class="slide-title">Empareja magnitud con sensor</h1>
+  <h2 class="slide-subtitle">Pulsa una magnitud (izquierda) y luego un sensor (derecha). Verde = correcto.</h2>
+
+  <div class="quiz-grid">
+    <div class="quiz-col">
+      <h4>Magnitud / aplicación</h4>
+      <div id="quiz-left"></div>
+    </div>
+    <div class="quiz-col">
+      <h4>Sensor adecuado</h4>
+      <div id="quiz-right"></div>
+    </div>
+  </div>
+  <div class="quiz-status" id="quiz-status">
+    Aciertos: 0 / 6
+    <button class="quiz-reset" onclick="resetQuiz()">Reiniciar</button>
+  </div>
+</section>
+
+<!-- 12. SECCIÓN 9 -->
+<section class="slide">
+  <div class="section-divider" style="position:relative">
+    <div class="label">Apartado 9</div>
+    <h1>Actuadores</h1>
+    <p>Cómo el sistema convierte la señal de control en una acción física real sobre la planta.</p>
+    <div class="num">09</div>
+  </div>
+</section>
+
+<!-- 13. 9.1 CONCEPTO -->
+<section class="slide">
+  <div class="eyebrow">9.1 · Concepto</div>
+  <h1 class="slide-title">¿Qué es un actuador?</h1>
+  <h2 class="slide-subtitle">Transforma la señal de control <code>m(t)</code> del regulador en una acción física sobre la planta.</h2>
+
+  <p class="lead">El actuador se sitúa <strong>entre el regulador y la planta</strong>. En muchos esquemas se considera incorporado al bloque <code>G₂</code> de la planta, pero físicamente es un componente independiente y fundamental.</p>
+
+  <svg class="lazo-svg" viewBox="0 0 780 240" xmlns="http://www.w3.org/2000/svg">
+    <text x="20" y="92" class="signal-label">r</text>
+    <line x1="32" y1="100" x2="105" y2="100" class="arrow" marker-end="url(#a2)"/>
+    <circle cx="120" cy="100" r="15" class="comparator"/>
+    <text x="120" y="105" class="sign">+</text>
+    <text x="120" y="135" class="sign">−</text>
+    <text x="148" y="92" class="signal-label">e</text>
+    <line x1="135" y1="100" x2="200" y2="100" class="arrow" marker-end="url(#a2)"/>
+    <rect x="200" y="75" width="90" height="50" rx="4" class="block"/>
+    <text x="245" y="105" class="block-label">G₁</text>
+    <text x="245" y="68" class="signal-label" text-anchor="middle">Regulador</text>
+    <text x="305" y="92" class="signal-label">m</text>
+    <line x1="290" y1="100" x2="355" y2="100" class="arrow" marker-end="url(#a2)"/>
+    <!-- ACTUADOR DESTACADO -->
+    <rect x="355" y="75" width="100" height="50" rx="4" class="block highlight"/>
+    <text x="405" y="105" class="block-label highlight-label">ACTUADOR</text>
+    <text x="405" y="68" class="signal-label" fill="#ea580c" text-anchor="middle" font-weight="700">actúa físicamente</text>
+    <line x1="455" y1="100" x2="510" y2="100" class="arrow" marker-end="url(#a2)"/>
+    <rect x="510" y="75" width="90" height="50" rx="4" class="block"/>
+    <text x="555" y="105" class="block-label">Planta</text>
+    <text x="615" y="92" class="signal-label">c</text>
+    <line x1="600" y1="100" x2="700" y2="100" class="arrow" marker-end="url(#a2)"/>
+    <line x1="660" y1="100" x2="660" y2="180" class="arrow"/>
+    <rect x="395" y="155" width="80" height="40" rx="4" class="block"/>
+    <text x="435" y="180" class="block-label">H</text>
+    <line x1="660" y1="180" x2="475" y2="180" class="arrow" marker-end="url(#a2)"/>
+    <line x1="395" y1="180" x2="120" y2="180" class="arrow" marker-end="url(#a2)"/>
+    <line x1="120" y1="180" x2="120" y2="115" class="arrow"/>
+    <defs>
+      <marker id="a2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+        <polygon points="0,0 8,4 0,8" fill="#475569"/>
+      </marker>
+    </defs>
+  </svg>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px">
+    <div style="background:#fff;padding:14px;border-radius:8px;border-left:3px solid var(--azul-2)">
+      <div style="font-family:'Barlow Condensed';font-weight:700;color:var(--azul);font-size:16px;margin-bottom:4px">CALEFACCIÓN</div>
+      <div style="font-size:13px;color:var(--gris-4)">Resistencia eléctrica que produce calor.</div>
+    </div>
+    <div style="background:#fff;padding:14px;border-radius:8px;border-left:3px solid var(--azul-2)">
+      <div style="font-family:'Barlow Condensed';font-weight:700;color:var(--azul);font-size:16px;margin-bottom:4px">VELOCIDAD MOTOR</div>
+      <div style="font-size:13px;color:var(--gris-4)">El propio motor eléctrico es el actuador.</div>
+    </div>
+    <div style="background:#fff;padding:14px;border-radius:8px;border-left:3px solid var(--azul-2)">
+      <div style="font-family:'Barlow Condensed';font-weight:700;color:var(--azul);font-size:16px;margin-bottom:4px">CIRCUITO HIDRÁULICO</div>
+      <div style="font-size:13px;color:var(--gris-4)">Válvula que regula el caudal del fluido.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 14. 9.2 MOTORES -->
+<section class="slide">
+  <div class="eyebrow">9.2 · Motores eléctricos</div>
+  <h1 class="slide-title">Energía eléctrica → movimiento de rotación</h1>
+  <h2 class="slide-subtitle">Cuatro tipos principales según la aplicación.</h2>
+
+  <div class="cards-grid" id="cards-motor"></div>
+</section>
+
+<!-- 15. 9.3 CILINDROS -->
+<section class="slide">
+  <div class="eyebrow">9.3 · Cilindros neumáticos e hidráulicos</div>
+  <h1 class="slide-title">Fluido a presión → movimiento lineal</h1>
+  <h2 class="slide-subtitle">Mismo principio, dos fluidos, dos rangos de fuerza muy distintos.</h2>
+
+  <div class="cards-grid" id="cards-cil"></div>
+
+  <div style="margin-top:18px;background:var(--azul-bg);border-left:4px solid var(--azul-2);padding:14px 18px;border-radius:0 6px 6px 0;font-size:14px;line-height:1.55">
+    <strong>Pista de examen:</strong> en cilindros se aplica directamente <code>F = p · S</code> (Bloque C3). El cilindro como actuador en el Bloque F suele aparecer en lazos donde una válvula regula el aire/aceite que llega al cilindro.
+  </div>
+</section>
+
+<!-- 16. 9.4 RESISTENCIAS -->
+<section class="slide">
+  <div class="eyebrow">9.4 · Resistencias calefactoras</div>
+  <h1 class="slide-title">Energía eléctrica → energía térmica</h1>
+  <h2 class="slide-subtitle">Efecto Joule. La potencia térmica depende de la señal de control aplicada.</h2>
+
+  <div style="display:grid;grid-template-columns:1fr 0.85fr 1fr;gap:20px;margin-top:18px;align-items:start">
+    <div>
+      <h3>Funcionamiento</h3>
+      <p>Cuando una corriente eléctrica atraviesa una resistencia, se disipa calor por <strong>efecto Joule</strong>. Variando la señal de control <code>m(t)</code> que llega a la resistencia (tensión, corriente, ciclo de trabajo PWM…), se modifica la potencia térmica generada y, por tanto, la temperatura del sistema.</p>
+
+      <h3>Dónde se usa</h3>
+      <p>Sistemas de calefacción doméstica, hornos eléctricos industriales, termos eléctricos, secadoras, sistemas de climatización industrial, hornos de mufla, planchas, soldadores, tostadoras…</p>
+
+      <h3>En el lazo de control</h3>
+      <p>Es el actuador típico cuando la <em>variable controlada es la temperatura</em>. Casi siempre va emparejado con un sensor de temperatura (termistor, termopar, RTD…) en la realimentación.</p>
+    </div>
+    <div>
+      <div class="card has-image" style="cursor:pointer" onclick="openLightboxByName('resistencia','Resistencia calefactora','Energía → calor')">
+        <div class="card-thumb" style="background-image:url('img/resistencia.jpg')"></div>
+        <div class="card-body">
+          <div class="card-name">Resistencia calefactora</div>
+          <div class="card-magnitude">Pulsa para ver ficha</div>
+        </div>
+      </div>
+    </div>
+    <div style="background:#fff;border-radius:8px;padding:20px;border:1px solid var(--gris-2)">
+      <div style="font-family:'Barlow Condensed';font-weight:700;color:var(--naranja);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Pareja típica en PEvAU</div>
+      <div style="font-family:'Barlow Condensed';font-weight:700;color:var(--azul);font-size:22px;line-height:1.2;margin-bottom:14px">Horno industrial<br>con regulador PID</div>
+      <div style="font-size:13px;line-height:1.55;color:var(--gris-4)">
+        <strong>Sensor (H):</strong> termopar o RTD<br>
+        <strong>Actuador:</strong> resistencia calefactora<br>
+        <strong>Regulador (G₁):</strong> PID<br>
+        <strong>Planta (G₂):</strong> el horno<br>
+        <strong>Variable controlada:</strong> temperatura
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 17. 9.5 VÁLVULAS -->
+<section class="slide">
+  <div class="eyebrow">9.5 · Válvulas de control</div>
+  <h1 class="slide-title">Regulan el paso de fluidos</h1>
+  <h2 class="slide-subtitle">El actuador clásico cuando hay neumática, hidráulica o térmica de fluidos.</h2>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:14px">
+    <div style="background:#fff;border-radius:8px;padding:20px;border-top:4px solid var(--azul-2)">
+      <h3 style="margin-top:0">Cómo funcionan</h3>
+      <p>Modifican la apertura del paso del fluido en función de la señal de control. La señal puede ser eléctrica, neumática o hidráulica. Variando la apertura se regula <strong>el caudal o la presión</strong> del fluido en el circuito.</p>
+      <h3>Dónde se usan</h3>
+      <p>Instalaciones hidráulicas y neumáticas, sistemas de calefacción y climatización por agua, procesos industriales con líquidos o gases, control de inyección…</p>
+    </div>
+    <div style="background:#fff;border-radius:8px;padding:20px;border-top:4px solid var(--naranja)">
+      <h3 style="margin-top:0;color:var(--naranja)">Diferencia clave</h3>
+      <p><strong>Válvula de control:</strong> regula <em>de forma continua</em> la apertura. Permite caudales intermedios. Es el actuador cuando se quiere ajustar finamente el flujo.</p>
+      <p><strong>Electroválvula:</strong> control <em>todo/nada</em>. Solo dos estados: abierta o cerrada. Se acciona eléctricamente. Útil cuando solo hay que dejar pasar o cortar el fluido.</p>
+      <div style="margin-top:14px;padding:10px 14px;background:var(--naranja-bg);border-radius:4px;font-size:13px;color:var(--naranja);font-weight:600">
+        💡 Si te preguntan por «control fino del caudal» → válvula. Si es «encender/apagar el riego» → electroválvula.
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;max-width:560px">
+    <div class="card has-image" onclick="openLightboxByName('valvula_control','Válvula de control','Regulación continua')">
+      <div class="card-thumb" style="background-image:url('img/valvula_control.jpg')"></div>
+      <div class="card-body">
+        <div class="card-name">Válvula de control</div>
+        <div class="card-magnitude">Continua · pulsa para ver</div>
+      </div>
+    </div>
+    <div class="card has-image" onclick="openLightboxByName('electrovalvula','Electroválvula','Todo/nada')">
+      <div class="card-thumb" style="background-image:url('img/electrovalvula.jpg')"></div>
+      <div class="card-body">
+        <div class="card-name">Electroválvula</div>
+        <div class="card-magnitude">Todo/nada · pulsa para ver</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 18. 9.6 OTROS ACTUADORES -->
+<section class="slide">
+  <div class="eyebrow">9.6 · Otros actuadores</div>
+  <h1 class="slide-title">Otros actuadores habituales</h1>
+  <h2 class="slide-subtitle">Componentes que no son motores ni cilindros pero también realizan acciones físicas controladas.</h2>
+
+  <div class="cards-grid" id="cards-otros"></div>
+</section>
+
+<!-- 19. 9.7 TABLA ACTUADORES -->
+<section class="slide">
+  <div class="eyebrow">9.7 · Tabla resumen</div>
+  <h1 class="slide-title">Todos los actuadores de un vistazo</h1>
+  <h2 class="slide-subtitle">Filtra por tipo de energía o de acción física.</h2>
+
+  <div class="filters" id="filters-act">
+    <button class="filter-btn active" data-cat="all">Todos</button>
+    <button class="filter-btn" data-cat="electrico">Energía eléctrica</button>
+    <button class="filter-btn" data-cat="fluido">Fluido a presión</button>
+    <button class="filter-btn" data-cat="termico">Térmico</button>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Actuador</th><th>Tipo de energía</th><th>Acción física</th><th>Aplicación típica</th></tr></thead>
+      <tbody id="tbody-act"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 20. EJEMPLO PEvAU -->
+<section class="slide">
+  <div class="eyebrow">9.8 · Ejemplo tipo PEvAU</div>
+  <h1 class="slide-title">¿Qué actuador para cada aplicación?</h1>
+  <h2 class="slide-subtitle">Pregunta clásica de selección. Pulsa «Ver respuesta» para comprobar tu razonamiento.</h2>
+
+  <div class="pevau-intro">
+    <strong>Enunciado:</strong> Indique qué actuador utilizaría en cada caso y justifique brevemente la respuesta.
+  </div>
+
+  <div class="pevau-block">
+    <div class="pevau-question"><span class="letter">a)</span>Regular la temperatura de un horno industrial.</div>
+    <button class="reveal-btn" onclick="reveal(this)">Ver respuesta</button>
+    <div class="pevau-answer">→ <strong>Resistencia calefactora.</strong> Transforma la señal de control eléctrica en calor mediante el efecto Joule, permitiendo regular con precisión la temperatura del horno.</div>
+  </div>
+
+  <div class="pevau-block">
+    <div class="pevau-question"><span class="letter">b)</span>Desplazar una pieza en una línea de montaje automática.</div>
+    <button class="reveal-btn" onclick="reveal(this)">Ver respuesta</button>
+    <div class="pevau-answer">→ <strong>Cilindro neumático.</strong> Transforma el aire comprimido en movimiento lineal, adecuado para desplazamientos rápidos y limpios en automatización industrial.</div>
+  </div>
+
+  <div class="pevau-block">
+    <div class="pevau-question"><span class="letter">c)</span>Controlar el caudal de agua en una tubería.</div>
+    <button class="reveal-btn" onclick="reveal(this)">Ver respuesta</button>
+    <div class="pevau-answer">→ <strong>Válvula de control.</strong> Regula el paso del fluido variando su apertura en función de la señal de control, permitiendo caudales intermedios.</div>
+  </div>
+
+  <div class="pevau-block">
+    <div class="pevau-question"><span class="letter">d)</span>Posicionar con precisión el brazo de un robot.</div>
+    <button class="reveal-btn" onclick="reveal(this)">Ver respuesta</button>
+    <div class="pevau-answer">→ <strong>Servomotor.</strong> Permite un control preciso de posición y velocidad, especialmente diseñado para aplicaciones robóticas con realimentación de posición.</div>
+  </div>
+</section>
+
+<!-- 20.5 TABLA ESENCIAL PEvAU -->
+<section class="slide">
+  <div class="eyebrow">Para llevar al examen</div>
+  <h1 class="slide-title">Tabla esencial PEvAU</h1>
+  <h2 class="slide-subtitle">Lo imprescindible · si solo te aprendes esto, ya tienes la mayor parte resuelta.</h2>
+
+  <div style="display:flex;gap:14px;margin-bottom:12px;font-size:12px;color:var(--gris-4);font-family:'Barlow Condensed';font-weight:600;text-transform:uppercase;letter-spacing:1px">
+    <span><span style="color:#dc2626">●</span> CLAVE — sí o sí</span>
+    <span><span style="color:#f97316">●</span> FRECUENTE — aparece como contexto o identificación</span>
+    <span><span style="color:#94a3b8">○</span> AMPLIACIÓN — cultura, no examen</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+    <!-- SENSORES -->
+    <div class="table-wrap">
+      <table style="font-size:12.5px">
+        <thead><tr><th colspan="3" style="background:#1e3a8a;text-align:center;font-size:14px;letter-spacing:1.5px">SENSORES (rama H · realimentación)</th></tr>
+        <tr><th>Magnitud</th><th>Sensor típico</th><th>Tipo señal</th></tr></thead>
+        <tbody>
+          <tr><td>Posición angular / lineal</td><td><span style="color:#f97316">●</span> <strong>Potenciómetro</strong></td><td>Analógica (R / V)</td></tr>
+          <tr><td>Posición límite (todo/nada)</td><td><span style="color:#f97316">●</span> <strong>Final de carrera</strong></td><td>Contacto NO/NC</td></tr>
+          <tr><td>Velocidad de giro</td><td><span style="color:#dc2626">●</span> <strong>Tacómetro</strong></td><td>Tensión proporcional</td></tr>
+          <tr><td>Posición / velocidad de eje</td><td><span style="color:#f97316">●</span> <strong>Encoder</strong></td><td>Pulsos digitales</td></tr>
+          <tr><td>Temperatura (rango bajo)</td><td><span style="color:#f97316">●</span> <strong>Termistor (NTC/PTC)</strong></td><td>Resistencia</td></tr>
+          <tr><td>Temperatura (alta, hornos)</td><td><span style="color:#dc2626">●</span> <strong>Termopar</strong></td><td>Tensión (mV)</td></tr>
+          <tr><td>Temperatura (precisión)</td><td><span style="color:#dc2626">●</span> <strong>RTD (Pt100)</strong></td><td>Resistencia</td></tr>
+          <tr><td>Presión</td><td><strong>Tubo Bourdon</strong> / piezorresistivo</td><td>Mecánica / eléctrica</td></tr>
+          <tr><td>Iluminación</td><td><span style="color:#f97316">●</span> <strong>LDR</strong></td><td>Resistencia</td></tr>
+          <tr><td>Distancia / nivel</td><td><strong>Ultrasónico</strong></td><td>Señal proporcional</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- ACTUADORES -->
+    <div class="table-wrap">
+      <table style="font-size:12.5px">
+        <thead><tr><th colspan="3" style="background:#ea580c;text-align:center;font-size:14px;letter-spacing:1.5px">ACTUADORES (entre regulador y planta)</th></tr>
+        <tr><th>Acción requerida</th><th>Actuador típico</th><th>Energía</th></tr></thead>
+        <tbody>
+          <tr><td>Velocidad regulable</td><td><span style="color:#f97316">●</span> <strong>Motor CC</strong></td><td>Eléctrica</td></tr>
+          <tr><td>Uso general industrial</td><td><span style="color:#f97316">●</span> <strong>Motor CA</strong></td><td>Eléctrica</td></tr>
+          <tr><td>Posición / velocidad precisa</td><td><span style="color:#dc2626">●</span> <strong>Servomotor</strong></td><td>Eléctrica</td></tr>
+          <tr><td>Posicionamiento exacto</td><td><span style="color:#f97316">●</span> <strong>Motor paso a paso</strong></td><td>Eléctrica</td></tr>
+          <tr><td>Movimiento lineal (rápido)</td><td><span style="color:#dc2626">●</span> <strong>Cilindro neumático</strong></td><td>Aire comprimido</td></tr>
+          <tr><td>Movimiento lineal (gran fuerza)</td><td><span style="color:#dc2626">●</span> <strong>Cilindro hidráulico</strong></td><td>Aceite a presión</td></tr>
+          <tr><td>Calor (calefacción/horno)</td><td><span style="color:#dc2626">●</span> <strong>Resistencia calefactora</strong></td><td>Eléctrica (Joule)</td></tr>
+          <tr><td>Regular caudal (continuo)</td><td><span style="color:#f97316">●</span> <strong>Válvula de control</strong></td><td>Eléct./neum./hidr.</td></tr>
+          <tr><td>Abrir/cerrar fluido (todo/nada)</td><td><span style="color:#f97316">●</span> <strong>Electroválvula</strong></td><td>Eléctrica</td></tr>
+          <tr><td>Conmutar circuitos de potencia</td><td><strong>Relé / contactor</strong></td><td>Eléctrica</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="margin-top:14px;background:var(--naranja-bg);border-left:4px solid var(--naranja);padding:12px 18px;border-radius:0 6px 6px 0;font-size:13.5px;color:#7c2d12;line-height:1.5">
+    <strong>Pareja PEvAU por excelencia:</strong> control de temperatura de un horno → <strong>termopar</strong> (sensor) + <strong>resistencia calefactora</strong> (actuador) + <strong>regulador PID</strong>. Si te aprendes esta pareja, tienes media pregunta resuelta.
+  </div>
+</section>
+
+<!-- 21. CIERRE -->
+<section class="slide">
+  <div class="closing-hero">
+    <div class="cover-tag">Lo que tienes que llevarte</div>
+    <h1>Sensor mide,<br>actuador actúa.</h1>
+    <p style="font-size:18px;color:var(--gris-4);max-width:700px;margin:6px auto 0">Los dos están en el lazo cerrado: uno en la rama de realimentación (H), el otro entre regulador y planta.</p>
+    <div class="key-points">
+      <div class="key-point">
+        <div class="kp-num">01</div>
+        <div class="kp-text"><strong>Identifica la magnitud</strong> que hay que medir o sobre la que hay que actuar. Eso fija de qué familia será el componente.</div>
+      </div>
+      <div class="key-point">
+        <div class="kp-num">02</div>
+        <div class="kp-text"><strong>Justifica brevemente</strong> por qué es el adecuado: tipo de señal, precisión necesaria, contacto/no contacto, fuerza requerida…</div>
+      </div>
+      <div class="key-point">
+        <div class="kp-num">03</div>
+        <div class="kp-text"><strong>No te pidan el principio físico</strong> en detalle. La Ponencia es clara: «los sensores se abordarán de forma general».</div>
+      </div>
+      <div class="key-point">
+        <div class="kp-num">04</div>
+        <div class="kp-text"><strong>Conoce las parejas</strong> típicas: termopar↔resistencia, encoder↔servomotor, presostato↔válvula, LDR↔lámpara…</div>
+      </div>
+    </div>
+    <div style="margin-top:22px;color:var(--gris-3);font-family:'Barlow Condensed';font-size:13px;letter-spacing:1.5px;text-transform:uppercase">
+      Fin · Bloque F · Apartados 8 y 9 · TECI II · PEvAU 2025-26
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox()" title="Cerrar (Esc)">✕</button>
+  <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1, event)" title="Anterior">‹</button>
+  <img class="lightbox-img" id="lightboxImg" alt="">
+  <button class="lightbox-nav lightbox-next" onclick="navLightbox(1, event)" title="Siguiente">›</button>
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<div class="controls">
+  <button class="ctrl-btn" id="prevBtn" onclick="prev()" title="Anterior">‹</button>
+  <button class="ctrl-btn home" onclick="goTo(0)" title="Portada">⌂</button>
+  <button class="ctrl-btn" id="nextBtn" onclick="next()" title="Siguiente">›</button>
+</div>
+<div class="kbd-hint"><kbd>←</kbd> <kbd>→</kbd> para navegar</div>
+
+<script>
+// ============== DATOS ==============
+
+const sensoresPos = [
+  {n:'Potenciómetro', img:'potenciometro', m:'Posición', d:'Pista resistiva con cursor móvil. Al desplazar el cursor cambia la resistencia, dando una señal eléctrica analógica.', det:'Aplicaciones: servomecanismos, joysticks, regulación manual. Salida: resistencia o tensión proporcional a la posición.', tag:'FRECUENTE', tagC:'frecuente'},
+  {n:'Final de carrera', img:'final_carrera', m:'Posición límite', d:'Sensor mecánico. Cuando el mecanismo llega a su tope, abre o cierra un contacto eléctrico.', det:'Salida todo/nada. Aplicaciones: puertas automáticas, ascensores, máquinas industriales.', tag:'FRECUENTE', tagC:'frecuente'},
+  {n:'Sensor inductivo', img:'inductivo', m:'Proximidad metales', d:'Genera un campo magnético alterno; al acercarse un metal el campo se altera y se detecta la presencia sin contacto.', det:'Solo detecta materiales metálicos. Salida todo/nada. Muy usado en automatización industrial.', tag:'FRECUENTE', tagC:'frecuente'},
+  {n:'Sensor capacitivo', img:'capacitivo', m:'Proximidad', d:'Detecta cualquier material (metálico o no) por variación de capacidad eléctrica.', det:'Salida todo/nada. Aplicaciones: control de nivel, detección de objetos en líneas de envasado.', tag:'FRECUENTE', tagC:'frecuente'},
+  {n:'Sensor óptico', img:'optico', m:'Presencia', d:'Un emisor lanza un haz de luz (visible o IR) y un receptor detecta si el haz llega o ha sido interrumpido.', det:'Variante con fibra óptica para espacios reducidos. Aplicación: cintas transportadoras, control de presencia.'},
+  {n:'Sensor PIR', img:'pir', m:'Movimiento', d:'Detecta la radiación infrarroja emitida por cuerpos calientes en movimiento. No emite señal: solo recibe.', det:'PIR = Passive InfraRed. Aplicaciones: alarmas de intrusión, encendido automático de luces, domótica.', tag:'FRECUENTE', tagC:'frecuente'},
+  {n:'Sensor ultrasónico', img:'ultrasonico', m:'Distancia', d:'Emite un pulso ultrasónico y mide el tiempo que tarda en rebotar. Da una señal proporcional a la distancia.', det:'Aplicaciones: control de nivel en depósitos, detección de obstáculos en robots, aparcamiento automático.', tag:'FRECUENTE', tagC:'frecuente'},
+  {n:'Radar', img:'radar', m:'Distancia (larga)', d:'Misma idea que el ultrasónico pero con ondas electromagnéticas (microondas). Permite mayores distancias y precisión.', det:'Aplicaciones: control de tráfico, navegación, nivel de grandes depósitos industriales.', tag:'AMPLIACIÓN', tagC:'ampliacion'},
+  {n:'LVDT', img:'lvdt', m:'Desplazamiento lineal', d:'Transformador diferencial de núcleo móvil. Mide desplazamientos cortos con gran precisión.', det:'Aplicaciones: metrología, sensores de posición en automoción, control de espesores. (Ampliación, no PEvAU.)', tag:'AMPLIACIÓN', tagC:'ampliacion'},
+  {n:'Resolver / Syncro', img:'resolver', m:'Posición angular', d:'Sensor electromagnético de posición angular absoluta basado en bobinas y tensiones alternas en cuadratura.', det:'Aplicaciones: servomecanismos de precisión, antenas, telescopios, aeronáutica. (Ampliación, no PEvAU.)', tag:'AMPLIACIÓN', tagC:'ampliacion'},
+  {n:'Reed switch', img:'reed_switch', m:'Proximidad magnética', d:'Ampolla de vidrio con dos láminas ferromagnéticas que se unen al acercarse un imán, cerrando el circuito.', det:'Salida todo/nada. Sin contacto mecánico, muy fiable. Aplicaciones: detectores de apertura de puertas y ventanas, alarmas, contadores de pulsos en bicicletas.'},
+  {n:'Sensor Hall', img:'hall', m:'Campo magnético / posición', d:'Detecta la presencia e intensidad de un campo magnético gracias al efecto Hall. Salida proporcional o todo/nada según el modelo.', det:'Sin contacto. Aplicaciones: medida de posición/velocidad de motores, encoders magnéticos, detección de imanes, sensor de cigüeñal en automoción.', tag:'FRECUENTE', tagC:'frecuente'},
+  {n:'Acelerómetro', img:'acelerometro', m:'Aceleración / vibración', d:'Mide aceleración lineal en uno, dos o tres ejes. Tecnología MEMS o piezoeléctrica. Salida analógica o digital (I²C, SPI).', det:'Detecta movimiento, inclinación y vibraciones. Aplicaciones: móviles, drones, automoción (airbag, ESP), monitorización de vibraciones en máquinas.'},
+  {n:'Giroscopio', img:'giroscopio', m:'Velocidad angular / orientación', d:'Mide la velocidad de rotación (°/s) en uno, dos o tres ejes. Tecnología MEMS, salida digital o analógica.', det:'Junto con el acelerómetro forma una IMU (unidad de medida inercial). Aplicaciones: móviles, drones, robótica, estabilización de cámaras, control de actitud en vehículos.'},
+  {n:'Fotocélula de barrera', img:'foto_barrera', m:'Presencia (gran alcance)', d:'Emisor y receptor en cuerpos separados, enfrentados. Detecta cuando un objeto interrumpe el haz entre ambos.', det:'Mayor alcance de las fotocélulas. Aplicaciones: cintas transportadoras, cuenta de objetos, barreras de seguridad en máquinas.', tag:'FRECUENTE', tagC:'frecuente'},
+  {n:'Fotocélula de reflexión', img:'foto_reflexion', m:'Presencia (alcance medio)', d:'Emisor y receptor en el mismo cuerpo. Un reflector enfrentado devuelve el haz; un objeto lo interrumpe.', det:'Más fácil de instalar que la de barrera (un solo cuerpo + reflector). Aplicaciones: automatización industrial, detección de paso.'},
+  {n:'Fotocélula de proximidad', img:'foto_proximidad', m:'Presencia (corto alcance)', d:'Sensor difuso: emite luz y detecta la luz reflejada por el propio objeto, sin reflector externo.', det:'Alcance corto, sensible al color y acabado del objeto. Aplicaciones: detección de piezas en líneas de montaje, automatización industrial.'},
+];
+
+const sensoresVel = [
+  {n:'Tacómetro', img:'tacometro', m:'Velocidad de giro', d:'Pequeño generador eléctrico acoplado al eje. Genera una tensión proporcional a la velocidad de giro.', det:'Tipos: dinamo tacométrica (CC) y alternador tacométrico (CA, frecuencia proporcional). Aplicaciones: control de velocidad de motores.', tag:'CLAVE', tagC:'clave'},
+  {n:'Encoder', img:'encoder', m:'Posición / velocidad', d:'Disco con marcas detectadas por un sistema óptico o magnético. Cada marca produce un impulso eléctrico digital.', det:'La cantidad de pulsos da la posición; la frecuencia de pulsos da la velocidad. Aplicaciones: robots, CNC, motores controlados.', tag:'FRECUENTE', tagC:'frecuente'},
+  {n:'Encoder incremental', img:'encoder_incremental', m:'Velocidad de giro', d:'Variante del encoder centrada en velocidad: cuenta pulsos por revolución; la frecuencia es proporcional a la velocidad.', det:'Aplicaciones: medida de velocidad en motores, cintas transportadoras, ascensores, CNC.'},
+];
+
+const sensoresTemp = [
+  {n:'Termistor (NTC/PTC)', img:'termistor', m:'Temperatura', d:'La resistencia eléctrica varía con la temperatura. NTC: baja al subir T. PTC: sube al subir T.', det:'Económicos y sensibles. Aplicaciones: termostatos domésticos, electrodomésticos, control de temperatura básico.', tag:'FRECUENTE', tagC:'frecuente'},
+  {n:'Termopar', img:'termopar', m:'Temperatura alta', d:'Dos metales distintos unidos en un punto. Al calentarse aparece una pequeña tensión (efecto Seebeck).', det:'Salida en mV. Aplicaciones: hornos industriales, procesos de alta temperatura. Tipos K, J, T, etc.', tag:'CLAVE', tagC:'clave'},
+  {n:'RTD (Pt100)', img:'rtd', m:'Temperatura precisa', d:'Resistencia de un metal noble (típicamente platino, 100 Ω a 0 °C) que varía linealmente con la temperatura.', det:'Gran precisión y estabilidad. Aplicaciones: procesos industriales de precisión, laboratorios.', tag:'CLAVE', tagC:'clave'},
+  {n:'Pirómetro', img:'pirometro', m:'Temperatura sin contacto', d:'Mide la radiación infrarroja emitida por el objeto. No necesita contacto físico.', det:'Aplicaciones: hornos industriales, fundiciones, procesos metalúrgicos donde no se puede tocar el objeto.', tag:'FRECUENTE', tagC:'frecuente'},
+];
+
+const sensoresPres = [
+  {n:'Sensor piezorresistivo', img:'piezorresistivo', m:'Presión', d:'Membrana que se deforma con la presión y modifica la resistencia eléctrica de elementos sensores integrados.', det:'Salida proporcional a la presión. Aplicaciones: sistemas hidráulicos, neumáticos, automoción.'},
+  {n:'Galga extensiométrica', img:'galga', m:'Deformación / fuerza', d:'Conductor cuya resistencia varía al estirarse o comprimirse. Mide deformaciones mecánicas.', det:'Base de las células de carga (medida de peso). Aplicaciones: ensayos de materiales, control de estructuras, balanzas industriales.'},
+  {n:'Sensor piezoeléctrico', img:'piezoelectrico', m:'Presión dinámica', d:'Genera una tensión eléctrica al aplicársele una fuerza o presión (efecto piezoeléctrico).', det:'Para presiones que cambian rápido (vibraciones, impactos). Aplicaciones: acelerómetros, micrófonos industriales, sistemas de detección.'},
+  {n:'Tubo en U', img:'tubo_u', m:'Presión baja', d:'Tubo con líquido (mercurio o agua). La diferencia de altura entre los dos brazos indica la diferencia de presión.', det:'Lectura visual. Aplicaciones: laboratorios, calibración, presiones diferenciales bajas.'},
+  {n:'Tubo Bourdon', img:'tubo_bourdon', m:'Presión', d:'Tubo metálico curvado que se endereza al aumentar la presión interna. El movimiento se transmite a una aguja.', det:'Es el clásico manómetro de aguja. Aplicaciones: calderas, aire comprimido, circuitos hidráulicos.'},
+  {n:'Diafragma / fuelle', img:'diafragma', m:'Presión baja', d:'Membrana o fuelle metálico que se deforma con la presión. La deformación se mide o se transmite mecánicamente.', det:'Aplicaciones: control de calderas, sistemas neumáticos, presiones bajas en procesos industriales.'},
+];
+
+const sensoresLum = [
+  {n:'LDR', img:'ldr', m:'Iluminación', d:'Resistencia que disminuye cuando aumenta la intensidad luminosa que recibe. Salida analógica.', det:'LDR = Light Dependent Resistor. Aplicaciones: alumbrado automático, control de iluminación, fotómetros sencillos.', tag:'FRECUENTE', tagC:'frecuente'},
+  {n:'Fotodiodo', img:'fotodiodo', m:'Iluminación', d:'Genera una corriente eléctrica proporcional a la intensidad luminosa que recibe (efecto fotoeléctrico).', det:'Más rápido y preciso que la LDR. Aplicaciones: sistemas ópticos, comunicaciones por fibra, detectores de luz.'},
+  {n:'Fototransistor', img:'fototransistor', m:'Iluminación', d:'Transistor cuya base se activa con luz en lugar de con corriente eléctrica. Más sensible que el fotodiodo.', det:'Responde a variaciones rápidas. Aplicaciones: mandos a distancia, barreras ópticas, lectores de códigos de barras.'},
+  {n:'Sensor de humedad', img:'humedad', m:'Humedad', d:'Mide el contenido de agua en el suelo (resistencia entre dos electrodos) o en el aire (humedad relativa).', det:'Aplicaciones: domótica, invernaderos, climatización, sistemas de riego automático, agricultura de precisión.'},
+  {n:'Caudalímetro', img:'caudalimetro', m:'Caudal de fluido', d:'Mide el caudal de un fluido (agua, aire, etc.). Suele ser tipo turbina con paletas que giran al paso del fluido y generan pulsos proporcionales al caudal.', det:'Salida en pulsos o señal analógica. Aplicaciones: fontanería, riego, procesos industriales, monitorización de consumo de agua o gas.'},
+  {n:'Sensor de nivel (flotador)', img:'sensor_nivel', m:'Nivel de líquido', d:'Boya flotante que sube y baja con el nivel del líquido. Al alcanzar un nivel determinado activa un contacto eléctrico (mediante palanca mecánica o reed switch interno).', det:'Salida todo/nada. Igual principio que el flotador de una cisterna. Aplicaciones: depósitos de agua, cisternas, sistemas de bombeo automático, alarmas de inundación.'},
+  {n:'Sensor de gas (MQ-x)', img:'sensor_gas', m:'Concentración de gas', d:'Detecta la presencia de gases (CO, CO₂, metano, GLP, humo…) por variación de la resistencia de un material semiconductor calentado.', det:'Salida analógica proporcional a la concentración del gas. Aplicaciones: domótica, detección de fugas de gas, alarmas de incendio, calidad del aire interior.'},
+];
+
+const motores = [
+  {n:'Motor CC', img:'motor_cc', m:'Velocidad regulable', d:'Motor de corriente continua. Permite un control sencillo y preciso de la velocidad.', det:'Muy utilizado cuando se necesita variar la velocidad fácilmente. Aplicaciones: vehículos eléctricos pequeños, juguetes, ventiladores variables.', tag:'FRECUENTE', tagC:'frecuente'},
+  {n:'Motor CA', img:'motor_ca', m:'Uso general', d:'Motor de corriente alterna. Robusto, económico y de uso general en industria y electrodomésticos.', det:'El control de velocidad es más complejo (requiere variador de frecuencia). Aplicaciones: maquinaria industrial, electrodomésticos.', tag:'FRECUENTE', tagC:'frecuente'},
+  {n:'Servomotor', img:'servomotor', m:'Posición y velocidad precisas', d:'Diseñado para control preciso de posición y velocidad. Incorpora realimentación interna.', det:'Aplicaciones: robótica, máquinas CNC, brazos manipuladores, posicionamiento exacto.', tag:'CLAVE', tagC:'clave'},
+  {n:'Motor paso a paso', img:'motor_paso', m:'Posicionamiento exacto', d:'Gira en pasos discretos (ángulos fijos). Permite un posicionamiento exacto sin necesidad de sensor.', det:'Cada pulso eléctrico mueve el motor un paso. Aplicaciones: impresoras 3D, escáneres, plotters, automatismos de precisión.', tag:'FRECUENTE', tagC:'frecuente'},
+];
+
+const cilindros = [
+  {n:'Cilindro neumático', img:'cilindro_neumatico', m:'Aire comprimido → mov. lineal', d:'Convierte aire comprimido en movimiento lineal. Rápido, limpio, fuerza moderada.', det:'Movimiento controlado por válvulas. Aplicaciones: automatización ligera, manipulación de piezas, líneas de montaje, puertas automáticas.', tag:'CLAVE', tagC:'clave'},
+  {n:'Cilindro hidráulico', img:'cilindro_hidraulico', m:'Aceite a presión → mov. lineal', d:'Convierte aceite a presión en movimiento lineal. Genera fuerzas mucho mayores que el neumático.', det:'Aplicaciones: prensas hidráulicas, retroexcavadoras, elevadores, dirección asistida, frenos.', tag:'CLAVE', tagC:'clave'},
+];
+
+const otrosAct = [
+  {n:'Electroválvula', img:'electrovalvula', m:'Apertura/cierre fluidos', d:'Válvula accionada eléctricamente para control todo/nada del paso de fluidos.', det:'Solo dos estados: abierta o cerrada. Aplicaciones: riego automático, control de gas, sistemas hidráulicos básicos.'},
+  {n:'Relé / contactor', img:'rele', m:'Conmutación de circuitos', d:'Permite controlar circuitos de potencia mediante señales eléctricas débiles.', det:'Diferencia: el contactor maneja potencias mayores y está pensado para uso industrial. Aplicaciones: encendido/apagado de cargas, automatismos.'},
+  {n:'Bomba', img:'bomba', m:'Movimiento de fluidos', d:'Transforma energía eléctrica en movimiento de fluidos. Genera presión o caudal.', det:'Aplicaciones: circuitos hidráulicos, sistemas de agua, calefacción central, sistemas de refrigeración por líquido.'},
+  {n:'Ventilador', img:'ventilador', m:'Movimiento de aire', d:'Genera movimiento de aire para refrigeración, ventilación o mezcla.', det:'Aplicaciones: refrigeración de equipos electrónicos, ventilación de naves industriales, climatización.'},
+  {n:'Lámpara', img:'lampara', m:'Energía → luz', d:'Transforma energía eléctrica en luz. Actuador de los sistemas de señalización e iluminación.', det:'Aplicaciones: alumbrado automático, semáforos, indicadores luminosos, señalización industrial.'},
+];
+
+// Tabla resumen sensores
+const tablaSens = [
+  {n:'Potenciómetro', img:'potenciometro', mag:'Posición', cat:'posicion', sal:'Resistencia / tensión', app:'Servomecanismos, joysticks'},
+  {n:'Final de carrera', img:'final_carrera', mag:'Posición límite', cat:'posicion', sal:'Contacto abierto/cerrado', app:'Puertas, ascensores'},
+  {n:'Sensor inductivo', img:'inductivo', mag:'Proximidad (metales)', cat:'posicion', sal:'Todo/nada', app:'Detección de piezas metálicas'},
+  {n:'Sensor capacitivo', img:'capacitivo', mag:'Proximidad (cualq.)', cat:'posicion', sal:'Todo/nada', app:'Control de nivel, detección'},
+  {n:'Sensor óptico', img:'optico', mag:'Proximidad / presencia', cat:'posicion', sal:'Todo/nada', app:'Cintas transportadoras'},
+  {n:'Sensor PIR', img:'pir', mag:'Movimiento', cat:'posicion', sal:'Todo/nada', app:'Alarmas, iluminación auto.'},
+  {n:'Sensor ultrasónico', img:'ultrasonico', mag:'Distancia / nivel', cat:'posicion', sal:'Señal proporcional', app:'Nivel depósitos, robótica'},
+  {n:'Radar', img:'radar', mag:'Distancia (larga)', cat:'posicion', sal:'Señal proporcional', app:'Tráfico, navegación'},
+  {n:'LVDT', img:'lvdt', mag:'Desplazamiento', cat:'posicion', sal:'Tensión proporcional', app:'Metrología, control dim.'},
+  {n:'Resolver / Syncro', img:'resolver', mag:'Posición angular', cat:'posicion', sal:'Tensión alterna', app:'Servomecanismos, antenas'},
+  {n:'Reed switch', img:'reed_switch', mag:'Proximidad magnética', cat:'posicion', sal:'Todo/nada', app:'Puertas, ventanas, alarmas'},
+  {n:'Sensor Hall', img:'hall', mag:'Campo magnético / posición', cat:'posicion', sal:'Tensión / pulsos', app:'Posición y velocidad de motores'},
+  {n:'Acelerómetro', img:'acelerometro', mag:'Aceleración / vibración', cat:'posicion', sal:'Analógica / digital', app:'Móviles, drones, automoción'},
+  {n:'Giroscopio', img:'giroscopio', mag:'Velocidad angular', cat:'posicion', sal:'Analógica / digital', app:'IMU, drones, robótica'},
+  {n:'Fotocélula de barrera', img:'foto_barrera', mag:'Presencia (gran alcance)', cat:'posicion', sal:'Todo/nada', app:'Cintas, barreras de seguridad'},
+  {n:'Fotocélula de reflexión', img:'foto_reflexion', mag:'Presencia (alc. medio)', cat:'posicion', sal:'Todo/nada', app:'Automatización industrial'},
+  {n:'Fotocélula de proximidad', img:'foto_proximidad', mag:'Presencia (alc. corto)', cat:'posicion', sal:'Todo/nada', app:'Detección de piezas'},
+  {n:'Tacómetro', img:'tacometro', mag:'Velocidad angular', cat:'velocidad', sal:'Tensión proporcional', app:'Motores, máquinas'},
+  {n:'Encoder', img:'encoder', mag:'Posición / velocidad', cat:'velocidad', sal:'Pulsos digitales', app:'Robótica, control de motores'},
+  {n:'Termistor (NTC/PTC)', img:'termistor', mag:'Temperatura', cat:'temperatura', sal:'Resistencia', app:'Termostatos, electrodom.'},
+  {n:'Termopar', img:'termopar', mag:'Temperatura', cat:'temperatura', sal:'Tensión (mV)', app:'Hornos, altas temperaturas'},
+  {n:'RTD (Pt100)', img:'rtd', mag:'Temperatura', cat:'temperatura', sal:'Resistencia', app:'Procesos de precisión'},
+  {n:'Pirómetro', img:'pirometro', mag:'Temperatura sin contacto', cat:'temperatura', sal:'Radiación IR', app:'Hornos, fundiciones'},
+  {n:'Sensor piezorresistivo', img:'piezorresistivo', mag:'Presión', cat:'presion', sal:'Resistencia / tensión', app:'Hidráulica, neumática'},
+  {n:'Galga extensiométrica', img:'galga', mag:'Deformación / fuerza', cat:'presion', sal:'Resistencia', app:'Células de carga, ensayos'},
+  {n:'Sensor piezoeléctrico', img:'piezoelectrico', mag:'Presión / fuerza dinámica', cat:'presion', sal:'Tensión eléctrica', app:'Vibraciones, impactos'},
+  {n:'Tubo Bourdon', img:'tubo_bourdon', mag:'Presión', cat:'presion', sal:'Mecánica (aguja)', app:'Manómetros industriales'},
+  {n:'LDR', img:'ldr', mag:'Iluminación', cat:'luz', sal:'Resistencia', app:'Alumbrado automático'},
+  {n:'Fotodiodo', img:'fotodiodo', mag:'Iluminación', cat:'luz', sal:'Corriente eléctrica', app:'Sistemas ópticos, comunic.'},
+  {n:'Fototransistor', img:'fototransistor', mag:'Iluminación', cat:'luz', sal:'Corriente eléctrica', app:'Mandos, barreras ópticas'},
+  {n:'Sensor de humedad', img:'humedad', mag:'Humedad', cat:'luz', sal:'Resistencia / señal eléct.', app:'Domótica, invernaderos'},
+  {n:'Caudalímetro', img:'caudalimetro', mag:'Caudal', cat:'fluido', sal:'Pulsos / señal proporc.', app:'Fontanería, riego, procesos'},
+  {n:'Sensor de nivel (flotador)', img:'sensor_nivel', mag:'Nivel de líquido', cat:'fluido', sal:'Todo/nada', app:'Cisternas, depósitos, bombeo'},
+  {n:'Sensor de gas (MQ-x)', img:'sensor_gas', mag:'Concentración de gas', cat:'luz', sal:'Analógica', app:'Domótica, alarmas, fugas'},
+];
+
+// Tabla resumen actuadores
+const tablaAct = [
+  {n:'Motor CC', img:'motor_cc', en:'Eléctrica', cat:'electrico', acc:'Rotación (vel. variable)', app:'Máquinas de velocidad regulable'},
+  {n:'Motor CA', img:'motor_ca', en:'Eléctrica', cat:'electrico', acc:'Rotación (uso general)', app:'Industria, electrodomésticos'},
+  {n:'Servomotor', img:'servomotor', en:'Eléctrica', cat:'electrico', acc:'Rotación controlada (pos./vel.)', app:'Robótica, CNC'},
+  {n:'Motor paso a paso', img:'motor_paso', en:'Eléctrica', cat:'electrico', acc:'Rotación por pasos', app:'Posicionamiento exacto, impresoras 3D'},
+  {n:'Cilindro neumático', img:'cilindro_neumatico', en:'Aire comprimido', cat:'fluido', acc:'Movimiento lineal', app:'Automatización, manipulación'},
+  {n:'Cilindro hidráulico', img:'cilindro_hidraulico', en:'Aceite a presión', cat:'fluido', acc:'Movimiento lineal (gran fuerza)', app:'Prensas, maquinaria pesada'},
+  {n:'Resistencia calefactora', en:'Eléctrica', cat:'termico', acc:'Calor (efecto Joule)', app:'Hornos, calefacción, secadoras'},
+  {n:'Válvula de control', en:'Eléct./neum./hidr.', cat:'fluido', acc:'Regulación de caudal/presión', app:'Hidráulica, neumática, térmica'},
+  {n:'Electroválvula', img:'electrovalvula', en:'Eléctrica', cat:'fluido', acc:'Apertura/cierre de fluidos', app:'Control todo/nada de fluidos'},
+  {n:'Relé / contactor', img:'rele', en:'Eléctrica', cat:'electrico', acc:'Conmutación de circuitos', app:'Encendido/apagado de cargas'},
+  {n:'Bomba', img:'bomba', en:'Eléctrica', cat:'fluido', acc:'Movimiento de fluidos', app:'Circuitos hidráulicos, agua'},
+  {n:'Ventilador', img:'ventilador', en:'Eléctrica', cat:'electrico', acc:'Movimiento de aire', app:'Refrigeración, ventilación'},
+  {n:'Lámpara', img:'lampara', en:'Eléctrica', cat:'electrico', acc:'Luz', app:'Iluminación, señalización'},
+];
+
+// Quiz emparejamiento
+const quizPairs = [
+  {l:'Velocidad de un motor industrial', r:'Tacómetro', id:1},
+  {l:'Temperatura de un horno industrial', r:'Termopar', id:2},
+  {l:'Nivel de agua en un depósito', r:'Sensor ultrasónico', id:3},
+  {l:'Detección de movimiento en alarma', r:'Sensor PIR', id:4},
+  {l:'Iluminación para alumbrado auto.', r:'LDR', id:5},
+  {l:'Posición de un servomecanismo', r:'Potenciómetro', id:6},
+];
+
+// ============== RENDER TARJETAS ==============
+const IMG_BASE = 'img/';
+let allCards = []; // para navegación lightbox
+
+function renderCards(arr, containerId){
+  const c = document.getElementById(containerId);
+  c.innerHTML = arr.map((s,i)=>{
+    const tagHtml = s.tag ? `<span class="card-tag ${s.tagC || (s.tagP?'frecuente':'')}">${s.tag}</span>` : '';
+    if(s.img){
+      const idx = allCards.length;
+      allCards.push({img:s.img, name:s.n, magnitude:s.m});
+      return `
+        <div class="card has-image">
+          <div class="card-thumb" style="background-image:url('${IMG_BASE}${s.img}.jpg')"
+               onclick="openLightbox(${idx}); event.stopPropagation();"
+               title="Pulsa para ver ficha completa"></div>
+          <div class="card-body" onclick="this.parentElement.classList.toggle('expanded')">
+            <div class="card-name">${s.n}</div>
+            <div class="card-magnitude">${s.m}</div>
+            <div class="card-desc">${s.d}</div>
+            ${tagHtml}
+            <div class="card-detail">${s.det}</div>
+          </div>
+        </div>
+      `;
+    }
+    return `
+      <div class="card" onclick="this.classList.toggle('expanded')">
+        <div class="card-name">${s.n}</div>
+        <div class="card-magnitude">${s.m}</div>
+        <div class="card-desc">${s.d}</div>
+        ${tagHtml}
+        <div class="card-detail">${s.det}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+renderCards(sensoresPos, 'cards-pos');
+renderCards(sensoresVel, 'cards-vel');
+renderCards(sensoresTemp, 'cards-temp');
+renderCards(sensoresPres, 'cards-pres');
+renderCards(sensoresLum, 'cards-lum');
+renderCards(motores, 'cards-motor');
+renderCards(cilindros, 'cards-cil');
+renderCards(otrosAct, 'cards-otros');
+
+// ============== TABLA SENSORES ==============
+function renderTablaSens(){
+  const tb = document.getElementById('tbody-sens');
+  tb.innerHTML = tablaSens.map(s=>`
+    <tr data-cat="${s.cat}">
+      <td><strong>${s.n}</strong></td>
+      <td>${s.mag}</td>
+      <td><span class="cat-pill cat-${s.cat}">${catLabel(s.cat)}</span></td>
+      <td>${s.sal}</td>
+      <td>${s.app}</td>
+    </tr>
+  `).join('');
+}
+function catLabel(c){
+  return {posicion:'Posición',velocidad:'Velocidad',temperatura:'Temp.',presion:'Presión',luz:'Luz/hum.',electrico:'Eléctrico',fluido:'Fluido',termico:'Térmico'}[c]||c;
+}
+renderTablaSens();
+
+// Filtros sensores
+document.querySelectorAll('#filters-sens .filter-btn').forEach(btn=>{
+  btn.addEventListener('click', e=>{
+    document.querySelectorAll('#filters-sens .filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    document.querySelectorAll('#tbody-sens tr').forEach(tr=>{
+      tr.classList.toggle('hidden', cat!=='all' && tr.dataset.cat!==cat);
+    });
+  });
+});
+
+// ============== TABLA ACTUADORES ==============
+function renderTablaAct(){
+  const tb = document.getElementById('tbody-act');
+  tb.innerHTML = tablaAct.map(a=>`
+    <tr data-cat="${a.cat}">
+      <td><strong>${a.n}</strong></td>
+      <td><span class="cat-pill cat-${a.cat}">${catLabel(a.cat)}</span> ${a.en}</td>
+      <td>${a.acc}</td>
+      <td>${a.app}</td>
+    </tr>
+  `).join('');
+}
+renderTablaAct();
+document.querySelectorAll('#filters-act .filter-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('#filters-act .filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    document.querySelectorAll('#tbody-act tr').forEach(tr=>{
+      tr.classList.toggle('hidden', cat!=='all' && tr.dataset.cat!==cat);
+    });
+  });
+});
+
+// ============== QUIZ ==============
+let quizSelected = null;
+let quizMatched = 0;
+function shuffle(a){return a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1])}
+
+function renderQuiz(){
+  const left = shuffle([...quizPairs]);
+  const right = shuffle([...quizPairs]);
+  document.getElementById('quiz-left').innerHTML = left.map(p=>
+    `<div class="quiz-item" data-side="L" data-id="${p.id}" onclick="quizClick(this)">${p.l}</div>`
+  ).join('');
+  document.getElementById('quiz-right').innerHTML = right.map(p=>
+    `<div class="quiz-item" data-side="R" data-id="${p.id}" onclick="quizClick(this)">${p.r}</div>`
+  ).join('');
+  quizMatched = 0;
+  quizSelected = null;
+  updateQuizStatus();
+}
+
+function quizClick(el){
+  if(el.classList.contains('matched')) return;
+  if(!quizSelected){
+    document.querySelectorAll('.quiz-item.selected').forEach(e=>e.classList.remove('selected'));
+    el.classList.add('selected');
+    quizSelected = el;
+    return;
+  }
+  if(el === quizSelected){ el.classList.remove('selected'); quizSelected = null; return; }
+  if(el.dataset.side === quizSelected.dataset.side){
+    document.querySelectorAll('.quiz-item.selected').forEach(e=>e.classList.remove('selected'));
+    el.classList.add('selected'); quizSelected = el; return;
+  }
+  // intentar match
+  if(el.dataset.id === quizSelected.dataset.id){
+    el.classList.remove('selected'); el.classList.add('matched');
+    quizSelected.classList.remove('selected'); quizSelected.classList.add('matched');
+    quizSelected = null; quizMatched++;
+    updateQuizStatus();
+  } else {
+    el.classList.add('wrong'); quizSelected.classList.add('wrong');
+    setTimeout(()=>{
+      el.classList.remove('wrong','selected');
+      if(quizSelected){quizSelected.classList.remove('wrong','selected'); quizSelected = null;}
+    }, 400);
+  }
+}
+
+function updateQuizStatus(){
+  const s = document.getElementById('quiz-status');
+  s.innerHTML = `Aciertos: ${quizMatched} / ${quizPairs.length}` +
+    (quizMatched===quizPairs.length?' · ¡completado! 🎉':'') +
+    ' <button class="quiz-reset" onclick="resetQuiz()">Reiniciar</button>';
+  s.classList.toggle('complete', quizMatched===quizPairs.length);
+}
+function resetQuiz(){ renderQuiz(); }
+renderQuiz();
+
+// ============== EJEMPLO PEvAU ==============
+function reveal(btn){
+  const ans = btn.nextElementSibling;
+  ans.classList.toggle('show');
+  btn.classList.toggle('opened');
+  btn.textContent = ans.classList.contains('show') ? 'Ocultar respuesta' : 'Ver respuesta';
+}
+
+// ============== NAVEGACIÓN ==============
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+function goTo(i){
+  if(i<0||i>=slides.length) return;
+  slides[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  slides[current].scrollTop = 0;
+  updateUI();
+}
+function next(){ goTo(current+1) }
+function prev(){ goTo(current-1) }
+function updateUI(){
+  document.getElementById('progressFill').style.width = ((current+1)/slides.length*100)+'%';
+  document.getElementById('slideCounter').textContent =
+    String(current+1).padStart(2,'0') + ' / ' + String(slides.length).padStart(2,'0');
+  document.getElementById('prevBtn').disabled = current===0;
+  document.getElementById('nextBtn').disabled = current===slides.length-1;
+}
+document.addEventListener('keydown', e=>{
+  // Si lightbox está abierto: navegación dentro del lightbox
+  if(document.getElementById('lightbox').classList.contains('open')){
+    if(e.key==='Escape'){ closeLightbox(); }
+    else if(e.key==='ArrowRight'){ navLightbox(1); }
+    else if(e.key==='ArrowLeft'){ navLightbox(-1); }
+    return;
+  }
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ') { e.preventDefault(); next(); }
+  else if(e.key==='ArrowLeft'||e.key==='PageUp') { e.preventDefault(); prev(); }
+  else if(e.key==='Home') goTo(0);
+  else if(e.key==='End') goTo(slides.length-1);
+});
+
+// ============== LIGHTBOX ==============
+let lightboxIdx = 0;
+function openLightbox(idx){
+  lightboxIdx = idx;
+  const card = allCards[idx];
+  document.getElementById('lightboxImg').src = IMG_BASE + card.img + '.jpg';
+  document.getElementById('lightboxImg').alt = card.name;
+  document.getElementById('lightboxCaption').textContent = card.name + ' · ' + card.magnitude;
+  document.getElementById('lightbox').classList.add('open');
+}
+function openLightboxByName(img, name, magnitude){
+  // Para tarjetas individuales fuera del grid (no entran en navegación con ‹/›)
+  document.getElementById('lightboxImg').src = IMG_BASE + img + '.jpg';
+  document.getElementById('lightboxImg').alt = name;
+  document.getElementById('lightboxCaption').textContent = name + ' · ' + magnitude;
+  lightboxIdx = -1; // marca que no hay navegación
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(e){
+  // si se hace click en la imagen o en los botones internos, no cerrar
+  if(e && e.target && (e.target.id==='lightboxImg' || e.target.classList.contains('lightbox-nav'))) return;
+  document.getElementById('lightbox').classList.remove('open');
+}
+function navLightbox(dir, e){
+  if(e) e.stopPropagation();
+  if(lightboxIdx < 0 || allCards.length === 0) return; // tarjeta especial sin navegación
+  lightboxIdx = (lightboxIdx + dir + allCards.length) % allCards.length;
+  const card = allCards[lightboxIdx];
+  document.getElementById('lightboxImg').src = IMG_BASE + card.img + '.jpg';
+  document.getElementById('lightboxImg').alt = card.name;
+  document.getElementById('lightboxCaption').textContent = card.name + ' · ' + card.magnitude;
+}
+
+updateUI();
+</script>
+
+</body>
+</html>

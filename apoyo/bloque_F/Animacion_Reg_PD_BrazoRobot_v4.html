@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animación · Regulador PD · Brazo robótico · TECI II</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #FAF7F0;
+  --paper-2: #F4EFE3;
+  --ink: #1A1814;
+  --ink-soft: #3A352E;
+  --muted: #7A736A;
+  --rule: #D9D2C2;
+  --rule-soft: #E8E2D3;
+  --surface: #FFFFFF;
+
+  --reference: #1A1814;
+  --output: #1A75BC;        /* azul = salida del sistema */
+  --output-light: #BFE2F4;
+  --output-tint: rgba(26, 117, 188, 0.10);
+  --error: #B5341E;
+  --error-light: #F2D2C9;
+  --error-tint: rgba(181, 52, 30, 0.18);
+
+  --control: #B5841A;       /* naranja = señal de control m */
+  --control-light: rgba(181, 132, 26, 0.18);
+
+  /* PD = siena: P (azul) + D (naranja) → tono cálido */
+  --reg-p: #C2502A;
+
+  --shadow-1: 0 1px 2px rgba(26, 24, 20, 0.04), 0 4px 12px rgba(26, 24, 20, 0.06);
+  --shadow-2: 0 2px 4px rgba(26, 24, 20, 0.04), 0 12px 32px rgba(26, 24, 20, 0.10);
+
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse at top left, rgba(194, 80, 42, 0.05), transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(26, 117, 188, 0.04), transparent 50%);
+  background-attachment: fixed;
+}
+
+.container { max-width: 1320px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+/* ============ HEADER ============ */
+header.masthead {
+  border-top: 4px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 1.25rem 0 2.5rem;
+  margin-bottom: 3rem;
+}
+.masthead-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.masthead-meta .left, .masthead-meta .right { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+
+h1.title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 4.5vw, 3.4rem);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144;
+  margin-bottom: 1rem;
+}
+h1.title em { font-style: italic; font-weight: 400; color: var(--ink-soft); }
+
+.subtitle {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  color: var(--ink-soft);
+  max-width: 64ch;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+
+.scope-pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+.scope-pill {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  padding: 0.35rem 0.7rem;
+  border-radius: 2px;
+}
+
+/* ============ SECTIONS ============ */
+section { margin-bottom: 3.5rem; }
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.section-label::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--ink);
+}
+
+h2.section-heading {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.25rem;
+  max-width: 36ch;
+}
+h2.section-heading em { font-style: italic; color: var(--ink-soft); }
+
+.lede {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 65ch;
+  font-weight: 400;
+}
+.lede em { color: var(--ink); font-style: italic; font-weight: 500; }
+.lede strong { color: var(--ink); font-weight: 600; font-style: normal; }
+
+/* ============ ANIMATION STAGE ============ */
+.stage {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  box-shadow: var(--shadow-2);
+  padding: 0;
+  overflow: hidden;
+}
+
+.stage-header {
+  background: var(--paper-2);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.stage-header .title-block {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.stage-header .title-block .accent { color: var(--reg-p); }
+.stage-header .status {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+.stage-header .status .dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--output);
+  margin-right: 0.4rem;
+  vertical-align: middle;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse { 50% { opacity: 0.35; } }
+
+.stage-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr 1.4fr;
+  gap: 0;
+  background: var(--surface);
+}
+@media (max-width: 980px) {
+  .stage-grid { grid-template-columns: 1fr; }
+}
+
+.panel {
+  padding: 1.5rem;
+  border-right: 1px solid var(--rule-soft);
+  display: flex;
+  flex-direction: column;
+}
+.panel:last-child { border-right: none; }
+@media (max-width: 980px) {
+  .panel { border-right: none; border-bottom: 1px solid var(--rule-soft); }
+}
+
+.panel-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+.panel-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+/* === FAN PANEL === */
+.fan-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper-2);
+  border-radius: 4px;
+  padding: 1rem;
+  position: relative;
+  min-height: 240px;
+}
+.fan-svg { width: 100%; max-width: 240px; height: auto; }
+/* La rotación se aplica como atributo SVG transform="rotate(deg 100 100)"
+   desde JavaScript, garantizando uso de coordenadas del viewBox.        */
+
+.fan-readout {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+.fan-readout .item {
+  flex: 1;
+  background: var(--paper-2);
+  padding: 0.55rem 0.7rem;
+  border-radius: 3px;
+  border-left: 3px solid var(--ink);
+}
+.fan-readout .item.ref { border-left-color: var(--ink); }
+.fan-readout .item.out { border-left-color: var(--output); }
+.fan-readout .item.err { border-left-color: var(--error); }
+.fan-readout .lab { font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 2px; }
+.fan-readout .val { font-size: 0.95rem; font-weight: 600; color: var(--ink); }
+.fan-readout .val .unit { font-size: 0.65rem; color: var(--muted); font-weight: 400; margin-left: 2px; }
+
+/* === BLOCK DIAGRAM PANEL === */
+.bd-svg { width: 100%; height: auto; }
+
+.bd-explainer {
+  margin-top: 1rem;
+  font-family: var(--serif);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.bd-explainer code {
+  font-family: var(--mono);
+  background: var(--paper-2);
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-size: 0.86em;
+  color: var(--ink);
+}
+.bd-explainer .reg-p-label { color: var(--reg-p); font-weight: 600; }
+
+/* === GRAPHS PANEL === */
+.graph-block { margin-bottom: 1rem; }
+.graph-block:last-child { margin-bottom: 0; }
+.graph-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.4rem;
+}
+.graph-title {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.legend {
+  display: flex;
+  gap: 0.85rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+.legend .swatch {
+  display: inline-block;
+  width: 14px;
+  height: 2px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+.legend .ref-sw { background: var(--reference); }
+.legend .out-sw { background: var(--output); height: 3px; }
+.legend .err-sw { background: var(--error); }
+.legend .ctrl-sw { background: var(--control); }
+
+canvas.graph {
+  width: 100%;
+  display: block;
+  background: var(--paper-2);
+  border-radius: 3px;
+  border: 1px solid var(--rule-soft);
+}
+
+/* === CONTROLS === */
+.controls {
+  background: var(--paper-2);
+  border-top: 1px solid var(--rule);
+  padding: 1.25rem 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto auto auto auto;
+  gap: 1rem;
+  align-items: end;
+}
+@media (max-width: 1100px) {
+  .controls { grid-template-columns: 1fr 1fr 1fr; }
+  .controls .speed-controls,
+  .controls .modo-controls,
+  .controls .btn { grid-column: span 3; }
+  .controls .speed-controls,
+  .controls .modo-controls { justify-self: stretch; }
+  .controls .speed-btn,
+  .controls .modo-btn { flex: 1; }
+}
+
+.modo-controls {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.modo-btn {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  padding: 0.65rem 1rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: none;
+  border-right: 1px solid var(--rule);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.modo-btn:last-child { border-right: none; }
+.modo-btn:hover { background: var(--paper-2); }
+.modo-btn.on {
+  background: var(--reg-p);
+  color: var(--paper);
+}
+
+.ctrl.disabled { opacity: 0.4; pointer-events: none; }
+
+.ctrl {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.ctrl-label {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+}
+.ctrl-label .val {
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--rule);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--reg-p);
+  border: 2px solid var(--surface);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--reg-p);
+  border: 2px solid var(--surface);
+  cursor: pointer;
+}
+
+button.btn {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.6rem 1rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+button.btn:hover { background: var(--ink); color: var(--paper); }
+button.btn.active {
+  background: var(--error);
+  color: var(--paper);
+  border-color: var(--error);
+}
+button.btn.reset { border-color: var(--muted); color: var(--muted); }
+button.btn.reset:hover { background: var(--muted); color: var(--paper); }
+
+/* === CONTROLES DE VELOCIDAD === */
+.speed-controls {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.speed-btn {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  padding: 0.6rem 0.65rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: none;
+  border-right: 1px solid var(--rule);
+  cursor: pointer;
+  transition: all 0.12s ease;
+  min-width: 38px;
+  text-align: center;
+}
+.speed-btn:last-child { border-right: none; }
+.speed-btn:hover { background: var(--paper-2); }
+.speed-btn.on {
+  background: var(--reg-p);
+  color: var(--paper);
+}
+.speed-btn.step-btn { background: var(--paper-2); }
+.speed-btn.step-btn:hover { background: var(--ink); color: var(--paper); }
+.speed-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* === PANEL DE NARRACIÓN === */
+.narration {
+  margin-top: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--reg-p);
+  border-radius: 4px;
+  padding: 1.2rem 1.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.2rem;
+  align-items: center;
+  box-shadow: var(--shadow-1);
+  transition: border-left-color 0.4s ease;
+  min-height: 92px;
+}
+.narration.phase-arranque { border-left-color: var(--reg-p); }
+.narration.phase-subiendo { border-left-color: var(--reg-p); }
+.narration.phase-pico { border-left-color: var(--control); }
+.narration.phase-oscilando { border-left-color: var(--control); }
+.narration.phase-estable { border-left-color: var(--error); }
+.narration.phase-perturbado { border-left-color: var(--error); }
+.narration.phase-parado { border-left-color: var(--muted); }
+
+.narration .phase-tag {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  padding-right: 1.2rem;
+  border-right: 1px solid var(--rule-soft);
+  min-width: 110px;
+}
+.narration .phase-tag .num {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 2rem;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.narration .phase-tag .lab {
+  display: block;
+  font-size: 0.6rem;
+}
+.narration .text-block { line-height: 1.5; }
+.narration .msg {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+  transition: opacity 0.25s ease;
+}
+.narration .msg em { font-style: italic; color: var(--ink-soft); }
+.narration .msg strong { font-weight: 600; }
+.narration .detail {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  transition: opacity 0.25s ease;
+}
+.narration .detail code {
+  font-family: var(--mono);
+  background: var(--paper-2);
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-size: 0.86em;
+}
+
+/* === OBSERVE / Q&A === */
+.observe {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.obs-card {
+  background: var(--surface);
+  border: 1px solid var(--rule-soft);
+  border-radius: 4px;
+  padding: 1.3rem 1.2rem;
+  border-top: 3px solid var(--reg-p);
+}
+.obs-card .num {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+.obs-card h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.08rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+.obs-card p {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.obs-card p em { color: var(--ink); font-style: italic; font-weight: 500; }
+.obs-card .try {
+  margin-top: 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--reg-p);
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--rule);
+}
+
+footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="masthead">
+  <div class="masthead-meta">
+    <div class="left">
+      <span>TECI II · Bloque F</span>
+      <span>Anexo · Animaciones de reguladores</span>
+    </div>
+    <div class="right">
+      <span>2º Bachillerato</span>
+      <span>PEvAU 2025–26</span>
+    </div>
+  </div>
+  <h1 class="title">Regulador <em>PD</em><br>en acción</h1>
+  <p class="subtitle">Posicionamiento angular de un brazo robótico. Cuando lo importante no es <em>llegar exacto</em> sino <em>llegar suave</em>: el PD aporta el amortiguamiento que la propia mecánica no tiene.</p>
+
+  <div class="scope-pills">
+    <span class="scope-pill">Animación · 05 / 06</span>
+    <span class="scope-pill">Regulador PD</span>
+    <span class="scope-pill">Sistema: brazo robótico</span>
+  </div>
+</header>
+
+<!-- ============ INTRO ============ -->
+<section>
+  <div class="section-label">§ Planteamiento</div>
+  <p class="lede">
+    Un brazo robótico debe girar a una posición angular determinada (digamos 90°) y <em>quedarse ahí</em>. El P solo lo intenta, pero si la fricción mecánica es pequeña, el brazo arranca con tanta inercia que <em>se pasa</em> de largo y oscila. La D resuelve eso: <em>m = K<sub>p</sub>·e + K<sub>d</sub>·de/dt</em>. La D mira la <em>velocidad</em> del brazo y, cuando ve que va rápido, frena anticipadamente.
+  </p>
+  <p class="note-prose" style="font-family: var(--serif); font-size: 1.02rem; line-height: 1.65; color: var(--ink-soft); max-width: 70ch; margin-top: 1.5rem;">
+    En este sistema <em>no hay perturbaciones constantes</em> que generen error en régimen permanente, así que la I no aporta nada. El PD es la combinación clásica para posicionamiento: rápido como el P, suave como… solo el PD puede serlo.
+  </p>
+</section>
+
+<!-- ============ ANIMATION STAGE ============ -->
+<section>
+  <div class="section-label">§ Simulación interactiva</div>
+
+  <div class="stage">
+
+    <div class="stage-header">
+      <div class="title-block"><span class="accent">●</span> Lazo de control · Regulador PD + Brazo robótico</div>
+      <div class="status"><span class="dot"></span><span id="statusText">EN MARCHA</span></div>
+    </div>
+
+    <div class="stage-grid">
+
+      <!-- PANEL 1: BRAZO ROBÓTICO -->
+      <div class="panel">
+        <div class="panel-label">Sistema físico</div>
+        <div class="panel-title">Brazo robótico</div>
+
+        <div class="fan-wrap" style="min-height: 240px;">
+          <svg class="fan-svg" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" style="max-width: 280px;">
+            <!-- Suelo / mesa -->
+            <line x1="20" y1="180" x2="260" y2="180" stroke="#3A352E" stroke-width="2"/>
+            <line x1="20" y1="180" x2="20" y2="186" stroke="#7A736A" stroke-width="0.6"/>
+            <line x1="40" y1="180" x2="40" y2="186" stroke="#7A736A" stroke-width="0.6"/>
+            <line x1="60" y1="180" x2="60" y2="186" stroke="#7A736A" stroke-width="0.6"/>
+            <line x1="80" y1="180" x2="80" y2="186" stroke="#7A736A" stroke-width="0.6"/>
+            <line x1="100" y1="180" x2="100" y2="186" stroke="#7A736A" stroke-width="0.6"/>
+            <line x1="120" y1="180" x2="120" y2="186" stroke="#7A736A" stroke-width="0.6"/>
+            <line x1="160" y1="180" x2="160" y2="186" stroke="#7A736A" stroke-width="0.6"/>
+            <line x1="180" y1="180" x2="180" y2="186" stroke="#7A736A" stroke-width="0.6"/>
+            <line x1="200" y1="180" x2="200" y2="186" stroke="#7A736A" stroke-width="0.6"/>
+            <line x1="220" y1="180" x2="220" y2="186" stroke="#7A736A" stroke-width="0.6"/>
+            <line x1="240" y1="180" x2="240" y2="186" stroke="#7A736A" stroke-width="0.6"/>
+            <line x1="260" y1="180" x2="260" y2="186" stroke="#7A736A" stroke-width="0.6"/>
+
+            <!-- Base del brazo (pirámide truncada) -->
+            <polygon points="120,180 160,180 154,160 126,160" fill="#5a5550" stroke="#1A1814" stroke-width="1.2"/>
+            <rect x="126" y="155" width="28" height="8" fill="#3A352E" stroke="#1A1814" stroke-width="1"/>
+
+            <!-- Eje horizontal de referencia (donde el brazo está a 0°) -->
+            <line x1="140" y1="160" x2="240" y2="160" stroke="#D9D2C2" stroke-width="0.8" stroke-dasharray="3 3"/>
+            <text x="245" y="163" font-family="JetBrains Mono, monospace" font-size="8" fill="#7A736A">0°</text>
+
+            <!-- Brazo "fantasma" en la consigna (línea punteada gris) -->
+            <line id="brazoFantasma"
+                  x1="140" y1="160" x2="140" y2="70"
+                  stroke="#7A736A" stroke-width="2" stroke-dasharray="4 3" opacity="0.55"/>
+            <circle id="puntaFantasma"
+                    cx="140" cy="70" r="5"
+                    fill="none" stroke="#7A736A" stroke-width="1.5" stroke-dasharray="2 2"/>
+
+            <!-- Arco que muestra el ángulo actual -->
+            <path id="arcoActual" d="M 168 160" fill="none" stroke="#C2502A" stroke-width="2.5" opacity="0.7"/>
+
+            <!-- Brazo (segmento principal) -->
+            <line id="brazoSegmento"
+                  x1="140" y1="160" x2="230" y2="160"
+                  stroke="#1A1814" stroke-width="6" stroke-linecap="round"/>
+
+            <!-- Punta del brazo (efector) -->
+            <circle id="puntaBrazo"
+                    cx="230" cy="160" r="7"
+                    fill="#C2502A" stroke="#1A1814" stroke-width="1.5"/>
+
+            <!-- Pivote (en el centro de la base) -->
+            <circle cx="140" cy="160" r="4" fill="#1A1814"/>
+            <circle cx="140" cy="160" r="2" fill="#FAF7F0"/>
+
+            <!-- Indicador del motor (visible junto a la base) -->
+            <g transform="translate(140, 178)">
+              <circle id="motorIndicador" cx="0" cy="0" r="0" fill="#C2502A" opacity="0.5"/>
+            </g>
+
+            <!-- Etiqueta de empujón -->
+            <g id="empujonTag" opacity="0">
+              <rect x="180" y="20" width="80" height="18" rx="2" fill="#B5341E" stroke="#1A1814" stroke-width="1"/>
+              <text x="220" y="33" font-family="JetBrains Mono, monospace" font-size="9"
+                    text-anchor="middle" fill="#FFFFFF" font-weight="600">¡EMPUJÓN!</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="fan-readout">
+          <div class="item ref">
+            <span class="lab">Consigna r</span>
+            <span class="val"><span id="readRef">90</span><span class="unit">°</span></span>
+          </div>
+          <div class="item out">
+            <span class="lab">Ángulo θ</span>
+            <span class="val"><span id="readOut">0.0</span><span class="unit">°</span></span>
+          </div>
+          <div class="item err">
+            <span class="lab">Error e</span>
+            <span class="val"><span id="readErr">90.0</span><span class="unit">°</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 2: DIAGRAMA DE BLOQUES -->
+      <div class="panel">
+        <div class="panel-label">Lazo de control</div>
+        <div class="panel-title">Diagrama de bloques</div>
+
+        <svg class="bd-svg" viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace">
+          <!-- Entrada r -->
+          <text x="10" y="78" font-size="11" fill="#1A1814" font-weight="600">r</text>
+          <line x1="20" y1="75" x2="55" y2="75" stroke="#1A1814" stroke-width="1.5"/>
+          <polygon points="55,72 60,75 55,78" fill="#1A1814"/>
+
+          <!-- Sumador -->
+          <circle cx="68" cy="75" r="9" fill="#FFFFFF" stroke="#1A1814" stroke-width="1.5"/>
+          <text x="68" y="79" font-size="10" text-anchor="middle" fill="#1A1814">Σ</text>
+          <text x="80" y="68" font-size="9" fill="#7A736A">+</text>
+          <text x="80" y="93" font-size="9" fill="#7A736A">−</text>
+
+          <!-- Salida del sumador: error e -->
+          <line x1="77" y1="75" x2="115" y2="75" stroke="#1A1814" stroke-width="1.5"/>
+          <polygon points="115,72 120,75 115,78" fill="#1A1814"/>
+          <text x="92" y="68" font-size="10" fill="#B5341E" font-weight="600">e</text>
+
+          <!-- Bloque regulador PD -->
+          <rect x="115" y="55" width="60" height="40" rx="3" fill="#FFFFFF" stroke="#C2502A" stroke-width="2"/>
+          <text x="145" y="73" font-size="10" text-anchor="middle" fill="#C2502A" font-weight="700">REG PD</text>
+          <text x="145" y="85" font-size="8" text-anchor="middle" fill="#C2502A">K_p · e</text>
+          <text x="145" y="93" font-size="8" text-anchor="middle" fill="#C2502A">+ K_d · de/dt</text>
+
+          <!-- Salida del regulador: m -->
+          <line x1="175" y1="75" x2="200" y2="75" stroke="#1A1814" stroke-width="1.5"/>
+          <polygon points="200,72 205,75 200,78" fill="#1A1814"/>
+          <text x="183" y="68" font-size="10" fill="#B5841A" font-weight="600">m</text>
+
+          <!-- Bloque planta -->
+          <rect x="205" y="58" width="55" height="34" rx="3" fill="#FFFFFF" stroke="#1A1814" stroke-width="1.5"/>
+          <text x="232" y="74" font-size="9" text-anchor="middle" fill="#1A1814">BRAZO</text>
+          <text x="232" y="86" font-size="9" text-anchor="middle" fill="#1A1814">ROBOT</text>
+
+          <!-- Salida θ (ángulo) -->
+          <line x1="260" y1="75" x2="285" y2="75" stroke="#1A1814" stroke-width="1.5"/>
+          <line x1="285" y1="75" x2="285" y2="155" stroke="#1A1814" stroke-width="1.5"/>
+          <text x="270" y="68" font-size="11" fill="#1A75BC" font-weight="600">θ</text>
+
+          <!-- Bifurcación a salida -->
+          <line x1="285" y1="75" x2="295" y2="75" stroke="#1A1814" stroke-width="1.5"/>
+
+          <!-- Realimentación: c -> sumador -->
+          <line x1="285" y1="155" x2="68" y2="155" stroke="#1A1814" stroke-width="1.5"/>
+          <line x1="68" y1="155" x2="68" y2="84" stroke="#1A1814" stroke-width="1.5"/>
+          <polygon points="65,89 68,84 71,89" fill="#1A1814"/>
+
+          <!-- Perturbación (golpe externo al brazo) -->
+          <text x="232" y="30" font-size="10" fill="#7A736A" id="pertLabel">empujón d</text>
+          <line x1="232" y1="35" x2="232" y2="55" stroke="#7A736A" stroke-width="1" stroke-dasharray="3 2" id="pertLine"/>
+          <polygon points="229,52 232,57 235,52" fill="#7A736A" id="pertArrow"/>
+
+          <!-- Indicador animado: pulso de error -->
+          <circle id="errPulse" cx="92" cy="75" r="3" fill="#B5341E" opacity="0.8"/>
+        </svg>
+
+        <p class="bd-explainer">
+          El sumador calcula <code>e = r − θ</code>. El <span class="reg-p-label">regulador PD</span> aplica <code>m = K<sub>p</sub>·e + K<sub>d</sub>·de/dt</code>. El motor recibe <code>m</code> y hace girar el brazo, cuyo ángulo θ se realimenta. Como la consigna es constante, <code>de/dt = −dθ/dt</code>: la D <em>frena</em> proporcionalmente a la velocidad del brazo.
+        </p>
+      </div>
+
+      <!-- PANEL 3: GRÁFICAS -->
+      <div class="panel">
+        <div class="panel-label">Evolución temporal</div>
+        <div class="panel-title">Señales en el tiempo</div>
+
+        <div class="graph-block">
+          <div class="graph-head">
+            <span class="graph-title">Ángulo θ (°)</span>
+            <div class="legend">
+              <span><span class="swatch ref-sw"></span>r consigna</span>
+              <span><span class="swatch out-sw"></span>θ ángulo</span>
+              <span><span class="swatch err-sw"></span>error</span>
+            </div>
+          </div>
+          <canvas class="graph" id="graphVel" width="600" height="220"></canvas>
+        </div>
+
+        <div class="graph-block">
+          <div class="graph-head">
+            <span class="graph-title">Señal de control m</span>
+            <div class="legend">
+              <span><span class="swatch ctrl-sw"></span>m = K<sub>p</sub>·e + K<sub>d</sub>·de/dt</span>
+            </div>
+          </div>
+          <canvas class="graph" id="graphCtrl" width="600" height="100"></canvas>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CONTROLES -->
+    <div class="controls">
+      <div class="ctrl">
+        <div class="ctrl-label">
+          <span>Consigna r</span>
+          <span class="val"><span id="lblRef">90</span> °</span>
+        </div>
+        <input type="range" id="sldRef" min="0" max="180" value="90" step="5">
+      </div>
+      <div class="ctrl">
+        <div class="ctrl-label">
+          <span>Ganancia K<sub>p</sub></span>
+          <span class="val"><span id="lblKp">0.50</span></span>
+        </div>
+        <input type="range" id="sldKp" min="0.05" max="2.0" value="0.50" step="0.05">
+      </div>
+      <div class="ctrl" id="ctrlKd">
+        <div class="ctrl-label">
+          <span>Ganancia K<sub>d</sub></span>
+          <span class="val"><span id="lblKd">0.50</span></span>
+        </div>
+        <input type="range" id="sldKd" min="0.0" max="1.5" value="0.50" step="0.05">
+      </div>
+      <div class="modo-controls" role="group" aria-label="Modo de regulador">
+        <button class="modo-btn" id="modoP" title="Solo acción proporcional">P solo</button>
+        <button class="modo-btn on" id="modoPD" title="Acción proporcional + derivativa">PD</button>
+      </div>
+      <div class="speed-controls" role="group" aria-label="Velocidad de simulación">
+        <button class="speed-btn" id="spdPause" title="Pausar">▮▮</button>
+        <button class="speed-btn step-btn" id="spdStep" title="Avanzar 0,1 s (sólo en pausa)" disabled>▶|</button>
+        <button class="speed-btn" id="spd025" title="Cámara muy lenta">¼×</button>
+        <button class="speed-btn" id="spd050" title="Cámara lenta">½×</button>
+        <button class="speed-btn on" id="spd1" title="Velocidad normal">1×</button>
+      </div>
+      <button class="btn" id="btnPert">Empujón</button>
+      <button class="btn reset" id="btnReset">Reiniciar</button>
+    </div>
+
+  </div>
+
+  <!-- ============ PANEL NARRATIVO ============ -->
+  <div class="narration phase-parado" id="narration">
+    <div class="phase-tag">
+      <span class="num" id="narrNum">00</span>
+      <span class="lab" id="narrLab">EN ESPERA</span>
+    </div>
+    <div class="text-block">
+      <div class="msg" id="narrMsg">Pulsa <em>Reiniciar</em> y observa el arranque, o usa los controles de velocidad para ir paso a paso.</div>
+      <div class="detail" id="narrDetail">Recomendado: pulsa <code>¼×</code> o <code>½×</code> para ver con calma cómo se construye la respuesta.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUÉ OBSERVAR ============ -->
+<section>
+  <div class="section-label">§ Qué observar</div>
+  <h2 class="section-heading">Tres cosas <em>que aprenderás</em> alternando P y PD</h2>
+
+  <div class="observe">
+
+    <div class="obs-card">
+      <div class="num">OBSERVACIÓN 01</div>
+      <h3>P solo: oscila <em>escandalosamente</em>.</h3>
+      <p>Pulsa <em>P solo</em> y reinicia. El brazo arranca con fuerza, pero <em>se pasa</em> hasta los 165° antes de volver. Y luego oscila. Y oscila. Tarda muchísimo en calmarse — porque la fricción mecánica natural del brazo es muy pequeña.</p>
+      <div class="try">▸ El P está empujando bien hacia la consigna, pero <em>no sabe frenar</em>.</div>
+    </div>
+
+    <div class="obs-card">
+      <div class="num">OBSERVACIÓN 02</div>
+      <h3>PD: la frenada anticipada.</h3>
+      <p>Cambia a <em>PD</em> y reinicia. El brazo llega a 90° con apenas overshoot y se queda quieto. La gráfica de m muestra la clave: durante la subida, m se vuelve <em>negativo</em> aunque el brazo todavía no haya llegado. Eso es la D frenando anticipadamente, en cuanto detecta velocidad.</p>
+      <div class="try">▸ Sube y baja K<sub>d</sub>. Verás cómo controla cuántas oscilaciones hay.</div>
+    </div>
+
+    <div class="obs-card">
+      <div class="num">OBSERVACIÓN 03</div>
+      <h3>Un empujón lo demuestra todo.</h3>
+      <p>Con el brazo asentado, pulsa <em>empujón</em>. En P solo, oscilará un buen rato; en PD, recupera la posición rápidamente sin apenas oscilar. La D reacciona <em>al instante</em> a cualquier cambio brusco de velocidad — sea por la consigna o por una perturbación.</p>
+      <div class="try">▸ Por eso el PD se usa en CNC, brazos robóticos, drones — todo lo que necesita posición precisa <em>sin</em> vibrar.</div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  Material didáctico para Tecnología e Ingeniería II · Bloque F · Apartado 7 · Animación 05 de 06
+</footer>
+
+</div>
+
+<script>
+// === DIAGNÓSTICO ===
+// Si no ves el brazo moverse, abre la consola (F12) y comprueba estos logs.
+console.log('[PD] Animación cargada, JS arrancando…');
+window.addEventListener('error', e => console.error('[PD] Error JS:', e.message, 'línea', e.lineno));
+
+// =========================================================================
+//   SIMULACIÓN: Brazo robótico (doble integrador) + Regulador P o PD
+// =========================================================================
+//
+// Modelo físico (sistema mecánico con inercia y fricción viscosa):
+//   J·d²θ/dt² + b·dθ/dt = K·m + τ_pert
+// Es un sistema "tipo doble integrador": sin amortiguamiento adecuado
+// oscila mucho. La D aporta el amortiguamiento que el sistema no tiene.
+//
+// Regulador conmutable:
+//   modo 'P'  → m = K_p · e
+//   modo 'PD' → m = K_p · e + K_d · de/dt
+//              donde de/dt = -dθ/dt (asumiendo ref constante)
+// =========================================================================
+
+const SIM = {
+  // Parámetros físicos del brazo
+  J: 1.0,              // inercia rotacional
+  b: 0.2,              // fricción viscosa (poca → muy oscilante con P solo)
+  K: 5.0,              // ganancia del motor (par por unidad de m)
+  pertAmp: 1.5,        // amplitud de torque perturbador (empujón)
+
+  // Estado (en radianes internamente)
+  theta: 0,            // ángulo actual
+  omega: 0,            // velocidad angular
+  m: 0,                // señal de control
+  e: 0,                // error
+  ref: Math.PI / 2,    // consigna por defecto: 90°
+  Kp: 0.50,            // ganancia proporcional
+  Kd: 0.50,            // ganancia derivativa
+  pert: 0,             // torque perturbador activo
+
+  // Modo
+  modo: 'PD',
+
+  // Tiempo
+  t: 0,
+  dt: 0.01,
+
+  // Aliases para código heredado de buffer/render
+  // y = θ en grados (lo que se grafica)
+  // v = velocidad angular en grados/s (para narración: detectar cambios de signo)
+  y: 0,
+  v: 0,
+  fanAngle: 0,
+
+  // Buffers (8 segundos = 800 muestras)
+  buffer: [],
+  bufferLen: 800,
+
+  // Saturación de m (BIPOLAR: la D produce valores negativos al frenar)
+  mMax: 1.0,
+  mMin: -1.0,
+
+  // Control de velocidad
+  speedMul: 1.0,
+  paused: false
+};
+
+// =========================================================================
+//   ESTADO DE NARRACIÓN AUTOMÁTICA
+// =========================================================================
+const NARR = {
+  fase: 'parado',
+  numFase: 0,
+  estableCounter: 0,
+  pertWasActive: false,
+  pertTimer: 0,
+  ultimaV: 0,
+  ultimaY: 0,
+  ultimaRef: 90,
+  ultimaKp: 0.50,
+  ultimaKd: 0.50,
+  ultimoModo: 'PD',
+  fadeTimer: 0,
+  tEntradaFase: 0
+};
+
+// =========================================================================
+//   PASO DE SIMULACIÓN
+// =========================================================================
+function step() {
+  // 1. Calcular error (en radianes, internamente)
+  SIM.e = SIM.ref - SIM.theta;
+
+  // 2. Acción del regulador
+  let m_raw;
+  if (SIM.modo === 'P') {
+    m_raw = SIM.Kp * SIM.e;
+  } else {
+    // PD: la derivada del error es -dθ/dt cuando ref es constante
+    m_raw = SIM.Kp * SIM.e + SIM.Kd * (-SIM.omega);
+  }
+  SIM.m = Math.max(SIM.mMin, Math.min(SIM.mMax, m_raw));
+
+  // 3. Dinámica del brazo
+  //    α = (K·m - b·ω + τ_pert) / J
+  const alpha = (SIM.K * SIM.m - SIM.b * SIM.omega + SIM.pert) / SIM.J;
+  SIM.omega += alpha * SIM.dt;
+  SIM.theta += SIM.omega * SIM.dt;
+
+  // Decaer perturbación si está activa (es un "empujón" temporal, no constante)
+  if (SIM.pert !== 0) {
+    SIM.pert *= 0.85;  // decae rápido
+    if (Math.abs(SIM.pert) < 0.01) SIM.pert = 0;
+  }
+
+  // 4. Avanzar tiempo
+  SIM.t += SIM.dt;
+
+  // 5. Aliases en grados para narración y render
+  SIM.y = SIM.theta * 180 / Math.PI;
+  SIM.v = SIM.omega * 180 / Math.PI;
+
+  // 6. Guardar muestra
+  SIM.buffer.push({
+    t: SIM.t,
+    ref: SIM.ref * 180 / Math.PI,
+    y: SIM.y,
+    m: SIM.m
+  });
+  if (SIM.buffer.length > SIM.bufferLen) SIM.buffer.shift();
+}
+
+// =========================================================================
+//   NARRACIÓN AUTOMÁTICA
+// =========================================================================
+const FASES = {
+  parado:                 { num: '00', lab: 'EN ESPERA',                cls: 'phase-parado' },
+  arranque:               { num: '01', lab: 'ARRANQUE',                 cls: 'phase-arranque' },
+  acelerando:             { num: '02', lab: 'ACELERANDO',               cls: 'phase-subiendo' },
+  frenando_PD:            { num: '03', lab: 'PD · FRENANDO',            cls: 'phase-subiendo' },
+  pico_grande:            { num: '04', lab: 'OVERSHOOT GRANDE',         cls: 'phase-pico' },
+  pico_pequeno:           { num: '04', lab: 'PICO PEQUEÑO',             cls: 'phase-pico' },
+  oscilando:              { num: '05', lab: 'OSCILACIÓN',               cls: 'phase-oscilando' },
+  estable_P:              { num: '06', lab: 'P · ASENTADO',             cls: 'phase-estable' },
+  estable_PD:             { num: '06', lab: 'PD · ASENTADO',            cls: 'phase-estable' },
+  perturbado:             { num: '07', lab: 'EMPUJÓN',                  cls: 'phase-perturbado' },
+  recuperando_PD:         { num: '08', lab: 'PD · RECUPERANDO',         cls: 'phase-estable' },
+  recuperando_P:          { num: '08', lab: 'P · RECUPERANDO',          cls: 'phase-perturbado' },
+  cambio_modo:            { num: '★',  lab: 'MODO CAMBIADO',            cls: 'phase-arranque' }
+};
+
+function setNarr(fase, msg, detail) {
+  if (NARR.fase === fase) return;
+  NARR.fase = fase;
+  NARR.tEntradaFase = SIM.t;
+  const f = FASES[fase] || FASES.parado;
+  document.getElementById('narrNum').textContent = f.num;
+  document.getElementById('narrLab').textContent = f.lab;
+  document.getElementById('narrMsg').innerHTML = msg;
+  document.getElementById('narrDetail').innerHTML = detail;
+  const panel = document.getElementById('narration');
+  panel.className = 'narration ' + f.cls;
+}
+
+const MIN_FASE_DUR = 0.15;
+function puedeTransitar() { return (SIM.t - (NARR.tEntradaFase || 0)) >= MIN_FASE_DUR; }
+
+function finalizarTransitorio() {
+  const yFinal = SIM.y.toFixed(1);
+  const refDeg = (SIM.ref * 180 / Math.PI).toFixed(0);
+  const errorFinal = Math.abs(SIM.e * 180 / Math.PI).toFixed(2);
+  if (SIM.modo === 'P') {
+    setNarr('estable_P',
+      `<strong>P solo asentado</strong>: el brazo está en <strong>${yFinal}°</strong> tras varias oscilaciones.`,
+      `Sin la D, el sistema solo tiene la fricción <em>natural</em> del brazo (b=0,2) para amortiguar — y es muy poca. ¿Quieres ver la diferencia? Cambia a <em>PD</em>.`
+    );
+  } else {
+    setNarr('estable_PD',
+      `<strong>PD asentado</strong>: el brazo está en <strong>${yFinal}°</strong>, con muy poca oscilación.`,
+      `La D ha aportado el amortiguamiento que faltaba: detectaba la velocidad del brazo y frenaba justo cuando hacía falta. <em>Sin sacrificar la rapidez del P</em>.`
+    );
+  }
+}
+
+function updateNarration() {
+  const refDeg = SIM.ref * 180 / Math.PI;
+  const dvSign = Math.sign(SIM.v) !== Math.sign(NARR.ultimaV) && Math.abs(NARR.ultimaV) > 5;
+
+  // === EVENTO: cambio de modo P ↔ PD ===
+  if (SIM.modo !== NARR.ultimoModo) {
+    if (SIM.modo === 'PD') {
+      setNarr('cambio_modo',
+        'Modo cambiado a <strong>PD</strong>. La acción derivativa se activa: empezará a frenar cuando el brazo se mueva.',
+        'Si el sistema estaba oscilando, lo verás amortiguarse rápidamente. La D detecta la velocidad y la usa para anticipar las frenadas.'
+      );
+    } else {
+      setNarr('cambio_modo',
+        'Modo cambiado a <strong>P solo</strong>. Adiós a la frenada de la D: el brazo sólo tiene su propia fricción para amortiguarse.',
+        'Si das un empujón ahora, verás cuántas oscilaciones tarda en calmarse. Y si reinicias, verás un overshoot enorme al apuntar a la consigna.'
+      );
+    }
+    NARR.ultimoModo = SIM.modo;
+    NARR.estableCounter = 0;
+    return;
+  }
+
+  // === EVENTO: perturbación (empujón) ===
+  if (Math.abs(SIM.pert) > 0.5 && !NARR.pertWasActive) {
+    setNarr('perturbado',
+      'Empujón al brazo: alguien le ha dado un golpe.',
+      SIM.modo === 'P'
+        ? 'Sin D, el brazo va a oscilar varias veces antes de volver al setpoint. La fricción natural es lenta para amortiguar.'
+        : 'La D detecta el cambio brusco de velocidad y aplica una acción de freno proporcional. La oscilación se contiene rápido.'
+    );
+    NARR.pertWasActive = true;
+    NARR.pertTimer = SIM.t;
+    return;
+  }
+  if (NARR.pertWasActive && Math.abs(SIM.pert) < 0.05 && (SIM.t - NARR.pertTimer) > 0.5) {
+    if (Math.abs(SIM.v) < 5 && Math.abs(SIM.e * 180 / Math.PI) < 2) {
+      setNarr(SIM.modo === 'P' ? 'recuperando_P' : 'recuperando_PD',
+        SIM.modo === 'P'
+          ? 'El brazo ha vuelto a su sitio tras oscilar varias veces — pero ha tardado.'
+          : 'El brazo ha vuelto a su sitio sin apenas oscilar. La D ha hecho su trabajo.',
+        'Compara con el otro modo cambiando el toggle. La diferencia está en cómo se gestiona la velocidad del brazo, no su posición.'
+      );
+      NARR.pertWasActive = false;
+    }
+    return;
+  }
+
+  // === Lógica del transitorio (sin perturbación) ===
+  if (!NARR.pertWasActive) {
+    switch (NARR.fase) {
+      case 'parado':
+      case 'cambio_modo':
+        if (SIM.t > 0.05 && Math.abs(SIM.y) > 0.5 && puedeTransitar()) {
+          setNarr('arranque',
+            SIM.modo === 'P'
+              ? `Error <em>máximo</em>: brazo en 0°, consigna ${refDeg.toFixed(0)}°. El P empuja fuerte: <code>m = K<sub>p</sub>·e</code>.`
+              : `Error <em>máximo</em>: brazo en 0°, consigna ${refDeg.toFixed(0)}°. Empieza el P empujando, y la D <em>aún no actúa</em> porque la velocidad inicial es cero.`,
+            SIM.modo === 'PD'
+              ? 'En cuanto el brazo coja velocidad, la D entrará en juego restando: <code>m = K<sub>p</sub>·e − K<sub>d</sub>·ω</code>. Esa resta es la frenada anticipada.'
+              : 'Sin frenada anticipada, prepárate para un overshoot considerable.'
+          );
+        }
+        break;
+      case 'arranque':
+        if (Math.abs(SIM.v) > 30 && puedeTransitar()) {
+          setNarr('acelerando',
+            'El brazo gira rápido hacia la consigna. La velocidad angular crece.',
+            SIM.modo === 'PD'
+              ? 'La D ahora <em>resta</em> a m proporcionalmente a esa velocidad. Mira la gráfica de m: ya no es una copia escalada del error, baja antes.'
+              : 'En P solo, m sigue siendo una copia escalada del error. Cuando llegue a la consigna, m valdrá cero — pero la inercia tirará del brazo más allá.'
+          );
+        }
+        break;
+      case 'acelerando':
+        // Detectar si m se vuelve negativo: la D está frenando
+        if (SIM.modo === 'PD' && SIM.m < -0.05 && SIM.y < refDeg && puedeTransitar()) {
+          setNarr('frenando_PD',
+            '<em>m se vuelve negativo</em>: la D está aplicando torque <strong>en sentido contrario</strong> al movimiento.',
+            'Eso es la frenada anticipada del PD. El brazo aún no ha llegado a la consigna, pero la D ya está frenándolo. Por eso luego no se pasa.'
+          );
+        } else if (SIM.e < 0 && puedeTransitar()) {
+          // Llegó al setpoint, está sobrepasando
+          if (SIM.modo === 'P') {
+            setNarr('pico_grande',
+              `Pasada de largo. El brazo va a llegar a unos <strong>${(refDeg + (refDeg - SIM.e * 180/Math.PI - refDeg) * 0).toFixed(0)}°</strong>. La inercia no encuentra freno.`,
+              'Esto no es un overshoot pequeño: con poca fricción y sin D, el sistema oscila muchísimo. Va a tardar varios ciclos en calmarse.'
+            );
+          } else {
+            setNarr('pico_pequeno',
+              'Pequeño rebase del setpoint. La D ha hecho un buen trabajo, pero la inercia tiende a arrastrar un poquito.',
+              'Compara con el modo P: aquí el rebase es de pocos grados, no decenas. Y ya viene de bajada.'
+            );
+          }
+        }
+        break;
+      case 'frenando_PD':
+        if (SIM.e < 0 && puedeTransitar()) {
+          setNarr('pico_pequeno',
+            'El brazo apenas se pasa de la consigna. La D ha amortiguado bien.',
+            'Mira la gráfica de m: durante esta fase de frenado m era negativo, ahora vuelve a estar cerca de cero — y a partir de aquí la D mantendrá el brazo cerquita.'
+          );
+        }
+        break;
+      case 'pico_grande':
+      case 'pico_pequeno':
+        if (dvSign && SIM.v > 0 && puedeTransitar()) {
+          setNarr('oscilando',
+            SIM.modo === 'P'
+              ? 'Vaivén: cada oscilación es algo más pequeña, pero el sistema tarda en calmarse.'
+              : 'Pequeña oscilación residual: la D la amortigua rápidamente.',
+            SIM.modo === 'P'
+              ? 'Con poca fricción y sin D, los sistemas oscilantes así son típicos. En la industria, esto puede dañar el sistema mecánico — por eso la D es tan común en posicionamiento.'
+              : 'Esta es la firma del PD: rápido al apuntar, suave al asentar. Justo lo que se necesita en CNC, robótica, drones, etc.'
+          );
+        }
+        if (Math.abs(SIM.v) < 3 && Math.abs(SIM.e * 180 / Math.PI) < 2) NARR.estableCounter++;
+        else NARR.estableCounter = 0;
+        if (NARR.estableCounter > 80 && puedeTransitar()) {
+          finalizarTransitorio();
+          NARR.estableCounter = 0;
+        }
+        break;
+      case 'oscilando':
+        if (Math.abs(SIM.v) < 3 && Math.abs(SIM.e * 180 / Math.PI) < 2) NARR.estableCounter++;
+        else NARR.estableCounter = 0;
+        if (NARR.estableCounter > 80 && puedeTransitar()) {
+          finalizarTransitorio();
+          NARR.estableCounter = 0;
+        }
+        break;
+    }
+  }
+
+  // === EVENTO: cambio de consigna o ganancias ===
+  if ((NARR.fase === 'estable_P' || NARR.fase === 'estable_PD' ||
+       NARR.fase === 'recuperando_P' || NARR.fase === 'recuperando_PD') &&
+      (Math.abs(refDeg - NARR.ultimaRef) > 1 ||
+       Math.abs(SIM.Kp - NARR.ultimaKp) > 0.005 ||
+       Math.abs(SIM.Kd - NARR.ultimaKd) > 0.005)) {
+    setNarr('arranque',
+      'Has cambiado un parámetro. El brazo busca un nuevo equilibrio.',
+      'Observa cómo la dinámica cambia con tu nuevo valor.'
+    );
+    NARR.estableCounter = 0;
+  }
+
+  NARR.ultimaV = SIM.v;
+  NARR.ultimaY = SIM.y;
+  NARR.ultimaRef = refDeg;
+  NARR.ultimaKp = SIM.Kp;
+  NARR.ultimaKd = SIM.Kd;
+}
+
+// =========================================================================
+//   RENDER DEL BRAZO ROBÓTICO
+// =========================================================================
+const brazoSVG = document.getElementById('brazoSegmento');
+const brazoFantasma = document.getElementById('brazoFantasma');
+const arcoActual = document.getElementById('arcoActual');
+const motorIndicador = document.getElementById('motorIndicador');
+const empujonTag = document.getElementById('empujonTag');
+
+// Convención: pivote en (140, 160). Brazo de longitud 90px.
+// θ=0° → horizontal a la derecha; θ creciendo en sentido antihorario.
+const PIVOT_X = 140, PIVOT_Y = 160;
+const BRAZO_LEN = 90;
+
+function angToXY(thetaRad) {
+  return {
+    x: PIVOT_X + BRAZO_LEN * Math.cos(thetaRad),
+    y: PIVOT_Y - BRAZO_LEN * Math.sin(thetaRad)
+  };
+}
+
+function renderBrazo() {
+  // 1. Brazo actual (segmento desde pivote)
+  const p = angToXY(SIM.theta);
+  brazoSVG.setAttribute('x2', p.x.toFixed(1));
+  brazoSVG.setAttribute('y2', p.y.toFixed(1));
+
+  // 2. Posición fantasma de la consigna
+  const pRef = angToXY(SIM.ref);
+  brazoFantasma.setAttribute('x2', pRef.x.toFixed(1));
+  brazoFantasma.setAttribute('y2', pRef.y.toFixed(1));
+  document.getElementById('puntaFantasma').setAttribute('cx', pRef.x.toFixed(1));
+  document.getElementById('puntaFantasma').setAttribute('cy', pRef.y.toFixed(1));
+
+  // 3. Punta del brazo
+  document.getElementById('puntaBrazo').setAttribute('cx', p.x.toFixed(1));
+  document.getElementById('puntaBrazo').setAttribute('cy', p.y.toFixed(1));
+
+  // 4. Arco que muestra el ángulo actual (un sector circular pequeño)
+  // Lo dibujamos como un path de arco al radio 30
+  const r = 28;
+  const x_end = PIVOT_X + r * Math.cos(SIM.theta);
+  const y_end = PIVOT_Y - r * Math.sin(SIM.theta);
+  const largeArc = Math.abs(SIM.theta) > Math.PI ? 1 : 0;
+  const sweepFlag = SIM.theta < 0 ? 1 : 0;
+  const arcPath = `M ${PIVOT_X + r} ${PIVOT_Y} A ${r} ${r} 0 ${largeArc} ${sweepFlag} ${x_end.toFixed(1)} ${y_end.toFixed(1)}`;
+  arcoActual.setAttribute('d', arcPath);
+
+  // 5. Indicador del motor (proporcional a |m|, color según signo)
+  const absm = Math.abs(SIM.m);
+  motorIndicador.setAttribute('r', absm * 9);
+  motorIndicador.setAttribute('fill', SIM.m >= 0 ? '#C2502A' : '#1A75BC');
+
+  // 6. Etiqueta de empujón visible cuando hay perturbación activa
+  empujonTag.setAttribute('opacity', Math.abs(SIM.pert) > 0.05 ? 1.0 : 0.0);
+}
+
+// Wrapper para mantener nombre histórico (loop principal llama renderFan)
+function renderFan(deltaSec) { renderBrazo(); }
+
+// Render inicial inmediato (sin esperar al primer requestAnimationFrame)
+console.log('[PD] Posicionando brazo inicial…');
+renderBrazo();
+console.log('[PD] OK. Estado: theta=' + (SIM.theta * 180 / Math.PI).toFixed(1) +
+            '°, ref=' + (SIM.ref * 180 / Math.PI).toFixed(1) +
+            '°, modo=' + SIM.modo);
+
+// Log periódico para verificar que el loop avanza (cada segundo)
+setInterval(() => {
+  if (!SIM.paused) {
+    console.log(`[PD] t=${SIM.t.toFixed(1)}s, θ=${SIM.y.toFixed(1)}°, m=${SIM.m.toFixed(3)}, modo=${SIM.modo}`);
+  }
+}, 1000);
+
+// =========================================================================
+//   RENDER DE LECTURAS NUMÉRICAS
+// =========================================================================
+const readRef = document.getElementById('readRef');
+const readOut = document.getElementById('readOut');
+const readErr = document.getElementById('readErr');
+
+function renderReadouts() {
+  const refDeg = SIM.ref * 180 / Math.PI;
+  const errDeg = SIM.e * 180 / Math.PI;
+  readRef.textContent = refDeg.toFixed(0);
+  readOut.textContent = SIM.y.toFixed(1);
+  readErr.textContent = errDeg.toFixed(1);
+}
+
+// =========================================================================
+//   RENDER DE GRÁFICAS
+// =========================================================================
+const cvVel = document.getElementById('graphVel');
+const ctxVel = cvVel.getContext('2d');
+const cvCtrl = document.getElementById('graphCtrl');
+const ctxCtrl = cvCtrl.getContext('2d');
+
+function setupCanvas(cv, ctx) {
+  // Hi-DPI
+  const ratio = window.devicePixelRatio || 1;
+  const rect = cv.getBoundingClientRect();
+  cv.width = rect.width * ratio;
+  cv.height = rect.height * ratio;
+  ctx.scale(ratio, ratio);
+  return { w: rect.width, h: rect.height };
+}
+
+let velDims = setupCanvas(cvVel, ctxVel);
+let ctrlDims = setupCanvas(cvCtrl, ctxCtrl);
+
+window.addEventListener('resize', () => {
+  // Reset canvas para hi-dpi tras resize
+  ctxVel.setTransform(1, 0, 0, 1, 0, 0);
+  ctxCtrl.setTransform(1, 0, 0, 1, 0, 0);
+  velDims = setupCanvas(cvVel, ctxVel);
+  ctrlDims = setupCanvas(cvCtrl, ctxCtrl);
+});
+
+function renderGraphs() {
+  if (SIM.buffer.length < 2) return;
+
+  // ----- Gráfica velocidad -----
+  const { w: W, h: H } = velDims;
+  const padL = 36, padR = 8, padT = 10, padB = 22;
+  const plotW = W - padL - padR;
+  const plotH = H - padT - padB;
+
+  ctxVel.clearRect(0, 0, W, H);
+
+  // Fondo cuadriculado sutil
+  ctxVel.strokeStyle = '#E8E2D3';
+  ctxVel.lineWidth = 0.5;
+  for (let i = 0; i <= 4; i++) {
+    const y = padT + (plotH * i / 4);
+    ctxVel.beginPath();
+    ctxVel.moveTo(padL, y);
+    ctxVel.lineTo(W - padR, y);
+    ctxVel.stroke();
+  }
+
+  // Ejes
+  ctxVel.strokeStyle = '#7A736A';
+  ctxVel.lineWidth = 1;
+  ctxVel.beginPath();
+  ctxVel.moveTo(padL, padT);
+  ctxVel.lineTo(padL, H - padB);
+  ctxVel.lineTo(W - padR, H - padB);
+  ctxVel.stroke();
+
+  // Etiquetas Y (grados)
+  ctxVel.fillStyle = '#7A736A';
+  ctxVel.font = '9px JetBrains Mono, monospace';
+  ctxVel.textAlign = 'right';
+  ctxVel.textBaseline = 'middle';
+  const yMax = 200;
+  const yMin = -10;
+  const yRange = yMax - yMin;
+  for (let i = 0; i <= 4; i++) {
+    const val = yMax - yRange * i / 4;
+    const y = padT + (plotH * i / 4);
+    ctxVel.fillText(Math.round(val) + '°', padL - 4, y);
+  }
+
+  // Eje X (tiempo): muestra los últimos 8s
+  const tWindow = 8;
+  const tNow = SIM.t;
+  const tMin = tNow - tWindow;
+  ctxVel.textAlign = 'center';
+  ctxVel.textBaseline = 'top';
+  for (let i = 0; i <= 5; i++) {
+    const x = padL + plotW * i / 5;
+    const tVal = tMin + tWindow * i / 5;
+    if (tVal >= 0) {
+      ctxVel.fillText(tVal.toFixed(1) + 's', x, H - padB + 4);
+    }
+  }
+
+  // Función mapeo
+  const tToX = (t) => padL + plotW * (t - tMin) / tWindow;
+  const yToY = (val) => padT + plotH * (1 - (val - yMin) / yRange);
+
+  // BANDA DE ERROR (sombreado entre ref y y)
+  ctxVel.fillStyle = 'rgba(181, 52, 30, 0.15)';
+  ctxVel.beginPath();
+  let started = false;
+  for (const s of SIM.buffer) {
+    if (s.t < tMin) continue;
+    if (!started) {
+      ctxVel.moveTo(tToX(s.t), yToY(s.ref));
+      started = true;
+    } else {
+      ctxVel.lineTo(tToX(s.t), yToY(s.ref));
+    }
+  }
+  // Volver por la línea de y
+  for (let i = SIM.buffer.length - 1; i >= 0; i--) {
+    const s = SIM.buffer[i];
+    if (s.t < tMin) break;
+    ctxVel.lineTo(tToX(s.t), yToY(s.y));
+  }
+  ctxVel.closePath();
+  ctxVel.fill();
+
+  // Línea de referencia r (negra fina)
+  ctxVel.strokeStyle = '#1A1814';
+  ctxVel.lineWidth = 1.2;
+  ctxVel.beginPath();
+  let first = true;
+  for (const s of SIM.buffer) {
+    if (s.t < tMin) continue;
+    const x = tToX(s.t);
+    const y = yToY(s.ref);
+    if (first) { ctxVel.moveTo(x, y); first = false; }
+    else ctxVel.lineTo(x, y);
+  }
+  ctxVel.stroke();
+
+  // Línea de salida c (azul gruesa)
+  ctxVel.strokeStyle = '#1A75BC';
+  ctxVel.lineWidth = 2.2;
+  ctxVel.beginPath();
+  first = true;
+  for (const s of SIM.buffer) {
+    if (s.t < tMin) continue;
+    const x = tToX(s.t);
+    const y = yToY(s.y);
+    if (first) { ctxVel.moveTo(x, y); first = false; }
+    else ctxVel.lineTo(x, y);
+  }
+  ctxVel.stroke();
+
+  // Cursor vertical "AHORA" cuando está en pausa o cámara lenta
+  if (SIM.speedMul < 1.0 && SIM.buffer.length > 0) {
+    const tNowReal = SIM.buffer[SIM.buffer.length - 1].t;
+    const xNow = tToX(tNowReal);
+    if (xNow > padL && xNow < W - padR) {
+      ctxVel.strokeStyle = SIM.paused ? '#B5341E' : '#7A736A';
+      ctxVel.lineWidth = SIM.paused ? 1.5 : 1;
+      ctxVel.setLineDash(SIM.paused ? [] : [3, 3]);
+      ctxVel.beginPath();
+      ctxVel.moveTo(xNow, padT);
+      ctxVel.lineTo(xNow, H - padB);
+      ctxVel.stroke();
+      ctxVel.setLineDash([]);
+      // Etiqueta "AHORA"
+      if (SIM.paused) {
+        ctxVel.fillStyle = '#B5341E';
+        ctxVel.font = 'bold 9px JetBrains Mono, monospace';
+        ctxVel.textAlign = 'left';
+        ctxVel.textBaseline = 'top';
+        ctxVel.fillText('AHORA', xNow + 3, padT + 2);
+      }
+    }
+  }
+
+  // ----- Gráfica señal de control m -----
+  const { w: W2, h: H2 } = ctrlDims;
+  const padL2 = 36, padR2 = 8, padT2 = 8, padB2 = 18;
+  const plotW2 = W2 - padL2 - padR2;
+  const plotH2 = H2 - padT2 - padB2;
+
+  ctxCtrl.clearRect(0, 0, W2, H2);
+
+  // Fondo cuadriculado sutil
+  ctxCtrl.strokeStyle = '#E8E2D3';
+  ctxCtrl.lineWidth = 0.5;
+  for (let i = 0; i <= 2; i++) {
+    const y = padT2 + (plotH2 * i / 2);
+    ctxCtrl.beginPath();
+    ctxCtrl.moveTo(padL2, y);
+    ctxCtrl.lineTo(W2 - padR2, y);
+    ctxCtrl.stroke();
+  }
+
+  // Ejes
+  ctxCtrl.strokeStyle = '#7A736A';
+  ctxCtrl.lineWidth = 1;
+  ctxCtrl.beginPath();
+  ctxCtrl.moveTo(padL2, padT2);
+  ctxCtrl.lineTo(padL2, H2 - padB2);
+  ctxCtrl.lineTo(W2 - padR2, H2 - padB2);
+  ctxCtrl.stroke();
+
+  // Etiquetas Y (m bipolar: -1, -0.5, 0, +0.5, +1)
+  ctxCtrl.fillStyle = '#7A736A';
+  ctxCtrl.font = '9px JetBrains Mono, monospace';
+  ctxCtrl.textAlign = 'right';
+  ctxCtrl.textBaseline = 'middle';
+  const mMax = 1.0;
+  const mRangeFull = 2.0;
+  const labels = [+1.0, +0.5, 0.0, -0.5, -1.0];
+  for (let i = 0; i < labels.length; i++) {
+    const y = padT2 + (plotH2 * i / 4);
+    const lbl = (labels[i] > 0 ? '+' : '') + labels[i].toFixed(1);
+    ctxCtrl.fillText(lbl, padL2 - 4, y);
+  }
+
+  // Línea cero remarcada
+  const yZero = padT2 + plotH2 * 0.5;
+  ctxCtrl.strokeStyle = '#1A1814';
+  ctxCtrl.lineWidth = 1;
+  ctxCtrl.beginPath();
+  ctxCtrl.moveTo(padL2, yZero);
+  ctxCtrl.lineTo(W2 - padR2, yZero);
+  ctxCtrl.stroke();
+
+  // Mapeo bipolar (-1 → bottom, +1 → top, 0 → centro)
+  const tToX2 = (t) => padL2 + plotW2 * (t - tMin) / tWindow;
+  const mToY = (val) => {
+    const v = Math.max(-mMax, Math.min(mMax, val));
+    return padT2 + plotH2 * (1 - (v + mMax) / mRangeFull);
+  };
+
+  // Área bajo m (relleno tenue) — desde el eje cero
+  ctxCtrl.fillStyle = 'rgba(181, 132, 26, 0.15)';
+  ctxCtrl.beginPath();
+  let started2 = false;
+  for (const s of SIM.buffer) {
+    if (s.t < tMin) continue;
+    if (!started2) {
+      ctxCtrl.moveTo(tToX2(s.t), yZero);
+      ctxCtrl.lineTo(tToX2(s.t), mToY(s.m));
+      started2 = true;
+    } else {
+      ctxCtrl.lineTo(tToX2(s.t), mToY(s.m));
+    }
+  }
+  if (started2) {
+    const lastT = SIM.buffer[SIM.buffer.length - 1].t;
+    ctxCtrl.lineTo(tToX2(lastT), yZero);
+    ctxCtrl.closePath();
+    ctxCtrl.fill();
+  }
+
+  // Línea m
+  ctxCtrl.strokeStyle = '#B5841A';
+  ctxCtrl.lineWidth = 2;
+  ctxCtrl.beginPath();
+  let first2 = true;
+  for (const s of SIM.buffer) {
+    if (s.t < tMin) continue;
+    const x = tToX2(s.t);
+    const y = mToY(s.m);
+    if (first2) { ctxCtrl.moveTo(x, y); first2 = false; }
+    else ctxCtrl.lineTo(x, y);
+  }
+  ctxCtrl.stroke();
+
+  // Cursor "AHORA" también en gráfica de m
+  if (SIM.speedMul < 1.0 && SIM.buffer.length > 0) {
+    const tNowReal = SIM.buffer[SIM.buffer.length - 1].t;
+    const xNow = tToX2(tNowReal);
+    if (xNow > padL2 && xNow < W2 - padR2) {
+      ctxCtrl.strokeStyle = SIM.paused ? '#B5341E' : '#7A736A';
+      ctxCtrl.lineWidth = SIM.paused ? 1.5 : 1;
+      ctxCtrl.setLineDash(SIM.paused ? [] : [3, 3]);
+      ctxCtrl.beginPath();
+      ctxCtrl.moveTo(xNow, padT2);
+      ctxCtrl.lineTo(xNow, H2 - padB2);
+      ctxCtrl.stroke();
+      ctxCtrl.setLineDash([]);
+    }
+  }
+}
+
+// =========================================================================
+//   PULSO ANIMADO EN EL DIAGRAMA (indica que hay error)
+// =========================================================================
+const errPulse = document.getElementById('errPulse');
+const pertLabel = document.getElementById('pertLabel');
+const pertLine = document.getElementById('pertLine');
+const pertArrow = document.getElementById('pertArrow');
+
+function renderDiagram() {
+  // El "pulso" del error es proporcional al error normalizado
+  const errNorm = Math.min(1, Math.abs(SIM.e) / 1500);
+  const r = 2 + errNorm * 5;
+  errPulse.setAttribute('r', r);
+  errPulse.setAttribute('opacity', 0.3 + errNorm * 0.6);
+
+  // Resaltar perturbación cuando está activa
+  if (SIM.pert > 0) {
+    pertLabel.setAttribute('fill', '#B5341E');
+    pertLine.setAttribute('stroke', '#B5341E');
+    pertLine.setAttribute('stroke-width', '1.6');
+    pertArrow.setAttribute('fill', '#B5341E');
+  } else {
+    pertLabel.setAttribute('fill', '#7A736A');
+    pertLine.setAttribute('stroke', '#7A736A');
+    pertLine.setAttribute('stroke-width', '1');
+    pertArrow.setAttribute('fill', '#7A736A');
+  }
+}
+
+// =========================================================================
+//   LOOP PRINCIPAL
+// =========================================================================
+let lastTimestamp = 0;
+let accumulator = 0;
+
+function loop(timestamp) {
+  const deltaMs = lastTimestamp ? (timestamp - lastTimestamp) : 16;
+  lastTimestamp = timestamp;
+  const deltaSec = Math.min(deltaMs / 1000, 0.1); // cap
+
+  // Avanzar simulación a paso fijo dt, modulado por speedMul (0=pausa)
+  // Cuando speedMul=0, el accumulator no crece y no se ejecuta step().
+  // El render sigue activo (las gráficas se siguen redibujando con el último estado).
+  accumulator += deltaSec * SIM.speedMul;
+  while (accumulator >= SIM.dt) {
+    step();
+    updateNarration();
+    accumulator -= SIM.dt;
+  }
+
+  // El brazo también se actualiza con la simulación
+  renderFan(deltaSec * SIM.speedMul);
+  renderReadouts();
+  renderGraphs();
+  renderDiagram();
+
+  requestAnimationFrame(loop);
+}
+
+// =========================================================================
+//   CONTROLES UI
+// =========================================================================
+const sldRef = document.getElementById('sldRef');
+const sldKp = document.getElementById('sldKp');
+const sldKd = document.getElementById('sldKd');
+const lblRef = document.getElementById('lblRef');
+const lblKp = document.getElementById('lblKp');
+const lblKd = document.getElementById('lblKd');
+const ctrlKd = document.getElementById('ctrlKd');
+const modoP = document.getElementById('modoP');
+const modoPD = document.getElementById('modoPD');
+const btnPert = document.getElementById('btnPert');
+const btnReset = document.getElementById('btnReset');
+
+sldRef.addEventListener('input', () => {
+  // El slider está en grados; convertir a radianes internamente
+  const refDeg = parseFloat(sldRef.value);
+  SIM.ref = refDeg * Math.PI / 180;
+  lblRef.textContent = refDeg.toFixed(0);
+});
+
+sldKp.addEventListener('input', () => {
+  SIM.Kp = parseFloat(sldKp.value);
+  lblKp.textContent = SIM.Kp.toFixed(2);
+});
+
+sldKd.addEventListener('input', () => {
+  SIM.Kd = parseFloat(sldKd.value);
+  lblKd.textContent = SIM.Kd.toFixed(2);
+});
+
+// Toggle Modo P / PD
+function setModo(nuevoModo) {
+  SIM.modo = nuevoModo;
+  if (nuevoModo === 'P') {
+    modoP.classList.add('on');
+    modoPD.classList.remove('on');
+    ctrlKd.classList.add('disabled');
+  } else {
+    modoPD.classList.add('on');
+    modoP.classList.remove('on');
+    ctrlKd.classList.remove('disabled');
+  }
+}
+modoP.addEventListener('click', () => setModo('P'));
+modoPD.addEventListener('click', () => setModo('PD'));
+
+btnPert.addEventListener('click', () => {
+  // Empujón: aplica un torque súbito que decae rápido (ver step())
+  SIM.pert = SIM.pertAmp * (Math.random() > 0.5 ? 1 : -1);  // dirección aleatoria
+  btnPert.classList.add('active');
+  setTimeout(() => btnPert.classList.remove('active'), 300);
+});
+
+btnReset.addEventListener('click', () => {
+  SIM.theta = 0;
+  SIM.omega = 0;
+  SIM.y = 0;
+  SIM.v = 0;
+  SIM.m = 0;
+  SIM.e = SIM.ref;
+  SIM.t = 0;
+  SIM.fanAngle = 0;
+  SIM.buffer = [];
+  SIM.pert = 0;
+  btnPert.classList.remove('active');
+  NARR.fase = 'parado';
+  NARR.estableCounter = 0;
+  NARR.pertWasActive = false;
+  NARR.ultimaV = 0;
+  NARR.ultimaY = 0;
+  NARR.ultimaRef = SIM.ref * 180 / Math.PI;
+  NARR.ultimaKp = SIM.Kp;
+  NARR.ultimaKd = SIM.Kd;
+  NARR.ultimoModo = SIM.modo;
+  setNarr('parado',
+    `Sistema reiniciado en modo <strong>${SIM.modo}</strong>. El brazo está en 0° y la consigna pide <strong>${(SIM.ref * 180 / Math.PI).toFixed(0)}°</strong>.`,
+    'Recomendado: pulsa <code>¼×</code> o <code>½×</code> para ver con calma cómo el brazo se mueve. Y prueba a alternar entre P y PD durante el régimen para ver el contraste.'
+  );
+  NARR.fase = 'parado';
+});
+
+// =========================================================================
+//   CONTROLES DE VELOCIDAD Y PAUSA
+// =========================================================================
+const spdPause = document.getElementById('spdPause');
+const spdStep = document.getElementById('spdStep');
+const spd025 = document.getElementById('spd025');
+const spd050 = document.getElementById('spd050');
+const spd1   = document.getElementById('spd1');
+const speedBtns = [spdPause, spd025, spd050, spd1];
+
+function setSpeed(mul, btn) {
+  SIM.speedMul = mul;
+  SIM.paused = (mul === 0);
+  speedBtns.forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  spdStep.disabled = !SIM.paused;
+  // Vaciar el accumulator al cambiar de velocidad para no arrastrar tiempo acumulado
+  accumulator = 0;
+  // Actualizar status del header
+  const statusText = document.getElementById('statusText');
+  const statusDot = document.querySelector('.status .dot');
+  if (mul === 0) {
+    statusText.textContent = 'PAUSADO';
+    statusDot.style.background = 'var(--error)';
+    statusDot.style.animation = 'none';
+  } else if (mul === 1) {
+    statusText.textContent = 'EN MARCHA';
+    statusDot.style.background = 'var(--output)';
+    statusDot.style.animation = 'pulse 1.6s ease-in-out infinite';
+  } else {
+    statusText.textContent = 'CÁMARA LENTA · ' + (mul === 0.25 ? '¼×' : '½×');
+    statusDot.style.background = 'var(--control)';
+    statusDot.style.animation = 'pulse 1.6s ease-in-out infinite';
+  }
+}
+
+spdPause.addEventListener('click', () => setSpeed(0, spdPause));
+spd025.addEventListener('click',  () => setSpeed(0.25, spd025));
+spd050.addEventListener('click',  () => setSpeed(0.5, spd050));
+spd1.addEventListener('click',    () => setSpeed(1.0, spd1));
+
+// Paso a paso: avanza ~0.1 s (5 pasos de dt=0.02) cuando está en pausa
+spdStep.addEventListener('click', () => {
+  if (!SIM.paused) return;
+  for (let i = 0; i < 10; i++) {
+    step();
+    updateNarration();
+  }
+});
+
+// Arrancar
+requestAnimationFrame(loop);
+
+</script>
+
+</body>
+</html>

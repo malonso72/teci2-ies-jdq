@@ -556,6 +556,17 @@ MathJax = {
 
 <div class="cuerpo">
 
+<!-- ═══ HUB DE RECURSOS INTERACTIVOS ═══ -->
+<div style="margin:8px 0 22px;padding:14px 18px;background:#FAFBFD;border:1px solid var(--borde);border-left:5px solid var(--azul2);border-radius:0 8px 8px 0;">
+  <div style="font-family:var(--cond);font-weight:700;color:var(--azul);font-size:14pt;margin-bottom:8px;">🧰 Recursos interactivos del Bloque F</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;font-size:9.5pt;">
+    <a href="../apoyo/bloque_F/estabilidad_error.html" target="_blank" rel="noopener" style="padding:6px 12px;background:#fff;border:1px solid var(--borde);border-radius:5px;color:var(--azul);text-decoration:none;font-weight:600;">⚖ Estabilidad y error</a>
+    <a href="../apoyo/bloque_F/reguladores_pid.html" target="_blank" rel="noopener" style="padding:6px 12px;background:#fff;border:1px solid var(--borde);border-radius:5px;color:var(--azul);text-decoration:none;font-weight:600;">🎛 Reguladores PID</a>
+    <a href="../apoyo/bloque_F/presentacion_sensores.html" target="_blank" rel="noopener" style="padding:6px 12px;background:#fff;border:1px solid var(--borde);border-radius:5px;color:var(--azul);text-decoration:none;font-weight:600;">🔍 Sensores y actuadores</a>
+    <a href="../apoyo/bloque_F/mini_examen.html" target="_blank" rel="noopener" style="padding:6px 12px;background:#fff;border:1px solid var(--borde);border-radius:5px;color:var(--azul);text-decoration:none;font-weight:600;">📝 Mini-examen</a>
+  </div>
+</div>
+
 <!-- ═══ SECCIÓN 1 ═══ -->
 <div class="seccion" id="F_s1">
   <div class="sec-hdr"><div class="sec-num">1</div><div class="sec-tit">Introducción a los sistemas automáticos</div></div>
@@ -977,21 +988,50 @@ MathJax = {
     <p style="font-size:9pt;color:var(--texto2);">Cada lazo aporta un término al denominador de la función de transferencia final.</p>
   </div>
 
+  <h3>5.11 Procedimiento general de simplificación</h3>
+  <p>Para simplificar cualquier diagrama de bloques se aplica el siguiente procedimiento ordenado:</p>
+  <ol>
+    <li><strong>Analizar el diagrama</strong>: identificar la entrada, la salida, los bloques, los comparadores y los lazos de realimentación.</li>
+    <li><strong>Simplificar bloques en serie</strong>: multiplicar sus funciones de transferencia.</li>
+    <li><strong>Simplificar bloques en paralelo</strong>: sumar sus funciones de transferencia respetando signos.</li>
+    <li><strong>Simplificar lazos de realimentación</strong> aplicando \(G_{eq} = G / (1 \pm G\cdot H)\), <em>empezando siempre por el lazo más interno</em>.</li>
+    <li>Repetir hasta obtener un único bloque equivalente.</li>
+    <li>Sustituir los valores numéricos y calcular el resultado.</li>
+  </ol>
+
   <div class="callout callout-key">
-    <span class="callout-icon">★</span>
-    <div><strong>Procedimiento de resolución:</strong> (1) Identificar bloques, lazos y señales → (2) Simplificar serie/paralelo → (3) Aplicar lazo cerrado (de dentro a fuera) → (4) Obtener expresión algebraica → (5) Sustituir valores numéricos. <em>Nunca sustituir antes de simplificar algebraicamente.</em></div>
+    <span class="callout-icon">⭐</span>
+    <div><strong>Importante para PEvAU.</strong> En el examen se piden normalmente dos pasos distintos: (1) obtener la <em>expresión algebraica</em> de \(G_{eq}\) en función de \(G_1\), \(G_2\), \(H\)…, y (2) sustituir los <em>valores numéricos</em> para calcular el resultado. <strong>Nunca sustituir antes de simplificar algebraicamente.</strong></div>
   </div>
 
+  <h3>5.12 Cálculo del error en lazo cerrado</h3>
+  <p>En un sistema con realimentación negativa, el <strong>error</strong> se define como la diferencia entre la referencia y la señal realimentada:</p>
   <div class="caja def">
-    <strong>Cálculo del error en lazo cerrado</strong><br>
-    <div class="formula-line" style="font-size:12pt;color:var(--naranja);">\(e = r - H \cdot c\) &nbsp;&nbsp;con&nbsp;&nbsp; \(c = G_{eq} \cdot r\)</div>
-    <p style="font-size:9pt;color:var(--texto2);">Ejemplo: \(G_{eq} = 1{,}5\) · \(H = 0{,}5\) · \(r = 10\) → \(c = 15\) → \(e = 10 - 0{,}5 \cdot 15 = 2{,}5\)</p>
+    <strong>Definición del error</strong><br>
+    <div class="formula-line" style="font-size:13pt;color:var(--naranja);">\(e = r - H \cdot c\) &nbsp;&nbsp;con&nbsp;&nbsp; \(c = G_{eq} \cdot r\)</div>
+  </div>
+  <p>Si se conoce la función de transferencia equivalente \(G_{eq}\), la salida vale \(c = G_{eq}\cdot r\). Combinando ambas expresiones se calcula el error para cualquier entrada \(r\).</p>
+  <div class="caja clave">
+    <strong>Ejemplo resuelto.</strong> Sistema con \(G = 6\), \(H = 0{,}5\) (realimentación negativa) y entrada \(r = 10\):
+    <ul style="margin:6px 0 0 20px;">
+      <li>\(G_{eq} = G/(1+G\cdot H) = 6/4 = 1{,}5\)</li>
+      <li>\(c = G_{eq} \cdot r = 1{,}5 \cdot 10 = 15\)</li>
+      <li>\(e = r - H\cdot c = 10 - 0{,}5\cdot 15 = \boxed{2{,}5}\)</li>
+    </ul>
   </div>
 </div>
 
 <!-- ═══ SECCIÓN 6 ═══ -->
 <div class="seccion" id="F_s6">
   <div class="sec-hdr"><div class="sec-num">6</div><div class="sec-tit">Estabilidad de sistemas <span class="exig nucleo">Núcleo: análisis cualitativo</span> <span class="exig ampliacion">Ampliación: Routh-Hurwitz, lugar de las raíces, Bode, Nyquist</span></div></div>
+
+  <div style="margin:10px 0 14px;padding:12px 16px;background:linear-gradient(135deg,#FEF0DF,#FFF7E8);border-left:4px solid var(--naranja);border-radius:5px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:220px;">
+      <strong style="color:var(--naranja);font-family:var(--cond);font-size:12pt;">▶ Recurso interactivo</strong><br>
+      <span style="font-size:9.5pt;color:var(--texto2);">Profundiza en el concepto de <em>estabilidad</em> y aprende a calcular el <em>error en régimen permanente</em> con ejemplos paso a paso, gráficas dinámicas y ejercicios resueltos.</span>
+    </div>
+    <a href="../apoyo/bloque_F/estabilidad_error.html" target="_blank" rel="noopener" style="display:inline-block;padding:9px 18px;background:var(--naranja);color:#fff;text-decoration:none;font-family:var(--sans);font-weight:600;font-size:10pt;border-radius:5px;box-shadow:0 2px 6px rgba(212,112,10,.3);white-space:nowrap;">Estabilidad y error →</a>
+  </div>
 
   <div class="img-container"><img src="data:image/png;base64,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" alt="Estabilidad" style="max-width:580px;border-radius:5px;box-shadow:0 2px 12px rgba(0,0,0,.12);"><div class="img-caption">Comparación: sistema estable (oscilaciones amortiguadas) vs inestable (oscilaciones crecientes).</div></div>
 
@@ -1014,11 +1054,36 @@ MathJax = {
   <div class="caja def">
     <strong>Comportamiento frente a perturbaciones:</strong> un sistema estable absorbe la perturbación y vuelve al equilibrio. Un sistema inestable amplifica la perturbación hasta destruirse o saturarse.
   </div>
+
+  <h3>Ejemplo tipo PEvAU — Identificación de la estabilidad</h3>
+  <p>Un sistema de control de temperatura tiene <strong>realimentación negativa</strong> con \(G = 5\) y \(H = 0{,}5\). ¿Es estable el sistema? Justifica la respuesta.</p>
+  <div class="caja clave">
+    <strong>Resolución.</strong>
+    <ul style="margin:6px 0 0 20px;">
+      <li>Producto \(G\cdot H = 5\cdot 0{,}5 = 2{,}5\)</li>
+      <li>Aplicando realimentación negativa: \(G_{eq} = \dfrac{G}{1 + G\cdot H} = \dfrac{5}{1 + 2{,}5} = \dfrac{5}{3{,}5} \approx 1{,}43\)</li>
+      <li>El denominador \((1 + G\cdot H) = 3{,}5 > 0\) → <strong>el sistema es estable</strong>.</li>
+      <li>La realimentación negativa reduce la ganancia de 5 a 1,43 y estabiliza el sistema.</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-key">
+    <span class="callout-icon">💡</span>
+    <div><strong>Nota PEvAU.</strong> Las preguntas más frecuentes sobre estabilidad en Andalucía son: (1) indicar si un sistema es estable o inestable y justificarlo cualitativamente; (2) explicar por qué la realimentación negativa estabiliza y la positiva puede desestabilizar; (3) relacionar la estabilidad con el valor del producto \(G\cdot H\) en el denominador de la función de transferencia.</div>
+  </div>
 </div>
 
 <!-- ═══ SECCIÓN 7 ═══ -->
 <div class="seccion" id="F_s7">
   <div class="sec-hdr"><div class="sec-num">7</div><div class="sec-tit">Reguladores industriales (P, I, D, PI, PD, PID)</div></div>
+
+  <div style="margin:10px 0 14px;padding:12px 16px;background:linear-gradient(135deg,#FEF0DF,#FFF7E8);border-left:4px solid var(--naranja);border-radius:5px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:220px;">
+      <strong style="color:var(--naranja);font-family:var(--cond);font-size:12pt;">▶ Recurso interactivo</strong><br>
+      <span style="font-size:9.5pt;color:var(--texto2);">Estudia las acciones P, I, D y sus combinaciones (PI, PD, PID) con simulaciones de respuesta temporal, comparativas y casos prácticos.</span>
+    </div>
+    <a href="../apoyo/bloque_F/reguladores_pid.html" target="_blank" rel="noopener" style="display:inline-block;padding:9px 18px;background:var(--naranja);color:#fff;text-decoration:none;font-family:var(--sans);font-weight:600;font-size:10pt;border-radius:5px;box-shadow:0 2px 6px rgba(212,112,10,.3);white-space:nowrap;">Reguladores PID →</a>
+  </div>
 
   <div class="video-group">
     <a class="btn-video" href="https://youtu.be/nIwBZx4DP0g" target="_blank" rel="noopener">📹 Controlador PID</a>
@@ -1467,6 +1532,14 @@ MathJax = {
 <div class="seccion" id="F_s8">
   <div class="sec-hdr"><div class="sec-num">8</div><div class="sec-tit">Sensores y transductores</div></div>
 
+  <div style="margin:10px 0 14px;padding:12px 16px;background:linear-gradient(135deg,#FEF0DF,#FFF7E8);border-left:4px solid var(--naranja);border-radius:5px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:220px;">
+      <strong style="color:var(--naranja);font-family:var(--cond);font-size:12pt;">▶ Presentación interactiva</strong><br>
+      <span style="font-size:9.5pt;color:var(--texto2);">Galería visual de <em>sensores y actuadores</em>: ldr, ldvt, encoder, galga, fototransistor, electroválvula, motores CA/CC/paso a paso, cilindros… con imagen y descripción de cada uno.</span>
+    </div>
+    <a href="../apoyo/bloque_F/presentacion_sensores.html" target="_blank" rel="noopener" style="display:inline-block;padding:9px 18px;background:var(--naranja);color:#fff;text-decoration:none;font-family:var(--sans);font-weight:600;font-size:10pt;border-radius:5px;box-shadow:0 2px 6px rgba(212,112,10,.3);white-space:nowrap;">Sensores y actuadores →</a>
+  </div>
+
   <p>Un <strong>sensor</strong> detecta una magnitud física. Un <strong>transductor</strong> la convierte en otra (normalmente eléctrica) para que el sistema de control pueda procesarla.</p>
 
   <h3>Sensores de posición y proximidad</h3>
@@ -1514,8 +1587,56 @@ MathJax = {
 <div class="seccion" id="F_s9">
   <div class="sec-hdr"><div class="sec-num">9</div><div class="sec-tit">Actuadores</div></div>
 
-  <p>Elemento que ejecuta la acción de control sobre la planta, transformando la señal de control en una acción física.</p>
+  <div class="callout callout-info">
+    <span class="callout-icon">📌</span>
+    <div><strong>Posición en el sistema.</strong> El actuador se sitúa entre el regulador y la planta. Recibe la señal de control \(m(t)\) generada por el regulador y la transforma en una <em>acción física</em> (movimiento, calor, caudal…) que modifica la variable de salida \(c(t)\).</div>
+  </div>
 
+  <h3>9.1 Concepto de actuador</h3>
+  <p>Un <strong>actuador</strong> es el elemento del sistema de control encargado de transformar la señal de control procedente del regulador en una <strong>acción física</strong> sobre el sistema. Actúa directamente sobre la planta modificando el valor de la variable controlada.</p>
+  <p>Ejemplos rápidos:</p>
+  <ul>
+    <li>En un sistema de calefacción, el actuador puede ser una <strong>resistencia eléctrica</strong> que produce calor.</li>
+    <li>En el control de velocidad de un motor, el actuador es el propio <strong>motor eléctrico</strong>.</li>
+    <li>En un sistema hidráulico, el actuador puede ser una <strong>válvula</strong> que regula el caudal.</li>
+  </ul>
+
+  <h3>9.2 Motores eléctricos</h3>
+  <p>Transforman la energía eléctrica en <strong>movimiento mecánico de rotación</strong>. Son uno de los actuadores más utilizados en sistemas de control. La velocidad o el par del motor pueden regularse mediante la señal de control \(m(t)\) procedente del regulador.</p>
+  <p>Tipos principales:</p>
+  <ul>
+    <li><strong>Motor de corriente continua (CC)</strong>: control sencillo y preciso de la velocidad. Sistemas de velocidad variable.</li>
+    <li><strong>Motor de corriente alterna (CA)</strong>: robusto y económico, de uso general en industria y electrodomésticos.</li>
+    <li><strong>Servomotor</strong>: control preciso de posición y velocidad. Robótica y máquinas CNC.</li>
+    <li><strong>Motor paso a paso</strong>: gira en pasos discretos. Posicionamiento exacto sin sensor. Impresoras 3D.</li>
+  </ul>
+
+  <h3>9.3 Cilindros neumáticos e hidráulicos</h3>
+  <p>Transforman la energía de un fluido a presión en <strong>movimiento mecánico lineal</strong>.</p>
+  <ul>
+    <li><strong>Cilindros neumáticos</strong>: utilizan aire comprimido. Movimientos rápidos en automatización industrial.</li>
+    <li><strong>Cilindros hidráulicos</strong>: utilizan aceite a presión, lo que permite generar <em>fuerzas mucho mayores</em>. Maquinaria pesada y prensas.</li>
+  </ul>
+  <p>El movimiento del cilindro se controla mediante <strong>válvulas</strong> que regulan el paso del fluido.</p>
+
+  <h3>9.4 Resistencias calefactoras</h3>
+  <p>Transforman la energía eléctrica en energía térmica mediante el <strong>efecto Joule</strong>. La potencia térmica generada depende de la señal de control aplicada, lo que permite regular la temperatura del sistema.</p>
+  <p>Aplicaciones: calefacción, hornos eléctricos, termos, secadoras, climatización industrial.</p>
+
+  <h3>9.5 Válvulas de control</h3>
+  <p>Regulan el paso de fluidos en sistemas neumáticos, hidráulicos o térmicos. La apertura puede controlarse mediante señales eléctricas, neumáticas o hidráulicas.</p>
+  <p>Variando la apertura se controla el <strong>caudal, la presión, el nivel o la temperatura</strong> del sistema.</p>
+
+  <h3>9.6 Otros actuadores</h3>
+  <ul>
+    <li><strong>Electroválvula</strong>: válvula accionada eléctricamente para control todo/nada del paso de fluidos.</li>
+    <li><strong>Relé / contactor</strong>: controla circuitos de potencia mediante señales eléctricas débiles.</li>
+    <li><strong>Bomba</strong>: transforma energía eléctrica en movimiento de fluidos. Circuitos hidráulicos y de agua.</li>
+    <li><strong>Ventilador</strong>: genera movimiento de aire para temperatura o ventilación.</li>
+    <li><strong>Lámpara</strong>: transforma energía eléctrica en luz. Señalización e iluminación automática.</li>
+  </ul>
+
+  <h3>9.7 Tabla resumen de actuadores</h3>
   <table>
     <tr><th>Tipo</th><th>Energía</th><th>Ejemplos</th><th>Aplicación</th></tr>
     <tr><td><strong>Motores eléctricos</strong></td><td>Eléctrica → mecánica</td><td>Motor CC, motor CA, servomotor, motor paso a paso</td><td>Robótica, CNC, ascensores, cintas</td></tr>
@@ -1527,6 +1648,20 @@ MathJax = {
     <tr><td><strong>Relé / contactor</strong></td><td>Eléctrica → conmutación de circuitos</td><td>Relé electromecánico, contactor</td><td>Encendido/apagado de cargas</td></tr>
     <tr><td><strong>Bombas</strong></td><td>Eléctrica → movimiento de fluidos</td><td>Bombas centrífugas, de engranajes</td><td>Circuitos hidráulicos, agua</td></tr>
   </table>
+
+  <h3>9.8 Ejemplo tipo PEvAU</h3>
+  <p><strong>Identificación de actuadores según la aplicación.</strong> Indique qué actuador utilizaría en cada caso y justifique brevemente la respuesta:</p>
+  <ol type="a">
+    <li><strong>Regular la temperatura de un horno industrial.</strong><br>→ <strong>Resistencia calefactora.</strong> Transforma la señal eléctrica en calor mediante el efecto Joule, permitiendo regular la temperatura.</li>
+    <li><strong>Desplazar una pieza en una línea de montaje automática.</strong><br>→ <strong>Cilindro neumático.</strong> Convierte el aire comprimido en movimiento lineal, ideal para desplazamientos rápidos en automatización.</li>
+    <li><strong>Controlar el caudal de agua en una tubería.</strong><br>→ <strong>Válvula de control.</strong> Regula el paso del fluido variando su apertura en función de la señal de control.</li>
+    <li><strong>Posicionar con precisión el brazo de un robot.</strong><br>→ <strong>Servomotor.</strong> Permite un control preciso de posición y velocidad, diseñado para aplicaciones robóticas.</li>
+  </ol>
+
+  <div class="callout callout-key">
+    <span class="callout-icon">💡</span>
+    <div><strong>Nota PEvAU.</strong> Las preguntas más frecuentes en Andalucía son: (1) identificar qué actuador se utilizaría para una aplicación concreta y justificarlo; (2) clasificar actuadores según el tipo de energía que transforman; (3) explicar brevemente el funcionamiento de un actuador concreto. La tabla resumen y el ejemplo son las herramientas de estudio más útiles.</div>
+  </div>
 </div>
 
 <!-- ═══ SECCIÓN 10 ═══ -->

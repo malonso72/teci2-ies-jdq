@@ -1,0 +1,3794 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estabilidad y error en régimen permanente · TECI II · Bloque F</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #FAF7F0;
+  --paper-2: #F4EFE3;
+  --ink: #1A1814;
+  --ink-soft: #3A352E;
+  --muted: #7A736A;
+  --rule: #D9D2C2;
+  --rule-soft: #E8E2D3;
+  --surface: #FFFFFF;
+
+  --reference: #1A1814;
+  --output: #0B6E4F;
+  --output-light: #C7E9D9;
+  --output-tint: rgba(11, 110, 79, 0.08);
+  --error: #B5341E;
+  --error-light: #F2D2C9;
+  --error-tint: rgba(181, 52, 30, 0.18);
+
+  --signal: #1A75BC;
+  --signal-light: #BFE2F4;
+
+  --warning: #B5841A;
+  --warning-light: rgba(181, 132, 26, 0.12);
+  --warning-tint: rgba(181, 132, 26, 0.18);
+
+  --shadow-1: 0 1px 2px rgba(26, 24, 20, 0.04), 0 4px 12px rgba(26, 24, 20, 0.06);
+  --shadow-2: 0 2px 4px rgba(26, 24, 20, 0.04), 0 12px 32px rgba(26, 24, 20, 0.10);
+
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse at top left, rgba(26, 117, 188, 0.04), transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(11, 110, 79, 0.04), transparent 50%);
+  background-attachment: fixed;
+}
+
+.container { max-width: 1320px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+/* ============ HEADER ============ */
+header.masthead {
+  border-top: 4px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 1.25rem 0 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.masthead-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.masthead-meta .left, .masthead-meta .right { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+
+h1.title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2rem, 5.5vw, 4.2rem);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144;
+  margin-bottom: 1rem;
+}
+
+h1.title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.subtitle {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  color: var(--ink-soft);
+  max-width: 64ch;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+
+.scope-pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.scope-pill {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  padding: 0.35rem 0.7rem;
+  border-radius: 2px;
+}
+
+/* ============ SECTIONS ============ */
+section { margin-bottom: 4rem; }
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-label::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--ink);
+}
+
+h2.section-heading {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.25rem;
+  max-width: 36ch;
+}
+
+h2.section-heading em { font-style: italic; color: var(--ink-soft); }
+
+.lede {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 65ch;
+  font-weight: 400;
+}
+
+.lede .dropcap {
+  font-family: var(--serif);
+  font-weight: 700;
+  float: left;
+  font-size: 4.2rem;
+  line-height: 0.85;
+  padding: 0.4rem 0.6rem 0 0;
+  color: var(--ink);
+}
+
+.lede em { color: var(--ink); font-style: italic; font-weight: 500; }
+.lede strong { color: var(--ink); font-weight: 600; font-style: normal; }
+
+.note-prose {
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 70ch;
+  margin-top: 1.5rem;
+}
+.note-prose em { color: var(--ink); font-style: italic; font-weight: 500; }
+.note-prose strong { color: var(--ink); font-weight: 600; font-style: normal; }
+.note-prose code { font-family: var(--mono); font-size: 0.92em; background: var(--warning-light); padding: 1px 6px; border-radius: 2px; color: var(--ink); }
+
+/* ============ CONCEPTS ============ */
+.concepts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.concept {
+  background: var(--surface);
+  border: 1px solid var(--rule-soft);
+  border-radius: 4px;
+  padding: 1.5rem 1.4rem 1.4rem;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.concept:hover { transform: translateY(-2px); box-shadow: var(--shadow-1); }
+
+.concept .num {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.concept h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.concept p { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.55; }
+
+.concept .formula {
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--rule);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* ============ STEP EXPLAINER (entrada escalón) ============ */
+.step-explainer {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 2.5rem;
+  margin-top: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 800px) {
+  .step-explainer { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+.step-formula-block {
+  background: var(--paper-2);
+  border-radius: 6px;
+  padding: 1.5rem;
+  margin: 1.5rem 0 1.5rem;
+  border-left: 3px solid var(--output);
+}
+
+.step-formula-block .formula-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.step-formula-block .formula-big {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+  line-height: 1.4;
+}
+
+.step-formula-block .cases {
+  display: inline-flex;
+  flex-direction: column;
+  border-left: 2px solid var(--ink);
+  padding-left: 0.85rem;
+  font-size: 0.95rem;
+  font-style: normal;
+  font-family: var(--mono);
+}
+
+.step-formula-block .cases span { padding: 0.15rem 0; color: var(--ink-soft); }
+
+.step-formula-block .formula-note {
+  font-family: var(--serif);
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  line-height: 1.55;
+}
+.step-formula-block .formula-note em { color: var(--output); font-weight: 500; }
+
+.why-heading {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  margin: 1.5rem 0 0.75rem;
+}
+
+.why-list {
+  list-style: none;
+  margin-bottom: 1.25rem;
+}
+.why-list li {
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  position: relative;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  border-bottom: 1px dashed var(--rule);
+}
+.why-list li:last-child { border-bottom: 0; }
+.why-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--output);
+  font-weight: 700;
+  font-family: var(--mono);
+}
+.why-list li strong { color: var(--ink); font-weight: 600; }
+
+.step-examples {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1.25rem 1.4rem;
+  margin-top: 1.25rem;
+}
+.step-examples-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--signal);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.step-examples ul { list-style: none; }
+.step-examples li {
+  padding: 0.5rem 0 0.5rem 1.4rem;
+  position: relative;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  border-bottom: 1px dashed var(--rule-soft);
+}
+.step-examples li:last-child { border-bottom: 0; }
+.step-examples li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--signal);
+  font-weight: 700;
+}
+.step-examples em { color: var(--ink); font-style: italic; font-weight: 500; }
+
+.step-diagram {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-1);
+}
+.step-diagram svg { width: 100%; height: auto; display: block; }
+.step-diagram .caption {
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--rule-soft);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ============ BLOCK DIAGRAM ============ */
+.block-section {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 2rem;
+  margin-top: 2rem;
+  box-shadow: var(--shadow-1);
+}
+
+.diagram-wrap {
+  background: var(--paper-2);
+  border-radius: 4px;
+  padding: 1.5rem 1rem;
+  position: relative;
+}
+
+.diagram-wrap svg { width: 100%; height: auto; display: block; }
+
+.diagram-readout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+@media (max-width: 600px) { .diagram-readout { grid-template-columns: 1fr; } }
+
+.readout-context {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--rule);
+}
+.readout-context .rc-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+.readout-context .rc-data {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.readout {
+  background: var(--paper-2);
+  border-radius: 4px;
+  padding: 0.85rem 1rem;
+  border-left: 3px solid var(--rule);
+  text-align: center;
+}
+.readout.r { border-left-color: var(--reference); }
+.readout.y { border-left-color: var(--output); }
+.readout.e { border-left-color: var(--error); }
+
+.readout .key {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.readout .val {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.readout.r .val { color: var(--reference); }
+.readout.y .val { color: var(--output); }
+.readout.e .val { color: var(--error); }
+
+.diagram-explainer {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.diagram-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.step-card {
+  padding: 1rem;
+  border: 1px solid var(--rule-soft);
+  border-radius: 4px;
+  background: var(--paper);
+}
+.step-card .n {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--signal);
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.step-card h4 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.35rem;
+}
+.step-card p {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+/* ============ WORKED EXAMPLE ============ */
+.worked-example {
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.75rem 1.75rem 1.5rem;
+  margin-top: 2rem;
+}
+.worked-example .we-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--rule);
+}
+.worked-example .we-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+.worked-example .we-data {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+.we-steps { display: flex; flex-direction: column; gap: 0.55rem; }
+.we-step {
+  display: flex;
+  gap: 0.85rem;
+  align-items: baseline;
+  font-size: 0.96rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.we-step .we-n {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 2px;
+}
+.we-step code {
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  color: var(--ink);
+  background: rgba(181, 132, 26, 0.08);
+  padding: 1px 6px;
+  border-radius: 2px;
+}
+.we-step strong { color: var(--ink); font-weight: 600; }
+.we-result {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--rule);
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+.we-result span strong {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--ink);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  margin-left: 0.4rem;
+}
+
+/* ============ SIMULATOR (canvas + controls) ============ */
+.sim-block {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.75rem 1.75rem 1.5rem;
+  margin-top: 2rem;
+  box-shadow: var(--shadow-1);
+}
+
+.sim-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.sim-title {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.sim-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--signal);
+  font-weight: 600;
+}
+
+.sim-canvas-wrap {
+  background: var(--paper-2);
+  border-radius: 4px;
+  padding: 0.5rem;
+  position: relative;
+}
+.sim-canvas-wrap canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.sim-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  background: var(--paper-2);
+  border-radius: 4px;
+}
+
+.sim-btn {
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.15s ease;
+}
+.sim-btn:hover { background: var(--signal); }
+.sim-btn.secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+}
+.sim-btn.secondary:hover { background: var(--paper); border-color: var(--ink); }
+
+.sim-btn svg { width: 11px; height: 11px; }
+
+.sim-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex: 1;
+  min-width: 200px;
+}
+.sim-slider-row label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.sim-slider-row input[type="range"] {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: var(--rule);
+  border-radius: 2px;
+  outline: none;
+}
+.sim-slider-row input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--signal);
+  cursor: pointer;
+  border: 2px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--signal);
+}
+.sim-slider-row input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--signal);
+  cursor: pointer;
+  border: 2px solid var(--paper);
+}
+.sim-slider-row .slider-val {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--paper);
+  padding: 0.25rem 0.6rem;
+  border-radius: 2px;
+  border: 1px solid var(--rule);
+  min-width: 60px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.sim-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.sim-metric {
+  background: var(--paper-2);
+  padding: 0.75rem 0.85rem;
+  border-radius: 3px;
+  border-left: 3px solid var(--rule);
+}
+.sim-metric .m-label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+.sim-metric .m-value {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.sim-metric.ok { border-left-color: var(--output); }
+.sim-metric.ok .m-value { color: var(--output); }
+.sim-metric.bad { border-left-color: var(--error); }
+.sim-metric.bad .m-value { color: var(--error); }
+.sim-metric.warn { border-left-color: var(--warning); }
+.sim-metric.warn .m-value { color: var(--warning); }
+.sim-metric.signal { border-left-color: var(--signal); }
+.sim-metric.signal .m-value { color: var(--signal); }
+
+.sim-status {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 4px;
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  border-left: 3px solid;
+}
+.sim-status .status-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block;
+  margin-right: 0.6rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+}
+.sim-status.ok { background: var(--output-tint); border-left-color: var(--output); color: var(--ink-soft); }
+.sim-status.ok .status-tag { background: var(--output); color: var(--paper); }
+.sim-status.warn { background: var(--warning-tint); border-left-color: var(--warning); color: var(--ink-soft); }
+.sim-status.warn .status-tag { background: var(--warning); color: var(--paper); }
+.sim-status.bad { background: var(--error-tint); border-left-color: var(--error); color: var(--ink-soft); }
+.sim-status.bad .status-tag { background: var(--error); color: var(--paper); }
+.sim-status strong { color: var(--ink); font-weight: 600; }
+
+/* ============ SIMULATOR DUAL (estable / inestable) ============ */
+.sim-dual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+@media (max-width: 800px) { .sim-dual { grid-template-columns: 1fr; } }
+
+/* Nota explicativa de orden de sistemas */
+.order-note {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.75rem;
+  margin-top: 2rem;
+  box-shadow: var(--shadow-1);
+}
+.order-note-text {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.order-note-text h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+.order-note-text p {
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 70ch;
+}
+.order-note-text p strong { color: var(--ink); font-weight: 600; }
+
+.order-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+@media (max-width: 800px) { .order-grid { grid-template-columns: 1fr; } }
+
+.order-card {
+  background: var(--paper-2);
+  border-radius: 4px;
+  padding: 1.2rem 1.25rem 1.1rem;
+  border-top: 3px solid var(--output);
+  display: flex;
+  flex-direction: column;
+}
+.order-card .order-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--output);
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.order-card h4 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.6rem;
+}
+.order-card .order-svg-wrap {
+  background: var(--surface);
+  border-radius: 3px;
+  padding: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+.order-card .order-svg-wrap svg { width: 100%; height: auto; display: block; }
+.order-card p {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  margin-bottom: 0.85rem;
+}
+.order-card p em { color: var(--ink); font-style: italic; font-weight: 500; }
+.order-card .order-examples {
+  margin-top: auto;
+  padding-top: 0.7rem;
+  border-top: 1px dashed var(--rule);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  font-style: italic;
+}
+
+.sim-dual-panel {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.4rem;
+  box-shadow: var(--shadow-1);
+}
+.sim-dual-panel.stable { border-top: 3px solid var(--output); }
+.sim-dual-panel.unstable { border-top: 3px solid var(--error); }
+
+.sim-dual-panel .sim-title { font-size: 1.05rem; }
+.sim-dual-panel .sim-tag { font-size: 0.65rem; }
+.sim-dual-panel.stable .sim-tag { color: var(--output); }
+.sim-dual-panel.unstable .sim-tag { color: var(--error); }
+
+.dual-controls-center {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+.dual-controls-center .sim-btn { font-size: 0.85rem; padding: 0.65rem 1.25rem; }
+.dual-controls-center .tip {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+}
+
+/* ============ DENOMINATOR SIM (the new pedagogical one) ============ */
+.denom-sim {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.75rem;
+  margin-top: 2rem;
+  box-shadow: var(--shadow-1);
+}
+
+.denom-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+@media (max-width: 900px) { .denom-grid { grid-template-columns: 1fr; } }
+
+.denom-canvas-side {
+  display: flex;
+  flex-direction: column;
+}
+
+.denom-info-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.denom-display {
+  background: var(--paper-2);
+  border-radius: 6px;
+  padding: 1.25rem;
+  border-left: 4px solid var(--rule);
+  transition: border-color 0.25s ease;
+}
+.denom-display.ok { border-left-color: var(--output); }
+.denom-display.warn { border-left-color: var(--warning); }
+.denom-display.bad { border-left-color: var(--error); }
+
+.denom-display .dd-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.denom-display .dd-formula {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.45rem;
+}
+.denom-display .dd-value {
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.denom-display.ok .dd-value { color: var(--output); }
+.denom-display.warn .dd-value { color: var(--warning); }
+.denom-display.bad .dd-value { color: var(--error); }
+
+.denom-display .dd-secondary {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-top: 0.5rem;
+}
+
+.denom-cases {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.denom-case {
+  padding: 0.75rem;
+  border-radius: 4px;
+  border: 1px solid;
+  text-align: center;
+  transition: all 0.25s ease;
+  opacity: 0.4;
+}
+.denom-case.active { opacity: 1; transform: scale(1.04); }
+
+.denom-case.ok { border-color: var(--output); background: var(--output-tint); }
+.denom-case.warn { border-color: var(--warning); background: var(--warning-tint); }
+.denom-case.bad { border-color: var(--error); background: var(--error-tint); }
+
+.denom-case .dc-cond {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.denom-case.ok .dc-cond { color: var(--output); }
+.denom-case.warn .dc-cond { color: var(--warning); }
+.denom-case.bad .dc-cond { color: var(--error); }
+
+.denom-case .dc-verdict {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.denom-case.ok .dc-verdict { color: var(--output); }
+.denom-case.warn .dc-verdict { color: var(--warning); }
+.denom-case.bad .dc-verdict { color: var(--error); }
+
+.denom-explainer {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule-soft);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 800px) { .denom-explainer { grid-template-columns: 1fr; } }
+
+.denom-explain-card {
+  padding: 1rem;
+  background: var(--paper-2);
+  border-radius: 4px;
+  border-top: 3px solid;
+}
+.denom-explain-card.ok { border-top-color: var(--output); }
+.denom-explain-card.warn { border-top-color: var(--warning); }
+.denom-explain-card.bad { border-top-color: var(--error); }
+
+.denom-explain-card h4 {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.45rem;
+}
+.denom-explain-card.ok h4 { color: var(--output); }
+.denom-explain-card.warn h4 { color: var(--warning); }
+.denom-explain-card.bad h4 { color: var(--error); }
+
+.denom-explain-card p {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+.denom-explain-card p strong { color: var(--ink); font-weight: 600; }
+.denom-explain-card p code { font-family: var(--mono); font-size: 0.85em; background: var(--surface); padding: 1px 5px; border-radius: 2px; }
+
+/* ============ FEEDBACK COMPARISON ============ */
+.feedback-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+@media (max-width: 720px) { .feedback-row { grid-template-columns: 1fr; } }
+
+.feedback-card {
+  background: var(--surface);
+  border: 1px solid var(--rule-soft);
+  border-radius: 6px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.feedback-card.neg { border-left: 3px solid var(--output); }
+.feedback-card.pos { border-left: 3px solid var(--error); }
+.feedback-card .fb-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.feedback-card.neg .fb-tag { color: var(--output); }
+.feedback-card.pos .fb-tag { color: var(--error); }
+.feedback-card h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.6rem;
+}
+.feedback-card p {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+.feedback-card .formula-box {
+  background: var(--paper-2);
+  border: 1px dashed var(--rule);
+  padding: 0.85rem 1rem;
+  border-radius: 3px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 1.02rem;
+  font-weight: 600;
+  margin-top: auto;
+}
+.feedback-card.neg .formula-box { color: var(--output); }
+.feedback-card.pos .formula-box { color: var(--error); }
+
+/* ============ Q&A BLOCK ============ */
+.qa-block {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.75rem;
+  margin-top: 2rem;
+  box-shadow: var(--shadow-1);
+}
+
+.qa-q {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule-soft);
+  position: relative;
+  padding-left: 2.5rem;
+}
+.qa-q::before {
+  content: "Q.";
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-style: normal;
+  color: var(--signal);
+  letter-spacing: 0.1em;
+}
+
+.qa-a {
+  font-family: var(--sans);
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  padding-left: 2.5rem;
+  position: relative;
+}
+.qa-a::before {
+  content: "A.";
+  position: absolute;
+  left: 0;
+  top: 0.05em;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--output);
+  letter-spacing: 0.1em;
+}
+.qa-a strong { color: var(--ink); font-weight: 600; }
+.qa-a code {
+  font-family: var(--mono);
+  font-size: 0.95em;
+  background: var(--warning-light);
+  color: var(--ink);
+  padding: 1px 6px;
+  border-radius: 2px;
+}
+
+.qa-numerical {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--rule);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 600px) { .qa-numerical { grid-template-columns: 1fr; } }
+.qa-num-card {
+  padding: 0.85rem 1rem;
+  background: var(--paper-2);
+  border-radius: 3px;
+  border-left: 3px solid;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.qa-num-card.ok { border-left-color: var(--output); }
+.qa-num-card.bad { border-left-color: var(--error); }
+.qa-num-card strong { display: block; color: var(--ink); margin-bottom: 0.2rem; font-weight: 600; }
+
+/* Diagramas comparativos lazo abierto vs cerrado */
+.qa-diagrams {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+@media (max-width: 800px) { .qa-diagrams { grid-template-columns: 1fr; } }
+
+.qa-diag-card {
+  background: var(--paper-2);
+  border-radius: 4px;
+  padding: 1.1rem 1.2rem 1rem;
+  border-top: 3px solid;
+  display: flex;
+  flex-direction: column;
+}
+.qa-diag-card.ok { border-top-color: var(--output); }
+.qa-diag-card.bad { border-top-color: var(--error); }
+
+.qa-diag-card .qd-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.qa-diag-card.ok .qd-tag { color: var(--output); }
+.qa-diag-card.bad .qd-tag { color: var(--error); }
+
+.qa-diag-card h4 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.6rem;
+}
+
+.qa-diag-svg-wrap {
+  background: var(--surface);
+  border-radius: 3px;
+  padding: 0.75rem 0.5rem;
+  margin-bottom: 0.85rem;
+}
+.qa-diag-svg-wrap svg { width: 100%; height: auto; display: block; }
+
+.qa-diag-eq {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0.6rem 0.75rem;
+  background: var(--surface);
+  border: 1px dashed var(--rule);
+  border-radius: 3px;
+  margin-bottom: 0.85rem;
+  line-height: 1.5;
+}
+.qa-diag-card.ok .qa-diag-eq { color: var(--output); }
+.qa-diag-card.bad .qa-diag-eq { color: var(--error); }
+
+.qa-diag-card p {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  margin: 0;
+}
+.qa-diag-card p strong { display: inline; color: var(--ink); font-weight: 600; }
+.qa-diag-card.bad p strong.verdict { color: var(--error); font-weight: 700; }
+
+/* Bloque enunciado y tabla comparativa dentro de worked-example */
+.we-enunciado {
+  background: var(--surface);
+  border-left: 3px solid var(--signal);
+  border-radius: 3px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.25rem;
+  font-family: var(--serif);
+  font-size: 0.96rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.we-enunciado strong { color: var(--ink); font-weight: 600; }
+.we-enunciado em { color: var(--ink); font-style: italic; font-weight: 500; }
+
+.we-subblock {
+  margin-top: 1.25rem;
+  padding-top: 1.1rem;
+  border-top: 1px dashed var(--rule);
+}
+.we-subblock-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--signal);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.compare-table {
+  display: grid;
+  grid-template-columns: auto repeat(3, 1fr);
+  gap: 0;
+  margin-top: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.compare-table > div {
+  padding: 0.6rem 0.85rem;
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  border-bottom: 1px solid var(--rule-soft);
+  border-right: 1px solid var(--rule-soft);
+  display: flex;
+  align-items: center;
+}
+.compare-table > div:nth-last-child(-n+4) { border-bottom: 0; }
+.compare-table > div:nth-child(4n) { border-right: 0; }
+.compare-table .ct-head {
+  background: var(--paper-2);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  justify-content: center;
+}
+.compare-table .ct-row-label {
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--paper-2);
+}
+.compare-table .ct-val {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--ink);
+  justify-content: center;
+}
+.compare-table .ct-val.highlight {
+  color: var(--signal);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.we-conclusion {
+  margin-top: 1.25rem;
+  padding: 0.85rem 1rem;
+  background: var(--output-tint);
+  border-left: 3px solid var(--output);
+  border-radius: 3px;
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.we-conclusion strong { color: var(--output); font-weight: 700; }
+.we-conclusion em { color: var(--ink); font-style: italic; font-weight: 500; }
+
+/* ============ EXERCISES ============ */
+.exercises-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+.exercise {
+  background: var(--surface);
+  border: 1px solid var(--rule-soft);
+  border-radius: 4px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.exercise .ex-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--signal);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.exercise h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+.exercise .ex-data {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+.exercise .ex-steps {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  flex: 1;
+}
+.exercise .ex-steps p { margin-bottom: 0.4rem; }
+.exercise .ex-steps code {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--ink);
+  background: var(--warning-light);
+  padding: 1px 5px;
+  border-radius: 2px;
+}
+.exercise .ex-result {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+.exercise .ex-result .nums {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+.exercise .ex-result .verdict {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 0.3rem 0.6rem;
+  border-radius: 2px;
+  background: var(--output-tint);
+  color: var(--output);
+  border: 1px solid var(--output-light);
+}
+
+/* ============ KEY POINTS ============ */
+.key-points {
+  background: var(--paper-2);
+  border-radius: 6px;
+  padding: 2rem;
+  margin-top: 2rem;
+  border: 1px solid var(--rule-soft);
+}
+.key-points h3 {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+}
+.key-points ol { list-style: none; counter-reset: kp; }
+.key-points li {
+  counter-increment: kp;
+  padding: 0.85rem 0 0.85rem 3.25rem;
+  position: relative;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+.key-points li:last-child { border-bottom: 0; }
+.key-points li::before {
+  content: counter(kp, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.85rem;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+  width: 2.25rem;
+  text-align: right;
+  padding-right: 0.5rem;
+  border-right: 1px solid var(--ink);
+}
+.key-points li strong {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-style: italic;
+  color: var(--ink);
+}
+.key-points li code {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  background: rgba(26, 24, 20, 0.06);
+  color: var(--ink);
+  padding: 1px 6px;
+  border-radius: 2px;
+}
+
+.formula-recap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.formula-recap .frec {
+  background: var(--surface);
+  border: 1px solid var(--rule-soft);
+  border-radius: 4px;
+  padding: 0.85rem 1rem;
+}
+.formula-recap .frec-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+.formula-recap .frec-formula {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ============ FOOTER ============ */
+footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+footer .signature {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  color: var(--ink-soft);
+}
+
+/* ============ DIAGRAM SVG STYLES ============ */
+.block-rect { fill: var(--surface); stroke: var(--ink); stroke-width: 1.5; }
+.block-rect.controller { fill: var(--paper); }
+.block-text-label {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 600;
+  fill: var(--ink);
+  text-anchor: middle;
+}
+.block-text-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  fill: var(--muted);
+  text-anchor: middle;
+}
+.signal-line {
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  fill: none;
+}
+.signal-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--ink);
+}
+.feedback-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  fill: var(--muted);
+  font-style: italic;
+}
+.summing-circle {
+  fill: var(--surface);
+  stroke: var(--ink);
+  stroke-width: 1.8;
+}
+.sign-text {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--ink);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+.pulse {
+  fill: var(--signal);
+  stroke: var(--surface);
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 4px rgba(26, 117, 188, 0.5));
+}
+.pulse.error-pulse { fill: var(--error); filter: drop-shadow(0 0 4px rgba(181, 52, 30, 0.5)); }
+.pulse.output-pulse { fill: var(--output); filter: drop-shadow(0 0 4px rgba(11, 110, 79, 0.5)); }
+</style>
+
+<!-- ═══ TECI II Cabecera global ═══ -->
+<style id="teci-header-style">
+.teci-hd{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(27,79,138,.12);font-family:'Barlow',system-ui,sans-serif;}
+.teci-hd .teci-lg{font-family:'Barlow Condensed','Barlow',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer;color:#fff;text-decoration:none;}
+.teci-hd .teci-lg:hover{opacity:.85;}
+.teci-hd .teci-sb{font-size:.72rem;opacity:.78;margin-left:10px;color:#fff;}
+.teci-hd .teci-home-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:8px;cursor:pointer;margin-left:auto;transition:background .15s;text-decoration:none;}
+.teci-hd .teci-home-btn:hover{background:rgba(255,255,255,.16);}
+.teci-navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;}
+.teci-navcross a,.teci-navcross span.teci-nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s;}
+.teci-navcross a{color:#23272F;background:#fff;border-color:#D8DDE5;}
+.teci-navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A;}
+.teci-navcross span.teci-nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default;}
+.teci-navcross .teci-nc-sep{color:#8C97A8;align-self:center;user-select:none;}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- ═══ TECI II Cabecera ═══ -->
+<div class="teci-hd">
+<a class="teci-lg" href="../../index.html">TECI II</a>
+<span class="teci-sb">⚖ Estabilidad y error · Bloque F</span>
+<a href="../../index.html" class="teci-home-btn">🏠 Índice</a>
+</div>
+<nav class="teci-navcross" role="navigation" aria-label="Navegación transversal">
+<a href="../../index.html"><span>🏠</span><span>Índice</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../teoria/bloque_F.html"><span>📖</span><span>Teoría F</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../ejercicios/ej_F.html"><span>✏️</span><span>Ejercicios F</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../examenes/tipo_2025_26/ponencia/tipo_1A_2025_26.html"><span>📋</span><span>Exámenes</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../ponencia_resuelta/index_ponencia.html"><span>📚</span><span>Ponencia</span></a>
+<span class="teci-nc-sep">·</span>
+<span class="teci-nc-current"><span>🧰</span><span>Apoyo</span></span>
+</nav>
+
+
+<div class="container">
+
+<header class="masthead">
+  <div class="masthead-meta">
+    <div class="left">
+      <span>TECI II · Bloque F</span>
+      <span>Sistemas Automáticos</span>
+    </div>
+    <div class="right">
+      <span>2º Bachillerato</span>
+      <span>PEvAU 2025–26</span>
+    </div>
+  </div>
+  <h1 class="title">Estabilidad <em>y error</em><br>en régimen permanente</h1>
+  <p class="subtitle">La diferencia que queda entre lo que pides y lo que el sistema te da, y la condición que ha de cumplirse para que esa diferencia llegue a estabilizarse.</p>
+
+  <div class="scope-pills">
+    <span class="scope-pill">Apuntes 5.12</span>
+    <span class="scope-pill">Apuntes Punto 6</span>
+    <span class="scope-pill">Banco · Sesión 3</span>
+    <span class="scope-pill">Ponencia nov 2025</span>
+  </div>
+</header>
+
+<!-- ============ § 01 PLANTEAMIENTO ============ -->
+<section>
+  <div class="section-label">§ 01 — Planteamiento</div>
+  <p class="lede">
+    <span class="dropcap">P</span>ides al termostato 22 °C y la habitación se queda en 21,5 °C. Pides al control de crucero 120 km/h y el coche mantiene 119,2. Esa diferencia entre <em>lo que pides</em> y <em>lo que el sistema te da</em>, una vez que ha dejado de cambiar, es el <strong>error en régimen permanente</strong>. Para poder medirlo, el sistema antes tiene que ser <strong>estable</strong>: que la salida deje de fluctuar y se quede fija en algún valor. Y esa condición depende, casi por entero, de un único número: el denominador <strong>1 + G·H</strong>.
+  </p>
+  <p class="note-prose">
+    En las próximas secciones vamos a desmontar esa idea pieza a pieza. Primero el vocabulario; luego el escalón, la señal de prueba que dispara todo. Después el lazo cerrado en marcha, con sus pulsos circulando. Y, finalmente, una sección dedicada a entender —con un simulador interactivo— por qué ese denominador, cuando vale cero o se hace negativo, lo destroza todo.
+  </p>
+</section>
+
+<!-- ============ § 02 CONCEPTOS ============ -->
+<section>
+  <div class="section-label">§ 02 — Conceptos clave</div>
+  <h2 class="section-heading">Cuatro palabras <em>antes</em> de mirar el lazo</h2>
+
+  <div class="concepts">
+    <div class="concept">
+      <div class="num">CONCEPTO 01</div>
+      <h3>Régimen transitorio</h3>
+      <p>Fase inicial tras un cambio en la entrada. La salida está acomodándose: subiendo, oscilando o ajustándose hacia su valor final. Su duración depende de la dinámica interna del sistema.</p>
+      <div class="formula">la salida cambia con el tiempo</div>
+    </div>
+
+    <div class="concept">
+      <div class="num">CONCEPTO 02</div>
+      <h3>Régimen permanente</h3>
+      <p>Cuando ha pasado tiempo suficiente y la salida queda fija en su valor final. Es el estado donde se mide el error. En PEvAU trabajamos aquí: G es un número, no una función del tiempo.</p>
+      <div class="formula">t → ∞ &nbsp;·&nbsp; salida constante</div>
+    </div>
+
+    <div class="concept">
+      <div class="num">CONCEPTO 03</div>
+      <h3>Sistema estable</h3>
+      <p>Aquel que, ante un cambio o perturbación, alcanza un valor constante de equilibrio. Las oscilaciones, si las hay, se amortiguan. Solo los sistemas estables alcanzan régimen permanente.</p>
+      <div class="formula">la salida tiende a un valor finito</div>
+    </div>
+
+    <div class="concept">
+      <div class="num">CONCEPTO 04</div>
+      <h3>Error en régimen permanente</h3>
+      <p>La diferencia que queda entre la referencia y la salida cuando el sistema ya se ha estabilizado. Mide la <em>precisión</em> del lazo: cuanto menor, mejor sigue el sistema lo que le pedimos.</p>
+      <div class="formula">e<sub>ss</sub> = r − H · c</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ § 03 ENTRADA ESCALÓN ============ -->
+<section>
+  <div class="section-label">§ 03 — La señal de prueba</div>
+  <h2 class="section-heading">¿Qué es <em>exactamente</em> una entrada escalón?</h2>
+
+  <div class="step-explainer">
+    <div class="step-text">
+      <p class="lede" style="font-size: 1.05rem; max-width: none;">
+        La entrada escalón es la señal que usamos para evaluar cómo responde un sistema de control. Representa <em>un cambio brusco e instantáneo</em> en la consigna que se mantiene constante a partir de ese momento. Es como pulsar un interruptor: pasamos de "nada" a "valor fijado" en un instante.
+      </p>
+
+      <div class="step-formula-block">
+        <div class="formula-label">Definición matemática</div>
+        <div class="formula-big">
+          u(t) =
+          <span class="cases">
+            <span>0  &nbsp;si&nbsp; t &lt; 0</span>
+            <span>1  &nbsp;si&nbsp; t ≥ 0</span>
+          </span>
+        </div>
+        <p class="formula-note">Cuando el salto vale exactamente 1, hablamos de <em>escalón unitario</em>. Si valiera otra cantidad —por ejemplo 5— sería un escalón de amplitud 5. La forma siempre es la misma: cero antes, valor constante después.</p>
+      </div>
+
+      <h3 class="why-heading">¿Por qué se usa esta entrada y no otra?</h3>
+
+      <ul class="why-list">
+        <li>Es <strong>fácil de generar</strong>: basta con cambiar bruscamente una consigna y mantenerla.</li>
+        <li><strong>Modela situaciones reales</strong>: pulsar un interruptor, fijar una nueva temperatura, abrir una válvula, soltar una carga sobre una báscula.</li>
+        <li><strong>Pone al sistema a prueba al máximo</strong>: una variación instantánea exige toda su capacidad de respuesta. Si responde bien al escalón, suele responder bien a entradas más suaves.</li>
+        <li>Permite medir <strong>parámetros característicos</strong>: tiempo de subida, sobreoscilación, valor final y error en régimen permanente.</li>
+      </ul>
+
+      <div class="step-examples">
+        <div class="step-examples-label">Escalones que aparecen en tu día a día</div>
+        <ul>
+          <li>Subir el aire acondicionado de 26 °C a 22 °C de golpe</li>
+          <li>Pulsar el botón <em>Set</em> del control de velocidad a 120 km/h</li>
+          <li>Cambiar la consigna de un horno de 0 a 200 °C</li>
+          <li>Conectar 12 V a un motor que estaba parado</li>
+          <li>Abrir una llave de paso de cero al máximo caudal</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-diagram">
+      <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowOrange" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <polygon points="0 0, 6 3, 0 6" fill="#B5841A"/>
+          </marker>
+          <marker id="arrowDark" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+            <polygon points="0 0, 7 3.5, 0 7" fill="#1A1814"/>
+          </marker>
+        </defs>
+
+        <text x="160" y="24" font-family="Fraunces, serif" font-style="italic" font-size="13" fill="#3A352E" text-anchor="middle">El escalón unitario u(t)</text>
+
+        <line x1="60" y1="200" x2="60" y2="50" stroke="#1A1814" stroke-width="1.3" marker-end="url(#arrowDark)"/>
+        <line x1="40" y1="180" x2="295" y2="180" stroke="#1A1814" stroke-width="1.3" marker-end="url(#arrowDark)"/>
+
+        <text x="48" y="55" font-family="JetBrains Mono, monospace" font-weight="600" font-size="11" fill="#1A1814" text-anchor="end">u(t)</text>
+        <text x="295" y="198" font-family="JetBrains Mono, monospace" font-weight="600" font-size="11" fill="#1A1814" text-anchor="middle">t</text>
+
+        <text x="160" y="198" font-family="JetBrains Mono, monospace" font-size="10" fill="#3A352E" text-anchor="middle">0</text>
+
+        <line x1="56" y1="80" x2="64" y2="80" stroke="#1A1814" stroke-width="1.3"/>
+        <text x="52" y="84" font-family="JetBrains Mono, monospace" font-size="10" fill="#3A352E" text-anchor="end">1</text>
+
+        <line x1="60" y1="80" x2="160" y2="80" stroke="#7A736A" stroke-width="0.7" stroke-dasharray="3,3"/>
+
+        <line x1="60" y1="180" x2="160" y2="180" stroke="#0B6E4F" stroke-width="3"/>
+        <line x1="160" y1="180" x2="160" y2="80" stroke="#0B6E4F" stroke-width="3"/>
+        <line x1="160" y1="80" x2="285" y2="80" stroke="#0B6E4F" stroke-width="3"/>
+
+        <circle cx="160" cy="80" r="4" fill="#0B6E4F"/>
+        <circle cx="160" cy="180" r="4" fill="#FAF7F0" stroke="#0B6E4F" stroke-width="2"/>
+
+        <text x="200" y="120" font-family="JetBrains Mono, monospace" font-size="10" fill="#B5841A" font-weight="600">salto brusco</text>
+        <text x="200" y="134" font-family="JetBrains Mono, monospace" font-size="10" fill="#B5841A" font-weight="600">en t = 0</text>
+        <line x1="198" y1="128" x2="166" y2="135" stroke="#B5841A" stroke-width="1" marker-end="url(#arrowOrange)"/>
+
+        <text x="105" y="170" font-family="Fraunces, serif" font-style="italic" font-size="10" fill="#7A736A" text-anchor="middle">u = 0</text>
+        <text x="220" y="72" font-family="Fraunces, serif" font-style="italic" font-size="10" fill="#7A736A" text-anchor="middle">u = 1 (constante)</text>
+      </svg>
+      <div class="caption">El sistema está en reposo (u = 0) hasta que, en t = 0, la entrada salta instantáneamente a 1 y se queda ahí.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ § 04 RÉGIMEN TRANSITORIO Y PERMANENTE — Simulador ============ -->
+<section>
+  <div class="section-label">§ 04 — Régimen transitorio vs permanente</div>
+  <h2 class="section-heading">¿Cuándo deja de cambiar la <em>salida</em>?</h2>
+  <p class="lede" style="font-size: 1.05rem; max-width: 70ch;">
+    Cuando aplicamos un escalón a un sistema estable, la salida no salta al valor final: pasa antes por una fase de acomodación —el <em>transitorio</em>— y solo después se estabiliza en el régimen <em>permanente</em>. Es ahí donde mediremos el error.
+  </p>
+
+  <div class="sim-block">
+    <div class="sim-header">
+      <div>
+        <div class="sim-tag">SIMULADOR · §04</div>
+        <div class="sim-title">Respuesta de un sistema estable a un escalón</div>
+      </div>
+    </div>
+
+    <div class="sim-canvas-wrap"><canvas id="canvasTransitory"></canvas></div>
+
+    <div class="sim-controls">
+      <button class="sim-btn" id="playTransitory">
+        <svg viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11" fill="currentColor"/></svg>
+        Reproducir
+      </button>
+      <button class="sim-btn secondary" id="resetTransitory">↺ Reiniciar</button>
+    </div>
+
+    <div class="sim-status ok" id="transitoryStatus">
+      <span class="status-tag">En espera</span>
+      Pulsa <strong>reproducir</strong> para ver cómo la respuesta entra en el régimen transitorio (sombreado ámbar) y luego se establece en el régimen permanente (sombreado verde).
+    </div>
+  </div>
+</section>
+
+<!-- ============ § 05 EL CÁLCULO DEL ERROR ============ -->
+<section>
+  <div class="section-label">§ 05 — Apuntes 5.12 · El error en lazo cerrado</div>
+  <h2 class="section-heading">El lazo cerrado <em>en marcha</em></h2>
+  <p class="lede" style="font-size: 1.05rem; max-width: 70ch;">
+    Las señales viajan continuamente por el lazo: la referencia entra, se compara con la salida realimentada, el error se procesa, se actúa sobre la planta, y la salida vuelve al comparador.
+  </p>
+
+  <div class="block-section">
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg" id="blockDiagram">
+        <defs>
+          <marker id="arrow-end" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+            <polygon points="0 0, 10 5, 0 10" fill="#1A1814"/>
+          </marker>
+        </defs>
+
+        <text x="50" y="135" class="signal-label">r</text>
+        <text x="50" y="152" class="feedback-label">referencia</text>
+
+        <path id="path-1" d="M 90 145 L 195 145" class="signal-line" marker-end="url(#arrow-end)"/>
+
+        <circle cx="220" cy="145" r="22" class="summing-circle"/>
+        <text x="220" y="148" class="sign-text">Σ</text>
+        <text x="206" y="128" class="sign-text" style="font-size: 14px;">+</text>
+        <text x="226" y="172" class="sign-text" style="font-size: 14px;">−</text>
+
+        <path id="path-2" d="M 242 145 L 360 145" class="signal-line" marker-end="url(#arrow-end)"/>
+        <text x="285" y="135" class="feedback-label" text-anchor="middle">e = r − H·c</text>
+
+        <rect x="365" y="115" width="170" height="60" class="block-rect controller" rx="3"/>
+        <text x="450" y="140" class="block-text-label">Bloque directo</text>
+        <text x="450" y="160" class="block-text-sub" style="font-size: 13px; font-weight: 600;">G</text>
+
+        <path id="path-3" d="M 537 145 L 760 145" class="signal-line" marker-end="url(#arrow-end)"/>
+        <text x="800" y="135" class="signal-label">c</text>
+        <text x="800" y="152" class="feedback-label">salida</text>
+
+        <circle cx="690" cy="145" r="4" fill="#1A1814"/>
+
+        <rect x="430" y="222" width="80" height="40" class="block-rect" rx="3"/>
+        <text x="470" y="248" class="block-text-label" style="font-size: 13px;">H</text>
+
+        <path id="path-4a" d="M 690 145 L 690 242 L 510 242" class="signal-line" marker-end="url(#arrow-end)"/>
+        <path id="path-4b" d="M 430 242 L 220 242 L 220 168" class="signal-line" marker-end="url(#arrow-end)"/>
+        <text x="585" y="232" class="feedback-label" text-anchor="middle">b = H·c</text>
+
+        <circle id="pulse-1" cx="0" cy="0" r="6" class="pulse" style="opacity:0"/>
+        <circle id="pulse-2" cx="0" cy="0" r="6" class="pulse error-pulse" style="opacity:0"/>
+        <circle id="pulse-3" cx="0" cy="0" r="6" class="pulse output-pulse" style="opacity:0"/>
+        <circle id="pulse-4a" cx="0" cy="0" r="6" class="pulse output-pulse" style="opacity:0"/>
+        <circle id="pulse-4b" cx="0" cy="0" r="6" class="pulse" style="opacity:0"/>
+
+        <text x="440" y="35" class="block-text-label" style="font-size: 13px; fill: #7A736A;">Sistema en lazo cerrado · realimentación negativa</text>
+      </svg>
+    </div>
+
+    <div class="diagram-explainer">
+      <div class="section-label" style="margin-bottom: 0.75rem;">Lectura paso a paso del lazo</div>
+      <div class="diagram-steps">
+        <div class="step-card">
+          <span class="n">PASO 01</span>
+          <h4>Entra la referencia</h4>
+          <p>r es lo que pides al sistema. Una señal externa que tú decides.</p>
+        </div>
+        <div class="step-card">
+          <span class="n">PASO 02</span>
+          <h4>Se compara con la salida</h4>
+          <p>El comparador resta a r la señal realimentada b = H·c. El resultado es el error: e = r − H·c.</p>
+        </div>
+        <div class="step-card">
+          <span class="n">PASO 03</span>
+          <h4>El bloque directo actúa</h4>
+          <p>El error se procesa y el bloque directo G genera la salida. Si la realimentación es negativa, el lazo intenta reducir el error.</p>
+        </div>
+        <div class="step-card">
+          <span class="n">PASO 04</span>
+          <h4>El sensor mide</h4>
+          <p>El bloque H mide la salida y la devuelve al comparador. El bucle se repite hasta que el sistema se estabiliza.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="worked-example">
+    <div class="we-header">
+      <div class="we-tag">Ejemplo desarrollado · Apuntes 5.12</div>
+    </div>
+
+    <div class="we-enunciado">
+      <strong>Enunciado.</strong> Un sistema de control en lazo cerrado tiene un bloque directo de ganancia <em>G = 6</em> y un sensor de realimentación <em>H = 0,5</em>. Calcula la función de transferencia equivalente, la salida en régimen permanente y el error: <strong>(a)</strong> cuando se aplica una referencia <em>r = 10</em>; <strong>(b)</strong> cuando se aplica un escalón unitario <em>r = 1</em>. Compara el error porcentual en ambos casos.
+    </div>
+
+    <div class="we-subblock-tag">Caso (a) · Referencia r = 10</div>
+    <div class="we-steps">
+      <div class="we-step"><span class="we-n">1</span><div>Función de transferencia equivalente: <code>G<sub>eq</sub> = G/(1+G·H) = 6/(1+3) = 6/4 = 1,5</code></div></div>
+      <div class="we-step"><span class="we-n">2</span><div>Salida en régimen permanente: <code>c = G<sub>eq</sub>·r = 1,5·10 = 15</code></div></div>
+      <div class="we-step"><span class="we-n">3</span><div>Señal realimentada: <code>b = H·c = 0,5·15 = 7,5</code></div></div>
+      <div class="we-step"><span class="we-n">4</span><div>Error en régimen permanente: <code>e = r − H·c = 10 − 7,5 = 2,5</code></div></div>
+      <div class="we-step"><span class="we-n">5</span><div>Error porcentual: <code>e% = (e/r)·100 = (2,5/10)·100 = 25 %</code></div></div>
+    </div>
+
+    <div class="we-subblock">
+      <div class="we-subblock-tag">Caso (b) · Escalón unitario r = 1</div>
+      <div class="we-steps">
+        <div class="we-step"><span class="we-n">1</span><div>G<sub>eq</sub> no cambia (depende solo de G y H): <code>G<sub>eq</sub> = 1,5</code></div></div>
+        <div class="we-step"><span class="we-n">2</span><div>Salida en régimen permanente: <code>c = G<sub>eq</sub>·r = 1,5·1 = 1,5</code></div></div>
+        <div class="we-step"><span class="we-n">3</span><div>Error en régimen permanente: <code>e = r − H·c = 1 − 0,5·1,5 = 1 − 0,75 = 0,25</code></div></div>
+        <div class="we-step"><span class="we-n">4</span><div>Error porcentual: <code>e% = (e/r)·100 = (0,25/1)·100 = 25 %</code></div></div>
+      </div>
+    </div>
+
+    <div class="we-subblock">
+      <div class="we-subblock-tag">Comparación</div>
+      <div class="compare-table">
+        <div class="ct-head"></div>
+        <div class="ct-head">r</div>
+        <div class="ct-head">e<sub>ss</sub></div>
+        <div class="ct-head">e %</div>
+
+        <div class="ct-row-label">Caso (a)</div>
+        <div class="ct-val">10</div>
+        <div class="ct-val">2,5</div>
+        <div class="ct-val highlight">25 %</div>
+
+        <div class="ct-row-label">Caso (b)</div>
+        <div class="ct-val">1</div>
+        <div class="ct-val">0,25</div>
+        <div class="ct-val highlight">25 %</div>
+      </div>
+    </div>
+
+    <div class="we-conclusion">
+      <strong>Conclusión.</strong> El error absoluto cambia (2,5 frente a 0,25), pero <em>el error porcentual es idéntico: 25 % en ambos casos</em>. Esto ocurre porque <code style="font-family: var(--mono); font-size: 0.92em; background: var(--surface); padding: 1px 5px; border-radius: 2px;">e/r = 1 − G·H/(1+G·H) = 1/(1+G·H)</code> depende <em>solo de G y H</em>, no de la amplitud de la entrada. Es una propiedad clave de la realimentación lineal — y por eso, en el simulador del error que viene a continuación, basta con probar con r = 1.
+    </div>
+  </div>
+
+  <!-- Simulador del error con slider K -->
+  <div class="sim-block">
+    <div class="sim-header">
+      <div>
+        <div class="sim-tag">SIMULADOR · §05</div>
+        <div class="sim-title">¿Cuánto error queda al final? Mueve la ganancia K</div>
+      </div>
+    </div>
+
+    <p style="font-family: var(--serif); font-size: 0.95rem; color: var(--ink-soft); line-height: 1.55; margin-bottom: 1rem;">
+      Aplica un escalón de referencia <strong>r = 1</strong> a un sistema con realimentación negativa unitaria (H = 1). Mueve la ganancia <strong>K</strong> y observa el área coloreada en rojo: <em>esa franja entre la referencia y la salida es el error que queda en régimen permanente</em>. Aumentar K reduce el error, pero nunca lo elimina del todo.
+    </p>
+
+    <div class="sim-canvas-wrap"><canvas id="canvasError"></canvas></div>
+
+    <div class="sim-controls">
+      <button class="sim-btn" id="playError">
+        <svg viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11" fill="currentColor"/></svg>
+        Reproducir
+      </button>
+      <button class="sim-btn secondary" id="resetError">↺ Reiniciar</button>
+      <div class="sim-slider-row">
+        <label>Ganancia K</label>
+        <input type="range" id="kSlider" min="0.5" max="20" step="0.1" value="2">
+        <span class="slider-val" id="kVal">2.0</span>
+      </div>
+    </div>
+
+    <div class="sim-metrics">
+      <div class="sim-metric ok"><span class="m-label">Valor final y∞</span><span class="m-value" id="metricYInf">—</span></div>
+      <div class="sim-metric bad"><span class="m-label">Error e<sub>ss</sub></span><span class="m-value" id="metricEss">—</span></div>
+      <div class="sim-metric"><span class="m-label">Error en %</span><span class="m-value" id="metricEPct">—</span></div>
+      <div class="sim-metric signal"><span class="m-label">Fórmula</span><span class="m-value" id="metricFormula" style="font-family: var(--mono); font-size: 0.95rem;">1/(1+K)</span></div>
+    </div>
+  </div>
+
+  <p class="note-prose">
+    <strong>¿Por qué no subir K hasta hacer el error cero?</strong> En la fórmula <code>e<sub>ss</sub> = 1/(1+K)</code> el error tiende a cero cuando K tiende a infinito, pero en un sistema real <em>aumentar K indefinidamente no es viable</em>. Tres razones lo impiden: <em>(i) la estabilidad</em> — al subir K, el sistema empieza a oscilar y termina volviéndose inestable; <em>(ii) la saturación del actuador</em> — el motor, la válvula o el calefactor tienen un límite físico de potencia que no se puede superar; y <em>(iii) la amplificación del ruido</em> — cualquier ruido de medida del sensor se multiplica por K y se traduce en oscilaciones aleatorias en la salida. Por eso, eliminar el error permanente con un control puramente proporcional <em>no es realista</em>: para llegar exactamente a la consigna hace falta otro tipo de regulador (el integral, que veremos en el bloque de reguladores).
+  </p>
+</section>
+
+<!-- ============ § 06 ESTABILIDAD: ESTABLE vs INESTABLE ============ -->
+<section>
+  <div class="section-label">§ 06 — Apuntes Punto 6 · Estabilidad</div>
+  <h2 class="section-heading">Mismo escalón, <em>dos sistemas</em>, comportamientos opuestos</h2>
+  <p class="lede" style="font-size: 1.05rem; max-width: 70ch;">
+    Un sistema es <strong>estable</strong> cuando, ante un cambio o perturbación, la salida termina alcanzando un valor constante. Es <strong>inestable</strong> cuando no lo logra: la salida crece sin control u oscila con amplitud creciente. Pulsa <em>reproducir</em> en cada panel para ver el contraste.
+  </p>
+
+  <div class="order-note">
+    <div class="order-note-text">
+      <h3>Una nota antes de mirar las curvas</h3>
+      <p>Los sistemas se clasifican según su <strong>orden</strong>, que coincide con el número de elementos que almacenan energía. La estabilidad se define igual para los tres: lo que cambia es la forma del transitorio.</p>
+    </div>
+
+    <div class="order-grid">
+
+      <div class="order-card">
+        <div class="order-tag">ORDEN 0</div>
+        <h4>Respuesta instantánea</h4>
+        <div class="order-svg-wrap">
+          <svg viewBox="0 0 220 110" xmlns="http://www.w3.org/2000/svg">
+            <line x1="20" y1="90" x2="210" y2="90" stroke="#D9D2C2" stroke-width="0.8"/>
+            <line x1="20" y1="20" x2="20" y2="90" stroke="#D9D2C2" stroke-width="0.8"/>
+            <line x1="20" y1="35" x2="210" y2="35" stroke="#1A1814" stroke-width="1" stroke-dasharray="4,3" opacity="0.4"/>
+            <text x="14" y="38" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A736A" text-anchor="end">r</text>
+            <line x1="20" y1="90" x2="80" y2="90" stroke="#0B6E4F" stroke-width="2.4"/>
+            <line x1="80" y1="90" x2="80" y2="35" stroke="#0B6E4F" stroke-width="2.4"/>
+            <line x1="80" y1="35" x2="210" y2="35" stroke="#0B6E4F" stroke-width="2.4"/>
+          </svg>
+        </div>
+        <p>Sin elementos almacenadores. La salida sigue a la entrada al instante, sin transitorio. <em>Si entra un escalón, sale un escalón.</em></p>
+        <div class="order-examples">divisor de tensión, palanca, amplificador ideal</div>
+      </div>
+
+      <div class="order-card">
+        <div class="order-tag">PRIMER ORDEN</div>
+        <h4>Exponencial creciente</h4>
+        <div class="order-svg-wrap">
+          <svg viewBox="0 0 220 110" xmlns="http://www.w3.org/2000/svg">
+            <line x1="20" y1="90" x2="210" y2="90" stroke="#D9D2C2" stroke-width="0.8"/>
+            <line x1="20" y1="20" x2="20" y2="90" stroke="#D9D2C2" stroke-width="0.8"/>
+            <line x1="20" y1="35" x2="210" y2="35" stroke="#1A1814" stroke-width="1" stroke-dasharray="4,3" opacity="0.4"/>
+            <text x="14" y="38" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A736A" text-anchor="end">r</text>
+            <path d="M 20.0 90.0 L 22.4 86.6 L 24.8 83.5 L 27.2 80.5 L 29.6 77.7 L 32.0 75.1 L 34.4 72.6 L 36.8 70.3 L 39.2 68.1 L 41.6 66.1 L 44.1 64.2 L 46.5 62.4 L 48.9 60.7 L 51.3 59.2 L 53.7 57.7 L 56.1 56.3 L 58.5 55.0 L 60.9 53.8 L 63.3 52.6 L 65.7 51.5 L 68.1 50.5 L 70.5 49.6 L 72.9 48.7 L 75.3 47.8 L 77.7 47.0 L 80.1 46.3 L 82.5 45.6 L 84.9 45.0 L 87.3 44.3 L 89.7 43.8 L 92.2 43.2 L 94.6 42.7 L 97.0 42.3 L 99.4 41.8 L 101.8 41.4 L 104.2 41.0 L 106.6 40.6 L 109.0 40.3 L 111.4 40.0 L 113.8 39.7 L 116.2 39.4 L 118.6 39.1 L 121.0 38.9 L 123.4 38.6 L 125.8 38.4 L 128.2 38.2 L 130.6 38.0 L 133.0 37.8 L 135.4 37.6 L 137.8 37.5 L 140.3 37.3 L 142.7 37.2 L 145.1 37.0 L 147.5 36.9 L 149.9 36.8 L 152.3 36.7 L 154.7 36.6 L 157.1 36.5 L 159.5 36.4 L 161.9 36.3 L 164.3 36.2 L 166.7 36.2 L 169.1 36.1 L 171.5 36.0 L 173.9 36.0 L 176.3 35.9 L 178.7 35.8 L 181.1 35.8 L 183.5 35.7 L 185.9 35.7 L 188.4 35.7 L 190.8 35.6 L 193.2 35.6 L 195.6 35.5 L 198.0 35.5 L 200.4 35.5 L 202.8 35.4 L 205.2 35.4 L 207.6 35.4 L 210.0 35.4" fill="none" stroke="#0B6E4F" stroke-width="2.4"/>
+          </svg>
+        </div>
+        <p>Un elemento almacenador. Sube siguiendo una <em>exponencial</em> y se acerca asintóticamente al valor final, sin pasarse.</p>
+        <div class="order-examples">termostato, motor con fricción, circuito RC</div>
+      </div>
+
+      <div class="order-card">
+        <div class="order-tag">SEGUNDO ORDEN</div>
+        <h4>Puede oscilar</h4>
+        <div class="order-svg-wrap">
+          <svg viewBox="0 0 220 110" xmlns="http://www.w3.org/2000/svg">
+            <line x1="20" y1="90" x2="210" y2="90" stroke="#D9D2C2" stroke-width="0.8"/>
+            <line x1="20" y1="20" x2="20" y2="90" stroke="#D9D2C2" stroke-width="0.8"/>
+            <line x1="20" y1="35" x2="210" y2="35" stroke="#1A1814" stroke-width="1" stroke-dasharray="4,3" opacity="0.4"/>
+            <text x="14" y="38" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A736A" text-anchor="end">r</text>
+            <path d="M 20.0 90.0 L 21.6 89.6 L 23.2 88.3 L 24.8 86.3 L 26.4 83.6 L 28.0 80.2 L 29.6 76.3 L 31.2 71.9 L 32.8 67.1 L 34.4 62.1 L 36.0 56.8 L 37.6 51.5 L 39.2 46.1 L 40.8 40.8 L 42.4 35.6 L 43.9 30.7 L 45.5 26.1 L 47.1 21.7 L 48.7 17.8 L 50.3 14.4 L 51.9 11.4 L 53.5 8.9 L 55.1 6.9 L 56.7 5.4 L 58.3 4.5 L 59.9 4.1 L 61.5 4.2 L 63.1 4.7 L 64.7 5.7 L 66.3 7.1 L 67.9 8.9 L 69.5 11.0 L 71.1 13.4 L 72.7 16.0 L 74.3 18.8 L 75.9 21.7 L 77.5 24.7 L 79.1 27.7 L 80.7 30.7 L 82.3 33.7 L 83.9 36.5 L 85.5 39.2 L 87.1 41.7 L 88.7 43.9 L 90.3 46.0 L 91.8 47.8 L 93.4 49.3 L 95.0 50.5 L 96.6 51.4 L 98.2 52.0 L 99.8 52.4 L 101.4 52.4 L 103.0 52.2 L 104.6 51.7 L 106.2 51.0 L 107.8 50.1 L 109.4 48.9 L 111.0 47.6 L 112.6 46.2 L 114.2 44.7 L 115.8 43.0 L 117.4 41.4 L 119.0 39.7 L 120.6 38.0 L 122.2 36.3 L 123.8 34.7 L 125.4 33.1 L 127.0 31.7 L 128.6 30.4 L 130.2 29.2 L 131.8 28.1 L 133.4 27.2 L 135.0 26.5 L 136.6 25.9 L 138.2 25.5 L 139.7 25.3 L 141.3 25.2 L 142.9 25.3 L 144.5 25.5 L 146.1 25.9 L 147.7 26.3 L 149.3 26.9 L 150.9 27.6 L 152.5 28.4 L 154.1 29.3 L 155.7 30.2 L 157.3 31.1 L 158.9 32.1 L 160.5 33.0 L 162.1 34.0 L 163.7 34.9 L 165.3 35.8 L 166.9 36.6 L 168.5 37.4 L 170.1 38.1 L 171.7 38.7 L 173.3 39.2 L 174.9 39.7 L 176.5 40.0 L 178.1 40.3 L 179.7 40.4 L 181.3 40.5 L 182.9 40.5 L 184.5 40.4 L 186.1 40.2 L 187.6 40.0 L 189.2 39.7 L 190.8 39.3 L 192.4 38.9 L 194.0 38.4 L 195.6 37.9 L 197.2 37.4 L 198.8 36.8 L 200.4 36.3 L 202.0 35.8 L 203.6 35.2 L 205.2 34.7 L 206.8 34.3 L 208.4 33.8 L 210.0 33.4" fill="none" stroke="#0B6E4F" stroke-width="2.4"/>
+          </svg>
+        </div>
+        <p>Dos elementos almacenadores. Puede pasarse del valor final y <em>oscilar</em> antes de estabilizarse — eso es lo que vamos a ver a continuación.</p>
+        <div class="order-examples">muelle con masa, circuito RLC, suspensión</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sim-dual">
+
+    <div class="sim-dual-panel stable">
+      <div class="sim-header">
+        <div>
+          <div class="sim-tag">● SISTEMA A · CONVERGENTE</div>
+          <div class="sim-title">Sistema estable</div>
+        </div>
+      </div>
+      <div class="sim-canvas-wrap"><canvas id="canvasStable"></canvas></div>
+      <div class="sim-status ok" id="statusStable" style="margin-top: 0.85rem;">
+        <span class="status-tag">En espera</span>
+        Pulsa reproducir para iniciar la simulación.
+      </div>
+      <div class="sim-controls" style="margin-top: 0.85rem;">
+        <button class="sim-btn" id="playStable">
+          <svg viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11" fill="currentColor"/></svg>
+          Reproducir
+        </button>
+        <button class="sim-btn secondary" id="resetStable">↺ Reiniciar</button>
+      </div>
+      <div class="sim-metrics">
+        <div class="sim-metric ok"><span class="m-label">Valor final y∞</span><span class="m-value">1.00</span></div>
+        <div class="sim-metric"><span class="m-label">Sobreoscilación</span><span class="m-value" style="font-size: 1rem;">≈ 35 %</span></div>
+        <div class="sim-metric"><span class="m-label">T. establecimiento</span><span class="m-value" style="font-size: 1rem;">≈ 7 s</span></div>
+        <div class="sim-metric"><span class="m-label">Error régimen perm.</span><span class="m-value">0.00</span></div>
+      </div>
+    </div>
+
+    <div class="sim-dual-panel unstable">
+      <div class="sim-header">
+        <div>
+          <div class="sim-tag">● SISTEMA B · DIVERGENTE</div>
+          <div class="sim-title">Sistema inestable</div>
+        </div>
+      </div>
+      <div class="sim-canvas-wrap"><canvas id="canvasUnstable"></canvas></div>
+      <div class="sim-status bad" id="statusUnstable" style="margin-top: 0.85rem;">
+        <span class="status-tag">En espera</span>
+        Pulsa reproducir para iniciar la simulación.
+      </div>
+      <div class="sim-controls" style="margin-top: 0.85rem;">
+        <button class="sim-btn" id="playUnstable">
+          <svg viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11" fill="currentColor"/></svg>
+          Reproducir
+        </button>
+        <button class="sim-btn secondary" id="resetUnstable">↺ Reiniciar</button>
+      </div>
+      <div class="sim-metrics">
+        <div class="sim-metric bad"><span class="m-label">Comportamiento</span><span class="m-value" style="font-size: 1rem;">y(t) → ∞</span></div>
+        <div class="sim-metric"><span class="m-label">T. establecimiento</span><span class="m-value" style="font-size: 0.9rem;">No existe</span></div>
+        <div class="sim-metric"><span class="m-label">Valor final</span><span class="m-value" style="font-size: 0.9rem;">No converge</span></div>
+        <div class="sim-metric bad"><span class="m-label">Error régimen perm.</span><span class="m-value" style="font-size: 0.85rem;">Crece sin límite</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dual-controls-center">
+    <button class="sim-btn" id="playBoth">
+      <svg viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11" fill="currentColor"/></svg>
+      Reproducir ambos a la vez
+    </button>
+    <div class="tip">Compara cómo reaccionan al mismo estímulo</div>
+  </div>
+
+  <p class="note-prose">
+    Detalle importante: <em>"estable"</em> no significa <em>"sin error"</em>. Significa que la salida deja de cambiar. Que ese valor coincida con la referencia es otra cuestión, la del error en régimen permanente que vimos en §05. Un sistema puede ser perfectamente estable y aun así dejar un error residual.
+  </p>
+
+  <h3 style="font-family: var(--serif); font-weight: 600; font-size: 1.4rem; letter-spacing: -0.01em; margin-top: 3rem; margin-bottom: 1rem;">Otra prueba de estabilidad: <em>la perturbación</em></h3>
+
+  <p class="lede" style="font-size: 1rem; max-width: 70ch;">
+    Hasta ahora hemos puesto a prueba al sistema con un escalón de referencia (un cambio en lo que pedimos). Pero hay otra prueba igual de importante: <em>una perturbación externa</em>. El sistema está tranquilo en su valor de equilibrio y, de repente, llega un golpe externo —una corriente de aire en la habitación, un bache en el coche, una carga súbita en el motor—. Un sistema estable debe ser capaz de <em>absorber esa perturbación</em> y volver al equilibrio.
+  </p>
+
+  <div class="sim-block">
+    <div class="sim-header">
+      <div>
+        <div class="sim-tag">SIMULADOR · §06 BIS</div>
+        <div class="sim-title">Respuesta de un sistema estable ante una perturbación</div>
+      </div>
+    </div>
+
+    <div class="sim-canvas-wrap"><canvas id="canvasPerturbation"></canvas></div>
+
+    <div class="sim-controls">
+      <button class="sim-btn" id="playPerturbation">
+        <svg viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11" fill="currentColor"/></svg>
+        Reproducir
+      </button>
+      <button class="sim-btn secondary" id="resetPerturbation">↺ Reiniciar</button>
+    </div>
+
+    <div class="sim-status ok" id="perturbationStatus">
+      <span class="status-tag">En espera</span>
+      Pulsa <strong>reproducir</strong>. Verás cómo la salida se estabiliza, recibe una <em>perturbación externa</em> en t = 6 s (flecha naranja), y el lazo de control la absorbe devolviendo el sistema al equilibrio.
+    </div>
+  </div>
+</section>
+
+<!-- ============ § 07 EL DENOMINADOR (1+G·H) — Simulador pedagógico ============ -->
+<section>
+  <div class="section-label">§ 07 — La clave de todo</div>
+  <h2 class="section-heading">Por qué el denominador <em>(1 + G·H)</em> lo decide todo</h2>
+
+  <p class="lede" style="font-size: 1.1rem; max-width: 72ch;">
+    Cuando cerramos el lazo con realimentación negativa, la ganancia equivalente del sistema vale <strong>G<sub>eq</sub> = G / (1 + G·H)</strong>. <em>En los problemas algebraicos que trabajamos aquí —donde G y H son ganancias constantes—</em>, toda la pregunta de la estabilidad se reduce a mirar ese denominador. Vamos a entender, con un simulador, qué pasa cuando lo movemos de positivo a cero y a negativo.
+  </p>
+
+  <p class="note-prose">
+    En el simulador siguiente, mueve el slider del <em>denominador 1 + G·H</em>. La respuesta temporal del sistema cambia en directo. Observa cómo, al acercarte a <em>cero</em>, el sistema se vuelve incontrolable, y cómo al cruzar al lado <em>negativo</em>, diverge sin posibilidad de estabilizarse.
+  </p>
+
+  <div class="denom-sim">
+
+    <div class="sim-header" style="margin-bottom: 1rem;">
+      <div>
+        <div class="sim-tag">SIMULADOR · §07 · INTERACTIVO</div>
+        <div class="sim-title">Cómo afecta el valor del denominador a la respuesta</div>
+      </div>
+    </div>
+
+    <div class="sim-controls">
+      <button class="sim-btn" id="playDenom">
+        <svg viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11" fill="currentColor"/></svg>
+        Reproducir
+      </button>
+      <button class="sim-btn secondary" id="resetDenom">↺ Reiniciar</button>
+      <div class="sim-slider-row">
+        <label>1 + G·H</label>
+        <input type="range" id="ghSlider" min="-1" max="5" step="0.05" value="2">
+        <span class="slider-val" id="ghVal" style="min-width: 175px;">1+G·H = +2.00 → G·H = +1.00</span>
+      </div>
+    </div>
+
+    <div class="denom-grid">
+
+      <div class="denom-canvas-side">
+        <div class="sim-canvas-wrap"><canvas id="canvasDenom"></canvas></div>
+      </div>
+
+      <div class="denom-info-side">
+        <div class="denom-display ok" id="denomDisplay">
+          <div class="dd-label">Denominador del lazo cerrado</div>
+          <div class="dd-formula">1 + G·H</div>
+          <div class="dd-value" id="denomValue">+2.00</div>
+          <div class="dd-secondary" id="denomGeq">G<sub>eq</sub> proporcional a 1/2 = 0.50</div>
+        </div>
+
+        <div class="denom-cases">
+          <div class="denom-case ok" id="case-ok">
+            <div class="dc-cond">&gt; 0</div>
+            <div class="dc-verdict">Estable</div>
+          </div>
+          <div class="denom-case warn" id="case-lim">
+            <div class="dc-cond">= 0</div>
+            <div class="dc-verdict">Crítico</div>
+          </div>
+          <div class="denom-case bad" id="case-bad">
+            <div class="dc-cond">&lt; 0</div>
+            <div class="dc-verdict">Inestable</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="denom-explainer">
+      <div class="denom-explain-card ok">
+        <h4>Caso 1 · Denominador positivo</h4>
+        <p>Si <code>1 + G·H &gt; 0</code>, la ganancia <strong>G<sub>eq</sub></strong> es un número finito. La salida converge a un valor concreto y queda fija. <strong>El sistema es estable</strong> y se puede medir el error en régimen permanente. Es la situación normal.</p>
+      </div>
+      <div class="denom-explain-card warn">
+        <h4>Caso 2 · Denominador igual a cero</h4>
+        <p>Si <code>1 + G·H = 0</code>, dividimos entre cero: <strong>G<sub>eq</sub> tiende a infinito</strong>. La señal de salida se amplifica sin límite ante cualquier referencia, por pequeña que sea. <strong>El sistema está en el límite de la estabilidad</strong> y, en la práctica, ya no funciona.</p>
+      </div>
+      <div class="denom-explain-card bad">
+        <h4>Caso 3 · Denominador negativo</h4>
+        <p>Si <code>1 + G·H &lt; 0</code>, el signo de la realimentación se invierte: lo que debería corregir el error lo amplifica. La salida crece sin control o toma valores opuestos al deseado. <strong>El sistema es inestable</strong>. Esto puede ocurrir cuando H tiene signo negativo o el lazo está mal diseñado.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="note-prose">
+    <strong>La conclusión que tienes que llevarte:</strong> el lazo cerrado funciona bien siempre que el denominador <em>1 + G·H</em> se mantenga claramente positivo. Cuando se acerca a cero, el sistema empieza a comportarse de manera errática; cuando lo cruza, se vuelve directamente inestable. Por eso en PEvAU la pregunta más recurrente es exactamente esta: <em>"¿es estable?"</em> — y la respuesta es siempre la misma operación: <em>calcular 1 + G·H y mirarle el signo</em>.
+  </p>
+</section>
+
+<!-- ============ § 08 REALIMENTACIÓN NEG vs POS ============ -->
+<section>
+  <div class="section-label">§ 08 — Apuntes 6.4 · Influencia del signo de la realimentación</div>
+  <h2 class="section-heading">La realimentación negativa <em>estabiliza</em>; la positiva puede desestabilizar</h2>
+  <p class="lede" style="font-size: 1rem; max-width: 70ch;">
+    El simulador anterior nos da la intuición. Ahora veamos cómo se traduce en el caso típico de los dos tipos de realimentación.
+  </p>
+
+  <div class="feedback-row">
+    <div class="feedback-card neg">
+      <div class="fb-tag">● Realimentación negativa</div>
+      <h3>Estabiliza el sistema</h3>
+      <p>Reduce el error entre la salida real y la deseada. Si la salida sube por encima del valor de consigna, la realimentación provoca una disminución de la señal de control y el sistema vuelve al equilibrio. Es la configuración del 99 % de los controles industriales.</p>
+      <div class="formula-box">G<sub>eq</sub> = G / (1 + G·H)</div>
+    </div>
+
+    <div class="feedback-card pos">
+      <div class="fb-tag">● Realimentación positiva</div>
+      <h3>Puede desestabilizar</h3>
+      <p>Tiende a aumentar el error. Puede provocar oscilaciones crecientes o aumentos continuos de la salida. Solo se utiliza en aplicaciones específicas (osciladores electrónicos, sistemas de disparo). Inestable cuando G·H ≥ 1.</p>
+      <div class="formula-box">G<sub>eq</sub> = G / (1 − G·H)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ § 09 LAZO ABIERTO vs CERRADO ============ -->
+<section>
+  <div class="section-label">§ 09 — Pregunta tipo PEvAU · Problema 13 de la Ponencia</div>
+  <h2 class="section-heading">¿Estable en lazo abierto, <em>inestable</em> en lazo cerrado?</h2>
+
+  <div class="qa-block">
+    <div class="qa-q">¿Un sistema que es estable en lazo abierto puede ser inestable en lazo cerrado?</div>
+    <div class="qa-a"><strong>Sí.</strong> En lazo cerrado, la función de transferencia equivalente vale <code>G/(1+G·H)</code>. Si el producto G·H se aproxima a −1, el denominador se anula y la salida crece sin control aunque la entrada sea finita. La realimentación introduce un nuevo denominador que puede hacer inestable un sistema que en lazo abierto era perfectamente estable. En lazo abierto, ese denominador no existe.
+
+      <div class="qa-diagrams">
+
+        <div class="qa-diag-card ok">
+          <div class="qd-tag">● Lazo abierto</div>
+          <h4>El bloque G actúa solo</h4>
+          <div class="qa-diag-svg-wrap">
+            <svg viewBox="0 0 360 130" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrowOpen" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                  <polygon points="0 0, 10 5, 0 10" fill="#1A1814"/>
+                </marker>
+              </defs>
+
+              <!-- Etiqueta r -->
+              <text x="20" y="63" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600" fill="#1A1814">r</text>
+              <text x="20" y="78" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A736A" font-style="italic">entrada</text>
+
+              <!-- Línea de entrada -->
+              <line x1="40" y1="65" x2="115" y2="65" stroke="#1A1814" stroke-width="1.6" marker-end="url(#arrowOpen)"/>
+
+              <!-- Bloque G -->
+              <rect x="120" y="42" width="120" height="46" fill="#FFFFFF" stroke="#1A1814" stroke-width="1.5" rx="3"/>
+              <text x="180" y="62" font-family="Fraunces, serif" font-size="14" font-weight="600" fill="#1A1814" text-anchor="middle">Bloque G</text>
+              <text x="180" y="80" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#0B6E4F" text-anchor="middle">G = 10</text>
+
+              <!-- Línea de salida -->
+              <line x1="240" y1="65" x2="320" y2="65" stroke="#1A1814" stroke-width="1.6" marker-end="url(#arrowOpen)"/>
+
+              <!-- Etiqueta c -->
+              <text x="334" y="63" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600" fill="#1A1814">c</text>
+              <text x="334" y="78" font-family="JetBrains Mono, monospace" font-size="9" fill="#7A736A" font-style="italic">salida</text>
+
+              <!-- Indicación numérica -->
+              <text x="77" y="55" font-family="JetBrains Mono, monospace" font-size="10" fill="#7A736A">1</text>
+              <text x="280" y="55" font-family="JetBrains Mono, monospace" font-size="10" fill="#0B6E4F" font-weight="600">10</text>
+
+              <!-- Sin H -->
+              <text x="180" y="115" font-family="Fraunces, serif" font-size="11" font-style="italic" fill="#7A736A" text-anchor="middle">No hay realimentación</text>
+            </svg>
+          </div>
+          <div class="qa-diag-eq">c = G · r = 10 · r</div>
+          <p>Si r = 1, la salida vale exactamente <strong>10</strong>. Es un múltiplo finito de la entrada. <strong>Perfectamente estable.</strong> No hay denominador que pueda anularse.</p>
+        </div>
+
+        <div class="qa-diag-card bad">
+          <div class="qd-tag">● Lazo cerrado</div>
+          <h4>Mismo G, ahora con H = −0,1</h4>
+          <div class="qa-diag-svg-wrap">
+            <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrowClosed" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                  <polygon points="0 0, 10 5, 0 10" fill="#1A1814"/>
+                </marker>
+              </defs>
+
+              <!-- Etiqueta r -->
+              <text x="14" y="63" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600" fill="#1A1814">r</text>
+
+              <!-- Línea entrada al sumador -->
+              <line x1="30" y1="65" x2="68" y2="65" stroke="#1A1814" stroke-width="1.6" marker-end="url(#arrowClosed)"/>
+
+              <!-- Sumador -->
+              <circle cx="86" cy="65" r="14" fill="#FFFFFF" stroke="#1A1814" stroke-width="1.8"/>
+              <text x="86" y="69" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#1A1814" text-anchor="middle">Σ</text>
+              <text x="76" y="55" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#1A1814" text-anchor="middle">+</text>
+              <text x="92" y="86" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#1A1814" text-anchor="middle">−</text>
+
+              <!-- Línea sumador → bloque G -->
+              <line x1="100" y1="65" x2="155" y2="65" stroke="#1A1814" stroke-width="1.6" marker-end="url(#arrowClosed)"/>
+
+              <!-- Bloque G -->
+              <rect x="160" y="42" width="100" height="46" fill="#FFFFFF" stroke="#1A1814" stroke-width="1.5" rx="3"/>
+              <text x="210" y="62" font-family="Fraunces, serif" font-size="14" font-weight="600" fill="#1A1814" text-anchor="middle">Bloque G</text>
+              <text x="210" y="80" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="#B5341E" text-anchor="middle">G = 10</text>
+
+              <!-- Línea G → salida -->
+              <line x1="260" y1="65" x2="335" y2="65" stroke="#1A1814" stroke-width="1.6" marker-end="url(#arrowClosed)"/>
+
+              <!-- Etiqueta c -->
+              <text x="345" y="63" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600" fill="#1A1814">c</text>
+
+              <!-- Punto de derivación -->
+              <circle cx="305" cy="65" r="3.5" fill="#1A1814"/>
+
+              <!-- Camino de realimentación -->
+              <path d="M 305 65 L 305 145 L 230 145" fill="none" stroke="#1A1814" stroke-width="1.6" marker-end="url(#arrowClosed)"/>
+
+              <!-- Bloque H -->
+              <rect x="160" y="125" width="70" height="40" fill="#FFFFFF" stroke="#B5341E" stroke-width="1.5" rx="3"/>
+              <text x="195" y="143" font-family="Fraunces, serif" font-size="13" font-weight="600" fill="#1A1814" text-anchor="middle">H</text>
+              <text x="195" y="158" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" fill="#B5341E" text-anchor="middle">−0,1</text>
+
+              <!-- Línea H → sumador -->
+              <path d="M 160 145 L 86 145 L 86 79" fill="none" stroke="#1A1814" stroke-width="1.6" marker-end="url(#arrowClosed)"/>
+
+              <!-- Etiqueta del producto -->
+              <text x="180" y="195" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#B5341E" text-anchor="middle">G·H = 10 · (−0,1) = −1</text>
+            </svg>
+          </div>
+          <div class="qa-diag-eq">G<sub>eq</sub> = G / (1 + G·H) = 10 / (1 + (−1)) = 10 / 0</div>
+          <p>El denominador se anula → la ganancia equivalente tiende a infinito → la salida diverge ante cualquier entrada finita. <strong class="verdict">Sistema inestable</strong> aunque el bloque G fuera el mismo de antes.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <p class="note-prose">
+    <strong>Cuidado con H negativo.</strong> Un valor negativo de H invierte el signo de la realimentación: lo que era negativa se convierte efectivamente en positiva. Por eso un sistema puede volverse inestable aunque el diagrama muestre signo negativo en el comparador.
+  </p>
+</section>
+
+<!-- ============ § 10 EJERCICIOS PEVAU ============ -->
+<section>
+  <div class="section-label">§ 10 — Identificación rápida de estabilidad</div>
+  <h2 class="section-heading">Tres preguntas <em>de identificación</em> para entrenar el ojo</h2>
+  <p class="lede" style="font-size: 1rem; max-width: 70ch;">
+    Los cálculos numéricos sobre álgebra de bloques y error permanente están resueltos paso a paso en el banco de ejercicios v27. Aquí entrenamos algo distinto, que solo el medio interactivo permite practicar: <em>la identificación rápida del signo del denominador (1+G·H)</em> y la inversión del comportamiento al cerrar el lazo. Es lo que se pregunta cualitativamente en PEvAU.
+  </p>
+
+  <style>
+    .quiz-q { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 1.5rem 1.75rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-1); }
+    .quiz-num { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .quiz-q h3 { font-family: var(--serif); font-weight: 600; font-size: 1.2rem; margin-bottom: 0.75rem; }
+    .quiz-statement { font-family: var(--serif); font-size: 1rem; color: var(--ink-soft); margin-bottom: 1rem; line-height: 1.6; }
+    .quiz-statement code { font-family: var(--mono); background: var(--paper-2); padding: 1px 6px; border-radius: 2px; color: var(--ink); }
+    .quiz-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.6rem; margin-top: 0.5rem; }
+    .quiz-opt { background: var(--paper); border: 1.5px solid var(--rule); border-radius: 4px; padding: 0.7rem 1rem; cursor: pointer; font-family: var(--sans); font-size: 0.95rem; color: var(--ink); text-align: center; transition: all 0.12s; }
+    .quiz-opt:hover { background: var(--surface); border-color: var(--ink-soft); }
+    .quiz-opt.correct { background: var(--output-tint); border-color: var(--output); pointer-events: none; }
+    .quiz-opt.incorrect { background: var(--error-tint); border-color: var(--error); pointer-events: none; opacity: 0.7; }
+    .quiz-fb { margin-top: 0.85rem; padding: 0.85rem 1.1rem; border-radius: 4px; font-size: 0.9rem; line-height: 1.55; display: none; }
+    .quiz-fb.visible { display: block; }
+    .quiz-fb.ok { background: var(--output-tint); border-left: 3px solid var(--output); color: var(--ink-soft); }
+    .quiz-fb.ko { background: var(--error-tint); border-left: 3px solid var(--error); color: var(--ink-soft); }
+    .quiz-fb strong { color: var(--ink); }
+  </style>
+
+  <div class="quiz-q" data-q="qz1">
+    <div class="quiz-num">Pregunta 1 · Signo del denominador</div>
+    <h3>¿Estable, crítico o inestable?</h3>
+    <p class="quiz-statement">Un sistema en lazo cerrado tiene <code>G = 4</code> y un sensor con <code>H = −0,25</code>. Sin calcular C/R, ¿qué tipo de comportamiento tendrá?</p>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="false" data-fb="Aunque H es negativo no garantiza estabilidad. Tienes que calcular 1+G·H. Aquí: 1+4·(−0,25) = 1−1 = 0. Crítico, no estable.">Estable</div>
+      <div class="quiz-opt" data-correct="true" data-fb="Correcto. 1+G·H = 1+4·(−0,25) = 0. Denominador igual a cero → ganancia equivalente tiende a infinito → sistema crítico (límite de la inestabilidad). Es el patrón del Problema 13 de Ponencia.">Crítico</div>
+      <div class="quiz-opt" data-correct="false" data-fb="Para que sea inestable el denominador debe ser negativo: 1+G·H &lt; 0. Aquí vale exactamente cero — caso límite, no claramente inestable.">Inestable</div>
+    </div>
+    <div class="quiz-fb"></div>
+  </div>
+
+  <div class="quiz-q" data-q="qz2">
+    <div class="quiz-num">Pregunta 2 · Inversión LA → LC</div>
+    <h3>De estable en lazo abierto a inestable al cerrar el lazo</h3>
+    <p class="quiz-statement">Un bloque <code>G = 20</code> es perfectamente estable funcionando en lazo abierto: si la entrada es 1, la salida es 20 (un múltiplo finito). Al cerrar el lazo con realimentación negativa y un sensor <code>H</code>, el sistema se vuelve inestable. ¿Cuál de estos valores de H lo provoca?</p>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="false" data-fb="Con H = 0,1 el denominador 1+G·H = 1+2 = 3 es positivo. El sistema sigue siendo estable.">H = +0,1</div>
+      <div class="quiz-opt" data-correct="false" data-fb="Con H = +1 el denominador 1+G·H = 1+20 = 21 es muy positivo. Estable. Para inestabilizar necesitas que (1+G·H) tienda a cero o se haga negativo, lo cual exige G·H negativo.">H = +1</div>
+      <div class="quiz-opt" data-correct="true" data-fb="Correcto. Con H = −0,05 el denominador es 1+G·H = 1+20·(−0,05) = 1−1 = 0. Ganancia equivalente tiende a infinito: el sistema diverge en lazo cerrado aunque G por sí solo era estable. Esta es la respuesta operativa al Problema 13 de Ponencia.">H = −0,05</div>
+      <div class="quiz-opt" data-correct="false" data-fb="Con H = −0,5 sería 1+G·H = 1−10 = −9 (denominador negativo, también inestable). Pero el caso «exacto al borde» que típicamente se pregunta en PEvAU es 1+G·H = 0, que se da con H = −0,05.">H = −0,5</div>
+    </div>
+    <div class="quiz-fb"></div>
+  </div>
+
+  <div class="quiz-q" data-q="qz3">
+    <div class="quiz-num">Pregunta 3 · Lectura del comportamiento</div>
+    <h3>¿Qué tipo de realimentación hay?</h3>
+    <p class="quiz-statement">Un sistema de control responde a un escalón de referencia con la siguiente característica: la salida <em>oscila con amplitud creciente</em> en lugar de estabilizarse. ¿Qué se puede decir del producto G·H?</p>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-correct="false" data-fb="Con G·H positivo y razonable (1+G·H &gt; 0), el sistema sería estable: las oscilaciones se amortiguarían. La amplitud creciente indica que el denominador es ≤ 0 o el lazo es positivo.">G·H &gt; 0 normal</div>
+      <div class="quiz-opt" data-correct="true" data-fb="Correcto. Si G·H tiene signo tal que 1+G·H se aproxima a cero o a valores negativos (ya sea por H negativa o por realimentación efectivamente positiva), la ganancia equivalente diverge y la salida crece sin control. Es la firma de un sistema inestable. La realimentación negativa con G·H&gt;0 amortigua; cuando se rompe esa condición, el lazo amplifica el error en vez de corregirlo.">G·H tal que 1+G·H ≤ 0</div>
+      <div class="quiz-opt" data-correct="false" data-fb="Que G·H sea exactamente cero significa que no hay realimentación efectiva — es como funcionar en lazo abierto. No produciría oscilaciones crecientes; daría una salida finita.">G·H = 0</div>
+    </div>
+    <div class="quiz-fb"></div>
+  </div>
+
+  <div style="margin-top: 2.5rem; background: var(--paper-2); border-left: 4px solid var(--output); border-radius: 0 6px 6px 0; padding: 1.5rem 1.75rem;">
+    <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;">Para más práctica · Banco de ejercicios v27</div>
+    <p style="font-family: var(--serif); font-size: 1rem; color: var(--ink-soft); margin-bottom: 0.75rem;">Estos quices entrenan la identificación rápida. Para los <em>cálculos numéricos</em> tipo PEvAU, el banco de ejercicios v27 contiene resueltos:</p>
+    <ul style="font-family: var(--serif); font-size: 0.95rem; color: var(--ink-soft); padding-left: 1.5rem; line-height: 1.7;">
+      <li><strong>Ejercicios 5–10 · Lazo simple.</strong> Realimentación negativa, positiva, casos particulares con H = 1, asociaciones serie con realimentación.</li>
+      <li><strong>Ejercicios 11–16 · Error en régimen permanente.</strong> Cálculos numéricos con valores concretos de G y H, error porcentual, escalones de distinta amplitud.</li>
+      <li><strong>Ejercicios 17, 21, 22, 24 · Lazos anidados.</strong> Casos del tipo del Problema 5 de Ponencia (control de motor con dos lazos).</li>
+      <li><strong>Ejercicios 27, 28 · Estabilidad y realimentación positiva.</strong> Análisis completo de realimentación no unitaria y valor límite de inestabilidad.</li>
+      <li><strong>Problemas P4, P6, P7 · Casos completos de Ponencia.</strong> Cilindro hidráulico, presión del agua doméstica, termo eléctrico (con transductor y perturbación).</li>
+      <li><strong>Problema P13 · Estabilidad LA vs LC.</strong> El caso de referencia para entender por qué un sistema estable en lazo abierto puede ser inestable al cerrar el lazo.</li>
+    </ul>
+  </div>
+</section>
+
+<script>
+// === Quiz § 10 ===
+document.querySelectorAll('.quiz-q').forEach(card => {
+  const opts = card.querySelectorAll('.quiz-opt');
+  const fb = card.querySelector('.quiz-fb');
+  opts.forEach(o => {
+    o.addEventListener('click', () => {
+      const isCorrect = o.dataset.correct === 'true';
+      o.classList.add(isCorrect ? 'correct' : 'incorrect');
+      // Si es incorrecta, deja pulsable las demás
+      if (!isCorrect) {
+        // marcar la correcta también
+      } else {
+        // bloquea todas
+        opts.forEach(x => x.classList.add('disabled'));
+      }
+      fb.classList.remove('ok', 'ko');
+      fb.classList.add('visible', isCorrect ? 'ok' : 'ko');
+      fb.innerHTML = `<strong>${isCorrect ? '✓ Correcto.' : '✗ Inténtalo otra vez.'}</strong> ${o.dataset.fb}`;
+    });
+  });
+});
+</script>
+
+
+<!-- ============ § 11 PARA RECORDAR ============ -->
+<section>
+  <div class="section-label">§ 11 — Para recordar</div>
+  <h2 class="section-heading">Lo esencial <em>para PEvAU</em></h2>
+
+  <div class="key-points">
+    <h3>Resumen operativo · Bloque F vale 1 punto sobre 10</h3>
+    <ol>
+      <li>Una <strong>entrada escalón</strong> es un cambio brusco e instantáneo de la consigna que se mantiene constante. Es la señal de prueba estándar para evaluar sistemas de control.</li>
+      <li>La salida pasa por dos fases: <strong>régimen transitorio</strong> (la salida está cambiando) y <strong>régimen permanente</strong> (la salida se ha estabilizado). El error solo se mide en régimen permanente.</li>
+      <li>El <strong>error en régimen permanente</strong> vale <code>e = r − H·c</code>. Cuando H = 1, se simplifica a <code>e = r − c</code>.</li>
+      <li>La fórmula clave de la realimentación negativa es <code>G<sub>eq</sub> = G/(1+G·H)</code>. De aquí salen casi todos los cálculos numéricos del bloque F.</li>
+      <li>El <strong>criterio operativo de estabilidad</strong>: mira el signo del denominador <em>1 + G·H</em>. Positivo → estable; cero → crítico (ganancia infinita); negativo → inestable.</li>
+      <li>La <strong>realimentación negativa</strong> resta la señal realimentada y reduce el error → estabiliza. La <strong>positiva</strong> la suma y amplifica desviaciones → puede desestabilizar.</li>
+      <li>Un sistema <strong>estable en lazo abierto</strong> puede ser inestable al cerrar el lazo, porque aparece el factor <em>(1+G·H)</em> en el denominador. Si vale cero, la salida diverge.</li>
+    </ol>
+  </div>
+
+  <div class="formula-recap">
+    <div class="frec">
+      <div class="frec-label">Geq · realim. neg.</div>
+      <div class="frec-formula">G / (1 + G·H)</div>
+    </div>
+    <div class="frec">
+      <div class="frec-label">Salida</div>
+      <div class="frec-formula">c = G<sub>eq</sub> · r</div>
+    </div>
+    <div class="frec">
+      <div class="frec-label">Error general</div>
+      <div class="frec-formula">e = r − H · c</div>
+    </div>
+    <div class="frec">
+      <div class="frec-label">Error H = 1, escalón</div>
+      <div class="frec-formula">e<sub>ss</sub> = r / (1 + G·H)</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="signature">Material didáctico para Tecnología e Ingeniería II · Bloque F</div>
+  <div>v4.18 · IES Jiménez de Quesada · Manuel Alonso Herrera</div>
+</footer>
+
+</div>
+
+<script>
+// =================================================================
+// 1. BLOCK DIAGRAM — Animación de pulsos
+// =================================================================
+class BlockDiagramAnimator {
+  constructor() {
+    this.paths = [
+      { el: document.getElementById('path-1'),  pulse: document.getElementById('pulse-1'),  duration: 1.4 },
+      { el: document.getElementById('path-2'),  pulse: document.getElementById('pulse-2'),  duration: 1.0 },
+      { el: document.getElementById('path-3'),  pulse: document.getElementById('pulse-3'),  duration: 1.6 },
+      { el: document.getElementById('path-4a'), pulse: document.getElementById('pulse-4a'), duration: 1.6 },
+      { el: document.getElementById('path-4b'), pulse: document.getElementById('pulse-4b'), duration: 1.6 },
+    ];
+    this.startTime = performance.now();
+    requestAnimationFrame((t) => this.animate(t));
+  }
+  animate(now) {
+    const t = (now - this.startTime) / 1000;
+    this.paths.forEach((p, i) => {
+      if (!p.el || !p.pulse) return;
+      const cycleTime = (t + i * 0.3) % p.duration;
+      const u = cycleTime / p.duration;
+      try {
+        const len = p.el.getTotalLength();
+        const point = p.el.getPointAtLength(u * len);
+        p.pulse.setAttribute('cx', point.x);
+        p.pulse.setAttribute('cy', point.y);
+        let opacity = 1;
+        if (u < 0.05) opacity = u / 0.05;
+        else if (u > 0.95) opacity = (1 - u) / 0.05;
+        p.pulse.style.opacity = opacity * 0.9;
+      } catch(e) {}
+    });
+    requestAnimationFrame((n) => this.animate(n));
+  }
+}
+
+// =================================================================
+// CANVAS UTILITIES
+// =================================================================
+function setupCanvas(canvas, w, h) {
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  canvas.style.width = w + 'px';
+  canvas.style.height = h + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  return ctx;
+}
+
+const COLORS = {
+  ref: '#1A1814',
+  output: '#0B6E4F',
+  outputFill: 'rgba(11, 110, 79, 0.18)',
+  error: '#B5341E',
+  errorFill: 'rgba(181, 52, 30, 0.18)',
+  warning: '#B5841A',
+  warningFill: 'rgba(181, 132, 26, 0.22)',
+  signal: '#1A75BC',
+  grid: '#D9D2C2',
+  muted: '#7A736A',
+  ink: '#1A1814',
+  paper2: '#F4EFE3',
+};
+
+// Pinta las zonas TRANSITORIO/PERMANENTE en el canvas, dadas las dimensiones y el tiempo de establecimiento aproximado.
+// Si tSettle >= tMax, todo el área se considera transitoria.
+function drawRegimeZones(ctx, opts) {
+  const { marginL, marginT, plotW, plotH, tToX, tSettle, tMax } = opts;
+  const xT = tToX(Math.min(tSettle, tMax));
+
+  // Zona transitoria
+  ctx.fillStyle = COLORS.warningFill;
+  ctx.fillRect(marginL, marginT, xT - marginL, plotH);
+
+  // Zona permanente (solo si el sistema se ha establecido dentro de la ventana)
+  if (tSettle < tMax) {
+    ctx.fillStyle = COLORS.outputFill;
+    ctx.fillRect(xT, marginT, marginL + plotW - xT, plotH);
+  }
+
+  // Etiquetas
+  ctx.font = '600 10px "JetBrains Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = COLORS.warning;
+  if (xT > marginL + 60) ctx.fillText('TRANSITORIO', (marginL + xT) / 2, marginT + 14);
+  if (tSettle < tMax) {
+    ctx.fillStyle = COLORS.output;
+    if (xT < marginL + plotW - 60) ctx.fillText('PERMANENTE', (xT + marginL + plotW) / 2, marginT + 14);
+  }
+}
+
+// =================================================================
+// 2. SIMULADOR §04 — Régimen transitorio y permanente
+// =================================================================
+class TransitorySimulator {
+  constructor() {
+    this.canvas = document.getElementById('canvasTransitory');
+    this.W = 800; this.H = 280;
+    this.ctx = setupCanvas(this.canvas, this.W, this.H);
+    this.margin = { l: 50, r: 30, t: 30, b: 40 };
+    this.plotW = this.W - this.margin.l - this.margin.r;
+    this.plotH = this.H - this.margin.t - this.margin.b;
+    this.tau = 1.2;
+    this.tMax = 8;
+    this.t = 0;
+    this.playing = false;
+    this.lastFrame = null;
+    this.statusEl = document.getElementById('transitoryStatus');
+    this.setup();
+    this.draw();
+  }
+  setup() {
+    document.getElementById('playTransitory').addEventListener('click', () => this.play());
+    document.getElementById('resetTransitory').addEventListener('click', () => this.reset());
+    const slider = document.getElementById('tauSlider');
+    if (slider) {
+      slider.addEventListener('input', () => {
+        this.tau = parseFloat(slider.value);
+        document.getElementById('tauVal').textContent = this.tau.toFixed(1) + ' s';
+        if (!this.playing) { this.t = this.tMax; this.draw(); }
+      });
+    }
+  }
+  tToX(t) { return this.margin.l + (t / this.tMax) * this.plotW; }
+  yToPx(y) { return this.margin.t + this.plotH - (y / 1.5) * this.plotH; }
+  response(t) { return 0.7 * (1 - Math.exp(-t / this.tau)); }
+  draw() {
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.W, this.H);
+    const yInf = 0.7;
+    const eSs = 1 - yInf;
+
+    // Zona transitoria (sombreado warning)
+    const tSettle = 4 * this.tau;
+    const xT = this.tToX(Math.min(tSettle, this.tMax));
+    ctx.fillStyle = COLORS.warningFill;
+    ctx.fillRect(this.margin.l, this.margin.t, xT - this.margin.l, this.plotH);
+
+    // Zona permanente
+    if (xT < this.margin.l + this.plotW) {
+      ctx.fillStyle = COLORS.outputFill;
+      ctx.fillRect(xT, this.margin.t, this.margin.l + this.plotW - xT, this.plotH);
+    }
+
+    // Etiquetas zonas
+    ctx.font = '600 10px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = COLORS.warning;
+    if (xT > this.margin.l + 60) ctx.fillText('TRANSITORIO', (this.margin.l + xT) / 2, this.margin.t + 14);
+    ctx.fillStyle = COLORS.output;
+    if (xT < this.margin.l + this.plotW - 60) ctx.fillText('PERMANENTE', (xT + this.margin.l + this.plotW) / 2, this.margin.t + 14);
+
+    // Grid
+    ctx.strokeStyle = COLORS.grid;
+    ctx.lineWidth = 0.5;
+    [0, 0.5, 1, 1.5].forEach(y => {
+      const py = this.yToPx(y);
+      ctx.beginPath(); ctx.moveTo(this.margin.l, py); ctx.lineTo(this.margin.l + this.plotW, py); ctx.stroke();
+      ctx.fillStyle = COLORS.muted;
+      ctx.font = '500 10px "JetBrains Mono", monospace';
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(y.toFixed(1), this.margin.l - 6, py);
+    });
+
+    for (let t = 0; t <= this.tMax; t += 1) {
+      const px = this.tToX(t);
+      ctx.strokeStyle = COLORS.grid;
+      ctx.beginPath(); ctx.moveTo(px, this.margin.t); ctx.lineTo(px, this.margin.t + this.plotH); ctx.stroke();
+      ctx.fillStyle = COLORS.muted;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      ctx.fillText(t + 's', px, this.margin.t + this.plotH + 6);
+    }
+
+    // Eje X y Y
+    ctx.strokeStyle = COLORS.ink;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(this.margin.l, this.yToPx(0));
+    ctx.lineTo(this.margin.l + this.plotW, this.yToPx(0));
+    ctx.moveTo(this.margin.l, this.margin.t);
+    ctx.lineTo(this.margin.l, this.margin.t + this.plotH);
+    ctx.stroke();
+
+    // Referencia r = 1
+    ctx.strokeStyle = COLORS.muted;
+    ctx.setLineDash([4, 4]);
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(this.margin.l, this.yToPx(1));
+    ctx.lineTo(this.margin.l + this.plotW, this.yToPx(1));
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = COLORS.ink;
+    ctx.font = '600 10px "JetBrains Mono", monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('r = 1', this.margin.l + 8, this.yToPx(1) - 6);
+
+    // Curva de respuesta
+    const tEnd = this.t;
+    if (tEnd > 0) {
+      const N = 300;
+
+      // Área del error (entre referencia r=1 y la salida)
+      ctx.fillStyle = COLORS.errorFill;
+      ctx.beginPath();
+      ctx.moveTo(this.margin.l, this.yToPx(1));
+      for (let i = 0; i <= N; i++) {
+        const t = (tEnd * i) / N;
+        const y = this.response(t);
+        const px = this.tToX(t);
+        const py = this.yToPx(y);
+        ctx.lineTo(px, py);
+      }
+      ctx.lineTo(this.tToX(tEnd), this.yToPx(1));
+      ctx.closePath();
+      ctx.fill();
+
+      // Curva
+      ctx.strokeStyle = COLORS.output;
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      for (let i = 0; i <= N; i++) {
+        const t = (tEnd * i) / N;
+        const y = this.response(t);
+        const px = this.tToX(t);
+        const py = this.yToPx(y);
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+
+      // Punto en cabeza
+      const yLast = this.response(tEnd);
+      ctx.fillStyle = COLORS.output;
+      ctx.beginPath();
+      ctx.arc(this.tToX(tEnd), this.yToPx(yLast), 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Asintota y∞ (siempre visible, ayuda a ver hacia dónde tiende)
+    if (tEnd > 0.5) {
+      ctx.strokeStyle = COLORS.output;
+      ctx.setLineDash([2, 4]);
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(this.margin.l, this.yToPx(yInf));
+      ctx.lineTo(this.margin.l + this.plotW, this.yToPx(yInf));
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = COLORS.output;
+      ctx.font = '600 10px "JetBrains Mono", monospace';
+      ctx.textAlign = 'right';
+      ctx.fillText('y∞ = ' + yInf.toFixed(2), this.margin.l + this.plotW - 6, this.yToPx(yInf) - 6);
+    }
+
+    // Etiqueta error e_ss en el área roja (cuando ya hay zona suficiente)
+    if (tEnd > 4) {
+      const yMid = (1 + yInf) / 2;
+      ctx.fillStyle = COLORS.error;
+      ctx.font = '600 11px "JetBrains Mono", monospace';
+      ctx.textAlign = 'left';
+      ctx.fillText('error e_ss = ' + eSs.toFixed(2), this.margin.l + this.plotW * 0.55, this.yToPx(yMid) + 4);
+    }
+
+    // Etiqueta y(t)
+    ctx.fillStyle = COLORS.output;
+    ctx.font = '600 11px "JetBrains Mono", monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText('y(t)', this.margin.l + this.plotW - 8, this.yToPx(yInf) + 14);
+  }
+  play() {
+    if (this.playing) return;
+    this.t = 0;
+    this.playing = true;
+    this.lastFrame = performance.now();
+    this.statusEl.className = 'sim-status warn';
+    this.statusEl.innerHTML = '<span class="status-tag">Transitorio</span>La salida está cambiando: aún no es estable.';
+    requestAnimationFrame((n) => this.tick(n));
+  }
+  reset() {
+    this.playing = false;
+    this.t = 0;
+    this.draw();
+    this.statusEl.className = 'sim-status ok';
+    this.statusEl.innerHTML = '<span class="status-tag">En espera</span>Pulsa <strong>reproducir</strong> para ver cómo la respuesta entra en el régimen transitorio (sombreado ámbar) y luego se establece en el régimen permanente (sombreado verde).';
+  }
+  tick(now) {
+    if (!this.playing) return;
+    const dt = (now - this.lastFrame) / 1000;
+    this.lastFrame = now;
+    this.t = Math.min(this.tMax, this.t + dt * 1.2);
+    this.draw();
+    // status update
+    if (this.t > 4 * this.tau) {
+      this.statusEl.className = 'sim-status ok';
+      this.statusEl.innerHTML = '<span class="status-tag">Permanente</span>La salida ya se ha estabilizado en y∞ = 0,70. <strong>Ahora sí podemos medir el error: e<sub>ss</sub> = 1 − 0,70 = 0,30</strong> (la franja roja entre la referencia y la salida).';
+    }
+    if (this.t < this.tMax) {
+      requestAnimationFrame((n) => this.tick(n));
+    } else {
+      this.playing = false;
+    }
+  }
+}
+
+// =================================================================
+// 3. SIMULADOR §05 — Error con slider K
+// =================================================================
+class ErrorSimulator {
+  constructor() {
+    this.canvas = document.getElementById('canvasError');
+    this.W = 800; this.H = 280;
+    this.ctx = setupCanvas(this.canvas, this.W, this.H);
+    this.margin = { l: 50, r: 30, t: 30, b: 40 };
+    this.plotW = this.W - this.margin.l - this.margin.r;
+    this.plotH = this.H - this.margin.t - this.margin.b;
+    this.K = 2.0;
+    this.tMax = 10;
+    this.t = 0;
+    this.playing = false;
+    this.lastFrame = null;
+    this.setup();
+    this.updateMetrics();
+    this.draw();
+  }
+  setup() {
+    document.getElementById('playError').addEventListener('click', () => this.play());
+    document.getElementById('resetError').addEventListener('click', () => this.reset());
+    const slider = document.getElementById('kSlider');
+    slider.addEventListener('input', () => {
+      this.K = parseFloat(slider.value);
+      document.getElementById('kVal').textContent = this.K.toFixed(1);
+      this.updateMetrics();
+      if (!this.playing) { this.t = this.tMax; this.draw(); }
+    });
+  }
+  tToX(t) { return this.margin.l + (t / this.tMax) * this.plotW; }
+  yToPx(y) { return this.margin.t + this.plotH - (y / 1.2) * this.plotH; }
+  yFinal() { return this.K / (1 + this.K); }
+  response(t) {
+    const yInf = this.yFinal();
+    return yInf * (1 - Math.exp(-t / 1.0));
+  }
+  updateMetrics() {
+    const yInf = this.yFinal();
+    const ess = 1 - yInf;
+    document.getElementById('metricYInf').textContent = yInf.toFixed(3);
+    document.getElementById('metricEss').textContent = ess.toFixed(3);
+    document.getElementById('metricEPct').textContent = (ess * 100).toFixed(1) + ' %';
+  }
+  draw() {
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.W, this.H);
+
+    // Zonas transitorio/permanente (sistema de primer orden con tau=1.0 → tSettle = 4·tau = 4s)
+    drawRegimeZones(ctx, {
+      marginL: this.margin.l, marginT: this.margin.t,
+      plotW: this.plotW, plotH: this.plotH,
+      tToX: (t) => this.tToX(t), tSettle: 4, tMax: this.tMax
+    });
+
+    // Grid
+    ctx.strokeStyle = COLORS.grid;
+    ctx.lineWidth = 0.5;
+    [0, 0.5, 1].forEach(y => {
+      const py = this.yToPx(y);
+      ctx.beginPath(); ctx.moveTo(this.margin.l, py); ctx.lineTo(this.margin.l + this.plotW, py); ctx.stroke();
+      ctx.fillStyle = COLORS.muted;
+      ctx.font = '500 10px "JetBrains Mono", monospace';
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(y.toFixed(1), this.margin.l - 6, py);
+    });
+    for (let t = 0; t <= this.tMax; t += 2) {
+      const px = this.tToX(t);
+      ctx.beginPath(); ctx.moveTo(px, this.margin.t); ctx.lineTo(px, this.margin.t + this.plotH); ctx.stroke();
+      ctx.fillStyle = COLORS.muted;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      ctx.fillText(t + 's', px, this.margin.t + this.plotH + 6);
+    }
+
+    // Ejes
+    ctx.strokeStyle = COLORS.ink;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(this.margin.l, this.yToPx(0));
+    ctx.lineTo(this.margin.l + this.plotW, this.yToPx(0));
+    ctx.moveTo(this.margin.l, this.margin.t);
+    ctx.lineTo(this.margin.l, this.margin.t + this.plotH);
+    ctx.stroke();
+
+    // Referencia r = 1
+    ctx.strokeStyle = COLORS.ref;
+    ctx.setLineDash([5, 3]);
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(this.margin.l, this.yToPx(1));
+    ctx.lineTo(this.margin.l + this.plotW, this.yToPx(1));
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = COLORS.ref;
+    ctx.font = '600 11px "JetBrains Mono", monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('r = 1', this.margin.l + 8, this.yToPx(1) - 6);
+
+    // Curva de respuesta + área del error
+    if (this.t > 0) {
+      const N = 300;
+      const tEnd = this.t;
+
+      // Área del error (entre referencia y salida)
+      ctx.fillStyle = COLORS.errorFill;
+      ctx.beginPath();
+      for (let i = 0; i <= N; i++) {
+        const t = (tEnd * i) / N;
+        const y = this.response(t);
+        const px = this.tToX(t);
+        const py = this.yToPx(y);
+        if (i === 0) ctx.moveTo(px, this.yToPx(1));
+        ctx.lineTo(px, py);
+      }
+      // cerrar el polígono volviendo por la línea de r=1
+      ctx.lineTo(this.tToX(tEnd), this.yToPx(1));
+      ctx.lineTo(this.margin.l, this.yToPx(1));
+      ctx.closePath();
+      ctx.fill();
+
+      // Curva
+      ctx.strokeStyle = COLORS.output;
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      for (let i = 0; i <= N; i++) {
+        const t = (tEnd * i) / N;
+        const y = this.response(t);
+        const px = this.tToX(t);
+        const py = this.yToPx(y);
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+
+      const yLast = this.response(tEnd);
+      ctx.fillStyle = COLORS.output;
+      ctx.beginPath();
+      ctx.arc(this.tToX(tEnd), this.yToPx(yLast), 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // y∞ horizontal asintota
+    if (this.t > 1) {
+      const yInf = this.yFinal();
+      ctx.strokeStyle = COLORS.output;
+      ctx.setLineDash([2, 4]);
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(this.margin.l, this.yToPx(yInf));
+      ctx.lineTo(this.margin.l + this.plotW, this.yToPx(yInf));
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = COLORS.output;
+      ctx.textAlign = 'right';
+      ctx.fillText('y∞ = ' + yInf.toFixed(2), this.margin.l + this.plotW - 6, this.yToPx(yInf) - 6);
+    }
+
+    // Etiqueta error
+    if (this.t > 4) {
+      const yInf = this.yFinal();
+      const yMid = (1 + yInf) / 2;
+      ctx.fillStyle = COLORS.error;
+      ctx.font = '600 11px "JetBrains Mono", monospace';
+      ctx.textAlign = 'left';
+      ctx.fillText('error e_ss', this.margin.l + this.plotW * 0.55, this.yToPx(yMid));
+    }
+  }
+  play() {
+    this.t = 0;
+    this.playing = true;
+    this.lastFrame = performance.now();
+    requestAnimationFrame((n) => this.tick(n));
+  }
+  reset() { this.playing = false; this.t = 0; this.draw(); }
+  tick(now) {
+    if (!this.playing) return;
+    const dt = (now - this.lastFrame) / 1000;
+    this.lastFrame = now;
+    this.t = Math.min(this.tMax, this.t + dt * 1.5);
+    this.draw();
+    if (this.t < this.tMax) requestAnimationFrame((n) => this.tick(n));
+    else this.playing = false;
+  }
+}
+
+// =================================================================
+// 4. SIMULADOR §06 — Estable vs Inestable (canvas dual)
+// =================================================================
+class StabilityComparator {
+  constructor(canvasId, type, statusId) {
+    this.canvas = document.getElementById(canvasId);
+    this.type = type; // 'stable' | 'unstable'
+    this.statusEl = document.getElementById(statusId);
+    this.W = 480; this.H = 240;
+    this.ctx = setupCanvas(this.canvas, this.W, this.H);
+    this.margin = { l: 40, r: 20, t: 25, b: 35 };
+    this.plotW = this.W - this.margin.l - this.margin.r;
+    this.plotH = this.H - this.margin.t - this.margin.b;
+    this.tMax = type === 'stable' ? 12 : 8;
+    this.yMax = type === 'stable' ? 1.8 : 5;
+    this.yMin = type === 'stable' ? 0 : -5;
+    this.t = 0;
+    this.playing = false;
+    this.lastFrame = null;
+    this.draw();
+  }
+  tToX(t) { return this.margin.l + (t / this.tMax) * this.plotW; }
+  yToPx(y) {
+    const range = this.yMax - this.yMin;
+    return this.margin.t + this.plotH - ((y - this.yMin) / range) * this.plotH;
+  }
+  response(t) {
+    if (this.type === 'stable') {
+      // Sub-amortiguada: 1 - e^(-zeta·wn·t) · (cos(wd·t) + zeta/sqrt(1-zeta²)·sin(wd·t))
+      const zeta = 0.3, wn = 1.5;
+      const wd = wn * Math.sqrt(1 - zeta * zeta);
+      return 1 - Math.exp(-zeta * wn * t) * (Math.cos(wd * t) + (zeta / Math.sqrt(1 - zeta * zeta)) * Math.sin(wd * t));
+    } else {
+      // Inestable: misma forma que el estable pero con zeta NEGATIVO → diverge
+      const zeta = -0.15, wn = 1.5;
+      const wd = wn * Math.sqrt(1 - zeta * zeta);
+      return 1 - Math.exp(-zeta * wn * t) * (Math.cos(wd * t) + (zeta / Math.sqrt(1 - zeta * zeta)) * Math.sin(wd * t));
+    }
+  }
+  draw() {
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.W, this.H);
+
+    // Zonas transitorio/permanente solo si el sistema es estable
+    if (this.type === 'stable') {
+      // zeta=0.3, wn=1.5 → tSettle ≈ 4/(zeta·wn) ≈ 8.9s
+      drawRegimeZones(ctx, {
+        marginL: this.margin.l, marginT: this.margin.t,
+        plotW: this.plotW, plotH: this.plotH,
+        tToX: (t) => this.tToX(t), tSettle: 8.9, tMax: this.tMax
+      });
+    }
+
+    // Grid
+    ctx.strokeStyle = COLORS.grid;
+    ctx.lineWidth = 0.5;
+    const yTicks = this.type === 'stable' ? [0, 0.5, 1, 1.5] : [-4, -2, 0, 2, 4];
+    yTicks.forEach(y => {
+      if (y > this.yMax || y < this.yMin) return;
+      const py = this.yToPx(y);
+      ctx.beginPath(); ctx.moveTo(this.margin.l, py); ctx.lineTo(this.margin.l + this.plotW, py); ctx.stroke();
+      ctx.fillStyle = COLORS.muted;
+      ctx.font = '500 9px "JetBrains Mono", monospace';
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(y.toString(), this.margin.l - 5, py);
+    });
+    for (let t = 0; t <= this.tMax; t += 2) {
+      const px = this.tToX(t);
+      ctx.beginPath(); ctx.moveTo(px, this.margin.t); ctx.lineTo(px, this.margin.t + this.plotH); ctx.stroke();
+      ctx.fillStyle = COLORS.muted;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      ctx.fillText(t + 's', px, this.margin.t + this.plotH + 5);
+    }
+
+    // Ejes
+    ctx.strokeStyle = COLORS.ink;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(this.margin.l, this.yToPx(0));
+    ctx.lineTo(this.margin.l + this.plotW, this.yToPx(0));
+    ctx.moveTo(this.margin.l, this.margin.t);
+    ctx.lineTo(this.margin.l, this.margin.t + this.plotH);
+    ctx.stroke();
+
+    // Referencia
+    ctx.strokeStyle = COLORS.ref;
+    ctx.setLineDash([5, 3]);
+    ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    ctx.moveTo(this.margin.l, this.yToPx(1));
+    ctx.lineTo(this.margin.l + this.plotW, this.yToPx(1));
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = COLORS.ref;
+    ctx.font = '600 10px "JetBrains Mono", monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('r = 1', this.margin.l + 6, this.yToPx(1) - 5);
+
+    // Curva
+    if (this.t > 0) {
+      const stroke = this.type === 'stable' ? COLORS.output : COLORS.error;
+      ctx.strokeStyle = stroke;
+      ctx.lineWidth = 2.2;
+      ctx.beginPath();
+      const N = 300;
+      const tEnd = this.t;
+      for (let i = 0; i <= N; i++) {
+        const t = (tEnd * i) / N;
+        const y = this.response(t);
+        const yClipped = Math.min(this.yMax, Math.max(this.yMin, y));
+        const px = this.tToX(t);
+        const py = this.yToPx(yClipped);
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+
+      const yLast = Math.min(this.yMax, Math.max(this.yMin, this.response(tEnd)));
+      ctx.fillStyle = stroke;
+      ctx.beginPath();
+      ctx.arc(this.tToX(tEnd), this.yToPx(yLast), 3.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  play() {
+    this.t = 0;
+    this.playing = true;
+    this.lastFrame = performance.now();
+    if (this.statusEl) {
+      const cl = this.type === 'stable' ? 'sim-status warn' : 'sim-status bad';
+      const tag = this.type === 'stable' ? 'En transitorio' : 'Diverge';
+      const txt = this.type === 'stable'
+        ? 'La salida oscila pero las oscilaciones se amortiguan.'
+        : 'La salida oscila con amplitud creciente. No se establece.';
+      this.statusEl.className = cl;
+      this.statusEl.innerHTML = '<span class="status-tag">' + tag + '</span>' + txt;
+    }
+    requestAnimationFrame((n) => this.tick(n));
+  }
+  reset() {
+    this.playing = false; this.t = 0; this.draw();
+    if (this.statusEl) {
+      const cl = this.type === 'stable' ? 'sim-status ok' : 'sim-status bad';
+      this.statusEl.className = cl;
+      this.statusEl.innerHTML = '<span class="status-tag">En espera</span>Pulsa reproducir para iniciar la simulación.';
+    }
+  }
+  tick(now) {
+    if (!this.playing) return;
+    const dt = (now - this.lastFrame) / 1000;
+    this.lastFrame = now;
+    this.t = Math.min(this.tMax, this.t + dt * 1.5);
+    this.draw();
+    // Update status
+    if (this.statusEl && this.type === 'stable' && this.t > 7) {
+      this.statusEl.className = 'sim-status ok';
+      this.statusEl.innerHTML = '<span class="status-tag">Permanente</span>La salida se ha estabilizado en y∞ = 1. <strong>Sistema estable.</strong>';
+    }
+    if (this.t < this.tMax) requestAnimationFrame((n) => this.tick(n));
+    else this.playing = false;
+  }
+}
+
+// =================================================================
+// 4 BIS. SIMULADOR §06 BIS — Respuesta a perturbación
+// =================================================================
+class PerturbationSimulator {
+  constructor() {
+    this.canvas = document.getElementById('canvasPerturbation');
+    this.W = 800; this.H = 280;
+    this.ctx = setupCanvas(this.canvas, this.W, this.H);
+    this.margin = { l: 50, r: 30, t: 30, b: 40 };
+    this.plotW = this.W - this.margin.l - this.margin.r;
+    this.plotH = this.H - this.margin.t - this.margin.b;
+    this.tMax = 14;
+    this.t = 0;
+    this.tPert = 6.0;       // instante de la perturbación
+    this.pertAmp = 0.4;     // amplitud del salto inducido por la perturbación
+    this.playing = false;
+    this.lastFrame = null;
+    this.statusEl = document.getElementById('perturbationStatus');
+    this.setup();
+    this.draw();
+  }
+  setup() {
+    document.getElementById('playPerturbation').addEventListener('click', () => this.play());
+    document.getElementById('resetPerturbation').addEventListener('click', () => this.reset());
+  }
+  tToX(t) { return this.margin.l + (t / this.tMax) * this.plotW; }
+  yToPx(y) { return this.margin.t + this.plotH - (y / 1.5) * this.plotH; }
+  // Respuesta: primer orden hasta tPert, luego salto + retorno exponencial al equilibrio
+  response(t) {
+    const tau = 0.8;
+    if (t < this.tPert) {
+      return 1 - Math.exp(-t / tau);
+    } else {
+      // En tPert hay un salto súbito de +pertAmp y el sistema vuelve al equilibrio
+      const dt = t - this.tPert;
+      const yEq = 1 - Math.exp(-this.tPert / tau);
+      const yJump = yEq + this.pertAmp;
+      // recovery exponencial al equilibrio yEq
+      return yEq + (yJump - yEq) * Math.exp(-dt / tau);
+    }
+  }
+  draw() {
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.W, this.H);
+
+    // Grid
+    ctx.strokeStyle = COLORS.grid;
+    ctx.lineWidth = 0.5;
+    [0, 0.5, 1, 1.5].forEach(y => {
+      const py = this.yToPx(y);
+      ctx.beginPath(); ctx.moveTo(this.margin.l, py); ctx.lineTo(this.margin.l + this.plotW, py); ctx.stroke();
+      ctx.fillStyle = COLORS.muted;
+      ctx.font = '500 10px "JetBrains Mono", monospace';
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(y.toFixed(1), this.margin.l - 6, py);
+    });
+    for (let t = 0; t <= this.tMax; t += 2) {
+      const px = this.tToX(t);
+      ctx.beginPath(); ctx.moveTo(px, this.margin.t); ctx.lineTo(px, this.margin.t + this.plotH); ctx.stroke();
+      ctx.fillStyle = COLORS.muted;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      ctx.fillText(t + 's', px, this.margin.t + this.plotH + 6);
+    }
+
+    // Ejes
+    ctx.strokeStyle = COLORS.ink;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(this.margin.l, this.yToPx(0));
+    ctx.lineTo(this.margin.l + this.plotW, this.yToPx(0));
+    ctx.moveTo(this.margin.l, this.margin.t);
+    ctx.lineTo(this.margin.l, this.margin.t + this.plotH);
+    ctx.stroke();
+
+    // Referencia r = 1
+    ctx.strokeStyle = COLORS.ref;
+    ctx.setLineDash([5, 3]);
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(this.margin.l, this.yToPx(1));
+    ctx.lineTo(this.margin.l + this.plotW, this.yToPx(1));
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = COLORS.ref;
+    ctx.font = '600 11px "JetBrains Mono", monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('r = 1', this.margin.l + 8, this.yToPx(1) - 6);
+
+    // Marca de la perturbación (siempre visible, para anticipar)
+    const xPert = this.tToX(this.tPert);
+    ctx.strokeStyle = COLORS.warning;
+    ctx.setLineDash([2, 4]);
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(xPert, this.margin.t + 30);
+    ctx.lineTo(xPert, this.margin.t + this.plotH);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Flecha de perturbación (resaltada cuando ya ha sucedido)
+    const pertHappened = this.t >= this.tPert;
+    const arrowAlpha = pertHappened ? 1.0 : 0.5;
+    ctx.globalAlpha = arrowAlpha;
+    ctx.strokeStyle = COLORS.warning;
+    ctx.fillStyle = COLORS.warning;
+    ctx.lineWidth = 2.4;
+
+    // Línea vertical de la flecha
+    const arrowYTop = this.margin.t + 8;
+    const arrowYBottom = this.margin.t + 32;
+    ctx.beginPath();
+    ctx.moveTo(xPert, arrowYTop);
+    ctx.lineTo(xPert, arrowYBottom);
+    ctx.stroke();
+    // Punta de la flecha (apunta hacia abajo)
+    ctx.beginPath();
+    ctx.moveTo(xPert, arrowYBottom + 6);
+    ctx.lineTo(xPert - 5, arrowYBottom);
+    ctx.lineTo(xPert + 5, arrowYBottom);
+    ctx.closePath();
+    ctx.fill();
+    // Etiqueta
+    ctx.font = '700 11px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('perturbación', xPert, this.margin.t + 4);
+    ctx.globalAlpha = 1.0;
+
+    // Curva
+    const tEnd = this.t;
+    if (tEnd > 0) {
+      const N = 400;
+      ctx.strokeStyle = COLORS.output;
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      for (let i = 0; i <= N; i++) {
+        const t = (tEnd * i) / N;
+        const y = this.response(t);
+        const px = this.tToX(t);
+        const py = this.yToPx(y);
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+
+      const yLast = this.response(tEnd);
+      ctx.fillStyle = COLORS.output;
+      ctx.beginPath();
+      ctx.arc(this.tToX(tEnd), this.yToPx(yLast), 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Etiqueta y(t)
+    ctx.fillStyle = COLORS.output;
+    ctx.font = '600 11px "JetBrains Mono", monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText('y(t)', this.margin.l + this.plotW - 8, this.yToPx(0.95));
+  }
+  play() {
+    if (this.playing) return;
+    this.t = 0;
+    this.playing = true;
+    this.lastFrame = performance.now();
+    this.statusEl.className = 'sim-status ok';
+    this.statusEl.innerHTML = '<span class="status-tag">Equilibrándose</span>El sistema sube hacia su valor de equilibrio en respuesta al escalón de referencia.';
+    requestAnimationFrame((n) => this.tick(n));
+  }
+  reset() {
+    this.playing = false;
+    this.t = 0;
+    this.draw();
+    this.statusEl.className = 'sim-status ok';
+    this.statusEl.innerHTML = '<span class="status-tag">En espera</span>Pulsa <strong>reproducir</strong>. Verás cómo la salida se estabiliza, recibe una <em>perturbación externa</em> en t = 6 s (flecha naranja), y el lazo de control la absorbe devolviendo el sistema al equilibrio.';
+  }
+  tick(now) {
+    if (!this.playing) return;
+    const dt = (now - this.lastFrame) / 1000;
+    this.lastFrame = now;
+    this.t = Math.min(this.tMax, this.t + dt * 1.4);
+    this.draw();
+    // Status
+    if (this.t >= this.tPert && this.t < this.tPert + 0.5) {
+      this.statusEl.className = 'sim-status warn';
+      this.statusEl.innerHTML = '<span class="status-tag">¡Perturbación!</span>Algo externo ha desplazado la salida. El lazo de control detecta el error y empieza a corregir.';
+    } else if (this.t >= this.tPert + 2.5) {
+      this.statusEl.className = 'sim-status ok';
+      this.statusEl.innerHTML = '<span class="status-tag">Recuperado</span>El sistema ha absorbido la perturbación y ha vuelto al equilibrio. <strong>Esto es lo que define a un sistema estable: rechazar perturbaciones.</strong>';
+    }
+    if (this.t < this.tMax) requestAnimationFrame((n) => this.tick(n));
+    else this.playing = false;
+  }
+}
+
+
+// =================================================================
+// 5. SIMULADOR §07 — DENOMINADOR (NUEVO PEDAGÓGICO)
+// =================================================================
+class DenomSimulator {
+  constructor() {
+    this.canvas = document.getElementById('canvasDenom');
+    this.W = 700; this.H = 320;
+    this.ctx = setupCanvas(this.canvas, this.W, this.H);
+    this.margin = { l: 50, r: 30, t: 30, b: 45 };
+    this.plotW = this.W - this.margin.l - this.margin.r;
+    this.plotH = this.H - this.margin.t - this.margin.b;
+    this.GH = 1.0;
+    this.tMax = 10;
+    this.t = this.tMax; // se ve completa al inicio
+    this.playing = false;
+    this.lastFrame = null;
+    this.setup();
+    this.updateInfo();
+    this.draw();
+  }
+  setup() {
+    document.getElementById('playDenom').addEventListener('click', () => this.play());
+    document.getElementById('resetDenom').addEventListener('click', () => this.reset());
+    const slider = document.getElementById('ghSlider');
+    slider.addEventListener('input', () => {
+      // El slider controla directamente el denominador; G·H se deriva
+      const D = parseFloat(slider.value);
+      this.GH = D - 1;
+      this.updateSliderLabel();
+      this.updateInfo();
+      if (!this.playing) { this.t = this.tMax; this.draw(); }
+    });
+    this.updateSliderLabel();
+  }
+  updateSliderLabel() {
+    const d = this.denom();
+    const ghStr = (this.GH >= 0 ? '+' : '') + this.GH.toFixed(2);
+    const dStr = (d >= 0 ? '+' : '') + d.toFixed(2);
+    const cls = this.classify();
+    const color = cls === 'ok' ? 'var(--output)' : (cls === 'bad' ? 'var(--error)' : 'var(--warning)');
+    document.getElementById('ghVal').innerHTML =
+      '<span style="color:' + color + '">1+G·H = ' + dStr + '</span> → G·H = ' + ghStr;
+  }
+  denom() { return 1 + this.GH; }
+  classify() {
+    const d = this.denom();
+    if (d > 0.08) return 'ok';
+    if (d < -0.08) return 'bad';
+    return 'warn';
+  }
+  yMax() {
+    const d = this.denom();
+    if (Math.abs(d) > 0.08 && d > 0) return Math.max(2.5, Math.abs(1/d) * 1.3);
+    return 8; // para crítico/inestable, escala fija amplia
+  }
+  yMin() {
+    const d = this.denom();
+    if (d < -0.08) {
+      // inestable: la salida puede ir hacia el negativo o positivo
+      return -8;
+    }
+    return -1;
+  }
+  response(t) {
+    const d = this.denom();
+    if (Math.abs(d) < 0.08) {
+      // Crítico → comportamiento de rampa
+      return t * 0.6;
+    } else if (d > 0) {
+      // Estable → exponencial convergente a 1/d
+      const yInf = 1 / d;
+      const tau = Math.max(0.4, 1 / d);
+      return yInf * (1 - Math.exp(-t / tau));
+    } else {
+      // Inestable: respuesta divergente y(t) = (1/d)·(1 - exp(|d|·t))
+      // Con d < 0, yInf es negativo y (1 - exp(k·t)) es negativo, por lo que el producto crece +∞
+      const k = Math.abs(d);
+      const yInf = 1 / d; // negativo
+      return yInf * (1 - Math.exp(k * t));
+    }
+  }
+  yToPx(y) {
+    const yMax = this.yMax();
+    const yMin = this.yMin();
+    const range = yMax - yMin;
+    return this.margin.t + this.plotH - ((y - yMin) / range) * this.plotH;
+  }
+  tToX(t) { return this.margin.l + (t / this.tMax) * this.plotW; }
+  draw() {
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.W, this.H);
+    const cls = this.classify();
+    const yMax = this.yMax();
+    const yMin = this.yMin();
+
+    // Zonas transitorio/permanente solo si el sistema es estable
+    if (cls === 'ok') {
+      // tau ≈ 1/d → tSettle ≈ 4·tau = 4/d. Tau interno = max(0.4, 1/d).
+      const d = this.denom();
+      const tau = Math.max(0.4, 1 / d);
+      const tSettle = 4 * tau;
+      drawRegimeZones(ctx, {
+        marginL: this.margin.l, marginT: this.margin.t,
+        plotW: this.plotW, plotH: this.plotH,
+        tToX: (t) => this.tToX(t), tSettle: tSettle, tMax: this.tMax
+      });
+    }
+    // Grid Y
+    ctx.strokeStyle = COLORS.grid;
+    ctx.lineWidth = 0.5;
+    const yStep = yMax > 4 ? 2 : (yMax > 2 ? 0.5 : 0.25);
+    for (let y = Math.ceil(yMin / yStep) * yStep; y <= yMax; y += yStep) {
+      const py = this.yToPx(y);
+      ctx.beginPath(); ctx.moveTo(this.margin.l, py); ctx.lineTo(this.margin.l + this.plotW, py); ctx.stroke();
+      ctx.fillStyle = COLORS.muted;
+      ctx.font = '500 10px "JetBrains Mono", monospace';
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(y.toFixed(yStep < 1 ? 1 : 0), this.margin.l - 6, py);
+    }
+
+    // Grid X
+    for (let t = 0; t <= this.tMax; t += 2) {
+      const px = this.tToX(t);
+      ctx.beginPath(); ctx.moveTo(px, this.margin.t); ctx.lineTo(px, this.margin.t + this.plotH); ctx.stroke();
+      ctx.fillStyle = COLORS.muted;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      ctx.fillText(t + 's', px, this.margin.t + this.plotH + 6);
+    }
+
+    // Línea y=0
+    ctx.strokeStyle = COLORS.ink;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(this.margin.l, this.yToPx(0));
+    ctx.lineTo(this.margin.l + this.plotW, this.yToPx(0));
+    ctx.stroke();
+
+    // Eje Y
+    ctx.beginPath();
+    ctx.moveTo(this.margin.l, this.margin.t);
+    ctx.lineTo(this.margin.l, this.margin.t + this.plotH);
+    ctx.stroke();
+
+    // Referencia r = 1
+    ctx.strokeStyle = COLORS.ref;
+    ctx.setLineDash([5, 3]);
+    ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    ctx.moveTo(this.margin.l, this.yToPx(1));
+    ctx.lineTo(this.margin.l + this.plotW, this.yToPx(1));
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = COLORS.ref;
+    ctx.font = '600 11px "JetBrains Mono", monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('r = 1', this.margin.l + 8, this.yToPx(1) - 6);
+
+    // Asintota y∞ (si estable)
+    if (cls === 'ok') {
+      const yInf = 1 / this.denom();
+      if (yInf <= yMax && yInf >= yMin) {
+        ctx.strokeStyle = COLORS.output;
+        ctx.setLineDash([2, 4]);
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(this.margin.l, this.yToPx(yInf));
+        ctx.lineTo(this.margin.l + this.plotW, this.yToPx(yInf));
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = COLORS.output;
+        ctx.font = '600 10px "JetBrains Mono", monospace';
+        ctx.textAlign = 'right';
+        ctx.fillText('y∞ = ' + yInf.toFixed(2), this.margin.l + this.plotW - 6, this.yToPx(yInf) - 6);
+      }
+    }
+
+    // Curva de respuesta
+    if (this.t > 0) {
+      const stroke = cls === 'ok' ? COLORS.output : (cls === 'bad' ? COLORS.error : COLORS.warning);
+      ctx.strokeStyle = stroke;
+      ctx.lineWidth = 2.6;
+
+      const N = 300;
+      const tEnd = this.t;
+      let inRange = false;
+      let escapeInfo = null; // { px, py, dir } cuando la curva sale por arriba o por abajo
+
+      ctx.beginPath();
+      for (let i = 0; i <= N; i++) {
+        const t = (tEnd * i) / N;
+        const y = this.response(t);
+        const px = this.tToX(t);
+
+        if (y > yMax) {
+          if (inRange) {
+            // marcar el punto de salida y romper la traza
+            ctx.lineTo(px, this.yToPx(yMax));
+            if (!escapeInfo) escapeInfo = { px: px, py: this.yToPx(yMax), dir: 'up' };
+          }
+          inRange = false;
+          continue;
+        }
+        if (y < yMin) {
+          if (inRange) {
+            ctx.lineTo(px, this.yToPx(yMin));
+            if (!escapeInfo) escapeInfo = { px: px, py: this.yToPx(yMin), dir: 'down' };
+          }
+          inRange = false;
+          continue;
+        }
+
+        // y está dentro del rango
+        const py = this.yToPx(y);
+        if (!inRange) {
+          ctx.moveTo(px, py);
+          inRange = true;
+        } else {
+          ctx.lineTo(px, py);
+        }
+      }
+      ctx.stroke();
+
+      // Punto en cabeza solo si la curva está dentro del rango
+      const yLast = this.response(tEnd);
+      if (yLast >= yMin && yLast <= yMax) {
+        ctx.fillStyle = stroke;
+        ctx.beginPath();
+        ctx.arc(this.tToX(tEnd), this.yToPx(yLast), 4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Flecha de escape "y → ∞" cuando la curva sale del rango
+      if (escapeInfo) {
+        const { px, py, dir } = escapeInfo;
+        const arrowL = 18;
+        const sign = dir === 'up' ? -1 : 1;
+
+        ctx.strokeStyle = stroke;
+        ctx.fillStyle = stroke;
+        ctx.lineWidth = 2.4;
+
+        // línea de la flecha
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+        ctx.lineTo(px, py + sign * arrowL);
+        ctx.stroke();
+
+        // punta de la flecha
+        ctx.beginPath();
+        ctx.moveTo(px, py + sign * (arrowL + 6));
+        ctx.lineTo(px - 5, py + sign * arrowL);
+        ctx.lineTo(px + 5, py + sign * arrowL);
+        ctx.closePath();
+        ctx.fill();
+
+        // etiqueta
+        ctx.font = '700 11px "JetBrains Mono", monospace';
+        ctx.textAlign = 'left';
+        ctx.fillText(dir === 'up' ? 'y → +∞' : 'y → −∞', px + 8, py + sign * (arrowL - 2));
+      }
+    }
+  }
+  updateInfo() {
+    const d = this.denom();
+    const cls = this.classify();
+    const display = document.getElementById('denomDisplay');
+    const valueEl = document.getElementById('denomValue');
+    const geqEl = document.getElementById('denomGeq');
+
+    display.className = 'denom-display ' + cls;
+    valueEl.textContent = (d >= 0 ? '+' : '') + d.toFixed(2);
+
+    if (cls === 'warn') {
+      geqEl.innerHTML = 'G<sub>eq</sub> tiende a <strong>infinito</strong>';
+    } else if (cls === 'bad') {
+      geqEl.innerHTML = 'G<sub>eq</sub> proporcional a 1/(' + d.toFixed(2) + ') = ' + (1/d).toFixed(2) + ' <em style="color:var(--error)">(invertido)</em>';
+    } else {
+      geqEl.innerHTML = 'G<sub>eq</sub> proporcional a 1/' + d.toFixed(2) + ' = ' + (1/d).toFixed(2);
+    }
+
+    // Cases highlighting
+    document.getElementById('case-ok').classList.toggle('active', cls === 'ok');
+    document.getElementById('case-lim').classList.toggle('active', cls === 'warn');
+    document.getElementById('case-bad').classList.toggle('active', cls === 'bad');
+  }
+  play() {
+    this.t = 0;
+    this.playing = true;
+    this.lastFrame = performance.now();
+    requestAnimationFrame((n) => this.tick(n));
+  }
+  reset() { this.playing = false; this.t = this.tMax; this.draw(); }
+  tick(now) {
+    if (!this.playing) return;
+    const dt = (now - this.lastFrame) / 1000;
+    this.lastFrame = now;
+    this.t = Math.min(this.tMax, this.t + dt * 1.4);
+    this.draw();
+    if (this.t < this.tMax) requestAnimationFrame((n) => this.tick(n));
+    else this.playing = false;
+  }
+}
+
+// =================================================================
+// INIT
+// =================================================================
+window.addEventListener('load', () => {
+  new BlockDiagramAnimator();
+  const transitorySim = new TransitorySimulator();
+  const errorSim = new ErrorSimulator();
+  const stableSim = new StabilityComparator('canvasStable', 'stable', 'statusStable');
+  const unstableSim = new StabilityComparator('canvasUnstable', 'unstable', 'statusUnstable');
+  const perturbationSim = new PerturbationSimulator();
+  const denomSim = new DenomSimulator();
+
+  document.getElementById('playStable').addEventListener('click', () => stableSim.play());
+  document.getElementById('resetStable').addEventListener('click', () => stableSim.reset());
+  document.getElementById('playUnstable').addEventListener('click', () => unstableSim.play());
+  document.getElementById('resetUnstable').addEventListener('click', () => unstableSim.reset());
+  document.getElementById('playBoth').addEventListener('click', () => {
+    stableSim.play();
+    unstableSim.play();
+  });
+});
+</script>
+</body>
+</html>
