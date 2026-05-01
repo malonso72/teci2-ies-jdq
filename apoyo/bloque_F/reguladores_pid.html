@@ -315,6 +315,40 @@ h2.section-heading em { font-style: italic; color: var(--ink-soft); }
 }
 .action-card canvas { display: block; width: 100%; height: auto; }
 
+/* Vista doble: ideal vs real (§ 03) */
+.action-card .ac-dual {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.action-card .ac-dual .ac-vista {
+  background: var(--paper-2);
+  border-radius: 3px;
+  padding: 0.4rem 0.4rem 0.5rem;
+  position: relative;
+}
+.action-card .ac-dual .ac-vista-label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.2rem;
+  display: block;
+}
+.action-card .ac-dual .ac-vista-label strong {
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+.action-card .ac-dual-note {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-style: italic;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+}
+
 /* ============ ANIMATION CARDS (§ 09) ============ */
 .anim-grid {
   display: grid;
@@ -571,6 +605,20 @@ h2.section-heading em { font-style: italic; color: var(--ink-soft); }
   position: relative;
 }
 .reg-canvas-wrap canvas { display: block; width: 100%; height: auto; }
+.reg-canvas-signal {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+  padding-left: 0.2rem;
+}
+.reg-canvas-signal strong {
+  color: var(--ink-soft);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
 .reg-canvas-caption {
   font-family: var(--serif);
   font-style: italic;
@@ -741,6 +789,39 @@ h2.section-heading em { font-style: italic; color: var(--ink-soft); }
 }
 .sim-btn.secondary:hover { background: var(--paper); border-color: var(--ink); }
 .sim-btn svg { width: 11px; height: 11px; }
+
+.speed-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-left: auto;
+}
+.speed-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-right: 0.2rem;
+}
+.speed-btn {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  padding: 0.4rem 0.7rem;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.speed-btn:hover { border-color: var(--ink); background: var(--paper); }
+.speed-btn.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
 
 .regulator-toggles {
   display: flex;
@@ -1439,34 +1520,124 @@ footer .signature {
     Antes de combinarlas, vamos a ver qué hace cada acción por separado. Cada una mira el error de una forma distinta: el proporcional mira <em>cuánto vale ahora</em>, el integral mira <em>cuánto ha valido a lo largo del tiempo</em>, y el derivativo mira <em>a qué velocidad está cambiando</em>.
   </p>
 
+  <!-- Diccionario de señales del lazo cerrado -->
+  <div style="background: var(--paper-2); border-left: 3px solid var(--ink); border-radius: 0 6px 6px 0; padding: 1.25rem 1.5rem; margin-bottom: 1.75rem;">
+    <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.85rem;">Antes de las gráficas · qué señal es cada cosa</div>
+    <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center;">
+      <svg viewBox="0 0 480 130" style="flex: 0 0 auto; width: 100%; max-width: 480px; height: auto;" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+        <defs>
+          <marker id="arr-dict" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L10,5 L0,10 Z" fill="#1A1814"/>
+          </marker>
+        </defs>
+        <!-- Etiqueta r -->
+        <text x="20" y="55" font-size="13" font-style="italic" font-weight="700" fill="#1A1814">r</text>
+        <line x1="32" y1="50" x2="78" y2="50" stroke="#1A1814" stroke-width="2" marker-end="url(#arr-dict)"/>
+        <!-- Punto suma -->
+        <circle cx="92" cy="50" r="11" fill="white" stroke="#1A1814" stroke-width="2"/>
+        <line x1="84" y1="42" x2="100" y2="58" stroke="#1A1814" stroke-width="1.6"/>
+        <line x1="84" y1="58" x2="100" y2="42" stroke="#1A1814" stroke-width="1.6"/>
+        <text x="92" y="33" text-anchor="middle" font-size="12" font-weight="bold" fill="#B5341E">+</text>
+        <text x="111" y="73" text-anchor="middle" font-size="12" font-weight="bold" fill="#B5341E">−</text>
+        <!-- Etiqueta e -->
+        <text x="123" y="44" font-size="13" font-style="italic" font-weight="700" fill="#1A1814">e</text>
+        <line x1="103" y1="50" x2="155" y2="50" stroke="#1A1814" stroke-width="2" marker-end="url(#arr-dict)"/>
+        <!-- Bloque G1 -->
+        <rect x="160" y="32" width="76" height="36" rx="4" fill="white" stroke="#1A1814" stroke-width="2"/>
+        <text x="198" y="55" text-anchor="middle" font-size="13" font-weight="bold" fill="#1A1814">G<tspan font-size="9">1</tspan></text>
+        <text x="198" y="80" text-anchor="middle" font-size="9" font-style="italic" fill="#7A736A">regulador</text>
+        <!-- Etiqueta m -->
+        <text x="246" y="44" font-size="13" font-style="italic" font-weight="700" fill="#1A1814">m</text>
+        <line x1="237" y1="50" x2="278" y2="50" stroke="#1A1814" stroke-width="2" marker-end="url(#arr-dict)"/>
+        <!-- Bloque G2 -->
+        <rect x="283" y="32" width="76" height="36" rx="4" fill="white" stroke="#1A1814" stroke-width="2"/>
+        <text x="321" y="55" text-anchor="middle" font-size="13" font-weight="bold" fill="#1A1814">G<tspan font-size="9">2</tspan></text>
+        <text x="321" y="80" text-anchor="middle" font-size="9" font-style="italic" fill="#7A736A">planta</text>
+        <!-- Etiqueta y (salida) -->
+        <text x="370" y="44" font-size="13" font-style="italic" font-weight="700" fill="#1A1814">y</text>
+        <line x1="360" y1="50" x2="450" y2="50" stroke="#1A1814" stroke-width="2" marker-end="url(#arr-dict)"/>
+        <text x="465" y="54" font-size="9" font-style="italic" fill="#7A736A">salida</text>
+        <!-- Realimentación -->
+        <circle cx="395" cy="50" r="3" fill="#1A1814"/>
+        <line x1="395" y1="50" x2="395" y2="105" stroke="#1A1814" stroke-width="2"/>
+        <line x1="395" y1="105" x2="92" y2="105" stroke="#1A1814" stroke-width="2"/>
+        <line x1="92" y1="105" x2="92" y2="62" stroke="#1A1814" stroke-width="2" marker-end="url(#arr-dict)"/>
+        <text x="240" y="120" text-anchor="middle" font-size="9" font-style="italic" fill="#7A736A">realimentación</text>
+      </svg>
+
+      <div style="flex: 1 1 220px; min-width: 220px;">
+        <ul style="list-style: none; padding: 0; margin: 0; font-family: var(--serif); font-size: 0.93rem; line-height: 1.7; color: var(--ink-soft);">
+          <li><strong style="font-style: italic; color: var(--ink);">r</strong> — <em>consigna</em>: el valor que queremos alcanzar.</li>
+          <li><strong style="font-style: italic; color: var(--ink);">e</strong> — <em>error</em>: cuánto falta para llegar (e = r − y).</li>
+          <li><strong style="font-style: italic; color: var(--ink);">m</strong> — <em>acción de control</em>: lo que produce el regulador.</li>
+          <li><strong style="font-style: italic; color: var(--ink);">y</strong> — <em>salida</em>: lo que de verdad hace el sistema.</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin: 1rem 0 0; font-size: 0.88rem; color: var(--muted); font-style: italic;">Cada gráfica del documento muestra <strong style="font-style: normal;">una o dos</strong> de estas cuatro señales. Antes de leer una curva, mira siempre el rótulo: <em>¿qué señal es?</em></p>
+  </div>
+
   <div class="three-actions">
     <div class="action-card p">
       <div class="ac-tag">● Acción proporcional</div>
       <h3>Mira el error actual</h3>
       <div class="ac-formula">m = K<sub>p</sub> · e</div>
-      <p>El regulador multiplica el error por una constante. <em>Error grande, acción grande. Error pequeño, acción pequeña. Error cero, no actúa.</em></p>
-      <div class="ac-mini-canvas"><canvas id="actionP"></canvas></div>
+      <p>Reacciona <em>de forma instantánea</em>: multiplica el error por una constante. Error grande → acción grande. Error cero → acción cero. No tiene memoria del pasado ni anticipa el futuro: solo mira el ahora.</p>
+      <div class="ac-dual">
+        <div class="ac-vista">
+          <span class="ac-vista-label"><strong>Ideal</strong> · regulador aislado · <em>e(t) → m(t)</em></span>
+          <canvas id="actionP"></canvas>
+        </div>
+        <div class="ac-vista">
+          <span class="ac-vista-label"><strong>Real</strong> · dentro de un lazo cerrado · <em>e(t) → m(t)</em></span>
+          <canvas id="actionP_real"></canvas>
+        </div>
+        <p class="ac-dual-note"><strong>El salto vertical inicial es real</strong>: la P actúa de forma instantánea sobre el error que aparece de golpe. Lo que cambia respecto al ideal es lo de <em>después</em> — la planta responde, el error decae y m decae con él, en lugar de quedarse plano. Pero queda un valor &gt; 0: <em>error permanente</em>.</p>
+      </div>
     </div>
 
     <div class="action-card i">
       <div class="ac-tag">● Acción integral</div>
       <h3>Acumula el error</h3>
       <div class="ac-formula">m = K<sub>i</sub> · ∫ e dt</div>
-      <p>Suma todo el error desde el principio. Si el error <em>persiste</em>, la acción crece sin parar. Por eso puede eliminar el error permanente.</p>
-      <div class="ac-mini-canvas"><canvas id="actionI"></canvas></div>
+      <p>Va sumando el error desde el principio. Mientras el error persista, la acción no para de crecer. Cuando el error llega a cero, la acción se queda <strong>fija en el último valor acumulado</strong> — por eso elimina el error permanente.</p>
+      <div class="ac-dual">
+        <div class="ac-vista">
+          <span class="ac-vista-label"><strong>Ideal</strong> · regulador aislado · <em>e(t) → m(t)</em></span>
+          <canvas id="actionI"></canvas>
+        </div>
+        <div class="ac-vista">
+          <span class="ac-vista-label"><strong>Real</strong> · dentro de un lazo cerrado · <em>e(t) → m(t)</em></span>
+          <canvas id="actionI_real"></canvas>
+        </div>
+        <p class="ac-dual-note">En el ideal, m crece como rampa <em>indefinida</em> porque el error se mantiene fijo. En el real, la planta responde, el error <strong>oscila amortiguadamente hasta cero</strong> (la I anula error), y m se estabiliza en el esfuerzo necesario para mantener la salida en la consigna.</p>
+      </div>
     </div>
 
     <div class="action-card d">
       <div class="ac-tag">● Acción derivativa</div>
       <h3>Mira la velocidad del error</h3>
       <div class="ac-formula">m = K<sub>d</sub> · de/dt</div>
-      <p>Reacciona a <em>la rapidez con que cambia</em> el error. Si el error está cambiando rápido, actúa fuerte. Si es constante, no actúa. Anticipa.</p>
-      <div class="ac-mini-canvas"><canvas id="actionD"></canvas></div>
+      <p>Reacciona a la velocidad con la que va cambiando el error, oponiéndose a ese cambio. Si el error cambia rápido en cualquier sentido, actúa fuerte. Si es constante, no actúa. Es anticipativa: detecta el movimiento antes de que la desviación se haga grande.</p>
+      <div class="ac-dual">
+        <div class="ac-vista">
+          <span class="ac-vista-label"><strong>Ideal</strong> · regulador aislado · <em>e(t) → m(t)</em></span>
+          <canvas id="actionD"></canvas>
+        </div>
+        <div class="ac-vista">
+          <span class="ac-vista-label"><strong>Real</strong> · dentro de un lazo cerrado · <em>e(t) → m(t)</em></span>
+          <canvas id="actionD_real"></canvas>
+        </div>
+        <p class="ac-dual-note">En el ideal, m es un pico estrecho idealizado (delta) en el flanco. En el real, el lazo cerrado <em>filtra</em> el pinchazo: m arranca con un valor <strong>finito</strong> y decae exponencialmente. Y el error se queda alto: <strong>la D sola NO mueve el sistema</strong> — sirve solo como acompañante.</p>
+      </div>
     </div>
   </div>
-</section>
 
-<!-- ============ § 04 REGULADOR P ============ -->
+  <!-- Transición §03 → §04 -->
+  <div style="margin-top: 1.75rem; padding: 1rem 1.25rem; background: var(--paper-2); border-left: 3px solid var(--reg-pid); border-radius: 0 6px 6px 0;">
+    <p style="margin: 0; font-size: 0.95rem; color: var(--ink-soft); line-height: 1.6;"><strong>Cambio de punto de vista en las próximas secciones.</strong> Hasta aquí las gráficas mostraban <em>m(t)</em> — lo que produce el regulador. A partir del § 04 cambiamos el "osciloscopio" al final del lazo y miraremos la <strong>salida del sistema, y(t)</strong>: lo que de verdad hace el horno, el motor o el ventilador. Las dos señales son distintas — una es la orden, la otra es el resultado.</p>
+  </div>
+</section>
 <section>
   <div class="section-label">§ 04 — Apuntes 7.2 · Regulador proporcional</div>
   <h2 class="section-heading">Regulador P: <em>rápido</em>, pero deja error</h2>
@@ -1497,7 +1668,7 @@ footer .signature {
       </div>
 
       <div>
-        <div class="reg-canvas-wrap"><canvas id="canvasP"></canvas></div>
+        <div class="reg-canvas-signal">Señal graficada · <strong>salida del sistema y(t)</strong> ante un escalón de consigna r=1</div><div class="reg-canvas-wrap"><canvas id="canvasP"></canvas></div>
         <div class="reg-canvas-caption">La salida sube rápido pero queda en y∞ &lt; 1. La franja roja es el error que no llega a anularse.</div>
       </div>
     </div>
@@ -1535,7 +1706,7 @@ footer .signature {
       </div>
 
       <div>
-        <div class="reg-canvas-wrap"><canvas id="canvasI"></canvas></div>
+        <div class="reg-canvas-signal">Señal graficada · <strong>salida del sistema y(t)</strong> ante un escalón de consigna r=1</div><div class="reg-canvas-wrap"><canvas id="canvasI"></canvas></div>
         <div class="reg-canvas-caption">La salida llega a y∞ = 1 (sin error), pero con sobrepaso y oscilaciones que tardan en amortiguarse.</div>
       </div>
     </div>
@@ -1574,7 +1745,7 @@ footer .signature {
       </div>
 
       <div>
-        <div class="reg-canvas-wrap"><canvas id="canvasD"></canvas></div>
+        <div class="reg-canvas-signal">Señal graficada · <strong>salida del sistema y(t)</strong> ante un escalón de consigna r=1</div><div class="reg-canvas-wrap"><canvas id="canvasD"></canvas></div>
         <div class="reg-canvas-caption">Solo, el derivativo apenas mueve la salida. Tras el pequeño impulso inicial, no corrige el error sostenido.</div>
       </div>
     </div>
@@ -1595,7 +1766,7 @@ footer .signature {
       <div class="cc-tag">● PI · Proporcional + integral</div>
       <h3>El más usado en la industria <span class="pill-pevau">Clave PEvAU</span></h3>
       <div class="cc-formula">m = K<sub>p</sub>·e + K<sub>i</sub>·∫e dt</div>
-      <div class="cc-canvas-wrap"><canvas id="canvasPI"></canvas></div>
+      <div class="reg-canvas-signal" style="margin-bottom:0.3rem;">Salida <strong>y(t)</strong></div><div class="cc-canvas-wrap"><canvas id="canvasPI"></canvas></div>
       <p>El P arranca rápido, el I termina el trabajo. <em>Llega rápido y llega exacto.</em> Sin error permanente y sin la lentitud del integral solo.</p>
       <p>Algo de sobreoscilación residual, pero bien sintonizado es una opción habitual en muchos procesos industriales porque resuelve el principal defecto del proporcional puro sin la complejidad del derivativo.</p>
       <div class="cc-summary">Aplicaciones: <strong>presión en tuberías, caudal de líquidos, velocidad de motores industriales, temperatura de procesos no críticos.</strong></div>
@@ -1605,7 +1776,7 @@ footer .signature {
       <div class="cc-tag">● PD · Proporcional + derivativo</div>
       <h3>Cuando importa no pasarse</h3>
       <div class="cc-formula">m = K<sub>p</sub>·e + K<sub>d</sub>·de/dt</div>
-      <div class="cc-canvas-wrap"><canvas id="canvasPD"></canvas></div>
+      <div class="reg-canvas-signal" style="margin-bottom:0.3rem;">Salida <strong>y(t)</strong></div><div class="cc-canvas-wrap"><canvas id="canvasPD"></canvas></div>
       <p>El P empuja, el D frena antes de llegar. <em>Rápido, suave, con menor sobreoscilación.</em> Pero como no hay integral, queda un pequeño error permanente.</p>
       <p>Se usa cuando las oscilaciones son inaceptables (por estabilidad mecánica o seguridad) y el error pequeño es asumible.</p>
       <div class="cc-summary">Aplicaciones: <strong>posicionamiento de cabezales, estabilizadores de cámara, control de balance.</strong></div>
@@ -1615,7 +1786,7 @@ footer .signature {
       <div class="cc-tag">● PID · Las tres acciones</div>
       <h3>El estándar industrial completo</h3>
       <div class="cc-formula">m = K<sub>p</sub>·e + K<sub>i</sub>·∫e dt + K<sub>d</sub>·de/dt</div>
-      <div class="cc-canvas-wrap"><canvas id="canvasPID"></canvas></div>
+      <div class="reg-canvas-signal" style="margin-bottom:0.3rem;">Salida <strong>y(t)</strong></div><div class="cc-canvas-wrap"><canvas id="canvasPID"></canvas></div>
       <p>P para velocidad, D para suavidad, I para precisión. <em>Bien ajustado, puede llegar rápido, con poco sobrepaso y sin error permanente.</em> La solución más completa cuando se requieren los tres requisitos a la vez.</p>
       <p>Más complejo de sintonizar (tres ganancias), pero indispensable en aplicaciones críticas.</p>
       <div class="cc-summary">Aplicaciones: <strong>hornos industriales críticos, drones, robots multieje, inyección de combustible.</strong></div>
@@ -1657,6 +1828,20 @@ footer .signature {
       <div class="dt-cell example">Combinación clásica: rápido y exacto.</div>
       <div class="dt-pill pi">Regulador PI</div>
     </div>
+
+    <div class="decision-row">
+      <div class="dt-cell cond">m tiene un pico en el flanco y luego un salto que se mantiene</div>
+      <div class="dt-cell">Pico de la D al cambiar el error + escalón de la P. Si el error queda constante, m se queda en K<sub>p</sub>·e<sub>0</sub>.</div>
+      <div class="dt-cell example">Reacciona al cambio (D) y al valor (P): rápido y suave, pero deja error permanente.</div>
+      <div class="dt-pill pd">Regulador PD</div>
+    </div>
+
+    <div class="decision-row">
+      <div class="dt-cell cond">m tiene pico en el flanco, salto inicial y luego rampa creciente</div>
+      <div class="dt-cell">Suma de las tres firmas: pico (D) + escalón (P) + rampa (I) mientras el error persiste.</div>
+      <div class="dt-cell example">La firma más completa: rápido, suave y sin error permanente.</div>
+      <div class="dt-pill pid">Regulador PID</div>
+    </div>
   </div>
 </section>
 
@@ -1676,6 +1861,7 @@ footer .signature {
       </div>
     </div>
 
+    <div class="reg-canvas-signal" style="margin-bottom:0.5rem; font-size:0.7rem;">Señal graficada · <strong>salida del sistema y(t)</strong> ante un escalón de consigna r=1 · <em>cada color identifica el regulador, la curva en sí es siempre la salida</em></div>
     <div class="canvas-wrap"><canvas id="canvasComparison"></canvas></div>
 
     <div class="comparison-controls">
@@ -1684,6 +1870,13 @@ footer .signature {
         Reproducir
       </button>
       <button class="sim-btn secondary" id="resetComparison">↺ Reiniciar</button>
+
+      <div class="speed-controls">
+        <span class="speed-label">Velocidad</span>
+        <button class="speed-btn" data-speed="0.25">¼×</button>
+        <button class="speed-btn" data-speed="0.5">½×</button>
+        <button class="speed-btn active" data-speed="1">1×</button>
+      </div>
     </div>
 
     <div class="regulator-toggles" id="regulatorToggles">
@@ -1824,7 +2017,7 @@ footer .signature {
   </div>
 
   <div class="anim-prelude">
-    <strong>Cómo aprovecharlas en clase.</strong> Cada animación es independiente y arranca con valores que muestran claramente la firma del regulador. Recomendado: empezar con velocidad <code>½×</code> o <code>¼×</code> para que se aprecien los transitorios. El panel narrativo de la izquierda explica cada fase mientras ocurre — útil para detener en cualquier momento y comentar lo que se ve. Los sliders permiten experimentar con las ganancias y descubrir los compromisos típicos de la sintonización.
+    <strong>Cómo sacar partido a las animaciones.</strong> Cada animación arranca con valores que muestran claramente la firma de su regulador. Empieza con velocidad <code>½×</code> o <code>¼×</code> para apreciar bien los transitorios. El panel narrativo de la izquierda va explicando cada fase mientras ocurre — puedes pausar cuando quieras para observar con calma lo que está pasando. Los sliders te permiten experimentar con las ganancias y descubrir los compromisos típicos de la sintonización.
   </div>
 </section>
 
@@ -1878,7 +2071,7 @@ footer .signature {
   <div class="section-label">§ 11 — Preparar la prueba</div>
   <h2 class="section-heading">Resolver preguntas <em>tipo Ponencia</em></h2>
   <p class="lede" style="font-size: 1.05rem; max-width: 70ch;">
-    Seis ejercicios al estilo de los que aparecen en la Ponencia oficial de Tecnología e Ingeniería II. Antes de mirar la solución, lee el enunciado y trata de razonar tú: ¿qué pista te da la situación o la gráfica? ¿qué <em>letra</em> de regulador casa con esa pista?
+    Ocho ejercicios al estilo de los que aparecen en la Ponencia oficial de Tecnología e Ingeniería II. Antes de mirar la solución, lee el enunciado y trata de razonar tú: ¿qué pista te da la situación o la gráfica? ¿qué <em>letra</em> de regulador casa con esa pista?
   </p>
 
   <nav class="ej-summary" aria-label="Índice de ejercicios">
@@ -1890,7 +2083,9 @@ footer .signature {
       <li><a href="#ej4"><span class="ejs-num">04</span><span class="ejs-title">¿Qué falta para llegar exacto?</span><span class="ejs-tag">diagnóstico</span></a></li>
       <li><a href="#ej5"><span class="ejs-num">05</span><span class="ejs-title">Rápido pero impreciso · lento pero exacto</span><span class="ejs-tag">comparación</span></a></li>
       <li><a href="#ej6"><span class="ejs-num">06</span><span class="ejs-title">Reducir oscilaciones y eliminar el error</span><span class="ejs-tag">combinadas</span></a></li>
-      <li><a href="#practiceBlock"><span class="ejs-num">★</span><span class="ejs-title">Practica tú · 8 preguntas con autoevaluación</span><span class="ejs-tag">interactivo</span></a></li>
+      <li><a href="#ej7"><span class="ejs-num">07</span><span class="ejs-title">Características de los reguladores P, I y D</span><span class="ejs-tag">teoría</span></a></li>
+      <li><a href="#ej8"><span class="ejs-num">08</span><span class="ejs-title">Asignar elementos a bloques del lazo cerrado</span><span class="ejs-tag">identificación</span></a></li>
+      <li><a href="#practiceBlock"><span class="ejs-num">★</span><span class="ejs-title">Practica tú · 15 preguntas con autoevaluación</span><span class="ejs-tag">interactivo</span></a></li>
     </ol>
   </nav>
 
@@ -1904,20 +2099,29 @@ footer .signature {
     <div style="background: var(--paper-2); padding: 1.25rem 1.5rem; border-radius: 6px; margin-bottom: 1.5rem;">
       <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;">Enunciado</div>
       <p style="margin: 0;">Una persona ajusta el grifo monomando de la ducha para conseguir la temperatura ideal. Coloca primero el mando en una posición intermedia: el agua sale fría. Lo mueve un poco hacia caliente: sigue saliendo fría. Lo vuelve a mover, comprueba, repite el ajuste varias veces hasta que la temperatura es la deseada.</p>
-      <p style="margin-top: 0.75rem; margin-bottom: 0;"><strong>Pregunta:</strong> ¿qué tipo de regulador realiza la persona — P, PD o PI? Justifica la respuesta.</p>
+      <p style="margin-top: 0.75rem; margin-bottom: 0;"><strong>a)</strong> ¿Qué tipo de regulador realiza la persona — P, PD o PI? Justifica la respuesta.</p>
+      <p style="margin-top: 0.5rem; margin-bottom: 0;"><strong>b)</strong> Una vez conseguida la temperatura óptima, la persona nota que <em>sin tocar el mando</em> el agua se va enfriando. Entonces mueve la maneta <em>rápidamente, en previsión</em> de un enfriamiento aún mayor. ¿Qué acción de control está realizando ahora? Justifica la respuesta.</p>
     </div>
 
     <div style="margin-bottom: 1.25rem;">
-      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;">Razonamiento</div>
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;">Razonamiento · apartado a</div>
       <p>Vamos descartando opciones, una por una.</p>
       <p><strong>¿Es un P solo?</strong> No. Un control proporcional puro hace que la posición del mando sea proporcional al error de temperatura. Para que el sistema se quede fijo en la temperatura deseada, el error debería ser cero — pero entonces el mando no se movería. Hay <em>error permanente</em>. Aquí la persona <em>sí</em> consigue eliminar el error, así que no es solo P.</p>
       <p><strong>¿Es un PD?</strong> Tampoco. La acción derivativa solo reacciona cuando el error <em>cambia</em>. No corrige errores constantes ni elimina el error permanente. Igual que el P, el PD se estabilizaría con un error residual.</p>
       <p><strong>¿Es un PI?</strong> Sí. La persona repite el ajuste mientras el error persiste; cada nuevo ajuste se suma al anterior. Esa <em>acumulación de pequeños movimientos hasta anular el error</em> es exactamente lo que hace una acción integral. La persona realiza un control con componente integral. Equivale a un comportamiento tipo PI: hay una reacción inicial al error grande (parte proporcional) y una acumulación de correcciones sucesivas hasta anularlo (parte integral).</p>
     </div>
 
+    <div style="margin-bottom: 1.25rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;">Razonamiento · apartado b</div>
+      <p>La pista clave es "rápidamente, <em>en previsión</em>". La persona no está reaccionando al valor del error — está reaccionando a la <em>velocidad con la que el error está cambiando</em>. Detecta que la temperatura está cayendo deprisa y se anticipa con un movimiento brusco antes de que la caída sea grande.</p>
+      <p>Esa es exactamente la lógica de la <strong>acción derivativa (D)</strong>: m = K<sub>d</sub>·de/dt. La D mide la pendiente del error y actúa con fuerza cuando esa pendiente es grande, aunque el error en sí todavía sea pequeño. Su efecto es <em>anticipativo</em>: corrige antes de que la desviación se haga importante.</p>
+      <p>Un controlador industrial con acción derivativa intenta reproducir exactamente este comportamiento humano: ver dónde va el sistema y frenarlo o acelerarlo antes de que llegue.</p>
+    </div>
+
     <div style="background: rgba(11,110,79,0.08); border-left: 3px solid var(--reg-i); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0;">
       <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--reg-i); margin-bottom: 0.4rem;">Solución</div>
-      <p style="margin: 0;"><strong>Regulador PI</strong> (proporcional + integral). La clave es que la persona <em>elimina</em> el error, no solo lo reduce — eso solo lo hace una acción integral.</p>
+      <p style="margin: 0;"><strong>a)</strong> Regulador <strong>PI</strong>. La clave es que la persona <em>elimina</em> el error, no solo lo reduce — eso solo lo hace una acción integral.</p>
+      <p style="margin: 0.5rem 0 0 0;"><strong>b)</strong> Acción <strong>derivativa (D)</strong>. La persona reacciona a la <em>velocidad de cambio</em> del error, anticipándose al enfriamiento. Es exactamente el comportamiento que reproduce la D en un controlador industrial.</p>
     </div>
   </article>
 
@@ -1949,9 +2153,9 @@ footer .signature {
         <line x1="50" y1="195" x2="240" y2="195" stroke="#D9D2C2" stroke-width="1"/>
         <line x1="60" y1="155" x2="60" y2="215" stroke="#D9D2C2" stroke-width="1"/>
         <polyline points="60,195 110,195 110,170 240,170" fill="none" stroke="#1A75BC" stroke-width="2.5"/>
-        <text x="245" y="173" font-size="10" fill="#1A75BC">K<sub>p</sub>·e₀</text>
+        <text x="245" y="173" font-size="10" fill="#1A75BC">K<tspan dy="2" font-size="7">p</tspan><tspan dy="-2">·e₀</tspan></text>
         <text x="50" y="245" font-size="11" fill="#3A352E" font-style="italic">m salta cuando salta el error</text>
-        <text x="50" y="262" font-size="11" fill="#3A352E">y queda fijo en K<sub>p</sub>·e₀.</text>
+        <text x="50" y="262" font-size="11" fill="#3A352E">y queda fijo en K<tspan dy="2" font-size="7">p</tspan><tspan dy="-2">·e₀</tspan>.</text>
         <text x="50" y="290" font-size="13" font-weight="700" fill="#1A75BC">→ Regulador P</text>
 
         <!-- ===== Caso B — Integral ===== -->
@@ -2169,13 +2373,115 @@ footer .signature {
     </div>
   </article>
 
+  <!-- ===== EJERCICIO 7 ===== -->
+  <article id="ej7" style="background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 2rem 2.25rem; margin-bottom: 2rem; box-shadow: var(--shadow-1);">
+    <div style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--rule-soft);">
+      <div style="font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">Ejercicio 7 · pregunta de teoría</div>
+    </div>
+    <h3 style="font-family: var(--serif); font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem;">Características de los reguladores P, I y D</h3>
+
+    <div style="background: var(--paper-2); padding: 1.25rem 1.5rem; border-radius: 6px; margin-bottom: 1.5rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;">Enunciado</div>
+      <p style="margin: 0;"><strong>Pregunta:</strong> Enumera y comenta brevemente las principales características de los controladores proporcional, integral y derivativo.</p>
+    </div>
+
+    <div style="margin-bottom: 1.25rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;">Cómo afrontar la respuesta</div>
+      <p>Es una pregunta de <em>desarrollo estructurado</em>. La forma más segura de contestar es dar para cada acción <strong>tres ideas</strong>: qué hace, qué consigue y cuál es su limitación. Así la respuesta queda completa y comparable.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+      <div style="background: rgba(26,117,188,0.07); border-left: 3px solid var(--reg-p); padding: 1rem 1.25rem; border-radius: 0 6px 6px 0;">
+        <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--reg-p); margin-bottom: 0.5rem;">Acción proporcional · m<sub>P</sub> = K<sub>p</sub>·e</div>
+        <ul style="margin: 0; padding-left: 1.1rem; line-height: 1.55;">
+          <li>La variable manipulada <em>m<sub>P</sub></em> es <strong>proporcional al error</strong> en cada instante.</li>
+          <li>Responde de forma <strong>instantánea</strong> a los cambios del error.</li>
+          <li><strong>No anula el error en régimen permanente</strong>: si el error fuera cero, m también sería cero, y el sistema dejaría de actuar.</li>
+        </ul>
+      </div>
+
+      <div style="background: rgba(11,110,79,0.07); border-left: 3px solid var(--reg-i); padding: 1rem 1.25rem; border-radius: 0 6px 6px 0;">
+        <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--reg-i); margin-bottom: 0.5rem;">Acción integral · m<sub>I</sub> = K<sub>i</sub>·∫e dt</div>
+        <ul style="margin: 0; padding-left: 1.1rem; line-height: 1.55;">
+          <li><em>m<sub>I</sub></em> <strong>acumula el error en el tiempo</strong>. Mientras el error persista, m sigue creciendo (o decreciendo) hasta anularlo.</li>
+          <li>Permite que el <strong>error en régimen permanente sea cero</strong>.</li>
+          <li>Es una acción <strong>retardada</strong>: necesita tiempo para acumular y ser efectiva, y puede provocar sobreoscilación.</li>
+        </ul>
+      </div>
+
+      <div style="background: rgba(181,132,26,0.08); border-left: 3px solid var(--reg-d); padding: 1rem 1.25rem; border-radius: 0 6px 6px 0;">
+        <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--reg-d); margin-bottom: 0.5rem;">Acción derivativa · m<sub>D</sub> = K<sub>d</sub>·de/dt</div>
+        <ul style="margin: 0; padding-left: 1.1rem; line-height: 1.55;">
+          <li><em>m<sub>D</sub></em> es proporcional a la <strong>velocidad de cambio del error</strong> (su derivada).</li>
+          <li>Tiene efecto <strong>anticipativo</strong>: se adelanta a los cambios y reduce las oscilaciones.</li>
+          <li>Solo actúa en régimen <strong>transitorio</strong>: si el error es constante, su derivada es cero y la acción D vale cero.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="background: rgba(26,24,20,0.05); border-left: 3px solid var(--reg-pid); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--reg-pid); margin-bottom: 0.4rem;">Resumen para examen</div>
+      <p style="margin: 0;"><strong>P</strong> es <em>rápida pero imprecisa</em>; <strong>I</strong> es <em>lenta pero exacta</em>; <strong>D</strong> es <em>anticipativa pero solo en transitorio</em>. El regulador <strong>PID</strong> combina las tres y es el más empleado en la industria.</p>
+    </div>
+  </article>
+
+  <!-- ===== EJERCICIO 8 ===== -->
+  <article id="ej8" style="background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 2rem 2.25rem; margin-bottom: 2rem; box-shadow: var(--shadow-1);">
+    <div style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--rule-soft);">
+      <div style="font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);">Ejercicio 8 · identificación de elementos</div>
+    </div>
+    <h3 style="font-family: var(--serif); font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem;">Asignar elementos a bloques del lazo cerrado</h3>
+
+    <div style="background: var(--paper-2); padding: 1.25rem 1.5rem; border-radius: 6px; margin-bottom: 1.5rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;">Enunciado</div>
+      <p style="margin: 0;">En el diagrama normalizado de un sistema de control en lazo cerrado (con bloques <em>G<sub>3</sub></em> de transducción de la consigna, <em>G<sub>1</sub></em> regulador, <em>G<sub>2</sub></em> planta y <em>H</em> realimentación), indica en qué bloque se incluiría cada uno de los siguientes elementos:</p>
+      <p style="margin-top: 0.6rem; margin-bottom: 0;">motor eléctrico · cilindro neumático · controlador proporcional · fotocélula · potenciómetro · sonda PTC · tacómetro · regulador PID · termo eléctrico · teclado para introducir valores numéricos.</p>
+    </div>
+
+    <div style="margin-bottom: 1.25rem;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;">Cómo decidir el bloque</div>
+      <p>Hay que preguntarse para cada elemento: <em>¿qué papel cumple en el lazo?</em> Si <strong>decide la acción</strong> a partir del error → es <em>regulador G<sub>1</sub></em>. Si <strong>es lo que se controla</strong> (recibe la acción y produce la salida) → es <em>planta G<sub>2</sub></em>. Si <strong>convierte la consigna</strong> introducida por el usuario en una señal comparable con la realimentación → es <em>transductor de consigna G<sub>3</sub></em>. Si <strong>mide la salida</strong> y la devuelve al punto de suma → es <em>realimentación H</em>.</p>
+    </div>
+
+    <div style="overflow-x: auto; margin-bottom: 1.5rem;">
+      <table style="width: 100%; border-collapse: collapse; font-family: var(--serif); font-size: 0.95rem;">
+        <thead>
+          <tr style="background: var(--paper-2);">
+            <th style="text-align: left; padding: 0.7rem 1rem; border-bottom: 2px solid var(--rule); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--reg-p);">G<sub>1</sub> · Regulador</th>
+            <th style="text-align: left; padding: 0.7rem 1rem; border-bottom: 2px solid var(--rule); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--reg-i);">G<sub>2</sub> · Planta</th>
+            <th style="text-align: left; padding: 0.7rem 1rem; border-bottom: 2px solid var(--rule); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--reg-d);">G<sub>3</sub> · Transductor consigna</th>
+            <th style="text-align: left; padding: 0.7rem 1rem; border-bottom: 2px solid var(--rule); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--reg-pi);">H · Realimentación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 0.7rem 1rem; border-bottom: 1px solid var(--rule-soft); vertical-align: top;">Regulador PID<br>Controlador proporcional</td>
+            <td style="padding: 0.7rem 1rem; border-bottom: 1px solid var(--rule-soft); vertical-align: top;">Motor eléctrico<br>Termo eléctrico<br>Cilindro neumático</td>
+            <td style="padding: 0.7rem 1rem; border-bottom: 1px solid var(--rule-soft); vertical-align: top;">Potenciómetro <em>(de consigna)</em><br>Teclado *</td>
+            <td style="padding: 0.7rem 1rem; border-bottom: 1px solid var(--rule-soft); vertical-align: top;">Potenciómetro <em>(de medida)</em><br>Sonda PTC<br>Fotocélula<br>Tacómetro</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-bottom: 1.25rem;">
+      <p style="font-size: 0.93rem; color: var(--ink-soft);">* El teclado introduce un valor numérico de consigna; la electrónica posterior lo convierte (analógico o digital) a una señal comparable con la realimentación, que es justo el papel de G<sub>3</sub>.</p>
+      <p style="font-size: 0.93rem; color: var(--ink-soft);">Nota: el potenciómetro aparece en G<sub>3</sub> y en H. <em>No es el mismo dispositivo</em> en los dos sitios — uno fija la consigna girando el mando, el otro mide la salida (por ejemplo, la posición de un eje). El nombre genérico engaña: lo que importa es la <em>función</em> que cumple en el lazo.</p>
+    </div>
+
+    <div style="background: rgba(26,24,20,0.05); border-left: 3px solid var(--reg-pid); padding: 1rem 1.5rem; border-radius: 0 6px 6px 0;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--reg-pid); margin-bottom: 0.4rem;">Regla operativa</div>
+      <p style="margin: 0;"><em>Decide → G<sub>1</sub>. Se controla → G<sub>2</sub>. Convierte la consigna → G<sub>3</sub>. Mide la salida → H.</em> Si dudas con un sensor (potenciómetro, encoder, sonda…), pregúntate <em>qué está midiendo</em>: si mide la salida real, va en H; si convierte un valor introducido por el usuario, va en G<sub>3</sub>.</p>
+    </div>
+  </article>
+
   <p class="note-prose" style="margin-top: 2rem;">
-    <strong>Patrón común a los seis ejercicios.</strong> En todos ellos la pregunta clave es la misma: <em>¿el error permanente se anula o no?</em> Si se anula → hay <strong>I</strong>. Si no → no hay I (y será P o PD según los detalles del transitorio). La acción D no determina nada por sí sola: solo modifica la forma del transitorio (más amortiguado, con menor sobreoscilación). <span class="pill-pevau">Clave PEvAU</span>
+    <strong>Patrón común a los ejercicios de identificación.</strong> En todos ellos la pregunta clave es la misma: <em>¿el error permanente se anula o no?</em> Si se anula → hay <strong>I</strong>. Si no → no hay I (y será P o PD según los detalles del transitorio). La acción D no determina nada por sí sola: solo modifica la forma del transitorio (más amortiguado, con menor sobreoscilación). <span class="pill-pevau">Clave PEvAU</span>
   </p>
 
   <!-- ===== Practica tú ===== -->
   <div class="practice-block" id="practiceBlock">
-    <div class="practice-block-title">Practica tú · 8 preguntas con autoevaluación</div>
+    <div class="practice-block-title">Practica tú · 15 preguntas con autoevaluación</div>
     <div class="practice-block-sub">Para cada pregunta, observa la situación o la gráfica y elige la opción que crees correcta. Tras cada clic verás si has acertado y por qué. Si te equivocas, lee la explicación y prueba con otra opción.</div>
 
     <div class="practice-grid">
@@ -2183,6 +2489,7 @@ footer .signature {
       <!-- ===== Pregunta 1 ===== -->
       <div class="practice-card" data-q="1">
         <div class="practice-num">Pregunta 1</div>
+        <div style="font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem;">Señal · <strong style="color:var(--ink-soft); font-weight:700;">salida y(t)</strong></div>
         <div class="practice-svg">
           <svg viewBox="0 0 280 150" style="width:100%; height:auto;">
             <!-- ejes -->
@@ -2212,6 +2519,7 @@ footer .signature {
       <!-- ===== Pregunta 2 ===== -->
       <div class="practice-card" data-q="2">
         <div class="practice-num">Pregunta 2</div>
+        <div style="font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem;">Señal · <strong style="color:var(--ink-soft); font-weight:700;">salida y(t)</strong></div>
         <div class="practice-svg">
           <svg viewBox="0 0 280 150" style="width:100%; height:auto;">
             <line x1="30" y1="110" x2="270" y2="110" stroke="#1A1814" stroke-width="1"/>
@@ -2238,6 +2546,7 @@ footer .signature {
       <!-- ===== Pregunta 3 ===== -->
       <div class="practice-card" data-q="3">
         <div class="practice-num">Pregunta 3</div>
+        <div style="font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem;">Señal · <strong style="color:var(--ink-soft); font-weight:700;">salida y(t)</strong></div>
         <div class="practice-svg">
           <svg viewBox="0 0 280 150" style="width:100%; height:auto;">
             <line x1="30" y1="110" x2="270" y2="110" stroke="#1A1814" stroke-width="1"/>
@@ -2332,6 +2641,7 @@ footer .signature {
       <!-- ===== Pregunta 9 — firma del PI en gráfica m(t) ===== -->
       <div class="practice-card" data-q="9">
         <div class="practice-num">Pregunta 9</div>
+        <div style="font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem;">Señal · <strong style="color:var(--ink-soft); font-weight:700;">señal de control m(t)</strong> y error e(t)</div>
         <div class="practice-svg">
           <svg viewBox="0 0 280 150" style="width:100%; height:auto;">
             <line x1="30" y1="110" x2="270" y2="110" stroke="#1A1814" stroke-width="1"/>
@@ -2357,6 +2667,119 @@ footer .signature {
         <div class="practice-feedback" hidden></div>
       </div>
 
+      <!-- ===== Pregunta 10 — situación: anticipación derivativa ===== -->
+      <div class="practice-card" data-q="10">
+        <div class="practice-num">Pregunta 10 · situación</div>
+        <div style="background: var(--paper); border: 1px solid var(--rule-soft); border-radius: 4px; padding: 0.8rem 1rem; margin-bottom: 1rem; font-style: italic; color: var(--ink-soft); font-size: 0.93rem;">
+          Un conductor circula a velocidad constante y nota que el coche empieza a frenarse muy ligeramente al iniciar una subida. Antes de que la velocidad caiga apreciablemente, pisa el acelerador con un toque rápido <em>previendo</em> que la pendiente va a empeorar.
+        </div>
+        <p class="practice-question">¿Qué acción de control está reproduciendo el conductor?</p>
+        <div class="practice-options">
+          <button data-correct="false" data-fb="La acción proporcional reaccionaría al valor del error (la velocidad ya caída), no al hecho de que el error está empezando a cambiar. Aquí la persona se anticipa.">Proporcional (P)</button>
+          <button data-correct="false" data-fb="La acción integral acumula el error a lo largo del tiempo. Es lenta y necesita que el error persista. El conductor no espera — actúa de inmediato al detectar el cambio.">Integral (I)</button>
+          <button data-correct="true" data-fb="Correcto. El conductor reacciona a la VELOCIDAD de cambio del error, no a su valor. Eso es exactamente la acción derivativa: anticipativa, basada en de/dt.">Derivativa (D)</button>
+          <button data-correct="false" data-fb="No, sí hay una acción concreta que reproduce este comportamiento.">Ninguna en concreto</button>
+        </div>
+        <div class="practice-feedback" hidden></div>
+      </div>
+
+      <!-- ===== Pregunta 11 — asignar elemento a bloque ===== -->
+      <div class="practice-card" data-q="11">
+        <div class="practice-num">Pregunta 11 · identificación</div>
+        <p class="practice-question">En un sistema de control de temperatura de un horno con realimentación, una <em>sonda PTC</em> se encarga de medir la temperatura real para devolverla al punto de suma. ¿En qué bloque del diagrama normalizado se incluye?</p>
+        <div class="practice-options">
+          <button data-correct="false" data-fb="G1 es el regulador o controlador — el bloque que decide la acción a partir del error. La sonda no decide nada, solo mide.">G<sub>1</sub> · regulador</button>
+          <button data-correct="false" data-fb="G2 es la planta — el horno en este caso. Es lo que se controla, no lo que mide la salida.">G<sub>2</sub> · planta</button>
+          <button data-correct="false" data-fb="G3 convierte la CONSIGNA introducida por el usuario en una señal comparable. La sonda no mide la consigna; mide la salida real del sistema.">G<sub>3</sub> · transductor de consigna</button>
+          <button data-correct="true" data-fb="Correcto. H agrupa los elementos que miden la salida y la realimentan al punto de suma. Una sonda PTC, un encoder o un tacómetro siempre van en H.">H · realimentación</button>
+        </div>
+        <div class="practice-feedback" hidden></div>
+      </div>
+
+      <!-- ===== Pregunta 12 — concepto: por qué D solo no se usa ===== -->
+      <div class="practice-card" data-q="12">
+        <div class="practice-num">Pregunta 12 · concepto</div>
+        <p class="practice-question">¿Por qué el regulador <em>D solo</em> no se usa nunca en la práctica?</p>
+        <div class="practice-options">
+          <button data-correct="false" data-fb="No es por amplificar ruido (que también lo hace, pero los PID reales lo filtran). El problema fundamental es otro.">Porque amplifica el ruido</button>
+          <button data-correct="true" data-fb="Correcto. Si el error es constante (aunque sea grande), su derivada es cero y la acción D vale cero — el regulador deja de actuar. Por eso solo se usa como complemento de P o de PI.">Porque si el error es constante, su derivada es cero y no actúa</button>
+          <button data-correct="false" data-fb="No, la D es muy rápida — reacciona al instante a los cambios. Su problema es justo el contrario: solo actúa en transitorio.">Porque es demasiado lenta</button>
+          <button data-correct="false" data-fb="No, la D no provoca error permanente por sí misma — simplemente no lo corrige. El verdadero problema es que con error constante no hace nada.">Porque provoca error permanente</button>
+        </div>
+        <div class="practice-feedback" hidden></div>
+      </div>
+
+      <!-- ===== Pregunta 13 — gráfica: firma del PD ===== -->
+      <div class="practice-card" data-q="13">
+        <div class="practice-num">Pregunta 13</div>
+        <div style="font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem;">Señal · <strong style="color:var(--ink-soft); font-weight:700;">señal de control m(t)</strong> y error e(t)</div>
+        <div class="practice-svg">
+          <svg viewBox="0 0 280 150" style="width:100%; height:auto;">
+            <line x1="30" y1="110" x2="270" y2="110" stroke="#1A1814" stroke-width="1"/>
+            <line x1="30" y1="20" x2="30" y2="110" stroke="#1A1814" stroke-width="1"/>
+            <text x="10" y="55" font-size="9" fill="#7A736A">m</text>
+            <text x="22" y="120" font-size="9" fill="#7A736A">0</text>
+            <text x="265" y="125" font-size="9" fill="#7A736A">t</text>
+            <!-- Error en escalón (referencia tenue) -->
+            <polyline points="30,110 50,110 50,75 270,75" fill="none" stroke="#B5341E" stroke-width="1" opacity="0.35"/>
+            <text x="56" y="68" font-size="9" fill="#B5341E" opacity="0.7" font-style="italic">e(t)</text>
+            <!-- Curva m(t) PD: pico agudo + escalón al nivel proporcional -->
+            <polyline points="30,110 49,110 50,30 51,80 270,80" fill="none" stroke="#B5651D" stroke-width="2.4"/>
+            <text x="200" y="95" font-size="9" fill="#B5651D" font-style="italic">m(t)</text>
+          </svg>
+        </div>
+        <p class="practice-question">El error es un escalón constante; la señal de control <em>m</em> da un <em>pico agudo</em> en el flanco del cambio y luego se queda en un escalón fijo. ¿Qué regulador es?</p>
+        <div class="practice-options">
+          <button data-correct="false" data-fb="P daría solo un escalón limpio, sin pico. El pico en el flanco indica que también hay acción D.">P</button>
+          <button data-correct="false" data-fb="D solo daría únicamente el pico, y volvería a cero. Aquí m se queda en un escalón después del pico, así que también hay acción P.">D</button>
+          <button data-correct="true" data-fb="Correcto. Pico en el flanco = acción D (reacciona al cambio). Escalón mantenido = acción P (proporcional al valor del error). La suma es la firma del PD.">PD</button>
+          <button data-correct="false" data-fb="PI tendría un escalón inicial seguido de una rampa creciente, no un pico seguido de meseta. La meseta plana descarta la I.">PI</button>
+        </div>
+        <div class="practice-feedback" hidden></div>
+      </div>
+
+      <!-- ===== Pregunta 14 — firma m(t) del I solo ===== -->
+      <div class="practice-card" data-q="14">
+        <div class="practice-num">Pregunta 14</div>
+        <div style="font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem;">Señal · <strong style="color:var(--ink-soft); font-weight:700;">señal de control m(t)</strong> y error e(t)</div>
+        <div class="practice-svg">
+          <svg viewBox="0 0 280 150" style="width:100%; height:auto;">
+            <line x1="30" y1="110" x2="270" y2="110" stroke="#1A1814" stroke-width="1"/>
+            <line x1="30" y1="20" x2="30" y2="110" stroke="#1A1814" stroke-width="1"/>
+            <text x="10" y="55" font-size="9" fill="#7A736A">m</text>
+            <text x="22" y="120" font-size="9" fill="#7A736A">0</text>
+            <text x="265" y="125" font-size="9" fill="#7A736A">t</text>
+            <!-- Error en escalón (referencia tenue) -->
+            <polyline points="30,110 50,110 50,75 270,75" fill="none" stroke="#B5341E" stroke-width="1" opacity="0.35"/>
+            <text x="56" y="68" font-size="9" fill="#B5341E" opacity="0.7" font-style="italic">e(t)</text>
+            <!-- Curva m(t) del I solo: arranca en 0 y crece como rampa pura mientras el error persista -->
+            <polyline points="30,110 50,110 270,25" fill="none" stroke="#0B6E4F" stroke-width="2.4"/>
+            <text x="200" y="50" font-size="9" fill="#0B6E4F" font-style="italic">m(t)</text>
+          </svg>
+        </div>
+        <p class="practice-question">El error es un escalón constante; la señal de control <em>m</em> arranca en cero y crece <em>como una rampa pura</em>, sin escalón ni pico inicial. ¿Qué regulador es?</p>
+        <div class="practice-options">
+          <button data-correct="false" data-fb="P daría un escalón fijo proporcional al error, no una rampa que sigue creciendo.">P</button>
+          <button data-correct="true" data-fb="Correcto. La integral de un escalón es una rampa: mientras el error persiste, m no para de acumular. Sin escalón ni pico iniciales — esa es la firma inconfundible del I solo.">I</button>
+          <button data-correct="false" data-fb="PI tendría un escalón inicial (de la P) ANTES de la rampa. Aquí m arranca exactamente en cero, así que no hay acción P.">PI</button>
+          <button data-correct="false" data-fb="D daría solo un pico en el flanco y luego cero. No produce rampa creciente — la D no acumula.">D</button>
+        </div>
+        <div class="practice-feedback" hidden></div>
+      </div>
+
+      <!-- ===== Pregunta 15 — identificación: potenciómetro de consigna ===== -->
+      <div class="practice-card" data-q="15">
+        <div class="practice-num">Pregunta 15 · identificación</div>
+        <p class="practice-question">En un sistema de control de temperatura, el usuario gira un <em>potenciómetro</em> para fijar la temperatura deseada de 22 °C. Ese potenciómetro convierte el ángulo del mando en una tensión que se compara con la procedente del sensor. ¿En qué bloque del diagrama normalizado se incluye este potenciómetro?</p>
+        <div class="practice-options">
+          <button data-correct="false" data-fb="G1 es el regulador — el bloque que decide la acción a partir del error. El potenciómetro no decide nada; solo traduce la consigna del usuario.">G<sub>1</sub> · regulador</button>
+          <button data-correct="false" data-fb="G2 es la planta — el sistema que se controla (el horno, la calefacción, etc.). El potenciómetro no recibe la acción de control ni produce la salida.">G<sub>2</sub> · planta</button>
+          <button data-correct="true" data-fb="Correcto. G3 convierte la CONSIGNA introducida por el usuario en una señal comparable con la realimentación. Un potenciómetro de mando, un teclado o cualquier transductor de consigna van siempre en G3.">G<sub>3</sub> · transductor de consigna</button>
+          <button data-correct="false" data-fb="H mide la SALIDA real del sistema (la temperatura que hay realmente). Aquí el potenciómetro mide algo distinto: el valor que el usuario quiere alcanzar. Por eso va en G3, no en H.">H · realimentación</button>
+        </div>
+        <div class="practice-feedback" hidden></div>
+      </div>
+
     </div>
 
     <button class="practice-reset" id="practiceReset">↺ Volver a empezar</button>
@@ -2364,12 +2787,11 @@ footer .signature {
 
   <div style="margin-top: 2.5rem; background: var(--paper-2); border-left: 4px solid var(--reg-pid); border-radius: 0 6px 6px 0; padding: 1.5rem 1.75rem;">
     <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem;">Para más práctica · Banco de ejercicios v27</div>
-    <p style="font-family: var(--serif); font-size: 1rem; color: var(--ink-soft); margin-bottom: 0.75rem;">Estos seis ejercicios y las nueve preguntas autoevaluadas dan la base. Para profundizar, en el banco de ejercicios encontrarás resueltos los problemas oficiales de la Ponencia 2025-26 que entrenan exactamente lo que se pregunta en PEvAU sobre reguladores:</p>
+    <p style="font-family: var(--serif); font-size: 1rem; color: var(--ink-soft); margin-bottom: 0.75rem;">Estos ocho ejercicios y las quince preguntas autoevaluadas cubren los <strong>cinco problemas oficiales sobre reguladores de la Ponencia 2025-26</strong> (P8, P9, P10, P11 y P12), más tres ejercicios de refuerzo. Para profundizar en la simplificación de diagramas y otros bloques, en el banco de ejercicios encontrarás resueltos los demás problemas oficiales:</p>
     <ul style="font-family: var(--serif); font-size: 0.95rem; color: var(--ink-soft); padding-left: 1.5rem; line-height: 1.7;">
-      <li><strong>P8 · Características de los reguladores P, I y D.</strong> Pregunta de redacción estructurada — ver plantilla en el § 11 de aquí abajo.</li>
-      <li><strong>P9 · Control de temperatura de una ducha.</strong> Identificación PI a partir de una situación realista (ajustes sucesivos hasta anular el error).</li>
-      <li><strong>P10 · Identificación de controladores por sus gráficas.</strong> Tres patrones e(t)/m(t) → P, I, D.</li>
-      <li><strong>P11 · Velocidad de crucero subiendo pendiente.</strong> Distinción entre P (deja error) y PI (lo elimina).</li>
+      <li><strong>P1 a P3 · Identificación de elementos en sistemas reales</strong> (epígrafe [4]). Vehículo, grifo monomando, cámara climática.</li>
+      <li><strong>P4 a P7 · Álgebra de bloques</strong> (epígrafe [1]). Cilindro hidráulico, motor con dos lazos, presurización de vivienda, termo eléctrico.</li>
+      <li><strong>P13 a P15 · Estabilidad y lazo abierto vs cerrado</strong> (epígrafes [5], [6]). Inestabilidad por realimentación, alumbrado de jardín, aprendizaje en bicicleta.</li>
     </ul>
     <p style="font-family: var(--serif); font-size: 0.95rem; color: var(--ink-soft); margin-top: 0.75rem; font-style: italic;">→ Banco de ejercicios v27 · sección «Problemas tipo PEvAU».</p>
   </div>
@@ -2561,7 +2983,7 @@ function drawRegimeZones(ctx, opts) {
 const T_SETTLE = {
   p: 4.0,    // primer orden tau=1.0 → 4·tau
   i: 24.7,   // sub-am zeta=0.18 wn=0.9 → 4/(zeta·wn) — no se establece en 10s
-  d: 8.0,    // tau=2.0 → 4·tau
+  d: 3.0,    // pico agudo + decaimiento rápido a 0 (sin error: el D solo se relaja a y=0)
   pi: 6.35,  // sub-am zeta=0.45 wn=1.4
   pd: 2.2,   // primer orden tau=0.55
   pid: 2.86, // sub-am zeta=0.7 wn=2.0
@@ -2582,8 +3004,15 @@ const RESP = {
     return 1 - Math.exp(-zeta*wn*t) * (Math.cos(wd*t) + (zeta/Math.sqrt(1-zeta*zeta))*Math.sin(wd*t));
   },
   d: function(t) {
-    // poco se mueve - error permanente grande
-    return 0.05 * (1 - Math.exp(-t / 2));
+    // D puro ante escalón de referencia: pico agudo en t≈0 y decaimiento rápido a 0.
+    // El valor estable es 0 (no la consigna): el D solo no corrige error sostenido,
+    // así que tras el "manotazo" inicial deja de actuar y la planta vuelve al reposo.
+    // Modelado como producto de subida y bajada exponenciales (función "alfa"):
+    //   y(t) = A · (1 − e^(−t/τs)) · e^(−t/τb)
+    const tauUp = 0.05;     // subida muy rápida (pinchazo)
+    const tauDown = 0.55;   // decaimiento moderado
+    const A = 0.55;
+    return A * (1 - Math.exp(-t / tauUp)) * Math.exp(-t / tauDown);
   },
   pi: function(t) {
     // sub-amortiguada moderada hasta 1
@@ -2738,6 +3167,221 @@ function drawActionMini(canvasId, kind) {
 }
 
 // =================================================================
+// MINI ACTION ILLUSTRATIONS — VISTA REAL EN LAZO CERRADO
+// (§ 03 — qué hace cada acción dentro de un sistema, no aislada)
+// Mismo formato visual que drawActionMini pero con curvas que reflejan
+// el comportamiento típico cuando la planta reacciona y el error cambia
+// =================================================================
+function drawActionMiniReal(canvasId, kind) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const W = 260, H = 110;
+  const ctx = setupCanvas(canvas, W, H);
+  const margin = { l: 28, r: 16, t: 18, b: 22 };
+  const plotW = W - margin.l - margin.r;
+  const plotH = H - margin.t - margin.b;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Ejes
+  ctx.strokeStyle = COLORS.grid;
+  ctx.lineWidth = 0.5;
+  ctx.beginPath();
+  ctx.moveTo(margin.l, margin.t + plotH);
+  ctx.lineTo(margin.l + plotW, margin.t + plotH);
+  ctx.moveTo(margin.l, margin.t);
+  ctx.lineTo(margin.l, margin.t + plotH);
+  ctx.stroke();
+
+  // Línea cero
+  ctx.strokeStyle = COLORS.ink;
+  ctx.lineWidth = 1;
+  const yZero = margin.t + plotH * 0.7;
+  ctx.beginPath();
+  ctx.moveTo(margin.l, yZero);
+  ctx.lineTo(margin.l + plotW, yZero);
+  ctx.stroke();
+
+  const tMax = 5;
+  const tStep = 0.6;        // instante en que salta la consigna
+  const xOf = (t) => margin.l + (t / tMax) * plotW;
+  const yOf = (v) => yZero - v * plotH * 0.55;
+
+  // ===== Caso 'p' real =====
+  // En t=tStep la consigna salta; el error parte de un valor alto y decae
+  // exponencialmente porque la planta responde. m = Kp · e (proporcional al
+  // error), así que m hace el mismo perfil escalado. Ambos quedan en valor > 0
+  // → error permanente.
+  //
+  // VALORES COHERENTES CON LA GRÁFICA IDEAL:
+  //   - mismo e inicial (0.70) → el FLANCO VERTICAL es idéntico en ideal y real
+  //   - mismo Kp ≈ 0.79 → m por debajo de e en ambas (m0 = 0.55, igual que ideal)
+  if (kind === 'p') {
+    const e0 = 0.70;          // mismo valor inicial que el ideal
+    const eInf = 0.25;        // error permanente (planta responde, P no lo anula)
+    const Kp = 55/70;         // mismo Kp que el ideal: m0 = 0.55, mInf = 0.196
+    const tau = 0.85;         // constante de tiempo de decaimiento
+    const eFn = (t) => {
+      if (t < tStep) return 0;
+      return eInf + (e0 - eInf) * Math.exp(-(t - tStep) / tau);
+    };
+    const mFn = (t) => (t < tStep ? 0 : Kp * eFn(t));
+
+    // Curva e(t): decaimiento exponencial hacia eInf
+    ctx.strokeStyle = COLORS.muted;
+    ctx.lineWidth = 1.4;
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.moveTo(xOf(0), yOf(0));
+    ctx.lineTo(xOf(tStep), yOf(0));
+    ctx.lineTo(xOf(tStep), yOf(e0));
+    const N = 80;
+    for (let i = 1; i <= N; i++) {
+      const t = tStep + ((tMax - tStep) * i) / N;
+      ctx.lineTo(xOf(t), yOf(eFn(t)));
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Curva m(t): mismo perfil escalado por Kp
+    ctx.strokeStyle = COLORS.reg_p;
+    ctx.lineWidth = 2.6;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(xOf(0), yOf(0));
+    ctx.lineTo(xOf(tStep), yOf(0));
+    ctx.lineTo(xOf(tStep), yOf(mFn(tStep)));
+    for (let i = 1; i <= N; i++) {
+      const t = tStep + ((tMax - tStep) * i) / N;
+      ctx.lineTo(xOf(t), yOf(mFn(t)));
+    }
+    ctx.stroke();
+  }
+
+  // ===== Caso 'i' real =====
+  // Lazo cerrado de 2º orden subamortiguado: el error oscila amortiguado
+  // hasta CERO (la I anula error permanente). m crece desde 0 oscilando
+  // hasta un valor estable (= esfuerzo permanente que mantiene y = r).
+  // El valor asintótico de m se elige igual al m del caso ideal (0.55) para
+  // continuidad visual con la línea de m horizontal del ideal.
+  if (kind === 'i') {
+    const e0 = 0.70, mInf = 0.55;
+    const zeta = 0.45, wn = 1.6;
+    const wd = wn * Math.sqrt(1 - zeta*zeta);
+    const k = zeta / Math.sqrt(1 - zeta*zeta);
+    const eFn = (t) => {
+      if (t < tStep) return 0;
+      const tt = t - tStep;
+      return e0 * Math.exp(-zeta*wn*tt) * (Math.cos(wd*tt) + k*Math.sin(wd*tt));
+    };
+    const mFn = (t) => {
+      if (t < tStep) return 0;
+      const tt = t - tStep;
+      return mInf * (1 - Math.exp(-zeta*wn*tt) * (Math.cos(wd*tt) + k*Math.sin(wd*tt)));
+    };
+
+    const N = 120;
+
+    // Curva e(t): oscila amortiguada desde 0.70 hasta 0
+    ctx.strokeStyle = COLORS.muted;
+    ctx.lineWidth = 1.4;
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.moveTo(xOf(0), yOf(0));
+    ctx.lineTo(xOf(tStep), yOf(0));
+    ctx.lineTo(xOf(tStep), yOf(e0));
+    for (let i = 1; i <= N; i++) {
+      const t = tStep + ((tMax - tStep) * i) / N;
+      ctx.lineTo(xOf(t), yOf(eFn(t)));
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Curva m(t): sube oscilando desde 0 hasta mInf
+    ctx.strokeStyle = COLORS.reg_i;
+    ctx.lineWidth = 2.6;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(xOf(0), yOf(0));
+    ctx.lineTo(xOf(tStep), yOf(0));
+    for (let i = 1; i <= N; i++) {
+      const t = tStep + ((tMax - tStep) * i) / N;
+      ctx.lineTo(xOf(t), yOf(mFn(t)));
+    }
+    ctx.stroke();
+  }
+
+  // ===== Caso 'd' real =====
+  // En lazo cerrado, m_D ya NO es delta de Dirac (idealización), sino un
+  // pico FINITO que decae exponencialmente. El sistema responde un poco al
+  // pinchazo, así que e(0+) parte de un valor menor que el escalón completo
+  // y vuelve a subir hacia él conforme la salida se relaja: la D sola NO
+  // sostiene la planta y el error se aproxima al escalón inicial.
+  if (kind === 'd') {
+    const eEscalon = 0.70;     // valor del "escalón forzado" del ideal
+    const ePinchazo = 0.35;    // arranque tras el pinchazo de la D
+    const mPico = 0.40;        // pico finito de m (no infinito como ideal)
+    const tau_e = 0.7;         // recuperación del error hacia el escalón
+    const tau_m = 0.5;         // decaimiento de la acción
+    const eFn = (t) => {
+      if (t < tStep) return 0;
+      return eEscalon - (eEscalon - ePinchazo) * Math.exp(-(t - tStep) / tau_e);
+    };
+    const mFn = (t) => {
+      if (t < tStep) return 0;
+      return mPico * Math.exp(-(t - tStep) / tau_m);
+    };
+
+    const N = 120;
+
+    // Curva e(t): salta a ePinchazo y sube exponencialmente hacia eEscalon
+    ctx.strokeStyle = COLORS.muted;
+    ctx.lineWidth = 1.4;
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.moveTo(xOf(0), yOf(0));
+    ctx.lineTo(xOf(tStep), yOf(0));
+    ctx.lineTo(xOf(tStep), yOf(ePinchazo));
+    for (let i = 1; i <= N; i++) {
+      const t = tStep + ((tMax - tStep) * i) / N;
+      ctx.lineTo(xOf(t), yOf(eFn(t)));
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Curva m(t): pico finito que decae a 0
+    ctx.strokeStyle = COLORS.reg_d;
+    ctx.lineWidth = 2.6;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(xOf(0), yOf(0));
+    ctx.lineTo(xOf(tStep), yOf(0));
+    ctx.lineTo(xOf(tStep), yOf(mPico));
+    for (let i = 1; i <= N; i++) {
+      const t = tStep + ((tMax - tStep) * i) / N;
+      ctx.lineTo(xOf(t), yOf(mFn(t)));
+    }
+    ctx.stroke();
+  }
+
+  // Etiquetas
+  ctx.font = '500 9px "JetBrains Mono", monospace';
+  ctx.fillStyle = COLORS.muted;
+  ctx.textAlign = 'left';
+  ctx.fillText('e', margin.l + 4, margin.t + 10);
+  if (kind === 'p') ctx.fillStyle = COLORS.reg_p;
+  else if (kind === 'i') ctx.fillStyle = COLORS.reg_i;
+  else if (kind === 'd') ctx.fillStyle = COLORS.reg_d;
+  ctx.fillText('m', margin.l + plotW - 14, margin.t + 10);
+  ctx.fillStyle = COLORS.muted;
+  ctx.textAlign = 'center';
+  ctx.fillText('t', margin.l + plotW / 2, margin.t + plotH + 14);
+}
+
+// =================================================================
 // REGULATOR RESPONSE CANVAS (§04, §05, §06, §07)
 // =================================================================
 function drawRegulatorResponse(canvasId, regKind, opts) {
@@ -2882,6 +3526,7 @@ class ComparisonSim {
     this.t = this.tMax;  // dibuja completo al inicio
     this.playing = false;
     this.lastFrame = null;
+    this.speed = 1;  // multiplicador de velocidad de reproducción (¼×, ½×, 1×)
     this.active = { p: true, i: true, d: true, pi: true, pd: true, pid: true };
     this.setup();
     this.draw();
@@ -2890,6 +3535,14 @@ class ComparisonSim {
   setup() {
     document.getElementById('playComparison').addEventListener('click', () => this.play());
     document.getElementById('resetComparison').addEventListener('click', () => this.reset());
+
+    document.querySelectorAll('.speed-btn').forEach(el => {
+      el.addEventListener('click', () => {
+        this.speed = parseFloat(el.dataset.speed);
+        document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+        el.classList.add('active');
+      });
+    });
 
     document.querySelectorAll('.reg-toggle').forEach(el => {
       el.addEventListener('click', () => {
@@ -3053,7 +3706,7 @@ class ComparisonSim {
     if (!this.playing) return;
     const dt = (now - this.lastFrame) / 1000;
     this.lastFrame = now;
-    this.t = Math.min(this.tMax, this.t + dt * 1.4);
+    this.t = Math.min(this.tMax, this.t + dt * 1.4 * this.speed);
     this.draw();
     if (this.t < this.tMax) requestAnimationFrame((n) => this.tick(n));
     else this.playing = false;
@@ -3068,6 +3721,10 @@ window.addEventListener('load', () => {
   drawActionMini('actionP', 'p');
   drawActionMini('actionI', 'i');
   drawActionMini('actionD', 'd');
+  // Vista real en lazo cerrado (§ 03 — vista doble)
+  drawActionMiniReal('actionP_real', 'p');
+  drawActionMiniReal('actionI_real', 'i');
+  drawActionMiniReal('actionD_real', 'd');
 
   // §04, §05, §06 Reguladores individuales
   drawRegulatorResponse('canvasP', 'p', { W: 380, H: 220 });

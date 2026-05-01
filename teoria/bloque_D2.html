@@ -477,6 +477,64 @@ table.kmap th.rowhdr{background:#2E7BC4;font-size:.78rem}
 table.kmap td{background:#FBFCFE}
 table.kmap td .cellnum{position:absolute;bottom:3px;right:5px;font-size:.6rem;color:#8C97A8}
 .kmap-caption{font-size:.78rem;color:#555D6B;font-style:italic;margin-top:4px}
+
+/* ====== MEJORAS 100/100 · SECCIONES INTEGRADORAS ====== */
+.mejora-panel{margin:28px 0;padding:18px 20px;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:linear-gradient(180deg,#fff,#F8FAFC);box-shadow:0 3px 14px rgba(27,79,138,.08)}
+.mejora-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:18pt;margin:0 0 12px;border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:6px}
+.mejora-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:13.5pt;margin:14px 0 6px}
+.mejora-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:12px 0}
+.mejora-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:10px;padding:11px 13px}
+.mejora-card strong{color:var(--azul,#1B4F8A)}
+.mejora-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92em;background:#fff}
+.mejora-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:7px 9px;font-weight:600}
+.mejora-table td{border:1px solid var(--borde,#CDD7E3);padding:7px 9px;vertical-align:top}
+.mejora-steps{counter-reset:paso;margin:10px 0;padding-left:0;list-style:none}
+.mejora-steps li{counter-increment:paso;margin:8px 0;padding:9px 11px 9px 42px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:9px;position:relative}
+.mejora-steps li::before{content:counter(paso);position:absolute;left:11px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.8em}
+.mejora-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+.mejora-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:8px;margin:10px 0;overflow-x:auto}
+@media print{.mejora-panel{break-inside:avoid;box-shadow:none}.mejora-svg{break-inside:avoid}}
+
+
+/* MEJORA-100-V2: componentes de segunda pasada */
+.mejora2-panel{margin:30px 0;padding:20px 22px;border:1px solid var(--borde,#CDD7E3);border-radius:14px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.09)}
+.mejora2-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:18.5pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:7px;margin:0 0 14px}
+.mejora2-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.mejora2-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.mejora2-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.mejora2-card strong{color:var(--azul,#1B4F8A)}
+.mejora2-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.mejora2-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.mejora2-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.mejora2-steps{counter-reset:paso2;margin:12px 0;padding-left:0;list-style:none}
+.mejora2-steps li{counter-increment:paso2;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.mejora2-steps li::before{content:counter(paso2);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.mejora2-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.mejora2-placeholder{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.mejora2-placeholder strong{color:var(--azul,#1B4F8A)}
+.mejora2-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+@media print{.mejora2-panel,.mejora2-card,.mejora2-svg{break-inside:avoid;box-shadow:none}.mejora2-placeholder{break-inside:avoid}}
+
+
+/* AUDITORIA-V3: pulido técnico final */
+.audit3-panel{margin:32px 0;padding:22px 24px;border:1px solid var(--borde,#CDD7E3);border-radius:15px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.08);break-inside:avoid}
+.audit3-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:19pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:8px;margin:0 0 14px}
+.audit3-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.audit3-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.audit3-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.audit3-card strong{color:var(--azul,#1B4F8A)}
+.audit3-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.audit3-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.audit3-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.audit3-steps{counter-reset:audit3;margin:12px 0;padding-left:0;list-style:none}
+.audit3-steps li{counter-increment:audit3;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.audit3-steps li::before{content:counter(audit3);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.audit3-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.audit3-imgnote{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.audit3-imgnote strong{color:var(--azul,#1B4F8A)}
+.audit3-mini{font-size:.92em;color:var(--texto2,#455565)}
+@media print{.audit3-panel,.audit3-card{break-inside:avoid;box-shadow:none}.audit3-imgnote{break-inside:avoid}}
+
 </style>
 <script>
 MathJax = {
@@ -556,14 +614,6 @@ MathJax = {
 </div>
 
 <!-- ═══════════════════ LEYENDA EXIGIBILIDAD PEvAU ═══════════════════ -->
-<div class="exig-leyenda" role="note" aria-label="Leyenda de exigibilidad PEvAU">
-  <strong>Exigibilidad PEvAU 2025-26:</strong>
-  <span class="exig nucleo">Núcleo</span>
-  <span class="exig contextual">Contextualizado</span>
-  <span class="exig ampliacion">Ampliación</span>
-  <span class="exig fuera">Fuera</span>
-</div>
-
 <!-- ═══════════════════ OBJETIVOS ═══════════════════ -->
 <div id="objetivos" class="objetivos-box">
   <h2>🎯 Objetivos de aprendizaje</h2>
@@ -640,12 +690,12 @@ MathJax = {
   <h3>Circuitos combinacionales y secuenciales</h3>
   <div class="comp-grid">
     <div class="comp-card clave">
-      <h4>Combinacionales <span class="exig nucleo">Núcleo PEvAU</span></h4>
+      <h4>Combinacionales</h4>
       <p>La salida depende <strong>solo de las entradas actuales</strong>. No tienen memoria. Son los que estudia este bloque.</p>
       <p style="font-size:9pt;color:var(--texto2);">Ej: sumadores, decodificadores, multiplexores, puertas lógicas.</p>
     </div>
     <div class="comp-card clave">
-      <h4>Secuenciales <span class="exig contextual">Puede aparecer contextualizado · conocer conceptos</span></h4>
+      <h4>Secuenciales</h4>
       <p>La salida depende de las entradas actuales <strong>y del estado anterior</strong>. Tienen memoria.</p>
       <p style="font-size:9pt;color:var(--texto2);">Ej: contadores, registros de desplazamiento, flip-flops, biestables. No aparecen como problema central, pero los conceptos pueden aparecer en enunciados contextualizados (Orientaciones PEvAU 2025-26).</p>
     </div>
@@ -1310,6 +1360,22 @@ MathJax = {
 
 </div><!-- fin cuerpo -->
 
+<!-- MEJORA-100: d2 -->
+<div class="mejora-panel" id="mejora-d2">
+<h2>🔢 Problema digital completo: itinerario de resolución</h2>
+<ol class="mejora-steps"><li>Traducir el enunciado a variables de entrada y salida.</li><li>Construir o completar la tabla de verdad.</li><li>Obtener minterms o maxterms según la forma elegida.</li><li>Colocar los unos o ceros en el mapa de Karnaugh respetando el orden Gray.</li><li>Agrupar en potencias de dos, usando bordes y grupos máximos.</li><li>Escribir la función simplificada e implementarla con puertas lógicas.</li></ol><table class="mejora-table"><tr><th>Error habitual</th><th>Corrección</th></tr><tr><td>Agrupar 3, 6 o 12 celdas</td><td>Los grupos deben tener 1, 2, 4, 8... celdas</td></tr><tr><td>Olvidar que los bordes son adyacentes</td><td>El mapa se interpreta como si se cerrara sobre sí mismo</td></tr><tr><td>Cambiar el orden Gray</td><td>Solo cambia una variable entre columnas/filas vecinas</td></tr><tr><td>No usar grupos máximos</td><td>Los grupos grandes simplifican más variables</td></tr></table>
+</div>
+
+
+<!-- MEJORA-100-V2: D2 -->
+<div class="mejora2-panel" id="mejora2-d2">
+<h2>🔢 Problema integrador: de enunciado a circuito lógico</h2>
+<p>Modelo cerrado de resolución para consolidar tabla, mapa, simplificación e implementación.</p>
+<ol class="mejora2-steps"><li>Traducir el enunciado a variables binarias de entrada y salida.</li><li>Construir la tabla de verdad sin simplificar mentalmente.</li><li>Identificar minterms de salida 1 o maxterms de salida 0.</li><li>Volcar los valores al mapa de Karnaugh respetando el orden Gray.</li><li>Agrupar en potencias de dos, con grupos lo más grandes posible.</li><li>Escribir la función simplificada.</li><li>Dibujar el circuito con inversores, puertas AND/OR o equivalentes NAND/NOR.</li></ol>
+<table class="mejora2-table"><tr><th>Fallo típico</th><th>Cómo detectarlo</th></tr><tr><td>Ordenar columnas 00, 01, 10, 11</td><td>El orden correcto Gray es 00, 01, 11, 10.</td></tr><tr><td>Agrupar 3 casillas</td><td>Los grupos son de 1, 2, 4, 8...</td></tr><tr><td>No usar bordes adyacentes</td><td>El mapa se comporta como si se cerrara por los bordes.</td></tr><tr><td>Escribir una variable que cambia dentro del grupo</td><td>Solo permanecen las variables constantes.</td></tr></table>
+<div class="mejora2-placeholder"><strong>Imagen a insertar:</strong> mapa de Karnaugh 4 variables con orden Gray, grupos marcados y función final debajo.</div>
+</div>
+
 <!-- ═══════════════════ DECÁLOGO ═══════════════════ -->
 <div id="decalogo" class="decalogo-box">
   <h2>📝 Decálogo PAU 2025-26</h2>
@@ -1325,6 +1391,16 @@ MathJax = {
     <li>Las condiciones indiferentes (\(X\) o \(-\)) pueden usarse como 0 o 1 según convenga para simplificar.</li>
     <li>Verifica siempre la simplificación construyendo la tabla de verdad desde la función resultante.</li>
   </ol>
+</div>
+
+
+<!-- AUDITORIA-V3-SECCION: bloque D2 -->
+<div class="audit3-panel" id="audit3-d2">
+<h2>Auditoría técnica final · De la condición lógica al circuito</h2>
+<p>El cierre del bloque asegura que cada problema pueda recorrerse sin saltos desde el enunciado hasta la implementación.</p>
+<ol class="audit3-steps"><li>Traducir la condición verbal a combinaciones de entrada.</li><li>Construir la tabla de verdad con orden binario estable.</li><li>Identificar unos, ceros o condiciones indiferentes según la forma elegida.</li><li>Pasar al mapa de Karnaugh respetando orden Gray.</li><li>Agrupar en potencias de dos y usar bordes si son adyacentes.</li><li>Escribir la función simplificada y dibujar el circuito final.</li></ol>
+<table class="audit3-table"><tr><th>Error</th><th>Revisión</th></tr><tr><td>Cambiar el orden Gray</td><td>Comprobar que columnas/filas cambian una sola variable.</td></tr><tr><td>Grupos pequeños innecesarios</td><td>Buscar primero grupos máximos.</td></tr><tr><td>No usar los bordes</td><td>Recordar que el mapa es cíclico.</td></tr><tr><td>Variable que cambia dentro del grupo</td><td>Eliminarla del término resultante.</td></tr></table>
+<div class="audit3-imgnote"><strong>Imagen recomendada:</strong> ejemplo completo en una lámina: tabla de verdad, mapa de Karnaugh con grupos coloreados, función simplificada y circuito con puertas.</div>
 </div>
 
 <div class="pie">

@@ -454,6 +454,64 @@ span.math { font-family: var(--mono); }
 }
 /* @media print v2 — ecosistema TECI2 */
 
+
+/* ====== MEJORAS 100/100 · SECCIONES INTEGRADORAS ====== */
+.mejora-panel{margin:28px 0;padding:18px 20px;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:linear-gradient(180deg,#fff,#F8FAFC);box-shadow:0 3px 14px rgba(27,79,138,.08)}
+.mejora-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:18pt;margin:0 0 12px;border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:6px}
+.mejora-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:13.5pt;margin:14px 0 6px}
+.mejora-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:12px 0}
+.mejora-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:10px;padding:11px 13px}
+.mejora-card strong{color:var(--azul,#1B4F8A)}
+.mejora-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92em;background:#fff}
+.mejora-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:7px 9px;font-weight:600}
+.mejora-table td{border:1px solid var(--borde,#CDD7E3);padding:7px 9px;vertical-align:top}
+.mejora-steps{counter-reset:paso;margin:10px 0;padding-left:0;list-style:none}
+.mejora-steps li{counter-increment:paso;margin:8px 0;padding:9px 11px 9px 42px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:9px;position:relative}
+.mejora-steps li::before{content:counter(paso);position:absolute;left:11px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.8em}
+.mejora-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+.mejora-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:8px;margin:10px 0;overflow-x:auto}
+@media print{.mejora-panel{break-inside:avoid;box-shadow:none}.mejora-svg{break-inside:avoid}}
+
+
+/* MEJORA-100-V2: componentes de segunda pasada */
+.mejora2-panel{margin:30px 0;padding:20px 22px;border:1px solid var(--borde,#CDD7E3);border-radius:14px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.09)}
+.mejora2-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:18.5pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:7px;margin:0 0 14px}
+.mejora2-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.mejora2-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.mejora2-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.mejora2-card strong{color:var(--azul,#1B4F8A)}
+.mejora2-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.mejora2-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.mejora2-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.mejora2-steps{counter-reset:paso2;margin:12px 0;padding-left:0;list-style:none}
+.mejora2-steps li{counter-increment:paso2;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.mejora2-steps li::before{content:counter(paso2);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.mejora2-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.mejora2-placeholder{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.mejora2-placeholder strong{color:var(--azul,#1B4F8A)}
+.mejora2-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+@media print{.mejora2-panel,.mejora2-card,.mejora2-svg{break-inside:avoid;box-shadow:none}.mejora2-placeholder{break-inside:avoid}}
+
+
+/* AUDITORIA-V3: pulido técnico final */
+.audit3-panel{margin:32px 0;padding:22px 24px;border:1px solid var(--borde,#CDD7E3);border-radius:15px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.08);break-inside:avoid}
+.audit3-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:19pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:8px;margin:0 0 14px}
+.audit3-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.audit3-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.audit3-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.audit3-card strong{color:var(--azul,#1B4F8A)}
+.audit3-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.audit3-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.audit3-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.audit3-steps{counter-reset:audit3;margin:12px 0;padding-left:0;list-style:none}
+.audit3-steps li{counter-increment:audit3;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.audit3-steps li::before{content:counter(audit3);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.audit3-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.audit3-imgnote{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.audit3-imgnote strong{color:var(--azul,#1B4F8A)}
+.audit3-mini{font-size:.92em;color:var(--texto2,#455565)}
+@media print{.audit3-panel,.audit3-card{break-inside:avoid;box-shadow:none}.audit3-imgnote{break-inside:avoid}}
+
 </style>
 <script>
 MathJax = {
@@ -1017,12 +1075,27 @@ MathJax = {
 
 </div><!-- fin cuerpo -->
 
+<!-- MEJORA-100: c2 -->
+<div class="mejora-panel" id="mejora-c2">
+<h2>🔥 Mapa de decisión para máquinas térmicas</h2>
+<table class="mejora-table"><tr><th>Datos del enunciado</th><th>Modelo que se activa</th><th>Magnitud clave</th></tr><tr><td>Calor absorbido y trabajo producido</td><td>Motor térmico</td><td>Rendimiento</td></tr><tr><td>Calor extraído del foco frío</td><td>Máquina frigorífica</td><td>COP frigorífico</td></tr><tr><td>Calor entregado al foco caliente</td><td>Bomba de calor</td><td>COP calorífico</td></tr><tr><td>Temperaturas de focos</td><td>Máquina ideal de Carnot</td><td>Límite teórico</td></tr><tr><td>Par, rpm, cilindrada o consumo</td><td>Motor alternativo</td><td>Potencia, rendimiento y consumo específico</td></tr></table><div class="mejora-grid"><div class="mejora-card"><strong>Motor térmico.</strong><br>Entrada: calor. Salida útil: trabajo. La energía no aprovechada se cede al foco frío.</div><div class="mejora-card"><strong>Frigorífica.</strong><br>El objetivo es extraer calor del foco frío mediante aporte de trabajo.</div><div class="mejora-card"><strong>Bomba de calor.</strong><br>El objetivo es entregar calor al foco caliente con ayuda de trabajo exterior.</div><div class="mejora-card"><strong>Motor alternativo.</strong><br>Relaciona geometría del cilindro, par, régimen de giro, potencia y consumo.</div></div>
+</div>
+
+
+<!-- MEJORA-100-V2: C2 -->
+<div class="mejora2-panel" id="mejora2-c2">
+<h2>🔥 Problemas modelo de máquinas térmicas</h2>
+<table class="mejora2-table"><tr><th>Tipo de problema</th><th>Datos que suelen aparecer</th><th>Magnitud final</th><th>Control de coherencia</th></tr><tr><td>Motor térmico</td><td>Calor absorbido, calor cedido o trabajo útil</td><td>Rendimiento</td><td>η siempre menor que 1</td></tr><tr><td>Máquina frigorífica</td><td>Calor extraído del foco frío y trabajo</td><td>COP frigorífico</td><td>Puede ser mayor que 1</td></tr><tr><td>Bomba de calor</td><td>Calor cedido al foco caliente y trabajo</td><td>COP calefacción</td><td>Mayor que COP frigorífico equivalente</td></tr><tr><td>Motor alternativo</td><td>Cilindrada, régimen, par, consumo</td><td>Potencia, rendimiento o consumo específico</td><td>Convertir rpm a rad/s si se usa P = Mω</td></tr></table>
+<div class="mejora2-placeholder"><strong>Imagen a insertar:</strong> comparativa p-V Otto/Diésel con puntos 1-2-3-4, combustión isócora en Otto y combustión isóbara en Diésel.</div>
+<div class="mejora2-placeholder"><strong>Imagen a insertar:</strong> gráfico de barras rendimiento real frente a límite de Carnot, dejando claro que Carnot es frontera ideal.</div>
+</div>
+
 <!-- ═══════════════════ DECÁLOGO ═══════════════════ -->
 <div id="decalogo" class="decalogo-box">
   <h2>📝 Decálogo PAU 2025-26</h2>
   <ol>
     <li>Rendimiento de Carnot: T en <strong>Kelvin siempre</strong> (\(T[K] = T[^{\circ}C]+273{,}15\)). Error típico trabajar en °C.</li>
-    <li>No confundas rendimiento \(\eta\) (motor, \(\leq 1\)) con eficiencia \(\varepsilon\) (frigorífica/bomba, puede ser \(&gt;1\)).</li>
+    <li>Distingue rendimiento \(\eta\) (motor, \(\leq 1\)) con eficiencia \(\varepsilon\) (frigorífica/bomba, puede ser \(&gt;1\)).</li>
     <li>Bomba de calor: \(\varepsilon' = Q_c/W\); frigorífica: \(\varepsilon = Q_f/W\). Relación: \(\varepsilon' = \varepsilon + 1\).</li>
     <li>El ciclo de Carnot es el ideal: un motor real siempre tendrá \(\eta &lt; \eta_{Carnot}\).</li>
     <li>Potencia en motores: \(P_e = M\cdot\omega\) con \(\omega\) en rad/s (\(\omega = 2\pi n/60\), con n en rpm).</li>
@@ -1032,6 +1105,16 @@ MathJax = {
     <li>4 tiempos completan el ciclo en 2 vueltas del cigüeñal; 2 tiempos en 1 vuelta. Afecta al cálculo de trabajo por ciclo.</li>
     <li>\(Q_c = \dot{m}_c\cdot P_c\): calor aportado = masa de combustible × poder calorífico. No olvides el signo.</li>
   </ol>
+</div>
+
+
+<!-- AUDITORIA-V3-SECCION: bloque C2 -->
+<div class="audit3-panel" id="audit3-c2">
+<h2>Auditoría técnica final · Coherencia energética en máquinas térmicas</h2>
+<p>La mejora final añade una prueba de coherencia para evitar confundir rendimiento, COP, potencia útil y flujos de calor.</p>
+<ol class="audit3-steps"><li>Identificar si la máquina entrega trabajo, extrae calor del foco frío o aporta calor al foco caliente.</li><li>Pasar siempre las temperaturas termodinámicas a Kelvin cuando intervenga Carnot.</li><li>Distinguir potencia, energía y calor: W, J, kWh, kJ y kW no son intercambiables.</li><li>Comprobar que un rendimiento queda entre 0 y 1, mientras que un COP puede ser mayor que 1.</li><li>En motores alternativos, convertir rpm a rad/s cuando se use \(P=M\omega\).</li></ol>
+<table class="audit3-table"><tr><th>Magnitud</th><th>Relación segura</th><th>Comprobación rápida</th></tr><tr><td>Rendimiento</td><td>\(\eta=W/Q_c\)</td><td>Debe ser menor que 1.</td></tr><tr><td>Frigorífica</td><td>\(COP=Q_f/W\)</td><td>El efecto útil es extraer calor del foco frío.</td></tr><tr><td>Bomba de calor</td><td>\(COP=Q_c/W\)</td><td>El efecto útil es calentar el foco caliente.</td></tr><tr><td>Potencia de giro</td><td>\(P=M\omega\)</td><td>\(\omega=2\pi n/60\) si n está en rpm.</td></tr></table>
+<div class="audit3-imgnote"><strong>Imagen recomendada:</strong> comparación p-V Otto/Diésel con los cuatro puntos numerados y la diferencia visual entre aporte de calor isócoro e isóbaro.</div>
 </div>
 
 <div class="pie">

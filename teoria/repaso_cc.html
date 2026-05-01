@@ -452,6 +452,64 @@ details[open] summary {
 }
 /* @media print v2 — ecosistema TECI2 */
 
+
+/* ====== MEJORAS 100/100 · SECCIONES INTEGRADORAS ====== */
+.mejora-panel{margin:28px 0;padding:18px 20px;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:linear-gradient(180deg,#fff,#F8FAFC);box-shadow:0 3px 14px rgba(27,79,138,.08)}
+.mejora-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:18pt;margin:0 0 12px;border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:6px}
+.mejora-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:13.5pt;margin:14px 0 6px}
+.mejora-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:12px 0}
+.mejora-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:10px;padding:11px 13px}
+.mejora-card strong{color:var(--azul,#1B4F8A)}
+.mejora-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92em;background:#fff}
+.mejora-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:7px 9px;font-weight:600}
+.mejora-table td{border:1px solid var(--borde,#CDD7E3);padding:7px 9px;vertical-align:top}
+.mejora-steps{counter-reset:paso;margin:10px 0;padding-left:0;list-style:none}
+.mejora-steps li{counter-increment:paso;margin:8px 0;padding:9px 11px 9px 42px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:9px;position:relative}
+.mejora-steps li::before{content:counter(paso);position:absolute;left:11px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.8em}
+.mejora-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+.mejora-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:8px;margin:10px 0;overflow-x:auto}
+@media print{.mejora-panel{break-inside:avoid;box-shadow:none}.mejora-svg{break-inside:avoid}}
+
+
+/* MEJORA-100-V2: componentes de segunda pasada */
+.mejora2-panel{margin:30px 0;padding:20px 22px;border:1px solid var(--borde,#CDD7E3);border-radius:14px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.09)}
+.mejora2-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:18.5pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:7px;margin:0 0 14px}
+.mejora2-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.mejora2-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.mejora2-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.mejora2-card strong{color:var(--azul,#1B4F8A)}
+.mejora2-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.mejora2-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.mejora2-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.mejora2-steps{counter-reset:paso2;margin:12px 0;padding-left:0;list-style:none}
+.mejora2-steps li{counter-increment:paso2;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.mejora2-steps li::before{content:counter(paso2);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.mejora2-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.mejora2-placeholder{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.mejora2-placeholder strong{color:var(--azul,#1B4F8A)}
+.mejora2-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+@media print{.mejora2-panel,.mejora2-card,.mejora2-svg{break-inside:avoid;box-shadow:none}.mejora2-placeholder{break-inside:avoid}}
+
+
+/* AUDITORIA-V3: pulido técnico final */
+.audit3-panel{margin:32px 0;padding:22px 24px;border:1px solid var(--borde,#CDD7E3);border-radius:15px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.08);break-inside:avoid}
+.audit3-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:19pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:8px;margin:0 0 14px}
+.audit3-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.audit3-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.audit3-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.audit3-card strong{color:var(--azul,#1B4F8A)}
+.audit3-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.audit3-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.audit3-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.audit3-steps{counter-reset:audit3;margin:12px 0;padding-left:0;list-style:none}
+.audit3-steps li{counter-increment:audit3;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.audit3-steps li::before{content:counter(audit3);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.audit3-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.audit3-imgnote{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.audit3-imgnote strong{color:var(--azul,#1B4F8A)}
+.audit3-mini{font-size:.92em;color:var(--texto2,#455565)}
+@media print{.audit3-panel,.audit3-card{break-inside:avoid;box-shadow:none}.audit3-imgnote{break-inside:avoid}}
+
 </style>
 <script>
 MathJax = {
@@ -736,7 +794,7 @@ MathJax = {
   <span class="callout-icon">⚠️</span>
   <div><strong>Error frecuente</strong><br>
 </div>
-  No confundas «mismos nodos» con «estar cerca». Dos resistencias están en paralelo <strong>solo</strong> si comparten exactamente los mismos dos nodos. Dibuja siempre el circuito e identifica los nodos antes de simplificar.
+  Distingue «mismos nodos» con «estar cerca». Dos resistencias están en paralelo <strong>solo</strong> si comparten exactamente los mismos dos nodos. Dibuja siempre el circuito e identifica los nodos antes de simplificar.
 </div>
 
 <div class="callout callout-key">
@@ -977,11 +1035,32 @@ MathJax = {
 
 </div><!-- fin cuerpo -->
 
+<!-- MEJORA-100: cc -->
+<div class="mejora-panel" id="mejora-cc">
+<h2>⚡ Esquemas base y puente hacia corriente alterna</h2>
+<table class="mejora-table"><tr><th>CC</th><th>CA</th><th>Idea común</th></tr><tr><td>Resistencia R</td><td>Impedancia Z</td><td>Oposición al paso de corriente</td></tr><tr><td>V = I·R</td><td>V = I·Z</td><td>Ley de Ohm generalizada</td></tr><tr><td>Potencia P = V·I</td><td>Potencias P, Q y S</td><td>Energía transferida por unidad de tiempo</td></tr><tr><td>Magnitudes constantes</td><td>Fasores y valores eficaces</td><td>Representación simplificada del régimen sinusoidal</td></tr></table><ol class="mejora-steps"><li>En serie, la intensidad es común y las tensiones se reparten.</li><li>En paralelo, la tensión es común y las intensidades se reparten.</li><li>En mixtos, se reducen asociaciones parciales hasta obtener la resistencia equivalente.</li><li>Antes de calcular potencia o energía, revisar unidades: A, V, Ω, W, J, kWh.</li></ol>
+</div>
+
+
+<!-- MEJORA-100-V2: REPASO CC -->
+<div class="mejora2-panel" id="mejora2-cc">
+<h2>⚡ Esquemas básicos de corriente continua</h2>
+<svg class="mejora2-svg" viewBox="0 0 760 300" role="img" aria-label="Circuitos básicos de corriente continua">
+<rect width="760" height="300" fill="#fff"/><text x="30" y="34" font-size="20" font-weight="700" fill="#1B4F8A">Serie, paralelo y mixto</text>
+<g stroke="#1A2430" stroke-width="3" fill="none" font-family="Barlow,Arial" font-size="14">
+<text x="70" y="65" fill="#1B4F8A" stroke="none" font-weight="700">Serie</text><path d="M70 105 h45 m30 0 h45 m30 0 h45 m0 0 v70 h-195 v-70"/><path d="M115 92 v26 M122 92 v26 M190 92 l30 26 M220 92 l-30 26"/><text x="185" y="145" fill="#1A2430" stroke="none">R₁ + R₂</text>
+<text x="340" y="65" fill="#1B4F8A" stroke="none" font-weight="700">Paralelo</text><path d="M340 105 h50 v-32 h90 v64 h-90 v-32 m90 0 h60 v70 h-200 v-70"/><path d="M390 73 l90 64 M480 73 l-90 64"/><text x="393" y="160" fill="#1A2430" stroke="none">ramas</text>
+<text x="70" y="220" fill="#1B4F8A" stroke="none" font-weight="700">Mixto</text><path d="M70 250 h70 m30 0 h60 v-30 h80 v60 h-80 v-30 m80 0 h60"/><path d="M140 237 l30 26 M170 237 l-30 26 M230 220 l80 60 M310 220 l-80 60"/><text x="400" y="255" fill="#1A2430" stroke="none">Reducir paso a paso</text>
+</g>
+</svg>
+<table class="mejora2-table"><tr><th>Magnitud</th><th>Símbolo</th><th>Unidad</th><th>Relación básica</th></tr><tr><td>Tensión</td><td>V</td><td>voltio (V)</td><td>V = I·R</td></tr><tr><td>Intensidad</td><td>I</td><td>amperio (A)</td><td>I = V/R</td></tr><tr><td>Resistencia</td><td>R</td><td>ohmio (Ω)</td><td>R = V/I</td></tr><tr><td>Potencia</td><td>P</td><td>vatio (W)</td><td>P = V·I = I²R = V²/R</td></tr><tr><td>Energía</td><td>E</td><td>J o kWh</td><td>E = P·t</td></tr></table>
+</div>
+
 <!-- ═══════════════════ DECÁLOGO ═══════════════════ -->
 <div id="decalogo" class="decalogo-box">
   <h2>📝 Decálogo PAU 2025-26</h2>
   <ol>
-    <li>Material de repaso: NO aparece como problema autónomo en PEvAU, pero sustenta todo el Bloque D1.</li>
+    <li>Material de base: sustenta el paso desde corriente continua hacia corriente alterna y ayuda a interpretar impedancias.</li>
     <li>Ley de Ohm: \(V = I\cdot R\). Es escalar en CC; se sustituye por \(V = I\cdot Z\) en CA.</li>
     <li>En serie: la intensidad es constante (\(I = \text{cte}\)), las tensiones se suman, \(R_{eq} = \sum R_i\).</li>
     <li>En paralelo: la tensión es constante (\(V = \text{cte}\)), las intensidades se suman, \(\dfrac{1}{R_{eq}} = \sum\dfrac{1}{R_i}\).</li>
@@ -992,6 +1071,15 @@ MathJax = {
     <li>Energía: \(E = P\cdot t\). Unidades SI: J. Comercial: kWh (\(1 \text{kWh} = 3{,}6\cdot 10^6\) J).</li>
     <li>Puente a CA: en CC todo lo reactivo (L, C) es invisible (L = cortocircuito, C = circuito abierto) en régimen permanente.</li>
   </ol>
+</div>
+
+
+<!-- AUDITORIA-V3-SECCION: repaso CC -->
+<div class="audit3-panel" id="audit3-cc">
+<h2>Auditoría técnica final · Puente CC → CA</h2>
+<p>Este cierre refuerza la transición desde circuitos resistivos de corriente continua hacia circuitos de corriente alterna con impedancias.</p>
+<table class="audit3-table"><tr><th>En CC</th><th>En CA</th><th>Idea que se conserva</th></tr><tr><td>Resistencia \(R\)</td><td>Impedancia \(Z\)</td><td>Oposición al paso de corriente.</td></tr><tr><td>\(V=IR\)</td><td>\(\overline V=\overline I\,Z\)</td><td>Relación tensión-intensidad.</td></tr><tr><td>Potencia \(P=VI\)</td><td>Potencias \(P,Q,S\)</td><td>Transferencia y almacenamiento de energía.</td></tr><tr><td>Serie/paralelo de resistencias</td><td>Serie/paralelo de impedancias o admitancias</td><td>Equivalencia de circuitos.</td></tr></table>
+<div class="audit3-imgnote"><strong>Imagen recomendada:</strong> añadir dos esquemas más junto a los ya incorporados: divisor de tensión en serie y divisor de corriente en paralelo, con fórmulas junto a cada rama.</div>
 </div>
 
 <!-- PIE -->

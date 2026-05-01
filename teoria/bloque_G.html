@@ -464,6 +464,64 @@ span.math { font-family: var(--mono); }
 }
 /* @media print v2 — ecosistema TECI2 */
 
+
+/* ====== MEJORAS 100/100 · SECCIONES INTEGRADORAS ====== */
+.mejora-panel{margin:28px 0;padding:18px 20px;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:linear-gradient(180deg,#fff,#F8FAFC);box-shadow:0 3px 14px rgba(27,79,138,.08)}
+.mejora-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:18pt;margin:0 0 12px;border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:6px}
+.mejora-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:13.5pt;margin:14px 0 6px}
+.mejora-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:12px 0}
+.mejora-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:10px;padding:11px 13px}
+.mejora-card strong{color:var(--azul,#1B4F8A)}
+.mejora-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92em;background:#fff}
+.mejora-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:7px 9px;font-weight:600}
+.mejora-table td{border:1px solid var(--borde,#CDD7E3);padding:7px 9px;vertical-align:top}
+.mejora-steps{counter-reset:paso;margin:10px 0;padding-left:0;list-style:none}
+.mejora-steps li{counter-increment:paso;margin:8px 0;padding:9px 11px 9px 42px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:9px;position:relative}
+.mejora-steps li::before{content:counter(paso);position:absolute;left:11px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.8em}
+.mejora-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+.mejora-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:8px;margin:10px 0;overflow-x:auto}
+@media print{.mejora-panel{break-inside:avoid;box-shadow:none}.mejora-svg{break-inside:avoid}}
+
+
+/* MEJORA-100-V2: componentes de segunda pasada */
+.mejora2-panel{margin:30px 0;padding:20px 22px;border:1px solid var(--borde,#CDD7E3);border-radius:14px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.09)}
+.mejora2-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:18.5pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:7px;margin:0 0 14px}
+.mejora2-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.mejora2-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.mejora2-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.mejora2-card strong{color:var(--azul,#1B4F8A)}
+.mejora2-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.mejora2-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.mejora2-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.mejora2-steps{counter-reset:paso2;margin:12px 0;padding-left:0;list-style:none}
+.mejora2-steps li{counter-increment:paso2;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.mejora2-steps li::before{content:counter(paso2);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.mejora2-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.mejora2-placeholder{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.mejora2-placeholder strong{color:var(--azul,#1B4F8A)}
+.mejora2-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+@media print{.mejora2-panel,.mejora2-card,.mejora2-svg{break-inside:avoid;box-shadow:none}.mejora2-placeholder{break-inside:avoid}}
+
+
+/* AUDITORIA-V3: pulido técnico final */
+.audit3-panel{margin:32px 0;padding:22px 24px;border:1px solid var(--borde,#CDD7E3);border-radius:15px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.08);break-inside:avoid}
+.audit3-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:19pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:8px;margin:0 0 14px}
+.audit3-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.audit3-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.audit3-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.audit3-card strong{color:var(--azul,#1B4F8A)}
+.audit3-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.audit3-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.audit3-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.audit3-steps{counter-reset:audit3;margin:12px 0;padding-left:0;list-style:none}
+.audit3-steps li{counter-increment:audit3;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.audit3-steps li::before{content:counter(audit3);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.audit3-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.audit3-imgnote{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.audit3-imgnote strong{color:var(--azul,#1B4F8A)}
+.audit3-mini{font-size:.92em;color:var(--texto2,#455565)}
+@media print{.audit3-panel,.audit3-card{break-inside:avoid;box-shadow:none}.audit3-imgnote{break-inside:avoid}}
+
 </style>
 <script>
 MathJax = {
@@ -864,6 +922,12 @@ MathJax = {
 
 </div><!-- fin cuerpo -->
 
+<!-- MEJORA-100: g -->
+<div class="mejora-panel" id="mejora-g">
+<h2>🌱 Indicadores y casos de tecnología sostenible</h2>
+<table class="mejora-table"><tr><th>Indicador</th><th>Qué mide</th><th>Ejemplo técnico</th></tr><tr><td>Huella de carbono</td><td>Emisiones equivalentes</td><td>kg CO₂ eq de un producto o proceso</td></tr><tr><td>Consumo energético</td><td>Energía empleada</td><td>kWh por ciclo, pieza o servicio</td></tr><tr><td>Huella hídrica</td><td>Agua utilizada</td><td>Litros consumidos en fabricación</td></tr><tr><td>Reciclabilidad</td><td>Recuperación material</td><td>% de material recuperable</td></tr><tr><td>Vida útil</td><td>Duración funcional</td><td>Años de uso antes de sustitución</td></tr></table><div class="mejora-grid"><div class="mejora-card"><strong>Materiales.</strong><br>Seleccionar material considerando resistencia, coste, energía incorporada y fin de vida.</div><div class="mejora-card"><strong>Máquinas.</strong><br>Mejorar rendimiento para reducir energía desperdiciada y emisiones asociadas.</div><div class="mejora-card"><strong>Fabricación.</strong><br>Reducir residuos, retrabajos, consumo de agua y consumo energético.</div><div class="mejora-card"><strong>EIA.</strong><br>Identificar impactos, proponer medidas correctoras y hacer seguimiento.</div></div>
+</div>
+
 <!-- ═══════════════════ DECÁLOGO ═══════════════════ -->
 <div id="decalogo" class="decalogo-box">
   <h2>📝 Decálogo PAU 2025-26</h2>
@@ -879,6 +943,15 @@ MathJax = {
     <li>Fuentes renovables vs no renovables: conoce al menos 3 ejemplos de cada una.</li>
     <li>ODS 7 (energía asequible y limpia), ODS 9 (industria e innovación) y ODS 12 (producción y consumo responsables) son los más relacionados.</li>
   </ol>
+</div>
+
+
+<!-- AUDITORIA-V3-SECCION: bloque G -->
+<div class="audit3-panel" id="audit3-g">
+<h2>Auditoría técnica final · Sostenibilidad aplicada al diseño técnico</h2>
+<p>La sostenibilidad se cierra como criterio de diseño: no se limita a reciclar, sino que afecta a materiales, energía, fabricación, uso, mantenimiento y fin de vida.</p>
+<table class="audit3-table"><tr><th>Decisión técnica</th><th>Pregunta de sostenibilidad</th><th>Indicador asociado</th></tr><tr><td>Elegir material</td><td>¿Tiene resistencia suficiente con menor impacto?</td><td>kg CO₂ eq, reciclabilidad, vida útil.</td></tr><tr><td>Diseñar una pieza</td><td>¿Se puede fabricar con menos material o menos energía?</td><td>Masa, energía por pieza, desperdicio.</td></tr><tr><td>Elegir una máquina</td><td>¿Qué rendimiento tiene durante su uso?</td><td>kWh, eficiencia, mantenimiento.</td></tr><tr><td>Gestionar residuos</td><td>¿Se puede reducir, reutilizar o recuperar?</td><td>% valorizado, kg de residuo.</td></tr><tr><td>Evaluar impacto</td><td>¿Qué efectos produce sobre entorno y personas?</td><td>Impactos, medidas y seguimiento.</td></tr></table>
+<div class="audit3-imgnote"><strong>Imagen recomendada:</strong> diagrama circular con seis fases: extracción → fabricación → transporte → uso → mantenimiento → reutilización/reciclaje.</div>
 </div>
 
 <div class="pie">

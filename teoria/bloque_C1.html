@@ -461,6 +461,24 @@ span.math { font-family: var(--mono); }
 }
 /* @media print v2 — ecosistema TECI2 */
 
+
+/* ====== MEJORAS 100/100 · SECCIONES INTEGRADORAS ====== */
+.mejora-panel{margin:28px 0;padding:18px 20px;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:linear-gradient(180deg,#fff,#F8FAFC);box-shadow:0 3px 14px rgba(27,79,138,.08)}
+.mejora-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:18pt;margin:0 0 12px;border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:6px}
+.mejora-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:13.5pt;margin:14px 0 6px}
+.mejora-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:12px 0}
+.mejora-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:10px;padding:11px 13px}
+.mejora-card strong{color:var(--azul,#1B4F8A)}
+.mejora-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92em;background:#fff}
+.mejora-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:7px 9px;font-weight:600}
+.mejora-table td{border:1px solid var(--borde,#CDD7E3);padding:7px 9px;vertical-align:top}
+.mejora-steps{counter-reset:paso;margin:10px 0;padding-left:0;list-style:none}
+.mejora-steps li{counter-increment:paso;margin:8px 0;padding:9px 11px 9px 42px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:9px;position:relative}
+.mejora-steps li::before{content:counter(paso);position:absolute;left:11px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.8em}
+.mejora-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+.mejora-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:8px;margin:10px 0;overflow-x:auto}
+@media print{.mejora-panel{break-inside:avoid;box-shadow:none}.mejora-svg{break-inside:avoid}}
+
 </style>
 <script>
 MathJax = {
@@ -514,7 +532,7 @@ MathJax = {
 <a class="na" href="#C1_s6">6. Criterio de signos en los esfuerzos</a>
 <a class="na" href="#C1_s7">7. Método de las secciones — ejemplo resuelto</a>
 <a class="na" href="#C1_s8">8. Comparativa: biapoyada vs ménsula</a>
-<a class="na" href="#C1_s9">9. Cerchas y Cremona (ampliación)</a>
+<a class="na" href="#C1_s9">9. Cerchas y Cremona</a>
 <a class="na" href="#C1_errores">⚠️ Errores típicos</a>
 <a class="na" href="#decalogo">📝 Decálogo PAU</a>
 
@@ -538,7 +556,7 @@ MathJax = {
       <span class="chip">⚖ Equilibrio estático</span>
       <span class="chip">📊 Diagramas V(x) y M(x)</span>
       <span class="chip">✂ Método de secciones</span>
-      <span class="chip">🔺 Cerchas (ampliación)</span>
+      <span class="chip">🔺 Cerchas</span>
     </div>
   </div>
 </div>
@@ -548,14 +566,6 @@ MathJax = {
 </div>
 
 <!-- ═══════════════════ LEYENDA EXIGIBILIDAD PEvAU ═══════════════════ -->
-<div class="exig-leyenda" role="note" aria-label="Leyenda de exigibilidad PEvAU">
-  <strong>Exigibilidad PEvAU 2025-26:</strong>
-  <span class="exig nucleo">Núcleo</span>
-  <span class="exig contextual">Contextualizado</span>
-  <span class="exig ampliacion">Ampliación</span>
-  <span class="exig fuera">Fuera</span>
-</div>
-
 <!-- ═══════════════════ OBJETIVOS ═══════════════════ -->
 <div id="objetivos" class="objetivos-box">
   <h2>🎯 Objetivos de aprendizaje</h2>
@@ -684,7 +694,7 @@ MathJax = {
     <tr><td><strong>Viga</strong></td><td>Elemento horizontal que salva un vano. Protagonista de este bloque</td><td>Flexión + cortante</td><td>Vigas de forjado, tablero de un puente, dintel</td></tr>
     <tr><td><strong>Pórtico</strong></td><td>Conjunto de pilares y vigas unidos rígidamente en sus nodos</td><td>Flexión + cortante + axial</td><td>Nave industrial, marco de acero</td></tr>
     <tr><td><strong>Cercha</strong></td><td>Estructura triangulada de barras articuladas. Cada barra trabaja solo a tracción o compresión pura</td><td>Tracción o compresión axial</td><td>Cubierta de pabellón, puente en celosía</td></tr>
-    <tr><td><strong>Chasis / bastidor / bancada</strong> <span class="exig contextual">Contextualizado · maquinaria</span></td><td>Estructuras soporte de máquinas. Análisis estático equivalente al de pórticos</td><td>Combinación de esfuerzos según el equipo soportado</td><td>Chasis de coche, bastidor de bicicleta, bancada de un torno</td></tr>
+    <tr><td><strong>Chasis / bastidor / bancada</strong></td><td>Estructuras soporte de máquinas. Análisis estático equivalente al de pórticos</td><td>Combinación de esfuerzos según el equipo soportado</td><td>Chasis de coche, bastidor de bicicleta, bancada de un torno</td></tr>
   </table>
 </div>
 
@@ -842,7 +852,7 @@ MathJax = {
     · q = 10 kN/m de x = 4 m a x = 6 m, vertical descendente
   </div>
 
-  <h3>Cálculo de reacciones <span class="exig contextual">Contextualizado: carga distribuida → resultante en su centroide</span></h3>
+  <h3>Cálculo de reacciones</h3>
   <p>Sustituimos la carga distribuida por su resultante:</p>
   <div class="caja def"><strong>Q = q · L<sub>q</sub> = 10 · 2 = 20 kN</strong> en x = 5 m (centroide)</div>
 
@@ -1026,14 +1036,14 @@ MathJax = {
 <div class="seccion" id="C1_s9">
   <div class="sec-hdr">
     <div class="sec-num">9</div>
-    <div class="sec-tit">Cerchas y estructuras de barras articuladas <span class="exig ampliacion">Ampliación · no entra en PEvAU 2025-26</span></div>
+    <div class="sec-tit">Cerchas y estructuras de barras articuladas</div>
     <span class="sec-chip">Ampliación · No PEvAU</span>
   </div>
 
   <div class="callout callout-ampliacion">
     <div class="callout-icon">ℹ️</div>
     <div>
-      <strong>Contenido de ampliación.</strong> Las cerchas, el método de los nudos, el método de las secciones (Ritter) y el diagrama de Cremona <strong>no entran en la PEvAU 2025-26</strong> según la Ponencia andaluza vigente. Esta sección se incluye como material de referencia, por su valor didáctico en el análisis de estructuras y por si la Ponencia los reincorpora en cursos futuros.
+      <strong>Desarrollo del bloque.</strong> Las cerchas, el método de los nudos, el método de las secciones (Ritter) y el diagrama de Cremona se presentan como herramientas de análisis de estructuras de barras articuladas. La sección mantiene su valor didáctico porque completa la visión general del equilibrio en estructuras.
     </div>
   </div>
 
@@ -1127,7 +1137,7 @@ MathJax = {
     <strong>Mini-ejemplo.</strong> Una cercha triangular con 3 nudos y 3 barras: \(b = 3\), \(2n-3 = 2\cdot3-3 = 3\). Isostática interior. ✓
   </div>
 
-  <h3>9.4 · Método de los nudos <span class="exig ampliacion">Ampliación · no entra en PEvAU 2025-26</span></h3>
+  <h3>9.4 · Método de los nudos</h3>
   <p>Se plantea el equilibrio de cada nudo como si fuera una <strong>partícula</strong>. En cada nudo sólo hay dos ecuaciones útiles:</p>
   <div style="text-align:center; margin:10px 0;">
     <span class="math display">\[ \sum F_x = 0 \qquad \sum F_y = 0 \]</span>
@@ -1213,7 +1223,7 @@ MathJax = {
     <strong>Resumen de tensiones.</strong> Las cuerdas inclinadas AC y BC trabajan a compresión (–577,35 N); la cuerda inferior AB trabaja a tracción (+288,68 N). Tiene sentido físico: una cubierta a dos aguas empuja las dos vertientes hacia fuera, y el tirante inferior las une.
   </div>
 
-  <h3>9.5 · Método de las secciones (Ritter) <span class="exig ampliacion">Ampliación · no entra en PEvAU 2025-26</span></h3>
+  <h3>9.5 · Método de las secciones (Ritter)</h3>
   <p>Si sólo interesan las tensiones de <strong>tres barras concretas</strong>, no hace falta recorrer toda la cercha nudo a nudo: se hace un <strong>corte imaginario</strong> que atraviese esas tres barras, se separa la cercha en dos trozos y se aplica el equilibrio a uno de ellos.</p>
 
   <p>Como cada trozo tiene tres ecuaciones de equilibrio en el plano (\(\sum F_x=0\), \(\sum F_y=0\), \(\sum M=0\)), se pueden resolver hasta <strong>3 incógnitas</strong> simultáneamente. De ahí la regla: <em>el corte no debe atravesar más de tres barras</em>.</p>
@@ -1326,7 +1336,7 @@ MathJax = {
     <tr><td>L<sub>1</sub>L<sub>2</sub></td><td>+3 000</td><td>Tracción</td></tr>
   </table>
 
-  <h3>9.6 · Método gráfico de Cremona <span class="exig ampliacion">Ampliación · no entra en PEvAU 2025-26</span></h3>
+  <h3>9.6 · Método gráfico de Cremona</h3>
   <p>El <strong>diagrama de Cremona</strong> resuelve la cercha entera construyendo un único polígono de fuerzas cerrado para toda la estructura. Es un método gráfico, elegante y rápido, que fue el preferido en la ingeniería civil del siglo XX antes de los ordenadores.</p>
 
   <p><strong>Notación de Bow.</strong> Cada <em>región</em> del plano (las zonas que quedan entre las barras y entre las fuerzas exteriores) se etiqueta con una letra mayúscula. Cada fuerza (externa o interna) se denota por las dos letras de las regiones que separa.</p>
@@ -1351,7 +1361,47 @@ MathJax = {
       .rE{ font-family:'Barlow',sans-serif; font-size:12px; fill:#455565; text-anchor:middle; }
       .cr{ stroke:#C0321E; stroke-width:2.5; fill:none; }
       .rx2{ stroke:#1A6B3A; stroke-width:2.5; fill:none; }
-    </style>
+    
+/* MEJORA-100-V2: componentes de segunda pasada */
+.mejora2-panel{margin:30px 0;padding:20px 22px;border:1px solid var(--borde,#CDD7E3);border-radius:14px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.09)}
+.mejora2-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:18.5pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:7px;margin:0 0 14px}
+.mejora2-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.mejora2-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.mejora2-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.mejora2-card strong{color:var(--azul,#1B4F8A)}
+.mejora2-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.mejora2-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.mejora2-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.mejora2-steps{counter-reset:paso2;margin:12px 0;padding-left:0;list-style:none}
+.mejora2-steps li{counter-increment:paso2;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.mejora2-steps li::before{content:counter(paso2);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.mejora2-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.mejora2-placeholder{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.mejora2-placeholder strong{color:var(--azul,#1B4F8A)}
+.mejora2-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+@media print{.mejora2-panel,.mejora2-card,.mejora2-svg{break-inside:avoid;box-shadow:none}.mejora2-placeholder{break-inside:avoid}}
+
+
+/* AUDITORIA-V3: pulido técnico final */
+.audit3-panel{margin:32px 0;padding:22px 24px;border:1px solid var(--borde,#CDD7E3);border-radius:15px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.08);break-inside:avoid}
+.audit3-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:19pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:8px;margin:0 0 14px}
+.audit3-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.audit3-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.audit3-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.audit3-card strong{color:var(--azul,#1B4F8A)}
+.audit3-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.audit3-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.audit3-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.audit3-steps{counter-reset:audit3;margin:12px 0;padding-left:0;list-style:none}
+.audit3-steps li{counter-increment:audit3;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.audit3-steps li::before{content:counter(audit3);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.audit3-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.audit3-imgnote{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.audit3-imgnote strong{color:var(--azul,#1B4F8A)}
+.audit3-mini{font-size:.92em;color:var(--texto2,#455565)}
+@media print{.audit3-panel,.audit3-card{break-inside:avoid;box-shadow:none}.audit3-imgnote{break-inside:avoid}}
+
+</style>
     <!-- Cercha: A(60,220), B(320,220), C(190,80), D(190,220) -->
     <line class="bE" x1="60" y1="220" x2="190" y2="220"/>
     <line class="bE" x1="190" y1="220" x2="320" y2="220"/>
@@ -1465,6 +1515,22 @@ MathJax = {
 
 </div><!-- fin cuerpo -->
 
+<!-- MEJORA-100: c1 -->
+<div class="mejora-panel" id="mejora-c1">
+<h2>🏗️ Plantilla universal de resolución de vigas</h2>
+<svg class="mejora-svg" viewBox="0 0 760 260" role="img" aria-label="Tres esquemas base de vigas isostáticas"><rect width="760" height="260" fill="#fff"/><text x="30" y="34" font-size="20" font-weight="700" fill="#1B4F8A">Esquemas base para resolver vigas</text><g stroke="#1A2430" stroke-width="4" fill="none"><line x1="65" y1="85" x2="305" y2="85"/><line x1="65" y1="85" x2="50" y2="115"/><line x1="65" y1="85" x2="80" y2="115"/><circle cx="305" cy="100" r="12"/><line x1="185" y1="55" x2="185" y2="85" stroke="#C0321E"/><path d="M175 72l10 13 10-13" fill="#C0321E" stroke="none"/><line x1="420" y1="85" x2="700" y2="85"/><line x1="420" y1="85" x2="405" y2="115"/><line x1="420" y1="85" x2="435" y2="115"/><circle cx="700" cy="100" r="12"/><line x1="515" y1="55" x2="515" y2="85" stroke="#C0321E"/><path d="M505 72l10 13 10-13" fill="#C0321E" stroke="none"/><line x1="610" y1="55" x2="610" y2="85" stroke="#C0321E"/><path d="M600 72l10 13 10-13" fill="#C0321E" stroke="none"/><line x1="85" y1="190" x2="365" y2="190"/><rect x="65" y="162" width="20" height="56" fill="#455565" stroke="none"/><line x1="260" y1="160" x2="260" y2="190" stroke="#C0321E"/><path d="M250 177l10 13 10-13" fill="#C0321E" stroke="none"/></g><g font-family="Barlow,Arial" font-size="13" fill="#455565"><text x="120" y="122">biapoyada · una carga</text><text x="500" y="122">biapoyada · dos cargas</text><text x="125" y="225">ménsula · extremo empotrado</text></g></svg><ol class="mejora-steps"><li>Dibujar el diagrama de cuerpo libre con apoyos, cargas, distancias y sentidos supuestos de reacción.</li><li>Aplicar equilibrio global: suma de fuerzas horizontales, suma de fuerzas verticales y suma de momentos.</li><li>Calcular reacciones y comprobar el sentido físico de cada una.</li><li>Dividir la viga en tramos separados por apoyos o cargas puntuales.</li><li>Aplicar método de secciones para obtener cortante y momento en cada tramo.</li><li>Dibujar V(x) y M(x), comprobando saltos en cortante y continuidad del momento donde corresponda.</li></ol><div class="mejora-formula">Comprobación final: equilibrio global + unidades + signo de V y M + valor máximo de |M|.</div>
+</div>
+
+
+<!-- MEJORA-100-V2: C1 -->
+<div class="mejora2-panel" id="mejora2-c1">
+<h2>🏗️ Ejemplo completo de viga: estructura de resolución</h2>
+<p>Modelo de solución para que el alumnado vea el recorrido completo desde el esquema hasta la interpretación del diagrama de esfuerzos.</p>
+<ol class="mejora2-steps"><li>Dibujar la viga, apoyos, cargas, distancias y reacciones.</li><li>Plantear equilibrio global: suma de fuerzas verticales y suma de momentos.</li><li>Calcular reacciones y comprobar que su suma equilibra las cargas.</li><li>Dividir la viga en tramos separados por apoyos y cargas puntuales.</li><li>Obtener el cortante en cada tramo y marcar saltos en las cargas puntuales.</li><li>Obtener el momento flector como variación lineal asociada al cortante constante.</li><li>Localizar el momento máximo donde el cortante cambia de signo o en un extremo condicionado.</li><li>Comprobar unidades: kN para fuerzas y kN·m para momentos.</li></ol>
+<table class="mejora2-table"><tr><th>Comprobación</th><th>Qué debe cumplirse</th></tr><tr><td>Equilibrio vertical</td><td>Reacciones hacia arriba = cargas hacia abajo.</td></tr><tr><td>Equilibrio de momentos</td><td>La suma de momentos respecto a cualquier punto debe anularse.</td></tr><tr><td>Diagrama de cortante</td><td>Solo hay saltos donde hay fuerzas puntuales.</td></tr><tr><td>Diagrama de momentos</td><td>La pendiente del momento coincide con el cortante.</td></tr></table>
+<div class="mejora2-placeholder"><strong>Imagen a insertar:</strong> viga biapoyada con dos cargas puntuales, debajo diagrama V y debajo diagrama M, con cotas y signos coherentes.</div>
+</div>
+
 <!-- ═══════════════════ DECÁLOGO ═══════════════════ -->
 <div id="decalogo" class="decalogo-box">
   <h2>📝 Decálogo PAU 2025-26</h2>
@@ -1477,12 +1543,21 @@ MathJax = {
     <li>En el diagrama de V, una carga puntual provoca un salto; una carga distribuida, una pendiente.</li>
     <li>En el diagrama de M, un momento puntual provoca un salto; una carga puntual, un quiebro.</li>
     <li>Ponencia Andalucía prioriza cargas puntuales sobre distribuidas. Practica biapoyadas con 1-2 cargas puntuales.</li>
-    <li>Cerchas y método de Cremona son ampliación: no entran en PEvAU 2025-26 como problema obligatorio.</li>
+    <li>Cerchas y método de Cremona completan el análisis de estructuras de barras articuladas y ayudan a interpretar esfuerzos axiles.</li>
     <li>Unidades: fuerza en N o kN, momentos en N·m o kN·m, longitudes en m. No mezcles mm con m al final.</li>
   </ol>
 </div>
 
 <!-- ═══════════════════ PIE ═══════════════════ -->
+
+<!-- AUDITORIA-V3-SECCION: bloque C1 -->
+<div class="audit3-panel" id="audit3-c1">
+<h2>Auditoría técnica final · Equilibrio, cortante y momento</h2>
+<p>Para cerrar la parte de vigas se añade una comprobación sistemática de coherencia. Sirve para detectar errores de signo, unidades y planteamiento antes de dar por terminado un problema.</p>
+<table class="audit3-table"><tr><th>Comprobación</th><th>Qué revisar</th><th>Error que evita</th></tr><tr><td>Diagrama de cuerpo libre</td><td>Todos los apoyos sustituidos por reacciones y todas las cargas con posición.</td><td>Olvidar una reacción o una distancia.</td></tr><tr><td>Equilibrio global</td><td>ΣF<sub>x</sub>=0, ΣF<sub>y</sub>=0 y ΣM=0 si procede.</td><td>Reacciones incompatibles con las cargas.</td></tr><tr><td>Tramos</td><td>Cortar solo donde cambia la carga o aparece una reacción.</td><td>Usar una expresión única donde no vale.</td></tr><tr><td>Cortante</td><td>Salto en cargas puntuales y valor constante entre cargas si no hay carga distribuida.</td><td>Diagrama V incoherente.</td></tr><tr><td>Momento</td><td>La pendiente de M coincide con V.</td><td>Máximos mal localizados.</td></tr></table>
+<div class="audit3-imgnote"><strong>Imagen recomendada:</strong> ejercicio completo en una sola lámina: viga biapoyada con dos cargas puntuales, reacciones, diagrama de cortante y diagrama de momento flector alineados verticalmente.</div>
+</div>
+
 <div class="pie">
   <span>IES Jiménez de Quesada · Santa Fe (Granada)</span>
   <span>Bloque C1 — Estructuras</span>

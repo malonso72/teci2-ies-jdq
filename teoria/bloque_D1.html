@@ -448,6 +448,64 @@ span.math { font-family: var(--mono); }
 }
 /* @media print v2 — ecosistema TECI2 */
 
+
+/* ====== MEJORAS 100/100 · SECCIONES INTEGRADORAS ====== */
+.mejora-panel{margin:28px 0;padding:18px 20px;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:linear-gradient(180deg,#fff,#F8FAFC);box-shadow:0 3px 14px rgba(27,79,138,.08)}
+.mejora-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:18pt;margin:0 0 12px;border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:6px}
+.mejora-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:13.5pt;margin:14px 0 6px}
+.mejora-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:12px 0}
+.mejora-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:10px;padding:11px 13px}
+.mejora-card strong{color:var(--azul,#1B4F8A)}
+.mejora-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92em;background:#fff}
+.mejora-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:7px 9px;font-weight:600}
+.mejora-table td{border:1px solid var(--borde,#CDD7E3);padding:7px 9px;vertical-align:top}
+.mejora-steps{counter-reset:paso;margin:10px 0;padding-left:0;list-style:none}
+.mejora-steps li{counter-increment:paso;margin:8px 0;padding:9px 11px 9px 42px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:9px;position:relative}
+.mejora-steps li::before{content:counter(paso);position:absolute;left:11px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.8em}
+.mejora-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+.mejora-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:8px;margin:10px 0;overflow-x:auto}
+@media print{.mejora-panel{break-inside:avoid;box-shadow:none}.mejora-svg{break-inside:avoid}}
+
+
+/* MEJORA-100-V2: componentes de segunda pasada */
+.mejora2-panel{margin:30px 0;padding:20px 22px;border:1px solid var(--borde,#CDD7E3);border-radius:14px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.09)}
+.mejora2-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:18.5pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:7px;margin:0 0 14px}
+.mejora2-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.mejora2-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.mejora2-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.mejora2-card strong{color:var(--azul,#1B4F8A)}
+.mejora2-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.mejora2-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.mejora2-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.mejora2-steps{counter-reset:paso2;margin:12px 0;padding-left:0;list-style:none}
+.mejora2-steps li{counter-increment:paso2;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.mejora2-steps li::before{content:counter(paso2);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.mejora2-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.mejora2-placeholder{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.mejora2-placeholder strong{color:var(--azul,#1B4F8A)}
+.mejora2-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+@media print{.mejora2-panel,.mejora2-card,.mejora2-svg{break-inside:avoid;box-shadow:none}.mejora2-placeholder{break-inside:avoid}}
+
+
+/* AUDITORIA-V3: pulido técnico final */
+.audit3-panel{margin:32px 0;padding:22px 24px;border:1px solid var(--borde,#CDD7E3);border-radius:15px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.08);break-inside:avoid}
+.audit3-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:19pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:8px;margin:0 0 14px}
+.audit3-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.audit3-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.audit3-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.audit3-card strong{color:var(--azul,#1B4F8A)}
+.audit3-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.audit3-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.audit3-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.audit3-steps{counter-reset:audit3;margin:12px 0;padding-left:0;list-style:none}
+.audit3-steps li{counter-increment:audit3;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.audit3-steps li::before{content:counter(audit3);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.audit3-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.audit3-imgnote{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.audit3-imgnote strong{color:var(--azul,#1B4F8A)}
+.audit3-mini{font-size:.92em;color:var(--texto2,#455565)}
+@media print{.audit3-panel,.audit3-card{break-inside:avoid;box-shadow:none}.audit3-imgnote{break-inside:avoid}}
+
 </style>
 <script>
 MathJax = {
@@ -554,14 +612,6 @@ MathJax = {
 </div>
 
 <!-- ═══════════════════ LEYENDA EXIGIBILIDAD PEvAU ═══════════════════ -->
-<div class="exig-leyenda" role="note" aria-label="Leyenda de exigibilidad PEvAU">
-  <strong>Exigibilidad PEvAU 2025-26:</strong>
-  <span class="exig nucleo">Núcleo</span>
-  <span class="exig contextual">Contextualizado</span>
-  <span class="exig ampliacion">Ampliación</span>
-  <span class="exig fuera">Fuera</span>
-</div>
-
 <div class="cuerpo">
 
 <!-- ═══ SECCIÓN 0: MÉTODO DE RESOLUCIÓN ═══ -->
@@ -602,7 +652,7 @@ MathJax = {
 
 <!-- ═══ SECCIÓN 1 — GENERACIÓN DE LA CA ═══ -->
 <div class="seccion" id="D1_s_gen">
-  <div class="sec-hdr"><div class="sec-num">1</div><div class="sec-tit">Generación de la corriente alterna <span class="exig ampliacion">Ampliación · contexto físico</span></div></div>
+  <div class="sec-hdr"><div class="sec-num">1</div><div class="sec-tit">Generación de la corriente alterna</div></div>
 
   <p>La <strong>corriente alterna (CA)</strong> es aquella cuya intensidad o tensión varía periódicamente con el tiempo, cambiando de sentido en cada ciclo. A diferencia de la <strong>corriente continua (CC)</strong>, que mantiene siempre el mismo sentido de circulación, la CA cambia de polaridad de forma cíclica.</p>
 
@@ -1366,6 +1416,22 @@ MathJax = {
 
 </div><!-- fin cuerpo -->
 
+<!-- MEJORA-100: d1 -->
+<div class="mejora-panel" id="mejora-d1">
+<h2>⚡ Ruta única de resolución en corriente alterna</h2>
+<ol class="mejora-steps"><li>Pasar todos los datos a valores eficaces si proceden de una expresión temporal.</li><li>Calcular reactancias: X<sub>L</sub>=ωL y X<sub>C</sub>=1/(ωC).</li><li>Escribir impedancias en forma compleja y distinguir claramente circuito serie y paralelo.</li><li>Resolver tensión o intensidad mediante fasores.</li><li>Calcular potencias activa, reactiva y aparente.</li><li>Interpretar el factor de potencia y el carácter inductivo o capacitivo.</li></ol><table class="mejora-table"><tr><th>Elemento</th><th>Impedancia</th><th>Desfase cualitativo</th><th>Lectura física</th></tr><tr><td>R</td><td>R</td><td>Tensión e intensidad en fase</td><td>Disipa potencia activa</td></tr><tr><td>L</td><td>jX<sub>L</sub></td><td>La corriente se retrasa</td><td>Comportamiento inductivo</td></tr><tr><td>C</td><td>-jX<sub>C</sub></td><td>La corriente se adelanta</td><td>Comportamiento capacitivo</td></tr></table><div class="mejora-formula">Serie → trabajar con impedancias. Paralelo → trabajar con admitancias. Potencias → aplicar Boucherot.</div>
+</div>
+
+
+<!-- MEJORA-100-V2: D1 -->
+<div class="mejora2-panel" id="mejora2-d1">
+<h2>⚡ Control de signos, potencias y corrección del factor de potencia</h2>
+<table class="mejora2-table"><tr><th>Situación</th><th>Lectura física</th><th>Consecuencia en el triángulo</th></tr><tr><td>Circuito inductivo</td><td>La corriente se retrasa respecto a la tensión</td><td>Q positiva si se adopta convenio receptor habitual</td></tr><tr><td>Circuito capacitivo</td><td>La corriente se adelanta respecto a la tensión</td><td>Q negativa o compensadora</td></tr><tr><td>Corrección con condensador</td><td>Se reduce la potencia reactiva inductiva demandada</td><td>Disminuye S y aumenta cos φ</td></tr></table>
+<h3>Secuencia para corrección del factor de potencia</h3>
+<ol class="mejora2-steps"><li>Calcular P y el factor de potencia inicial.</li><li>Obtener φ inicial y Q inicial.</li><li>Fijar el factor de potencia deseado y obtener φ final.</li><li>Calcular Q final.</li><li>La batería debe compensar Qc = Q inicial − Q final.</li><li>Si se pide capacidad, usar la relación entre Qc, tensión y reactancia capacitiva.</li></ol>
+<div class="mejora2-placeholder"><strong>Imagen a insertar:</strong> triángulo de potencias antes/después con P constante, Q reducida, S menor y cos φ mayor.</div>
+</div>
+
 <!-- ═══════════════════ DECÁLOGO ═══════════════════ -->
 <div id="decalogo" class="decalogo-box">
   <h2>📝 Decálogo PAU 2025-26</h2>
@@ -1381,6 +1447,15 @@ MathJax = {
     <li>Resonancia serie: \(X_L = X_C\), es decir \(f_0 = \dfrac{1}{2\pi\sqrt{LC}}\). En resonancia Z = R (mínima).</li>
     <li>Boucherot: las potencias activas y reactivas se suman (no las aparentes). S_total = \(\sqrt{P_{tot}^2+Q_{tot}^2}\).</li>
   </ol>
+</div>
+
+
+<!-- AUDITORIA-V3-SECCION: bloque D1 -->
+<div class="audit3-panel" id="audit3-d1">
+<h2>Auditoría técnica final · Fasores, signos y potencias</h2>
+<p>La última revisión de corriente alterna debe impedir tres errores: mezclar valor máximo y eficaz, cambiar el signo del desfase y usar impedancias de serie en un paralelo sin pasar por admitancias.</p>
+<table class="audit3-table"><tr><th>Situación</th><th>Regla de seguridad</th><th>Comprobación</th></tr><tr><td>Onda temporal</td><td>Si aparece \(V_0\), es valor máximo.</td><td>\(V=V_0/\sqrt2\) para senoide.</td></tr><tr><td>Fasor</td><td>El módulo suele representar valor eficaz.</td><td>No volver a dividir por \(\sqrt2\).</td></tr><tr><td>Inductivo</td><td>\(X_L>0\), impedancia con parte imaginaria positiva.</td><td>La corriente queda retrasada respecto a la tensión.</td></tr><tr><td>Capacitivo</td><td>\(X_C<0\), impedancia con parte imaginaria negativa.</td><td>La corriente queda adelantada respecto a la tensión.</td></tr><tr><td>Paralelo</td><td>Trabajar con admitancias.</td><td>\(Y=1/Z\), no sumar módulos de Z.</td></tr></table>
+<div class="audit3-imgnote"><strong>Imagen recomendada:</strong> triángulo de potencias antes y después de corregir el factor de potencia, con Q inicial, Q corregida, Qc del condensador y P constante.</div>
 </div>
 
 <div class="pie">

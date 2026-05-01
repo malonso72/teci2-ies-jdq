@@ -458,6 +458,64 @@ span.math { font-family: var(--mono); }
 }
 /* @media print v2 — ecosistema TECI2 */
 
+
+/* ====== MEJORAS 100/100 · SECCIONES INTEGRADORAS ====== */
+.mejora-panel{margin:28px 0;padding:18px 20px;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:linear-gradient(180deg,#fff,#F8FAFC);box-shadow:0 3px 14px rgba(27,79,138,.08)}
+.mejora-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:18pt;margin:0 0 12px;border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:6px}
+.mejora-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:13.5pt;margin:14px 0 6px}
+.mejora-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:12px 0}
+.mejora-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:10px;padding:11px 13px}
+.mejora-card strong{color:var(--azul,#1B4F8A)}
+.mejora-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92em;background:#fff}
+.mejora-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:7px 9px;font-weight:600}
+.mejora-table td{border:1px solid var(--borde,#CDD7E3);padding:7px 9px;vertical-align:top}
+.mejora-steps{counter-reset:paso;margin:10px 0;padding-left:0;list-style:none}
+.mejora-steps li{counter-increment:paso;margin:8px 0;padding:9px 11px 9px 42px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:9px;position:relative}
+.mejora-steps li::before{content:counter(paso);position:absolute;left:11px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.8em}
+.mejora-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+.mejora-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:8px;margin:10px 0;overflow-x:auto}
+@media print{.mejora-panel{break-inside:avoid;box-shadow:none}.mejora-svg{break-inside:avoid}}
+
+
+/* MEJORA-100-V2: componentes de segunda pasada */
+.mejora2-panel{margin:30px 0;padding:20px 22px;border:1px solid var(--borde,#CDD7E3);border-radius:14px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.09)}
+.mejora2-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:18.5pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:7px;margin:0 0 14px}
+.mejora2-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.mejora2-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.mejora2-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.mejora2-card strong{color:var(--azul,#1B4F8A)}
+.mejora2-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.mejora2-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.mejora2-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.mejora2-steps{counter-reset:paso2;margin:12px 0;padding-left:0;list-style:none}
+.mejora2-steps li{counter-increment:paso2;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.mejora2-steps li::before{content:counter(paso2);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.mejora2-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.mejora2-placeholder{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.mejora2-placeholder strong{color:var(--azul,#1B4F8A)}
+.mejora2-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+@media print{.mejora2-panel,.mejora2-card,.mejora2-svg{break-inside:avoid;box-shadow:none}.mejora2-placeholder{break-inside:avoid}}
+
+
+/* AUDITORIA-V3: pulido técnico final */
+.audit3-panel{margin:32px 0;padding:22px 24px;border:1px solid var(--borde,#CDD7E3);border-radius:15px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.08);break-inside:avoid}
+.audit3-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:19pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:8px;margin:0 0 14px}
+.audit3-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.audit3-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.audit3-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.audit3-card strong{color:var(--azul,#1B4F8A)}
+.audit3-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.audit3-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.audit3-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.audit3-steps{counter-reset:audit3;margin:12px 0;padding-left:0;list-style:none}
+.audit3-steps li{counter-increment:audit3;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.audit3-steps li::before{content:counter(audit3);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.audit3-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.audit3-imgnote{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.audit3-imgnote strong{color:var(--azul,#1B4F8A)}
+.audit3-mini{font-size:.92em;color:var(--texto2,#455565)}
+@media print{.audit3-panel,.audit3-card{break-inside:avoid;box-shadow:none}.audit3-imgnote{break-inside:avoid}}
+
 </style>
 <script>
 MathJax = {
@@ -958,21 +1016,47 @@ MathJax = {
 
 </div><!-- fin cuerpo -->
 
+<!-- MEJORA-100: e -->
+<div class="mejora-panel" id="mejora-e">
+<h2>🤖 Caso transversal: mantenimiento predictivo industrial</h2>
+<p>Un sistema de mantenimiento predictivo permite conectar IA, Big Data, bases de datos distribuidas y ciberseguridad en un único ejemplo tecnológico.</p><ol class="mejora-steps"><li>Los sensores capturan vibración, temperatura, consumo y horas de funcionamiento.</li><li>Los datos se almacenan en una base distribuida para que varias plantas puedan consultarlos.</li><li>El sistema Big Data filtra, limpia y analiza grandes volúmenes de registros.</li><li>Un modelo de IA detecta patrones y predice fallos antes de que se produzcan.</li><li>La ciberseguridad protege credenciales, comunicaciones, copias de seguridad y disponibilidad del servicio.</li></ol><table class="mejora-table"><tr><th>Concepto</th><th>Aplicación en el caso</th><th>Riesgo técnico</th></tr><tr><td>IA</td><td>Predicción de averías</td><td>Sesgo, datos pobres o sobreajuste</td></tr><tr><td>Big Data</td><td>Análisis de grandes históricos</td><td>Ruido, velocidad y veracidad</td></tr><tr><td>BDD</td><td>Datos repartidos entre sedes</td><td>Consistencia, latencia y disponibilidad</td></tr><tr><td>Ciberseguridad</td><td>Protección del sistema</td><td>Phishing, ransomware o fuga de datos</td></tr></table>
+</div>
+
+
+<!-- MEJORA-100-V2: E -->
+<div class="mejora2-panel" id="mejora2-e">
+<h2>🤖 Respuestas técnicas breves y flujo de datos</h2>
+<svg class="mejora2-svg" viewBox="0 0 760 220" role="img" aria-label="Flujo de datos en un sistema inteligente">
+<rect width="760" height="220" fill="#fff"/><text x="30" y="34" font-size="20" font-weight="700" fill="#1B4F8A">Flujo básico en un sistema inteligente</text>
+<g font-family="Barlow,Arial" font-size="14"><rect x="35" y="75" width="120" height="70" rx="10" fill="#EEF4FB" stroke="#1B4F8A"/><text x="67" y="115">Datos</text><rect x="185" y="75" width="120" height="70" rx="10" fill="#FEF0DF" stroke="#D4700A"/><text x="216" y="105">Limpieza</text><text x="213" y="124">y filtrado</text><rect x="335" y="75" width="120" height="70" rx="10" fill="#E4F4EB" stroke="#1A6B3A"/><text x="364" y="105">Modelo</text><text x="355" y="124">IA / análisis</text><rect x="485" y="75" width="120" height="70" rx="10" fill="#FCEAE7" stroke="#C0321E"/><text x="513" y="105">Decisión</text><text x="510" y="124">técnica</text><rect x="635" y="75" width="90" height="70" rx="10" fill="#F5F6F8" stroke="#455565"/><text x="656" y="105">Acción</text><text x="647" y="124">segura</text></g><path d="M155 110h30M305 110h30M455 110h30M605 110h30" stroke="#455565" stroke-width="3" marker-end="url(#a)"/><defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#455565"/></marker></defs>
+</svg>
+<table class="mejora2-table"><tr><th>Concepto</th><th>Respuesta técnica breve</th><th>Ejemplo</th></tr><tr><td>IA</td><td>Sistema capaz de realizar tareas que requieren percepción, aprendizaje, razonamiento o decisión.</td><td>Clasificación de defectos en una línea de producción.</td></tr><tr><td>Entrenamiento</td><td>Proceso en el que el modelo ajusta parámetros a partir de datos.</td><td>Aprender patrones de avería con históricos.</td></tr><tr><td>Inferencia</td><td>Uso del modelo ya entrenado para obtener una salida ante datos nuevos.</td><td>Predecir si un motor fallará.</td></tr><tr><td>Big Data</td><td>Tratamiento de datos por volumen, velocidad, variedad y valor que exceden herramientas simples.</td><td>Millones de registros de sensores.</td></tr><tr><td>Ciberseguridad</td><td>Conjunto de medidas para proteger confidencialidad, integridad y disponibilidad.</td><td>Copias, autenticación, cifrado y actualización.</td></tr></table>
+</div>
+
 <!-- ═══════════════════ DECÁLOGO ═══════════════════ -->
 <div id="decalogo" class="decalogo-box">
   <h2>📝 Decálogo PAU 2025-26</h2>
   <ol>
-    <li>Bloque contextual: no aparece como problema numérico. Entra en preguntas cortas o de definición.</li>
-    <li>Memoriza los 4 tipos de IA: <strong>reactiva</strong>, <strong>memoria limitada</strong>, <strong>teoría de la mente</strong> y <strong>autoconsciente</strong> (la palabra que usan las Orientaciones es <em>autoconciencia</em>; ambos términos son equivalentes y se aceptan).</li>
+    <li>Bloque contextual: se trabaja mediante definiciones precisas, comparaciones y análisis breve de casos tecnológicos.</li>
+    <li>Domina los 4 tipos de IA: <strong>reactiva</strong>, <strong>memoria limitada</strong>, <strong>teoría de la mente</strong> y <strong>autoconsciente</strong> (la palabra que usan las Orientaciones es <em>autoconciencia</em>; ambos términos son equivalentes y se aceptan).</li>
     <li>Las 7 V del Big Data: <strong>v</strong>olumen, <strong>v</strong>elocidad, <strong>v</strong>ariedad, <strong>v</strong>eracidad, <strong>v</strong>alor, <strong>v</strong>ariabilidad y <strong>v</strong>isualización.</li>
     <li>Triángulo de la seguridad CIA: <strong>C</strong>onfidencialidad, <strong>I</strong>ntegridad, <strong>D</strong>isponibilidad (en inglés C-I-A, en español C-I-D).</li>
-    <li>No confundas IA débil (específica) con IA fuerte (general). Hoy solo existe la débil.</li>
+    <li>Distingue IA débil (específica) con IA fuerte (general). Hoy solo existe la débil.</li>
     <li>Diferencia machine learning (supervisado, no supervisado, semisupervisado, por refuerzo) de deep learning (redes neuronales profundas).</li>
     <li>Bases de datos distribuidas: particionadas, replicadas o mixtas. Teorema CAP: no se pueden garantizar las tres a la vez.</li>
     <li>Ciberataques habituales: malware, phishing, ransomware, DDoS, man-in-the-middle. Sabe reconocerlos.</li>
     <li>Medidas de protección: firewall, antivirus, cifrado, 2FA, backups, actualizaciones, política de contraseñas.</li>
     <li>Aspectos éticos: sesgos en IA, privacidad de datos (RGPD), brecha digital y huella energética de la computación.</li>
   </ol>
+</div>
+
+
+<!-- AUDITORIA-V3-SECCION: bloque E -->
+<div class="audit3-panel" id="audit3-e">
+<h2>Auditoría técnica final · Datos, IA y seguridad como sistema</h2>
+<p>La mejora final conecta los conceptos informáticos en una cadena técnica única: captación de datos, almacenamiento, análisis, decisión y protección.</p>
+<table class="audit3-table"><tr><th>Capa</th><th>Función</th><th>Riesgo principal</th><th>Medida de control</th></tr><tr><td>Captación</td><td>Sensores, formularios, registros o dispositivos.</td><td>Dato incompleto o sesgado.</td><td>Validación y trazabilidad.</td></tr><tr><td>Almacenamiento</td><td>Bases de datos locales o distribuidas.</td><td>Pérdida, duplicidad o acceso indebido.</td><td>Copias, permisos y cifrado.</td></tr><tr><td>Análisis</td><td>Big Data, estadística, aprendizaje automático.</td><td>Conclusiones erróneas.</td><td>Calidad del dato y revisión humana.</td></tr><tr><td>Decisión</td><td>Recomendación, predicción o control.</td><td>Automatizar una mala decisión.</td><td>Supervisión, métricas y límites.</td></tr><tr><td>Seguridad</td><td>Protección del sistema completo.</td><td>Phishing, ransomware, fuga de datos.</td><td>Autenticación, copias y actualización.</td></tr></table>
+<div class="audit3-imgnote"><strong>Imagen recomendada:</strong> arquitectura de un sistema de mantenimiento predictivo: sensores → red → base de datos → análisis IA → panel de decisión → medidas de ciberseguridad.</div>
 </div>
 
 <div class="pie">

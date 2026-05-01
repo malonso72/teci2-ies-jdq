@@ -449,6 +449,64 @@ span.math { font-family: var(--mono); }
 }
 /* @media print v2 — ecosistema TECI2 */
 
+
+/* ====== MEJORAS 100/100 · SECCIONES INTEGRADORAS ====== */
+.mejora-panel{margin:28px 0;padding:18px 20px;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:linear-gradient(180deg,#fff,#F8FAFC);box-shadow:0 3px 14px rgba(27,79,138,.08)}
+.mejora-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:18pt;margin:0 0 12px;border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:6px}
+.mejora-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:13.5pt;margin:14px 0 6px}
+.mejora-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:12px 0}
+.mejora-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:10px;padding:11px 13px}
+.mejora-card strong{color:var(--azul,#1B4F8A)}
+.mejora-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92em;background:#fff}
+.mejora-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:7px 9px;font-weight:600}
+.mejora-table td{border:1px solid var(--borde,#CDD7E3);padding:7px 9px;vertical-align:top}
+.mejora-steps{counter-reset:paso;margin:10px 0;padding-left:0;list-style:none}
+.mejora-steps li{counter-increment:paso;margin:8px 0;padding:9px 11px 9px 42px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:9px;position:relative}
+.mejora-steps li::before{content:counter(paso);position:absolute;left:11px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.8em}
+.mejora-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+.mejora-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:8px;margin:10px 0;overflow-x:auto}
+@media print{.mejora-panel{break-inside:avoid;box-shadow:none}.mejora-svg{break-inside:avoid}}
+
+
+/* MEJORA-100-V2: componentes de segunda pasada */
+.mejora2-panel{margin:30px 0;padding:20px 22px;border:1px solid var(--borde,#CDD7E3);border-radius:14px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.09)}
+.mejora2-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:18.5pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:7px;margin:0 0 14px}
+.mejora2-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.mejora2-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.mejora2-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.mejora2-card strong{color:var(--azul,#1B4F8A)}
+.mejora2-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.mejora2-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.mejora2-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.mejora2-steps{counter-reset:paso2;margin:12px 0;padding-left:0;list-style:none}
+.mejora2-steps li{counter-increment:paso2;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.mejora2-steps li::before{content:counter(paso2);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.mejora2-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.mejora2-placeholder{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.mejora2-placeholder strong{color:var(--azul,#1B4F8A)}
+.mejora2-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+@media print{.mejora2-panel,.mejora2-card,.mejora2-svg{break-inside:avoid;box-shadow:none}.mejora2-placeholder{break-inside:avoid}}
+
+
+/* AUDITORIA-V3: pulido técnico final */
+.audit3-panel{margin:32px 0;padding:22px 24px;border:1px solid var(--borde,#CDD7E3);border-radius:15px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.08);break-inside:avoid}
+.audit3-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:19pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:8px;margin:0 0 14px}
+.audit3-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.audit3-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.audit3-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.audit3-card strong{color:var(--azul,#1B4F8A)}
+.audit3-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.audit3-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.audit3-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.audit3-steps{counter-reset:audit3;margin:12px 0;padding-left:0;list-style:none}
+.audit3-steps li{counter-increment:audit3;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.audit3-steps li::before{content:counter(audit3);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.audit3-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.audit3-imgnote{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.audit3-imgnote strong{color:var(--azul,#1B4F8A)}
+.audit3-mini{font-size:.92em;color:var(--texto2,#455565)}
+@media print{.audit3-panel,.audit3-card{break-inside:avoid;box-shadow:none}.audit3-imgnote{break-inside:avoid}}
+
 </style>
 <script>
 MathJax = {
@@ -546,14 +604,6 @@ MathJax = {
 </div>
 
 <!-- ═══════════════════ LEYENDA EXIGIBILIDAD PEvAU ═══════════════════ -->
-<div class="exig-leyenda" role="note" aria-label="Leyenda de exigibilidad PEvAU">
-  <strong>Exigibilidad PEvAU 2025-26:</strong>
-  <span class="exig nucleo">Núcleo</span>
-  <span class="exig contextual">Contextualizado</span>
-  <span class="exig ampliacion">Ampliación</span>
-  <span class="exig fuera">Fuera</span>
-</div>
-
 <div class="cuerpo">
 
 <!-- ═══ SECCIÓN 1 ═══ -->
@@ -797,23 +847,23 @@ MathJax = {
     <p style="font-size:9pt;color:var(--texto2);">Conclusión física importante: donde la tubería se estrecha, la velocidad aumenta y la presión disminuye.</p>
   </div>
 
-  <h3>Las tres formas de la ecuación de Bernoulli <span class="exig nucleo">Núcleo: forma en presión y en altura</span></h3>
+  <h3>Las tres formas de la ecuación de Bernoulli</h3>
   <p>La misma ecuación admite tres expresiones equivalentes según las unidades en que se escriban sus términos. Las tres son correctas y se elige la que resulte más cómoda según el problema.</p>
 
   <div class="caja def" style="margin-bottom:8px;">
-    <strong>1) Forma en energía (J) <span class="exig ampliacion">Ampliación</span></strong><br>
+    <strong>1) Forma en energía (J)</strong><br>
     <div class="formula-line" style="font-size:11pt;color:var(--azul);">\(p_1 V + m g h_1 + \tfrac{1}{2} m v_1^2 = p_2 V + m g h_2 + \tfrac{1}{2} m v_2^2\)</div>
     <p style="font-size:9pt;color:var(--texto2);">Cada término es una energía en julios. Útil conceptualmente para visualizar la conservación de la energía mecánica del fluido; menos práctica para el cálculo directo.</p>
   </div>
 
   <div class="caja def" style="margin-bottom:8px;">
-    <strong>2) Forma en presión (Pa) — la más usada en hidrodinámica <span class="exig nucleo">Núcleo</span></strong><br>
+    <strong>2) Forma en presión (Pa) — la más usada en hidrodinámica</strong><br>
     <div class="formula-line" style="font-size:11pt;color:var(--azul);">\(p_1 + \rho g h_1 + \tfrac{1}{2}\rho v_1^2 = p_2 + \rho g h_2 + \tfrac{1}{2}\rho v_2^2\)</div>
     <p style="font-size:9pt;color:var(--texto2);">Es la forma desarrollada al inicio de la sección. Términos: presión estática, presión hidrostática y presión dinámica.</p>
   </div>
 
   <div class="caja clave" style="margin-bottom:8px;">
-    <strong>3) Forma en altura o carga (m) — la que se usa en bombas y turbinas <span class="exig nucleo">Núcleo</span></strong><br>
+    <strong>3) Forma en altura o carga (m) — la que se usa en bombas y turbinas</strong><br>
     <div class="formula-line" style="font-size:12pt;color:var(--naranja);">\(\dfrac{p_1}{\rho g} + h_1 + \dfrac{v_1^2}{2g} = \dfrac{p_2}{\rho g} + h_2 + \dfrac{v_2^2}{2g}\)</div>
     <p style="font-size:9.5pt;color:var(--texto2);margin-top:6px;">
       Cada término tiene unidades de metros (de columna de líquido):<br>
@@ -824,7 +874,7 @@ MathJax = {
   </div>
 
   <div class="caja def" style="margin-bottom:8px;">
-    <strong>Altura manométrica \(H\) — conexión con bombas y turbinas <span class="exig nucleo">Núcleo</span></strong><br>
+    <strong>Altura manométrica \(H\) — conexión con bombas y turbinas</strong><br>
     <p style="margin:4px 0;">La suma de las tres alturas se denomina <strong>carga total</strong> o <strong>altura manométrica</strong>:</p>
     <div class="formula-line" style="font-size:12pt;color:var(--naranja);">\(H = \dfrac{p}{\rho g} + h + \dfrac{v^2}{2g}\) &nbsp;(m)</div>
     <p style="font-size:9.5pt;color:var(--texto2);margin-top:6px;">Esta \(H\) es la <strong>altura manométrica</strong> que aparece en las fórmulas de potencia de la bomba (\(P_B = \rho g H Q / \eta\)) y de la turbina (\(P_T = \eta \rho g H Q\)) de la sección 10. Representa la energía mecánica que la bomba entrega al fluido (o que el fluido cede a la turbina) expresada como una altura de columna de líquido.</p>
@@ -1213,12 +1263,28 @@ MathJax = {
 
 </div><!-- fin cuerpo -->
 
+<!-- MEJORA-100: c32 -->
+<div class="mejora-panel" id="mejora-c32">
+<h2>💧 Árbol de decisión hidráulica</h2>
+<table class="mejora-table"><tr><th>Situación física</th><th>Relación principal</th><th>Comprobación</th></tr><tr><td>Fluido en reposo</td><td>Hidrostática</td><td>Profundidad, densidad y presión</td></tr><tr><td>Dos pistones conectados</td><td>Principio de Pascal</td><td>Igualdad de presiones</td></tr><tr><td>Cambio de sección en una conducción</td><td>Continuidad</td><td>Caudal constante</td></tr><tr><td>Presión, velocidad y altura</td><td>Bernoulli</td><td>Conservación de energía por unidad de volumen</td></tr><tr><td>Estrechamiento con manómetro</td><td>Venturi</td><td>Relación entre caída de presión y velocidad</td></tr><tr><td>Bomba o turbina</td><td>Potencia hidráulica</td><td>Caudal, salto de presión y rendimiento</td></tr></table><h3>Plantilla de Bernoulli en forma de presiones</h3><div class="mejora-formula">p₁ + ½ρv₁² + ρgz₁ = p₂ + ½ρv₂² + ρgz₂</div><ol class="mejora-steps"><li>Elegir los puntos 1 y 2 en la misma línea de corriente.</li><li>Escribir todos los términos antes de anular ninguno.</li><li>Eliminar únicamente los términos justificados: misma altura, depósito grande, presión atmosférica, etc.</li><li>Resolver la incógnita y comprobar unidades: Pa, m/s, m³/s, W.</li></ol>
+</div>
+
+
+<!-- MEJORA-100-V2: C32 -->
+<div class="mejora2-panel" id="mejora2-c32">
+<h2>💧 Problemas hidráulicos completos: comprobaciones finales</h2>
+<table class="mejora2-table"><tr><th>Problema</th><th>Ecuación principal</th><th>Dato crítico</th><th>Error habitual</th></tr><tr><td>Prensa hidráulica</td><td>F₁/S₁ = F₂/S₂</td><td>Usar áreas, no diámetros</td><td>Olvidar elevar el diámetro al cuadrado</td></tr><tr><td>Continuidad</td><td>Q = S·v</td><td>Sección en m²</td><td>Usar cm² sin convertir</td></tr><tr><td>Bernoulli</td><td>p + ½ρv² + ρgz = constante</td><td>Puntos 1 y 2 bien elegidos</td><td>Anular términos sin justificar</td></tr><tr><td>Venturi</td><td>Continuidad + Bernoulli</td><td>Diferencia de presión</td><td>Confundir presión absoluta y manométrica</td></tr><tr><td>Potencia hidráulica</td><td>P = Δp·Q</td><td>Q en m³/s</td><td>Usar L/min directamente</td></tr></table>
+<h3>Formato recomendado de solución con Bernoulli</h3>
+<ol class="mejora2-steps"><li>Escribir Bernoulli completa en forma de presiones.</li><li>Indicar hipótesis: régimen estacionario, fluido ideal, misma línea de corriente.</li><li>Justificar qué términos se cancelan.</li><li>Resolver con unidades SI.</li><li>Interpretar el resultado: presión, velocidad, caudal o potencia.</li></ol>
+<div class="mejora2-placeholder"><strong>Imagen a insertar:</strong> Venturi con secciones S₁/S₂, velocidades v₁/v₂ y manómetro diferencial indicando Δp.</div>
+</div>
+
 <!-- ═══════════════════ DECÁLOGO ═══════════════════ -->
 <div id="decalogo" class="decalogo-box">
   <h2>📝 Decálogo PAU 2025-26</h2>
   <ol>
     <li>Pascal en prensa: \(\dfrac{F_1}{S_1} = \dfrac{F_2}{S_2}\). El fluido transmite presión, no fuerza.</li>
-    <li>Continuidad: \(Q = A\cdot v = \text{cte}\). Si reduces sección, aumenta velocidad. No confundas Q (caudal) con q (calor).</li>
+    <li>Continuidad: \(Q = A\cdot v = \text{cte}\). Si reduces sección, aumenta velocidad. Distingue Q (caudal) con q (calor).</li>
     <li>Bernoulli en tres términos: \(\dfrac{v^2}{2g} + \dfrac{p}{\rho g} + z = \text{cte}\) (expresado en altura) o bien \(\dfrac{1}{2}\rho v^2 + p + \rho g z = \text{cte}\).</li>
     <li>Unidades: 1 bar = \(10^5\) Pa; 1 atm \(\approx\) 101325 Pa. Trabaja en SI (Pa) antes de sustituir.</li>
     <li>Densidad del agua: \(\rho = 1000\) kg/m\(^3\); del aceite hidráulico \(\approx 850\) kg/m\(^3\). No confundas.</li>
@@ -1228,6 +1294,17 @@ MathJax = {
     <li>Potencia hidráulica: \(P = p\cdot Q = \rho g h\cdot Q\). Verifica unidades (Pa·m\(^3\)/s = W).</li>
     <li>En prensa, aunque la fuerza se multiplica, el trabajo se conserva: el émbolo grande recorre menos distancia (\(F_1 d_1 = F_2 d_2\)).</li>
   </ol>
+</div>
+
+
+<!-- AUDITORIA-V3-SECCION: bloque C32 -->
+<div class="audit3-panel" id="audit3-c32">
+<h2>Auditoría técnica final · Bernoulli, Venturi y potencia hidráulica</h2>
+<p>Se añade una comprobación de unidades y términos para cerrar los problemas de hidráulica sin errores de criterio.</p>
+<div class="audit3-formula">p + 1/2·ρ·v² + ρ·g·z = constante</div>
+<table class="audit3-table"><tr><th>Término</th><th>Unidad</th><th>Significado</th><th>Cuándo puede anularse</th></tr><tr><td>p</td><td>Pa</td><td>Presión estática</td><td>Nunca por sistema; solo si se trabaja con presión relativa y el punto está a atmósfera.</td></tr><tr><td>1/2·ρ·v²</td><td>Pa</td><td>Presión dinámica</td><td>Si la velocidad es despreciable.</td></tr><tr><td>ρ·g·z</td><td>Pa</td><td>Término de altura</td><td>Si ambos puntos están a la misma cota.</td></tr></table>
+<ol class="audit3-steps"><li>Elegir dos puntos de la misma línea de corriente.</li><li>Escribir Bernoulli completo antes de simplificar.</li><li>Usar continuidad si cambian las secciones.</li><li>Comprobar unidades: Pa, m/s, kg/m³, m.</li><li>Interpretar si el resultado es presión, velocidad, caudal o potencia.</li></ol>
+<div class="audit3-imgnote"><strong>Imagen recomendada:</strong> tubo de Venturi con secciones A₁/A₂, velocidades v₁/v₂, presiones p₁/p₂ y manómetro diferencial conectado a ambos puntos.</div>
 </div>
 
 <div class="pie">

@@ -448,6 +448,64 @@ span.math { font-family: var(--mono); }
 }
 /* @media print v2 — ecosistema TECI2 */
 
+
+/* ====== MEJORAS 100/100 · SECCIONES INTEGRADORAS ====== */
+.mejora-panel{margin:28px 0;padding:18px 20px;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:linear-gradient(180deg,#fff,#F8FAFC);box-shadow:0 3px 14px rgba(27,79,138,.08)}
+.mejora-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:18pt;margin:0 0 12px;border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:6px}
+.mejora-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:13.5pt;margin:14px 0 6px}
+.mejora-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:12px 0}
+.mejora-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:10px;padding:11px 13px}
+.mejora-card strong{color:var(--azul,#1B4F8A)}
+.mejora-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92em;background:#fff}
+.mejora-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:7px 9px;font-weight:600}
+.mejora-table td{border:1px solid var(--borde,#CDD7E3);padding:7px 9px;vertical-align:top}
+.mejora-steps{counter-reset:paso;margin:10px 0;padding-left:0;list-style:none}
+.mejora-steps li{counter-increment:paso;margin:8px 0;padding:9px 11px 9px 42px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:9px;position:relative}
+.mejora-steps li::before{content:counter(paso);position:absolute;left:11px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.8em}
+.mejora-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+.mejora-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:8px;margin:10px 0;overflow-x:auto}
+@media print{.mejora-panel{break-inside:avoid;box-shadow:none}.mejora-svg{break-inside:avoid}}
+
+
+/* MEJORA-100-V2: componentes de segunda pasada */
+.mejora2-panel{margin:30px 0;padding:20px 22px;border:1px solid var(--borde,#CDD7E3);border-radius:14px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.09)}
+.mejora2-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:18.5pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:7px;margin:0 0 14px}
+.mejora2-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.mejora2-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.mejora2-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.mejora2-card strong{color:var(--azul,#1B4F8A)}
+.mejora2-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.mejora2-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.mejora2-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.mejora2-steps{counter-reset:paso2;margin:12px 0;padding-left:0;list-style:none}
+.mejora2-steps li{counter-increment:paso2;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.mejora2-steps li::before{content:counter(paso2);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.mejora2-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.mejora2-placeholder{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.mejora2-placeholder strong{color:var(--azul,#1B4F8A)}
+.mejora2-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+@media print{.mejora2-panel,.mejora2-card,.mejora2-svg{break-inside:avoid;box-shadow:none}.mejora2-placeholder{break-inside:avoid}}
+
+
+/* AUDITORIA-V3: pulido técnico final */
+.audit3-panel{margin:32px 0;padding:22px 24px;border:1px solid var(--borde,#CDD7E3);border-radius:15px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.08);break-inside:avoid}
+.audit3-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:19pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:8px;margin:0 0 14px}
+.audit3-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.audit3-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.audit3-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.audit3-card strong{color:var(--azul,#1B4F8A)}
+.audit3-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.audit3-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.audit3-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.audit3-steps{counter-reset:audit3;margin:12px 0;padding-left:0;list-style:none}
+.audit3-steps li{counter-increment:audit3;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.audit3-steps li::before{content:counter(audit3);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.audit3-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.audit3-imgnote{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.audit3-imgnote strong{color:var(--azul,#1B4F8A)}
+.audit3-mini{font-size:.92em;color:var(--texto2,#455565)}
+@media print{.audit3-panel,.audit3-card{break-inside:avoid;box-shadow:none}.audit3-imgnote{break-inside:avoid}}
+
 </style>
 <script>
 MathJax = {
@@ -549,19 +607,11 @@ MathJax = {
 </div>
 
 <!-- ═══════════════════ LEYENDA EXIGIBILIDAD PEvAU ═══════════════════ -->
-<div class="exig-leyenda" role="note" aria-label="Leyenda de exigibilidad PEvAU">
-  <strong>Exigibilidad PEvAU 2025-26:</strong>
-  <span class="exig nucleo">Núcleo</span>
-  <span class="exig contextual">Contextualizado</span>
-  <span class="exig ampliacion">Ampliación</span>
-  <span class="exig fuera">Fuera</span>
-</div>
-
 <div class="cuerpo">
 
 <!-- ═══ SECCIÓN 1 — FUNDAMENTOS DE NEUMÁTICA ═══ -->
 <div class="seccion" id="C31_s_fun">
-  <div class="sec-hdr"><div class="sec-num">1</div><div class="sec-tit">Fundamentos de neumática <span class="exig nucleo">Núcleo: magnitudes y Boyle</span> <span class="exig ampliacion">Ampliación: Charles, Gay-Lussac</span></div></div>
+  <div class="sec-hdr"><div class="sec-num">1</div><div class="sec-tit">Fundamentos de neumática</div></div>
 
   <p>La <strong>neumática</strong> es la tecnología que utiliza aire comprimido para transmitir energía y realizar un trabajo útil. Antes de entrar en los cálculos de cilindros y circuitos, conviene fijar tres bloques de ideas: las <strong>propiedades del aire</strong> como fluido de trabajo, las <strong>magnitudes fundamentales</strong> con las que vamos a operar, y las <strong>leyes de los gases</strong> que gobiernan su comportamiento.</p>
 
@@ -578,7 +628,7 @@ MathJax = {
     <div><strong>Por qué importa la compresibilidad:</strong> explica la principal limitación de la neumática (menor precisión de posicionamiento que la hidráulica) y justifica por qué el consumo de aire se calcula con la ley de Boyle-Mariotte, pasando el aire de las condiciones de trabajo a las condiciones normales.</div>
   </div>
 
-  <h3>Magnitudes neumáticas fundamentales <span class="exig nucleo">Núcleo</span></h3>
+  <h3>Magnitudes neumáticas fundamentales</h3>
 
   <div class="caja def">
     <strong>Presión</strong><br>
@@ -619,25 +669,25 @@ MathJax = {
   </div>
 
   <div class="caja clave">
-    <strong>Ley de Boyle-Mariotte · proceso isotermo (T = cte) <span class="exig nucleo">Núcleo</span></strong><br>
+    <strong>Ley de Boyle-Mariotte · proceso isotermo (T = cte)</strong><br>
     <div class="formula-line" style="font-size:12pt;color:var(--naranja);">\(p_1 \cdot V_1 = p_2 \cdot V_2\)</div>
     <p style="font-size:9.5pt;color:var(--texto2);">Para una masa fija de gas a temperatura constante, presión y volumen son inversamente proporcionales. Es la ley que se aplica al <strong>consumo de aire</strong> de los cilindros (paso de condiciones de trabajo a condiciones normales).</p>
   </div>
 
   <div class="caja clave">
-    <strong>Ley de Charles · proceso isobárico (p = cte) <span class="exig ampliacion">Ampliación</span></strong><br>
+    <strong>Ley de Charles · proceso isobárico (p = cte)</strong><br>
     <div class="formula-line" style="font-size:12pt;color:var(--naranja);">\(\dfrac{V_1}{T_1} = \dfrac{V_2}{T_2}\)</div>
     <p style="font-size:9.5pt;color:var(--texto2);">A presión constante, el volumen es directamente proporcional a la temperatura absoluta.</p>
   </div>
 
   <div class="caja clave">
-    <strong>Ley de Gay-Lussac · proceso isocórico (V = cte) <span class="exig ampliacion">Ampliación</span></strong><br>
+    <strong>Ley de Gay-Lussac · proceso isocórico (V = cte)</strong><br>
     <div class="formula-line" style="font-size:12pt;color:var(--naranja);">\(\dfrac{p_1}{T_1} = \dfrac{p_2}{T_2}\)</div>
     <p style="font-size:9.5pt;color:var(--texto2);">A volumen constante, la presión es directamente proporcional a la temperatura absoluta.</p>
   </div>
 
   <div class="caja clave">
-    <strong>Ecuación general del gas ideal <span class="exig contextual">Contextualizado</span></strong><br>
+    <strong>Ecuación general del gas ideal</strong><br>
     <div class="formula-line" style="font-size:12pt;color:var(--naranja);">\(\dfrac{p_1 \cdot V_1}{T_1} = \dfrac{p_2 \cdot V_2}{T_2}\) &nbsp;&nbsp;o bien&nbsp;&nbsp; \(p \cdot V = n \cdot R \cdot T\)</div>
     <p style="font-size:9.5pt;color:var(--texto2);">\(n\): moles de gas · \(R = 8{,}314\) J/(mol·K). Integra las tres leyes anteriores en una sola expresión.</p>
   </div>
@@ -1409,6 +1459,23 @@ MathJax = {
 
 </div><!-- fin cuerpo -->
 
+<!-- MEJORA-100: c31 -->
+<div class="mejora-panel" id="mejora-c31">
+<h2>💨 Lectura guiada de circuitos neumáticos</h2>
+<ol class="mejora-steps"><li>Localizar la alimentación: compresor, depósito y grupo FRL.</li><li>Identificar el actuador final: cilindro de simple efecto, doble efecto o motor neumático.</li><li>Reconocer la válvula distribuidora: número de vías, posiciones y accionamientos.</li><li>Seguir la señal de mando: pulsador, rodillo, final de carrera, pilotaje o temporización.</li><li>Determinar qué cámara se presuriza y si el vástago avanza o retrocede.</li><li>Comprobar retorno, seguridad, regulación de velocidad y coherencia de la secuencia.</li></ol><table class="mejora-table"><tr><th>Elemento</th><th>Función</th><th>Clave de lectura</th></tr><tr><td>Válvula 3/2</td><td>Control de señal o cilindro SE</td><td>Tres vías y dos posiciones</td></tr><tr><td>Válvula 5/2</td><td>Control de cilindro DE</td><td>Alterna presión y escape en las dos cámaras</td></tr><tr><td>Final de carrera</td><td>Detecta posición del vástago</td><td>Genera la siguiente señal de mando</td></tr><tr><td>Regulador unidireccional</td><td>Ajusta velocidad</td><td>Paso libre en un sentido y estrangulado en el otro</td></tr></table>
+</div>
+
+
+<!-- MEJORA-100-V2: C31 -->
+<div class="mejora2-panel" id="mejora2-c31">
+<h2>💨 Lectura avanzada de circuitos neumáticos</h2>
+<p>Secuencia de análisis para circuitos con uno o dos cilindros, finales de carrera y válvulas distribuidoras.</p>
+<table class="mejora2-table"><tr><th>Elemento</th><th>Función</th><th>Pregunta de lectura</th></tr><tr><td>Unidad FRL</td><td>Prepara el aire</td><td>¿De dónde sale la alimentación?</td></tr><tr><td>Válvula 3/2</td><td>Mando de señal o cilindro simple</td><td>¿Actúa por pulsador, rodillo, muelle o pilotaje?</td></tr><tr><td>Válvula 5/2</td><td>Gobierna cilindro de doble efecto</td><td>¿Qué cámara queda alimentada en cada posición?</td></tr><tr><td>Regulador unidireccional</td><td>Ajusta velocidad</td><td>¿Regula entrada o escape?</td></tr><tr><td>Final de carrera</td><td>Detecta posición</td><td>¿Qué movimiento habilita después?</td></tr></table>
+<h3>Secuencia tipo con dos cilindros</h3>
+<ol class="mejora2-steps"><li>Nombrar cilindros A y B y sus posiciones A0, A1, B0, B1.</li><li>Escribir la secuencia deseada: por ejemplo A+ / B+ / A− / B−.</li><li>Asociar cada cambio de etapa al final de carrera que lo provoca.</li><li>Dibujar el diagrama espacio-fase antes del circuito.</li><li>Comprobar que no hay señales simultáneas contradictorias sobre una misma válvula.</li></ol>
+<div class="mejora2-placeholder"><strong>Imagen a insertar:</strong> tabla de símbolos neumáticos normalizados con compresor, FRL, 3/2, 5/2, cilindro SE, cilindro DE, regulador y finales de carrera.</div>
+</div>
+
 <!-- ═══════════════════ DECÁLOGO ═══════════════════ -->
 <div id="decalogo" class="decalogo-box">
   <h2>📝 Decálogo PAU 2025-26</h2>
@@ -1424,6 +1491,15 @@ MathJax = {
     <li>Nomenclatura de válvulas: vías/posiciones (ej. 5/2 = 5 vías, 2 posiciones). Cuenta antes de dibujar.</li>
     <li>Rendimiento del cilindro real \(\approx 0{,}85{-}0{,}95\): la fuerza real es menor que la teórica por rozamientos.</li>
   </ol>
+</div>
+
+
+<!-- AUDITORIA-V3-SECCION: bloque C31 -->
+<div class="audit3-panel" id="audit3-c31">
+<h2>Auditoría técnica final · Lectura de circuitos neumáticos</h2>
+<p>La revisión final se centra en que el alumno pueda leer un esquema desde la alimentación hasta el movimiento del cilindro.</p>
+<table class="audit3-table"><tr><th>Elemento</th><th>Qué hay que reconocer</th><th>Función en el circuito</th></tr><tr><td>FRL</td><td>Filtro, regulador y lubricación si aparece.</td><td>Preparar el aire de alimentación.</td></tr><tr><td>Válvula distribuidora</td><td>Número de vías, posiciones y tipo de accionamiento.</td><td>Decidir hacia qué cámara llega el aire.</td></tr><tr><td>Final de carrera</td><td>Accionamiento mecánico por el vástago o la pieza.</td><td>Generar señal al alcanzar una posición.</td></tr><tr><td>Regulador de caudal</td><td>Estrangulación con antirretorno.</td><td>Ajustar la velocidad, normalmente regulando el escape.</td></tr><tr><td>Cilindro</td><td>Simple o doble efecto y cámaras activas.</td><td>Transformar presión en fuerza lineal.</td></tr></table>
+<div class="audit3-imgnote"><strong>Imagen recomendada:</strong> secuencia A+/B+/A−/B− con tres capas: diagrama espacio-fase, esquema neumático y tabla de estados de finales de carrera.</div>
 </div>
 
 <div class="pie">

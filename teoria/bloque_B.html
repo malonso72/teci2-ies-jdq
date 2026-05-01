@@ -450,6 +450,64 @@ span.math { font-family: var(--mono); }
 }
 /* @media print v2 — ecosistema TECI2 */
 
+
+/* ====== MEJORAS 100/100 · SECCIONES INTEGRADORAS ====== */
+.mejora-panel{margin:28px 0;padding:18px 20px;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:linear-gradient(180deg,#fff,#F8FAFC);box-shadow:0 3px 14px rgba(27,79,138,.08)}
+.mejora-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:18pt;margin:0 0 12px;border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:6px}
+.mejora-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);color:var(--azul,#1B4F8A);font-size:13.5pt;margin:14px 0 6px}
+.mejora-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:12px 0}
+.mejora-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:10px;padding:11px 13px}
+.mejora-card strong{color:var(--azul,#1B4F8A)}
+.mejora-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92em;background:#fff}
+.mejora-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:7px 9px;font-weight:600}
+.mejora-table td{border:1px solid var(--borde,#CDD7E3);padding:7px 9px;vertical-align:top}
+.mejora-steps{counter-reset:paso;margin:10px 0;padding-left:0;list-style:none}
+.mejora-steps li{counter-increment:paso;margin:8px 0;padding:9px 11px 9px 42px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:9px;position:relative}
+.mejora-steps li::before{content:counter(paso);position:absolute;left:11px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.8em}
+.mejora-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+.mejora-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:8px;margin:10px 0;overflow-x:auto}
+@media print{.mejora-panel{break-inside:avoid;box-shadow:none}.mejora-svg{break-inside:avoid}}
+
+
+/* MEJORA-100-V2: componentes de segunda pasada */
+.mejora2-panel{margin:30px 0;padding:20px 22px;border:1px solid var(--borde,#CDD7E3);border-radius:14px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.09)}
+.mejora2-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:18.5pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:7px;margin:0 0 14px}
+.mejora2-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.mejora2-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.mejora2-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.mejora2-card strong{color:var(--azul,#1B4F8A)}
+.mejora2-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.mejora2-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.mejora2-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.mejora2-steps{counter-reset:paso2;margin:12px 0;padding-left:0;list-style:none}
+.mejora2-steps li{counter-increment:paso2;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.mejora2-steps li::before{content:counter(paso2);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.mejora2-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.mejora2-placeholder{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.mejora2-placeholder strong{color:var(--azul,#1B4F8A)}
+.mejora2-svg{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid var(--borde,#CDD7E3);border-radius:12px;background:#fff}
+@media print{.mejora2-panel,.mejora2-card,.mejora2-svg{break-inside:avoid;box-shadow:none}.mejora2-placeholder{break-inside:avoid}}
+
+
+/* AUDITORIA-V3: pulido técnico final */
+.audit3-panel{margin:32px 0;padding:22px 24px;border:1px solid var(--borde,#CDD7E3);border-radius:15px;background:linear-gradient(180deg,#FFFFFF,#F8FAFC);box-shadow:0 4px 18px rgba(27,79,138,.08);break-inside:avoid}
+.audit3-panel h2{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:19pt;line-height:1.15;color:var(--azul,#1B4F8A);border-bottom:2px solid var(--azul,#1B4F8A);padding-bottom:8px;margin:0 0 14px}
+.audit3-panel h3{font-family:var(--cond,'Barlow Condensed',sans-serif);font-size:14pt;color:var(--azul,#1B4F8A);margin:18px 0 8px}
+.audit3-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.audit3-card{background:#fff;border:1px solid var(--borde,#CDD7E3);border-left:4px solid var(--azul2,#2E7BC4);border-radius:11px;padding:12px 14px;break-inside:avoid}
+.audit3-card strong{color:var(--azul,#1B4F8A)}
+.audit3-table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff;font-size:.93em}
+.audit3-table th{background:var(--azul,#1B4F8A);color:#fff;text-align:left;padding:8px 10px;font-weight:600}
+.audit3-table td{border:1px solid var(--borde,#CDD7E3);padding:8px 10px;vertical-align:top}
+.audit3-steps{counter-reset:audit3;margin:12px 0;padding-left:0;list-style:none}
+.audit3-steps li{counter-increment:audit3;margin:8px 0;padding:9px 12px 9px 44px;background:#fff;border:1px solid var(--borde,#CDD7E3);border-radius:10px;position:relative}
+.audit3-steps li::before{content:counter(audit3);position:absolute;left:12px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--azul,#1B4F8A);color:#fff;font-weight:700;text-align:center;line-height:22px;font-size:.78em}
+.audit3-formula{font-family:var(--mono,'JetBrains Mono',monospace);background:#F1F5F9;border-left:4px solid var(--azul2,#2E7BC4);padding:10px 12px;border-radius:9px;margin:10px 0;overflow-x:auto}
+.audit3-imgnote{margin:14px 0;padding:13px 15px;border:2px dashed var(--azul2,#2E7BC4);border-radius:12px;background:#F8FBFF;color:var(--texto2,#455565)}
+.audit3-imgnote strong{color:var(--azul,#1B4F8A)}
+.audit3-mini{font-size:.92em;color:var(--texto2,#455565)}
+@media print{.audit3-panel,.audit3-card{break-inside:avoid;box-shadow:none}.audit3-imgnote{break-inside:avoid}}
+
 </style>
 <script>
 MathJax = {
@@ -503,7 +561,7 @@ MathJax = {
 <a class="na" href="#B_b2-1">1. Tratamientos térmicos de los aceros</a>
 <a class="na" href="#B_b2-2">2. Técnicas de fabricación y tipos de uniones</a>
 <a class="na" href="#B_b2-3">3. Sostenibilidad en la elección de materiale…</a>
-<a class="na" href="#B_ampliacion">📽 Ampliación — Vídeos complementarios</a>
+<a class="na" href="#B_ampliacion">📽 Vídeos complementarios</a>
 <a class="na" href="#decalogo">📝 Decálogo PAU</a>
 
 </div>
@@ -671,7 +729,7 @@ MathJax = {
 </div>
 
   <div class="img-container">
-    <img src="data:image/png;base64,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...">
+    <img alt="Esquema técnico del ensayo o proceso representado" src="data:image/png;base64,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...">
     <div class="img-caption">Curva típica tensión-deformación de un acero dúctil.</div>
   </div>
 
@@ -1237,12 +1295,33 @@ MathJax = {
 </div>
 </div>
 
+<!-- MEJORA-100: b -->
+<div class="mejora-panel" id="mejora-b">
+<h2>🔬 Procedimientos de resolución en materiales</h2>
+<p>Guía común de lectura de ensayos y selección técnica de materiales.</p><svg class="mejora-svg" viewBox="0 0 760 220" role="img" aria-label="Ensayos de materiales: tracción, Brinell, Vickers y Charpy"><rect width="760" height="220" fill="#fff"/><text x="30" y="34" font-size="20" font-weight="700" fill="#1B4F8A">Ensayos mecánicos: qué mide cada uno</text><g font-family="Barlow,Arial" font-size="13"><rect x="35" y="65" width="155" height="105" rx="10" fill="#EEF4FB" stroke="#1B4F8A"/><line x1="65" y1="118" x2="160" y2="118" stroke="#1B4F8A" stroke-width="5"/><text x="75" y="94">Tracción</text><text x="60" y="150" font-size="11">σ, ε, E, límite elástico</text><rect x="215" y="65" width="155" height="105" rx="10" fill="#FEF0DF" stroke="#D4700A"/><circle cx="292" cy="115" r="24" fill="none" stroke="#D4700A" stroke-width="3"/><circle cx="292" cy="115" r="9" fill="#D4700A" opacity=".45"/><text x="260" y="94">Brinell</text><text x="250" y="150" font-size="11">bola · diámetro huella</text><rect x="395" y="65" width="155" height="105" rx="10" fill="#E4F4EB" stroke="#1A6B3A"/><path d="M472 90l26 26-26 26-26-26z" fill="none" stroke="#1A6B3A" stroke-width="3"/><line x1="446" y1="142" x2="498" y2="90" stroke="#C0321E" stroke-width="2"/><text x="443" y="94">Vickers</text><text x="430" y="154" font-size="11">diagonal de la huella</text><rect x="575" y="65" width="155" height="105" rx="10" fill="#FCEAE7" stroke="#C0321E"/><path d="M635 80 Q690 112 646 150" fill="none" stroke="#455565" stroke-width="4"/><rect x="610" y="145" width="70" height="9" fill="#455565"/><text x="623" y="94">Charpy</text><text x="610" y="165" font-size="11">energía absorbida</text></g></svg><ol class="mejora-steps"><li>Identificar el ensayo o proceso: tracción, dureza, resiliencia, tratamiento o fabricación.</li><li>Extraer datos con unidades coherentes y convertir cuando sea necesario.</li><li>Aplicar la relación física correspondiente sin perder el significado de cada magnitud.</li><li>Interpretar el resultado: material más duro, dúctil, tenaz, frágil o adecuado al proceso.</li></ol><table class="mejora-table"><tr><th>Ensayo</th><th>Magnitud principal</th><th>Error que conviene evitar</th></tr><tr><td>Tracción</td><td>Resistencia, deformación, módulo elástico</td><td>Confundir carga con tensión o alargamiento con deformación unitaria</td></tr><tr><td>Brinell</td><td>Dureza por huella esférica</td><td>Olvidar que la huella depende de carga, bola y diámetro</td></tr><tr><td>Vickers</td><td>Dureza por huella piramidal</td><td>Acotar el lado del rombo en vez de la diagonal de la huella</td></tr><tr><td>Charpy</td><td>Resiliencia o energía absorbida</td><td>No dividir por la sección cuando se pide resiliencia</td></tr></table>
+</div>
+
+
+<!-- MEJORA-100-V2: B -->
+<div class="mejora2-panel" id="mejora2-b">
+<h2>🧪 Ejercicios modelo de ensayos de materiales</h2>
+<p>Estos modelos completan la parte aplicada del bloque y fijan la interpretación física del resultado, no solo la sustitución numérica.</p>
+<div class="mejora2-grid">
+<div class="mejora2-card"><strong>Brinell.</strong><br>Datos: carga, diámetro de bola y diámetro medio de huella. Método: calcular superficie de casquete y dureza HB. Interpretación: mayor HB implica mayor resistencia a penetración.</div>
+<div class="mejora2-card"><strong>Vickers.</strong><br>Datos: carga y diagonal media. Método: usar la diagonal real de la huella, no el lado del cuadrado. Interpretación: adecuado para piezas finas o materiales duros.</div>
+<div class="mejora2-card"><strong>Charpy.</strong><br>Datos: energía absorbida y sección de rotura. Método: resiliencia = energía/sección. Interpretación: compara tenacidad frente a impacto.</div>
+<div class="mejora2-card"><strong>Tracción.</strong><br>Datos: fuerza, sección, alargamiento y longitud inicial. Método: tensión, deformación y módulo elástico si procede. Interpretación: ductilidad, límite elástico y resistencia.</div>
+</div>
+<table class="mejora2-table"><tr><th>Error habitual</th><th>Corrección didáctica</th></tr><tr><td>Usar diámetro de penetrador como si fuera diámetro de huella.</td><td>Distinguir siempre herramienta, huella y magnitud medida.</td></tr><tr><td>En Vickers, acotar el lado en lugar de la diagonal.</td><td>La fórmula utiliza la diagonal media de la huella romboidal/cuadrada.</td></tr><tr><td>Confundir resiliencia con resistencia mecánica.</td><td>La resiliencia mide energía absorbida por unidad de sección.</td></tr><tr><td>Mezclar MPa, N/mm², Pa y mm² sin convertir.</td><td>Fijar una línea de unidades antes de sustituir.</td></tr></table>
+<div class="mejora2-placeholder"><strong>Imagen a insertar:</strong> composición de cuatro mini-esquemas normalizados: Brinell, Vickers con diagonal acotada, Charpy y curva tensión-deformación con zonas.</div>
+</div>
+
 <!-- ═══════════════════ DECÁLOGO ═══════════════════ -->
 <div id="decalogo" class="decalogo-box">
   <h2>📝 Decálogo PAU 2025-26</h2>
   <ol>
     <li>Brinell se expresa en <strong>kp/mm\(^2\)</strong> (no en N): \(HB = \dfrac{2F}{\pi D (D-\sqrt{D^2-d^2})}\) con F en kp.</li>
-    <li>Vickers usa la constante \(1{,}8544\): \(HV = \dfrac{1{,}8544\,F}{d^2}\). No confundas con Brinell.</li>
+    <li>Vickers usa la constante \(1{,}8544\): \(HV = \dfrac{1{,}8544\,F}{d^2}\). Distingue con Brinell.</li>
     <li>Designación normalizada de Brinell: \(HB\; D/F/t\) (diámetro, carga, tiempo). Debe aparecer completa.</li>
     <li>Zona elástica: deformación recuperable, pendiente \(E\). Zona plástica: permanente, empieza en \(\sigma_e\) (~0,2% deformación).</li>
     <li>Coeficiente de seguridad \(n = \sigma_{adm}/\sigma_{trabajo}\); nunca lo confundas con el factor de concentración de tensiones.</li>
@@ -1255,6 +1334,15 @@ MathJax = {
 </div>
 
 <!-- ═══════════════════ PIE ═══════════════════ -->
+
+<!-- AUDITORIA-V3-SECCION: bloque B -->
+<div class="audit3-panel" id="audit3-b">
+<h2>Auditoría técnica final · Ensayos, unidades y selección de material</h2>
+<p>La revisión final del bloque se centra en que cada ensayo quede asociado a una magnitud, una fórmula, una unidad y una interpretación física. El resultado numérico no debe quedar aislado: debe decir algo sobre el comportamiento del material.</p>
+<table class="audit3-table"><tr><th>Ensayo</th><th>Comprobación antes de calcular</th><th>Interpretación del resultado</th></tr><tr><td>Tracción</td><td>Área inicial, fuerza, alargamiento y longitud inicial en unidades coherentes.</td><td>Resistencia, rigidez, ductilidad y zona de comportamiento.</td></tr><tr><td>Brinell</td><td>Carga, diámetro de bola y diámetro de huella en las mismas unidades.</td><td>Huella grande: material más blando; huella pequeña: mayor dureza.</td></tr><tr><td>Vickers</td><td>La magnitud acotada es la diagonal media de la huella, no el lado.</td><td>Permite comparar durezas en piezas delgadas o tratamientos superficiales.</td></tr><tr><td>Charpy</td><td>Energía absorbida y sección resistente en unidades compatibles.</td><td>Mayor resiliencia implica mejor resistencia al impacto.</td></tr></table>
+<div class="audit3-imgnote"><strong>Imagen recomendada para cerrar el bloque:</strong> una lámina única con cuatro viñetas: probeta de tracción con curva σ-ε, penetrador Brinell, huella Vickers con diagonal acotada y péndulo Charpy golpeando la probeta.</div>
+</div>
+
 <div class="pie">
   <span>IES Jiménez de Quesada · Santa Fe (Granada)</span>
   <span>Bloque B — Materiales y Fabricación</span>
