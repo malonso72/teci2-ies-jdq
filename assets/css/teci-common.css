@@ -1,0 +1,76 @@
+/* ═══════════════════════════════════════════════════════════════
+   TECI II · IES Jiménez de Quesada · CSS común
+   Curso 2025-26
+   ═══════════════════════════════════════════════════════════════ */
+
+:root{
+  --az:#1B4F8A;
+  --az2:#2E7BC4;
+  --azul:#1B4F8A;
+  --azul2:#2E7BC4;
+  --azul-cl:#DDE9F7;
+  --azul-bg:#EEF4FB;
+  --bg:#F4F6F9;
+  --hub-bg:#F4F6F9;
+  --w:#FFF;
+  --tx:#23272F;
+  --texto:#1A2430;
+  --t2:#555D6B;
+  --texto2:#455565;
+  --bd:#D8DDE5;
+  --borde:#CDD7E3;
+  --naranja:#D4700A;
+  --naranja-cl:#FEF0DF;
+  --verde:#1A6B3A;
+  --verde-cl:#E4F4EB;
+  --rojo:#C0321E;
+  --rojo-cl:#FCEAE7;
+  --gris:#F5F6F8;
+  --mono:'JetBrains Mono',monospace;
+  --sans:'Barlow',sans-serif;
+  --cond:'Barlow Condensed',sans-serif;
+  --nw:260px;
+  --hh:52px;
+}
+
+/* ── Accesibilidad ── */
+*:focus-visible{outline:2px solid var(--az);outline-offset:2px;border-radius:3px}
+.skip-link{position:absolute;top:-100px;left:8px;z-index:9999;padding:8px 14px;background:var(--az);color:#fff;font-weight:600;border-radius:6px;text-decoration:none;font-size:.85rem;transition:top .15s}
+.skip-link:focus{top:8px;outline:2px solid #F8C060;outline-offset:2px}
+
+/* ── Cabecera global TECI ── */
+.teci-hd{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(27,79,138,.12);font-family:var(--sans)}
+.teci-hd .teci-lg{font-family:var(--cond);font-size:1.15rem;font-weight:700;cursor:pointer;color:#fff;text-decoration:none}
+.teci-hd .teci-lg:hover{opacity:.85}
+.teci-hd .teci-sb{font-size:.72rem;opacity:.78;margin-left:10px;color:#fff}
+.teci-hd .teci-home-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:8px;cursor:pointer;margin-left:auto;transition:background .15s;text-decoration:none}
+.teci-hd .teci-home-btn:hover{background:rgba(255,255,255,.16)}
+
+.teci-navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:var(--sans);font-size:.78rem}
+.teci-navcross a,.teci-navcross span.teci-nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.teci-navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.teci-navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+.teci-navcross span.teci-nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default}
+.teci-navcross .teci-nc-sep{color:#8C97A8;align-self:center;user-select:none}
+
+/* ── Mini-test ── */
+.test-section{margin:20px 0 28px;padding:20px 24px;background:linear-gradient(180deg,#E4F4EB,#F2FAF5);border-left:5px solid var(--verde);border-radius:5px}
+.test-section h2{font-family:var(--cond);font-size:16pt;color:var(--verde);margin:0 0 6px;display:flex;align-items:center;gap:8px}
+.test-section .test-sub{font-size:9pt;color:var(--texto2);margin-bottom:14px}
+.test-q{background:#fff;border:1px solid var(--borde);border-radius:5px;padding:12px 14px;margin-bottom:10px}
+.test-qtext{font-weight:600;color:var(--texto);margin-bottom:8px;font-size:10pt}
+.test-opts{display:flex;flex-direction:column;gap:4px}
+.test-opt{display:block;width:100%;text-align:left;padding:8px 12px;background:#fff;border:1px solid var(--borde);border-radius:4px;cursor:pointer;font-family:var(--sans);font-size:9.5pt;color:var(--texto);transition:all .15s;line-height:1.4}
+.test-opt:hover:not(:disabled){background:#EEF4FB;border-color:var(--azul2)}
+.test-opt:disabled{cursor:default;opacity:.95}
+.test-opt.correct{background:#E4F4EB;border-color:var(--verde);color:var(--verde);font-weight:600}
+.test-opt.wrong{background:#FCEAE7;border-color:var(--rojo);color:var(--rojo)}
+.test-fb{display:none;margin-top:10px;padding:10px 12px;background:#EEF4FB;border-left:3px solid var(--azul);font-size:9pt;color:var(--texto2);border-radius:0 4px 4px 0;line-height:1.5}
+.test-q.answered .test-fb{display:block}
+
+/* ── Print ── */
+@media print{
+  .hd,.navcross,.teci-hd,.teci-navcross,.sol-btn,.test-opt{display:none!important}
+  .sol-content,.test-fb{display:block!important}
+  .apartado,.seccion,.test-q{break-inside:avoid}
+}

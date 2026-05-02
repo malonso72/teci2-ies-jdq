@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A">
+<meta name="description" content="Material de apoyo TECI II — IES Jiménez de Quesada. Formularios, conversiones y recursos interactivos.">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
 <title>Animación · Regulador D · Señales · TECI II</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -667,8 +670,42 @@ footer {
   text-align: center;
 }
 </style>
+
+<style id="teci-header-style">
+.teci-hd{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(27,79,138,.12);font-family:'Barlow',system-ui,sans-serif;}
+.teci-hd .teci-lg{font-family:'Barlow Condensed','Barlow',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer;color:#fff;text-decoration:none;}
+.teci-hd .teci-lg:hover{opacity:.85;}
+.teci-hd .teci-sb{font-size:.72rem;opacity:.78;margin-left:10px;color:#fff;}
+.teci-hd .teci-home-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:8px;cursor:pointer;margin-left:auto;transition:background .15s;text-decoration:none;}
+.teci-hd .teci-home-btn:hover{background:rgba(255,255,255,.16);}
+.teci-navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;}
+.teci-navcross a,.teci-navcross span.teci-nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s;}
+.teci-navcross a{color:#23272F;background:#fff;border-color:#D8DDE5;}
+.teci-navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A;}
+.teci-navcross span.teci-nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default;}
+.teci-navcross .teci-nc-sep{color:#8C97A8;align-self:center;user-select:none;}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+<div class="teci-hd">
+<a class="teci-lg" href="../../index.html">TECI II</a>
+<span class="teci-sb">D · Acción derivativa</span>
+<a href="../../index.html" class="teci-home-btn">🏠 Índice</a>
+</div>
+<nav class="teci-navcross" role="navigation" aria-label="Navegación transversal">
+<a href="../../index.html"><span>🏠</span><span>Índice</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../teoria/bloque_F.html"><span>📖</span><span>Teoría F</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../ejercicios/ej_F.html"><span>✏️</span><span>Ejercicios F</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="reguladores_pid.html"><span>🎛</span><span>Reguladores</span></a>
+<span class="teci-nc-sep">·</span>
+<span class="teci-nc-current"><span>🧰</span><span>Apoyo</span></span>
+</nav>
+
 <div class="container">
 
 <header class="masthead">

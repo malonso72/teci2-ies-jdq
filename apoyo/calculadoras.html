@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A">
+<meta name="description" content="Calculadoras interactivas para los problemas tipo PAU/PEvAU TECI II: triángulo de potencias, ciclo de Carnot, motor 4T y corrección del factor de potencia.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<title>TECI II · Calculadoras interactivas · IES Jiménez de Quesada</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--az:#1B4F8A;--az2:#2E7BC4;--bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5;--green:#2E7D32;--orange:#D4700A}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Barlow',system-ui,sans-serif;background:var(--bg);color:var(--tx);line-height:1.5}
+.hd{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(27,79,138,.12);position:sticky;top:0;z-index:500}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer;color:#fff;text-decoration:none}
+.hd .sb{font-size:.72rem;opacity:.78;margin-left:10px}
+.home-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:8px;cursor:pointer;margin-left:auto;text-decoration:none}
+.home-btn:hover{background:rgba(255,255,255,.16)}
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:'Barlow',sans-serif;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+.navcross span.nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8}
+.main{max-width:980px;margin:0 auto;padding:28px 18px 64px}
+.title-block{text-align:center;margin-bottom:28px}
+.title-block h1{font-family:'Barlow Condensed',sans-serif;font-size:2rem;color:var(--az);font-weight:700}
+.title-block .sub{color:var(--t2);font-size:.95rem;margin-top:4px}
+.calc{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:20px 24px;margin:0 0 24px;box-shadow:0 3px 12px rgba(27,79,138,.06)}
+.calc h2{font-family:'Barlow Condensed',sans-serif;color:var(--az);font-size:1.3rem;margin-bottom:6px;padding-bottom:8px;border-bottom:2px solid var(--az2)}
+.calc .descr{color:var(--t2);font-size:.88rem;margin-bottom:14px}
+.input-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:14px}
+.input-grid label{display:block;font-size:.82rem;color:var(--t2);font-weight:600;margin-bottom:4px}
+.input-grid input{width:100%;padding:8px 10px;border:1.5px solid var(--bd);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.95rem;color:var(--tx)}
+.input-grid input:focus{outline:none;border-color:var(--az2);box-shadow:0 0 0 3px rgba(46,123,196,.15)}
+.btn-calc{padding:9px 18px;background:var(--az);color:#fff;border:none;border-radius:6px;font-family:'Barlow',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;transition:all .15s;box-shadow:0 2px 6px rgba(27,79,138,.25)}
+.btn-calc:hover{background:var(--az2);transform:translateY(-1px)}
+.results{margin-top:14px;padding:14px 18px;background:#EFF6FF;border-left:4px solid var(--az2);border-radius:0 8px 8px 0;font-family:'JetBrains Mono',monospace;font-size:.88rem;line-height:1.7;display:none}
+.results.show{display:block}
+.results .r-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px dashed #CDD7E3}
+.results .r-row:last-child{border-bottom:none}
+.results .r-row strong{color:var(--az)}
+.results .r-row .val{color:var(--green);font-weight:700}
+.formula{display:inline-block;background:#FEF0DF;color:#6B3800;padding:3px 9px;border-radius:5px;font-family:'JetBrains Mono',monospace;font-size:.82rem;margin:4px 0}
+.foot{text-align:center;color:var(--t2);font-size:.78rem;padding:24px 0 0}
+@media(max-width:600px){.main{padding:18px 12px 40px}.calc{padding:14px 16px}}
+</style>
+</head>
+<body>
+
+<div class="hd">
+<a class="lg" href="../index.html">TECI II</a>
+<span class="sb">🧮 Calculadoras interactivas</span>
+<a href="../index.html" class="home-btn">🏠 Índice</a>
+</div>
+
+<nav class="navcross" role="navigation" aria-label="Navegación transversal">
+<a href="../index.html"><span>🏠</span><span>Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html#teoria"><span>📖</span><span>Teoría</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html#ejercicios"><span>✏️</span><span>Ejercicios</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html#examenes"><span>📋</span><span>Exámenes</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>🧰</span><span>Apoyo</span></span>
+</nav>
+
+<div class="main">
+
+<div class="title-block">
+<h1>🧮 Calculadoras interactivas</h1>
+<div class="sub">Verifica los resultados de tus problemas tipo PAU al instante. No sustituye al planteamiento — sirve para comprobar.</div>
+</div>
+
+<!-- TRIÁNGULO DE POTENCIAS -->
+<div class="calc" id="calc-fdp">
+<h2>⚡ Triángulo de potencias y corrección del factor de potencia</h2>
+<p class="descr">Calcula P, Q, S y cos φ a partir de tensión, corriente y desfase. Si quieres, calcula también el condensador necesario para corregir el fdp.</p>
+<span class="formula">P = U·I·cos φ · Q = U·I·sin φ · S = U·I</span>
+<div class="input-grid">
+<div><label>U (V eficaz)</label><input type="number" id="fdp-u" value="230" step="any"></div>
+<div><label>I (A eficaz)</label><input type="number" id="fdp-i" value="6,30" step="any"></div>
+<div><label>cos φ inicial</label><input type="number" id="fdp-cos" value="0,82" step="any"></div>
+<div><label>cos φ' deseado</label><input type="number" id="fdp-cos2" value="0,95" step="any"></div>
+<div><label>Frecuencia (Hz)</label><input type="number" id="fdp-f" value="50" step="any"></div>
+</div>
+<button class="btn-calc" onclick="calcFDP()">Calcular</button>
+<div class="results" id="fdp-results"></div>
+</div>
+
+<!-- CICLO DE CARNOT -->
+<div class="calc" id="calc-carnot">
+<h2>🔥 Ciclo de Carnot · Motor térmico, frigorífica y bomba de calor</h2>
+<p class="descr">Calcula los rendimientos ideales (Carnot) y reales según el % proporcionado.</p>
+<span class="formula">η = 1 − T_f/T_c · ε = T_f/(T_c−T_f) · ε' = T_c/(T_c−T_f)</span>
+<div class="input-grid">
+<div><label>T foco caliente (°C)</label><input type="number" id="ca-tc" value="500" step="any"></div>
+<div><label>T foco frío (°C)</label><input type="number" id="ca-tf" value="25" step="any"></div>
+<div><label>% del Carnot real</label><input type="number" id="ca-pc" value="35" step="any"></div>
+</div>
+<button class="btn-calc" onclick="calcCarnot()">Calcular</button>
+<div class="results" id="ca-results"></div>
+</div>
+
+<!-- MOTOR 4T -->
+<div class="calc" id="calc-motor">
+<h2>🚗 Motor de combustión 4T · Cilindrada, par y potencia</h2>
+<p class="descr">Datos del motor: diámetro D, carrera L, número de cilindros, rpm, par. Devuelve cilindrada, ω y potencia efectiva.</p>
+<span class="formula">V_u = π·D²/4·L · P_e = M·ω · ω = 2π·n/60</span>
+<div class="input-grid">
+<div><label>D (mm)</label><input type="number" id="m-d" value="80" step="any"></div>
+<div><label>L (mm)</label><input type="number" id="m-l" value="90" step="any"></div>
+<div><label>nº cilindros</label><input type="number" id="m-n" value="4" step="any"></div>
+<div><label>rpm</label><input type="number" id="m-rpm" value="3000" step="any"></div>
+<div><label>Par M (N·m)</label><input type="number" id="m-par" value="120" step="any"></div>
+<div><label>r compresión</label><input type="number" id="m-r" value="10" step="any"></div>
+</div>
+<button class="btn-calc" onclick="calcMotor()">Calcular</button>
+<div class="results" id="m-results"></div>
+</div>
+
+<!-- BRINELL -->
+<div class="calc" id="calc-brinell">
+<h2>🔩 Ensayo Brinell · Calculadora rápida</h2>
+<p class="descr">A partir de la designación HB, calcula la profundidad f, el diámetro d y comprueba la norma D/4 ≤ d ≤ D/2.</p>
+<span class="formula">HB = F/(π·D·f) · d = √(D² − (D−2f)²)</span>
+<div class="input-grid">
+<div><label>HB (kp/mm²)</label><input type="number" id="br-hb" value="160" step="any"></div>
+<div><label>D bola (mm)</label><input type="number" id="br-d" value="5" step="any"></div>
+<div><label>F (kp)</label><input type="number" id="br-f" value="650" step="any"></div>
+</div>
+<button class="btn-calc" onclick="calcBrinell()">Calcular</button>
+<div class="results" id="br-results"></div>
+</div>
+
+<!-- CILINDRO NEUMÁTICO -->
+<div class="calc" id="calc-cilindro">
+<h2>💨 Cilindro neumático de doble efecto</h2>
+<p class="descr">Fuerzas reales (avance/retroceso) considerando rendimiento y consumo de aire en condiciones normales.</p>
+<span class="formula">F = η·p·S · Q_CN = V_ciclo · n · (p_abs/p_atm)</span>
+<div class="input-grid">
+<div><label>D émbolo (mm)</label><input type="number" id="ci-d" value="40" step="any"></div>
+<div><label>d vástago (mm)</label><input type="number" id="ci-dv" value="16" step="any"></div>
+<div><label>L carrera (mm)</label><input type="number" id="ci-l" value="100" step="any"></div>
+<div><label>p (bar relativos)</label><input type="number" id="ci-p" value="6" step="any"></div>
+<div><label>n (ciclos/min)</label><input type="number" id="ci-n" value="20" step="any"></div>
+<div><label>η (rendimiento)</label><input type="number" id="ci-eta" value="0,90" step="any"></div>
+</div>
+<button class="btn-calc" onclick="calcCilindro()">Calcular</button>
+<div class="results" id="ci-results"></div>
+</div>
+
+<div class="foot">
+IES Jiménez de Quesada · Santa Fe (Granada) · TECI II · Curso 2025-26
+</div>
+</div>
+
+<script>
+function num(id){
+  // Soporta coma como separador decimal
+  var v = document.getElementById(id).value.replace(',','.');
+  return parseFloat(v);
+}
+function fmt(x, dec){
+  if (typeof x !== 'number' || isNaN(x)) return '—';
+  return x.toFixed(dec || 2).replace('.',',');
+}
+function show(id, html){
+  var d = document.getElementById(id);
+  d.innerHTML = html;
+  d.classList.add('show');
+}
+function row(label, val, unit){
+  return '<div class="r-row"><strong>'+label+'</strong><span class="val">'+val+(unit?' '+unit:'')+'</span></div>';
+}
+
+function calcFDP(){
+  var U=num('fdp-u'), I=num('fdp-i'), c=num('fdp-cos'), c2=num('fdp-cos2'), f=num('fdp-f');
+  if (!U||!I||!c) return show('fdp-results','<strong>Faltan datos</strong>');
+  var phi = Math.acos(c)*180/Math.PI;
+  var P = U*I*c, S = U*I, Q = Math.sqrt(S*S-P*P);
+  var html = row('Potencia activa P', fmt(P), 'W');
+  html += row('Potencia reactiva Q', fmt(Q), 'VAr');
+  html += row('Potencia aparente S', fmt(S), 'VA');
+  html += row('Desfase φ', fmt(phi), '°');
+  if (c2 && f && c2>c) {
+    var phi2 = Math.acos(c2);
+    var Q2 = P*Math.tan(phi2);
+    var dQ = Q-Q2;
+    var omega = 2*Math.PI*f;
+    var C = dQ/(U*U*omega);
+    html += row('— Corrección a cos φ\\' = '+fmt(c2,2), '', '');
+    html += row('ΔQ a compensar', fmt(dQ), 'VAr');
+    html += row('C condensador', fmt(C*1e6,2), 'μF');
+  }
+  show('fdp-results', html);
+}
+
+function calcCarnot(){
+  var Tc=num('ca-tc')+273.15, Tf=num('ca-tf')+273.15, p=num('ca-pc')/100;
+  if (Tc<=Tf) return show('ca-results','<strong>T_c debe ser mayor que T_f</strong>');
+  var eta = 1-Tf/Tc;
+  var eps = Tf/(Tc-Tf);
+  var epsp = Tc/(Tc-Tf);
+  var html = row('η Carnot ideal (motor)', fmt(eta*100), '%');
+  html += row('η real ('+fmt(p*100,0)+'% del Carnot)', fmt(eta*p*100), '%');
+  html += row('ε frigorífica ideal', fmt(eps), '');
+  html += row('ε frigorífica real', fmt(eps*p), '');
+  html += row('ε\\' bomba calor ideal', fmt(epsp), '');
+  html += row('ε\\' bomba calor real', fmt(epsp*p), '');
+  html += row('Verificación ε\\' = ε + 1', fmt(eps+1)+' ≈ '+fmt(epsp), '');
+  show('ca-results', html);
+}
+
+function calcMotor(){
+  var D=num('m-d')/1000, L=num('m-l')/1000, n=num('m-n'), rpm=num('m-rpm'), M=num('m-par'), r=num('m-r');
+  var Vu = Math.PI*D*D/4*L; // m³
+  var Vt = Vu*n;
+  var Vc = r ? Vu/(r-1) : 0;
+  var omega = 2*Math.PI*rpm/60;
+  var Pe = M*omega;
+  var html = row('Volumen unitario', fmt(Vu*1e6,1), 'cm³');
+  html += row('Cilindrada total', fmt(Vt*1e6,1)+' cm³ ('+fmt(Vt*1000,2)+' L)', '');
+  if (r) html += row('Vol. cámara combustión', fmt(Vc*1e6,1), 'cm³/cilindro');
+  html += row('Velocidad angular ω', fmt(omega), 'rad/s');
+  html += row('Potencia efectiva Pe', fmt(Pe/1000), 'kW ('+fmt(Pe/735.5)+' CV)');
+  show('m-results', html);
+}
+
+function calcBrinell(){
+  var HB=num('br-hb'), D=num('br-d'), F=num('br-f');
+  if (!HB||!D||!F) return show('br-results','<strong>Faltan datos</strong>');
+  var f = F/(Math.PI*D*HB);
+  var d = Math.sqrt(D*D - Math.pow(D-2*f,2));
+  var rel = d/D;
+  var ok = (rel >= 0.25 && rel <= 0.5);
+  var html = row('Profundidad f', fmt(f,3), 'mm');
+  html += row('Diámetro huella d', fmt(d,3), 'mm');
+  html += row('Relación d/D', fmt(rel,3), (ok?'✓ cumple norma':'✗ NO cumple (0,25 ≤ d/D ≤ 0,5)'));
+  show('br-results', html);
+}
+
+function calcCilindro(){
+  var D=num('ci-d')/1000, dv=num('ci-dv')/1000, L=num('ci-l')/1000, p_rel=num('ci-p')*1e5, n=num('ci-n'), eta=num('ci-eta');
+  var Sa = Math.PI*D*D/4;
+  var Sr = Math.PI*(D*D-dv*dv)/4;
+  var Fa = eta*p_rel*Sa;
+  var Fr = eta*p_rel*Sr;
+  var Vciclo = (Sa+Sr)*L;
+  var Qtrab = Vciclo*n;
+  var pabs = num('ci-p')+1; // bar
+  var QCN = Qtrab*pabs;
+  var html = row('Sección avance S_a', fmt(Sa*1e4,2), 'cm²');
+  html += row('Sección retroceso S_r', fmt(Sr*1e4,2), 'cm²');
+  html += row('Fuerza avance real', fmt(Fa,1), 'N ('+fmt(Fa/9.81)+' kp)');
+  html += row('Fuerza retroceso real', fmt(Fr,1), 'N');
+  html += row('Volumen por ciclo', fmt(Vciclo*1e6,2), 'cm³');
+  html += row('Caudal trabajo', fmt(Qtrab*1000,2), 'L/min');
+  html += row('Caudal CN (condic. normales)', fmt(QCN*1000,2), 'L/min');
+  show('ci-results', html);
+}
+</script>
+</body>
+</html>

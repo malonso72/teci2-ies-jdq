@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A">
+<meta name="description" content="Glosario de fórmulas y conceptos clave por bloque para la PEvAU TECI II 2025-26.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<title>TECI II · Glosario de fórmulas · IES Jiménez de Quesada</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--az:#1B4F8A;--az2:#2E7BC4;--bg:#F4F6F9;--w:#FFF;--tx:#23272F;--t2:#555D6B;--bd:#D8DDE5;--green:#2E7D32;--orange:#D4700A}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:'Barlow',system-ui,sans-serif;background:var(--bg);color:var(--tx);line-height:1.5}
+.hd{background:linear-gradient(135deg,var(--az),var(--az2));color:#fff;padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(27,79,138,.12);position:sticky;top:0;z-index:500}
+.hd .lg{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer;color:#fff;text-decoration:none}
+.hd .sb{font-size:.72rem;opacity:.78;margin-left:10px}
+.home-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:8px;cursor:pointer;margin-left:auto;text-decoration:none}
+.navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-size:.78rem;position:sticky;top:52px;z-index:450}
+.navcross a,.navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent}
+.navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.navcross a:hover{background:#EBF0F7;border-color:#1B4F8A;color:#1B4F8A}
+.navcross span.nc-current{background:linear-gradient(135deg,#1B4F8A,#2E7BC4);color:#fff;border-color:#1B4F8A;font-weight:600;cursor:default}
+.navcross .nc-sep{color:#8C97A8}
+.main{max-width:1100px;margin:0 auto;padding:28px 18px 64px}
+.title-block{text-align:center;margin-bottom:28px}
+.title-block h1{font-family:'Barlow Condensed',sans-serif;font-size:2rem;color:var(--az);font-weight:700}
+.title-block .sub{color:var(--t2);font-size:.95rem;margin-top:4px}
+.search-box{margin:0 0 22px;padding:14px 18px;background:#fff;border:1.5px solid var(--bd);border-radius:10px;display:flex;gap:10px;align-items:center;box-shadow:0 2px 8px rgba(27,79,138,.05)}
+.search-box input{flex:1;padding:8px 12px;border:1px solid var(--bd);border-radius:6px;font-size:.95rem;font-family:'Barlow',sans-serif}
+.search-box input:focus{outline:none;border-color:var(--az2);box-shadow:0 0 0 3px rgba(46,123,196,.15)}
+.bloque{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:18px 22px;margin:0 0 18px;box-shadow:0 3px 12px rgba(27,79,138,.06)}
+.bloque h2{font-family:'Barlow Condensed',sans-serif;color:var(--az);font-size:1.3rem;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--az2)}
+.formulas{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
+.formula-card{padding:11px 14px;background:#FAFBFD;border-left:3px solid var(--az2);border-radius:0 6px 6px 0;font-size:.9rem}
+.formula-card .name{font-weight:600;color:var(--az);font-size:.86rem;margin-bottom:3px}
+.formula-card .eq{font-family:'JetBrains Mono',monospace;color:var(--tx);font-size:.95rem;margin:4px 0}
+.formula-card .desc{color:var(--t2);font-size:.78rem;line-height:1.45}
+.formula-card.hide{display:none}
+.bloque.collapsed .formulas{display:none}
+.bloque h2{cursor:pointer;user-select:none}
+.bloque h2::before{content:'▼';font-size:.7em;margin-right:6px;color:var(--orange);transition:transform .15s}
+.bloque.collapsed h2::before{transform:rotate(-90deg)}
+.foot{text-align:center;color:var(--t2);font-size:.78rem;padding:24px 0 0}
+@media(max-width:600px){.main{padding:18px 12px 40px}.formulas{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="hd">
+<a class="lg" href="../index.html">TECI II</a>
+<span class="sb">📚 Glosario de fórmulas</span>
+<a href="../index.html" class="home-btn">🏠 Índice</a>
+</div>
+
+<nav class="navcross" role="navigation" aria-label="Navegación transversal">
+<a href="../index.html"><span>🏠</span><span>Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html#teoria"><span>📖</span><span>Teoría</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html#ejercicios"><span>✏️</span><span>Ejercicios</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html#examenes"><span>📋</span><span>Exámenes</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>🧰</span><span>Apoyo</span></span>
+</nav>
+
+<div class="main">
+
+<div class="title-block">
+<h1>📚 Glosario de fórmulas TECI II</h1>
+<div class="sub">Las fórmulas imprescindibles para PEvAU 2025-26, organizadas por bloque y buscables.</div>
+</div>
+
+<div class="search-box">
+<span>🔍</span>
+<input type="text" id="search" placeholder="Filtrar fórmulas (ej. 'Carnot', 'Bernoulli', 'cos φ'…)" oninput="filterFormulas()">
+</div>
+
+<div class="bloque" id="b-B"><h2 onclick="this.parentElement.classList.toggle('collapsed')">B · Materiales y fabricación</h2>
+<div class="formulas">
+<div class="formula-card"><div class="name">Dureza Brinell</div><div class="eq">\(HB = \dfrac{F}{\pi \cdot D \cdot f}\)</div><div class="desc">F en kp · D bola · f profundidad huella</div></div>
+<div class="formula-card"><div class="name">Diámetro huella Brinell</div><div class="eq">\(d = \sqrt{D^2 - (D-2f)^2}\)</div><div class="desc">Validez: D/4 ≤ d ≤ D/2</div></div>
+<div class="formula-card"><div class="name">Dureza Vickers</div><div class="eq">\(HV = \dfrac{1{,}854 \cdot F}{d^2}\)</div><div class="desc">F en kp · d diagonal media de la huella romboidal</div></div>
+<div class="formula-card"><div class="name">Resiliencia (Charpy)</div><div class="eq">\(\rho = \dfrac{E_{abs}}{A}\)</div><div class="desc">E energía absorbida · A área de la sección entallada (cm² o m²)</div></div>
+<div class="formula-card"><div class="name">Tensión normal</div><div class="eq">\(\sigma = \dfrac{F}{A}\)</div><div class="desc">F en N · A sección · σ en Pa o N/m²</div></div>
+<div class="formula-card"><div class="name">Deformación unitaria</div><div class="eq">\(\varepsilon = \dfrac{\Delta L}{L_0}\)</div><div class="desc">Adimensional</div></div>
+<div class="formula-card"><div class="name">Ley de Hooke</div><div class="eq">\(\sigma = E \cdot \varepsilon\)</div><div class="desc">E módulo de Young (Pa). Solo en zona elástica.</div></div>
+</div>
+</div>
+
+<div class="bloque" id="b-C1"><h2 onclick="this.parentElement.classList.toggle('collapsed')">C1 · Estructuras</h2>
+<div class="formulas">
+<div class="formula-card"><div class="name">Equilibrio estático 2D</div><div class="eq">\(\sum F_x=0,\ \sum F_y=0,\ \sum M=0\)</div><div class="desc">Tres ecuaciones para vigas isostáticas</div></div>
+<div class="formula-card"><div class="name">Cortante y momento</div><div class="eq">\(V = \dfrac{dM}{dx}\)</div><div class="desc">Donde V=0, M es máximo o mínimo</div></div>
+<div class="formula-card"><div class="name">Resultante de carga distribuida</div><div class="eq">\(Q = q \cdot L_q\)</div><div class="desc">Aplicada en el centroide del área de carga</div></div>
+<div class="formula-card"><div class="name">Reacciones biapoyada · carga centrada</div><div class="eq">\(R_A = R_B = P/2\)</div><div class="desc">Si la carga P está justo en el centro</div></div>
+<div class="formula-card"><div class="name">Momento máximo biapoyada</div><div class="eq">\(M_{max} = \dfrac{P \cdot L}{4}\)</div><div class="desc">Carga puntual centrada</div></div>
+<div class="formula-card"><div class="name">Momento empotramiento ménsula</div><div class="eq">\(M = P \cdot L\)</div><div class="desc">Carga P en el extremo, L longitud</div></div>
+</div>
+</div>
+
+<div class="bloque" id="b-C2"><h2 onclick="this.parentElement.classList.toggle('collapsed')">C2 · Máquinas térmicas</h2>
+<div class="formulas">
+<div class="formula-card"><div class="name">Rendimiento de Carnot</div><div class="eq">\(\eta_{Carnot} = 1 - \dfrac{T_f}{T_c}\)</div><div class="desc">Temperaturas SIEMPRE en Kelvin</div></div>
+<div class="formula-card"><div class="name">Rendimiento motor térmico</div><div class="eq">\(\eta = \dfrac{W}{Q_c} = 1 - \dfrac{Q_f}{Q_c}\)</div><div class="desc">η ≤ 1 siempre</div></div>
+<div class="formula-card"><div class="name">Eficiencia frigorífica</div><div class="eq">\(\varepsilon = \dfrac{Q_f}{W}\)</div><div class="desc">Puede ser > 1</div></div>
+<div class="formula-card"><div class="name">Eficiencia bomba de calor</div><div class="eq">\(\varepsilon' = \dfrac{Q_c}{W} = \varepsilon + 1\)</div><div class="desc">Relación clave</div></div>
+<div class="formula-card"><div class="name">Cilindrada unitaria</div><div class="eq">\(V_u = \dfrac{\pi D^2}{4} \cdot L\)</div><div class="desc">D diámetro pistón, L carrera</div></div>
+<div class="formula-card"><div class="name">Volumen cámara combustión</div><div class="eq">\(V_c = \dfrac{V_u}{r-1}\)</div><div class="desc">r relación de compresión</div></div>
+<div class="formula-card"><div class="name">Potencia efectiva motor</div><div class="eq">\(P_e = M \cdot \omega\)</div><div class="desc">ω en rad/s · ω = 2π·n/60 (n en rpm)</div></div>
+<div class="formula-card"><div class="name">Potencia térmica de combustible</div><div class="eq">\(P_t = \dot m \cdot P_c\)</div><div class="desc">ṁ caudal másico · Pc poder calorífico</div></div>
+</div>
+</div>
+
+<div class="bloque" id="b-C3"><h2 onclick="this.parentElement.classList.toggle('collapsed')">C3 · Neumática e hidráulica</h2>
+<div class="formulas">
+<div class="formula-card"><div class="name">Principio de Pascal</div><div class="eq">\(\dfrac{F_1}{S_1} = \dfrac{F_2}{S_2}\)</div><div class="desc">Prensa hidráulica: F₂ = F₁·S₂/S₁</div></div>
+<div class="formula-card"><div class="name">Continuidad</div><div class="eq">\(S_1 v_1 = S_2 v_2\)</div><div class="desc">Caudal Q = S·v constante</div></div>
+<div class="formula-card"><div class="name">Bernoulli</div><div class="eq">\(p + \tfrac12\rho v^2 + \rho g h = \text{cte}\)</div><div class="desc">Conservación de energía por unidad de volumen</div></div>
+<div class="formula-card"><div class="name">Cilindro DE · Sección avance</div><div class="eq">\(S_a = \dfrac{\pi D^2}{4}\)</div><div class="desc">D diámetro émbolo</div></div>
+<div class="formula-card"><div class="name">Cilindro DE · Sección retroceso</div><div class="eq">\(S_r = \dfrac{\pi(D^2-d^2)}{4}\)</div><div class="desc">d diámetro vástago · S_r &lt; S_a</div></div>
+<div class="formula-card"><div class="name">Fuerza del cilindro</div><div class="eq">\(F = \eta \cdot p \cdot S\)</div><div class="desc">η rendimiento, p presión absoluta o relativa según contexto</div></div>
+<div class="formula-card"><div class="name">Caudal en condiciones normales</div><div class="eq">\(Q_{CN} = Q_{trab} \cdot \dfrac{p_{abs}}{p_0}\)</div><div class="desc">p₀ = 1 atm ≈ 1 bar</div></div>
+<div class="formula-card"><div class="name">Potencia hidráulica</div><div class="eq">\(P = \rho \cdot g \cdot Q \cdot H = Q \cdot \Delta p\)</div><div class="desc">Q caudal, H altura manométrica</div></div>
+</div>
+</div>
+
+<div class="bloque" id="b-D1"><h2 onclick="this.parentElement.classList.toggle('collapsed')">D1 · Corriente alterna</h2>
+<div class="formulas">
+<div class="formula-card"><div class="name">Reactancias</div><div class="eq">\(X_L = \omega L,\quad X_C = \dfrac{1}{\omega C}\)</div><div class="desc">ω = 2πf · X en Ω</div></div>
+<div class="formula-card"><div class="name">Impedancia RLC serie</div><div class="eq">\(Z = \sqrt{R^2 + (X_L-X_C)^2}\)</div><div class="desc">Z en Ω</div></div>
+<div class="formula-card"><div class="name">Ley de Ohm CA</div><div class="eq">\(V = I \cdot Z\)</div><div class="desc">Valores eficaces</div></div>
+<div class="formula-card"><div class="name">Valor eficaz</div><div class="eq">\(V_{ef} = \dfrac{V_{max}}{\sqrt 2}\)</div><div class="desc">Para señal senoidal pura</div></div>
+<div class="formula-card"><div class="name">Factor de potencia</div><div class="eq">\(\cos\varphi = \dfrac{R}{Z} = \dfrac{P}{S}\)</div><div class="desc">Mide aprovechamiento de la potencia</div></div>
+<div class="formula-card"><div class="name">Potencia activa</div><div class="eq">\(P = V \cdot I \cdot \cos\varphi\)</div><div class="desc">En W · es la útil</div></div>
+<div class="formula-card"><div class="name">Potencia reactiva</div><div class="eq">\(Q = V \cdot I \cdot \sin\varphi\)</div><div class="desc">En VAr</div></div>
+<div class="formula-card"><div class="name">Potencia aparente</div><div class="eq">\(S = V \cdot I = \sqrt{P^2 + Q^2}\)</div><div class="desc">En VA</div></div>
+<div class="formula-card"><div class="name">Frecuencia de resonancia</div><div class="eq">\(f_0 = \dfrac{1}{2\pi\sqrt{LC}}\)</div><div class="desc">A f₀: X_L = X_C, Z mín, I máx (serie)</div></div>
+<div class="formula-card"><div class="name">Corrección del fdp</div><div class="eq">\(C = \dfrac{P(\tan\varphi - \tan\varphi')}{\omega \cdot V^2}\)</div><div class="desc">Condensador en paralelo · cos φ' es el deseado</div></div>
+</div>
+</div>
+
+<div class="bloque" id="b-D2"><h2 onclick="this.parentElement.classList.toggle('collapsed')">D2 · Electrónica digital</h2>
+<div class="formulas">
+<div class="formula-card"><div class="name">De Morgan</div><div class="eq">\(\overline{A \cdot B} = \bar A + \bar B,\quad \overline{A+B} = \bar A \cdot \bar B\)</div><div class="desc">Base para implementar con NAND/NOR</div></div>
+<div class="formula-card"><div class="name">Tabla de verdad</div><div class="eq">\(\text{filas} = 2^N\)</div><div class="desc">N = nº variables de entrada</div></div>
+<div class="formula-card"><div class="name">Suma de minterms</div><div class="eq">\(F = \sum m(0,3,5,…)\)</div><div class="desc">Forma canónica: producto de todas las variables (negada o no) cuando F=1</div></div>
+<div class="formula-card"><div class="name">Producto de maxterms</div><div class="eq">\(F = \prod M(1,2,4,…)\)</div><div class="desc">Forma canónica: suma de todas las variables (negada o no) cuando F=0</div></div>
+<div class="formula-card"><div class="name">Karnaugh · grupos</div><div class="eq">\(\text{tamaño} = 2^k\)</div><div class="desc">k=0,1,2,3,4… Cuanto mayor el grupo, más simplificación</div></div>
+</div>
+</div>
+
+<div class="bloque" id="b-F"><h2 onclick="this.parentElement.classList.toggle('collapsed')">F · Sistemas automáticos</h2>
+<div class="formulas">
+<div class="formula-card"><div class="name">Función de transferencia</div><div class="eq">\(G = \dfrac{\text{Salida}}{\text{Entrada}}\)</div><div class="desc">Relación entrada-salida en régimen permanente</div></div>
+<div class="formula-card"><div class="name">Bloques en serie</div><div class="eq">\(G_{eq} = G_1 \cdot G_2\)</div><div class="desc">Multiplicar funciones de transferencia</div></div>
+<div class="formula-card"><div class="name">Bloques en paralelo</div><div class="eq">\(G_{eq} = G_1 + G_2\)</div><div class="desc">Sumar (con signo según punto de suma)</div></div>
+<div class="formula-card"><div class="name">Realimentación negativa</div><div class="eq">\(G_{eq} = \dfrac{G}{1+G \cdot H}\)</div><div class="desc">⭐ La fórmula más importante de F</div></div>
+<div class="formula-card"><div class="name">Realimentación positiva</div><div class="eq">\(G_{eq} = \dfrac{G}{1-G \cdot H}\)</div><div class="desc">Inestable si G·H ≥ 1</div></div>
+<div class="formula-card"><div class="name">Error en lazo cerrado</div><div class="eq">\(e = r - H \cdot c\)</div><div class="desc">c salida, r consigna, H realimentación</div></div>
+<div class="formula-card"><div class="name">Acción Proporcional</div><div class="eq">\(m(t) = K_p \cdot e(t)\)</div><div class="desc">Rápida, deja error estacionario</div></div>
+<div class="formula-card"><div class="name">Acción Integral</div><div class="eq">\(m(t) = K_i \int e\, dt\)</div><div class="desc">Elimina error estacionario, lenta</div></div>
+<div class="formula-card"><div class="name">Acción Derivativa</div><div class="eq">\(m(t) = K_d \cdot \dfrac{de}{dt}\)</div><div class="desc">Anticipa, amortigua oscilaciones</div></div>
+</div>
+</div>
+
+<div class="foot">
+IES Jiménez de Quesada · Santa Fe (Granada) · TECI II · Curso 2025-26
+</div>
+</div>
+
+<script>
+function filterFormulas(){
+  var q = document.getElementById('search').value.toLowerCase();
+  document.querySelectorAll('.bloque').forEach(function(b){
+    var anyVisible = false;
+    b.querySelectorAll('.formula-card').forEach(function(c){
+      var hit = c.textContent.toLowerCase().indexOf(q) !== -1;
+      c.classList.toggle('hide', !hit);
+      if (hit) anyVisible = true;
+    });
+    b.style.display = (q && !anyVisible) ? 'none' : '';
+  });
+}
+</script>
+</body>
+</html>
