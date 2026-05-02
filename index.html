@@ -178,6 +178,29 @@ html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:
   .exam-table thead th, .exam-table tbody td{padding:5px 8px}
 }
 
+/* ── subsecciones de exámenes ── */
+.ex-subtitle{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1rem;font-weight:600;color:#1B4F8A;
+  text-transform:uppercase;letter-spacing:.05em;
+  margin:18px 4px 4px;
+}
+.ex-intro{
+  font-size:.78rem;color:#555D6B;
+  margin:0 4px 8px;font-style:italic;line-height:1.45;
+}
+.exam-table .ex-cfg{
+  color:#3A2A26;font-size:.8rem;line-height:1.4;
+}
+.ex-foot{
+  font-size:.78rem;color:#555D6B;
+  margin:8px 4px 16px;text-align:right;
+}
+.ex-foot-link{
+  color:#1B4F8A;text-decoration:none;font-weight:600;
+}
+.ex-foot-link:hover{text-decoration:underline}
+
 /* @media print v2 — ecosistema TECI2 */
 
 .skip-link{position:absolute;top:-100px;left:8px;z-index:9999;padding:8px 14px;background:#1B4F8A;color:#fff;font-weight:600;border-radius:6px;text-decoration:none;font-size:.85rem;transition:top .15s}.skip-link:focus{top:8px;outline:2px solid #F8C060;outline-offset:2px}*:focus-visible{outline:2px solid #1B4F8A;outline-offset:2px;border-radius:3px}</style>
@@ -228,25 +251,6 @@ html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:
 <a href="ponencia_resuelta/index_ponencia.html" class="bc ej" data-keywords="ponencia resuelta problemas resueltos paso a paso ensayos estructuras termicas neumatica hidraulica alterna digital automaticos pevau andalucia oficial 56 57 problemas variante brinell vickers charpy traccion temple otto diesel carnot bomba calor frigorifico cilindro bernoulli pascal rlc fasorial resonancia karnaugh nand nor viga empotrada apoyada voladizo pid lazo cerrado transferencia" aria-label="Ir a Ponencia 2025-26 resuelta — 56 problemas oficiales + 1 variante con procedimiento paso a paso"><span class="bi">📚</span><span class="bk">Ponencia</span><span class="bn">57 problemas PEvAU resueltos</span></a>
 </div>
 
-<!-- ══ 3. BANCO DE MODELOS 2025-26 ══ -->
-<div class="section-title">🧪 Banco de modelos PEvAU 2025-26</div>
-<table class="exam-table" data-section="tipo" aria-label="Banco de modelos PEvAU 2025-26">
-<thead>
-<tr><th style="width:22%;">Modelo</th><th style="width:78%;">Bloques que toca</th></tr>
-</thead>
-<tbody>
-<tr data-keywords="examen modelo banco simulacro 2025-26 brinell tracción charpy vickers carnot otto diésel bomba calor frigorífica venturi bernoulli pascal cilindro RLC fdp resonancia NAND NOR maxterms"><td class="ex-conv" colspan="2"><a class="ex-link reco" href="examenes/banco_modelos/index.html" style="display:block;padding:6px 8px;font-weight:600;">📋 Banco completo · 8 modelos (A–H)</a></td></tr>
-<tr><td class="ex-conv">Modelo A</td><td><a class="ex-link" href="examenes/banco_modelos/Examen_TECI_II_Modelo_A_v2.pdf" target="_blank">Brinell con temple · Bomba reversible / Cilindro neumático · Biapoyada + control velocidad / Ménsula + control nivel · RLC serie / Alarma D2</a></td></tr>
-<tr><td class="ex-conv">Modelo B</td><td><a class="ex-link" href="examenes/banco_modelos/Examen_TECI_II_Modelo_B_v2.pdf" target="_blank">Tracción · Motor Diésel / Venturi · Biapoyada repartida + perturbación / Cable tensor · RLC paralelo / Riego automático D2</a></td></tr>
-<tr><td class="ex-conv">Modelo C</td><td><a class="ex-link" href="examenes/banco_modelos/Examen_TECI_II_Modelo_C_v2.pdf" target="_blank">Charpy · Motor Otto / Bomba centrífuga · Biapoyada 3P / Ménsula 2P · Motor monofásico fdp / Sistema votación</a></td></tr>
-<tr><td class="ex-conv">Modelo D</td><td><a class="ex-link" href="examenes/banco_modelos/Examen_TECI_II_Modelo_D_v2.pdf" target="_blank">Vickers · Frigorífica / Prensa hidráulica · Biapoyada asimétrica / Ménsula 3P · RLC en resonancia / Ventilación inteligente</a></td></tr>
-<tr><td class="ex-conv">Modelo E</td><td><a class="ex-link" href="examenes/banco_modelos/Examen_TECI_II_Modelo_E_v2.pdf" target="_blank">Brinell · Bomba calor invierno / Cilindro hidráulico · Biapoyada con voladizo / Ménsula · RLC + fdp / Análisis circuito lógico</a></td></tr>
-<tr><td class="ex-conv">Modelo F</td><td><a class="ex-link" href="examenes/banco_modelos/Examen_TECI_II_Modelo_F_v2.pdf" target="_blank">Charpy · Motor Diésel / Bomba centrífuga · Biapoyada 2 voladizos / Ménsula · RLC paralelo / NAND</a></td></tr>
-<tr><td class="ex-conv">Modelo G</td><td><a class="ex-link" href="examenes/banco_modelos/Examen_TECI_II_Modelo_G_v2.pdf" target="_blank">Tracción · Carnot / Bernoulli con desnivel · Cable tensor / Biapoyada + estabilidad · Múltiples cargas fdp / Sensores nivel</a></td></tr>
-<tr><td class="ex-conv">Modelo H</td><td><a class="ex-link" href="examenes/banco_modelos/Examen_TECI_II_Modelo_H_v2.pdf" target="_blank">Brinell + endurecimiento · Otto teórico / Cilindro simple efecto · Biapoyada repartida / Ménsula · RLC paralelo instantáneos / Maxterms NOR</a></td></tr>
-</tbody>
-</table>
-<p style="font-size:.72rem;color:var(--t2);margin:6px 0 0;"><span style="color:#8C4400;">⭐ Banco completo</span> · 8 simulacros con estructura oficial de la Ponencia · 4 apartados · 2,5 pt cada uno · 90 min · enunciados en PDF descargables</p>
 
 
 <!-- ══ 3b. TRABAJOS INTEGRADORES ══ -->
@@ -260,8 +264,10 @@ html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:
 </div>
 
 
-<!-- ══ 4. EXÁMENES OFICIALES PAU 2024-25 (historial) ══ -->
-<div class="section-title" id="examenes">📝 Exámenes PAU · convocatorias oficiales</div>
+<!-- ══ EXÁMENES Y MODELOS PEvAU ══ -->
+<div class="section-title" id="examenes">📝 Exámenes y modelos PEvAU</div>
+
+<h3 class="ex-subtitle">Convocatorias oficiales · Distrito Único Andaluz</h3>
 <table class="exam-table" data-section="oficiales" aria-label="Tabla de exámenes oficiales PAU 2024-2025">
 <thead>
 <tr><th style="width:25%;">Convocatoria</th><th style="width:25%;">Opción A</th><th style="width:25%;">Opción B</th><th style="width:25%;">Notas</th></tr>
@@ -275,6 +281,25 @@ html,body{min-height:100vh;font-family:'Barlow',system-ui,sans-serif;background:
 <tr data-keywords="examen pau suplente 2024 extraordinaria julio"><td class="ex-conv">Suplente · 2024</td><td><a class="ex-link" href="examenes/2024/suplente_A_2024.html">Suplente A</a></td><td><a class="ex-link" href="examenes/2024/suplente_B_2024.html">Suplente B</a></td><td class="ex-meta">8 ejercicios · elegir 4</td></tr>
 </tbody>
 </table>
+
+<h3 class="ex-subtitle">Banco de modelos 2025-26 · 8 modelos (A–H)</h3>
+<p class="ex-intro">Los 8 modelos cubren los 7 bloques (B · C1 · C2 · C3 · D1 · D2 · F) con la misma estructura oficial de la Ponencia: 4 apartados · 90 min · 10 pt. Cambian los temas concretos.</p>
+<table class="exam-table" data-section="tipo" aria-label="Banco de modelos PEvAU 2025-26">
+<thead>
+<tr><th style="width:18%;">Modelo</th><th style="width:62%;">Configuración temática</th><th style="width:20%;text-align:right;">Descarga</th></tr>
+</thead>
+<tbody>
+<tr data-keywords="examen modelo banco 2025-26 brinell temple bomba reversible cilindro neumático biapoyada control velocidad ménsula nivel rlc serie alarma"><td class="ex-conv">Modelo A</td><td class="ex-cfg">Brinell con temple · Bomba reversible / Cilindro neumático · Biapoyada+vel. / Ménsula+nivel · RLC serie / Alarma</td><td style="text-align:right;"><a class="ex-link" href="examenes/banco_modelos/Examen_TECI_II_Modelo_A_v2.pdf" target="_blank">📄 PDF</a></td></tr>
+<tr data-keywords="examen modelo banco 2025-26 tracción diésel venturi biapoyada repartida perturbación cable tensor rlc paralelo riego automático"><td class="ex-conv">Modelo B</td><td class="ex-cfg">Tracción · Diésel / Venturi · Repartida+perturbación / Cable tensor · RLC paralelo / Riego automático</td><td style="text-align:right;"><a class="ex-link" href="examenes/banco_modelos/Examen_TECI_II_Modelo_B_v2.pdf" target="_blank">📄 PDF</a></td></tr>
+<tr data-keywords="examen modelo banco 2025-26 charpy otto bomba centrífuga biapoyada 3p ménsula 2p monofásico fdp votación"><td class="ex-conv">Modelo C</td><td class="ex-cfg">Charpy · Otto / Bomba centrífuga · Biapoyada 3P / Ménsula 2P · Monofásico fdp / Votación</td><td style="text-align:right;"><a class="ex-link" href="examenes/banco_modelos/Examen_TECI_II_Modelo_C_v2.pdf" target="_blank">📄 PDF</a></td></tr>
+<tr data-keywords="examen modelo banco 2025-26 vickers frigorífica prensa hidráulica pascal asimétrica ménsula 3p resonancia ventilación"><td class="ex-conv">Modelo D</td><td class="ex-cfg">Vickers · Frigorífica / Prensa hidráulica · Asimétrica / Ménsula 3P · RLC resonancia / Ventilación</td><td style="text-align:right;"><a class="ex-link" href="examenes/banco_modelos/Examen_TECI_II_Modelo_D_v2.pdf" target="_blank">📄 PDF</a></td></tr>
+<tr data-keywords="examen modelo banco 2025-26 brinell bomba calor cilindro hidráulico biapoyada voladizo ménsula rlc fdp circuito lógico"><td class="ex-conv">Modelo E</td><td class="ex-cfg">Brinell · Bomba calor / Cilindro hidráulico · Voladizo / Ménsula · RLC+fdp / Circuito lógico</td><td style="text-align:right;"><a class="ex-link" href="examenes/banco_modelos/Examen_TECI_II_Modelo_E_v2.pdf" target="_blank">📄 PDF</a></td></tr>
+<tr data-keywords="examen modelo banco 2025-26 charpy diésel bomba centrífuga 2 voladizos ménsula rlc paralelo nand"><td class="ex-conv">Modelo F</td><td class="ex-cfg">Charpy · Diésel / Bomba centrífuga · 2 voladizos / Ménsula · RLC paralelo / NAND</td><td style="text-align:right;"><a class="ex-link" href="examenes/banco_modelos/Examen_TECI_II_Modelo_F_v2.pdf" target="_blank">📄 PDF</a></td></tr>
+<tr data-keywords="examen modelo banco 2025-26 tracción carnot bernoulli desnivel cable tensor estabilidad múltiples cargas fdp sensores nivel"><td class="ex-conv">Modelo G</td><td class="ex-cfg">Tracción · Carnot / Bernoulli con desnivel · Cable tensor / Estabilidad · Múltiples fdp / Sensores nivel</td><td style="text-align:right;"><a class="ex-link" href="examenes/banco_modelos/Examen_TECI_II_Modelo_G_v2.pdf" target="_blank">📄 PDF</a></td></tr>
+<tr data-keywords="examen modelo banco 2025-26 brinell endurecimiento otto teórico cilindro simple efecto repartida ménsula rlc paralelo instantáneos maxterms nor"><td class="ex-conv">Modelo H</td><td class="ex-cfg">Brinell+endurec. · Otto teórico / Cilindro SE · Repartida / Ménsula · RLC instantáneos / NOR</td><td style="text-align:right;"><a class="ex-link" href="examenes/banco_modelos/Examen_TECI_II_Modelo_H_v2.pdf" target="_blank">📄 PDF</a></td></tr>
+</tbody>
+</table>
+<p class="ex-foot"><a href="examenes/banco_modelos/index.html" class="ex-foot-link">→ Ver banco con cobertura detallada por apartados</a></p>
 
 <!-- ══ 5. REPASO Y PRÁCTICA ══ -->
 <div class="section-title">🎯 Repaso y práctica</div>

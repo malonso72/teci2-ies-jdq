@@ -34,8 +34,7 @@ teci2-ies-jdq/
 ├── examenes/
 │   ├── 2024/               ← PAU oficial 2024 (titular, reserva, suplente)
 │   ├── 2025/               ← PAU oficial 2025 (titular, suplente1, suplente2)
-│   ├── banco_modelos/      ← Banco de 8 modelos (A–H) en PDF
-│   └── tipo_2025_26/       ← Modelos elaborados (oficiales + ponencia)
+│   └── banco_modelos/      ← Banco de 8 modelos (A–H) en PDF
 │
 ├── ponencia_resuelta/      ← Ponencia 2025-26 resuelta por bloques
 │
@@ -103,7 +102,6 @@ Todos los bloques de teoría incluyen un mini-test al final:
 
 - **PAU oficiales** 2024 y 2025 (titular, reserva, suplente)
 - **8 modelos elaborados** (A–H) siguiendo la estructura de la Ponencia 2025-26
-- **2 simulacros completos** (`tipo_1A`, `tipo_1B`) con cobertura complementaria
 
 ## 🔧 Desarrollo
 
