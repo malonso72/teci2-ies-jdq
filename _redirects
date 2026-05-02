@@ -1,0 +1,22 @@
+# ═══════════════════════════════════════════════════════════════
+# TECI II · IES Jiménez de Quesada
+# Reglas de redirección compatibles con Cloudflare Pages y Netlify
+# ═══════════════════════════════════════════════════════════════
+
+# Pretty URLs · permitir acceso sin extensión .html
+# Si alguien escribe /teoria/bloque_a, sirve /teoria/bloque_a.html
+/teoria/:slug         /teoria/:slug.html         200
+/ejercicios/:slug     /ejercicios/:slug.html     200
+/apoyo/:slug          /apoyo/:slug.html          200
+/apoyo/bloque_F/:slug /apoyo/bloque_F/:slug.html 200
+/trabajos/:slug       /trabajos/:slug.html       200
+/examenes/2024/:slug  /examenes/2024/:slug.html  200
+/examenes/2025/:slug  /examenes/2025/:slug.html  200
+
+# Redirección permanente · carpeta tipo_2025_26 eliminada (mayo 2026)
+# Cualquier petición a las rutas viejas se redirige a la sección
+# de exámenes del index, donde está ahora el banco de modelos.
+/examenes/tipo_2025_26/*   /index.html#examenes   301
+
+# Página de error 404 personalizada (opcional · usa el index si no hay 404.html)
+# /*   /index.html   404

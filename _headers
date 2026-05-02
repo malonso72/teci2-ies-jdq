@@ -1,0 +1,66 @@
+# ═══════════════════════════════════════════════════════════════
+# TECI II · IES Jiménez de Quesada
+# Cabeceras de caché y seguridad · compatibles con Cloudflare Pages
+# y Netlify (misma sintaxis)
+# ═══════════════════════════════════════════════════════════════
+
+# ─── Imágenes · cache 1 año ─────────────────────────────────────
+# El alumno descarga la imagen una vez y queda en su navegador
+# durante un año. Si cambias una imagen, renómbrala (foto_v2.jpg).
+/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+/*.gif
+  Cache-Control: public, max-age=31536000, immutable
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+/*.ico
+  Cache-Control: public, max-age=31536000, immutable
+
+# ─── CSS y JS · cache 1 año ─────────────────────────────────────
+/assets/css/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/js/*
+  Cache-Control: public, max-age=31536000, immutable
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# ─── Fuentes · cache 1 año ──────────────────────────────────────
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+/*.woff
+  Cache-Control: public, max-age=31536000, immutable
+/*.ttf
+  Cache-Control: public, max-age=31536000, immutable
+/*.otf
+  Cache-Control: public, max-age=31536000, immutable
+
+# ─── PDFs · cache 1 mes ─────────────────────────────────────────
+# Más corto que las imágenes porque a veces se actualizan
+# (correcciones, modelos nuevos, etc.).
+/*.pdf
+  Cache-Control: public, max-age=2592000
+
+# ─── HTML · cache corto + revalidación ──────────────────────────
+# El HTML cambia cuando editamos contenido, así que sólo
+# cacheamos 1 hora y forzamos al navegador a comprobar si hay
+# versión nueva.
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# ─── Cabeceras de seguridad para todo el sitio ──────────────────
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
