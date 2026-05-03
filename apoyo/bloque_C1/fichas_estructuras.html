@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fichas de visualización rápida · Vigas | TECI II · IES Jiménez de Quesada</title>
+<meta name="description" content="12 fichas comparativas para dominar el bloque C1 de Estructuras (PEvAU 2025-26): cargas puntuales, repartidas, voladizo, ménsulas, superposición y perturbaciones. Material didáctico para 2.º Bachillerato.">
+<meta name="theme-color" content="#1B4F8A">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/teci-common.css">
+<style>
+  body{margin:0;font-family:'Barlow',sans-serif;background:#F4F6F9;color:#23272F;line-height:1.55}
+  .ct{max-width:1280px;margin:0 auto;padding:20px}
+  .page-hero{margin:14px 0 22px;padding:22px 24px;background:linear-gradient(135deg,#EEF4FB,#DDE9F7);border-radius:12px;border-left:5px solid #1B4F8A}
+  .page-hero h1{font-family:'Barlow Condensed',sans-serif;font-size:1.85rem;font-weight:700;color:#1B4F8A;margin:0 0 8px}
+  .page-hero p{margin:6px 0;font-size:.95rem;color:#23272F}
+  .page-hero p:last-child{font-size:.85rem;color:#555D6B;margin-top:12px}
+
+  .toc{margin:18px 0 24px;padding:14px 18px;background:#fff;border:1px solid #D8DDE5;border-radius:10px;font-size:.86rem}
+  .toc strong{display:block;font-family:'Barlow Condensed',sans-serif;font-size:.78rem;color:#555D6B;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+  .toc-row{display:flex;flex-wrap:wrap;gap:6px}
+  .toc a{display:inline-block;padding:4px 10px;border-radius:14px;text-decoration:none;font-weight:600;font-size:.78rem;border:1px solid transparent;transition:transform .12s, box-shadow .12s}
+  .toc a:hover{transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,.1)}
+  .toc a.l1{background:#FCEAE7;color:#962919;border-color:#F1D7D2}
+  .toc a.l2{background:#FEF0DF;color:#8C4400;border-color:#F3D7B0}
+  .toc a.l3{background:#DDE9F7;color:#1B4F8A;border-color:#B7CEE8}
+
+  .nivel{margin:28px 0;padding:20px 22px;border-radius:14px;scroll-margin-top:80px}
+  .nivel.l1{background:linear-gradient(180deg,#FFF5F3,#FCEAE7);border-left:6px solid #C0321E}
+  .nivel.l2{background:linear-gradient(180deg,#FFF8EC,#FEF0DF);border-left:6px solid #D4700A}
+  .nivel.l3{background:linear-gradient(180deg,#F2F7FC,#DDE9F7);border-left:6px solid #1B4F8A}
+
+  .nivel-head{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:6px}
+  .nivel-badge{display:inline-block;padding:4px 12px;border-radius:14px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:#fff}
+  .nivel.l1 .nivel-badge{background:#C0321E}
+  .nivel.l2 .nivel-badge{background:#D4700A}
+  .nivel.l3 .nivel-badge{background:#1B4F8A}
+  .nivel h2{font-family:'Barlow Condensed',sans-serif;font-size:1.45rem;font-weight:700;margin:0;color:#23272F}
+  .nivel.l1 h2{color:#962919}
+  .nivel.l2 h2{color:#8C4400}
+  .nivel.l3 h2{color:#1B4F8A}
+  .nivel-desc{margin:6px 0 18px;font-size:.92rem;color:#3A2A26;font-style:italic}
+
+  .ficha{background:#fff;padding:18px 18px 14px;border-radius:10px;margin:14px 0;border:1px solid #D8DDE5;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .ficha-head{display:flex;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+  .ficha-num{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.86rem;padding:3px 10px;border-radius:6px;color:#fff;flex-shrink:0;line-height:1.4;letter-spacing:.04em}
+  .nivel.l1 .ficha-num{background:#C0321E}
+  .nivel.l2 .ficha-num{background:#D4700A}
+  .nivel.l3 .ficha-num{background:#1B4F8A}
+  .ficha h3{margin:0;font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;color:#23272F;flex:1}
+  .ficha-lead{margin:6px 0 12px;color:#555D6B;font-size:.88rem;line-height:1.5}
+  .ficha-img{display:block;width:100%;max-width:100%;height:auto;border:1px solid #D8DDE5;border-radius:6px;background:#FAFBFC}
+  .ficha-img:hover{cursor:zoom-in}
+
+  .lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,30,55,.94);z-index:9999;cursor:zoom-out;overflow:auto;padding:20px;box-sizing:border-box}
+  .lightbox.open{display:flex;align-items:center;justify-content:center}
+  .lightbox img{max-width:100%;max-height:95vh;object-fit:contain;border-radius:6px;box-shadow:0 6px 30px rgba(0,0,0,.5)}
+  .lightbox::after{content:'Pulsa cualquier punto para cerrar';position:fixed;bottom:16px;left:50%;transform:translateX(-50%);color:#fff;font-size:.78rem;opacity:.7;pointer-events:none}
+
+  .footer-note{margin:32px 0 8px;padding:14px 18px;background:#fff;border:1px solid #D8DDE5;border-left:4px solid #1A6B3A;border-radius:8px;font-size:.84rem;color:#3A2A26}
+  .footer-note strong{color:#1A6B3A}
+
+  @media(max-width:760px){
+    .ct{padding:14px}
+    .page-hero{padding:18px}
+    .page-hero h1{font-size:1.45rem}
+    .nivel{padding:16px 14px}
+    .nivel h2{font-size:1.2rem}
+    .ficha{padding:14px 12px}
+    .ficha h3{font-size:.98rem}
+  }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="teci-hd">
+<a href="../../index.html" class="teci-lg">TECI II</a>
+<span class="teci-sb">IES Jiménez de Quesada · Santa Fe (Granada)</span>
+<a href="../../index.html" class="teci-home-btn">🏠 Inicio</a>
+</header>
+
+<nav class="teci-navcross" role="navigation" aria-label="Navegación transversal">
+<a href="../../index.html#teoria"><span>📖</span><span>Teoría</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../teoria/bloque_C1.html"><span>🏗️</span><span>Bloque C1</span></a>
+<span class="teci-nc-sep">·</span>
+<a href="../../ejercicios/ej_C1.html"><span>✏️</span><span>Ejercicios C1</span></a>
+<span class="teci-nc-sep">·</span>
+<span class="teci-nc-current" aria-current="page"><span>📐</span><span>Fichas de vigas</span></span>
+<span class="teci-nc-sep">·</span>
+<a href="../../index.html#examenes"><span>📋</span><span>Exámenes</span></a>
+</nav>
+
+<main class="ct" id="main-content">
+
+<section class="page-hero">
+<h1>📐 Fichas de visualización rápida · Vigas</h1>
+<p>Doce comparativas para dominar el bloque C1 de Estructuras: cargas puntuales, repartidas, voladizo, ménsulas, superposición y perturbaciones. Cada ficha enfrenta dos casos lado a lado para que la diferencia se vea de un golpe.</p>
+<p>Las fichas están ordenadas en <strong>tres niveles de dificultad creciente</strong>. Empieza por las troncales: si las dominas, las demás caen como variaciones.</p>
+</section>
+
+<nav class="toc" aria-label="Índice de fichas">
+<strong>Índice rápido</strong>
+<div class="toc-row">
+<a href="#F1" class="l1">F1 · Puntual vs repartida</a>
+<a href="#F2" class="l1">F2 · Una vs dos cargas</a>
+<a href="#F3" class="l1">F3 · Repartida total vs parcial</a>
+<a href="#F4" class="l1">F4 · Biapoyada vs ménsula</a>
+<a href="#F5" class="l1">F5 · Ménsula izq vs der</a>
+<a href="#F6" class="l1">F6 · Cortar izq vs der</a>
+<a href="#F7" class="l1">F7 · Centrada vs excéntrica</a>
+<a href="#F8" class="l2">F8 · Voladizo vs vano</a>
+<a href="#F9" class="l2">F9 · Repartida invade voladizo</a>
+<a href="#F10" class="l2">F10 · Puntual en voladizo vs total</a>
+<a href="#F11" class="l3">F11 · Superposición</a>
+<a href="#F12" class="l3">F12 · Perturbación</a>
+</div>
+</nav>
+
+<!-- ═══════════════ NIVEL 1 · TRONCAL ═══════════════ -->
+<section class="nivel l1" id="nivel-troncal">
+<div class="nivel-head"><span class="nivel-badge">🔴 Nivel 1</span><h2>Troncal · lo que no puedes fallar</h2></div>
+<p class="nivel-desc">Las siete ideas base. Si dominas estas siete, todo el resto del bloque C1 cae por su propio peso.</p>
+
+<article class="ficha" id="F1">
+<div class="ficha-head"><span class="ficha-num">F1</span><h3>Carga puntual centrada vs carga repartida (misma resultante)</h3></div>
+<p class="ficha-lead">Mismas reacciones, pero al repartir la carga el momento máximo se reduce a la mitad. La lección base de la flexión: por qué una losa con peso propio repartido necesita menos canto que la misma losa cargada en el centro.</p>
+<img src="img/fichas/F1.jpg" alt="F1 — Comparación entre carga puntual centrada y carga uniformemente repartida con la misma resultante en una viga biapoyada de 6 m" class="ficha-img" loading="lazy">
+</article>
+
+<article class="ficha" id="F2">
+<div class="ficha-head"><span class="ficha-num">F2</span><h3>Una vs dos cargas puntuales simétricas</h3></div>
+<p class="ficha-lead">Reacciones idénticas, pero el momento máximo cae de 30 a 20 kN·m y aparece una meseta constante entre las dos cargas. Esa zona de momento plano es la sección crítica para el armado.</p>
+<img src="img/fichas/F2.jpg" alt="F2 — Comparación entre viga biapoyada con una carga puntual centrada y la misma viga con dos cargas puntuales simétricas a tercios del vano" class="ficha-img" loading="lazy">
+</article>
+
+<article class="ficha" id="F3">
+<div class="ficha-head"><span class="ficha-num">F3</span><h3>Carga repartida total vs parcial (3 m centrales)</h3></div>
+<p class="ficha-lead">Al concentrar la carga sólo en los 3 m centrales, las reacciones bajan a la mitad y M_max también. El diagrama M(x) deja de ser una parábola pura: es recta en los tramos sin carga y parábola sólo en el tramo cargado.</p>
+<img src="img/fichas/F3.jpg" alt="F3 — Comparación entre viga biapoyada con carga repartida en todo el vano y la misma viga con carga repartida sólo en los 3 m centrales" class="ficha-img" loading="lazy">
+</article>
+
+<article class="ficha" id="F4">
+<div class="ficha-head"><span class="ficha-num">F4</span><h3>Biapoyada vs ménsula con la misma carga</h3></div>
+<p class="ficha-lead">Misma luz y misma carga, pero los diagramas son radicalmente distintos: la ménsula soporta cuatro veces más momento (80 frente a 20 kN·m) y el máximo aparece en el empotramiento, no en el centro. Por eso una ménsula necesita mucho más canto.</p>
+<img src="img/fichas/F4.jpg" alt="F4 — Comparación entre viga biapoyada y ménsula con la misma carga puntual de 20 kN" class="ficha-img" loading="lazy">
+</article>
+
+<article class="ficha" id="F5">
+<div class="ficha-head"><span class="ficha-num">F5</span><h3>Ménsula empotrada izquierda vs derecha</h3></div>
+<p class="ficha-lead">Las reacciones son idénticas en módulo (15 kN y 60 kN·m) y el momento máximo siempre aparece en el empotramiento, sea izquierdo o derecho. Cambiar el lado sólo invierte el signo del diagrama, no las solicitaciones reales.</p>
+<img src="img/fichas/F5.jpg" alt="F5 — Misma ménsula con carga puntual a 4 m del empotramiento, resuelta dos veces con el empotramiento en lados opuestos" class="ficha-img" loading="lazy">
+</article>
+
+<article class="ficha" id="F6">
+<div class="ficha-head"><span class="ficha-num">F6</span><h3>Análisis izquierda→derecha vs derecha→izquierda</h3></div>
+<p class="ficha-lead">Los diagramas V(x) y M(x) no dependen de desde dónde cortes la viga: la flexión es una propiedad de la estructura, no del observador. Cortar desde el lado de menos carga ahorra pasos en voladizos asimétricos.</p>
+<img src="img/fichas/F6.jpg" alt="F6 — Misma viga biapoyada con carga puntual centrada, resuelta cortando desde la izquierda y desde la derecha. Los diagramas finales coinciden" class="ficha-img" loading="lazy">
+</article>
+
+<article class="ficha" id="F7">
+<div class="ficha-head"><span class="ficha-num">F7</span><h3>Carga simétrica vs carga excéntrica</h3></div>
+<p class="ficha-lead">Cuando la carga está centrada, las reacciones son iguales y el momento máximo está en el centro. Cuando se desplaza, las reacciones son distintas (el apoyo más cercano reacciona más) y el momento máximo aparece bajo la carga, no en el centro geométrico de la viga.</p>
+<img src="img/fichas/F7.jpg" alt="F7 — Comparación entre viga biapoyada con carga puntual en el centro y la misma viga con la carga desplazada" class="ficha-img" loading="lazy">
+</article>
+
+</section>
+
+<!-- ═══════════════ NIVEL 2 · COMPORTAMIENTO REAL ═══════════════ -->
+<section class="nivel l2" id="nivel-real">
+<div class="nivel-head"><span class="nivel-badge">🟠 Nivel 2</span><h2>Comportamiento real de estructuras</h2></div>
+<p class="nivel-desc">Aquí dejas de “aplicar fórmulas” y empiezas a entender dónde rompe la estructura. Imprescindible para PEvAU si quieres asegurar el problema.</p>
+
+<article class="ficha" id="F8">
+<div class="ficha-head"><span class="ficha-num">F8</span><h3>Voladizo · carga puntual en el voladizo vs en el vano</h3></div>
+<p class="ficha-lead">Cuando la carga está en el voladizo, el momento crítico aparece sobre el apoyo y es NEGATIVO (tracciona las fibras superiores). Cuando está en el vano, es positivo y aparece en el centro. Las losas con voladizo necesitan armadura SUPERIOR sobre el apoyo.</p>
+<img src="img/fichas/F8.jpg" alt="F8 — Viga biapoyada con voladizo: comparación entre carga puntual en el extremo del voladizo y carga en el centro del vano" class="ficha-img" loading="lazy">
+</article>
+
+<article class="ficha" id="F9">
+<div class="ficha-head"><span class="ficha-num">F9</span><h3>Voladizo · repartida sólo en el vano vs en todo el conjunto</h3></div>
+<p class="ficha-lead">Cuando la repartida invade el voladizo, aparece un pico negativo sobre el apoyo cercano además del positivo del vano. Si el momento negativo es mayor en módulo, la sección crítica para armar pasa al apoyo, no al centro del vano.</p>
+<img src="img/fichas/F9.jpg" alt="F9 — Viga biapoyada con voladizo: comparación entre carga repartida sólo entre apoyos y carga repartida en todo el conjunto" class="ficha-img" loading="lazy">
+</article>
+
+<article class="ficha" id="F10">
+<div class="ficha-head"><span class="ficha-num">F10</span><h3>Voladizo · carga puntual en el voladizo vs en todo el conjunto</h3></div>
+<p class="ficha-lead">Las reacciones cambian de signo cuando la carga se desplaza al voladizo. Cortar desde el extremo libre del voladizo simplifica el cálculo: el momento es nulo en el extremo y crece hacia el apoyo.</p>
+<img src="img/fichas/F10.jpg" alt="F10 — Viga biapoyada con voladizo: comparación entre carga puntual en el voladizo y carga en todo el conjunto" class="ficha-img" loading="lazy">
+</article>
+
+</section>
+
+<!-- ═══════════════ NIVEL 3 · ALTO NIVEL ═══════════════ -->
+<section class="nivel l3" id="nivel-alto">
+<div class="nivel-head"><span class="nivel-badge">🔵 Nivel 3</span><h2>Alto nivel · ir sobrado al examen</h2></div>
+<p class="nivel-desc">Conceptos finos que separan al alumno medio del que va seguro. No son imprescindibles para aprobar, pero te dan argumentos en los problemas más difíciles del banco.</p>
+
+<article class="ficha" id="F11">
+<div class="ficha-head"><span class="ficha-num">F11</span><h3>Superposición · puntual sola vs puntual + repartida</h3></div>
+<p class="ficha-lead">El diagrama final es la suma punto a punto del diagrama de la puntual sola más el de la repartida sola. Las reacciones también se suman. Cuando una viga lleva varias cargas a la vez no hay que volver a empezar: se calcula cada efecto por separado y se superponen.</p>
+<img src="img/fichas/F11.jpg" alt="F11 — Superposición: viga biapoyada con sólo carga puntual frente a la misma viga con carga puntual y repartida actuando simultáneamente" class="ficha-img" loading="lazy">
+</article>
+
+<article class="ficha" id="F12">
+<div class="ficha-head"><span class="ficha-num">F12</span><h3>Cargas mixtas · todas hacia abajo vs con perturbación hacia arriba</h3></div>
+<p class="ficha-lead">La perturbación hacia arriba alivia los apoyos: las reacciones bajan a un tercio y M_max cae a un cuarto. El cortante zigzaguea cambiando de signo varias veces, y el momento se anula en el punto de la perturbación en lugar de tener su máximo allí. Caso típico de tirantes y puntales.</p>
+<img src="img/fichas/F12.jpg" alt="F12 — Comparación entre tres cargas puntuales todas hacia abajo y la misma viga con la carga central invertida hacia arriba como perturbación" class="ficha-img" loading="lazy">
+</article>
+
+</section>
+
+<aside class="footer-note">
+<strong>💡 Cómo usar estas fichas</strong> — Léelas en orden, una por una. En la primera lectura, tapa la columna B y resuelve mentalmente el caso A; después destápala y compara. Cuando termines las siete troncales (Nivel 1) ya tendrás el 80&nbsp;% del bloque dominado. Las del Nivel 2 te enseñan a leer la estructura como un ingeniero. Las del Nivel 3 son para asegurar la nota.
+</aside>
+
+</main>
+
+<!-- Lightbox para ampliar imágenes -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+<img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+(function(){
+  // Lightbox al pulsar cualquier ficha-img
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lightbox-img');
+  document.querySelectorAll('.ficha-img').forEach(function(img){
+    img.addEventListener('click', function(){
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  lb.addEventListener('click', function(){
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && lb.classList.contains('open')){
+      lb.click();
+    }
+  });
+})();
+</script>
+</body>
+</html>
