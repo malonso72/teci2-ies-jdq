@@ -1,0 +1,15 @@
+# ═══════════════════════════════════════════════════════════════
+# TECI II · IES Jiménez de Quesada
+# Configuración de Cloudflare Workers Static Assets
+# ═══════════════════════════════════════════════════════════════
+
+name = "teci2-ies-jdq"
+compatibility_date = "2025-05-01"
+
+# Sitio estático: servir todos los archivos del repo como assets
+[assets]
+directory = "./"
+not_found_handling = "404-page"
+
+# Excluir archivos que no deben servirse al público
+# (los _redirects y _headers sí se respetan automáticamente)
