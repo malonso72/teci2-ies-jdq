@@ -33,3 +33,7 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Antiguos archivos de Pages renombrados a .disabled (no servirlos)
+_redirects.disabled
+_headers.disabled
